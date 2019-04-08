@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="119.0" y="426.0">models.Item</node>
+    <node x="93.0" y="352.0">models.cards.Minion</node>
+    <node x="318.0" y="273.0">models.Player</node>
+    <node x="199.0" y="352.0">models.cards.Hero</node>
+    <node x="287.0" y="0.0">models.Match</node>
+    <node x="0.0" y="0.0">models.auth.Account</node>
+    <node x="0.0" y="352.0">models.cards.Spell</node>
+    <node x="99.5" y="273.0">models.cards.Card</node>
+    <node x="0.0" y="426.0">models.Deck</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="models.cards.Spell" target="models.cards.Card">
+      <point x="0.0" y="-14.5" />
+      <point x="36.5" y="327.0" />
+      <point x="111.66666666666666" y="327.0" />
+      <point x="-24.333333333333343" y="14.5" />
+    </edge>
+    <edge source="models.cards.Hero" target="models.cards.Card">
+      <point x="0.0" y="-14.5" />
+      <point x="236.0" y="327.0" />
+      <point x="160.33333333333331" y="327.0" />
+      <point x="24.33333333333333" y="14.5" />
+    </edge>
+    <edge source="models.cards.Minion" target="models.cards.Card">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="0.0" y="461.181818181818" />
+  <SelectedNodes>
+    <node>models.Match</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
