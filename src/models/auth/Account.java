@@ -3,9 +3,8 @@ package models.auth;
 import models.Collection;
 import models.Deck;
 import models.Match;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 public class Account {
     private static Map<String, Account> accounts = new HashMap();
@@ -17,8 +16,17 @@ public class Account {
     private List<Deck> decks;
     private Deck deck;
     private int drake;
+    private int winCount = 0;
 
-    public Account getUser(String username, String password) {
-        return null;
+    public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
+
+    public Account getUser(String username, String password) { return null; }
+    public void AddUser(Account user) {}
+    public int getWinCount() { return winCount; }
+
+    public ArrayList<Account> getRanking() {
+        ArrayList<Account> ranking = new ArrayList<Account>(accounts.values());
+        ranking.sort(compare);
+        return ranking;
     }
 }
