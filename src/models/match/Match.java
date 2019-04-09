@@ -1,9 +1,9 @@
-package models.Match;
+package models.match;
 
 import models.Player;
 import models.map.Map;
 
-public class Match {
+public abstract class Match {
     private Map map;
     private Player[] players = new Player[2];
     private int turn;
@@ -11,5 +11,9 @@ public class Match {
 
     public Player getPlayer1() { return players[0]; }
     public Player getPlayer2() { return players[1]; }
-    public void nextTern() {}
+    public void nextTurn() {}
+    private Map getMap() { return map; }
+
+    public abstract Player getWinner();
+    public int getTurn() { return turn; }
 }

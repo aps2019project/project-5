@@ -3,40 +3,104 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="0.0" y="168.0">views.menus.BattleMenu</node>
-    <node x="267.5" y="0.0">views.menus.Menu</node>
-    <node x="616.0" y="267.0">views.menus.AccountMenu</node>
-    <node x="374.0" y="267.0">views.menus.ShopMenu</node>
-    <node x="248.0" y="333.0">views.menus.MainMenu</node>
+    <node x="1128.0" y="1174.0">models.Match.FlagMode</node>
+    <node x="0.0" y="1174.0">controllers.Manager</node>
+    <node x="0.0" y="1337.0">models.Shop</node>
+    <node x="320.0" y="1070.0">views.InputAI</node>
+    <node x="1287.0" y="1174.0">models.Match.DeathMode</node>
+    <node x="813.0" y="946.0">models.cards.spell.Buff</node>
+    <node x="249.0" y="1174.0">models.MatchResult</node>
+    <node x="290.5" y="0.0">views.menus.Menu</node>
+    <node x="438.0" y="289.0">views.menus.AccountMenu</node>
+    <node x="0.0" y="946.0">models.cards.spell.TargetType</node>
+    <node x="186.0" y="805.0">models.cards.spell.Spell</node>
+    <node x="905.0" y="0.0">models.auth.Account</node>
+    <node x="1118.0" y="616.0">models.Match.Match</node>
+    <node x="581.0" y="838.5">models.items.UsableItem</node>
+    <node x="1041.0" y="946.0">views.Command</node>
+    <node x="823.0" y="739.0">models.items.CollectableItems</node>
+    <node x="0.0" y="355.0">views.menus.MainMenu</node>
+    <node x="542.0" y="946.0">models.Deck</node>
+    <node x="928.0" y="1174.0">models.Match.MultiFlagMode</node>
+    <node x="190.0" y="190.0">views.menus.BattleMenu</node>
+    <node x="733.0" y="761.0">models.items.Flag</node>
+    <node x="395.0" y="805.5">models.cards.Minion</node>
+    <node x="709.0" y="1174.0">models.Player</node>
+    <node x="0.0" y="805.5">models.cards.Hero</node>
+    <node x="320.0" y="946.0">views.Input</node>
+    <node x="638.0" y="289.0">views.menus.ShopMenu</node>
+    <node x="777.0" y="616.0">models.items.Item</node>
+    <node x="298.25" y="616.0">models.cards.Card</node>
+    <node x="450.0" y="1174.0">models.Collection</node>
   </nodes>
   <notes />
   <edges>
     <edge source="views.menus.AccountMenu" target="views.menus.Menu">
-      <point x="0.0" y="-80.5" />
-      <point x="706.0" y="138.0" />
-      <point x="487.125" y="138.0" />
-      <point x="94.125" y="59.0" />
+      <point x="0.0" y="-91.5" />
+      <point x="528.0" y="170.0" />
+      <point x="447.375" y="170.0" />
+      <point x="31.375" y="70.0" />
+    </edge>
+    <edge source="views.InputAI" target="views.Input">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="models.cards.Hero" target="models.cards.Card">
+      <point x="0.0" y="-47.5" />
+      <point x="83.0" y="775.0" />
+      <point x="318.5" y="775.0" />
+      <point x="-60.75" y="69.5" />
+    </edge>
+    <edge source="models.items.Flag" target="models.items.Item">
+      <point x="0.0" y="-14.5" />
+      <point x="768.0" y="714.0" />
+      <point x="817.5" y="714.0" />
+      <point x="-40.5" y="36.5" />
+    </edge>
+    <edge source="models.cards.spell.Spell" target="models.cards.Card">
+      <point x="0.0" y="-48.0" />
+      <point x="280.5" y="785.0" />
+      <point x="359.0" y="785.0" />
+      <point x="-20.25" y="69.5" />
     </edge>
     <edge source="views.menus.MainMenu" target="views.menus.Menu">
-      <point x="0.0" y="-14.5" />
-      <point x="301.0" y="148.0" />
-      <point x="361.625" y="148.0" />
-      <point x="-31.375" y="59.0" />
+      <point x="0.0" y="-25.5" />
+      <point x="85.0" y="160.0" />
+      <point x="321.875" y="160.0" />
+      <point x="-94.125" y="70.0" />
+    </edge>
+    <edge source="models.items.CollectableItems" target="models.items.Item">
+      <point x="0.0" y="-36.5" />
+      <point x="948.0" y="714.0" />
+      <point x="898.5" y="714.0" />
+      <point x="40.5" y="36.5" />
     </edge>
     <edge source="views.menus.ShopMenu" target="views.menus.Menu">
-      <point x="0.0" y="-80.5" />
-      <point x="485.0" y="148.0" />
-      <point x="424.375" y="148.0" />
-      <point x="31.375" y="59.0" />
+      <point x="0.0" y="-91.5" />
+      <point x="749.0" y="160.0" />
+      <point x="510.125" y="160.0" />
+      <point x="94.125" y="70.0" />
     </edge>
     <edge source="views.menus.BattleMenu" target="views.menus.Menu">
-      <point x="0.0" y="-179.5" />
-      <point x="114.0" y="138.0" />
-      <point x="298.875" y="138.0" />
-      <point x="-94.125" y="59.0" />
+      <point x="0.0" y="-190.5" />
+      <point x="304.0" y="170.0" />
+      <point x="384.625" y="170.0" />
+      <point x="-31.375" y="70.0" />
+    </edge>
+    <edge source="models.items.UsableItem" target="models.cards.Card">
+      <point x="0.0" y="-14.5" />
+      <point x="634.5" y="775.0" />
+      <point x="440.0" y="775.0" />
+      <point x="60.75" y="69.5" />
+    </edge>
+    <edge source="models.cards.Minion" target="models.cards.Card">
+      <point x="0.0" y="-47.5" />
+      <point x="478.0" y="785.0" />
+      <point x="399.5" y="785.0" />
+      <point x="20.25" y="69.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="482.7777777777778" y="731.6666666666666" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="464.0" y="166.0" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>

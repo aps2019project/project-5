@@ -8,5 +8,4 @@ public class Menu {
     private static void handleMenu() {}
     public static void setCommands() {}
     public static void showMenu() {}
-    public static void help() {}
 }
