@@ -2,14 +2,14 @@ package models.auth;
 
 import models.Collection;
 import models.Deck;
-import models.Match;
+import models.MatchResult;
 
 import java.util.*;
 
 public class Account {
     private static Map<String, Account> accounts = new HashMap();
 
-    private List<Match> matchHistory;
+    private List<MatchResult> matchHistory;
     private String username;
     private String password;
     private Collection collection;
@@ -22,6 +22,7 @@ public class Account {
 
     public Account getUser(String username, String password) { return null; }
     public void AddUser(Account user) {}
+    public List<MatchResult> getMatchHistory() { return matchHistory; }
     public int getWinCount() { return winCount; }
 
     public ArrayList<Account> getRanking() {
