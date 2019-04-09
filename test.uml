@@ -3,42 +3,81 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="119.0" y="426.0">models.Item</node>
-    <node x="93.0" y="352.0">models.cards.Minion</node>
-    <node x="318.0" y="273.0">models.Player</node>
-    <node x="199.0" y="352.0">models.cards.Hero</node>
-    <node x="287.0" y="0.0">models.Match</node>
-    <node x="0.0" y="0.0">models.auth.Account</node>
-    <node x="0.0" y="352.0">models.cards.Spell</node>
-    <node x="99.5" y="273.0">models.cards.Card</node>
-    <node x="0.0" y="426.0">models.Deck</node>
+    <node x="292.0" y="696.0">views.InputAI</node>
+    <node x="119.0" y="1108.0">models.Item</node>
+    <node x="568.0" y="168.0">views.menus.BattleMenu</node>
+    <node x="0.0" y="1034.0">models.cards.Minion</node>
+    <node x="222.0" y="0.0">views.menus.Menu</node>
+    <node x="318.0" y="955.0">Manager</node>
+    <node x="542.0" y="955.0">models.Player</node>
+    <node x="368.0" y="267.0">views.menus.AccountMenu</node>
+    <node x="199.0" y="1034.0">models.cards.Hero</node>
+    <node x="514.0" y="572.0">models.Match</node>
+    <node x="292.0" y="572.0">views.Input</node>
+    <node x="126.0" y="267.0">views.menus.ShopMenu</node>
+    <node x="0.0" y="572.0">models.auth.Account</node>
+    <node x="106.0" y="1034.0">models.cards.Spell</node>
+    <node x="726.0" y="572.0">views.Command</node>
+    <node x="106.0" y="955.0">models.cards.Card</node>
+    <node x="0.0" y="333.0">views.menus.MainMenu</node>
+    <node x="0.0" y="1108.0">models.Deck</node>
+    <node x="761.0" y="955.0">Main</node>
+    <node x="975.0" y="955.0">models.Collection</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="models.cards.Spell" target="models.cards.Card">
-      <point x="0.0" y="-14.5" />
-      <point x="36.5" y="327.0" />
-      <point x="111.66666666666666" y="327.0" />
-      <point x="-24.333333333333343" y="14.5" />
+    <edge source="views.menus.AccountMenu" target="views.menus.Menu">
+      <point x="0.0" y="-80.5" />
+      <point x="458.0" y="148.0" />
+      <point x="378.875" y="148.0" />
+      <point x="31.375" y="59.0" />
+    </edge>
+    <edge source="views.InputAI" target="views.Input">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="37.0" />
     </edge>
     <edge source="models.cards.Hero" target="models.cards.Card">
       <point x="0.0" y="-14.5" />
-      <point x="236.0" y="327.0" />
-      <point x="160.33333333333331" y="327.0" />
-      <point x="24.33333333333333" y="14.5" />
+      <point x="236.0" y="1009.0" />
+      <point x="166.83333333333337" y="1009.0" />
+      <point x="24.33333333333337" y="14.5" />
     </edge>
-    <edge source="models.cards.Minion" target="models.cards.Card">
+    <edge source="models.cards.Spell" target="models.cards.Card">
       <point x="0.0" y="-14.5" />
       <point x="0.0" y="14.5" />
     </edge>
+    <edge source="views.menus.MainMenu" target="views.menus.Menu">
+      <point x="0.0" y="-14.5" />
+      <point x="53.0" y="138.0" />
+      <point x="253.375" y="138.0" />
+      <point x="-94.125" y="59.0" />
+    </edge>
+    <edge source="views.menus.ShopMenu" target="views.menus.Menu">
+      <point x="0.0" y="-80.5" />
+      <point x="237.0" y="148.0" />
+      <point x="316.125" y="148.0" />
+      <point x="-31.375" y="59.0" />
+    </edge>
+    <edge source="views.menus.BattleMenu" target="views.menus.Menu">
+      <point x="0.0" y="-179.5" />
+      <point x="682.0" y="138.0" />
+      <point x="441.625" y="138.0" />
+      <point x="94.125" y="59.0" />
+    </edge>
+    <edge source="models.cards.Minion" target="models.cards.Card">
+      <point x="0.0" y="-14.5" />
+      <point x="43.0" y="1009.0" />
+      <point x="118.16666666666663" y="1009.0" />
+      <point x="-24.33333333333337" y="14.5" />
+    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.9" x="0.0" y="461.181818181818" />
+  <settings layout="Hierarchic Group" zoom="0.9" x="177.0" y="355.0" />
   <SelectedNodes>
-    <node>models.Match</node>
+    <node>views.InputAI</node>
   </SelectedNodes>
   <Categories>
-    <Category>Methods</Category>
     <Category>Fields</Category>
+    <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
