@@ -12,18 +12,9 @@ public class Deck {
     public boolean isComplete() {
         return false;
     }
-
-    public void addCard(Card card) {
-    }
-
-    public void removeCard(Card card) {
-    }
-
-    public void addItem(UsableItem usableItem) {
-
-    }
-    public void removeItem(UsableItem usableItem) {
-
-    }
+    public void addCard(Card card) {}
+    public void removeCard(Card card) {}
+    public void addItem(UsableItem usableItem) {}
+    public void removeItem(UsableItem usableItem) {}
 
 }

@@ -12,4 +12,9 @@ public class Card {
 
     public void moveCard(Cell cell) {}
     public void attack(Cell cell) {}
+
+    public Cell getCell() { return this.cell; }
+    public Buff getBuff() { return this.buff; }
+    public int getPrice() { return this.price; }
+    public int getManaPoint() { return this.manaPoint; }
 }

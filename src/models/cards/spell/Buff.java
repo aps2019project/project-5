@@ -1,8 +1,10 @@
 package models.cards.spell;
 
-import controllers.Manager;
-
 public class Buff {
+    private BuffType type;
+
+    public BuffType getType() { return type; }
+
     public enum BuffType {
         HOLY_BUFF,
         POWER_BUFF,
