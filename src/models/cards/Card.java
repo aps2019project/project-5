@@ -7,4 +7,6 @@ public class Card {
     private Cell cell;
     private Buff buff;
     private int price;
+    private int manaPoint;
+    private String description;
 }

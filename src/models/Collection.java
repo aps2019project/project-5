@@ -7,4 +7,5 @@ public class Collection {
     private ArrayList<Card> cards;
 
     public ArrayList<Card> getCards() { return cards; }
+
 }

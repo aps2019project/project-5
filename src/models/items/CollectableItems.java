@@ -1,8 +1,11 @@
 package models.items;
 
 public class CollectableItems extends Item {
-    public enum CollectableTypes {
-    }
+    private boolean isCollected;
     private CollectableTypes collectableTypes;
+
+    public enum CollectableTypes {
+
+    }
 
 }
