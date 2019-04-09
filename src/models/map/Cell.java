@@ -1,7 +1,7 @@
 package models.map;
 
 import models.cards.Card;
-import models.Item;
+import models.items.Item;
 
 public class Cell {
     private int x, y;
