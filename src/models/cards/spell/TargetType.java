@@ -1,5 +1,10 @@
 package models.cards.spell;
 
+import models.cards.Card;
+import models.map.Cell;
+
+import java.util.List;
+
 public enum TargetType {
     AN_OPPONENT_FORCE,
     SQUARE2x2,
