@@ -6,6 +6,5 @@ import models.map.Cell;
 public class Card {
     private Cell cell;
     private Buff buff;
-
-
+    private int price;
 }
