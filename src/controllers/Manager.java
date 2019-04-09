@@ -1,6 +1,6 @@
 package controllers;
 
-import models.Match;
+import models.Match.Match;
 import models.auth.Account;
 
 public class Manager {
