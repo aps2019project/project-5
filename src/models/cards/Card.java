@@ -9,4 +9,7 @@ public class Card {
     private int price;
     private int manaPoint;
     private String description;
+
+    public void moveCard(Cell cell) {}
+    public void attack(Cell cell) {}
 }

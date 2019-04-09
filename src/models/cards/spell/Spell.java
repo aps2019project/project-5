@@ -11,6 +11,7 @@ public class Spell extends Card {
     private TargetType targetType;
 
     void doEffect() {
+
     }
 
 }

@@ -7,4 +7,7 @@ public class Hero extends Card {
     private int attackPoint;
     private Spell specialPower;
 
+    public void useSpecialPower() {
+
+    }
 }
