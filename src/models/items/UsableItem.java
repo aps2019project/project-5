@@ -8,6 +8,4 @@ public class UsableItem extends Card {
 
     private String name;
     private Effect effect;
-
-    public static enum Effect {}
 }
