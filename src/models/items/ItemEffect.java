@@ -1,4 +1,4 @@
 package models.items;
 
-public enum Effect {
+public enum ItemEffect {
 }

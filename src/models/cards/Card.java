@@ -8,6 +8,7 @@ public class Card {
     private Buff buff;
     private int price;
     private int manaPoint;
+    private int id;
     private String description;
 
     public void moveCard(Cell cell) {}

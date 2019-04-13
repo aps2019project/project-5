@@ -4,8 +4,8 @@ import models.cards.Card;
 
 public class UsableItem extends Card {
     public String getName() { return name; }
-    public Effect getEffect() { return effect; }
+    public ItemEffect getItemEffect() { return itemEffect; }
 
     private String name;
-    private Effect effect;
+    private ItemEffect itemEffect;
 }

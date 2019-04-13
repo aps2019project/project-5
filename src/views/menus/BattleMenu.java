@@ -1,7 +1,6 @@
 package views.menus;
 
 public class BattleMenu extends Menu {
-    private static void handleMenu(){}
     public static void gameInfo() {}
     public static void showMyMinions() {}
     public static void showOpponentMinions() {}

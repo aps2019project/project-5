@@ -1,7 +1,6 @@
 package views.menus;
 
 public class CollectionMenu extends Menu {
-    public void handleMenu() {}
     private static void exit() {}
     private static void searchCard(String name) {}
     private static void searchItem(String name) {}
