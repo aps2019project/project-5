@@ -2,7 +2,8 @@ package views;
 
 public class InputAI extends Input {
 
-    @Override
-    public void getCommand() {}
+    public static String getCommand() {
+        return "";
+    }
 
 }

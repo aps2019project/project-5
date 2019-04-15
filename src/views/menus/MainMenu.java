@@ -1,7 +1,25 @@
 package views.menus;
 
-public class MainMenu extends Menu {
-    public static void handleMenu() {
+import models.cards.Card;
+import views.Command;
+
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+
+public class MainMenu implements Menu {
+
+    private ArrayList<Command> commands = new ArrayList<>();
+
+    public MainMenu() {
+        commands.add(new Command("^(?i)exit$", ""));
+        commands.add(new Command("^(?i)enter\\s+(?i)collection$", "EnterCollection"));
+    }
+
+    public ArrayList<Command> getCommands() {
+        return commands;
+    }
+
+    public static void enterCollection(Matcher matcher) {
 
     }
 

@@ -1,7 +1,20 @@
 package views.menus;
 
-public class BattleMenu extends Menu {
-    private static void handleMenu(){}
+import views.Command;
+
+import java.util.ArrayList;
+
+public class BattleMenu implements Menu {
+    private ArrayList<Command> commands = new ArrayList<>();
+
+    public BattleMenu() {
+        // TODO: Add commands
+    }
+
+    public ArrayList<Command> getCommands() {
+        return this.commands;
+    }
+
     public static void gameInfo() {}
     public static void showMyMinions() {}
     public static void showOpponentMinions() {}

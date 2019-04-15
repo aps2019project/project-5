@@ -1,11 +1,24 @@
 package views.menus;
 
-public class ShopMenu extends Menu {
-    public void handleMenu() {}
-    private static void showCollection() {}
-    private static void search(String name) {}
-    private static void searchCollection(String name) {}
-    private static void buy(String name) {}
-    private static void sell(int id) {}
-    private static void show() {}
+import views.Command;
+
+import java.util.ArrayList;
+
+public class ShopMenu implements Menu {
+    private ArrayList<Command> commands = new ArrayList<>();
+
+    public ShopMenu() {
+        // TODO: Add Commands
+    }
+
+    public ArrayList<Command> getCommands() {
+        return this.commands;
+    }
+
+    public static void showCollection() {}
+    public static void search(String name) {}
+    public static void searchCollection(String name) {}
+    public static void buy(String name) {}
+    public static void sell(int id) {}
+    public static void show() {}
 }

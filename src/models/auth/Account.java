@@ -25,6 +25,7 @@ public class Account {
     public List<MatchResult> getMatchHistory() { return matchHistory; }
     public int getWinCount() { return winCount; }
 
+    public String getUsername() { return this.username; }
     public ArrayList<Account> getRanking() {
         ArrayList<Account> ranking = new ArrayList<Account>(accounts.values());
         ranking.sort(compare);
