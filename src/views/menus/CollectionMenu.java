@@ -1,16 +1,30 @@
 package views.menus;
 
-public class CollectionMenu extends Menu {
-    private static void exit() {}
-    private static void searchCard(String name) {}
-    private static void searchItem(String name) {}
-    private static void save() {}
-    private static void createDeck(String deckName) {}
-    private static void deleteDeck(String deckName) {}
-    private static void addCardToDeck(int deckId, int cardId) {}
-    private static void removeCardFromDeck(int deckId, int cardId) {}
-    private static void validateDeck(String deckName) {}
-    private static void selectDeck(String deckName) {}
-    private static void showAllDecks() {}
-    private static void showDeck(String deckName) {}
+import views.Command;
+
+import java.util.ArrayList;
+
+public class CollectionMenu implements Menu {
+    private ArrayList<Command> commands = new ArrayList<>();
+
+    public CollectionMenu() {
+        // TODO: Add Commands
+    }
+
+    public ArrayList<Command> getCommands() {
+        return this.commands;
+    }
+
+    private void exit() {}
+    private void searchCard(String name) {}
+    private void searchItem(String name) {}
+    private void save() {}
+    private void createDeck(String deckName) {}
+    private void deleteDeck(String deckName) {}
+    private void addCardToDeck(int deckId, int cardId) {}
+    private void removeCardFromDeck(int deckId, int cardId) {}
+    private void validateDeck(String deckName) {}
+    private void selectDeck(String deckName) {}
+    private void showAllDecks() {}
+    private void showDeck(String deckName) {}
 }

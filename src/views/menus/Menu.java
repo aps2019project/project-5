@@ -3,22 +3,19 @@ package views.menus;
 import views.Command;
 import views.Error;
 import views.Input;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-public class Menu {
-    protected static ArrayList<Command> commands = new ArrayList<>();
+public interface Menu {
 
-    public static void setCommands() {}
-    public static void showMenu() {}
+    ArrayList<Command> getCommands();
 
-    public static void handleMenu() {
+    default void handleMenu() {
         while(true) {
             String inputCommand = Input.getCommand();
             boolean matches = false;
-            for(Command command : commands) {
+            for(Command command : getCommands()) {
                 Matcher matcher = command.getPattern().matcher(inputCommand);
                 if(matcher.find()) {
                     if(command.getFunctionName().equals(""))
