@@ -19,7 +19,7 @@ public class MainMenu implements Menu {
         return commands;
     }
 
-    public static void EnterCollection(Matcher matcher) {
+    public static void enterCollection(Matcher matcher) {
 
     }
 

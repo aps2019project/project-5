@@ -15,10 +15,10 @@ public class ShopMenu implements Menu {
         return this.commands;
     }
 
-    private void showCollection() {}
-    private void search(String name) {}
-    private void searchCollection(String name) {}
-    private void buy(String name) {}
-    private void sell(int id) {}
-    private void show() {}
+    public static void showCollection() {}
+    public static void search(String name) {}
+    public static void searchCollection(String name) {}
+    public static void buy(String name) {}
+    public static void sell(int id) {}
+    public static void show() {}
 }

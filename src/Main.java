@@ -1,7 +1,7 @@
-import views.menus.MainMenu;
+import views.menus.AccountMenu;
 
 public class Main {
     public static void main(String[] args) {
-        new MainMenu().handleMenu();
+        new AccountMenu().handleMenu();
     }
 }

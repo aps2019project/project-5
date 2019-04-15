@@ -15,16 +15,16 @@ public class CollectionMenu implements Menu {
         return this.commands;
     }
 
-    private void exit() {}
-    private void searchCard(String name) {}
-    private void searchItem(String name) {}
-    private void save() {}
-    private void createDeck(String deckName) {}
-    private void deleteDeck(String deckName) {}
-    private void addCardToDeck(int deckId, int cardId) {}
-    private void removeCardFromDeck(int deckId, int cardId) {}
-    private void validateDeck(String deckName) {}
-    private void selectDeck(String deckName) {}
-    private void showAllDecks() {}
-    private void showDeck(String deckName) {}
+    public static void exit() {}
+    public static void searchCard(String name) {}
+    public static void searchItem(String name) {}
+    public static void save() {}
+    public static void createDeck(String deckName) {}
+    public static void deleteDeck(String deckName) {}
+    public static void addCardToDeck(int deckId, int cardId) {}
+    public static void removeCardFromDeck(int deckId, int cardId) {}
+    public static void validateDeck(String deckName) {}
+    public static void selectDeck(String deckName) {}
+    public static void showAllDecks() {}
+    public static void showDeck(String deckName) {}
 }
