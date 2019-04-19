@@ -1,9 +1,10 @@
 package models.cards;
 
+import models.Marketable;
 import models.cards.spell.Buff;
 import models.map.Cell;
 
-public class Card {
+public class Card implements Marketable {
     private Cell cell;
     private Buff buff;
     private int price;
@@ -26,6 +27,7 @@ public class Card {
         return this.id;
     }
 
+    @Override
     public String getDescription() {
         return this.description;
     }
@@ -34,6 +36,7 @@ public class Card {
         return this.buff;
     }
 
+    @Override
     public int getPrice() {
         return this.price;
     }
@@ -42,6 +45,7 @@ public class Card {
         return this.manaPoint;
     }
 
+    @Override
     public String getName() {
         return this.name;
     }

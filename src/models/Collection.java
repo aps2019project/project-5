@@ -1,35 +1,32 @@
 package models;
-
-import models.cards.AttackType;
-import models.cards.Card;
-import models.cards.Hero;
-import models.cards.Minion;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
-public class Collection {
-    private static List<Card> allCards = new ArrayList<>();
-    private List<Card> cards = new ArrayList<>();
+public class Collection<E> {
+    private List<E> members = new ArrayList<>();
 
-    static {
-        // TODO: Add all cards (heroes, minions, usable items)
-        // TODO: Add allCards.add(new Hero(...));
-
-        allCards.add(new Minion(1,"کماندار فارس", "", 2, 300, 6, 4, AttackType.RANGED));
-        allCards.add(new Minion(1,"شمشیرزن فارس", "", 2, 300, 6, 4, AttackType.RANGED));
-
-        System.out.println(allCards.get(0).getName());
+    public List<E> getMembers() {
+        return this.members;
     }
 
-    public List<Card> getCards() {
-        return this.cards;
+    public void addMember(E member) {
+        this.members.add(member);
     }
 
-    public static List<Card> getAllCards() {
-        return allCards;
+    public List<E> filterByName(String pattern) throws InvalidCollectionTypeException {
+        if(members.size() == 0)
+            return members;
+        if(!Marketable.class.isAssignableFrom(members.get(0).getClass()))
+            throw new InvalidCollectionTypeException();
+        return members.stream().filter(
+                (member) -> ((Marketable) member).getName().matches(pattern)
+        ).collect(Collectors.toList());
     }
 
+    public static class InvalidCollectionTypeException extends Exception {
+        InvalidCollectionTypeException() {
+            super("This collection is not 'Marketable'");
+        }
+    }
 }
