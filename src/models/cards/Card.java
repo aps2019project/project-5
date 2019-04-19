@@ -22,6 +22,14 @@ public class Card {
         return this.cell;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
     public Buff getBuff() {
         return this.buff;
     }

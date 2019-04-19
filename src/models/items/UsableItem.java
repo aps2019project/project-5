@@ -3,9 +3,15 @@ package models.items;
 import models.cards.Card;
 
 public class UsableItem extends Card {
-    public String getName() { return name; }
-    public ItemEffect getItemEffect() { return itemEffect; }
 
-    private String name;
     private ItemEffect itemEffect;
+
+    public ItemEffect getItemEffect() {
+        return itemEffect;
+    }
+
+    public UsableItem(int id, String name, String description, int manaPoint, int price, ItemEffect itemEffect) {
+        super(id, name, description, manaPoint, price);
+        this.itemEffect = itemEffect;
+    }
 }
