@@ -1,4 +1,4 @@
-package models.auth;
+package models;
 
 import models.Collection;
 import models.Deck;

@@ -5,6 +5,8 @@ import models.cards.spell.Spell;
 public class Hero extends Card {
     private int health;
     private int attackPoint;
+    private AttackType attackType;
+    private int range;
     private Spell specialPower;
 
     public int getHealth() {
@@ -23,9 +25,11 @@ public class Hero extends Card {
 
     }
 
-    public Hero(String name, String description, int manaPoint, int price, int health, int attackPoint) {
+    public Hero(String name, String description, int manaPoint, int price, int health, int attackPoint, AttackType attackType, int range) {
         super(name, description, manaPoint, price);
         this.health = health;
         this.attackPoint = attackPoint;
+        this.attackType = attackType;
+        this.range = range;
     }
 }
