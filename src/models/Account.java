@@ -16,6 +16,11 @@ public class Account {
     private String username;
     private String password;
     private Collection collection;
+
+    public Deck getDeck() {
+        return deck;
+    }
+
     private List<Deck> decks;
     private Deck deck;
     private int drake = 15000;

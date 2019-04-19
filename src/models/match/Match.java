@@ -14,7 +14,9 @@ public class Match {
 
     public Player getPlayer1() { return players[0]; }
     public Player getPlayer2() { return players[1]; }
-    public void nextTurn() {}
+    public void nextTurn() {
+        turn++;
+    }
     private Map getMap() { return map; }
     private Match (Player player1,Player player2){
         player1=player1;
