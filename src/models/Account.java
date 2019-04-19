@@ -3,13 +3,14 @@ package models;
 import models.cards.Card;
 
 import java.util.*;
-class userNameExistsException extends Exception{
-    public userNameExistsException(){
-        super("username exists");
-    }
-}
 
 public class Account {
+    public static class userNameExistsException extends Exception{
+        public userNameExistsException(){
+            super("username exists");
+        }
+    }
+
     private static Map<String, Account> accounts = new HashMap();
     private List<MatchResult> matchHistory;
     private String username;
