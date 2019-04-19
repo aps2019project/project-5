@@ -13,4 +13,8 @@ public class Spell extends Card {
 
     public TargetType getTargetType() { return targetType; }
     void doEffect() {}
+
+    public Spell(int id, String name, String description, int manaPoint, int price) {
+        super(id, name, description, manaPoint, price);
+    }
 }

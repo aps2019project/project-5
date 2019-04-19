@@ -7,14 +7,14 @@ public class Minion extends Card {
     private int health;
     private int attackPoint;
     private Spell specialPower;
-    private TargetType targetType;
+    private AttackType attackType;
 
     public int getHealth() {
         return health;
     }
 
-    public TargetType getTargetType() {
-        return targetType;
+    public AttackType getAttackType() {
+        return attackType;
     }
 
     public int getAttackPoint() {
@@ -25,10 +25,10 @@ public class Minion extends Card {
         return specialPower;
     }
 
-    public Minion(int id, String name, String description, int manaPoint, int price, int health, int attackPoint, TargetType targetType) {
+    public Minion(int id, String name, String description, int manaPoint, int price, int health, int attackPoint, AttackType attackType) {
         super(id, name, description, manaPoint, price);
         this.health = health;
         this.attackPoint = attackPoint;
-        this.targetType = targetType;
+        this.attackType = attackType;
     }
 }
