@@ -23,8 +23,8 @@ public class Hero extends Card {
 
     }
 
-    public Hero(int id, String name, String description, int manaPoint, int price, int health, int attackPoint) {
-        super(id, name, description, manaPoint, price);
+    public Hero(String name, String description, int manaPoint, int price, int health, int attackPoint) {
+        super(name, description, manaPoint, price);
         this.health = health;
         this.attackPoint = attackPoint;
     }
