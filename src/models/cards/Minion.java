@@ -25,8 +25,8 @@ public class Minion extends Card {
         return specialPower;
     }
 
-    public Minion(int id, String name, String description, int manaPoint, int price, int health, int attackPoint, AttackType attackType) {
-        super(id, name, description, manaPoint, price);
+    public Minion(String name, String description, int manaPoint, int price, int health, int attackPoint, AttackType attackType) {
+        super(name, description, manaPoint, price);
         this.health = health;
         this.attackPoint = attackPoint;
         this.attackType = attackType;

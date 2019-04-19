@@ -1,8 +1,6 @@
 package models.match;
-
 import models.Player;
 import models.items.Item;
-import models.map.Cell;
 import models.map.Map;
 
 import java.util.ArrayList;

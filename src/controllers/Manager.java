@@ -1,7 +1,7 @@
 package controllers;
 
 import models.match.Match;
-import models.auth.Account;
+import models.Account;
 
 public class Manager {
     private static Account account;

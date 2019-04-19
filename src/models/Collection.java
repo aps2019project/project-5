@@ -1,35 +1,25 @@
 package models;
 
-import models.cards.AttackType;
-import models.cards.Card;
-import models.cards.Hero;
-import models.cards.Minion;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Collection {
-    private static List<Card> allCards = new ArrayList<>();
-    private List<Card> cards = new ArrayList<>();
+    private List<Marketable> members = new ArrayList<>();
 
-    static {
-        // TODO: Add all cards (heroes, minions, usable items)
-        // TODO: Add allCards.add(new Hero(...));
-
-        allCards.add(new Minion(1,"کماندار فارس", "", 2, 300, 6, 4, AttackType.RANGED));
-        allCards.add(new Minion(1,"شمشیرزن فارس", "", 2, 300, 6, 4, AttackType.RANGED));
-
-        System.out.println(allCards.get(0).getName());
+    public List<Marketable> getMembers() {
+        return this.members;
     }
 
-    public List<Card> getCards() {
-        return this.cards;
+    public void addMember(Marketable member) {
+        this.members.add(member);
     }
 
-    public static List<Card> getAllCards() {
-        return allCards;
+    public List<Marketable> filterByName(String pattern) {
+        if(members.size() == 0)
+            return members;
+        return members.stream().filter(
+                (member) -> member.getName().matches(pattern)
+        ).collect(Collectors.toList());
     }
-
 }

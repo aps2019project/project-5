@@ -1,6 +1,5 @@
 package models;
 
-import models.auth.Account;
 import models.cards.Card;
 
 import java.util.ArrayList;
