@@ -10,7 +10,7 @@ public class Account {
     private List<MatchResult> matchHistory;
     private String username;
     private String password;
-    private Collection<Card> collection;
+    private Collection collection;
     private List<Deck> decks;
     private Deck deck;
     private int drake;

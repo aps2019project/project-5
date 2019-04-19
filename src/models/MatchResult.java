@@ -8,8 +8,8 @@ public class MatchResult {
     private Date matchDate;
 
 
-    public String getOpponentUsername() {
-        return opponent.getUsername();
+    public Account getOpponent() {
+        return opponent;
     }
 
     public boolean won() {

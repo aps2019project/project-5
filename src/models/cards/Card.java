@@ -1,5 +1,6 @@
 package models.cards;
 
+import models.Collection;
 import models.Marketable;
 import models.cards.spell.Buff;
 import models.map.Cell;
