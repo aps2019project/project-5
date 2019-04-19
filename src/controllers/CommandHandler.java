@@ -61,7 +61,7 @@ public class CommandHandler {
         }
     }
 
-    private void start(){
+    public static void start(){
 
         return;
     }
