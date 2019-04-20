@@ -1,7 +1,6 @@
 package views.menus;
 
 import views.Command;
-
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
