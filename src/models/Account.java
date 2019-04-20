@@ -1,18 +1,16 @@
 package models;
 
-import models.cards.Card;
-
 import java.util.*;
 
 public class Account {
-    public static class userNameExistsException extends Exception{
-        public userNameExistsException(){
-            super("username exists");
+    public static class UsernameExistsException extends Exception{
+        UsernameExistsException(String username){
+            super(String.format("This username exists: %s", username));
         }
     }
 
-    private static Map<String, Account> accounts = new HashMap();
-    private List<MatchResult> matchHistory;
+    private static Map<String, Account> accounts = new HashMap<>();
+    private List<MatchResult> matchHistory = new ArrayList<>();
     private String username;
     private String password;
     private Collection collection;
@@ -25,7 +23,6 @@ public class Account {
     private Deck deck;
     private int drake = 15000;
     private int winCount = 0;
-    public static userNameExistsException userNameExistsException=new userNameExistsException();
     public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
 
     public static Account getUser(String username, String password) {
@@ -48,19 +45,18 @@ public class Account {
         this.password = password;
     }
 
-    public static boolean doesAccountExists(Account account){
-        for (Map.Entry<String,Account> entry:accounts.entrySet()){
-            if (account.getUsername().equals(entry.getKey())){
-                return true;
-            }
-        }
-        return false;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public static void AddUser(Account user) throws userNameExistsException{
+    private static boolean doesAccountExists(Account account){
+        return accounts.containsKey(account.username);
+    }
+
+    public static void addAccount(Account user) throws UsernameExistsException {
         if (!doesAccountExists(user))
             accounts.put(user.username, user);
-        else throw userNameExistsException;
+        else throw new UsernameExistsException(user.username);
     }
 
     public List<MatchResult> getMatchHistory() {

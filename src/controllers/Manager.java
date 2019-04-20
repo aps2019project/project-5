@@ -11,13 +11,8 @@ public class Manager {
         return account;
     }
 
-    public static void addAccount() {
-        Account account1 = new Account(account.getUsername(), account.getPassword());
-        try {
-            Account.AddUser(account1);
-        }catch (Account.userNameExistsException e){
-            System.out.println("player existed!");
-        }
+    public static void addAccount(Account account) throws Account.UsernameExistsException {
+        Account.addAccount(account);
     }
 
     public static Match getPlayingMatch() {

@@ -8,4 +8,9 @@ public class Input {
     public static String getCommand() {
         return scanner.nextLine().trim();
     }
+
+    public static String getString(String prefix) {
+        System.out.print(prefix);
+        return scanner.nextLine();
+    }
 }

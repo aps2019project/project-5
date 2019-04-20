@@ -22,7 +22,7 @@ public interface Menu {
                         return;
                     matches = true;
                     try {
-                        Method method = MainMenu.class.getMethod(command.getFunctionName(), Matcher.class);
+                        Method method = getClass().getMethod(command.getFunctionName(), Matcher.class);
                         method.invoke(null, matcher);
                     } catch (Exception exception) {
                         System.err.println(exception.getMessage());
