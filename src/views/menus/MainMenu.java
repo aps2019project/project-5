@@ -15,6 +15,7 @@ public class MainMenu implements Menu {
         commands.add(new Command("^(?i)enter\\s+(?i)collection$", "enterCollection"));
     }
 
+    @Override
     public ArrayList<Command> getCommands() {
         return commands;
     }

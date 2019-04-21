@@ -11,6 +11,7 @@ public class BattleMenu implements Menu {
         // TODO: Add commands
     }
 
+    @Override
     public ArrayList<Command> getCommands() {
         return this.commands;
     }
