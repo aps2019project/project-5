@@ -77,10 +77,15 @@ public class Account {
         return password;
     }
 
-    public ArrayList<Account> getRanking() {
+    public static ArrayList<Account> getRanking() {
         ArrayList<Account> ranking = new ArrayList<>(accounts.values());
         ranking.sort(compare);
         return ranking;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("UserName: %s - Wins: %d", username, winCount);
     }
 
 

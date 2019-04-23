@@ -54,7 +54,10 @@ public class AccountMenu implements Menu {
     }
 
     public static void showRanking(Matcher matcher) {
-
+        ArrayList<Account> accounts = Manager.getLeaderboard();
+        for(Account account : accounts) {
+            Output.print(account);
+        }
     }
 
     public static void help(Matcher matcher) {
@@ -62,10 +65,6 @@ public class AccountMenu implements Menu {
     }
 
     public static void save(Matcher matcher) {
-        // TODO: Call controller functions
-    }
-
-    public static void logount(Matcher matcher) {
         // TODO: Call controller functions
     }
 

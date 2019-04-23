@@ -3,6 +3,8 @@ package controllers;
 import models.Account;
 import models.match.Match;
 
+import java.util.ArrayList;
+
 public class Manager {
     private static Account account;
     private static Match playingMatch;
@@ -19,8 +21,8 @@ public class Manager {
         account = Account.getAccount(username, password);;
     }
 
-    public static void getLeaderboard() {
-
+    public static ArrayList<Account> getLeaderboard() {
+        return Account.getRanking();
     }
 
     public static Match getPlayingMatch() {
