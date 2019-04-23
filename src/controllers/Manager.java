@@ -15,6 +15,14 @@ public class Manager {
         Account.addAccount(account);
     }
 
+    public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
+        account = Account.getAccount(username, password);;
+    }
+
+    public static void getLeaderboard() {
+
+    }
+
     public static Match getPlayingMatch() {
         return playingMatch;
     }

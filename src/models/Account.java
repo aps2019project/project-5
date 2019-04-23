@@ -25,14 +25,16 @@ public class Account {
     private int winCount = 0;
     public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
 
-    public static Account getUser(String username, String password) {
+    public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
         for (Map.Entry<String, Account> entry : accounts.entrySet()) {
-            if (entry.getValue().username.equals(username) && entry.getValue().password.equals(password)) {
-                return entry.getValue();
+            if (entry.getValue().username.equals(username)) {
+                if(entry.getValue().password.equals(password))
+                    return entry.getValue();
+                else
+                    throw new InvalidPasswordException();
             }
-
         }
-        return null;
+        throw new InvalidUsernameException(username);
     }
 
     public void incrementDrake(int drake) {
@@ -84,5 +86,17 @@ public class Account {
 
     public void addMatchResult(MatchResult matchResult) {
         matchHistory.add(matchResult);
+    }
+
+    public static class InvalidUsernameException extends Exception {
+        InvalidUsernameException(String username) {
+            super(String.format("Username not found: %s", username));
+        }
+    }
+
+    public static class InvalidPasswordException extends Exception {
+        InvalidPasswordException() {
+            super("Wrong password.");
+        }
     }
 }
