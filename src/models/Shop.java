@@ -1,6 +1,5 @@
-package controllers;
+package models;
 
-import models.Collection;
 import models.cards.AttackType;
 import models.cards.Minion;
 

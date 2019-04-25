@@ -3,27 +3,31 @@ package models;
 import java.util.*;
 
 public class Account {
-    public static class UsernameExistsException extends Exception{
-        UsernameExistsException(String username){
-            super(String.format("This username exists: %s", username));
-        }
-    }
-
     private static Map<String, Account> accounts = new HashMap<>();
     private List<MatchResult> matchHistory = new ArrayList<>();
     private String username;
     private String password;
     private Collection collection;
+    private List<Deck> decks = new ArrayList<>();
+    private Deck deck;
+    private int drake = 15000;
+    private int winCount = 0;
+
+    public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
 
     public Deck getDeck() {
         return deck;
     }
 
-    private List<Deck> decks;
-    private Deck deck;
-    private int drake = 15000;
-    private int winCount = 0;
-    public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
+    public List<Deck> getDecks() {
+        // Gives user's decks
+        return this.decks;
+    }
+
+    public void addDeck(Deck deck) {
+        // Add new deck to user's decks
+        this.decks.add(deck);
+    }
 
     public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
         for (Map.Entry<String, Account> entry : accounts.entrySet()) {
@@ -85,7 +89,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("UserName: %s - Wins: %d", username, winCount);
+        return String.format("Username: %s - Wins: %d", username, winCount);
     }
 
 
@@ -104,4 +108,17 @@ public class Account {
             super("Wrong password.");
         }
     }
+
+    public static class NotLoggedInException extends Exception {
+        public NotLoggedInException() {
+            super("You must log in.");
+        }
+    }
+
+    public static class UsernameExistsException extends Exception{
+        UsernameExistsException(String username) {
+            super(String.format("This username exists: %s", username));
+        }
+    }
+
 }
