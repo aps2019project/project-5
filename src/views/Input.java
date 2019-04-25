@@ -10,7 +10,7 @@ public class Input {
     }
 
     public static String getCommand(String menuName) {
-        System.out.print(String.format("%s> ", menuName));
+        System.out.print(menuName + "> ");
         return scanner.nextLine().trim();
     }
 

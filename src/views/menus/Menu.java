@@ -26,7 +26,10 @@ public interface Menu {
                     matches = true;
                     try {
                         Method method = getClass().getMethod(command.getFunctionName(), Matcher.class);
-                        method.invoke(null, matcher);
+                        try {
+                            if (method.invoke(null, matcher).equals(Boolean.FALSE))
+                                return;
+                        } catch (Exception ignored) {}
                     } catch (Exception exception) {
                         Output.err(exception.getMessage());
                     }
