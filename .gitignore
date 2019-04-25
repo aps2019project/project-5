@@ -4,4 +4,4 @@ project-5.iml
 /.idea/
 # Created by .ignore support plugin (hsz.mobi)
 *.iml
-.gitignore
+*.class
