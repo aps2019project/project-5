@@ -1,5 +1,6 @@
 package models.cards;
 
+import models.cards.spell.SpecialPowerActivateTime;
 import models.cards.spell.Spell;
 import models.cards.spell.TargetType;
 
@@ -8,7 +9,9 @@ public class Minion extends Card {
     private int attackPoint;
     private int range;
     private Spell specialPower;
+    private SpecialPowerActivateTime specialPowerActivateTime;
     private AttackType attackType;
+
 
     public int getHealth() {
         return health;
