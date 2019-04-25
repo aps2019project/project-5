@@ -41,7 +41,7 @@ public class CollectionMenu implements Menu {
             Output.log(Log.DECK_CREATED);
         } catch (Account.NotLoggedInException e) {
             Output.err(Error.NOT_LOGGED_IN);
-        } catch (Account.DeckExitstsException e) {
+        } catch (Account.DeckExistsException e) {
             Output.err(Error.DECK_EXISTS);
         }
     }

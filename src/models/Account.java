@@ -9,14 +9,21 @@ public class Account {
     private String password;
     private Collection collection;
     private List<Deck> decks = new ArrayList<>();
-    private Deck deck;
+    private Deck mainDeck;
     private int drake = 15000;
     private int winCount = 0;
 
     public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
 
-    public Deck getDeck() {
-        return deck;
+    public Deck getMainDeck() {
+        return mainDeck;
+    }
+
+    public Deck getDeck(String name) throws DeckNotFoundException {
+        for(Deck deck : decks)
+            if(deck.getName().equals(name))
+                return deck;
+        throw new DeckNotFoundException(name);
     }
 
     public List<Deck> getDecks() {
@@ -24,11 +31,11 @@ public class Account {
         return this.decks;
     }
 
-    public void addDeck(Deck deck) throws DeckExitstsException {
+    public void addDeck(Deck deck) throws DeckExistsException {
         // Add new deck to user's decks
         for(Deck existingDeck : decks)
             if(existingDeck.getName().equals(deck.getName()))
-                throw new DeckExitstsException(deck.getName());
+                throw new DeckExistsException(deck.getName());
         this.decks.add(deck);
     }
 
@@ -124,9 +131,15 @@ public class Account {
         }
     }
 
-    public static class DeckExitstsException extends Exception {
-        DeckExitstsException(String name) {
+    public static class DeckExistsException extends Exception {
+        DeckExistsException(String name) {
             super(String.format("Deck '%s' exists.", name));
+        }
+    }
+
+    public static class DeckNotFoundException extends Exception {
+        DeckNotFoundException(String name) {
+            super(String.format("Deck '%s' not found for this user.", name));
         }
     }
 }

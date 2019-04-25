@@ -17,7 +17,7 @@ public class Player {
     private ArrayList<Card> graveYard;
     private Player(Account account){
         this.account=account;
-        this.deck=account.getDeck();
+        this.deck=account.getMainDeck();
     }
 
     public ArrayList<Card> getGraveYard() { return graveYard; }

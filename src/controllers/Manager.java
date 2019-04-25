@@ -29,12 +29,15 @@ public class Manager {
         return playingMatch;
     }
 
-    public static void createDeck(String name) throws Account.NotLoggedInException, Account.DeckExitstsException {
+    public static void createDeck(String name) throws Account.NotLoggedInException, Account.DeckExistsException {
         if(account == null) {
             throw new Account.NotLoggedInException();
         }
         Deck deck = new Deck(name);
         account.addDeck(deck);
-        // TODO: Implement...
+    }
+
+    public static void deleteDeck(String name) {
+
     }
 }
