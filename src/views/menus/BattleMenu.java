@@ -8,7 +8,13 @@ public class BattleMenu implements Menu {
     private ArrayList<Command> commands = new ArrayList<>();
 
     public BattleMenu() {
-        // TODO: Add commands
+        // TODO: Add commands.
+        commands.add(new Command("^(?i)return", ""));
+    }
+
+    @Override
+    public String getMenuName() {
+        return "BattleMenu";
     }
 
     @Override

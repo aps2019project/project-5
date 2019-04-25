@@ -26,7 +26,9 @@ public class Output {
         System.out.println(account);
     }
 
-    public static void printSpell(Spell spell) {}
+    public static void print(Spell spell) {
+        System.out.println(spell);
+    }
 
     public static void log(String str) {
         System.out.println(str);
@@ -34,6 +36,14 @@ public class Output {
 
     public static void err(String str) {
         System.err.println(str);
+    }
+
+    public static void err(Error error) {
+        System.err.println(error.toString());
+    }
+
+    public static void log(Log log) {
+        System.out.println(log.toString());
     }
 
 }

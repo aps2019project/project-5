@@ -9,6 +9,12 @@ public class ShopMenu implements Menu {
 
     public ShopMenu() {
         // TODO: Add Commands
+        commands.add(new Command("^(?i)return", ""));
+    }
+
+    @Override
+    public String getMenuName() {
+        return "ShopMenu";
     }
 
     @Override

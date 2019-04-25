@@ -9,6 +9,11 @@ public class Input {
         return scanner.nextLine().trim();
     }
 
+    public static String getCommand(String menuName) {
+        System.out.print(menuName + "> ");
+        return scanner.nextLine().trim();
+    }
+
     public static String getString(String prefix) {
         System.out.print(prefix);
         return scanner.nextLine();
