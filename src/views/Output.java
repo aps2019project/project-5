@@ -36,4 +36,12 @@ public class Output {
         System.err.println(str);
     }
 
+    public static void err(Error error) {
+        System.err.println(error.toString());
+    }
+
+    public static void log(Log log) {
+        System.err.println(log.toString());
+    }
+
 }

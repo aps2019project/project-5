@@ -2,9 +2,8 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
-import views.Command;
-import views.Input;
-import views.Output;
+import views.*;
+import views.Error;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -40,8 +39,9 @@ public class AccountMenu implements Menu {
         Account account = new Account(username, password);
         try {
             Manager.addAccount(account);
+            Output.log(Log.ACCOUNT_CREATED);
         } catch (Account.UsernameExistsException exception) {
-            Output.err("This username exists.");
+            Output.err(Error.USERNAME_EXISTS);
         }
     }
 
@@ -50,11 +50,12 @@ public class AccountMenu implements Menu {
         String password = Input.getString("Password: ");
         try {
             Manager.login(username, password);
-            Output.log("You logged in!");
+            Output.log(Log.LOGGED_IN);
+            new MainMenu().handleMenu();
         } catch (Account.InvalidPasswordException e) {
-            Output.err("Wrong password.");
+            Output.err(Error.WRONG_PASSWORD);
         } catch (Account.InvalidUsernameException e) {
-            Output.err("User not found.");
+            Output.err(Error.USERNAME_NOT_FOUND);
         }
     }
 
@@ -70,10 +71,6 @@ public class AccountMenu implements Menu {
     }
 
     public static void save(Matcher matcher) {
-        // TODO: Call controller functions
-    }
-
-    public static void logout(Matcher matcher) {
         // TODO: Call controller functions
     }
 }
