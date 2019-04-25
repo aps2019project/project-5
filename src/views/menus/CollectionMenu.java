@@ -1,8 +1,14 @@
 package views.menus;
 
+import controllers.Manager;
+import models.Account;
 import views.Command;
+import views.Error;
+import views.Log;
+import views.Output;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 
 public class CollectionMenu implements Menu {
     private ArrayList<Command> commands = new ArrayList<>();
@@ -10,6 +16,7 @@ public class CollectionMenu implements Menu {
     public CollectionMenu() {
         // TODO: Add Commands
         commands.add(new Command("^(?i)return", ""));
+        commands.add(new Command("^(?i)create\\s+(?i)deck\\s+(?<name>\\w+)$", "createDeck"));
     }
 
     @Override
@@ -22,16 +29,56 @@ public class CollectionMenu implements Menu {
         return this.commands;
     }
 
-    public static void exit() {}
-    public static void searchCard(String name) {}
-    public static void searchItem(String name) {}
-    public static void save() {}
-    public static void createDeck(String deckName) {}
-    public static void deleteDeck(String deckName) {}
-    public static void addCardToDeck(int deckId, int cardId) {}
-    public static void removeCardFromDeck(int deckId, int cardId) {}
-    public static void validateDeck(String deckName) {}
-    public static void selectDeck(String deckName) {}
-    public static void showAllDecks() {}
-    public static void showDeck(String deckName) {}
+    public static void searchCard(Matcher matcher) {
+        // TODO: Implement...
+
+    }
+
+    public static void createDeck(Matcher matcher) {
+        String deckName = matcher.group("name");
+        try {
+            Manager.createDeck(deckName);
+            Output.log(Log.DECK_CREATED);
+        } catch (Account.NotLoggedInException e) {
+            Output.err(Error.NOT_LOGGED_IN);
+        } catch (Account.DeckExitstsException e) {
+            Output.err(Error.DECK_EXISTS);
+        }
+    }
+
+    public static void deleteDeck(Matcher matcher) {
+        // TODO: Implement...
+
+    }
+
+    public static void addCardToDeck(Matcher matcher) {
+        // TODO: Implement...
+
+    }
+
+    public static void removeCardFromDeck(Matcher matcher) {
+        // TODO: Implement...
+
+    }
+
+    public static void validateDeck(Matcher matcher) {
+        // TODO: Implement...
+
+    }
+
+    public static void selectDeck(Matcher matcher) {
+        // TODO: Implement...
+
+    }
+
+    public static void showAllDecks(Matcher matcher) {
+        // TODO: Implement...
+
+    }
+
+    public static void showDeck(Matcher matcher) {
+        // TODO: Implement...
+
+    }
+
 }
