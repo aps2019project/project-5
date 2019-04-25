@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Account;
+import models.Deck;
 import models.match.Match;
 import java.util.ArrayList;
 
@@ -28,11 +29,12 @@ public class Manager {
         return playingMatch;
     }
 
-    public static void createDeck() throws Account.NotLoggedInException {
+    public static void createDeck(String name) throws Account.NotLoggedInException, Account.DeckExitstsException {
         if(account == null) {
             throw new Account.NotLoggedInException();
         }
-
+        Deck deck = new Deck(name);
+        account.addDeck(deck);
         // TODO: Implement...
     }
 }

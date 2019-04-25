@@ -24,8 +24,11 @@ public class Account {
         return this.decks;
     }
 
-    public void addDeck(Deck deck) {
+    public void addDeck(Deck deck) throws DeckExitstsException {
         // Add new deck to user's decks
+        for(Deck existingDeck : decks)
+            if(existingDeck.getName().equals(deck.getName()))
+                throw new DeckExitstsException(deck.getName());
         this.decks.add(deck);
     }
 
@@ -115,10 +118,15 @@ public class Account {
         }
     }
 
-    public static class UsernameExistsException extends Exception{
+    public static class UsernameExistsException extends Exception {
         UsernameExistsException(String username) {
             super(String.format("This username exists: %s", username));
         }
     }
 
+    public static class DeckExitstsException extends Exception {
+        DeckExitstsException(String name) {
+            super(String.format("Deck '%s' exists.", name));
+        }
+    }
 }
