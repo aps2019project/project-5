@@ -18,7 +18,7 @@ public class Manager {
     }
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
-        account = Account.getAccount(username, password);;
+        account = Account.getAccount(username, password);
     }
 
     public static ArrayList<Account> getLeaderboard() {

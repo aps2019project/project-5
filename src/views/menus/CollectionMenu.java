@@ -9,6 +9,12 @@ public class CollectionMenu implements Menu {
 
     public CollectionMenu() {
         // TODO: Add Commands
+        commands.add(new Command("^(?i)return", ""));
+    }
+
+    @Override
+    public String getMenuName() {
+        return "CollectionMenu";
     }
 
     @Override

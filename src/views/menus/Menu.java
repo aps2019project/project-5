@@ -3,17 +3,20 @@ package views.menus;
 import views.Command;
 import views.Error;
 import views.Input;
+import views.Output;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public interface Menu {
 
+    String getMenuName();
     ArrayList<Command> getCommands();
 
     default void handleMenu() {
         while(true) {
-            String inputCommand = Input.getCommand();
+            String inputCommand = Input.getCommand(getMenuName());
             boolean matches = false;
             for(Command command : getCommands()) {
                 Matcher matcher = command.getPattern().matcher(inputCommand);
@@ -23,14 +26,17 @@ public interface Menu {
                     matches = true;
                     try {
                         Method method = getClass().getMethod(command.getFunctionName(), Matcher.class);
-                        method.invoke(null, matcher);
+                        try {
+                            if (method.invoke(null, matcher).equals(Boolean.FALSE))
+                                return;
+                        } catch (Exception ignored) {}
                     } catch (Exception exception) {
-                        System.err.println(exception.getMessage());
+                        Output.err(exception.getMessage());
                     }
                 }
             }
             if(!matches)
-                System.err.println(Error.INVALID_COMMAND);
+                Output.err(Error.INVALID_COMMAND.toString());
         }
     }
 }
