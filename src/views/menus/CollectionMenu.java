@@ -12,6 +12,11 @@ public class CollectionMenu implements Menu {
     }
 
     @Override
+    public String getMenuName() {
+        return "CollectionMenu";
+    }
+
+    @Override
     public ArrayList<Command> getCommands() {
         return this.commands;
     }

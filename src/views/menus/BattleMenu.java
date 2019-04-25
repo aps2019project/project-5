@@ -12,6 +12,11 @@ public class BattleMenu implements Menu {
     }
 
     @Override
+    public String getMenuName() {
+        return "BattleMenu";
+    }
+
+    @Override
     public ArrayList<Command> getCommands() {
         return this.commands;
     }

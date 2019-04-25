@@ -16,6 +16,11 @@ public class MainMenu implements Menu {
     }
 
     @Override
+    public String getMenuName() {
+        return "MainMenu";
+    }
+
+    @Override
     public ArrayList<Command> getCommands() {
         return commands;
     }

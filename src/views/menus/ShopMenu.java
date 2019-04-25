@@ -12,6 +12,11 @@ public class ShopMenu implements Menu {
     }
 
     @Override
+    public String getMenuName() {
+        return "ShopMenu";
+    }
+
+    @Override
     public ArrayList<Command> getCommands() {
         return this.commands;
     }

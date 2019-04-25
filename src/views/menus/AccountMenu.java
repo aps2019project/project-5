@@ -25,6 +25,11 @@ public class AccountMenu implements Menu {
     }
 
     @Override
+    public String getMenuName() {
+        return "AccountMenu";
+    }
+
+    @Override
     public ArrayList<Command> getCommands() {
         return this.commands;
     }
