@@ -6,9 +6,9 @@ public class Command {
     private Pattern pattern;
     private String functionName;
 
-    public Command(String patternString, String functionName) {
-        this.pattern = Pattern.compile(patternString);
+    public Command(String pattern, String functionName) {
         this.functionName = functionName;
+        this.pattern = Pattern.compile(pattern);
     }
 
     public Pattern getPattern() {

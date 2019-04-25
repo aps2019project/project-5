@@ -1,7 +1,9 @@
 package controllers;
 
+import models.Account;
 import models.match.Match;
-import models.auth.Account;
+
+import java.util.ArrayList;
 
 public class Manager {
     private static Account account;
@@ -9,6 +11,18 @@ public class Manager {
 
     public static Account getAccount() {
         return account;
+    }
+
+    public static void addAccount(Account account) throws Account.UsernameExistsException {
+        Account.addAccount(account);
+    }
+
+    public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
+        account = Account.getAccount(username, password);;
+    }
+
+    public static ArrayList<Account> getLeaderboard() {
+        return Account.getRanking();
     }
 
     public static Match getPlayingMatch() {

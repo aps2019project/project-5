@@ -12,9 +12,10 @@ public class MainMenu implements Menu {
 
     public MainMenu() {
         commands.add(new Command("^(?i)exit$", ""));
-        commands.add(new Command("^(?i)enter\\s+(?i)collection$", "EnterCollection"));
+        commands.add(new Command("^(?i)enter\\s+(?i)collection$", "enterCollection"));
     }
 
+    @Override
     public ArrayList<Command> getCommands() {
         return commands;
     }
