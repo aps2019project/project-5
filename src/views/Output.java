@@ -47,6 +47,7 @@ public class Output {
         System.out.println(log.toString());
     }
 
+
     public static void print(Deck deck) {
         System.out.println(deck.toString());
     }

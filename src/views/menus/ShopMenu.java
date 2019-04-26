@@ -25,7 +25,7 @@ public class ShopMenu implements Menu {
                 "help"
         ));
         commands.add(new Command(
-                "^(?i)get amount$",
+                "^(?i)get(\\s+)amount$",
                 "getAmount"
         ));
 
@@ -63,7 +63,7 @@ public class ShopMenu implements Menu {
         Menu.help(new ShopMenu().getCommands());
     }
 
-    public static void getAmount() {
-            System.out.println(Manager.getAccount().getDrake());
+    public static void getAmount(Matcher matcher) {
+        Output.log(Integer.toString(Manager.getAccount().getDrake()));
     }
 }

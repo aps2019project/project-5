@@ -11,7 +11,9 @@ public enum Log {
     Log(String message) {
         this.message = message;
     }
+    public void printAmount(int drake){
 
+    }
     @Override
     public String toString() {
         return this.message;
