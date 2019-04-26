@@ -26,13 +26,13 @@ public class Account {
         throw new DeckNotFoundException(name);
     }
 
+    // Gives user's decks
     public List<Deck> getDecks() {
-        // Gives user's decks
         return this.decks;
     }
 
+    // Add new deck to user's decks
     public void addDeck(Deck deck) throws DeckExistsException {
-        // Add new deck to user's decks
         for(Deck existingDeck : decks)
             if(existingDeck.getName().equals(deck.getName()))
                 throw new DeckExistsException(deck.getName());
@@ -73,6 +73,11 @@ public class Account {
         if (!doesAccountExists(user))
             accounts.put(user.username, user);
         else throw new UsernameExistsException(user.username);
+    }
+
+    public void deleteDeck(String deckName) throws DeckNotFoundException {
+        Deck deck = getDeck(deckName);
+        decks.remove(deck);
     }
 
     public List<MatchResult> getMatchHistory() {

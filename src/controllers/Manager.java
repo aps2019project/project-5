@@ -37,7 +37,7 @@ public class Manager {
         account.addDeck(deck);
     }
 
-    public static void deleteDeck(String name) {
-
+    public static void deleteDeck(String name) throws Account.DeckNotFoundException {
+        account.deleteDeck(name);
     }
 }
