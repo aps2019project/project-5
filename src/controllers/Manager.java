@@ -4,6 +4,7 @@ import models.Account;
 import models.Deck;
 import models.match.Match;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Manager {
     private static Account account;
@@ -39,5 +40,11 @@ public class Manager {
 
     public static void deleteDeck(String name) throws Account.DeckNotFoundException {
         account.deleteDeck(name);
+    }
+
+    public static List<Deck> getDecks() throws Account.NotLoggedInException {
+        if(account == null)
+            throw new Account.NotLoggedInException();
+        return account.getDecks();
     }
 }

@@ -2,11 +2,13 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
+import models.Deck;
 import views.Command;
 import views.Error;
 import views.Log;
 import views.Output;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 
 public class CollectionMenu implements Menu {
@@ -17,6 +19,7 @@ public class CollectionMenu implements Menu {
         commands.add(new Command("^(?i)return", ""));
         commands.add(new Command("^(?i)create\\s+(?i)deck\\s+(?<name>\\w+)$", "createDeck"));
         commands.add(new Command("^(?i)delete\\s+(?i)deck\\s+(?<name>\\w+)$", "createDeck"));
+        commands.add(new Command("^(?i)show\\s+(?i)all\\s+(?i)decks$", "showAllDecks"));
     }
 
     @Override
@@ -78,8 +81,13 @@ public class CollectionMenu implements Menu {
     }
 
     public static void showAllDecks(Matcher matcher) {
-        // TODO: Implement...
-
+        try {
+            List<Deck> decks = Manager.getDecks();
+            for(Deck deck : decks)
+                Output.print(deck);
+        } catch (Account.NotLoggedInException e) {
+            Output.err(Error.NOT_LOGGED_IN);
+        }
     }
 
     public static void showDeck(Matcher matcher) {

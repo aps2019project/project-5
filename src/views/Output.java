@@ -1,6 +1,7 @@
 package views;
 
 import models.Account;
+import models.Deck;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
@@ -46,4 +47,7 @@ public class Output {
         System.out.println(log.toString());
     }
 
+    public static void print(Deck deck) {
+        System.out.println(deck.toString());
+    }
 }
