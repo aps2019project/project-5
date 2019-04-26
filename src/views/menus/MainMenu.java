@@ -16,22 +16,30 @@ public class MainMenu implements Menu {
 
         commands.add(new Command(
                 "^(?i)logout$",
-                "logout"
+                "logout",
+                "logout",
+                "\t\t\tlogout and return to account menu."
         ));
 
         commands.add(new Command(
                 "^(?i)enter\\s+(?i)collection$",
-                "enterCollection"
+                "enterCollection",
+                "enter collection",
+                "enter collection menu, create and edit decks."
         ));
 
         commands.add(new Command(
                 "^(?i)enter\\s+(?i)battle$",
-                "enterBattle"
+                "enterBattle",
+                "enter battle",
+                "\tenter battle menu and battle with other player or computer."
         ));
 
         commands.add(new Command(
                 "^(?i)enter\\s+(?i)shop",
-                "enterShop"
+                "enterShop",
+                "enter shop",
+                "\t\tenter shop menu and buy new cards."
         ));
 
         commands.add(new Command(

@@ -5,12 +5,12 @@ import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
 
 public class Shop {
-    private static Collection allCards = new Collection();
+    private static Collection cards = new Collection();
 
     static {
-        // TODO: add cards to allCards Collection.
+        // TODO: add cards to cards Collection.
 
-        allCards.addMember(new Minion(
+        cards.addMember(new Minion(
                 "Persian Archer",
                 "",
                 2,
@@ -22,7 +22,7 @@ public class Shop {
                 null
         ));
 
-        allCards.addMember(new Minion(
+        cards.addMember(new Minion(
                 "Persian Swordsman",
                 "",
                 2,
@@ -31,10 +31,10 @@ public class Shop {
                 4,
                 AttackType.MELEE,
                 0,
-                SpecialPowerActivateTime.ONATTACK
+                SpecialPowerActivateTime.ON_ATTACK
         )); // Special Power must be added!
 
-        allCards.addMember(new Minion(
+        cards.addMember(new Minion(
                 "Persian Lancer",
                 "",
                 1,
@@ -45,5 +45,9 @@ public class Shop {
                 3,
                 null
         ));
+    }
+
+    public static Collection getCards() {
+        return cards;
     }
 }

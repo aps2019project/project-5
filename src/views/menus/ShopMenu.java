@@ -38,7 +38,6 @@ public class ShopMenu implements Menu {
     public static void buy(Matcher matcher) {}
     public static void sell(Matcher matcher) {}
     public static void show(Matcher matcher) {}
-
     public static void help(Matcher matcher) {
         Menu.help(new ShopMenu().getCommands());
     }

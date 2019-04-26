@@ -7,6 +7,8 @@ import models.cards.spell.Spell;
 import models.items.UsableItem;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Deck {
     private ArrayList<Card> cards = new ArrayList<>();
@@ -40,36 +42,36 @@ public class Deck {
         return this.name;
     }
 
-    public ArrayList<Hero> getHeroes() {
-        ArrayList<Hero> heroes = new ArrayList<>();
-        for(Card card : cards)
-            if(card instanceof Hero)
-                heroes.add((Hero) card);
-        return heroes;
+    public List<Hero> getHeroes() {
+        return cards.stream().filter(
+                (card) -> (card instanceof Hero)
+        ).map(
+                (card) -> ((Hero) card)
+        ).collect(Collectors.toList());
     }
 
-    public ArrayList<UsableItem> getItems() {
-        ArrayList<UsableItem> items = new ArrayList<>();
-        for(Card card : cards)
-            if(card instanceof UsableItem)
-                items.add((UsableItem) card);
-        return items;
+    public List<Minion> getMinions() {
+        return cards.stream().filter(
+                (card) -> (card instanceof Minion)
+        ).map(
+                (card) -> ((Minion) card)
+        ).collect(Collectors.toList());
     }
 
-    public ArrayList<Spell> getSpells() {
-        ArrayList<Spell> spells = new ArrayList<>();
-        for(Card card : cards)
-            if(card instanceof Spell)
-                spells.add((Spell) card);
-        return spells;
+    public List<UsableItem> getItems() {
+        return cards.stream().filter(
+                (card) -> (card instanceof UsableItem)
+        ).map(
+                (card) -> ((UsableItem) card)
+        ).collect(Collectors.toList());
     }
 
-    public ArrayList<Minion> getMinions() {
-        ArrayList<Minion> minions = new ArrayList<>();
-        for(Card card : cards)
-            if(card instanceof Minion)
-                minions.add((Minion) card);
-        return minions;
+    public List<Spell> getSpells() {
+        return cards.stream().filter(
+                (card) -> (card instanceof Spell)
+        ).map(
+                (card) -> ((Spell) card)
+        ).collect(Collectors.toList());
     }
 
     @Override
