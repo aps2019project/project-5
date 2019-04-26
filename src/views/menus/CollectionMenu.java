@@ -16,10 +16,31 @@ public class CollectionMenu implements Menu {
 
     public CollectionMenu() {
         // TODO: Add Commands
-        commands.add(new Command("^(?i)return", ""));
-        commands.add(new Command("^(?i)create\\s+(?i)deck\\s+(?<name>\\w+)$", "createDeck"));
-        commands.add(new Command("^(?i)delete\\s+(?i)deck\\s+(?<name>\\w+)$", "createDeck"));
-        commands.add(new Command("^(?i)show\\s+(?i)all\\s+(?i)decks$", "showAllDecks"));
+        commands.add(new Command(
+                "^(?i)return$",
+                ""
+        ));
+
+        commands.add(new Command(
+                "^(?i)create\\s+(?i)deck\\s+(?<name>\\w+)$",
+                "createDeck"
+        ));
+
+        commands.add(new Command(
+                "^(?i)delete\\s+(?i)deck\\s+(?<name>\\w+)$",
+                "createDeck"
+        ));
+
+        commands.add(new Command(
+                "^(?i)show\\s+(?i)all\\s+(?i)decks$",
+                "showAllDecks"
+        ));
+
+        commands.add(new Command(
+                "^(?i)help$",
+                "help"
+        ));
+
     }
 
     @Override
@@ -93,6 +114,10 @@ public class CollectionMenu implements Menu {
     public static void showDeck(Matcher matcher) {
         // TODO: Implement...
 
+    }
+
+    public static void help(Matcher matcher) {
+        Menu.help(new CollectionMenu().getCommands());
     }
 
 }

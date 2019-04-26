@@ -12,10 +12,33 @@ public class MainMenu implements Menu {
     private ArrayList<Command> commands = new ArrayList<>();
 
     public MainMenu() {
-        commands.add(new Command("^(?i)logout$", "logout"));
-        commands.add(new Command("^(?i)enter\\s+(?i)collection$", "enterCollection"));
-        commands.add(new Command("^(?i)enter\\s+(?i)battle$", "enterBattle"));
-        commands.add(new Command("^(?i)enter\\s+(?i)shop", "enterShop"));
+        // TODO: Add commands...
+
+        commands.add(new Command(
+                "^(?i)logout$",
+                "logout"
+        ));
+
+        commands.add(new Command(
+                "^(?i)enter\\s+(?i)collection$",
+                "enterCollection"
+        ));
+
+        commands.add(new Command(
+                "^(?i)enter\\s+(?i)battle$",
+                "enterBattle"
+        ));
+
+        commands.add(new Command(
+                "^(?i)enter\\s+(?i)shop",
+                "enterShop"
+        ));
+
+        commands.add(new Command(
+                "^(?i)help$",
+                "help"
+        ));
+
     }
 
     @Override
@@ -44,4 +67,7 @@ public class MainMenu implements Menu {
         new ShopMenu().handleMenu();
     }
 
+    public static void help(Matcher matcher) {
+        Menu.help(new MainMenu().getCommands());
+    }
 }

@@ -39,4 +39,12 @@ public interface Menu {
                 Output.err(Error.INVALID_COMMAND.toString());
         }
     }
+
+    static void help(ArrayList<Command> commands) {
+        for(Command command : commands) {
+            if(!command.hasHelp())
+                continue;
+            Output.log(String.format("%s\t%s", command.getSampleCommand(), command.getCommandAction()));
+        }
+    }
 }

@@ -2,6 +2,7 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
+import models.match.Match;
 import views.*;
 import views.Error;
 
@@ -10,17 +11,41 @@ import java.util.regex.Matcher;
 
 public class AccountMenu implements Menu {
     private ArrayList<Command> commands = new ArrayList<>();
-    private static final String help = "create account <USERNAME>:\tget password and creates the account.\n" +
-            "login <USERNAME>:\t\t\tgets password logs in the user.\n" +
-            "show leaderboard:\t\t\tprints players ordered by their win count.";
 
     public AccountMenu() {
         // TODO: Add Commands
-        commands.add(new Command("^(?i)exit$", ""));
-        commands.add(new Command("^(?i)create\\s+(?i)account\\s+(?<username>\\w+)$", "createAccount"));
-        commands.add(new Command("^(?i)login\\s+(?<username>\\w+)$", "login"));
-        commands.add(new Command("^(?i)help$", "help"));
-        commands.add(new Command("^(?i)show\\s+(?i)leaderboard$", "showRanking"));
+        commands.add(new Command(
+                "^(?i)exit$",
+                "",
+                "exit",
+                "\t\t\t\t\t\texit game"
+        ));
+
+        commands.add(new Command(
+                "^(?i)create\\s+(?i)account\\s+(?<username>\\w+)$",
+                "createAccount",
+                "create account [username]",
+                "\tgets password and creates the account."
+        ));
+
+        commands.add(new Command(
+                "^(?i)login\\s+(?<username>\\w+)$",
+                "login",
+                "login [username]",
+                "\t\t\tgets password logs in the user."
+        ));
+
+        commands.add(new Command(
+                "^(?i)help$",
+                "help"
+        ));
+
+        commands.add(new Command(
+                "^(?i)show\\s+(?i)leaderboard$",
+                "showRanking",
+                "show leaderboard",
+                "\t\t\tprints players ordered by their win count."
+        ));
     }
 
     @Override
@@ -66,11 +91,11 @@ public class AccountMenu implements Menu {
         }
     }
 
-    public static void help(Matcher matcher) {
-        System.out.println(help);
-    }
-
     public static void save(Matcher matcher) {
         // TODO: Call controller functions
+    }
+
+    public static void help(Matcher matcher) {
+        Menu.help(new AccountMenu().getCommands());
     }
 }
