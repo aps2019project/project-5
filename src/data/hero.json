@@ -1,0 +1,112 @@
+[
+  {
+    "name": "White Daemon",
+    "price": 8000,
+    "health": 50,
+    "attackPoint": 4,
+    "attackType": "MELEE",
+    "range": null,
+    "specialPower": {},
+    "manaPoint": 1,
+    "coolDown": 2
+  },
+  {
+    "name": "Phoenix",
+    "price": 9000,
+    "health": 50,
+    "attackPoint": 4,
+    "attackType": "MELEE",
+    "range": null,
+    "specialPower": {},
+    "manaPoint": 5,
+    "coolDown": 8
+  },
+  {
+    "name": "SevenHead Dragon",
+    "price": 8000,
+    "health": 50,
+    "attackPoint": 4,
+    "attackType": "MELEE",
+    "range": null,
+    "specialPower": {},
+    "manaPoint": 0,
+    "coolDown": 1
+  },
+  {
+    "name": "Rakhsh",
+    "price": 8000,
+    "health": 50,
+    "attackPoint": 4,
+    "attackType": "MELEE",
+    "range": null,
+    "specialPower": {},
+    "manaPoint": 1,
+    "coolDown": 2
+  },
+  {
+    "name": "Zahak",
+    "price": 10000,
+    "health": 50,
+    "attackPoint": 2,
+    "attackType": "MELEE",
+    "range": null,
+    "specialPower": {},
+    "manaPoint": null,
+    "coolDown": null
+  },
+  {
+    "name": "Kaveh",
+    "price": 8000,
+    "health": 50,
+    "attackPoint": 4,
+    "attackType": "MELEE",
+    "range": null,
+    "specialPower": {},
+    "manaPoint": 1,
+    "coolDown": 3
+  },
+  {
+    "name": "Arash",
+    "price": 10000,
+    "health": 30,
+    "attackPoint": 2,
+    "attackType": "Ranged",
+    "range": 6,
+    "specialPower": {},
+    "manaPoint": 2,
+    "coolDown": 2
+  },
+  {
+    "name": "Legend",
+    "price": 11000,
+    "health": 40,
+    "attackPoint": 3,
+    "attackType": "Ranged",
+    "range": 3,
+    "specialPower": {},
+    "manaPoint": 1,
+    "coolDown": 2
+  },
+  {
+    "name": "esfandiar",
+    "price": 12000,
+    "health": 35,
+    "attackPoint": 3,
+    "attackType": "HYBRID",
+    "range": 3,
+    "specialPower": {},
+    "manaPoint": null,
+    "coolDown": null
+  },
+  {
+    "name": "Rostam",
+    "price": 8000,
+    "health": 55,
+    "attackPoint": 7,
+    "attackType": "HYBRID",
+    "range": 4,
+    "specialPower": null,
+    "manaPoint": null,
+    "coolDown": null
+  }
+]
