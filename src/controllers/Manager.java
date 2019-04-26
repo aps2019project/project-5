@@ -2,6 +2,8 @@ package controllers;
 
 import models.Account;
 import models.Deck;
+import models.Shop;
+import models.cards.Card;
 import models.match.Match;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 public class Manager {
     private static Account account;
     private static Match playingMatch;
+    public Shop shop = Shop.getInstance();
 
     public static Account getAccount() {
         return account;
@@ -46,5 +49,9 @@ public class Manager {
         if(account == null)
             throw new Account.NotLoggedInException();
         return account.getDecks();
+    }
+
+    public void searchCard (String cardName) {
+        Card card = shop.searchCard(cardName);
     }
 }

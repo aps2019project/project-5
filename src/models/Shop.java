@@ -7,12 +7,14 @@ import models.cards.spell.SpecialPowerActivateTime;
 import models.exceptions.AccountNotFoundException;
 import models.exceptions.CardNotFoundException;
 
+import java.util.List;
+
 
 public class Shop {
-    private static Collection cardsCollection = new Collection();
+    private Collection cardsCollection = new Collection();
+    private static Shop shopInstance = null;
 
-
-    static {
+     {
         // TODO: add cards to cardsCollection Collection.
 
         cardsCollection.addMember(new Minion(
@@ -52,10 +54,24 @@ public class Shop {
         ));
     }
 
+    public static Shop getInstance() {
+        if (shopInstance == null)
+            shopInstance = new Shop();
+        return shopInstance;
+    }
+
     public Collection getCardsCollection() {
         return cardsCollection;
     }
 
+    public Card searchCard (String cardName) {
+        for (MarketObject mo: cardsCollection.getCards()) {
+            Card card = (Card) mo;
+            if(card.getName().equals(cardName))
+                return card;
+        }
+        return null;
+    }
 
     public void sell(Account account, Card card) throws AccountNotFoundException, CardNotFoundException {
 
