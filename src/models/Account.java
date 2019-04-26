@@ -13,6 +13,10 @@ public class Account {
     private int drake = 15000;
     private int winCount = 0;
 
+    public int getDrake() {
+        return drake;
+    }
+
     public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
 
     public Deck getMainDeck() {
