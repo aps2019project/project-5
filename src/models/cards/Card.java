@@ -14,6 +14,10 @@ public class Card extends MarketObject {
 
     public Card() {}
 
+    public int getID() {
+        return id;
+    }
+
     public void moveCard(Cell cell) {
     }
 

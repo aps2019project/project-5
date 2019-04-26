@@ -48,6 +48,10 @@ public class Output {
         System.err.println(error.toString());
     }
 
+    public static void err (Exception e) {
+        System.out.println(e.getMessage());
+    }
+
     public static void log(Log log) {
         System.out.println(log.toString());
     }

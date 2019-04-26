@@ -4,7 +4,10 @@ import models.Account;
 import models.Deck;
 import models.Shop;
 import models.cards.Card;
+import models.exceptions.CardNotFoundException;
 import models.match.Match;
+import views.Output;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +54,13 @@ public class Manager {
         return account.getDecks();
     }
 
-    public void searchCard (String cardName) {
-        Card card = shop.searchCard(cardName);
+    public int searchCard (String cardName) throws CardNotFoundException {
+        Card card = null;
+        try {
+            card = shop.searchCard(cardName);
+            return card.getID();
+        } catch (CardNotFoundException noCardException) {
+            throw noCardException;
+        }
     }
 }

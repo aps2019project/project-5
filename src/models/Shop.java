@@ -64,13 +64,13 @@ public class Shop {
         return cardsCollection;
     }
 
-    public Card searchCard (String cardName) {
+    public Card searchCard (String cardName) throws CardNotFoundException {
         for (MarketObject mo: cardsCollection.getCards()) {
             Card card = (Card) mo;
             if(card.getName().equals(cardName))
                 return card;
         }
-        return null;
+        throw new CardNotFoundException("Card not exists in shop.");
     }
 
     public void sell(Account account, Card card) throws AccountNotFoundException, CardNotFoundException {
