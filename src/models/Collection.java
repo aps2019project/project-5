@@ -1,5 +1,8 @@
 package models;
 
+import models.cards.Card;
+import models.items.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +14,7 @@ public class Collection {
         return this.cards;
     }
 
-    public void addMember(MarketObject member) {
+    public void addCard(MarketObject member) {
         this.cards.add(member);
     }
 
@@ -19,7 +22,18 @@ public class Collection {
         if(cards.size() == 0)
             return cards;
         return cards.stream().filter(
-                (member) -> member.getName().matches(pattern)
+                (card) -> card.getName().matches(pattern)
         ).collect(Collectors.toList());
+    }
+
+    public int getItemsNumber() {
+        int number = 0;
+        for (MarketObject mo : cards ) {
+            try {
+                Item card = (Item) mo;
+                number++;
+            } catch (Exception e) {}
+
+        }
     }
 }

@@ -1,4 +1,7 @@
 package models.exceptions;
 
-public class ItemsFullException {
+public class ItemsFullException extends Throwable {
+    public ItemsFullException(String message) {
+        super(message);
+    }
 }

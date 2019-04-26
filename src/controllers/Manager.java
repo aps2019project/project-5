@@ -5,11 +5,14 @@ import models.Deck;
 import models.Shop;
 import models.cards.Card;
 import models.exceptions.CardNotFoundException;
+import models.exceptions.ItemsFullException;
+import models.exceptions.NotEnoughDrakeException;
 import models.match.Match;
 import views.Output;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 
 public class Manager {
     private static Account account;
@@ -54,7 +57,8 @@ public class Manager {
         return account.getDecks();
     }
 
-    public int searchCard (String cardName) throws CardNotFoundException {
+    public int searchCard (Matcher matcher) throws CardNotFoundException {
+        String cardName = matcher.group("cardName");
         Card card = null;
         try {
             card = shop.searchCard(cardName);
@@ -62,5 +66,16 @@ public class Manager {
         } catch (CardNotFoundException noCardException) {
             throw noCardException;
         }
+    }
+
+    public void buy (Matcher matcher) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
+        String cardName = matcher.group("cardName");
+        Card card = null;
+        try {
+            shop.buy(account, cardName);
+        } catch (Exception e) {
+            throw e;
+        }
+        Output.log("buying successful.");
     }
 }

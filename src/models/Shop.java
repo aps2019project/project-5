@@ -6,6 +6,8 @@ import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
 import models.exceptions.AccountNotFoundException;
 import models.exceptions.CardNotFoundException;
+import models.exceptions.ItemsFullException;
+import models.exceptions.NotEnoughDrakeException;
 
 import java.util.List;
 
@@ -73,7 +75,24 @@ public class Shop {
         throw new CardNotFoundException("Card not exists in shop.");
     }
 
-    public void sell(Account account, Card card) throws AccountNotFoundException, CardNotFoundException {
 
+
+    public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException,
+            ItemsFullException {
+        Card card = null;
+        try {
+            card = shopInstance.searchCard(cardName);
+        }catch (Exception e){
+            throw e;
+        }
+        if(account.getDrake() < card.getPrice())
+            throw new NotEnoughDrakeException("Money not enough to buy this card.");
+        if (account.getItemsNumber() == 3) {
+            throw new ItemsFullException("You have 3 items and can't have any more!");
+        }
+        account.addCardToCollection(card);
+        account.incrementDrake(-card.getPrice());
     }
+
+
 }

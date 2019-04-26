@@ -1,5 +1,7 @@
 package models;
 
+import models.cards.Card;
+
 import java.util.*;
 
 public class Account {
@@ -15,6 +17,10 @@ public class Account {
 
     public int getDrake() {
         return drake;
+    }
+
+    public int getItemsNumber () {
+        return collection.getItemsNumber();
     }
 
     public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
@@ -104,6 +110,10 @@ public class Account {
         ArrayList<Account> ranking = new ArrayList<>(accounts.values());
         ranking.sort(compare);
         return ranking;
+    }
+
+    public void addCardToCollection (Card card) {
+        collection.addCard(card);
     }
 
     @Override
