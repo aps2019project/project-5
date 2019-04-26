@@ -10,20 +10,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Collection {
-    private List<Marketable> members = new ArrayList<>();
+    private List<MarketObject> cards = new ArrayList<>();
 
-    public List<Marketable> getMembers() {
-        return this.members;
+    public List<MarketObject> getCards() {
+        return this.cards;
     }
 
-    public void addMember(Marketable member) {
-        this.members.add(member);
+    public void addMember(MarketObject member) {
+        this.cards.add(member);
     }
 
-    public List<Marketable> filterByName(String pattern) {
-        if(members.size() == 0)
-            return members;
-        return members.stream().filter(
+    public List<MarketObject> filterByName(String pattern) {
+        if(cards.size() == 0)
+            return cards;
+        return cards.stream().filter(
                 (member) -> member.getName().matches(pattern)
         ).collect(Collectors.toList());
     }

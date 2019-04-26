@@ -1,18 +1,18 @@
 package models.cards;
 
-import models.Collection;
-import models.Marketable;
+import models.MarketObject;
 import models.cards.spell.Buff;
 import models.map.Cell;
 
-public class Card implements Marketable {
+public class Card extends MarketObject {
     private Cell cell;
     private Buff buff;
     private int price;
     private int manaPoint;
     private int id;
-    private String name;
     private String description;
+
+    public Card() {}
 
     public void moveCard(Cell cell) {
     }
@@ -24,32 +24,14 @@ public class Card implements Marketable {
         return this.cell;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
-    @Override
-    public String getDescription() {
-        return this.description;
-    }
-
     public Buff getBuff() {
         return this.buff;
-    }
-
-    @Override
-    public int getPrice() {
-        return this.price;
     }
 
     public int getManaPoint() {
         return this.manaPoint;
     }
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
 
     // this constructor can be called only in hero, minion and usable item class
     protected Card(String name, String description, int manaPoint, int price) {
