@@ -2,6 +2,7 @@ package models;
 
 import models.cards.AttackType;
 import models.cards.Minion;
+import models.cards.spell.SpecialPowerActivateTime;
 
 public class Shop {
     private static Collection allCards = new Collection();
@@ -17,7 +18,8 @@ public class Shop {
                 6,
                 4,
                 AttackType.RANGED,
-                7
+                7,
+                null
         ));
 
         allCards.addMember(new Minion(
@@ -28,7 +30,8 @@ public class Shop {
                 6,
                 4,
                 AttackType.MELEE,
-                0
+                0,
+                SpecialPowerActivateTime.ONATTACK
         )); // Special Power must be added!
 
         allCards.addMember(new Minion(
@@ -39,7 +42,8 @@ public class Shop {
                 5,
                 3,
                 AttackType.HYBRID,
-                3
+                3,
+                null
         ));
     }
 }

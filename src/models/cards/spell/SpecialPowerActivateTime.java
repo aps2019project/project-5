@@ -1,12 +1,12 @@
 package models.cards.spell;
 
 public enum SpecialPowerActivateTime {
-    ONATTACK,
+    ON_ATTACK,
     COMBO,
     PASSIVE,
-    ONDEATH,
-    ONSPAWN,
-    ONTURN,
-    ONDEFEND
+    ON_DEATH,
+    ON_SPAWN,
+    ON_TURN,
+    ON_DEFEND
 
 }
