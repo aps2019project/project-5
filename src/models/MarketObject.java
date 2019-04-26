@@ -11,7 +11,7 @@ public abstract class MarketObject {
         return name;
     }
 
-    protected int getPrice() {
+    public int getPrice() {
         return price;
     }
 
