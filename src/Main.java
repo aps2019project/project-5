@@ -1,11 +1,10 @@
-import data.JsonParser;
+import data.FileReader;
 import views.menus.AccountMenu;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        JsonParser jsonParser = new JsonParser();
-        System.out.println(jsonParser.minionParse().size());
-        System.out.println(jsonParser.minionParse().get(0).getAttackPoint());
+    public static void main(String[] args) throws IOException {
+        System.out.println(new FileReader().getFileContent(FileReader.MINIONS_DATA));
         new AccountMenu().handleMenu();
     }
 }
