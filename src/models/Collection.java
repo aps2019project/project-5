@@ -2,7 +2,11 @@ package models;
 
 import models.cards.Card;
 import models.exceptions.CardNotFoundException;
+import models.cards.Hero;
+import models.cards.Minion;
+import models.cards.spell.Spell;
 import models.items.Item;
+import models.items.UsableItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +31,35 @@ public class Collection {
         ).collect(Collectors.toList());
     }
 
-    public int getItemsNumber() {
-        int number = 0;
-        for (MarketObject mo : cards ) {
-            try {
-                Item card = (Item) mo;
-                number++;
-            } catch (Exception e) {}
-        }
-        return number;
+    public List<Hero> getHeroes() {
+        return cards.stream().filter(
+                (card) -> (card instanceof Hero)
+        ).map(
+                (card) -> ((Hero) card)
+        ).collect(Collectors.toList());
     }
 
-    public void removeCard(Card card) throws CardNotFoundException {
-        if (!cards.remove(card))
-            throw new CardNotFoundException("You don't have this card in your collection.");
+    public List<Minion> getMinions() {
+        return cards.stream().filter(
+                (card) -> (card instanceof Minion)
+        ).map(
+                (card) -> ((Minion) card)
+        ).collect(Collectors.toList());
+    }
+
+    public List<Spell> getSpells() {
+        return cards.stream().filter(
+                (card) -> (card instanceof Spell)
+        ).map(
+                (card) -> ((Spell) card)
+        ).collect(Collectors.toList());
+    }
+
+    public List<UsableItem> getUsableItems() {
+        return cards.stream().filter(
+                (card) -> (card instanceof UsableItem)
+        ).map(
+                (card) -> ((UsableItem) card)
+        ).collect(Collectors.toList());
     }
 }
