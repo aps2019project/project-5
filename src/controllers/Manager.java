@@ -70,12 +70,21 @@ public class Manager {
 
     public void buy (Matcher matcher) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
         String cardName = matcher.group("cardName");
-        Card card = null;
         try {
             shop.buy(account, cardName);
         } catch (Exception e) {
             throw e;
         }
         Output.log("buying successful.");
+    }
+
+    public void sell (Matcher matcher) throws CardNotFoundException{
+        int id = Integer.parseInt(matcher.group("id"));
+        try {
+            shop.sell(account, id);
+        } catch (CardNotFoundException noCard) {
+            throw noCard;
+        }
+        Output.log("selling successful");
     }
 }

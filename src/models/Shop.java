@@ -19,7 +19,7 @@ public class Shop {
      {
         // TODO: add cards to cardsCollection Collection.
 
-        cardsCollection.addMember(new Minion(
+        cardsCollection.addCard(new Minion(
                 "Persian Archer",
                 "",
                 2,
@@ -31,7 +31,7 @@ public class Shop {
                 null
         ));
 
-        cardsCollection.addMember(new Minion(
+        cardsCollection.addCard(new Minion(
                 "Persian Swordsman",
                 "",
                 2,
@@ -43,7 +43,7 @@ public class Shop {
                 SpecialPowerActivateTime.ON_ATTACK
         )); // Special Power must be added!
 
-        cardsCollection.addMember(new Minion(
+        cardsCollection.addCard(new Minion(
                 "Persian Lancer",
                 "",
                 1,
@@ -95,4 +95,12 @@ public class Shop {
     }
 
 
+    public void sell(Account account, int id) throws CardNotFoundException {
+         Card card = null;
+        card = account.getCard(id);
+        if(card == null)
+            throw new CardNotFoundException("You don't have this card");
+        account.incrementDrake(card.getPrice());
+        account.removeCardFromCollection(card);
+    }
 }

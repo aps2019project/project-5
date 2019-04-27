@@ -1,6 +1,7 @@
 package models;
 
 import models.cards.Card;
+import models.exceptions.CardNotFoundException;
 
 import java.util.*;
 
@@ -36,6 +37,15 @@ public class Account {
         throw new DeckNotFoundException(name);
     }
 
+    //for selling a card
+    public void removeCardFromCollection (Card card) throws CardNotFoundException {
+        try {
+            collection.removeCard(card);
+        } catch (Exception e){
+            throw e;
+        }
+    }
+
     // Gives user's decks
     public List<Deck> getDecks() {
         return this.decks;
@@ -47,6 +57,10 @@ public class Account {
             if(existingDeck.getName().equals(deck.getName()))
                 throw new DeckExistsException(deck.getName());
         this.decks.add(deck);
+    }
+
+    public Collection getCollection() {
+        return collection;
     }
 
     public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
@@ -124,6 +138,16 @@ public class Account {
 
     public void addMatchResult(MatchResult matchResult) {
         matchHistory.add(matchResult);
+    }
+
+    public Card getCard(int id) {
+        for (MarketObject mo:collection.getCards()) {
+            Card card = (Card) mo;
+            if(card.getID() == id){
+                return card;
+            }
+        }
+        return null;
     }
 
     public static class InvalidUsernameException extends Exception {

@@ -1,6 +1,7 @@
 package models;
 
 import models.cards.Card;
+import models.exceptions.CardNotFoundException;
 import models.items.Item;
 
 import java.util.ArrayList;
@@ -33,7 +34,12 @@ public class Collection {
                 Item card = (Item) mo;
                 number++;
             } catch (Exception e) {}
-
         }
+        return number;
+    }
+
+    public void removeCard(Card card) throws CardNotFoundException {
+        if (!cards.remove(card))
+            throw new CardNotFoundException("You don't have this card in your collection.");
     }
 }
