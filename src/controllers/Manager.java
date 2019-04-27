@@ -1,13 +1,15 @@
 package controllers;
 
 import models.Account;
+import models.Collection;
 import models.Deck;
 import models.Shop;
 import models.cards.Card;
-import models.exceptions.CardNotFoundException;
-import models.exceptions.ItemsFullException;
-import models.exceptions.NotEnoughDrakeException;
+import models.Collection.CardNotFoundException;
+import models.Collection.ItemsFullException;
+import models.Account.NotEnoughDrakeException;
 import models.match.Match;
+import views.Log;
 import views.Output;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ import java.util.regex.Matcher;
 public class Manager {
     private static Account account;
     private static Match playingMatch;
-    public Shop shop = Shop.getInstance();
+    private static Shop shop = Shop.getInstance();
 
     public static Account getAccount() {
         return account;
@@ -57,34 +59,27 @@ public class Manager {
         return account.getDecks();
     }
 
-    public int searchCard (Matcher matcher) throws CardNotFoundException {
-        String cardName = matcher.group("cardName");
-        Card card = null;
-        try {
-            card = shop.searchCard(cardName);
-            return card.getID();
-        } catch (CardNotFoundException noCardException) {
-            throw noCardException;
-        }
+    public static int searchCard (String cardName) throws CardNotFoundException {
+        Card card = shop.searchCard(cardName);
+        return card.getID();
     }
 
-    public void buy (Matcher matcher) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
-        String cardName = matcher.group("cardName");
-        try {
-            shop.buy(account, cardName);
-        } catch (Exception e) {
-            throw e;
-        }
-        Output.log("buying successful.");
+    public static void buy (String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
+        shop.buy(account, cardName);
+        Output.log(Log.BUYING_SUCCESSFUL);
     }
 
-    public void sell (Matcher matcher) throws CardNotFoundException{
-        int id = Integer.parseInt(matcher.group("id"));
-        try {
-            shop.sell(account, id);
-        } catch (CardNotFoundException noCard) {
-            throw noCard;
-        }
-        Output.log("selling successful");
+    public static void sell (int cardID) throws CardNotFoundException{
+        shop.sell(account, cardID);
+        Output.log(Log.SELLING_SUCCESSFUL);
+    }
+
+    public static Collection getShopCollection() {
+        return shop.getCardsCollection();
+    }
+
+
+    public static Collection getMyCollection() {
+        return account.getCollection();
     }
 }

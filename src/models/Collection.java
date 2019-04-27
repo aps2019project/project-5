@@ -1,16 +1,16 @@
 package models;
 
 import models.cards.Card;
-import models.exceptions.CardNotFoundException;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
-import models.items.Item;
 import models.items.UsableItem;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static views.Error.*;
 
 public class Collection {
     private List<MarketObject> cards = new ArrayList<>();
@@ -62,4 +62,35 @@ public class Collection {
                 (card) -> ((UsableItem) card)
         ).collect(Collectors.toList());
     }
+
+    public void removeCard (Card card) throws CardNotFoundException {
+        if(!cards.remove(card))
+            throw new CardNotFoundException();
+    }
+
+    public Card searchCard(String cardName) throws CardNotFoundException {
+        for (MarketObject marketObject: cards) {
+            if(marketObject.getName().equals(cardName))
+                return (Card)marketObject;
+        }
+        throw new CardNotFoundException(CARD_NOT_EXISTS_IN_SHOP.toString());
+    }
+
+    public static class CardNotFoundException extends Exception{
+        public CardNotFoundException () {
+            super(CARD_NOT_FOUND.toString());
+        }
+        public CardNotFoundException (String message) {
+            super(message);
+        }
+    }
+
+
+    public static class ItemsFullException extends Exception {
+        public ItemsFullException() {
+            super(ITEMS_ARE_FULL.toString());
+        }
+    }
+
+
 }

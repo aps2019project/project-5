@@ -4,7 +4,9 @@ public enum Log {
     ACCOUNT_CREATED("Account created."),
     DECK_CREATED("Deck created."),
     DECK_DELETED("Deck deleted."),
-    LOGGED_IN("You logged in.");
+    LOGGED_IN("You logged in."),
+    BUYING_SUCCESSFUL("buying successful."),
+    SELLING_SUCCESSFUL("selling successful");
 
     private String message;
 

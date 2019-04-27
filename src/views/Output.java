@@ -57,21 +57,12 @@ public class Output {
     }
 
 
-    public static void showCardsOfShop (Collection cardsCollection) {
-        List<String> cardsOrderList = new LinkedList<>(Arrays.asList("Hero", "Item", "Minion", "Spell"));
-
-        for (int j = 0; j < cardsOrderList.size(); j++) {
-            System.out.println(cardsOrderList.get(j).toString().replace("class ", ""));
-            for (int i = 1; i < cardsCollection.getCards().size(); i++) {
-                Card card = (Card) cardsCollection.getCards().get(i);
-                if (!card.getClass().toString().equals("class " + cardsOrderList.get(j)))
-                    continue;
-                System.out.println("\t\t" + i + " : " + card + " - Buy Cost : " + card.getPrice() + "$");
-            }
-        }
-    }
 
     public static void print(Deck deck) {
         System.out.println(deck.toString());
+    }
+
+    public static void log(int number) {
+        System.out.println(number);
     }
 }

@@ -1,7 +1,6 @@
 package models;
 
 import models.cards.Card;
-import models.exceptions.CardNotFoundException;
 
 import java.util.*;
 
@@ -21,7 +20,7 @@ public class Account {
     }
 
     public int getItemsNumber () {
-        return collection.getItemsNumber();
+        return collection.getUsableItems().size();
     }
 
     public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
@@ -38,7 +37,7 @@ public class Account {
     }
 
     //for selling a card
-    public void removeCardFromCollection (Card card) throws CardNotFoundException {
+    public void removeCardFromCollection (Card card) throws Collection.CardNotFoundException {
         try {
             collection.removeCard(card);
         } catch (Exception e){
@@ -183,6 +182,12 @@ public class Account {
     public static class DeckNotFoundException extends Exception {
         DeckNotFoundException(String name) {
             super(String.format("Deck '%s' not found for this user.", name));
+        }
+    }
+
+    public static class NotEnoughDrakeException extends Exception {
+        public NotEnoughDrakeException() {
+            super("Not enough drake.");
         }
     }
 }

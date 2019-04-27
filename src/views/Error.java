@@ -7,7 +7,10 @@ public enum Error {
     DECK_EXISTS("Deck with this name exists."),
     DECK_NOT_FOUND("Deck with this name not found."),
     NOT_LOGGED_IN("You not logged in."),
-    INVALID_COMMAND("Invalid command");
+    INVALID_COMMAND("Invalid command"),
+    CARD_NOT_EXISTS_IN_SHOP("Card not exists in shop."),
+    CARD_NOT_FOUND("Card not found in collection."),
+    ITEMS_ARE_FULL("You have 3 items and can't have any more!");
 
     private String message;
 
