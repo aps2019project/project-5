@@ -28,7 +28,9 @@ public class ShopMenu implements Menu {
                 "^(?i)get(\\s+)amount$",
                 "getAmount"
         ));
-
+        commands.add(new Command(
+                "^(?i)search(\\s+)(?<cardName>\\d+$)","search"
+        ));
     }
 
     @Override
@@ -45,6 +47,7 @@ public class ShopMenu implements Menu {
     }
 
     public static void search(Matcher matcher) {
+
     }
 
     public static void searchCollection(Matcher matcher) {
