@@ -8,6 +8,9 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 
+import javax.xml.crypto.dsig.CanonicalizationMethod;
+import java.util.List;
+
 
 public class Shop {
     private Collection cardsCollection = new Collection();
@@ -66,11 +69,13 @@ public class Shop {
         return cardsCollection;
     }
 
-    public Card searchCard (String cardName) throws CardNotFoundException {
-        return cardsCollection.searchCard(cardName);
+    public List<Card> searchCards(String cardName) throws CardNotFoundException {
+        return cardsCollection.getCards(cardName);
     }
 
-
+    public Card searchCard(String cardName) throws CardNotFoundException {
+         return cardsCollection.getCard(cardName);
+    }
 
     public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException,
             ItemsFullException {

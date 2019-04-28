@@ -14,7 +14,6 @@ import views.Output;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 
 public class Manager {
     private static Account account;
@@ -59,9 +58,9 @@ public class Manager {
         return account.getDecks();
     }
 
-    public static int searchCard (String cardName) throws CardNotFoundException {
-        Card card = shop.searchCard(cardName);
-        return card.getID();
+    public static List<Card> searchCardInShop(String cardName) throws CardNotFoundException {
+        List<Card> foundCards = shop.searchCards(cardName);
+        return foundCards;
     }
 
     public static void buy (String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
@@ -74,12 +73,23 @@ public class Manager {
         Output.log(Log.SELLING_SUCCESSFUL);
     }
 
-    public static Collection getShopCollection() {
+    public static Collection getShopCollection() throws Collection.NullCollectionException {
+        Collection collection = shop.getCardsCollection();
+        if(collection == null)
+            throw new Collection.NullCollectionException();
         return shop.getCardsCollection();
     }
 
 
-    public static Collection getMyCollection() {
-        return account.getCollection();
+    public static Collection getMyCollection() throws Collection.NullCollectionException {
+        Collection collection = account.getCollection();
+        if(collection == null)
+            throw new Collection.NullCollectionException();
+        return collection;
+    }
+
+    public static List<Card> searchMyCard(String cardName) throws CardNotFoundException {
+        List<Card> foundCards = account.getCollection().getCards(cardName);
+        return foundCards;
     }
 }

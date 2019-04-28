@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static views.Error.*;
+import static views.Log.EMPTY_COLLECTION;
 
 public class Collection {
     private List<MarketObject> cards = new ArrayList<>();
@@ -68,12 +69,23 @@ public class Collection {
             throw new CardNotFoundException();
     }
 
-    public Card searchCard(String cardName) throws CardNotFoundException {
-        for (MarketObject marketObject: cards) {
-            if(marketObject.getName().equals(cardName))
-                return (Card)marketObject;
+    public List<Card> getCards(String cardName) throws CardNotFoundException {
+        List<MarketObject> foundCard = filterByName(cardName);
+        if (foundCard.size() == 0)
+            throw new CardNotFoundException();
+        return foundCard.stream().map(
+                marketObject -> (Card) marketObject)
+                .collect(Collectors.toList());
+    }
+
+    public Card getCard(String cardName) throws CardNotFoundException {
+        List<Card> cards = filterByName("^" + cardName + "$").stream().map(
+                marketObject -> (Card)marketObject
+        ).collect(Collectors.toList());
+        if (cards.size() == 0) {
+            throw new CardNotFoundException();
         }
-        throw new CardNotFoundException(CARD_NOT_EXISTS_IN_SHOP.toString());
+        return cards.get(0);
     }
 
     public static class CardNotFoundException extends Exception{
@@ -85,12 +97,16 @@ public class Collection {
         }
     }
 
-
     public static class ItemsFullException extends Exception {
         public ItemsFullException() {
             super(ITEMS_ARE_FULL.toString());
         }
     }
 
+    public static class NullCollectionException extends Exception {
+        public NullCollectionException() {
+            super(EMPTY_COLLECTION.toString());
+        }
+    }
 
 }

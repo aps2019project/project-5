@@ -6,7 +6,9 @@ public enum Log {
     DECK_DELETED("Deck deleted."),
     LOGGED_IN("You logged in."),
     BUYING_SUCCESSFUL("buying successful."),
-    SELLING_SUCCESSFUL("selling successful");
+    SELLING_SUCCESSFUL("selling successful"),
+    EMPTY_COLLECTION("collection is empty.");
+
 
     private String message;
 

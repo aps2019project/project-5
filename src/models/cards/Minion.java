@@ -15,7 +15,7 @@ public class Minion extends Attacker {
     @Override
     public String toString() {
         return "Type : Minion - Name : " + getName() + " - Class : " + getAttackType() + " - AP : " + getAttackPoint() +
-                " - HP : " + getHealth() + " - MP : " + getManaPoint() + " - Special power : " +
+                " - HP : " + getHealth() + " - MP : " + getManaPoint() + " - Special power : " /*+
                 getSpecialPower().getDescription() /* phrases that should be printed in shop for a special power*/;
     }
 
