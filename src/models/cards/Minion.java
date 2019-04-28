@@ -4,9 +4,9 @@ import models.cards.spell.SpecialPowerActivateTime;
 public class Minion extends Attacker {
     public SpecialPowerActivateTime specialPowerActivateTime;
 
-    public Minion(String name, String description, int manaPoint, int price, int health, int attackPoint,
+    public Minion(int id, String name, String description, int manaPoint, int price, int health, int attackPoint,
                   AttackType attackType, int range, SpecialPowerActivateTime specialPowerActivateTime) {
-        super(name, description, manaPoint, price, health, attackPoint, attackType, range);
+        super(id, name, description, manaPoint, price, health, attackPoint, attackType, range);
         this.specialPowerActivateTime = specialPowerActivateTime;
     }
 

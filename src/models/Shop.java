@@ -17,6 +17,7 @@ public class Shop {
         // TODO: add cards to cardsCollection Collection.
 
         cardsCollection.addCard(new Minion(
+                1,
                 "Persian Archer",
                 "",
                 2,
@@ -29,6 +30,7 @@ public class Shop {
         ));
 
         cardsCollection.addCard(new Minion(
+                2,
                 "Persian Swordsman",
                 "",
                 2,
@@ -41,6 +43,7 @@ public class Shop {
         )); // Special Power must be added!
 
         cardsCollection.addCard(new Minion(
+                3,
                 "Persian Lancer",
                 "",
                 1,

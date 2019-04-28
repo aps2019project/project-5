@@ -38,7 +38,8 @@ public class Card extends MarketObject {
 
 
     // this constructor can be called only in hero, minion and usable item class
-    protected Card(String name, String description, int manaPoint, int price) {
+    protected Card(int id, String name, String description, int manaPoint, int price) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.manaPoint = manaPoint;
