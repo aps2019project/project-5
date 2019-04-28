@@ -9,7 +9,7 @@ public class Account {
     private List<MatchResult> matchHistory = new ArrayList<>();
     private String username;
     private String password;
-    private Collection collection;
+    private Collection collection = new Collection();
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
     private int drake = 15000;

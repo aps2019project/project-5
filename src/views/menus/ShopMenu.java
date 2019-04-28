@@ -53,7 +53,7 @@ public class ShopMenu implements Menu {
                 "searchCollection"
         ));
         commands.add(new Command(
-                "^(?i)sell (?<cardID>//d+)$",
+                "^(?i)sell (?<cardID>\\d+)$",
                 "sell"
         ));
     }
