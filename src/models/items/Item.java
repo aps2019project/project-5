@@ -7,6 +7,12 @@ public class Item {
     private String description;
     private String name;
 
+    public Item(String name, Cell cell, String description) {
+        this.name = name;
+        this.cell = cell;
+        this.description = description;
+    }
+
     public String getDescription() {
         return this.description;
     }

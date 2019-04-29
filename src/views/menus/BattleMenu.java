@@ -1,5 +1,6 @@
 package views.menus;
 
+import controllers.Manager;
 import views.Command;
 
 import java.util.ArrayList;
@@ -10,6 +11,10 @@ public class BattleMenu implements Menu {
 
     public BattleMenu() {
         // TODO: Add commands.
+        commands.add(new Command(
+                "^(?i)Game info$",
+                "gameInfo"
+        ));
         commands.add(new Command(
                 "^(?i)return$",
                 ""
@@ -32,7 +37,9 @@ public class BattleMenu implements Menu {
         return this.commands;
     }
 
-    public static void gameInfo(Matcher matcher) {}
+    public static void gameInfo(Matcher matcher) {
+        Manager.getMatchInfo();
+    }
     public static void showMyMinions(Matcher matcher) {}
     public static void showOpponentMinions(Matcher matcher) {}
     public static void showCardInfo(int cardId) {}

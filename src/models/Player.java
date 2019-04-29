@@ -1,17 +1,13 @@
 package models;
 
-import models.cards.AttackType;
 import models.cards.Attacker;
 import models.cards.Card;
-import models.cards.Hero;
 import models.items.Flag;
 import models.items.Item;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Player {
@@ -20,29 +16,38 @@ public class Player {
     private Deque<Card> hand;
     private Card selectedCard;
     private int flags;
-    private List<Item> collectedItems=new ArrayList<>();
+    private List<Item> collectedItems = new ArrayList<>();
     private ArrayList<Card> graveYard;
     private List<Card> activeCards;
 
-    private Player(Account account){
-        this.account=account;
-        this.deck=account.getMainDeck();
+    private Player(Account account) {
+        this.account = account;
+        this.deck = account.getMainDeck();
     }
 
 
-    public ArrayList<Card> getGraveYard() { return graveYard; }
-    public Deque<Card> getHand() { return hand; }
-    public Card getSelectedCard() { return selectedCard; }
+    public ArrayList<Card> getGraveYard() {
+        return graveYard;
+    }
+
+    public Deque<Card> getHand() {
+        return hand;
+    }
+
+    public Card getSelectedCard() {
+        return selectedCard;
+    }
+
+    public void setSelectedCard(Card selectedCard) {
+        this.selectedCard = selectedCard;
+    }
+
     public void insertCard(Card card) {
 
     }
 
     public Deck getDeck() {
         return deck;
-    }
-
-    public void setSelectedCard(Card selectedCard) {
-        this.selectedCard = selectedCard;
     }
 
     public void incrementFlags() {
@@ -58,11 +63,14 @@ public class Player {
         return activeCards
                 .stream()
                 .filter(
-                card -> card instanceof Attacker)
-                .map(
-                card -> ((Attacker)card).getFlag()
-                )
-                .collect(Collectors.toList());
+                        card -> card instanceof Attacker
+                ).map(
+                        card -> ((Attacker) card).getFlag()
+                ).collect(Collectors.toList());
+    }
+
+    public List<Card> getActiveCards() {
+        return activeCards;
     }
 
     public boolean hasFlag() {

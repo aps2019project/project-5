@@ -113,6 +113,10 @@ public class Manager {
         deck.removeCard(card);
     }
 
+    public static String getMatchInfo() {
+        return playingMatch.getInfo();
+    }
+
     public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
         return deck.validateDeck();

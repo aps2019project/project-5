@@ -17,4 +17,16 @@ public class DeathMatch extends Match {
         }
         return null;
     }
+
+    @Override
+    public String getInfo() {
+        String result = "";
+        for (int i = 0; i < PLAYERS_COUNT; i++) {
+            result += "Player number " + (i + 1) + " Hero HP : " +
+                    players[i].getDeck().getHero().getCurrentHealth() ;
+            if(i == 0)
+                result += "\n";
+        }
+        return result;
+    }
 }

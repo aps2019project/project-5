@@ -5,6 +5,7 @@ import models.Player;
 import models.items.Item;
 import models.map.Map;
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 
 public abstract class Match {
@@ -46,5 +47,7 @@ public abstract class Match {
     public int getTurn() {
         return turn;
     }
+
+    abstract public String getInfo();
 
 }
