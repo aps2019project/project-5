@@ -61,7 +61,10 @@ public class CollectionMenu implements Menu {
                 "^(?i)remove\\s+(?<card>[A-z ]+)\\s+from\\s+deck\\s+(?<deck>\\w+)$",
                 "removeCardFromDeck"
         ));
-
+        commands.add(new Command(
+           "^(?i)search\\s+(?<card>[A-z ]+)$",
+           "searchCard"
+        ));
     }
 
     @Override
@@ -76,6 +79,13 @@ public class CollectionMenu implements Menu {
 
     public static void searchCard(Matcher matcher) {
         // TODO: Implement...
+        String cardName=matcher.group("cardName");
+        try {
+            List<Card> cards=Manager.searchMyCard(cardName);
+            cards.forEach((card) -> Output.log(card.toString()));
+        }catch (Collection.CardNotFoundException e){
+            Output.err(Error.CARD_NOT_FOUND);
+        }
 
     }
 
