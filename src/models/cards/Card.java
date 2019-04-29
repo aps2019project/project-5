@@ -61,4 +61,5 @@ public class Card {
     public int getPrice() {
         return price;
     }
+
 }
