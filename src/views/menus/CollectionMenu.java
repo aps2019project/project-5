@@ -54,8 +54,12 @@ public class CollectionMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)add\\s+(?<card>[A-z ]+)\\s+to\\s+(?<deck>\\w+)$",
+                "^(?i)add\\s+(?<card>[A-z ]+)\\s+to\\s+deck\\s+(?<deck>\\w+)$",
                 "addCardToDeck"
+        ));
+        commands.add(new Command(
+                "^(?i)remove\\s+(?<card>[A-z ]+)\\s+from\\s+deck\\s+(?<deck>\\w+)$",
+                "removeCardFromDeck"
         ));
 
     }
@@ -113,7 +117,7 @@ public class CollectionMenu implements Menu {
             Output.err(Error.DECK_NOT_FOUND);
         } catch (Deck.DeckFullException e) {
             Output.err(Error.DECK_FULL_EXCEPTION);
-        } catch (Collection.CardNotFoundException e){
+        } catch (Collection.CardNotFoundException e) {
             Output.err(Error.CARD_NOT_FOUND);
         }
 
@@ -121,6 +125,16 @@ public class CollectionMenu implements Menu {
 
     public static void removeCardFromDeck(Matcher matcher) {
         // TODO: Implement...
+        String cardName = matcher.group("card");
+        String deckName = matcher.group("deck");
+        try {
+            Manager.removeCardFromDeck(cardName, deckName);
+            Output.log(Log.CARD_REMOVED_FROM_COLLECTION);
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_FOUND);
+        } catch (Account.DeckNotFoundException e) {
+            Output.err(Error.DECK_NOT_FOUND);
+        }
 
     }
 

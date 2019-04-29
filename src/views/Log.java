@@ -8,7 +8,8 @@ public enum Log {
     BUYING_SUCCESSFUL("buying successful."),
     SELLING_SUCCESSFUL("selling successful"),
     EMPTY_COLLECTION("collection is empty."),
-    CARD_ADDED_TO_DECK("Card added to deck.");
+    CARD_ADDED_TO_DECK("Card added to deck."),
+    CARD_REMOVED_FROM_COLLECTION("Card removed from deck");
 
 
     private String message;
@@ -16,9 +17,11 @@ public enum Log {
     Log(String message) {
         this.message = message;
     }
-    public void printAmount(int drake){
+
+    public void printAmount(int drake) {
 
     }
+
     @Override
     public String toString() {
         return this.message;
