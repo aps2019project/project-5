@@ -97,9 +97,10 @@ public class Deck {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append(this.name);
-        // TODO: Add deck cards.
+//        result.append(this.name);
+        result.append("Heroes :\n\t");
         return result.toString();
+
     }
 
     public boolean validateDeck() {
@@ -124,6 +125,5 @@ public class Deck {
             super(String.format("deck '%s' is full!", deckName));
         }
     }
-
 
 }

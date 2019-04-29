@@ -73,6 +73,9 @@ public class CollectionMenu implements Menu {
                 "^(?i)select\\s+deck\\s+(?<deck>\\d+)$",
                 "selectDeck"
         ));
+        commands.add(new Command(
+                "^(?i)show\\s+deck\\s+(?<deck>\\d+)",
+                "showDeck"));
     }
 
     @Override
@@ -191,6 +194,15 @@ public class CollectionMenu implements Menu {
 
     public static void showDeck(Matcher matcher) {
         // TODO: Implement...
+        String deckName = matcher.group("deck");
+        try {
+            Deck deck = Manager.getAccount().getDeck(deckName);
+
+
+            Output.log(deck.toString());
+        } catch (Account.DeckNotFoundException e) {
+            Output.err(Error.DECK_NOT_FOUND);
+        }
 
     }
 
