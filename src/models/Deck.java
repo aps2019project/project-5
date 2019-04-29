@@ -5,6 +5,7 @@ import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.items.UsableItem;
+import views.Error;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +102,11 @@ public class Deck {
         return result.toString();
     }
 
+    public boolean validateDeck() {
+        if (cards.size() != 20 || this.getHeroes().size() == 0) return false;
+        return true;
+    }
+
     public static class CardExistsInDeckException extends Exception {
         public CardExistsInDeckException(String cardName, String deckName) {
             super(String.format("card '%s' exists in deck '%s'", cardName, deckName));
@@ -118,4 +124,6 @@ public class Deck {
             super(String.format("deck '%s' is full!", deckName));
         }
     }
+
+
 }

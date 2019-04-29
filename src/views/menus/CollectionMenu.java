@@ -62,8 +62,16 @@ public class CollectionMenu implements Menu {
                 "removeCardFromDeck"
         ));
         commands.add(new Command(
-           "^(?i)search\\s+(?<card>[A-z ]+)$",
-           "searchCard"
+                "^(?i)search\\s+(?<card>[A-z ]+)$",
+                "searchCard"
+        ));
+        commands.add(new Command(
+                "^(?i)validate\\s+deck\\s+(?<deck>\\d+)$",
+                "validateDeck"
+        ));
+        commands.add(new Command(
+                "^(?i)select\\s+deck\\s+(?<deck>\\d+)$",
+                "selectDeck"
         ));
     }
 
@@ -79,11 +87,11 @@ public class CollectionMenu implements Menu {
 
     public static void searchCard(Matcher matcher) {
         // TODO: Implement...
-        String cardName=matcher.group("cardName");
+        String cardName = matcher.group("cardName");
         try {
-            List<Card> cards=Manager.searchMyCard(cardName);
+            List<Card> cards = Manager.searchMyCard(cardName);
             cards.forEach((card) -> Output.log(card.toString()));
-        }catch (Collection.CardNotFoundException e){
+        } catch (Collection.CardNotFoundException e) {
             Output.err(Error.CARD_NOT_FOUND);
         }
 
@@ -150,11 +158,24 @@ public class CollectionMenu implements Menu {
 
     public static void validateDeck(Matcher matcher) {
         // TODO: Implement...
+        String deckName = matcher.group("deck");
+        try {
+            if (Manager.validateDeck(deckName))
+                Output.log(Log.DECK_IS_COMPLETED);
+        } catch (Account.DeckNotFoundException e) {
+            Output.err(Error.DECK_IS_NOT_COMPLETE);
+        }
 
     }
 
     public static void selectDeck(Matcher matcher) {
         // TODO: Implement...
+        String deckName = matcher.group("deck");
+        try {
+            Manager.selectDeck(deckName);
+        } catch (Account.DeckNotFoundException e) {
+            Output.err(Error.DECK_NOT_FOUND);
+        }
 
     }
 

@@ -9,6 +9,7 @@ public enum Log {
     SELLING_SUCCESSFUL("selling successful"),
     EMPTY_COLLECTION("collection is empty."),
     CARD_ADDED_TO_DECK("Card added to deck."),
+    DECK_IS_COMPLETED("Deck is complete!"),
     CARD_REMOVED_FROM_COLLECTION("Card removed from deck");
 
 

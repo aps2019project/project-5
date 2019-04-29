@@ -13,7 +13,8 @@ public enum Error {
     ITEMS_ARE_FULL("You have 3 items and can't have any more!"),
     CARD_EXISTS_IN_DECK("Card exists in the deck"),
     DECK_FULL_EXCEPTION("Deck is full!"),
-    HERO_EXISTS_IN_DECK("Hero Exists in deck");
+    HERO_EXISTS_IN_DECK("Hero Exists in deck"),
+    DECK_IS_NOT_COMPLETE("Deck is not completed!");
     private String message;
 
     Error(String message) {

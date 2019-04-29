@@ -19,6 +19,10 @@ public class Account {
         return drake;
     }
 
+    public void setMainDeck(Deck mainDeck) {
+        this.mainDeck = mainDeck;
+    }
+
     public int getItemsNumber () {
         return collection.getUsableItems().size();
     }

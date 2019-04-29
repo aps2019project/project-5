@@ -112,4 +112,14 @@ public class Manager {
         Deck deck = account.getDeck(deckName);
         deck.removeCard(card);
     }
+
+    public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
+        Deck deck = account.getDeck(deckName);
+        return deck.validateDeck();
+    }
+
+    public static void selectDeck(String deckName) throws Account.DeckNotFoundException {
+        Deck deck = account.getDeck(deckName);
+        account.setMainDeck(deck);
+    }
 }
