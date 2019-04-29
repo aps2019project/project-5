@@ -21,7 +21,9 @@ public class ShopMenu implements Menu {
     public ShopMenu() {
         commands.add(new Command(
                 "^(?i)return$",
-                ""
+                "",
+                "return",
+                "return to MainMenu."
         ));
 
         commands.add(new Command(
@@ -30,31 +32,46 @@ public class ShopMenu implements Menu {
         ));
         commands.add(new Command(
                 "^(?i)show$",
-                "show"
+                "show",
+                "show",
+                "Show all cards and items."
         ));
         commands.add(new Command(
                 "^(?i)buy (?<cardName>[A-z ]+)$",
-                "buy"
+                "buy",
+                "buy [CardName]",
+                "\t\t\tbuy card and add to account collection."
         ));
         commands.add(new Command(
                 "^(?i)get(\\s+)amount$",
-                "getAmount"
+                "getAmount",
+                "get amount",
+                "\t\t\t\tshows the amount in drakes."
         ));
         commands.add(new Command(
                 "^(?i)show collection$",
-                "showMyCollection"
+                "showMyCollection",
+                "show collection",
+                "\t\t\tshow all cards in account's collection"
         ));
         commands.add(new Command(
                 "^(?i)search (?<cardName>[A-z ]+)$",
-                "search"
+                "search",
+                "search [String]",
+                "\t\t\tshow all cards that their name's contains '[String]'"
         ));
         commands.add(new Command(
                 "^(?i)search collection (?<cardName>[A-z ]+)$",
-                "searchCollection"
+                "searchCollection",
+                "search collection [String]",
+                "show all cards in account's collection that their name contains '[String]'"
         ));
+
         commands.add(new Command(
                 "^(?i)sell (?<cardID>\\d+)$",
-                "sell"
+                "sell",
+                "sell [CardId]",
+                "\t\t\tsell cards in collection"
         ));
     }
 
