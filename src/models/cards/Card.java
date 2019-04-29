@@ -1,21 +1,25 @@
 package models.cards;
 
-import models.MarketObject;
 import models.cards.spell.Buff;
 import models.map.Cell;
 
-public class Card extends MarketObject {
+public class Card {
     private Cell cell;
     private Buff buff;
-    private int price;
     private int manaPoint;
     private int id;
     private String description;
+    private String name;
+    private int price;
 
     public Card() {}
 
     public int getID() {
         return id;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void moveCard(Cell cell) {
@@ -38,10 +42,23 @@ public class Card extends MarketObject {
 
 
     // this constructor can be called only in hero, minion and usable item class
-    protected Card(String name, String description, int manaPoint, int price) {
+    protected Card(int id, String name, String description, int manaPoint, int price) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.manaPoint = manaPoint;
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

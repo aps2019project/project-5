@@ -19,7 +19,7 @@ public class Deck {
     }
 
     public void addCard(Card card) throws CardExistsInDeckException, HeroExistsInDeckException, DeckFullException {
-        if (hasCard(card.name)) {
+        if (hasCard(card.getName())) {
             throw new CardExistsInDeckException(card.getName(), this.name);
         }
         if (this.getHeroes().size() == 1) {
@@ -34,7 +34,7 @@ public class Deck {
 
     public boolean hasCard(String cardName) {
         return (this.cards.stream().filter(
-                card -> card.name.equals(cardName)
+                card -> card.getName().equals(cardName)
         ).count() == 1);
     }
 
@@ -94,7 +94,7 @@ public class Deck {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append(this.name);
-
+        // TODO: Add deck cards.
         return result.toString();
     }
 

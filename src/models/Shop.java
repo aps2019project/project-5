@@ -8,15 +8,18 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 
+import java.util.List;
+
 
 public class Shop {
     private Collection cardsCollection = new Collection();
     private static Shop shopInstance = null;
 
-     {
+    {
         // TODO: add cards to cardsCollection Collection.
 
         cardsCollection.addCard(new Minion(
+                1,
                 "Persian Archer",
                 "",
                 2,
@@ -29,6 +32,7 @@ public class Shop {
         ));
 
         cardsCollection.addCard(new Minion(
+                2,
                 "Persian Swordsman",
                 "",
                 2,
@@ -41,6 +45,7 @@ public class Shop {
         )); // Special Power must be added!
 
         cardsCollection.addCard(new Minion(
+                3,
                 "Persian Lancer",
                 "",
                 1,
@@ -63,16 +68,18 @@ public class Shop {
         return cardsCollection;
     }
 
-    public Card searchCard (String cardName) throws CardNotFoundException {
-        return cardsCollection.searchCard(cardName);
+    public List<Card> searchCards(String cardName) throws CardNotFoundException {
+        return cardsCollection.getCards(cardName);
     }
 
-
+    public Card searchCard(String cardName) throws CardNotFoundException {
+        return cardsCollection.getCard(cardName);
+    }
 
     public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException,
             ItemsFullException {
         Card card = shopInstance.searchCard(cardName);
-        if(account.getDrake() < card.getPrice())
+        if (account.getDrake() < card.getPrice())
             throw new NotEnoughDrakeException();
         if (account.getItemsNumber() == 3)
             throw new ItemsFullException();
@@ -82,8 +89,8 @@ public class Shop {
 
 
     public void sell(Account account, int id) throws CardNotFoundException {
-         Card card = account.getCard(id);
-        if(card == null)
+        Card card = account.getCard(id);
+        if (card == null)
             throw new CardNotFoundException();
         account.incrementDrake(card.getPrice());
         account.removeCardFromCollection(card);

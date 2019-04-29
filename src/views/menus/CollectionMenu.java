@@ -22,22 +22,30 @@ public class CollectionMenu implements Menu {
         // TODO: Add Commands
         commands.add(new Command(
                 "^(?i)return$",
-                ""
+                "",
+                "return",
+                "\t\t\t\treturn to MainMenu."
         ));
 
         commands.add(new Command(
                 "^(?i)create\\s+(?i)deck\\s+(?<name>\\w+)$",
-                "createDeck"
+                "createDeck",
+                "create deck [DeckName]",
+                "create new empty deck."
         ));
 
         commands.add(new Command(
                 "^(?i)delete\\s+(?i)deck\\s+(?<name>\\w+)$",
-                "createDeck"
+                "deleteDeck",
+                "delete deck [DeckName]",
+                "deletes the deck."
         ));
 
         commands.add(new Command(
                 "^(?i)show\\s+(?i)all\\s+(?i)decks$",
-                "showAllDecks"
+                "showAllDecks",
+                "show all decks",
+                "\t\tshows name of all decks."
         ));
 
         commands.add(new Command(
@@ -45,7 +53,10 @@ public class CollectionMenu implements Menu {
                 "help"
         ));
 
-        commands.add(new Command("^(?i)add\\s+(?<card>\\w+)\\s+to\\s+(?<deck>\\w+)$", "addCardToDeck"));
+        commands.add(new Command(
+                "^(?i)add\\s+(?<card>[A-z ]+)\\s+to\\s+(?<deck>\\w+)$",
+                "addCardToDeck"
+        ));
 
     }
 
@@ -93,6 +104,7 @@ public class CollectionMenu implements Menu {
         String deckName = matcher.group("deck");
         try {
             Manager.addCardToDeck(cardId, deckName);
+            Output.log(Log.CARD_ADDED_TO_DECK);
         } catch (Deck.CardExistsInDeckException e) {
             Output.err(Error.CARD_EXISTS_IN_DECK);
         } catch (Deck.HeroExistsInDeckException e) {

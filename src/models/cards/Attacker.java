@@ -9,9 +9,9 @@ public class Attacker extends Card {
     private AttackType attackType;
     private Spell specialPower;
 
-    public Attacker(String name, String description, int manaPoint, int price, int health, int attackPoint,
+    public Attacker(int id, String name, String description, int manaPoint, int price, int health, int attackPoint,
                     AttackType attackType, int range) {
-        super(name, description, manaPoint, price);
+        super(id, name, description, manaPoint, price);
         this.health = health;
         this.attackPoint = attackPoint;
         this.attackType = attackType;

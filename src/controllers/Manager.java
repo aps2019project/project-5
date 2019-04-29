@@ -59,6 +59,10 @@ public class Manager {
         return account.getDecks();
     }
 
+    public static List<Card> searchCardInShop(String cardName) throws CardNotFoundException {
+        return shop.searchCards(cardName);
+    }
+
     public static int searchCard(String cardName) throws CardNotFoundException {
         Card card = shop.searchCard(cardName);
         return card.getID();
@@ -74,13 +78,24 @@ public class Manager {
         Output.log(Log.SELLING_SUCCESSFUL);
     }
 
-    public static Collection getShopCollection() {
+    public static Collection getShopCollection() throws Collection.NullCollectionException {
+        Collection collection = shop.getCardsCollection();
+        if(collection == null)
+            throw new Collection.NullCollectionException();
         return shop.getCardsCollection();
     }
 
 
-    public static Collection getMyCollection() {
-        return account.getCollection();
+    public static Collection getMyCollection() throws Collection.NullCollectionException {
+        Collection collection = account.getCollection();
+        if(collection == null)
+            throw new Collection.NullCollectionException();
+        return collection;
+    }
+
+    public static List<Card> searchMyCard(String cardName) throws CardNotFoundException {
+        List<Card> foundCards = account.getCollection().getCards(cardName);
+        return foundCards;
     }
 
     public static void addCardToDeck(String name, String deckName) throws Account.DeckNotFoundException,

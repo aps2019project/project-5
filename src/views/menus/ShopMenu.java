@@ -1,35 +1,24 @@
 package views.menus;
 
 import controllers.Manager;
-import models.Account;
 import models.Collection;
-import models.Shop;
-import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
-import models.items.Item;
 import models.items.UsableItem;
-import models.match.Match;
 import models.Collection.CardNotFoundException;
 import views.Command;
-import views.Error;
-import views.Log;
 import views.Output;
 
-import javax.naming.ldap.ManageReferralControl;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
-import models.Collection.ItemsFullException;
 
 public class ShopMenu implements Menu {
     private ArrayList<Command> commands = new ArrayList<>();
 
     public ShopMenu() {
-        // TODO: Add Commands
         commands.add(new Command(
                 "^(?i)return$",
                 ""
@@ -40,7 +29,7 @@ public class ShopMenu implements Menu {
                 "help"
         ));
         commands.add(new Command(
-                "^(?i)show",
+                "^(?i)show$",
                 "show"
         ));
         commands.add(new Command(
@@ -52,15 +41,19 @@ public class ShopMenu implements Menu {
                 "getAmount"
         ));
         commands.add(new Command(
-                "^(?i)show collection",
+                "^(?i)show collection$",
                 "showMyCollection"
         ));
         commands.add(new Command(
-                "^(?i)search (?<cardName>[A-z ]+)",
+                "^(?i)search (?<cardName>[A-z ]+)$",
                 "search"
         ));
         commands.add(new Command(
-                "^(?i)sell (?<cardID>//d+)",
+                "^(?i)search collection (?<cardName>[A-z ]+)$",
+                "searchCollection"
+        ));
+        commands.add(new Command(
+                "^(?i)sell (?<cardID>\\d+)$",
                 "sell"
         ));
     }
@@ -76,20 +69,31 @@ public class ShopMenu implements Menu {
     }
 
     public static void showMyCollection(Matcher matcher) {
-        showCollection(Manager.getMyCollection(), "Sell");
+        try {
+            showCollection(Manager.getMyCollection(), "Sell");
+        } catch (Collection.NullCollectionException npException) {
+            Output.err(npException);
+        }
     }
 
     public static void search(Matcher matcher) {
         String cardName = matcher.group("cardName");
         try {
-            Output.log(Manager.searchCard(cardName));
+            Manager.searchCardInShop(cardName).stream().forEach(
+                    card -> Output.log(card.toString()));
         } catch (CardNotFoundException e) {
             Output.err(e);
         }
     }
 
     public static void searchCollection(Matcher matcher) {
-
+        String cardName = matcher.group("cardName");
+        try {
+            Manager.searchMyCard(cardName).stream().forEach(
+                    card -> Output.log(card.toString()));
+        } catch (CardNotFoundException e) {
+            Output.err(e);
+        }
     }
 
     public static void buy(Matcher matcher) {
@@ -120,7 +124,11 @@ public class ShopMenu implements Menu {
     }
 
     public static void show (Matcher matcher) {
-        showCollection(Manager.getShopCollection(), "Buy");
+        try {
+            showCollection(Manager.getShopCollection(), "Buy");
+        } catch (Collection.NullCollectionException e) {
+            Output.err(e);
+        }
     }
 
     public static void showCollection (Collection collection, String buyOrSell) {
@@ -139,18 +147,18 @@ public class ShopMenu implements Menu {
                     Items.get(i).getPrice() + "$");
         }
 
+        Output.log("Cards :");
+
         List<Minion> minions = new LinkedList<>(collection.getMinions());
-        Output.log("Minions :");
         for (int i = 0; i < minions.size(); i++) {
-            Output.log("\t\t" + i + " : " + minions.get(i) + " - " + buyOrSell + " Cost : " +
+            Output.log("\t\t" + (i + 1) + " : " + minions.get(i) + " - " + buyOrSell + " Cost : " +
                     minions.get(i).getPrice() + "$") ;
         }
 
 
         List<Spell> spells = new LinkedList<>(collection.getSpells());
-        Output.log("Spells :");
         for (int i = 0; i < spells.size(); i++) {
-            Output.log("\t\t" + i + " : " + spells.get(i) + " - " + buyOrSell + " Cost : " +
+            Output.log("\t\t" + (i + 1 + minions.size()) + " : " + spells.get(i) + " - " + buyOrSell + " Cost : " +
                     spells.get(i).getPrice() + "$");
         }
 
