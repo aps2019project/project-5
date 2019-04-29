@@ -80,7 +80,7 @@ public class Manager {
 
     public static Collection getShopCollection() throws Collection.NullCollectionException {
         Collection collection = shop.getCardsCollection();
-        if(collection == null)
+        if (collection == null)
             throw new Collection.NullCollectionException();
         return shop.getCardsCollection();
     }
@@ -88,7 +88,7 @@ public class Manager {
 
     public static Collection getMyCollection() throws Collection.NullCollectionException {
         Collection collection = account.getCollection();
-        if(collection == null)
+        if (collection == null)
             throw new Collection.NullCollectionException();
         return collection;
     }
@@ -98,11 +98,18 @@ public class Manager {
         return foundCards;
     }
 
-    public static void addCardToDeck(String name, String deckName) throws Account.DeckNotFoundException,
+    public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
             CardNotFoundException, Deck.HeroExistsInDeckException, Deck.DeckFullException, Deck.CardExistsInDeckException {
-        Card card = account.getCollection().getCard(name);
+        Card card = account.getCollection().getCard(cardName);
         Deck deck = account.getDeck(deckName);
         deck.addCard(card);
 
+    }
+
+    public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException,
+            Account.DeckNotFoundException {
+        Card card = account.getCollection().getCard(cardName);
+        Deck deck = account.getDeck(deckName);
+        deck.removeCard(card);
     }
 }

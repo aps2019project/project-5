@@ -38,8 +38,11 @@ public class Deck {
         ).count() == 1);
     }
 
-    public void removeCard(Card card) {
-
+    public void removeCard(Card card) throws Collection.CardNotFoundException {
+        if (!hasCard(card.getName())) {
+            throw new Collection.CardNotFoundException();
+        }
+        cards.remove(card);
     }
 
     public void addItem(UsableItem usableItem) {
