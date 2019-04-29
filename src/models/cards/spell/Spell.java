@@ -17,4 +17,9 @@ public class Spell extends Card {
     public Spell(String name, String description, int manaPoint, int price) {
         super(name, description, manaPoint, price);
     }
+
+    @Override
+    public String toString() {
+        return "Type : Spell - Name : " + getName() + " - MP : " + getManaPoint() + " - Desc : " + getDescription();
+    }
 }

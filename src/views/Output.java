@@ -1,14 +1,19 @@
 package views;
 
 import models.Account;
+import models.Collection;
 import models.Deck;
+import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.items.Item;
 
 import java.nio.channels.AcceptPendingException;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Output {
     public static void print(Hero hero) {
@@ -43,12 +48,21 @@ public class Output {
         System.err.println(error.toString());
     }
 
+    public static void err (Exception e) {
+        System.out.println(e.getMessage());
+    }
+
     public static void log(Log log) {
         System.out.println(log.toString());
     }
 
 
+
     public static void print(Deck deck) {
         System.out.println(deck.toString());
+    }
+
+    public static void log(int number) {
+        System.out.println(number);
     }
 }

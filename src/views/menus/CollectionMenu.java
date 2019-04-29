@@ -2,12 +2,16 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
+import models.Collection;
 import models.Deck;
+import models.cards.Card;
 import views.Command;
 import views.Error;
 import views.Log;
 import views.Output;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -41,6 +45,8 @@ public class CollectionMenu implements Menu {
                 "help"
         ));
 
+        commands.add(new Command("^(?i)add\\s+(?<card>\\w+)\\s+to\\s+(?<deck>\\w+)$", "addCardToDeck"));
+
     }
 
     @Override
@@ -57,6 +63,7 @@ public class CollectionMenu implements Menu {
         // TODO: Implement...
 
     }
+
 
     public static void createDeck(Matcher matcher) {
         String deckName = matcher.group("name");
@@ -78,11 +85,25 @@ public class CollectionMenu implements Menu {
         } catch (Account.DeckNotFoundException e) {
             Output.err(Error.DECK_NOT_FOUND);
         }
-
     }
 
     public static void addCardToDeck(Matcher matcher) {
         // TODO: Implement...
+        String cardId = matcher.group("card");
+        String deckName = matcher.group("deck");
+        try {
+            Manager.addCardToDeck(cardId, deckName);
+        } catch (Deck.CardExistsInDeckException e) {
+            Output.err(Error.CARD_EXISTS_IN_DECK);
+        } catch (Deck.HeroExistsInDeckException e) {
+            Output.err(Error.HERO_EXISTS_IN_DECK);
+        } catch (Account.DeckNotFoundException e) {
+            Output.err(Error.DECK_NOT_FOUND);
+        } catch (Deck.DeckFullException e) {
+            Output.err(Error.DECK_FULL_EXCEPTION);
+        } catch (Collection.CardNotFoundException e){
+            Output.err(Error.CARD_NOT_FOUND);
+        }
 
     }
 
@@ -104,7 +125,7 @@ public class CollectionMenu implements Menu {
     public static void showAllDecks(Matcher matcher) {
         try {
             List<Deck> decks = Manager.getDecks();
-            for(Deck deck : decks)
+            for (Deck deck : decks)
                 Output.print(deck);
         } catch (Account.NotLoggedInException e) {
             Output.err(Error.NOT_LOGGED_IN);

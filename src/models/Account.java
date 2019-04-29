@@ -1,5 +1,7 @@
 package models;
 
+import models.cards.Card;
+
 import java.util.*;
 
 public class Account {
@@ -17,6 +19,10 @@ public class Account {
         return drake;
     }
 
+    public int getItemsNumber () {
+        return collection.getUsableItems().size();
+    }
+
     public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
 
     public Deck getMainDeck() {
@@ -30,6 +36,15 @@ public class Account {
         throw new DeckNotFoundException(name);
     }
 
+    //for selling a card
+    public void removeCardFromCollection (Card card) throws Collection.CardNotFoundException {
+        try {
+            collection.removeCard(card);
+        } catch (Exception e){
+            throw e;
+        }
+    }
+
     // Gives user's decks
     public List<Deck> getDecks() {
         return this.decks;
@@ -41,6 +56,10 @@ public class Account {
             if(existingDeck.getName().equals(deck.getName()))
                 throw new DeckExistsException(deck.getName());
         this.decks.add(deck);
+    }
+
+    public Collection getCollection() {
+        return collection;
     }
 
     public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
@@ -106,6 +125,10 @@ public class Account {
         return ranking;
     }
 
+    public void addCardToCollection (Card card) {
+        collection.addCard(card);
+    }
+
     @Override
     public String toString() {
         return String.format("Username: %s - Wins: %d", username, winCount);
@@ -114,6 +137,16 @@ public class Account {
 
     public void addMatchResult(MatchResult matchResult) {
         matchHistory.add(matchResult);
+    }
+
+    public Card getCard(int id) {
+        for (MarketObject mo:collection.getCards()) {
+            Card card = (Card) mo;
+            if(card.getID() == id){
+                return card;
+            }
+        }
+        return null;
     }
 
     public static class InvalidUsernameException extends Exception {
@@ -149,6 +182,12 @@ public class Account {
     public static class DeckNotFoundException extends Exception {
         DeckNotFoundException(String name) {
             super(String.format("Deck '%s' not found for this user.", name));
+        }
+    }
+
+    public static class NotEnoughDrakeException extends Exception {
+        public NotEnoughDrakeException() {
+            super("Not enough drake.");
         }
     }
 }

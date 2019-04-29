@@ -1,5 +1,6 @@
 package models;
 
+import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
@@ -9,54 +10,87 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static views.Error.*;
+
 public class Collection {
-    private List<Marketable> members = new ArrayList<>();
+    private List<MarketObject> cards = new ArrayList<>();
 
-    public List<Marketable> getMembers() {
-        return this.members;
+    public List<MarketObject> getCards() {
+        return this.cards;
     }
 
-    public void addMember(Marketable member) {
-        this.members.add(member);
+    public void addCard(MarketObject member) {
+        this.cards.add(member);
     }
 
-    public List<Marketable> filterByName(String pattern) {
-        if(members.size() == 0)
-            return members;
-        return members.stream().filter(
-                (member) -> member.getName().matches(pattern)
-        ).collect(Collectors.toList());
-    }
-
-    public List<Minion> getMinions() {
-        return members.stream().filter(
-                (card) -> (card instanceof Minion)
-        ).map(
-                (card) -> ((Minion) card)
+    public List<MarketObject> filterByName(String pattern) {
+        if(cards.size() == 0)
+            return cards;
+        return cards.stream().filter(
+                (card) -> card.getName().matches(pattern)
         ).collect(Collectors.toList());
     }
 
     public List<Hero> getHeroes() {
-        return members.stream().filter(
+        return cards.stream().filter(
                 (card) -> (card instanceof Hero)
         ).map(
                 (card) -> ((Hero) card)
         ).collect(Collectors.toList());
     }
 
-    public List<UsableItem> getItems() {
-        return members.stream().filter(
+    public List<Minion> getMinions() {
+        return cards.stream().filter(
+                (card) -> (card instanceof Minion)
+        ).map(
+                (card) -> ((Minion) card)
+        ).collect(Collectors.toList());
+    }
+
+    public List<Spell> getSpells() {
+        return cards.stream().filter(
+                (card) -> (card instanceof Spell)
+        ).map(
+                (card) -> ((Spell) card)
+        ).collect(Collectors.toList());
+    }
+
+    public List<UsableItem> getUsableItems() {
+        return cards.stream().filter(
                 (card) -> (card instanceof UsableItem)
         ).map(
                 (card) -> ((UsableItem) card)
         ).collect(Collectors.toList());
     }
 
-    public List<Spell> getSpells() {
-        return members.stream().filter(
-                (card) -> (card instanceof Spell)
-        ).map(
-                (card) -> ((Spell) card)
-        ).collect(Collectors.toList());
+    public void removeCard (Card card) throws CardNotFoundException {
+        if(!cards.remove(card))
+            throw new CardNotFoundException();
     }
+
+    public Card searchCard(String cardName) throws CardNotFoundException {
+        for (MarketObject marketObject: cards) {
+            if(marketObject.getName().equals(cardName))
+                return (Card)marketObject;
+        }
+        throw new CardNotFoundException(CARD_NOT_EXISTS_IN_SHOP.toString());
+    }
+
+    public static class CardNotFoundException extends Exception{
+        public CardNotFoundException () {
+            super(CARD_NOT_FOUND.toString());
+        }
+        public CardNotFoundException (String message) {
+            super(message);
+        }
+    }
+
+
+    public static class ItemsFullException extends Exception {
+        public ItemsFullException() {
+            super(ITEMS_ARE_FULL.toString());
+        }
+    }
+
+
 }

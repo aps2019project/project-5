@@ -18,8 +18,24 @@ public class Deck {
         return false;
     }
 
-    public void addCard(Card card) {
+    public void addCard(Card card) throws CardExistsInDeckException, HeroExistsInDeckException, DeckFullException {
+        if (hasCard(card.name)) {
+            throw new CardExistsInDeckException(card.getName(), this.name);
+        }
+        if (this.getHeroes().size() == 1) {
+            throw new HeroExistsInDeckException(card.getName(), this.name);
+        }
+        if (cards.size() == 20) {
+            throw new DeckFullException(this.name);
+        }
+        cards.add(card);
 
+    }
+
+    public boolean hasCard(String cardName) {
+        return (this.cards.stream().filter(
+                card -> card.name.equals(cardName)
+        ).count() == 1);
     }
 
     public void removeCard(Card card) {
@@ -80,5 +96,23 @@ public class Deck {
         result.append(this.name);
 
         return result.toString();
+    }
+
+    public static class CardExistsInDeckException extends Exception {
+        public CardExistsInDeckException(String cardName, String deckName) {
+            super(String.format("card '%s' exists in deck '%s'", cardName, deckName));
+        }
+    }
+
+    public static class HeroExistsInDeckException extends Exception {
+        public HeroExistsInDeckException(String cardName, String deckName) {
+            super(String.format("card '%s' exists in deck '%s'", cardName, deckName));
+        }
+    }
+
+    public static class DeckFullException extends Exception {
+        public DeckFullException(String deckName) {
+            super(String.format("deck '%s' is full!", deckName));
+        }
     }
 }

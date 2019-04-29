@@ -9,7 +9,8 @@ public class Attacker extends Card {
     private AttackType attackType;
     private Spell specialPower;
 
-    public Attacker(String name, String description, int manaPoint, int price, int health, int attackPoint, AttackType attackType, int range) {
+    public Attacker(String name, String description, int manaPoint, int price, int health, int attackPoint,
+                    AttackType attackType, int range) {
         super(name, description, manaPoint, price);
         this.health = health;
         this.attackPoint = attackPoint;
@@ -31,5 +32,9 @@ public class Attacker extends Card {
 
     public AttackType getAttackType() {
         return attackType;
+    }
+
+    public Spell getSpecialPower() {
+        return specialPower;
     }
 }

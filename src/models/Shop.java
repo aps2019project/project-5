@@ -1,16 +1,22 @@
 package models;
 
 import models.cards.AttackType;
+import models.cards.Card;
 import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
+import models.Collection.CardNotFoundException;
+import models.Collection.ItemsFullException;
+import models.Account.NotEnoughDrakeException;
+
 
 public class Shop {
-    private static Collection cards = new Collection();
+    private Collection cardsCollection = new Collection();
+    private static Shop shopInstance = null;
 
-    static {
-        // TODO: add cards to cards Collection.
+     {
+        // TODO: add cards to cardsCollection Collection.
 
-        cards.addMember(new Minion(
+        cardsCollection.addCard(new Minion(
                 "Persian Archer",
                 "",
                 2,
@@ -22,7 +28,7 @@ public class Shop {
                 null
         ));
 
-        cards.addMember(new Minion(
+        cardsCollection.addCard(new Minion(
                 "Persian Swordsman",
                 "",
                 2,
@@ -34,7 +40,7 @@ public class Shop {
                 SpecialPowerActivateTime.ON_ATTACK
         )); // Special Power must be added!
 
-        cards.addMember(new Minion(
+        cardsCollection.addCard(new Minion(
                 "Persian Lancer",
                 "",
                 1,
@@ -47,7 +53,39 @@ public class Shop {
         ));
     }
 
-    public static Collection getCards() {
-        return cards;
+    public static Shop getInstance() {
+        if (shopInstance == null)
+            shopInstance = new Shop();
+        return shopInstance;
+    }
+
+    public Collection getCardsCollection() {
+        return cardsCollection;
+    }
+
+    public Card searchCard (String cardName) throws CardNotFoundException {
+        return cardsCollection.searchCard(cardName);
+    }
+
+
+
+    public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException,
+            ItemsFullException {
+        Card card = shopInstance.searchCard(cardName);
+        if(account.getDrake() < card.getPrice())
+            throw new NotEnoughDrakeException();
+        if (account.getItemsNumber() == 3)
+            throw new ItemsFullException();
+        account.addCardToCollection(card);
+        account.incrementDrake(-card.getPrice());
+    }
+
+
+    public void sell(Account account, int id) throws CardNotFoundException {
+         Card card = account.getCard(id);
+        if(card == null)
+            throw new CardNotFoundException();
+        account.incrementDrake(card.getPrice());
+        account.removeCardFromCollection(card);
     }
 }
