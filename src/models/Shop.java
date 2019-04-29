@@ -25,6 +25,12 @@ public class Shop {
         } catch (FileNotFoundException | JSONException e) {
             e.printStackTrace();
         }
+        try {
+            cardsCollection.getCards().addAll(JsonParser.getHeroes());
+        } catch (FileNotFoundException | JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(cardsCollection.getCards().size());
     }
 
     public static Shop getInstance() {

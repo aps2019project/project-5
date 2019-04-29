@@ -51,8 +51,8 @@
     "attackType": "MELEE",
     "range": 0,
     "specialPower": {},
-    "manaPoint": null,
-    "coolDown": null
+    "manaPoint": -1,
+    "coolDown": -1
   },
   {
     "name": "Kaveh",
@@ -70,7 +70,7 @@
     "price": 10000,
     "health": 30,
     "attackPoint": 2,
-    "attackType": "Ranged",
+    "attackType": "RANGED",
     "range": 6,
     "specialPower": {},
     "manaPoint": 2,
@@ -81,7 +81,7 @@
     "price": 11000,
     "health": 40,
     "attackPoint": 3,
-    "attackType": "Ranged",
+    "attackType": "RANGED",
     "range": 3,
     "specialPower": {},
     "manaPoint": 1,
@@ -95,8 +95,8 @@
     "attackType": "HYBRID",
     "range": 3,
     "specialPower": {},
-    "manaPoint": null,
-    "coolDown": null
+    "manaPoint": -1,
+    "coolDown": -1
   },
   {
     "name": "Rostam",
@@ -106,7 +106,7 @@
     "attackType": "HYBRID",
     "range": 4,
     "specialPower": null,
-    "manaPoint": null,
-    "coolDown": null
+    "manaPoint": -1,
+    "coolDown": -1
   }
 ]

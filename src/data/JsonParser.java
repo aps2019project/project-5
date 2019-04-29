@@ -1,6 +1,7 @@
 package data;
 
 import models.cards.AttackType;
+import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
 import org.json.JSONArray;
@@ -11,8 +12,8 @@ import java.util.*;
 
 public class JsonParser {
 
-    public static String minionsData() throws FileNotFoundException {
-        return new FileReader().getFileContent(FileReader.MINIONS_DATA);
+    public static String getFileData(String filename) throws FileNotFoundException {
+        return new FileReader().getFileContent(filename);
     }
 
     private static Map<String, Object> jsonToMap(JSONObject json) throws JSONException {
@@ -62,7 +63,7 @@ public class JsonParser {
 
 
     public static List<Minion> getMinions() throws FileNotFoundException, JSONException {
-        JSONArray minionsJSON = new JSONArray(minionsData());
+        JSONArray minionsJSON = new JSONArray(getFileData(FileReader.MINIONS_DATA));
         List<Object> minionsObject = toList(minionsJSON);
         ArrayList<Minion> minions = new ArrayList<>();
         int id = 1;
@@ -93,9 +94,39 @@ public class JsonParser {
         return minions;
     }
 
+    public static List<Hero> getHeroes() throws FileNotFoundException, JSONException {
+        JSONArray heroesJSON = new JSONArray(getFileData(FileReader.HEROES_DATA));
+        List<Object> heroesObject = toList(heroesJSON);
+        ArrayList<Hero> heroes = new ArrayList<>();
+        int id = 1;
+        for(Object heroObject : heroesObject) {
+            HashMap<String, Object> heroHashMap = (HashMap<String, Object>) heroObject;
+            AttackType attackType = null;
+            try {
+                attackType = AttackType.valueOf((String) heroHashMap.get("attackType"));
+            } catch (Exception ignored) {}
+            Hero hero = new Hero(
+                    id++,
+                    (String) heroHashMap.get("name"),
+                    (String) heroHashMap.get("description"),
+                    (int) heroHashMap.get("manaPoint"),
+                    (int) heroHashMap.get("price"),
+                    (int) heroHashMap.get("health"),
+                    (int) heroHashMap.get("attackPoint"),
+                    attackType,
+                    (int) heroHashMap.get("range"),
+                    (int) heroHashMap.get("coolDown")
+
+            );
+            heroes.add(hero);
+        }
+        return heroes;
+    }
+
+
     public static void main(String[] args) throws FileNotFoundException, JSONException {
-        List<Minion> minions = getMinions();
-        System.out.println(minions.toString());
+        List<Hero> heroes = getHeroes();
+        System.out.println(heroes.toString());
     }
 
 }
