@@ -15,7 +15,7 @@ public class Shop {
     private Collection cardsCollection = new Collection();
     private static Shop shopInstance = null;
 
-     {
+    {
         // TODO: add cards to cardsCollection Collection.
 
         cardsCollection.addCard(new Minion(
@@ -73,13 +73,13 @@ public class Shop {
     }
 
     public Card searchCard(String cardName) throws CardNotFoundException {
-         return cardsCollection.getCard(cardName);
+        return cardsCollection.getCard(cardName);
     }
 
     public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException,
             ItemsFullException {
         Card card = shopInstance.searchCard(cardName);
-        if(account.getDrake() < card.getPrice())
+        if (account.getDrake() < card.getPrice())
             throw new NotEnoughDrakeException();
         if (account.getItemsNumber() == 3)
             throw new ItemsFullException();
@@ -89,8 +89,8 @@ public class Shop {
 
 
     public void sell(Account account, int id) throws CardNotFoundException {
-         Card card = account.getCard(id);
-        if(card == null)
+        Card card = account.getCard(id);
+        if (card == null)
             throw new CardNotFoundException();
         account.incrementDrake(card.getPrice());
         account.removeCardFromCollection(card);

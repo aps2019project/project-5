@@ -1,20 +1,25 @@
 package models.cards;
 
-import models.MarketObject;
 import models.cards.spell.Buff;
 import models.map.Cell;
 
-public class Card extends MarketObject {
+public class Card {
     private Cell cell;
     private Buff buff;
     private int manaPoint;
     private int id;
     private String description;
+    private String name;
+    private int price;
 
     public Card() {}
 
     public int getID() {
         return id;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void moveCard(Cell cell) {
@@ -42,6 +47,18 @@ public class Card extends MarketObject {
         this.name = name;
         this.description = description;
         this.manaPoint = manaPoint;
-        super.price = price;
+        this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

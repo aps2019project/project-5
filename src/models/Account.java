@@ -140,8 +140,7 @@ public class Account {
     }
 
     public Card getCard(int id) {
-        for (MarketObject mo:collection.getCards()) {
-            Card card = (Card) mo;
+        for (Card card : collection.getCards()) {
             if(card.getID() == id){
                 return card;
             }

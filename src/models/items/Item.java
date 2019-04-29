@@ -1,15 +1,12 @@
 package models.items;
 
-import models.MarketObject;
 import models.map.Cell;
 
-public class Item extends MarketObject {
+public class Item {
     private Cell cell;
     private String description;
     private String name;
 
-
-    @Override
     public String getDescription() {
         return this.description;
     }
@@ -17,5 +14,13 @@ public class Item extends MarketObject {
     @Override
     public String toString() {
         return "Name : " + getName() + " - Desc : " + getDescription();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Cell getCell() {
+        return cell;
     }
 }

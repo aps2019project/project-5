@@ -8,27 +8,34 @@ import models.items.UsableItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static views.Error.*;
 import static views.Log.EMPTY_COLLECTION;
 
 public class Collection {
-    private List<MarketObject> cards = new ArrayList<>();
+    private List<Card> cards = new ArrayList<>();
 
-    public List<MarketObject> getCards() {
+    public List<Card> getCards() {
         return this.cards;
     }
 
-    public void addCard(MarketObject member) {
+    public void addCard(Card member) {
         this.cards.add(member);
     }
 
-    public List<MarketObject> filterByName(String pattern) {
-        if(cards.size() == 0)
+    public List<Card> filterByName(String keyword) {
+        String regex = String.format("(?i)%s", keyword);
+        if (cards.size() == 0)
             return cards;
         return cards.stream().filter(
-                (card) -> card.getName().matches(pattern)
+                (card) -> {
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(card.getName());
+                    return matcher.find();
+                }
         ).collect(Collectors.toList());
     }
 
@@ -64,35 +71,34 @@ public class Collection {
         ).collect(Collectors.toList());
     }
 
-    public void removeCard (Card card) throws CardNotFoundException {
-        if(!cards.remove(card))
+    public void removeCard(Card card) throws CardNotFoundException {
+        if (!cards.remove(card))
             throw new CardNotFoundException();
     }
 
     public List<Card> getCards(String cardName) throws CardNotFoundException {
-        List<MarketObject> foundCard = filterByName(cardName);
+        List<Card> foundCard = filterByName(cardName);
         if (foundCard.size() == 0)
             throw new CardNotFoundException();
-        return foundCard.stream().map(
-                marketObject -> (Card) marketObject)
-                .collect(Collectors.toList());
+        return foundCard;
     }
 
     public Card getCard(String cardName) throws CardNotFoundException {
         List<Card> cards = filterByName("^" + cardName + "$").stream().map(
-                marketObject -> (Card)marketObject
+                marketObject -> (Card) marketObject
         ).collect(Collectors.toList());
-        if (cards.size() == 0) {
+        if (cards.size() != 1) {
             throw new CardNotFoundException();
         }
         return cards.get(0);
     }
 
-    public static class CardNotFoundException extends Exception{
-        public CardNotFoundException () {
+    public static class CardNotFoundException extends Exception {
+        public CardNotFoundException() {
             super(CARD_NOT_FOUND.toString());
         }
-        public CardNotFoundException (String message) {
+
+        public CardNotFoundException(String message) {
             super(message);
         }
     }
