@@ -7,7 +7,6 @@ import models.map.Cell;
 public class Card extends MarketObject {
     private Cell cell;
     private Buff buff;
-    private int price;
     private int manaPoint;
     private int id;
     private String description;
@@ -43,6 +42,6 @@ public class Card extends MarketObject {
         this.name = name;
         this.description = description;
         this.manaPoint = manaPoint;
-        this.price = price;
+        super.price = price;
     }
 }

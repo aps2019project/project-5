@@ -18,22 +18,30 @@ public class CollectionMenu implements Menu {
         // TODO: Add Commands
         commands.add(new Command(
                 "^(?i)return$",
-                ""
+                "",
+                "return",
+                "\t\t\t\treturn to MainMenu."
         ));
 
         commands.add(new Command(
                 "^(?i)create\\s+(?i)deck\\s+(?<name>\\w+)$",
-                "createDeck"
+                "createDeck",
+                "create deck [DeckName]",
+                "create new empty deck."
         ));
 
         commands.add(new Command(
                 "^(?i)delete\\s+(?i)deck\\s+(?<name>\\w+)$",
-                "createDeck"
+                "deleteDeck",
+                "delete deck [DeckName]",
+                "deletes the deck."
         ));
 
         commands.add(new Command(
                 "^(?i)show\\s+(?i)all\\s+(?i)decks$",
-                "showAllDecks"
+                "showAllDecks",
+                "show all decks",
+                "\t\tshows name of all decks."
         ));
 
         commands.add(new Command(

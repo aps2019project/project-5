@@ -2,8 +2,8 @@ package models;
 
 public abstract class MarketObject {
 
-    protected int price ;
-    protected int id ;
+    protected int price;
+    protected int id;
     protected String name;
     protected String description;
 
