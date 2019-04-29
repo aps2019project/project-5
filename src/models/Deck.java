@@ -22,7 +22,7 @@ public class Deck {
         if (hasCard(card.getName())) {
             throw new CardExistsInDeckException(card.getName(), this.name);
         }
-        if (this.getHeroes().size() == 1) {
+        if (this.getHero() != null) {
             throw new HeroExistsInDeckException(card.getName(), this.name);
         }
         if (cards.size() == 20) {
@@ -38,8 +38,11 @@ public class Deck {
         ).count() == 1);
     }
 
-    public void removeCard(Card card) {
-
+    public void removeCard(Card card) throws Collection.CardNotFoundException {
+        if (!hasCard(card.getName())) {
+            throw new Collection.CardNotFoundException();
+        }
+        cards.remove(card);
     }
 
     public void addItem(UsableItem usableItem) {
@@ -58,12 +61,15 @@ public class Deck {
         return this.name;
     }
 
-    public List<Hero> getHeroes() {
-        return cards.stream().filter(
+    public Hero getHero() {
+        List<Hero> heroCards = cards.stream().filter(
                 (card) -> (card instanceof Hero)
         ).map(
                 (card) -> ((Hero) card)
         ).collect(Collectors.toList());
+        if(heroCards.size() == 0)
+            return null;
+        return heroCards.get(0);
     }
 
     public List<Minion> getMinions() {

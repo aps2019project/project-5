@@ -1,17 +1,19 @@
 package models.match;
 
+import models.Account;
 import models.Player;
 import models.items.Item;
 import models.map.Map;
 
 import java.util.ArrayList;
 
-public class Match {
+public abstract class Match {
     private Map map;
-    private Player[] players = new Player[2];
+    protected Player[] players = new Player[2];
     private int turn;
-    private boolean multiPlayerMatch;
+    private boolean AIMode;
     private ArrayList<Item> collectibleItems = new ArrayList<>();
+    final int PLAYERS_COUNT = 2;
 
     public Player getPlayer1() {
         return players[0];
@@ -30,16 +32,19 @@ public class Match {
         return map;
     }
 
-    private Match(Player player1, Player player2) {
+    protected Match(Player player1, Player player2) {
         player1 = player1;
         player2 = player2;
     }
 
-    public Player getWinner() {
-        return null;
+    abstract public Player getWinner() ;
+
+    public Player[] getPlayers() {
+        return players;
     }
 
     public int getTurn() {
         return turn;
     }
+
 }
