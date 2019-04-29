@@ -68,7 +68,7 @@ public class Deck {
         ).map(
                 (card) -> ((Hero) card)
         ).collect(Collectors.toList());
-        if(heroCards.size() == 0)
+        if (heroCards.size() == 0)
             return null;
         return heroCards.get(0);
     }
@@ -102,12 +102,25 @@ public class Deck {
         StringBuilder result = new StringBuilder();
 //        result.append(this.name);
         result.append("Heroes :\n\t");
+        result.append(this.getHero().toString());
+        result.append("\nItems :\n\t");
+        for (UsableItem item : this.getItems()) {
+            result.append(item.toString());
+            result.append("\n\t");
+        }
+        result.append("Cards : ");
+        this.cards.stream().filter(card -> card instanceof Spell || card instanceof Minion)
+                .forEach(card -> {
+                            result.append(card.toString());
+                            result.append("\n\t");
+                        }
+                );
         return result.toString();
 
     }
 
     public boolean validateDeck() {
-        if (cards.size() != 20 || this.getHeroes().size() == 0) return false;
+        if (cards.size() != 20 || this.getHero() != null) return false;
         return true;
     }
 
