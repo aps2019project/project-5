@@ -1,5 +1,7 @@
 package models;
 
+import data.JsonParser;
+import jdk.nashorn.internal.parser.JSONParser;
 import models.cards.AttackType;
 import models.cards.Card;
 import models.cards.Minion;
@@ -7,7 +9,9 @@ import models.cards.spell.SpecialPowerActivateTime;
 import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
+import org.json.JSONException;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 
@@ -16,46 +20,11 @@ public class Shop {
     private static Shop shopInstance = null;
 
     {
-        // TODO: add cards to cardsCollection Collection.
-
-        cardsCollection.addCard(new Minion(
-                1,
-                "Persian Archer",
-                "",
-                2,
-                300,
-                6,
-                4,
-                AttackType.RANGED,
-                7,
-                null
-        ));
-
-        cardsCollection.addCard(new Minion(
-                2,
-                "Persian Swordsman",
-                "",
-                2,
-                400,
-                6,
-                4,
-                AttackType.MELEE,
-                0,
-                SpecialPowerActivateTime.ON_ATTACK
-        )); // Special Power must be added!
-
-        cardsCollection.addCard(new Minion(
-                3,
-                "Persian Lancer",
-                "",
-                1,
-                500,
-                5,
-                3,
-                AttackType.HYBRID,
-                3,
-                null
-        ));
+        try {
+            cardsCollection.getCards().addAll(JsonParser.getMinions());
+        } catch (FileNotFoundException | JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Shop getInstance() {

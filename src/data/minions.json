@@ -7,8 +7,8 @@
     "attackPoint": 4,
     "attackType": "RANGED",
     "range": 7,
-    "SpecialPower": null,
-    "SpecialPowerActivate": "ON_ATTACK"
+    "specialPower": null,
+    "specialPowerActivate": "ON_ATTACK"
   },
   {
     "name": "Persian Swordsman",
@@ -16,8 +16,8 @@
     "manaPoint": 2,
     "health": 6,
     "attackPoint": 4,
-    "attackType": "melee",
-    "range": null,
+    "attackType": "MELEE",
+    "range": 0,
     "specialPower": {},
     "specialPowerActivate": "ON_ATTACK"
   },
@@ -39,7 +39,7 @@
     "health": 10,
     "attackPoint": 6,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": null,
     "specialPowerActivate": null
   },
@@ -50,7 +50,7 @@
     "health": 24,
     "attackPoint": 6,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "specialPowerActivate": "ON_ATTACK"
   },
@@ -105,7 +105,7 @@
     "health": 6,
     "attackPoint": 6,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "specialPowerActivate": "ON_ATTACK"
   },
@@ -116,7 +116,7 @@
     "health": 3,
     "attackPoint": 10,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": null,
     "specialPowerActivate": null
   },
@@ -127,7 +127,7 @@
     "health": 6,
     "attackPoint": 10,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": "COMBO",
     "specialPowerActivate": "COMBO"
   },
@@ -171,7 +171,7 @@
     "health": 16,
     "attackPoint": 8,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": null,
     "specialPowerActivate": null
   },
@@ -215,7 +215,7 @@
     "health": 1,
     "attackPoint": 8,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "specialPowerActivate": "ON_ATTACK"
   }

@@ -5,7 +5,7 @@
     "health": 50,
     "attackPoint": 4,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "manaPoint": 1,
     "coolDown": 2
@@ -16,7 +16,7 @@
     "health": 50,
     "attackPoint": 4,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "manaPoint": 5,
     "coolDown": 8
@@ -27,7 +27,7 @@
     "health": 50,
     "attackPoint": 4,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "manaPoint": 0,
     "coolDown": 1
@@ -38,7 +38,7 @@
     "health": 50,
     "attackPoint": 4,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "manaPoint": 1,
     "coolDown": 2
@@ -49,7 +49,7 @@
     "health": 50,
     "attackPoint": 2,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "manaPoint": null,
     "coolDown": null
@@ -60,7 +60,7 @@
     "health": 50,
     "attackPoint": 4,
     "attackType": "MELEE",
-    "range": null,
+    "range": 0,
     "specialPower": {},
     "manaPoint": 1,
     "coolDown": 3
