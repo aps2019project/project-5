@@ -19,7 +19,6 @@ public class CollectionMenu implements Menu {
     private ArrayList<Command> commands = new ArrayList<>();
 
     public CollectionMenu() {
-        // TODO: Add Commands
         commands.add(new Command(
                 "^(?i)return$",
                 "",
@@ -55,7 +54,9 @@ public class CollectionMenu implements Menu {
 
         commands.add(new Command(
                 "^(?i)add\\s+(?<card>[A-z ]+)\\s+to\\s+deck\\s+(?<deck>\\w+)$",
-                "addCardToDeck"
+                "addCardToDeck",
+                "add [CardName] to deck [DeckName]",
+                "Adds card to deck."
         ));
         commands.add(new Command(
                 "^(?i)remove\\s+(?<card>[A-z ]+)\\s+from\\s+deck\\s+(?<deck>\\w+)$",
@@ -66,15 +67,15 @@ public class CollectionMenu implements Menu {
                 "searchCard"
         ));
         commands.add(new Command(
-                "^(?i)validate\\s+deck\\s+(?<deck>\\d+)$",
+                "^(?i)validate\\s+deck\\s+(?<deck>\\w+)$",
                 "validateDeck"
         ));
         commands.add(new Command(
-                "^(?i)select\\s+deck\\s+(?<deck>\\d+)$",
+                "^(?i)select\\s+deck\\s+(?<deck>\\w+)$",
                 "selectDeck"
         ));
         commands.add(new Command(
-                "^(?i)show\\s+deck\\s+(?<deck>\\d+)",
+                "^(?i)show\\s+deck\\s+(?<deck>\\w+)$",
                 "showDeck"));
     }
 
@@ -89,7 +90,6 @@ public class CollectionMenu implements Menu {
     }
 
     public static void searchCard(Matcher matcher) {
-        // TODO: Implement...
         String cardName = matcher.group("cardName");
         try {
             List<Card> cards = Manager.searchMyCard(cardName);
@@ -124,7 +124,6 @@ public class CollectionMenu implements Menu {
     }
 
     public static void addCardToDeck(Matcher matcher) {
-        // TODO: Implement...
         String cardId = matcher.group("card");
         String deckName = matcher.group("deck");
         try {
@@ -145,7 +144,6 @@ public class CollectionMenu implements Menu {
     }
 
     public static void removeCardFromDeck(Matcher matcher) {
-        // TODO: Implement...
         String cardName = matcher.group("card");
         String deckName = matcher.group("deck");
         try {
@@ -193,7 +191,6 @@ public class CollectionMenu implements Menu {
     }
 
     public static void showDeck(Matcher matcher) {
-        // TODO: Implement...
         String deckName = matcher.group("deck");
         try {
             Deck deck = Manager.getAccount().getDeck(deckName);
