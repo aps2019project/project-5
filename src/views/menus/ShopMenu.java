@@ -152,7 +152,7 @@ public class ShopMenu implements Menu {
         List<Hero> heroes = new LinkedList<>(collection.getHeroes());
         Output.log("Heroes :");
         for (int i = 0; i < heroes.size(); i++) {
-            Output.log("\t\t" + i + " : " + heroes.get(i) + " - " + buyOrSell + " Cost : " +
+            Output.log("\t\t" + (i + 1) + " : " + heroes.get(i) + " - " + buyOrSell + " Cost : " +
                     heroes.get(i).getPrice() + "$");
         }
 
@@ -160,7 +160,7 @@ public class ShopMenu implements Menu {
         List<UsableItem> Items = new LinkedList<>(collection.getUsableItems());
         Output.log("Items :");
         for (int i = 0; i < Items.size(); i++) {
-            Output.log("\t\t" + i + " : " + Items.get(i) + " - " + buyOrSell + " Cost : " +
+            Output.log("\t\t" + (i + 1) + " : " + Items.get(i) + " - " + buyOrSell + " Cost : " +
                     Items.get(i).getPrice() + "$");
         }
 
