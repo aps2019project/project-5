@@ -1,5 +1,6 @@
 package views.menus;
 
+import controllers.Manager;
 import models.cards.Card;
 import views.Command;
 import views.Output;
@@ -68,7 +69,10 @@ public class MainMenu implements Menu {
     }
 
     public static void enterBattle(Matcher matcher) {
-        new BattleMenu().handleMenu();
+//        if(Manager.getAccount().getMainDeck().isValid())
+            new BattleMenu().handleMenu();
+//        else
+//            throw new DeckNotValidException();
     }
 
     public static void enterShop(Matcher matcher) {

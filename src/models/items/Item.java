@@ -13,7 +13,8 @@ public class Item {
     
     @Override
     public String toString() {
-        return "Name : " + getName() + " - Desc : " + getDescription();
+        return "Name : " + getName() +
+                " - Desc : " + getDescription();
     }
 
     public String getName() {

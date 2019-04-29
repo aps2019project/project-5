@@ -96,7 +96,7 @@ public class ShopMenu implements Menu {
     public static void search(Matcher matcher) {
         String cardName = matcher.group("cardName");
         try {
-            Manager.searchCardInShop(cardName).stream().forEach(
+            Manager.searchCardInShop(cardName).forEach(
                     card -> Output.log(card.toString()));
         } catch (CardNotFoundException e) {
             Output.err(e);
@@ -106,7 +106,7 @@ public class ShopMenu implements Menu {
     public static void searchCollection(Matcher matcher) {
         String cardName = matcher.group("cardName");
         try {
-            Manager.searchMyCard(cardName).stream().forEach(
+            Manager.searchMyCard(cardName).forEach(
                     card -> Output.log(card.toString()));
         } catch (CardNotFoundException e) {
             Output.err(e);
