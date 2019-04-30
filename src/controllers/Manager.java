@@ -24,12 +24,6 @@ public class Manager {
     private static Match playingMatch;
     private static Shop shop = Shop.getInstance();
 
-
-    public static void setState(boolean isStory) {
-
-        playingMatch.setState(isStory);
-    }
-
     public static Account getAccount() {
         return account;
     }
@@ -70,11 +64,6 @@ public class Manager {
 
     public static List<Card> searchCardInShop(String cardName) throws CardNotFoundException {
         return shop.searchCards(cardName);
-    }
-
-    public static int searchCard(String cardName) throws CardNotFoundException {
-        Card card = shop.searchCard(cardName);
-        return card.getID();
     }
 
     public static void buy(String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
@@ -118,8 +107,7 @@ public class Manager {
 
     }
 
-    public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException,
-            Account.DeckNotFoundException {
+    public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException, Account.DeckNotFoundException {
         Card card = account.getCollection().getCard(cardName);
         Deck deck = account.getDeck(deckName);
         deck.removeCard(card);
@@ -127,8 +115,8 @@ public class Manager {
 
     public static String getMatchInfo() {
         return "Player 1 mana: " + playingMatch.getPlayer1().getMana() +
-                "Player 2 mana: " + playingMatch.getPlayer2().getMana() +
-                playingMatch.getInfo();
+               "Player 2 mana: " + playingMatch.getPlayer2().getMana() +
+               playingMatch.getInfo();
     }
 
     public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {

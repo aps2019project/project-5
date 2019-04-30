@@ -7,12 +7,11 @@ import models.cards.spell.Spell;
 import models.items.UsableItem;
 import views.Error;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Deck {
-    private ArrayList<Card> cards = new ArrayList<>();
+    private Deque<Card> cards = new ArrayDeque<>();
     private String name;
 
     public boolean isComplete() {
@@ -20,9 +19,6 @@ public class Deck {
     }
 
     public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
-//        if (hasCard(card.getName())) {
-//            throw new CardExistsInDeckException(card.getName(), this.name);
-//        }
         if (this.getHero() != null) {
             throw new HeroExistsInDeckException(card.getName(), this.name);
         }
@@ -37,7 +33,7 @@ public class Deck {
 
     }
 
-    public ArrayList<Card> getCards() {
+    public Deque<Card> getCards() {
         return cards;
     }
 

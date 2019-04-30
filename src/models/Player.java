@@ -40,6 +40,7 @@ public class Player {
             input = InputAI.getInstance();
         else
             input = Input.getInstance();
+        setCardsId();
     }
 
 
@@ -95,6 +96,9 @@ public class Player {
     }
 
     public void setCardsId() {
-
+        int i = 0;
+        for(Card card : getDeck().getCards())
+            card.setId(++i);
     }
+
 }
