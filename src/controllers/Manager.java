@@ -81,7 +81,6 @@ public class Manager {
                     .forEach(card -> deck.getCards().remove(card));
 
         }
-        Output.log(Log.SELLING_SUCCESSFUL);
     }
 
     public static Collection getShopCollection() throws Collection.NullCollectionException {
