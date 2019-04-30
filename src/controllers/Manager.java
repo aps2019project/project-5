@@ -9,6 +9,7 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.match.Match;
+import models.match.MultiFlagMatch;
 import views.Log;
 import views.Output;
 
@@ -25,6 +26,7 @@ public class Manager {
 
 
     public static void setState(boolean isStory) {
+
         playingMatch.setState(isStory);
     }
 
@@ -137,13 +139,5 @@ public class Manager {
     public static void selectDeck(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
         account.setMainDeck(deck);
-    }
-
-    public static void setAI(boolean AIMode) {
-        playingMatch.setAIMode(AIMode);
-    }
-
-    public static Map<String, Account> getAccounts() {
-        return Account.getAccounts();
     }
 }

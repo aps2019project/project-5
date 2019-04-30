@@ -1,9 +1,7 @@
 package views.menus;
 
 import controllers.Manager;
-import models.cards.Card;
 import views.Command;
-import views.Output;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -71,7 +69,7 @@ public class MainMenu implements Menu {
     public static void enterBattle(Matcher matcher) {
 //        if(!Manager.getAccount().getMainDeck().isValid())
 //            return;
-            new preBattleMenu().handleMenu();
+            new PreBattleMenu().handleMenu();
             new BattleMenu().handleMenu();
 //        else
 //            throw new DeckNotValidException();
