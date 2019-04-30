@@ -12,7 +12,14 @@ public class Card {
     private String name;
     private int price;
 
-    public Card() {
+    public Card(Card card) {
+        this.cell = card.cell;
+        this.buff = card.buff;
+        this.manaPoint = card.manaPoint;
+        this.id = card.id;
+        this.description = card.description;
+        this.name = card.name;
+        this.price = card.price;
     }
 
     public void setId(int id) {
@@ -66,7 +73,7 @@ public class Card {
 
     @Override
     public boolean equals(Object object) {
-        if(this == object)
+        if (this == object)
             return true;
         return object instanceof Card && ((Card) object).getName().equals(this.name);
     }

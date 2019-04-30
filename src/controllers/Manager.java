@@ -72,7 +72,7 @@ public class Manager {
         shop.sell(account, cardName);
         for (Deck deck : account.getDecks()) {
             deck.getCards().stream()
-                    .filter(card -> card.getName().equals(cardName))
+                    .filter(card -> card.getName().equalsIgnoreCase(cardName))
                     .forEach(card -> deck.getCards().remove(card));
 
         }
@@ -99,7 +99,7 @@ public class Manager {
 
     public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
             CardNotFoundException, Deck.HeroExistsInDeckException, Deck.DeckFullException, Deck.HeroNotExistsInDeckException {
-        Card card = account.getCollection().getCard(cardName);
+        Card card = new Card(account.getCollection().getCard(cardName));
         Deck deck = account.getDeck(deckName);
         deck.addCard(card);
 

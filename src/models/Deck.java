@@ -11,13 +11,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Deck {
-    private Deque<Card> cards = new ArrayDeque<>();
+    private ArrayList<Card> cards = new ArrayList<>();
     private String name;
 
     public boolean isComplete() {
         return false;
     }
-
     public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
         if (this.getHero() != null) {
             throw new HeroExistsInDeckException(card.getName(), this.name);
@@ -29,11 +28,19 @@ public class Deck {
             throw new HeroNotExistsInDeckException();
 
         }
+
         cards.add(card);
 
     }
 
-    public Deque<Card> getCards() {
+    public Deck(Deck deck) {
+        for (Card card : deck.getCards()) {
+            this.getCards().add(card);
+        }
+        this.name = deck.getName();
+    }
+
+    public ArrayList<Card> getCards() {
         return cards;
     }
 
@@ -105,7 +112,7 @@ public class Deck {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("Heroes :\n\t");
-        if(this.getHero() != null)
+        if (this.getHero() != null)
             result.append(this.getHero().toString());
         result.append("\nItems :\n");
         for (UsableItem item : this.getItems()) {
