@@ -101,7 +101,7 @@ public class Manager {
 
     public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
             CardNotFoundException, Deck.HeroExistsInDeckException, Deck.DeckFullException, Deck.HeroNotExistsInDeckException {
-        Card card = account.getCollection().getCard(cardName);
+        Card card = new Card(account.getCollection().getCard(cardName));
         Deck deck = account.getDeck(deckName);
         deck.addCard(card);
 
