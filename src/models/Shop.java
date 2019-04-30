@@ -1,7 +1,6 @@
 package models;
 
 import data.JsonParser;
-import jdk.nashorn.internal.parser.JSONParser;
 import models.cards.AttackType;
 import models.cards.Card;
 import models.cards.Minion;
@@ -63,8 +62,8 @@ public class Shop {
     }
 
 
-    public void sell(Account account, int id) throws CardNotFoundException {
-        Card card = account.getCard(id);
+    public void sell(Account account, String name) throws CardNotFoundException {
+        Card card = account.getCard(name);
         if (card == null)
             throw new CardNotFoundException();
         account.incrementDrake(card.getPrice());

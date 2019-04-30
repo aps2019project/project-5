@@ -14,7 +14,8 @@ public enum Error {
     CARD_EXISTS_IN_DECK("Card exists in the deck"),
     DECK_FULL_EXCEPTION("Deck is full!"),
     HERO_EXISTS_IN_DECK("Hero Exists in deck"),
-    DECK_IS_NOT_COMPLETE("Deck is not completed!");
+    DECK_IS_NOT_COMPLETE("Deck is not completed!"),
+    HERO_NOT_EXISTS_IN_DECK("Hero does not exist");
     private String message;
 
     Error(String message) {

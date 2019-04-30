@@ -129,8 +129,8 @@ public class CollectionMenu implements Menu {
         try {
             Manager.addCardToDeck(cardId, deckName);
             Output.log(Log.CARD_ADDED_TO_DECK);
-        } catch (Deck.CardExistsInDeckException e) {
-            Output.err(Error.CARD_EXISTS_IN_DECK);
+        } catch (Deck.HeroNotExistsInDeckException e) {
+            Output.err(Error.HERO_NOT_EXISTS_IN_DECK);
         } catch (Deck.HeroExistsInDeckException e) {
             Output.err(Error.HERO_EXISTS_IN_DECK);
         } catch (Account.DeckNotFoundException e) {

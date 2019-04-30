@@ -12,7 +12,8 @@ public class Card {
     private String name;
     private int price;
 
-    public Card() {}
+    public Card() {
+    }
 
     public int getID() {
         return id;
@@ -50,9 +51,6 @@ public class Card {
         this.price = price;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -60,6 +58,13 @@ public class Card {
 
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if(this == object)
+            return true;
+        return object instanceof Card && ((Card) object).getName().equals(this.name);
     }
 
 }

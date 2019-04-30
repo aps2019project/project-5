@@ -73,6 +73,8 @@ public class ShopMenu implements Menu {
                 "sell [CardId]",
                 "\t\t\tsell cards in collection"
         ));
+
+
     }
 
     @Override
