@@ -5,6 +5,7 @@ import models.cards.Card;
 import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
+import models.cards.Minion;
 import models.match.Match;
 import views.Input;
 import views.InputAI;
@@ -111,8 +112,8 @@ public class Manager {
 
     public static String getMatchInfo() {
         return "Player 1 mana: " + playingMatch.getPlayer1().getMana() +
-               "Player 2 mana: " + playingMatch.getPlayer2().getMana() +
-               playingMatch.getInfo();
+                "Player 2 mana: " + playingMatch.getPlayer2().getMana() +
+                playingMatch.getInfo();
     }
 
     public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
@@ -126,9 +127,9 @@ public class Manager {
     }
 
     public static Input getInput() {
-        if(playingMatch == null)
+        if (playingMatch == null)
             return Input.getInstance();
-        if(playingMatch.isAIMode() && playingMatch.getTurn() % 2 == 1)
+        if (playingMatch.isAIMode() && playingMatch.getTurn() % 2 == 1)
             return InputAI.getInstance();
         return Input.getInstance();
     }
@@ -146,6 +147,10 @@ public class Manager {
         return playingMatch.getInActivePlayer();
     }
 
+    public static void selectCard(int cardID) {
+        playingMatch.getActivePlayer().selectCard(playingMatch.getCard(cardID));
+    }
+
     public static boolean canPlay(String username) throws Account.InvalidUsernameException, Account.CantPlayWithYourselfException {
         Account playerAccount = Account.getAccounts().get(username);
         if(playerAccount == null)
@@ -155,6 +160,14 @@ public class Manager {
         if(playerAccount.getMainDeck() == null)
             return false;
         return playerAccount.getMainDeck().isValid();
+    }
+
+    public static List<Minion> showMyMinions() {
+        return playingMatch.showMyMinions();
+    }
+
+    public static List<Minion> showOponentMinions() {
+        return playingMatch.showOponentMinions();
     }
 
     public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {

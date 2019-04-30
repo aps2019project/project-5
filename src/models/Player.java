@@ -121,4 +121,8 @@ public class Player {
     public String getDecision() {
         return decision;
     }
+
+    public void selectCard(Card card) {
+        this.selectedCard = card;
+    }
 }

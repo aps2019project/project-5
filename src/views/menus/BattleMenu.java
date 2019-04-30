@@ -2,11 +2,14 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
+import models.cards.Minion;
+import models.match.Match;
 import views.Command;
 import views.Input;
 import views.Output;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
@@ -22,7 +25,14 @@ public class BattleMenu implements Menu {
                 "^(?i)return$",
                 ""
         ));
-
+        commands.add(new Command(
+                "^(?i)select (?<cardID>\\d+)",
+                "selectCard"
+        ));
+        commands.add(new Command(
+                "^(?i)show\\s+my\\s+minions",
+                "showMyMinions"
+        ));
         commands.add(new Command(
                 "^(?i)help$",
                 "help"
@@ -38,20 +48,70 @@ public class BattleMenu implements Menu {
     public static void gameInfo(Matcher matcher) {
         Manager.getMatchInfo();
     }
-    public static void showMyMinions(Matcher matcher) {}
-    public static void showOpponentMinions(Matcher matcher) {}
-    public static void showCardInfo(int cardId) {}
-    public static void selectCard(Matcher matcher) {}
-    public static void moveTo(Matcher matcher) {}
-    public static void attack(Matcher matcher) {}
-    public static void useSpecialPower(Matcher matcher) {}
-    public static void showHand(Matcher matcher) {}
-    public static void insertCard(Matcher matcher) {}
-    public static void endTurn(Matcher matcher) {}
-    public static void showCollectables(Matcher matcher) {}
-    public static void selectCollectable(Matcher matcher) {}
-    public static void showCollectableInfo(Matcher matcher) {}
-    public static void useCollectable(Matcher matcher) {}
+
+    private static void showMinions(List<Minion> minions) {
+        minions.forEach(minion -> {
+                    StringBuilder result = new StringBuilder();
+                    result.append(minion.getID());
+                    result.append(" : ");
+                    result.append(minion.getName());
+                    result.append(", health : ");
+                    result.append(minion.getHealth());
+                    result.append(", location : ");
+                    result.append(String.format("(%s,%s) power : %s"
+                            , minion.getCell().getX(), minion.getCell().getY(), minion.getAttackPoint()));
+                    Output.log(result.toString());
+                }
+        );
+    }
+
+    public static void showMyMinions(Matcher matcher) {
+        showMinions(Manager.showMyMinions());
+    }
+    public static void showOponnent(Matcher matcher){
+        showMinions(Manager.showOponentMinions());
+    }
+
+    public static void showOpponentMinions(Matcher matcher) {
+    }
+
+    public static void showCardInfo(int cardId) {
+    }
+
+    public static void selectCard(Matcher matcher) {
+        int cardID = Integer.parseInt(matcher.group("cardID"));
+        Manager.selectCard(cardID);
+    }
+
+    public static void moveTo(Matcher matcher) {
+    }
+
+    public static void attack(Matcher matcher) {
+    }
+
+    public static void useSpecialPower(Matcher matcher) {
+    }
+
+    public static void showHand(Matcher matcher) {
+    }
+
+    public static void insertCard(Matcher matcher) {
+    }
+
+    public static void endTurn(Matcher matcher) {
+    }
+
+    public static void showCollectables(Matcher matcher) {
+    }
+
+    public static void selectCollectable(Matcher matcher) {
+    }
+
+    public static void showCollectableInfo(Matcher matcher) {
+    }
+
+    public static void useCollectable(Matcher matcher) {
+    }
 
     public static void help(Matcher matcher) {
         Menu.help(new BattleMenu().getCommands());
