@@ -54,7 +54,7 @@ public class PreBattleMenu implements Menu {
     public void handleMenu() {
 
         int result = askQuestion("Select your game state:", "Story Game", "Custom Game");
-        boolean StateType = result == 1;
+        boolean isStory = result == 1;
 
         result = askQuestion("Choose Player Numbers:", "Single Player", "Multi Player");
         boolean AIMode = result == 1;

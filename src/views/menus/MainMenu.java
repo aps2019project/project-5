@@ -2,7 +2,8 @@ package views.menus;
 
 import controllers.Manager;
 import views.Command;
-
+import views.Error;
+import views.Output;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
@@ -67,12 +68,13 @@ public class MainMenu implements Menu {
     }
 
     public static void enterBattle(Matcher matcher) {
-//        if(!Manager.getAccount().getMainDeck().isValid())
-//            return;
+        if(!Manager.getAccount().getMainDeck().isValid()) {
+            Output.err(Error.SELECTED_DECK_IS_INVALID);
+        } else {
             new PreBattleMenu().handleMenu();
+
             new BattleMenu().handleMenu();
-//        else
-//            throw new DeckNotValidException();
+        }
     }
 
     public static void enterShop(Matcher matcher) {

@@ -2,16 +2,12 @@ package models;
 
 import models.cards.Attacker;
 import models.cards.Card;
-import models.cards.Hero;
 import models.items.Flag;
 import models.items.Item;
 import views.Input;
-import views.InputAI;
 
-import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,18 +28,18 @@ public class Player {
         return mana;
     }
 
-    public void setMana() {
+    public void setMana(int mana) {
         this.mana = mana;
     }
 
     private Player(Account account) {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
+        this.shuffleDeck();
         this.setHand();
         this.setCardsId();
         this.setNextCard();
     }
-
 
     public ArrayList<Card> getGraveYard() {
         return graveYard;
@@ -102,7 +98,7 @@ public class Player {
             card.setId(++i);
     }
 
-    private void setDeck() {
+    private void shuffleDeck() {
         Collections.shuffle(deck.getCards());
     }
 

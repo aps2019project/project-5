@@ -12,8 +12,6 @@ import java.util.regex.Matcher;
 
 public class BattleMenu implements Menu {
 
-
-
     public BattleMenu() {
         // TODO: Add commands.
         commands.add(new Command(
@@ -36,8 +34,6 @@ public class BattleMenu implements Menu {
     public String getMenuName() {
         return "BattleMenu";
     }
-
-
 
     public static void gameInfo(Matcher matcher) {
         Manager.getMatchInfo();

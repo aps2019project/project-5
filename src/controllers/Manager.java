@@ -6,12 +6,8 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.match.Match;
-import models.match.MultiFlagMatch;
 import views.Input;
 import views.InputAI;
-import views.Log;
-import views.Output;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +16,8 @@ public class Manager {
     private static Match playingMatch;
     private static Shop shop = Shop.getInstance();
 
-    public static void setState(boolean isStory) {
-
-        playingMatch.setState(isStory);
-    }
+    private static boolean isAI, isStory, mustPlayGame;
+    private static String opponentUsername;
 
     public static Account getAccount() {
         return account;
@@ -161,5 +155,11 @@ public class Manager {
         if(playerAccount.getMainDeck() == null)
             return false;
         return playerAccount.getMainDeck().isValid();
+    }
+
+    public static void playMatch(boolean isAIMode, boolean isStoryMode, String username) {
+        opponentUsername = username;
+        isAI = isAIMode;
+        isStory = isStoryMode;
     }
 }
