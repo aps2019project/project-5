@@ -85,4 +85,8 @@ public class Player {
     public boolean hasFlag() {
         return getFlags().size() > 0;
     }
+
+    public void setCardsId() {
+
+    }
 }
