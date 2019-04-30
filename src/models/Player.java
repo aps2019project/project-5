@@ -25,6 +25,8 @@ public class Player {
     private ArrayList<Card> graveYard;
     private List<Card> activeCards;
     private int mana;
+    private Input input;
+    private String decision;
 
     public int getMana() {
         return mana;
@@ -115,4 +117,12 @@ public class Player {
     }
 
 
+
+    public void decide() {
+
+    }
+
+    public String getDecision() {
+        return decision;
+    }
 }

@@ -1,5 +1,7 @@
 package views;
 
+import controllers.Manager;
+
 public class InputAI extends Input {
 
     private static InputAI instance = new InputAI();
@@ -10,7 +12,7 @@ public class InputAI extends Input {
 
     @Override
     public String getCommand() {
-        return "";
+        return Manager.getAIMove();
     }
 
     public static InputAI getInstance() {
