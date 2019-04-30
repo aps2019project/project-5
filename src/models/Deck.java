@@ -33,6 +33,13 @@ public class Deck {
 
     }
 
+    public Deck(Deck deck) {
+        for (Card card : deck.getCards()) {
+            this.getCards().add(card);
+        }
+        this.name = deck.getName();
+    }
+
     public ArrayList<Card> getCards() {
         return cards;
     }
@@ -105,7 +112,7 @@ public class Deck {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("Heroes :\n\t");
-        if(this.getHero() != null)
+        if (this.getHero() != null)
             result.append(this.getHero().toString());
         result.append("\nItems :\n");
         for (UsableItem item : this.getItems()) {

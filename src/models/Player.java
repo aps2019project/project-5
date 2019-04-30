@@ -36,7 +36,7 @@ public class Player {
 
     private Player(Account account) {
         this.account = account;
-        this.deck = account.getMainDeck();
+        this.deck = new Deck(account.getMainDeck());
         this.setHand();
         this.setCardsId();
         this.setNextCard();
