@@ -118,7 +118,6 @@ public class CollectionMenu implements Menu {
 
     }
 
-
     public static void createDeck(Matcher matcher) {
         String deckName = matcher.group("name");
         try {
@@ -176,7 +175,6 @@ public class CollectionMenu implements Menu {
     }
 
     public static void validateDeck(Matcher matcher) {
-        // TODO: Implement...
         String deckName = matcher.group("deck");
         try {
             if (Manager.validateDeck(deckName))
@@ -184,11 +182,9 @@ public class CollectionMenu implements Menu {
         } catch (Account.DeckNotFoundException e) {
             Output.err(Error.DECK_IS_NOT_COMPLETE);
         }
-
     }
 
     public static void selectDeck(Matcher matcher) {
-        // TODO: Implement...
         String deckName = matcher.group("deck");
         try {
             Manager.selectDeck(deckName);

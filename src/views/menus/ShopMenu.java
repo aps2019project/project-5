@@ -1,6 +1,7 @@
 package views.menus;
 
 import controllers.Manager;
+import models.Account;
 import models.Collection;
 import models.cards.Hero;
 import models.cards.Minion;
@@ -8,6 +9,8 @@ import models.cards.spell.Spell;
 import models.items.UsableItem;
 import models.Collection.CardNotFoundException;
 import views.Command;
+import views.Error;
+import views.Log;
 import views.Output;
 
 import java.util.ArrayList;
@@ -117,8 +120,13 @@ public class ShopMenu implements Menu {
         String cardName = matcher.group("cardName");
         try {
             Manager.buy(cardName);
-        } catch (Exception e) {
-            Output.err(e);
+            Output.log(Log.BUYING_SUCCESSFUL);
+        } catch (CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_EXISTS_IN_SHOP);
+        } catch (Account.NotEnoughDrakeException e) {
+            Output.err(Error.NOT_ENOUGH_DRAKE);
+        } catch (Collection.ItemsFullException e) {
+            Output.err(Error.ITEMS_ARE_FULL);
         }
     }
 
@@ -126,6 +134,7 @@ public class ShopMenu implements Menu {
         int cardID = Integer.parseInt(matcher.group("cardID"));
         try {
             Manager.sell(cardID);
+            Output.log(Log.SELLING_SUCCESSFUL);
         } catch (CardNotFoundException e) {
             Output.err(e);
         }
