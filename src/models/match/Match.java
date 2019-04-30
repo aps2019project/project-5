@@ -15,6 +15,7 @@ public abstract class Match {
     private boolean AIMode;
     private ArrayList<Item> collectibleItems = new ArrayList<>();
     final int PLAYERS_COUNT = 2;
+    private boolean isStory;
 
     public Player getPlayer1() {
         return players[0];
@@ -27,6 +28,10 @@ public abstract class Match {
     public void nextTurn() {
         turn++;
         // TODO: Implement
+    }
+
+    public void setAIMode(boolean AIMode) {
+        this.AIMode = AIMode;
     }
 
     private Map getMap() {
@@ -50,4 +55,7 @@ public abstract class Match {
 
     abstract public String getInfo();
 
+    public void setState(boolean isStory) {
+        this.isStory = isStory;
+    }
 }

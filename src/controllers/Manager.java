@@ -14,6 +14,7 @@ import views.Output;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,11 @@ public class Manager {
     private static Account account;
     private static Match playingMatch;
     private static Shop shop = Shop.getInstance();
+
+
+    public static void setState(boolean isStory) {
+        playingMatch.setState(isStory);
+    }
 
     public static Account getAccount() {
         return account;
@@ -71,6 +77,7 @@ public class Manager {
 
     public static void buy(String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
         shop.buy(account, cardName);
+        Output.log(Log.BUYING_SUCCESSFUL);
     }
 
     public static void sell(String cardName) throws CardNotFoundException {
@@ -118,7 +125,9 @@ public class Manager {
     }
 
     public static String getMatchInfo() {
-        return playingMatch.getInfo();
+        return "Player 1 mana: " + playingMatch.getPlayer1().getMana() +
+                "Player 2 mana: " + playingMatch.getPlayer2().getMana() +
+                playingMatch.getInfo();
     }
 
     public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
@@ -129,5 +138,13 @@ public class Manager {
     public static void selectDeck(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
         account.setMainDeck(deck);
+    }
+
+    public static void setAI(boolean AIMode) {
+        playingMatch.setAIMode(AIMode);
+    }
+
+    public static Map<String, Account> getAccounts() {
+        return Account.getAccounts();
     }
 }

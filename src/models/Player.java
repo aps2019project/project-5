@@ -19,6 +19,15 @@ public class Player {
     private List<Item> collectedItems = new ArrayList<>();
     private ArrayList<Card> graveYard;
     private List<Card> activeCards;
+    private int mana;
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana() {
+        this.mana = mana;
+    }
 
     private Player(Account account) {
         this.account = account;

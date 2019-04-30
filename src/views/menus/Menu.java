@@ -11,8 +11,13 @@ import java.util.regex.Matcher;
 
 public interface Menu {
 
+    ArrayList<Command> commands = new ArrayList<>();
     String getMenuName();
-    ArrayList<Command> getCommands();
+
+    default ArrayList<Command> getCommands() {
+        return this.commands;
+    }
+
 
     default void handleMenu() {
         while(true) {
@@ -29,7 +34,9 @@ public interface Menu {
                         try {
                             if (method.invoke(null, matcher).equals(Boolean.FALSE))
                                 return;
-                        } catch (Exception ignored) {}
+                        } catch (Exception ignored) {
+                            System.out.println("hamnoon catch exception bikhodeeeeeeeeeeeeeeee!");
+                        }
                     } catch (Exception exception) {
                         Output.err(exception.getMessage());
                     }
