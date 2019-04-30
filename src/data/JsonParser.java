@@ -35,9 +35,7 @@ public class JsonParser {
 
             if(value instanceof JSONArray) {
                 value = toList((JSONArray) value);
-            }
-
-            else if(value instanceof JSONObject) {
+            } else if(value instanceof JSONObject) {
                 value = toMap((JSONObject) value);
             }
             map.put(key, value);
