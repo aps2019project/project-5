@@ -68,12 +68,12 @@ public class MainMenu implements Menu {
     }
 
     public static void enterBattle(Matcher matcher) {
-        if(!Manager.getAccount().getMainDeck().isValid()) {
+        if(Manager.getAccount().getMainDeck() == null || !Manager.getAccount().getMainDeck().isValid()) {
             Output.err(Error.SELECTED_DECK_IS_INVALID);
         } else {
             new PreBattleMenu().handleMenu();
-
-            new BattleMenu().handleMenu();
+            if(!Manager.isOpponentNull())
+                new BattleMenu().handleMenu();
         }
     }
 

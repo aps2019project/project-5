@@ -59,10 +59,12 @@ public class PreBattleMenu implements Menu {
         result = askQuestion("Choose Player Numbers:", "Single Player", "Multi Player");
         boolean AIMode = result == 1;
 
-        String opponentName = null;
+        String opponentName = "";
         if(!AIMode) {
             Output.log("Enter opponent's name:");
-            while (opponentName == null || opponentName.equals("")) {
+            int attemptsCount = 0;
+            while (opponentName.equals("") && attemptsCount < 3 ) {
+                attemptsCount++;
                 opponentName = Input.getString("");
                 try {
                     if(!Manager.canPlay(opponentName)) {
@@ -70,13 +72,15 @@ public class PreBattleMenu implements Menu {
                     }
                 } catch (Account.InvalidUsernameException e) {
                     Output.err(Error.USERNAME_NOT_FOUND);
-                    opponentName = null;
+                    opponentName = "";
                 } catch (Account.CantPlayWithYourselfException e) {
                     Output.err(Error.CANT_PLAY_WITH_YOURSELF);
-                    opponentName = null;
+                    opponentName = "";
                 }
             }
         }
+
+        Manager.setMatchData(AIMode, isStory, opponentName);
 
     }
 }

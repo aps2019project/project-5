@@ -175,4 +175,10 @@ public class Manager {
         isAI = isAIMode;
         isStory = isStoryMode;
     }
+
+    public static boolean isOpponentNull() {
+        if(opponentUsername == null)
+            return true;
+        return opponentUsername.equals("");
+    }
 }
