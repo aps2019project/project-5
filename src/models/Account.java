@@ -23,7 +23,7 @@ public class Account {
         this.mainDeck = mainDeck;
     }
 
-    public int getItemsNumber () {
+    public int getItemsNumber() {
         return collection.getUsableItems().size();
     }
 
@@ -34,17 +34,17 @@ public class Account {
     }
 
     public Deck getDeck(String name) throws DeckNotFoundException {
-        for(Deck deck : decks)
-            if(deck.getName().equals(name))
+        for (Deck deck : decks)
+            if (deck.getName().equals(name))
                 return deck;
         throw new DeckNotFoundException(name);
     }
 
     //for selling a card
-    public void removeCardFromCollection (Card card) throws Collection.CardNotFoundException {
+    public void removeCardFromCollection(Card card) throws Collection.CardNotFoundException {
         try {
             collection.removeCard(card);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -56,8 +56,8 @@ public class Account {
 
     // Add new deck to user's decks
     public void addDeck(Deck deck) throws DeckExistsException {
-        for(Deck existingDeck : decks)
-            if(existingDeck.getName().equals(deck.getName()))
+        for (Deck existingDeck : decks)
+            if (existingDeck.getName().equals(deck.getName()))
                 throw new DeckExistsException(deck.getName());
         this.decks.add(deck);
     }
@@ -69,7 +69,7 @@ public class Account {
     public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
         for (Map.Entry<String, Account> entry : accounts.entrySet()) {
             if (entry.getValue().username.equals(username)) {
-                if(entry.getValue().password.equals(password))
+                if (entry.getValue().password.equals(password))
                     return entry.getValue();
                 else
                     throw new InvalidPasswordException();
@@ -92,7 +92,7 @@ public class Account {
         this.password = password;
     }
 
-    private static boolean doesAccountExists(Account account){
+    private static boolean doesAccountExists(Account account) {
         return accounts.containsKey(account.username);
     }
 
@@ -129,7 +129,7 @@ public class Account {
         return ranking;
     }
 
-    public void addCardToCollection (Card card) {
+    public void addCardToCollection(Card card) {
         collection.addCard(card);
     }
 
@@ -143,9 +143,9 @@ public class Account {
         matchHistory.add(matchResult);
     }
 
-    public Card getCard(int id) {
+    public Card getCard(String name) {
         for (Card card : collection.getCards()) {
-            if(card.getID() == id){
+            if (card.getName().equals(name)) {
                 return card;
             }
         }

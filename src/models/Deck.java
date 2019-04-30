@@ -19,18 +19,26 @@ public class Deck {
         return false;
     }
 
-    public void addCard(Card card) throws CardExistsInDeckException, HeroExistsInDeckException, DeckFullException {
-        if (hasCard(card.getName())) {
-            throw new CardExistsInDeckException(card.getName(), this.name);
-        }
+    public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
+//        if (hasCard(card.getName())) {
+//            throw new CardExistsInDeckException(card.getName(), this.name);
+//        }
         if (this.getHero() != null) {
             throw new HeroExistsInDeckException(card.getName(), this.name);
         }
         if (cards.size() == 20) {
             throw new DeckFullException(this.name);
         }
+        if (cards.size() == 19 && !(card instanceof Hero) && this.getHero() == null) {
+            throw new HeroNotExistsInDeckException();
+
+        }
         cards.add(card);
 
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 
     public boolean hasCard(String cardName) {
@@ -63,14 +71,14 @@ public class Deck {
     }
 
     public Hero getHero() {
-        List<Hero> heroCards = cards.stream().filter(
+        List<Card> heroCards = cards.stream().filter(
                 (card) -> (card instanceof Hero)
-        ).map(
-                (card) -> ((Hero) card)
         ).collect(Collectors.toList());
-        if (heroCards.size() == 0)
+        try {
+            return (Hero) heroCards.get(0);
+        } catch (Exception e) {
             return null;
-        return heroCards.get(0);
+        }
     }
 
     public List<Minion> getMinions() {
@@ -100,7 +108,6 @@ public class Deck {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-//        result.append(this.name);
         result.append("Heroes :\n\t");
         result.append(this.getHero().toString());
         result.append("\nItems :\n\t");
@@ -142,4 +149,9 @@ public class Deck {
         }
     }
 
+    public static class HeroNotExistsInDeckException extends Exception {
+        public HeroNotExistsInDeckException() {
+            super("Hero is not existed");
+        }
+    }
 }

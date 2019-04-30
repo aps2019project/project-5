@@ -1,7 +1,6 @@
 package models;
 
 import data.JsonParser;
-import jdk.nashorn.internal.parser.JSONParser;
 import models.cards.AttackType;
 import models.cards.Card;
 import models.cards.Minion;
@@ -30,7 +29,6 @@ public class Shop {
         } catch (FileNotFoundException | JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(cardsCollection.getCards().size());
     }
 
     public static Shop getInstance() {
@@ -51,8 +49,7 @@ public class Shop {
         return cardsCollection.getCard(cardName);
     }
 
-    public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException,
-            ItemsFullException {
+    public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
         Card card = shopInstance.searchCard(cardName);
         if (account.getDrake() < card.getPrice())
             throw new NotEnoughDrakeException();
@@ -63,8 +60,8 @@ public class Shop {
     }
 
 
-    public void sell(Account account, int id) throws CardNotFoundException {
-        Card card = account.getCard(id);
+    public void sell(Account account, String name) throws CardNotFoundException {
+        Card card = account.getCard(name);
         if (card == null)
             throw new CardNotFoundException();
         account.incrementDrake(card.getPrice());

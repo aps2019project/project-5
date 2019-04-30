@@ -1,6 +1,7 @@
 package views.menus;
 
 import controllers.Manager;
+import models.Account;
 import models.Collection;
 import models.cards.Hero;
 import models.cards.Minion;
@@ -8,6 +9,8 @@ import models.cards.spell.Spell;
 import models.items.UsableItem;
 import models.Collection.CardNotFoundException;
 import views.Command;
+import views.Error;
+import views.Log;
 import views.Output;
 
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ public class ShopMenu implements Menu {
                 "Show all cards and items."
         ));
         commands.add(new Command(
-                "^(?i)buy (?<cardName>[A-z ]+)$",
+                "^(?i)buy\\s+(?<cardName>[A-z ]+)$",
                 "buy",
                 "buy [CardName]",
                 "\t\t\tbuy card and add to account collection."
@@ -49,30 +52,33 @@ public class ShopMenu implements Menu {
                 "\t\t\t\tshows the amount in drakes."
         ));
         commands.add(new Command(
-                "^(?i)show collection$",
+                "^(?i)show\\s+collection$",
                 "showMyCollection",
                 "show collection",
                 "\t\t\tshow all cards in account's collection"
         ));
         commands.add(new Command(
-                "^(?i)search (?<cardName>[A-z ]+)$",
+                "^(?i)search\\s+(?<cardName>[A-z ]+)$",
                 "search",
                 "search [String]",
                 "\t\t\tshow all cards that their name's contains '[String]'"
         ));
+
         commands.add(new Command(
-                "^(?i)search collection (?<cardName>[A-z ]+)$",
+                "^(?i)search\\s+collection\\s+(?<cardName>[A-z ]+)$",
                 "searchCollection",
                 "search collection [String]",
                 "show all cards in account's collection that their name contains '[String]'"
         ));
 
         commands.add(new Command(
-                "^(?i)sell (?<cardID>\\d+)$",
+                "^(?i)sell\\s+(?<name>[A-z ]+)$",
                 "sell",
                 "sell [CardId]",
                 "\t\t\tsell cards in collection"
         ));
+
+
     }
 
     @Override
@@ -117,15 +123,21 @@ public class ShopMenu implements Menu {
         String cardName = matcher.group("cardName");
         try {
             Manager.buy(cardName);
-        } catch (Exception e) {
-            Output.err(e);
+            Output.log(Log.BUYING_SUCCESSFUL);
+        } catch (CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_EXISTS_IN_SHOP);
+        } catch (Account.NotEnoughDrakeException e) {
+            Output.err(Error.NOT_ENOUGH_DRAKE);
+        } catch (Collection.ItemsFullException e) {
+            Output.err(Error.ITEMS_ARE_FULL);
         }
     }
 
     public static void sell(Matcher matcher) {
-        int cardID = Integer.parseInt(matcher.group("cardID"));
+        String name = matcher.group("name");
         try {
-            Manager.sell(cardID);
+            Manager.sell(name);
+            Output.log(Log.SELLING_SUCCESSFUL);
         } catch (CardNotFoundException e) {
             Output.err(e);
         }
@@ -140,7 +152,7 @@ public class ShopMenu implements Menu {
         Output.log(Integer.toString(Manager.getAccount().getDrake()));
     }
 
-    public static void show (Matcher matcher) {
+    public static void show(Matcher matcher) {
         try {
             showCollection(Manager.getShopCollection(), "Buy");
         } catch (Collection.NullCollectionException e) {
@@ -148,7 +160,7 @@ public class ShopMenu implements Menu {
         }
     }
 
-    public static void showCollection (Collection collection, String buyOrSell) {
+    public static void showCollection(Collection collection, String buyOrSell) {
         List<Hero> heroes = new LinkedList<>(collection.getHeroes());
         Output.log("Heroes :");
         for (int i = 0; i < heroes.size(); i++) {
@@ -169,7 +181,7 @@ public class ShopMenu implements Menu {
         List<Minion> minions = new LinkedList<>(collection.getMinions());
         for (int i = 0; i < minions.size(); i++) {
             Output.log("\t\t" + (i + 1) + " : " + minions.get(i) + " - " + buyOrSell + " Cost : " +
-                    minions.get(i).getPrice() + "$") ;
+                    minions.get(i).getPrice() + "$");
         }
 
 

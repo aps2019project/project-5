@@ -15,6 +15,7 @@ import views.Output;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 public class Manager {
     private static Account account;
@@ -70,12 +71,16 @@ public class Manager {
 
     public static void buy(String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
         shop.buy(account, cardName);
-        Output.log(Log.BUYING_SUCCESSFUL);
     }
 
-    public static void sell(int cardID) throws CardNotFoundException {
-        shop.sell(account, cardID);
-        Output.log(Log.SELLING_SUCCESSFUL);
+    public static void sell(String cardName) throws CardNotFoundException {
+        shop.sell(account, cardName);
+        for (Deck deck : account.getDecks()) {
+            deck.getCards().stream()
+                    .filter(card -> card.getName().equals(cardName))
+                    .forEach(card -> deck.getCards().remove(card));
+
+        }
     }
 
     public static Collection getShopCollection() throws Collection.NullCollectionException {
@@ -94,12 +99,11 @@ public class Manager {
     }
 
     public static List<Card> searchMyCard(String cardName) throws CardNotFoundException {
-        List<Card> foundCards = account.getCollection().getCards(cardName);
-        return foundCards;
+        return account.getCollection().getCards(cardName);
     }
 
     public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
-            CardNotFoundException, Deck.HeroExistsInDeckException, Deck.DeckFullException, Deck.CardExistsInDeckException {
+            CardNotFoundException, Deck.HeroExistsInDeckException, Deck.DeckFullException, Deck.HeroNotExistsInDeckException {
         Card card = account.getCollection().getCard(cardName);
         Deck deck = account.getDeck(deckName);
         deck.addCard(card);
