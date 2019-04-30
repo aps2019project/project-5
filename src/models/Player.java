@@ -4,7 +4,10 @@ import models.cards.Attacker;
 import models.cards.Card;
 import models.items.Flag;
 import models.items.Item;
+import views.Input;
+import views.InputAI;
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
@@ -20,6 +23,7 @@ public class Player {
     private ArrayList<Card> graveYard;
     private List<Card> activeCards;
     private int mana;
+    private Input input;
 
     public int getMana() {
         return mana;
@@ -29,9 +33,13 @@ public class Player {
         this.mana = mana;
     }
 
-    private Player(Account account) {
+    private Player(Account account, boolean isAI) {
         this.account = account;
         this.deck = account.getMainDeck();
+        if (isAI)
+            input = InputAI.getInstance();
+        else
+            input = Input.getInstance();
     }
 
 

@@ -22,7 +22,7 @@ public interface Menu {
 
     default void handleMenu() {
         while(true) {
-            String inputCommand = Input.getCommand(getMenuName());
+            String inputCommand = Input.getInstance().getCommand(getMenuName());
             boolean matches = false;
             for(Command command : getCommands()) {
                 Matcher matcher = command.getPattern().matcher(inputCommand);
