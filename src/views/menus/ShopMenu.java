@@ -63,6 +63,7 @@ public class ShopMenu implements Menu {
                 "search [String]",
                 "\t\t\tshow all cards that their name's contains '[String]'"
         ));
+
         commands.add(new Command(
                 "^(?i)search collection (?<cardName>[A-z ]+)$",
                 "searchCollection",
@@ -71,7 +72,7 @@ public class ShopMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)sell (?<cardID>\\d+)$",
+                "^(?i)sell\\s+(?<name>[A-z ]+)$",
                 "sell",
                 "sell [CardId]",
                 "\t\t\tsell cards in collection"
@@ -133,9 +134,9 @@ public class ShopMenu implements Menu {
     }
 
     public static void sell(Matcher matcher) {
-        int cardID = Integer.parseInt(matcher.group("cardID"));
+        String name = matcher.group("name");
         try {
-            Manager.sell(cardID);
+            Manager.sell(name);
             Output.log(Log.SELLING_SUCCESSFUL);
         } catch (CardNotFoundException e) {
             Output.err(e);
