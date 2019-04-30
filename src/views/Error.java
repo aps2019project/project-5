@@ -17,7 +17,8 @@ public enum Error {
     DECK_IS_NOT_COMPLETE("Deck is not completed!"),
     HERO_NOT_EXISTS_IN_DECK("Hero does not exist"),
     WRONG_CHOICE("Wrong Choice !"),
-    PLAYERS_DECK_IS_NOT_VALID("Player's deck is not valid");
+    PLAYERS_DECK_IS_NOT_VALID("Player's deck is not valid"),
+    CANT_PLAY_WITH_YOURSELF("You can't play with yourself.");
 
     private String message;
 

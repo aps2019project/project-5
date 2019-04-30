@@ -127,10 +127,14 @@ public class Manager {
         account.setMainDeck(deck);
     }
 
-    public static boolean canPlay(String username) throws Account.InvalidUsernameException {
+    public static boolean canPlay(String username) throws Account.InvalidUsernameException, Account.CantPlayWithYourselfException {
         Account playerAccount = Account.getAccounts().get(username);
         if(playerAccount == null)
             throw new Account.InvalidUsernameException(username);
+        if(username.equals(account.getUsername()))
+            throw new Account.CantPlayWithYourselfException();
+        if(playerAccount.getMainDeck() == null)
+            return false;
         return playerAccount.getMainDeck().isValid();
     }
 }

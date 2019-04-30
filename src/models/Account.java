@@ -192,6 +192,12 @@ public class Account {
         }
     }
 
+    public static class CantPlayWithYourselfException extends Exception {
+        public CantPlayWithYourselfException() {
+            super("You can't play with yourself.");
+        }
+    }
+
     public static class NotEnoughDrakeException extends Exception {
         public NotEnoughDrakeException() {
             super("Not enough drake.");

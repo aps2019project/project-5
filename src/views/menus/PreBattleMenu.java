@@ -7,6 +7,9 @@ import views.Command;
 import views.Error;
 import views.Input;
 import views.Output;
+
+import javax.swing.plaf.OptionPaneUI;
+import java.nio.channels.AcceptPendingException;
 import java.util.ArrayList;
 
 import static views.Error.WRONG_CHOICE;
@@ -59,15 +62,18 @@ public class PreBattleMenu implements Menu {
         String opponentName = null;
         if(!AIMode) {
             Output.log("Enter opponent's name:");
-            while (opponentName == null) {
+            while (opponentName == null || opponentName.equals("")) {
                 opponentName = Input.getString("");
                 try {
                     if(!Manager.canPlay(opponentName)) {
-                        opponentName = null;
                         Output.err(Error.PLAYERS_DECK_IS_NOT_VALID);
                     }
                 } catch (Account.InvalidUsernameException e) {
                     Output.err(Error.USERNAME_NOT_FOUND);
+                    opponentName = null;
+                } catch (Account.CantPlayWithYourselfException e) {
+                    Output.err(Error.CANT_PLAY_WITH_YOURSELF);
+                    opponentName = null;
                 }
             }
         }
