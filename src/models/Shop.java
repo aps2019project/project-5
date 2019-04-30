@@ -1,11 +1,7 @@
 package models;
 
 import data.JsonParser;
-import jdk.nashorn.internal.parser.JSONParser;
-import models.cards.AttackType;
 import models.cards.Card;
-import models.cards.Minion;
-import models.cards.spell.SpecialPowerActivateTime;
 import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;

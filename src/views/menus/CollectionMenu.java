@@ -23,28 +23,28 @@ public class CollectionMenu implements Menu {
                 "^(?i)return$",
                 "",
                 "return",
-                "\t\t\t\treturn to MainMenu."
+                "\t\t\t\t\t\t\t\treturn to MainMenu."
         ));
 
         commands.add(new Command(
                 "^(?i)create\\s+(?i)deck\\s+(?<name>\\w+)$",
                 "createDeck",
                 "create deck [DeckName]",
-                "create new empty deck."
+                "\t\t\t\tcreate new empty deck."
         ));
 
         commands.add(new Command(
                 "^(?i)delete\\s+(?i)deck\\s+(?<name>\\w+)$",
                 "deleteDeck",
                 "delete deck [DeckName]",
-                "deletes the deck."
+                "\t\t\t\tdeletes the deck."
         ));
 
         commands.add(new Command(
                 "^(?i)show\\s+(?i)all\\s+(?i)decks$",
                 "showAllDecks",
                 "show all decks",
-                "\t\tshows name of all decks."
+                "\t\t\t\t\t\tshows name of all decks."
         ));
 
         commands.add(new Command(
@@ -56,27 +56,43 @@ public class CollectionMenu implements Menu {
                 "^(?i)add\\s+(?<card>[A-z ]+)\\s+to\\s+deck\\s+(?<deck>\\w+)$",
                 "addCardToDeck",
                 "add [CardName] to deck [DeckName]",
-                "Adds card to deck."
+                "\tAdds card to deck."
         ));
+
         commands.add(new Command(
                 "^(?i)remove\\s+(?<card>[A-z ]+)\\s+from\\s+deck\\s+(?<deck>\\w+)$",
-                "removeCardFromDeck"
+                "removeCardFromDeck",
+                "remove [CardName] from deck [DeckName]",
+                "Removes card from deck."
         ));
+
         commands.add(new Command(
                 "^(?i)search\\s+(?<card>[A-z ]+)$",
-                "searchCard"
+                "searchCard",
+                "search [String]",
+                "\t\t\t\t\t\tShows cards in player's collection that their name contains [String]"
         ));
+
         commands.add(new Command(
                 "^(?i)validate\\s+deck\\s+(?<deck>\\w+)$",
-                "validateDeck"
+                "validateDeck",
+                "validate deck [DeckName]",
+                "\t\t\tCheck if deck is valid or isn't"
         ));
+
         commands.add(new Command(
                 "^(?i)select\\s+deck\\s+(?<deck>\\w+)$",
-                "selectDeck"
+                "selectDeck",
+                "select deck [DeckName]",
+                "\t\t\t\tSets deck as main deck"
         ));
+
         commands.add(new Command(
                 "^(?i)show\\s+deck\\s+(?<deck>\\w+)$",
-                "showDeck"));
+                "showDeck",
+                "show deck [DeckName]",
+                "\t\t\t\tShows cards of deck."
+        ));
     }
 
     @Override
@@ -93,7 +109,9 @@ public class CollectionMenu implements Menu {
         String cardName = matcher.group("cardName");
         try {
             List<Card> cards = Manager.searchMyCard(cardName);
-            cards.forEach((card) -> Output.log(card.toString()));
+            cards.forEach(
+                    (card) -> Output.log(card.toString())
+            );
         } catch (Collection.CardNotFoundException e) {
             Output.err(Error.CARD_NOT_FOUND);
         }
