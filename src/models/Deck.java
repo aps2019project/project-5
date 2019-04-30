@@ -29,7 +29,7 @@ public class Deck {
         if (cards.size() == 20) {
             throw new DeckFullException(this.name);
         }
-        if (cards.size() == 19 && this.getHero() == null) {
+        if (cards.size() == 19 && !(card instanceof Hero) && this.getHero() == null) {
             throw new HeroNotExistsInDeckException();
 
         }
