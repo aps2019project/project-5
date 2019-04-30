@@ -17,20 +17,15 @@ public class Deck {
     public boolean isComplete() {
         return false;
     }
+
     public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
-        if (this.getHero() != null) {
+        if (this.getHero() != null && card instanceof Hero)
             throw new HeroExistsInDeckException(card.getName(), this.name);
-        }
-        if (cards.size() == 20) {
+        if (cards.size() == 20)
             throw new DeckFullException(this.name);
-        }
-        if (cards.size() == 19 && !(card instanceof Hero) && this.getHero() == null) {
+        if (cards.size() == 19 && !(card instanceof Hero) && this.getHero() == null)
             throw new HeroNotExistsInDeckException();
-
-        }
-
         cards.add(card);
-
     }
 
     public Deck(Deck deck) {

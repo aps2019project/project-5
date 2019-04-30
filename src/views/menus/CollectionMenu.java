@@ -75,7 +75,7 @@ public class CollectionMenu implements Menu {
 
         commands.add(new Command(
                 "^(?i)validate\\s+deck\\s+(?<deck>\\w+)$",
-                "isValid",
+                "validateDeck",
                 "validate deck [DeckName]",
                 "\t\t\tCheck if deck is valid or isn't"
         ));
@@ -179,6 +179,7 @@ public class CollectionMenu implements Menu {
         try {
             if (Manager.validateDeck(deckName))
                 Output.log(Log.DECK_IS_COMPLETED);
+            Output.log(Log.DECK_IS_INVALID);
         } catch (Account.DeckNotFoundException e) {
             Output.err(Error.DECK_IS_NOT_COMPLETE);
         }
@@ -191,7 +192,7 @@ public class CollectionMenu implements Menu {
         } catch (Account.DeckNotFoundException e) {
             Output.err(Error.DECK_NOT_FOUND);
         }
-
+        System.out.println(Manager.getAccount().getMainDeck());
     }
 
     public static void showAllDecks(Matcher matcher) {
