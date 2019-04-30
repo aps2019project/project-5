@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Deck {
-    private Deque<Card> cards = new ArrayDeque<>();
+    private ArrayList<Card> cards = new ArrayList<>();
     private String name;
 
     public boolean isComplete() {
@@ -33,7 +33,7 @@ public class Deck {
 
     }
 
-    public Deque<Card> getCards() {
+    public ArrayList<Card> getCards() {
         return cards;
     }
 
