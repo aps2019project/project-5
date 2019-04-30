@@ -1,14 +1,16 @@
 package controllers;
 
-import models.Account;
-import models.Collection;
-import models.Deck;
-import models.Shop;
+import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.match.Match;
+import models.match.MultiFlagMatch;
+import views.Input;
+import views.InputAI;
+import views.Log;
+import views.Output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +20,17 @@ public class Manager {
     private static Match playingMatch;
     private static Shop shop = Shop.getInstance();
 
+    public static void setState(boolean isStory) {
+
+        playingMatch.setState(isStory);
+    }
+
     public static Account getAccount() {
         return account;
     }
 
     public static void addAccount(Account account) throws Account.UsernameExistsException {
         Account.addAccount(account);
-    }
-
-    public static void salam() {
-        System.out.println("salam kachal!!!!!\nboro gom sho divooone");
     }
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
@@ -99,13 +102,14 @@ public class Manager {
 
     public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
             CardNotFoundException, Deck.HeroExistsInDeckException, Deck.DeckFullException, Deck.HeroNotExistsInDeckException {
-        Card card = new Card(account.getCollection().getCard(cardName));
+        Card card = account.getCollection().getCard(cardName);
         Deck deck = account.getDeck(deckName);
         deck.addCard(card);
 
     }
 
-    public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException, Account.DeckNotFoundException {
+    public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException,
+            Account.DeckNotFoundException {
         Card card = account.getCollection().getCard(cardName);
         Deck deck = account.getDeck(deckName);
         deck.removeCard(card);
@@ -125,6 +129,27 @@ public class Manager {
     public static void selectDeck(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
         account.setMainDeck(deck);
+    }
+
+    public static Input getInput() {
+        if(playingMatch == null)
+            return Input.getInstance();
+        if(playingMatch.isAIMode() && playingMatch.getTurn() % 2 == 1)
+            return InputAI.getInstance();
+        return Input.getInstance();
+    }
+
+    public static String getAIMove() {
+        playingMatch.getPlayer2().decide();
+        return playingMatch.getPlayer2().getDecision();
+    }
+
+    public static Player getActivePlayer() {
+        return playingMatch.getActivePlayer();
+    }
+
+    public static Player getInActivePlayer() {
+        return playingMatch.getInActivePlayer();
     }
 
     public static boolean canPlay(String username) throws Account.InvalidUsernameException, Account.CantPlayWithYourselfException {

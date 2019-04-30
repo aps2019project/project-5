@@ -38,6 +38,7 @@ public class BattleMenu implements Menu {
     }
 
 
+
     public static void gameInfo(Matcher matcher) {
         Manager.getMatchInfo();
     }

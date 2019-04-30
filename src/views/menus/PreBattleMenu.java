@@ -57,6 +57,7 @@ public class PreBattleMenu implements Menu {
         boolean StateType = result == 1;
 
         result = askQuestion("Choose Player Numbers:", "Single Player", "Multi Player");
+        Manager.setState(result == 1);
         boolean AIMode = result == 1;
 
         String opponentName = null;
