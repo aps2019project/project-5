@@ -128,4 +128,8 @@ public class Manager {
         Deck deck = account.getDeck(deckName);
         account.setMainDeck(deck);
     }
+
+    public static void showMyMinions(){
+
+    }
 }

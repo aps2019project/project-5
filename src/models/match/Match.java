@@ -2,11 +2,13 @@ package models.match;
 
 import models.Account;
 import models.Player;
+import models.cards.Minion;
 import models.items.Item;
 import models.map.Map;
 
 import javax.print.DocFlavor;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Match {
     private Map map;
@@ -29,6 +31,10 @@ public abstract class Match {
         // TODO: Implement
     }
 
+    public List<Minion> showMyMinions() {
+        Player player = this.getActivePlayer();
+        return player.getDeck().getMinions();
+    }
 
     private Map getMap() {
         return map;
@@ -39,7 +45,7 @@ public abstract class Match {
         player2 = player2;
     }
 
-    abstract public Player getWinner() ;
+    abstract public Player getWinner();
 
     public Player[] getPlayers() {
         return players;
