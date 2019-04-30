@@ -10,7 +10,7 @@ public class FileReader {
     public static final String HEROES_DATA = "heroes.json";
 
     public String getFileContent(String fileName) throws FileNotFoundException {
-        URL url = getClass().getResource(fileName);
+        URL url = FileReader.class.getResource(fileName);
         File file = new File(url.getPath());
         Scanner scanner = new Scanner(file);
         StringBuilder stringBuilder = new StringBuilder();
