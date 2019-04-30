@@ -15,4 +15,5 @@ public class Hand {
     public Card getNextCard() {
         return nextCard;
     }
+
 }

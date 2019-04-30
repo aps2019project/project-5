@@ -84,7 +84,7 @@ public class Manager {
         shop.sell(account, cardName);
         for (Deck deck : account.getDecks()) {
             deck.getCards().stream()
-                    .filter(card -> card.getName().equals(cardName))
+                    .filter(card -> card.getName().equalsIgnoreCase(cardName))
                     .forEach(card -> deck.getCards().remove(card));
 
         }
