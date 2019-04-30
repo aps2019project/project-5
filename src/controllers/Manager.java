@@ -71,7 +71,6 @@ public class Manager {
 
     public static void buy(String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
         shop.buy(account, cardName);
-        Output.log(Log.BUYING_SUCCESSFUL);
     }
 
     public static void sell(String cardName) throws CardNotFoundException {
@@ -101,8 +100,7 @@ public class Manager {
     }
 
     public static List<Card> searchMyCard(String cardName) throws CardNotFoundException {
-        List<Card> foundCards = account.getCollection().getCards(cardName);
-        return foundCards;
+        return account.getCollection().getCards(cardName);
     }
 
     public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,

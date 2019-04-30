@@ -29,7 +29,6 @@ public class Shop {
         } catch (FileNotFoundException | JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(cardsCollection.getCards().size());
     }
 
     public static Shop getInstance() {
@@ -50,8 +49,7 @@ public class Shop {
         return cardsCollection.getCard(cardName);
     }
 
-    public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException,
-            ItemsFullException {
+    public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
         Card card = shopInstance.searchCard(cardName);
         if (account.getDrake() < card.getPrice())
             throw new NotEnoughDrakeException();
