@@ -20,4 +20,9 @@ public class Cell {
     public static int manhattanDistance(Cell cell1, Cell cell2) {
         return manhattanDistance(cell1.x, cell1.y, cell2.x, cell2.y);
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + " )";
+    }
 }

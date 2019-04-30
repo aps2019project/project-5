@@ -56,8 +56,8 @@ public class Account {
 
     // Add new deck to user's decks
     public void addDeck(Deck deck) throws DeckExistsException {
-        for (Deck existingDeck : decks)
-            if (existingDeck.getName().equals(deck.getName()))
+        for(Deck existingDeck : decks)
+            if(existingDeck.getName().equals(deck.getName()))
                 throw new DeckExistsException(deck.getName());
         this.decks.add(deck);
     }
@@ -69,7 +69,7 @@ public class Account {
     public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
         for (Map.Entry<String, Account> entry : accounts.entrySet()) {
             if (entry.getValue().username.equals(username)) {
-                if (entry.getValue().password.equals(password))
+                if(entry.getValue().password.equals(password))
                     return entry.getValue();
                 else
                     throw new InvalidPasswordException();
@@ -92,7 +92,7 @@ public class Account {
         this.password = password;
     }
 
-    private static boolean doesAccountExists(Account account) {
+    private static boolean doesAccountExists(Account account){
         return accounts.containsKey(account.username);
     }
 
@@ -129,7 +129,7 @@ public class Account {
         return ranking;
     }
 
-    public void addCardToCollection(Card card) {
+    public void addCardToCollection (Card card) {
         collection.addCard(card);
     }
 
@@ -141,6 +141,10 @@ public class Account {
 
     public void addMatchResult(MatchResult matchResult) {
         matchHistory.add(matchResult);
+    }
+
+    public static Map<String, Account> getAccounts() {
+        return accounts;
     }
 
     public Card getCard(String name) {

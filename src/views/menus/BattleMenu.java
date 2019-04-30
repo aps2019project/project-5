@@ -1,15 +1,25 @@
 package views.menus;
 
+import controllers.Manager;
+import models.Account;
 import views.Command;
+import views.Input;
+import views.Output;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.regex.Matcher;
 
 public class BattleMenu implements Menu {
-    private ArrayList<Command> commands = new ArrayList<>();
+
+
 
     public BattleMenu() {
         // TODO: Add commands.
+        commands.add(new Command(
+                "^(?i)Game info$",
+                "gameInfo"
+        ));
         commands.add(new Command(
                 "^(?i)return$",
                 ""
@@ -27,12 +37,10 @@ public class BattleMenu implements Menu {
         return "BattleMenu";
     }
 
-    @Override
-    public ArrayList<Command> getCommands() {
-        return this.commands;
-    }
 
-    public static void gameInfo(Matcher matcher) {}
+    public static void gameInfo(Matcher matcher) {
+        Manager.getMatchInfo();
+    }
     public static void showMyMinions(Matcher matcher) {}
     public static void showOpponentMinions(Matcher matcher) {}
     public static void showCardInfo(int cardId) {}

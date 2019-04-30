@@ -1,21 +1,36 @@
 package models.items;
 
-public class Flag extends Item {
-    int gotTurn;
+import models.cards.Card;
+import models.map.Cell;
 
-    public int getGotTurn() {
-        return gotTurn;
+public class Flag extends Item {
+    int tokenTurn;
+    Card owner;
+
+    public Flag(String name, Cell cell) {
+        super(name, cell, "");
+        tokenTurn = -1;
     }
 
-    public boolean isGot() {
-        return gotTurn != -1;
+    public int getTokenTurn() {
+        return tokenTurn;
+    }
+
+    public boolean isGotten() {
+        return tokenTurn != -1;
     }
 
     public void realese() {
-        gotTurn = -1;
+        this.tokenTurn = -1;
+        this.owner = null;
     }
 
-    public void get(int turn) {
-        gotTurn = turn;
+    public void take(int turn, Card card) {
+        this.owner = card;
+        this.tokenTurn = turn;
+    }
+
+    public Card getOwner() {
+        return owner;
     }
 }

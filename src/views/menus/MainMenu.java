@@ -69,7 +69,9 @@ public class MainMenu implements Menu {
     }
 
     public static void enterBattle(Matcher matcher) {
-//        if(Manager.getAccount().getMainDeck().isValid())
+//        if(!Manager.getAccount().getMainDeck().isValid())
+//            return;
+            new preBattleMenu().handleMenu();
             new BattleMenu().handleMenu();
 //        else
 //            throw new DeckNotValidException();
