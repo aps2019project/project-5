@@ -51,12 +51,12 @@ public class PreBattleMenu implements Menu {
     @Override
     public void handleMenu() {
 
-
         int result = askQuestion("Select your game state:", "Story Game", "Custom Game");
-        Manager.setState(result == 1);
+        boolean StateType = result == 1;
 
         result = askQuestion("Choose Player Numbers:", "Single Player", "Multi Player");
         Manager.setState(result == 1);
+        boolean AIMode = result == 1;
 
     }
 }

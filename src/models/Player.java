@@ -2,6 +2,7 @@ package models;
 
 import models.cards.Attacker;
 import models.cards.Card;
+import models.cards.Hero;
 import models.items.Flag;
 import models.items.Item;
 import views.Input;
@@ -9,6 +10,7 @@ import views.InputAI;
 
 import javax.print.DocFlavor;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
 public class Player {
     private Account account;
     private Deck deck;
-    private Deque<Card> hand;
+    private Hand hand;
     private Card selectedCard;
     private int flags;
     private List<Item> collectedItems = new ArrayList<>();
@@ -34,13 +36,12 @@ public class Player {
         this.mana = mana;
     }
 
-    private Player(Account account, boolean isAI) {
+    private Player(Account account) {
         this.account = account;
-        this.deck = account.getMainDeck();
-        if (isAI)
-            input = InputAI.getInstance();
-        else
-            input = Input.getInstance();
+        this.deck = new Deck(account.getMainDeck());
+        this.setHand();
+        this.setCardsId();
+        this.setNextCard();
     }
 
 
@@ -48,7 +49,7 @@ public class Player {
         return graveYard;
     }
 
-    public Deque<Card> getHand() {
+    public Hand getHand() {
         return hand;
     }
 
@@ -94,6 +95,28 @@ public class Player {
     public boolean hasFlag() {
         return getFlags().size() > 0;
     }
+
+    public void setCardsId() {
+        int i = 0;
+        for (Card card : getDeck().getCards())
+            card.setId(++i);
+    }
+
+    private void setDeck() {
+        Collections.shuffle(deck.getCards());
+    }
+
+    private void setHand() {
+        for (int i = 0; i < 5; i++) {
+            hand.getHand().add(deck.getCards().get(i));
+        }
+    }
+
+    private void setNextCard() {
+        hand.setNextCard(deck.getCards().get(5));
+    }
+
+
 
     public void decide() {
 

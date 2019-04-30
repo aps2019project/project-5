@@ -70,11 +70,6 @@ public class Manager {
         return shop.searchCards(cardName);
     }
 
-    public static int searchCard(String cardName) throws CardNotFoundException {
-        Card card = shop.searchCard(cardName);
-        return card.getID();
-    }
-
     public static void buy(String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
         shop.buy(account, cardName);
     }
@@ -83,7 +78,7 @@ public class Manager {
         shop.sell(account, cardName);
         for (Deck deck : account.getDecks()) {
             deck.getCards().stream()
-                    .filter(card -> card.getName().equals(cardName))
+                    .filter(card -> card.getName().equalsIgnoreCase(cardName))
                     .forEach(card -> deck.getCards().remove(card));
 
         }
@@ -125,8 +120,8 @@ public class Manager {
 
     public static String getMatchInfo() {
         return "Player 1 mana: " + playingMatch.getPlayer1().getMana() +
-                "Player 2 mana: " + playingMatch.getPlayer2().getMana() +
-                playingMatch.getInfo();
+               "Player 2 mana: " + playingMatch.getPlayer2().getMana() +
+               playingMatch.getInfo();
     }
 
     public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
