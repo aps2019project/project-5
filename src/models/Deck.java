@@ -34,9 +34,7 @@ public class Deck {
     }
 
     public Deck(Deck deck) {
-        for (Card card : deck.getCards()) {
-            this.getCards().add(card);
-        }
+        this.cards.addAll(deck.getCards());
         this.name = deck.getName();
     }
 
@@ -46,7 +44,7 @@ public class Deck {
 
     public boolean hasCard(String cardName) {
         return (this.cards.stream().filter(
-                card -> card.getName().equals(cardName)
+                card -> card.getName().equalsIgnoreCase(cardName)
         ).count() == 1);
     }
 
@@ -128,11 +126,10 @@ public class Deck {
                         }
                 );
         return result.toString();
-
     }
 
     public boolean isValid() {
-        return !(cards.size() != 20 || this.getHero() != null);
+        return !(cards.size() < 20 || this.getHero() != null);
     }
 
     public static class CardExistsInDeckException extends Exception {
