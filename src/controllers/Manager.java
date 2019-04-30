@@ -77,7 +77,6 @@ public class Manager {
 
     public static void buy(String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
         shop.buy(account, cardName);
-        Output.log(Log.BUYING_SUCCESSFUL);
     }
 
     public static void sell(String cardName) throws CardNotFoundException {

@@ -5,6 +5,7 @@ import views.Error;
 import views.Input;
 import views.Output;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -29,16 +30,15 @@ public interface Menu {
                     if(command.getFunctionName().equals(""))
                         return;
                     matches = true;
+
+                    Method method = null;
                     try {
-                        Method method = getClass().getMethod(command.getFunctionName(), Matcher.class);
-                        try {
-                            if (method.invoke(null, matcher).equals(Boolean.FALSE))
-                                return;
-                        } catch (Exception ignored) {
-                            System.out.println("hamnoon catch exception bikhodeeeeeeeeeeeeeeee!");
-                        }
-                    } catch (Exception exception) {
-                        Output.err(exception.getMessage());
+                        method = getClass().getMethod(command.getFunctionName(), Matcher.class);
+                        Object object = method.invoke(null, matcher);
+                        if(object != null && object.equals(Boolean.FALSE))
+                            return;
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        e.printStackTrace();
                     }
                 }
             }
