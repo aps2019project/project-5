@@ -1,15 +1,14 @@
 package controllers;
 
-import models.Account;
-import models.Collection;
-import models.Deck;
-import models.Shop;
+import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.match.Match;
 import models.match.MultiFlagMatch;
+import views.Input;
+import views.InputAI;
 import views.Log;
 import views.Output;
 
@@ -23,7 +22,6 @@ public class Manager {
     private static Account account;
     private static Match playingMatch;
     private static Shop shop = Shop.getInstance();
-
 
     public static void setState(boolean isStory) {
 
@@ -139,5 +137,26 @@ public class Manager {
     public static void selectDeck(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
         account.setMainDeck(deck);
+    }
+
+    public static Input getInput() {
+        if(playingMatch == null)
+            return Input.getInstance();
+        if(playingMatch.isAIMode() && playingMatch.getTurn() % 2 == 1)
+            return InputAI.getInstance();
+        return Input.getInstance();
+    }
+
+    public static String getAIMove() {
+        playingMatch.getPlayer2().decide();
+        return playingMatch.getPlayer2().getDecision();
+    }
+
+    public static Player getActivePlayer() {
+        return playingMatch.getActivePlayer();
+    }
+
+    public static Player getInActivePlayer() {
+        return playingMatch.getInActivePlayer();
     }
 }

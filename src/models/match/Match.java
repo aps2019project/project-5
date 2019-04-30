@@ -15,6 +15,15 @@ public abstract class Match {
     private ArrayList<Item> collectibleItems = new ArrayList<>();
     final int PLAYERS_COUNT = 2;
     private boolean isStory;
+    private boolean isAIMode;
+
+    public void setAIMode(boolean AIMode) {
+        isAIMode = AIMode;
+    }
+
+    public boolean isAIMode() {
+        return isAIMode;
+    }
 
     public Player getPlayer1() {
         return players[0];
@@ -53,5 +62,13 @@ public abstract class Match {
 
     public void setState(boolean isStory) {
         this.isStory = isStory;
+    }
+
+    public Player getActivePlayer() {
+        return players[ (turn + 1) % 2];
+    }
+
+    public Player getInActivePlayer() {
+        return players[ turn % 2];
     }
 }

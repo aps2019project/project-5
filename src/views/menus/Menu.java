@@ -1,5 +1,6 @@
 package views.menus;
 
+import controllers.Manager;
 import views.Command;
 import views.Error;
 import views.Input;
@@ -22,7 +23,7 @@ public interface Menu {
 
     default void handleMenu() {
         while(true) {
-            String inputCommand = Input.getInstance().getCommand(getMenuName());
+            String inputCommand = Manager.getInput().getCommand(getMenuName());
             boolean matches = false;
             for(Command command : getCommands()) {
                 Matcher matcher = command.getPattern().matcher(inputCommand);
