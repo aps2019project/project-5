@@ -2,6 +2,7 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
+import models.match.Match;
 import views.Command;
 import views.Input;
 import views.Output;
@@ -24,7 +25,10 @@ public class BattleMenu implements Menu {
                 "^(?i)return$",
                 ""
         ));
-
+        commands.add(new Command(
+                "^(?i)select (?<cardID>\\d+)",
+                "selectCard"
+        ));
         commands.add(new Command(
                 "^(?i)help$",
                 "help"
@@ -42,10 +46,23 @@ public class BattleMenu implements Menu {
     public static void gameInfo(Matcher matcher) {
         Manager.getMatchInfo();
     }
-    public static void showMyMinions(Matcher matcher) {}
-    public static void showOpponentMinions(Matcher matcher) {}
-    public static void showCardInfo(int cardId) {}
-    public static void selectCard(Matcher matcher) {}
+
+    public static void showMyMinions(Matcher matcher) {
+
+    }
+
+    public static void showOpponentMinions(Matcher matcher) {
+
+    }
+
+    public static void showCardInfo(Matcher matcher) {
+
+    }
+
+    public static void selectCard(Matcher matcher) {
+        int cardID = Integer.parseInt(matcher.group("cardID"));
+        Manager.selectCard(cardID);
+    }
     public static void moveTo(Matcher matcher) {}
     public static void attack(Matcher matcher) {}
     public static void useSpecialPower(Matcher matcher) {}

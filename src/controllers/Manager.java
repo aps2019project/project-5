@@ -6,12 +6,8 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.match.Match;
-import models.match.MultiFlagMatch;
 import views.Input;
 import views.InputAI;
-import views.Log;
-import views.Output;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,6 +146,10 @@ public class Manager {
 
     public static Player getInActivePlayer() {
         return playingMatch.getInActivePlayer();
+    }
+
+    public static void selectCard(int cardID) {
+        playingMatch.getActivePlayer().selectCard(playingMatch.getCard(cardID));
     }
 
     public static boolean canPlay(String username) throws Account.InvalidUsernameException, Account.CantPlayWithYourselfException {

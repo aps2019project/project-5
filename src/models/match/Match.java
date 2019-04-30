@@ -2,11 +2,14 @@ package models.match;
 
 import models.Account;
 import models.Player;
+import models.cards.Card;
 import models.items.Item;
 import models.map.Map;
 
 import javax.print.DocFlavor;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Match {
     private Map map;
@@ -70,5 +73,20 @@ public abstract class Match {
 
     public Player getInActivePlayer() {
         return players[ turn % 2];
+    }
+
+    public Card getCard(int cardID) {
+        getActiveCards()
+                .stream()
+                .filter(
+                        card -> card.getID() == cardID)
+                .collect(Collectors.toList())
+                .get(0);
+    }
+
+    private List<Card> getActiveCards() {
+        List<Card> allActiveCards = new ArrayList<>(players[0].getActiveCards());
+        allActiveCards.addAll(players[1].getActiveCards());
+        return allActiveCards;
     }
 }
