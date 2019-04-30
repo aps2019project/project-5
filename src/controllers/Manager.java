@@ -9,15 +9,9 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.match.Match;
-import models.match.MultiFlagMatch;
-import views.Log;
-import views.Output;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.stream.Collectors;
 
 public class Manager {
     private static Account account;
@@ -30,6 +24,10 @@ public class Manager {
 
     public static void addAccount(Account account) throws Account.UsernameExistsException {
         Account.addAccount(account);
+    }
+
+    public static void salam() {
+        System.out.println("salam kachal!!!!!\nboro gom sho divooone");
     }
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
@@ -121,11 +119,18 @@ public class Manager {
 
     public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
-        return deck.validateDeck();
+        return deck.isValid();
     }
 
     public static void selectDeck(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
         account.setMainDeck(deck);
+    }
+
+    public static boolean canPlay(String username) throws Account.InvalidUsernameException {
+        Account playerAccount = Account.getAccounts().get(username);
+        if(playerAccount == null)
+            throw new Account.InvalidUsernameException(username);
+        return playerAccount.getMainDeck().isValid();
     }
 }

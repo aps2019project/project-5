@@ -157,7 +157,7 @@ public class Account {
     }
 
     public static class InvalidUsernameException extends Exception {
-        InvalidUsernameException(String username) {
+        public InvalidUsernameException(String username) {
             super(String.format("Username not found: %s", username));
         }
     }
