@@ -157,7 +157,7 @@ public class Manager {
         return playerAccount.getMainDeck().isValid();
     }
 
-    public static void playMatch(boolean isAIMode, boolean isStoryMode, String username) {
+    public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {
         opponentUsername = username;
         isAI = isAIMode;
         isStory = isStoryMode;
