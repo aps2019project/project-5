@@ -15,9 +15,6 @@ import views.Output;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.stream.Collectors;
 
 public class Manager {
     private static Account account;
@@ -127,7 +124,7 @@ public class Manager {
 
     public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
-        return deck.validateDeck();
+        return deck.isValid();
     }
 
     public static void selectDeck(String deckName) throws Account.DeckNotFoundException {
@@ -154,6 +151,17 @@ public class Manager {
 
     public static Player getInActivePlayer() {
         return playingMatch.getInActivePlayer();
+    }
+
+    public static boolean canPlay(String username) throws Account.InvalidUsernameException, Account.CantPlayWithYourselfException {
+        Account playerAccount = Account.getAccounts().get(username);
+        if(playerAccount == null)
+            throw new Account.InvalidUsernameException(username);
+        if(username.equals(account.getUsername()))
+            throw new Account.CantPlayWithYourselfException();
+        if(playerAccount.getMainDeck() == null)
+            return false;
+        return playerAccount.getMainDeck().isValid();
     }
 
     public static List<Minion> showMyMinions() {

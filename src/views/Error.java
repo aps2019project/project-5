@@ -12,12 +12,14 @@ public enum Error {
     NOT_ENOUGH_DRAKE("Not enough drake."),
     CARD_NOT_FOUND("Card not found in collection."),
     ITEMS_ARE_FULL("You have 3 items and can't have any more!"),
-    CARD_EXISTS_IN_DECK("Card exists in the deck"),
     DECK_FULL_EXCEPTION("Deck is full!"),
     HERO_EXISTS_IN_DECK("Hero Exists in deck"),
     DECK_IS_NOT_COMPLETE("Deck is not completed!"),
     HERO_NOT_EXISTS_IN_DECK("Hero does not exist"),
-    WRONG_CHOICE("Wrong Choice !");
+    WRONG_CHOICE("Wrong Choice !"),
+    PLAYERS_DECK_IS_NOT_VALID("Player's deck is not valid"),
+    CANT_PLAY_WITH_YOURSELF("You can't play with yourself.");
+
     private String message;
 
     Error(String message) {

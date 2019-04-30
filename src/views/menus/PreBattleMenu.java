@@ -2,13 +2,15 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
+import models.Collection;
 import views.Command;
 import views.Error;
 import views.Input;
 import views.Output;
 
+import javax.swing.plaf.OptionPaneUI;
+import java.nio.channels.AcceptPendingException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import static views.Error.WRONG_CHOICE;
 
@@ -39,7 +41,7 @@ public class PreBattleMenu implements Menu {
                     result = 0;
             } catch (Exception e) {
                 for (int j = 0; j < choices.length; j++)
-                    if (chosen.trim().equalsIgnoreCase(choices[i]))
+                    if (chosen.trim().equalsIgnoreCase(choices[j]))
                         return j + 1;
             }
             if(result == 0)
@@ -55,8 +57,26 @@ public class PreBattleMenu implements Menu {
         boolean StateType = result == 1;
 
         result = askQuestion("Choose Player Numbers:", "Single Player", "Multi Player");
-        Manager.setState(result == 1);
         boolean AIMode = result == 1;
+
+        String opponentName = null;
+        if(!AIMode) {
+            Output.log("Enter opponent's name:");
+            while (opponentName == null || opponentName.equals("")) {
+                opponentName = Input.getString("");
+                try {
+                    if(!Manager.canPlay(opponentName)) {
+                        Output.err(Error.PLAYERS_DECK_IS_NOT_VALID);
+                    }
+                } catch (Account.InvalidUsernameException e) {
+                    Output.err(Error.USERNAME_NOT_FOUND);
+                    opponentName = null;
+                } catch (Account.CantPlayWithYourselfException e) {
+                    Output.err(Error.CANT_PLAY_WITH_YOURSELF);
+                    opponentName = null;
+                }
+            }
+        }
 
     }
 }

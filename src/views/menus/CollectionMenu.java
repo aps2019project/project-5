@@ -75,7 +75,7 @@ public class CollectionMenu implements Menu {
 
         commands.add(new Command(
                 "^(?i)validate\\s+deck\\s+(?<deck>\\w+)$",
-                "validateDeck",
+                "isValid",
                 "validate deck [DeckName]",
                 "\t\t\tCheck if deck is valid or isn't"
         ));

@@ -157,7 +157,7 @@ public class Account {
     }
 
     public static class InvalidUsernameException extends Exception {
-        InvalidUsernameException(String username) {
+        public InvalidUsernameException(String username) {
             super(String.format("Username not found: %s", username));
         }
     }
@@ -189,6 +189,12 @@ public class Account {
     public static class DeckNotFoundException extends Exception {
         DeckNotFoundException(String name) {
             super(String.format("Deck '%s' not found for this user.", name));
+        }
+    }
+
+    public static class CantPlayWithYourselfException extends Exception {
+        public CantPlayWithYourselfException() {
+            super("You can't play with yourself.");
         }
     }
 

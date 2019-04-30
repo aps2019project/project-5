@@ -131,9 +131,8 @@ public class Deck {
 
     }
 
-    public boolean validateDeck() {
-        if (cards.size() != 20 || this.getHero() != null) return false;
-        return true;
+    public boolean isValid() {
+        return !(cards.size() != 20 || this.getHero() != null);
     }
 
     public static class CardExistsInDeckException extends Exception {
