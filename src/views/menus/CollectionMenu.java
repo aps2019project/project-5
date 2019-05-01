@@ -179,7 +179,7 @@ public class CollectionMenu implements Menu {
         try {
             if (Manager.validateDeck(deckName))
                 Output.log(Log.DECK_IS_COMPLETED);
-            Output.log(Log.DECK_IS_INVALID);
+            else Output.err(Error.DECK_IS_NOT_COMPLETE);
         } catch (Account.DeckNotFoundException e) {
             Output.err(Error.DECK_IS_NOT_COMPLETE);
         }
@@ -189,10 +189,10 @@ public class CollectionMenu implements Menu {
         String deckName = matcher.group("deck");
         try {
             Manager.selectDeck(deckName);
+            Output.log(Log.DECK_SELECTED);
         } catch (Account.DeckNotFoundException e) {
             Output.err(Error.DECK_NOT_FOUND);
         }
-        System.out.println(Manager.getAccount().getMainDeck());
     }
 
     public static void showAllDecks(Matcher matcher) {

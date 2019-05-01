@@ -5,7 +5,6 @@ import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.items.UsableItem;
-import views.Error;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -124,7 +123,7 @@ public class Deck {
     }
 
     public boolean isValid() {
-        return !(cards.size() < 20 || this.getHero() != null);
+        return !(cards.size() < 20 || this.getHero() == null);
     }
 
     public static class CardExistsInDeckException extends Exception {

@@ -11,7 +11,8 @@ public enum Log {
     CARD_ADDED_TO_DECK("Card added to deck."),
     DECK_IS_COMPLETED("Deck is complete!"),
     CARD_REMOVED_FROM_COLLECTION("Card removed from deck"),
-    DECK_IS_INVALID("Deck is invalid");
+    DECK_IS_INVALID("Deck is invalid"),
+    DECK_SELECTED("Deck selected.");
 
 
     private String message;
