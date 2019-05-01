@@ -15,6 +15,10 @@ public class Account {
     private int drake = 15000;
     private int winCount = 0;
 
+    public static Account getAiAccount() {
+        return new Account("AI", "password");
+    }
+
     public int getDrake() {
         return drake;
     }

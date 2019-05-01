@@ -172,12 +172,17 @@ public class Manager {
 
     public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {
         opponentUsername = username;
-        if(isOpponentNull()) {
-            Account opponent = Account.getAccounts().get(username);
-            if(opponent == null)
-                opponentUsername = "";
-            if(isAIMode) {
+        if(!isOpponentNull()) {
+            Account opponent;
+            if(isAIMode)
+                opponent = Account.getAiAccount();
+            else
+                opponent = Account.getAccounts().get(username);
+            if(!isStoryMode) {
 
+            }
+            if(opponent == null) {
+                opponentUsername = "";
             }
         }
     }
