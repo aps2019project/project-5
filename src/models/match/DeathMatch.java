@@ -5,8 +5,8 @@ import models.Player;
 import java.text.DecimalFormat;
 
 public class DeathMatch extends Match {
-    public DeathMatch(Player player1, Player player2) {
-        super(player1, player2);
+    public DeathMatch() {
+        super();
     }
 
     @Override

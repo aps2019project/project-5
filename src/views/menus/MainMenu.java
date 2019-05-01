@@ -72,8 +72,9 @@ public class MainMenu implements Menu {
             Output.err(Error.SELECTED_DECK_IS_INVALID);
         } else {
             new PreBattleMenu().handleMenu();
-            if(!Manager.isOpponentNull())
+            if(!Manager.isOpponentNull()) {
                 new BattleMenu().handleMenu();
+            }
         }
     }
 

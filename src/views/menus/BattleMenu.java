@@ -1,16 +1,11 @@
 package views.menus;
 
 import controllers.Manager;
-import models.Account;
 import models.cards.Minion;
-import models.match.Match;
 import views.Command;
-import views.Input;
 import views.Output;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 
 public class BattleMenu implements Menu {
@@ -21,18 +16,22 @@ public class BattleMenu implements Menu {
                 "^(?i)Game info$",
                 "gameInfo"
         ));
+
         commands.add(new Command(
                 "^(?i)return$",
                 ""
         ));
+
         commands.add(new Command(
                 "^(?i)select (?<cardID>\\d+)",
                 "selectCard"
         ));
+
         commands.add(new Command(
                 "^(?i)show\\s+my\\s+minions",
                 "showMyMinions"
         ));
+
         commands.add(new Command(
                 "^(?i)help$",
                 "help"
@@ -69,7 +68,7 @@ public class BattleMenu implements Menu {
         showMinions(Manager.showMyMinions());
     }
     public static void showOponnent(Matcher matcher){
-        showMinions(Manager.showOponentMinions());
+        showMinions(Manager.showOpponentMinions());
     }
 
     public static void showOpponentMinions(Matcher matcher) {
