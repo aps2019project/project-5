@@ -16,8 +16,8 @@ public class Manager {
     private static Account account;
     private static Match playingMatch;
     private static Shop shop = Shop.getInstance();
+    private static ArrayList<Match> matches = new ArrayList<>();
 
-    private static boolean isAI, isStory, mustPlayGame;
     private static String opponentUsername;
 
     public static Account getAccount() {
@@ -166,14 +166,31 @@ public class Manager {
         return playingMatch.showMyMinions();
     }
 
-    public static List<Minion> showOponentMinions() {
+    public static List<Minion> showOpponentMinions() {
         return playingMatch.showOponentMinions();
     }
 
     public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {
         opponentUsername = username;
-        isAI = isAIMode;
-        isStory = isStoryMode;
+        if(!isOpponentNull()) {
+            Account opponent;
+            if(isAIMode)
+                opponent = Account.getAiAccount();
+            else
+                opponent = Account.getAccounts().get(username);
+            if(!isStoryMode) {
+
+            }
+            if(opponent == null) {
+                opponentUsername = "";
+            }
+        }
+    }
+
+    public static boolean isOpponentNull() {
+        if(opponentUsername == null)
+            return true;
+        return opponentUsername.equals("");
     }
     public static Card showCardInfo(String name) throws CardNotFoundException {
         return shop.searchCard(name);

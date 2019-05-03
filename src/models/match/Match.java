@@ -1,17 +1,13 @@
 package models.match;
 
-import models.Account;
 import models.Player;
 import models.cards.Card;
 import models.cards.Minion;
 import models.items.Item;
 import models.map.Map;
-
-import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.List;
 
 public abstract class Match {
     private Map map;
@@ -21,6 +17,7 @@ public abstract class Match {
     final int PLAYERS_COUNT = 2;
     private boolean isStory;
     private boolean isAIMode;
+    private MatchMode matchMode;
 
     public void setAIMode(boolean AIMode) {
         isAIMode = AIMode;
@@ -52,9 +49,8 @@ public abstract class Match {
         return map;
     }
 
-    protected Match(Player player1, Player player2) {
-        player1 = player1;
-        player2 = player2;
+    protected Match() {
+
     }
 
     abstract public Player getWinner();

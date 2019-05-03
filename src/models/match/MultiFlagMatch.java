@@ -8,8 +8,8 @@ import java.util.List;
 public class MultiFlagMatch extends Match {
     List<Flag> flags;
 
-    public MultiFlagMatch(Player player1, Player player2) {
-        super(player1, player2);
+    public MultiFlagMatch() {
+        super();
     }
 
     public void setFlags() {

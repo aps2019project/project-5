@@ -9,8 +9,8 @@ public class SingleFlagMatch extends Match {
     private int WINNING_TURN = 12;
     Flag flag ;
 
-    public SingleFlagMatch(Player player1, Player player2){
-        super(player1, player2);
+    public SingleFlagMatch(){
+        super();
     }
 
     @Override

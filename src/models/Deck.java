@@ -5,7 +5,6 @@ import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.items.UsableItem;
-import views.Error;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,26 +16,19 @@ public class Deck {
     public boolean isComplete() {
         return false;
     }
+
     public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
-        if (this.getHero() != null) {
+        if (this.getHero() != null && card instanceof Hero)
             throw new HeroExistsInDeckException(card.getName(), this.name);
-        }
-        if (cards.size() == 20) {
+        if (cards.size() == 20)
             throw new DeckFullException(this.name);
-        }
-        if (cards.size() == 19 && !(card instanceof Hero) && this.getHero() == null) {
+        if (cards.size() == 19 && !(card instanceof Hero) && this.getHero() == null)
             throw new HeroNotExistsInDeckException();
-
-        }
-
         cards.add(card);
-
     }
 
     public Deck(Deck deck) {
-        for (Card card : deck.getCards()) {
-            this.getCards().add(card);
-        }
+        this.cards.addAll(deck.getCards());
         this.name = deck.getName();
     }
 
@@ -46,7 +38,7 @@ public class Deck {
 
     public boolean hasCard(String cardName) {
         return (this.cards.stream().filter(
-                card -> card.getName().equals(cardName)
+                card -> card.getName().equalsIgnoreCase(cardName)
         ).count() == 1);
     }
 
@@ -128,11 +120,10 @@ public class Deck {
                         }
                 );
         return result.toString();
-
     }
 
     public boolean isValid() {
-        return !(cards.size() != 20 || this.getHero() != null);
+        return !(cards.size() < 20 || this.getHero() == null);
     }
 
     public static class CardExistsInDeckException extends Exception {
