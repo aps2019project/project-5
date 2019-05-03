@@ -57,4 +57,9 @@ public class Attacker extends Card {
     public Flag getFlag() {
         return flag;
     }
+
+    @Override
+    public String showInfo() {
+        return super.showInfo();
+    }
 }

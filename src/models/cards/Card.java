@@ -1,6 +1,7 @@
 package models.cards;
 
 import models.cards.spell.Buff;
+import models.cards.spell.Spell;
 import models.map.Cell;
 
 public class Card {
@@ -62,7 +63,10 @@ public class Card {
         this.price = price;
     }
 
-
+    public String showInfo(){
+        StringBuilder result=new StringBuilder();
+        return result.toString();
+    }
     public String getName() {
         return name;
     }

@@ -175,4 +175,8 @@ public class Manager {
         isAI = isAIMode;
         isStory = isStoryMode;
     }
+    public static Card showCardInfo(String name) throws CardNotFoundException {
+        return shop.searchCard(name);
+    }
+
 }

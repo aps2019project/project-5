@@ -7,7 +7,7 @@ public class Hero extends Attacker {
     public String toString() {
         return "Name : " + getName() +
                 " - AP : " + getAttackPoint() +
-                " - HP : " +  getHealth() +
+                " - HP : " + getHealth() +
                 " - Class : " + getAttackType() +
                 " - Special power : " + getSpecialPower();
     }
@@ -16,6 +16,15 @@ public class Hero extends Attacker {
                 AttackType attackType, int range, int coolDown) {
         super(id, name, description, manaPoint, price, health, attackPoint, attackType, range);
         this.coolDown = coolDown;
+    }
+
+    @Override
+    public String showInfo() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("Hero :\nname : %s\ncost : %d\ndesc : %s"
+                , this.getName(), this.getPrice(), this.getDescription()));
+
+        return result.toString();
     }
 
     public int getCoolDown() {

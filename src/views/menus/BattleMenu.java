@@ -2,6 +2,8 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
+import models.Collection;
+import models.cards.Card;
 import models.cards.Minion;
 import models.match.Match;
 import views.Command;
@@ -36,6 +38,10 @@ public class BattleMenu implements Menu {
         commands.add(new Command(
                 "^(?i)help$",
                 "help"
+        ));
+        commands.add(new Command(
+                "^(?i)show\\s+card(?<card>)\\s+info$",
+                "showCardInfo"
         ));
 
     }
@@ -75,7 +81,15 @@ public class BattleMenu implements Menu {
     public static void showOpponentMinions(Matcher matcher) {
     }
 
-    public static void showCardInfo(int cardId) {
+    public static void showCardInfo(Matcher matcher) {
+        String name=matcher.group("name");
+        try {
+            Card card=Manager.showCardInfo(name);
+            Output.log(card.showInfo());
+
+        } catch (Collection.CardNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void selectCard(Matcher matcher) {
