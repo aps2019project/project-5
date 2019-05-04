@@ -7,6 +7,7 @@ import models.cards.Card;
 import models.cards.Minion;
 import models.match.Match;
 import views.Command;
+import views.Error;
 import views.Output;
 
 import java.util.List;
@@ -97,7 +98,7 @@ public class BattleMenu implements Menu {
             Output.log(card.showInfo());
 
         } catch (Collection.CardNotFoundException e) {
-            e.printStackTrace();
+            Output.err(Error.CARD_NOT_FOUND);
         }
     }
 
@@ -114,7 +115,7 @@ public class BattleMenu implements Menu {
             Card card = Manager.getActivePlayer().getSelectedCard();
             Output.log(String.format("%s moved to %d %d", card.getName(), x, y));
         } catch (Match.InvalidMoveException e) {
-            Output.err("invalid Card!");
+            Output.err(Error.INVALID_MOVE);
         }
 
     }

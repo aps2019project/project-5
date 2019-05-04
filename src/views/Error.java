@@ -19,7 +19,9 @@ public enum Error {
     WRONG_CHOICE("Wrong Choice !"),
     PLAYERS_DECK_IS_NOT_VALID("Player's deck is not valid"),
     CANT_PLAY_WITH_YOURSELF("You can't play with yourself."),
+    INVALID_MOVE("invalid move!"),
     SELECTED_DECK_IS_INVALID("Selected deck is invalid");
+
 
     private String message;
 
