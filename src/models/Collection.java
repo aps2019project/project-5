@@ -1,9 +1,11 @@
 package models;
 
+import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
+import models.items.Flag;
 import models.items.UsableItem;
 
 import java.util.ArrayList;
@@ -16,9 +18,21 @@ import static views.Error.*;
 import static views.Log.EMPTY_COLLECTION;
 
 public class Collection {
+
+
     private List<Card> cards = new ArrayList<>();
 
-    public List<Card> getCards() {
+    public Collection() {}
+
+    public Collection(List<Card> cards) {
+        this.cards = new ArrayList<>(cards);
+    }
+
+    public void addCards(List<Card> cards) {
+        this.cards.addAll(cards);
+    }
+
+    public List<Card> getCardsList() {
         return this.cards;
     }
 
@@ -76,7 +90,7 @@ public class Collection {
             throw new CardNotFoundException();
     }
 
-    public List<Card> getCards(String cardName) throws CardNotFoundException {
+    public List<Card> getCardsList(String cardName) throws CardNotFoundException {
         List<Card> foundCard = filterByName(cardName);
         if (foundCard.size() == 0)
             throw new CardNotFoundException();
@@ -91,6 +105,23 @@ public class Collection {
             throw new CardNotFoundException();
         }
         return cards.get(0);
+    }
+
+    public List<Flag> getFlags() {
+        return cards.stream()
+                .filter(
+                        card -> card instanceof Attacker
+                ).map(
+                        card -> ((Attacker) card).getFlag()
+                ).collect(Collectors.toList());
+    }
+
+    public Card getCard(int cardID) throws CardNotFoundException {
+        for (Card card :cards) {
+            if (card.getID() == cardID)
+                return card;
+        }
+        throw new CardNotFoundException();
     }
 
     public static class CardNotFoundException extends Exception {

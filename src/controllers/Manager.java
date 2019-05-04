@@ -92,7 +92,7 @@ public class Manager {
     }
 
     public static List<Card> searchMyCard(String cardName) throws CardNotFoundException {
-        return account.getCollection().getCards(cardName);
+        return account.getCollection().getCardsList(cardName);
     }
 
     public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
@@ -147,8 +147,8 @@ public class Manager {
         return playingMatch.getInActivePlayer();
     }
 
-    public static void selectCard(int cardID) {
-        playingMatch.getActivePlayer().selectCard(playingMatch.getCard(cardID));
+    public static void selectCard(int cardID) throws CardNotFoundException {
+        playingMatch.getActivePlayer().selectCard(playingMatch.getActivePlayer().getCard(cardID));
     }
 
     public static boolean canPlay(String username) throws Account.InvalidUsernameException, Account.CantPlayWithYourselfException {
@@ -167,7 +167,7 @@ public class Manager {
     }
 
     public static List<Minion> showOpponentMinions() {
-        return playingMatch.showOponentMinions();
+        return playingMatch.showOpponentMinions();
     }
 
     public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {

@@ -1,6 +1,5 @@
 package models;
 
-import models.cards.Attacker;
 import models.cards.Card;
 import models.items.Flag;
 import models.items.Item;
@@ -9,7 +8,6 @@ import views.Input;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Player {
     private Account account;
@@ -19,7 +17,7 @@ public class Player {
     private int flags;
     private List<Item> collectedItems = new ArrayList<>();
     private ArrayList<Card> graveYard;
-    private List<Card> activeCards;
+    private Collection activeCards;
     private int mana;
     private Input input;
     private String decision;
@@ -75,16 +73,10 @@ public class Player {
 
 
     public List<Flag> getFlags() {
-        return activeCards
-                .stream()
-                .filter(
-                        card -> card instanceof Attacker
-                ).map(
-                        card -> ((Attacker) card).getFlag()
-                ).collect(Collectors.toList());
+        return activeCards.getFlags();
     }
 
-    public List<Card> getActiveCards() {
+    public Collection getActiveCards() {
         return activeCards;
     }
 
@@ -104,7 +96,7 @@ public class Player {
 
     private void setHand() {
         for (int i = 0; i < 5; i++) {
-            hand.getHand().add(deck.getCards().get(i));
+            hand.getCards().add(deck.getCards().get(i));
         }
     }
 
@@ -124,5 +116,9 @@ public class Player {
 
     public void selectCard(Card card) {
         this.selectedCard = card;
+    }
+
+    public Card getCard(int cardID) throws Collection.CardNotFoundException {
+        return activeCards.getCard(cardID);
     }
 }

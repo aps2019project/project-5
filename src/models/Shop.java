@@ -6,8 +6,6 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import org.json.JSONException;
-import views.Input;
-import views.InputAI;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -19,12 +17,12 @@ public class Shop {
 
     {
         try {
-            cardsCollection.getCards().addAll(JsonParser.getMinions());
+            cardsCollection.getCardsList().addAll(JsonParser.getMinions());
         } catch (FileNotFoundException | JSONException e) {
             e.printStackTrace();
         }
         try {
-            cardsCollection.getCards().addAll(JsonParser.getHeroes());
+            cardsCollection.getCardsList().addAll(JsonParser.getHeroes());
         } catch (FileNotFoundException | JSONException e) {
             e.printStackTrace();
         }
@@ -41,7 +39,7 @@ public class Shop {
     }
 
     public List<Card> searchCards(String cardName) throws CardNotFoundException {
-        return cardsCollection.getCards(cardName);
+        return cardsCollection.getCardsList(cardName);
     }
 
     public Card searchCard(String cardName) throws CardNotFoundException {

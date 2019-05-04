@@ -1,5 +1,6 @@
 package models.match;
 
+import models.Collection;
 import models.Player;
 import models.cards.Card;
 import models.cards.Minion;
@@ -77,23 +78,17 @@ public abstract class Match {
         return players[ turn % 2];
     }
 
-    public Card getCard(int cardID) {
-        return getActiveCards()
-                .stream()
-                .filter(
-                        card -> card.getID() == cardID)
-                .collect(Collectors.toList())
-                .get(0);
-
+    public Card getCard(int cardID) throws Collection.CardNotFoundException {
+        return getActiveCards().getCard(cardID);
     }
 
-    private List<Card> getActiveCards() {
-        List<Card> allActiveCards = new ArrayList<>(players[0].getActiveCards());
-        allActiveCards.addAll(players[1].getActiveCards());
+    private Collection getActiveCards() {
+        Collection allActiveCards = new Collection(players[0].getActiveCards().getCardsList());
+        allActiveCards.addCards(players[1].getActiveCards().getCardsList());
         return allActiveCards;
     }
 
-    public List<Minion> showOponentMinions() {
+    public List<Minion> showOpponentMinions() {
         return getInActivePlayer().getDeck().getMinions();
     }
 }

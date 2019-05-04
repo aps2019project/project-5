@@ -5,11 +5,11 @@ import models.cards.Card;
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Card> hand;
+    private ArrayList<Card> cards;
     private Card nextCard;
 
-    public ArrayList<Card> getHand() {
-        return hand;
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 
     public Card getNextCard() {
@@ -20,4 +20,5 @@ public class Hand {
     public void setNextCard(Card nextCard) {
         this.nextCard = nextCard;
     }
+
 }
