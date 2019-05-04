@@ -12,6 +12,7 @@ public class Card {
     private String description;
     private String name;
     private int price;
+    int maxDistanceToMove=2;
 
     public Card(Card card) {
         this.cell = card.cell;
@@ -82,4 +83,8 @@ public class Card {
         return object instanceof Card && ((Card) object).getName().equals(this.name);
     }
 
+    public int getMaxDistance() {
+        return this.getMaxDistance();
+
+    }
 }

@@ -5,6 +5,7 @@ import models.Account;
 import models.Collection;
 import models.cards.Card;
 import models.cards.Minion;
+import models.match.Match;
 import views.Command;
 import views.Output;
 
@@ -43,7 +44,14 @@ public class BattleMenu implements Menu {
                 "^(?i)show\\s+card(?<card>)\\s+info$",
                 "showCardInfo"
         ));
-
+        commands.add(new Command(
+                "^(?i)show\\s+hand(?<hand>)",
+                "showHand"
+        ));
+        commands.add(new Command(
+                "^(?i)Move\\s+to\\s+((?<x>\\d+),(?<y>\\d+)",
+                "moveTo"
+        ));
     }
 
     @Override
@@ -74,7 +82,8 @@ public class BattleMenu implements Menu {
     public static void showMyMinions(Matcher matcher) {
         showMinions(Manager.showMyMinions());
     }
-    public static void showOponnent(Matcher matcher){
+
+    public static void showOponnent(Matcher matcher) {
         showMinions(Manager.showOpponentMinions());
     }
 
@@ -82,9 +91,9 @@ public class BattleMenu implements Menu {
     }
 
     public static void showCardInfo(Matcher matcher) {
-        String name=matcher.group("name");
+        String name = matcher.group("name");
         try {
-            Card card=Manager.showCardInfo(name);
+            Card card = Manager.showCardInfo(name);
             Output.log(card.showInfo());
 
         } catch (Collection.CardNotFoundException e) {
@@ -98,6 +107,16 @@ public class BattleMenu implements Menu {
     }
 
     public static void moveTo(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        try {
+            Manager.moveTo(x, y);
+            Card card = Manager.getActivePlayer().getSelectedCard();
+            Output.log(String.format("%s moved to %d %d", card.getName(), x, y));
+        } catch (Match.InvalidMoveException e) {
+            Output.err("invalid Card!");
+        }
+
     }
 
     public static void attack(Matcher matcher) {

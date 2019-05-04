@@ -9,6 +9,7 @@ import models.cards.Minion;
 import models.match.Match;
 import views.Input;
 import views.InputAI;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,11 +154,11 @@ public class Manager {
 
     public static boolean canPlay(String username) throws Account.InvalidUsernameException, Account.CantPlayWithYourselfException {
         Account playerAccount = Account.getAccounts().get(username);
-        if(playerAccount == null)
+        if (playerAccount == null)
             throw new Account.InvalidUsernameException(username);
-        if(username.equals(account.getUsername()))
+        if (username.equals(account.getUsername()))
             throw new Account.CantPlayWithYourselfException();
-        if(playerAccount.getMainDeck() == null)
+        if (playerAccount.getMainDeck() == null)
             return false;
         return playerAccount.getMainDeck().isValid();
     }
@@ -172,26 +173,31 @@ public class Manager {
 
     public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {
         opponentUsername = username;
-        if(!isOpponentNull()) {
+        if (!isOpponentNull()) {
             Account opponent;
-            if(isAIMode)
+            if (isAIMode)
                 opponent = Account.getAiAccount();
             else
                 opponent = Account.getAccounts().get(username);
-            if(!isStoryMode) {
+            if (!isStoryMode) {
 
             }
-            if(opponent == null) {
+            if (opponent == null) {
                 opponentUsername = "";
             }
         }
     }
 
     public static boolean isOpponentNull() {
-        if(opponentUsername == null)
+        if (opponentUsername == null)
             return true;
         return opponentUsername.equals("");
     }
+
+    public static void moveTo(int x, int y) throws Match.InvalidMoveException {
+        playingMatch.moveTo(x,y);
+    }
+
     public static Card showCardInfo(String name) throws CardNotFoundException {
         return shop.searchCard(name);
     }

@@ -4,7 +4,9 @@ import models.Player;
 import models.cards.Card;
 import models.cards.Minion;
 import models.items.Item;
+import models.map.Cell;
 import models.map.Map;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,11 +72,11 @@ public abstract class Match {
     }
 
     public Player getActivePlayer() {
-        return players[ (turn + 1) % 2];
+        return players[(turn + 1) % 2];
     }
 
     public Player getInActivePlayer() {
-        return players[ turn % 2];
+        return players[turn % 2];
     }
 
     public Card getCard(int cardID) {
@@ -93,7 +95,24 @@ public abstract class Match {
         return allActiveCards;
     }
 
+
     public List<Minion> showOponentMinions() {
         return getInActivePlayer().getDeck().getMinions();
+    }
+
+
+    public void moveTo(int x2, int y2) throws InvalidMoveException {
+        Card card = getActivePlayer().getSelectedCard();
+        Cell cell2 = map.getCell(x2, y2);
+        if (!map.isValidMove(card, this.getInActivePlayer(), cell2)) throw new InvalidMoveException();
+        map.getCell(card.getCell().getX(), card.getCell().getY()).removeCard();
+        map.getCell(x2, y2).addCard(card);
+    }
+
+
+    public static class InvalidMoveException extends Exception {
+        public InvalidMoveException() {
+            super("Invalid Move!");
+        }
     }
 }
