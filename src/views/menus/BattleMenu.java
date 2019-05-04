@@ -53,6 +53,11 @@ public class BattleMenu implements Menu {
                 "^(?i)Move\\s+to\\s+((?<x>\\d+),(?<y>\\d+)",
                 "moveTo"
         ));
+        commands.add(new Command(
+                "^(?i)insert (?<cardName>\\w+) in \\((?<x>\\d+), (?<y>\\d+)\\)$",
+                "insert"
+        ));
+
     }
 
     @Override
@@ -94,13 +99,13 @@ public class BattleMenu implements Menu {
     }
 
     public static void showCardInfo(Matcher matcher) {
-        String name = matcher.group("name");
+        String name=matcher.group("name");
         try {
-            Card card = Manager.showCardInfo(name);
+            Card card=Manager.showCardInfo(name);
             Output.log(card.showInfo());
 
         } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            e.printStackTrace();
         }
     }
 
@@ -141,16 +146,27 @@ public class BattleMenu implements Menu {
     public static void endTurn(Matcher matcher) {
     }
 
-    public static void showCollectables(Matcher matcher) {
+    public static void showCollectibles(Matcher matcher) {
     }
 
-    public static void selectCollectable(Matcher matcher) {
+    public static void selectCollectible(Matcher matcher) {
     }
 
-    public static void showCollectableInfo(Matcher matcher) {
+    public static void showCollectibleInfo(Matcher matcher) {
     }
 
-    public static void useCollectable(Matcher matcher) {
+    public static void useCollectible(Matcher matcher) {
+    }
+
+    public static void insert(Matcher matcher) {
+        String cardName = matcher.group("cardName");
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        try {
+            Manager.insertCard(cardName, x, y);
+        } catch (Exception?? e) {
+            Output.err(e);
+        }
     }
 
     public static void help(Matcher matcher) {

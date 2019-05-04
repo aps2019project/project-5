@@ -10,14 +10,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Deck extends Collection{
-    private ArrayList<Card> cards = new ArrayList<>();
     private String name;
 
     public boolean isComplete() {
         return false;
     }
 
-    public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
+    public void addCard(Card card) throws CollectionException {
         if (this.getHero() != null && card instanceof Hero)
             throw new HeroExistsInDeckException(card.getName(), this.name);
         if (cards.size() == 20)
@@ -32,7 +31,7 @@ public class Deck extends Collection{
         this.name = deck.getName();
     }
 
-    public ArrayList<Card> getCards() {
+    public List<Card> getCards() {
         return cards;
     }
 
@@ -132,19 +131,20 @@ public class Deck extends Collection{
         }
     }
 
-    public static class HeroExistsInDeckException extends Exception {
+
+    public static class HeroExistsInDeckException extends CollectionException {
         public HeroExistsInDeckException(String cardName, String deckName) {
             super(String.format("card '%s' exists in deck '%s'", cardName, deckName));
         }
     }
 
-    public static class DeckFullException extends Exception {
+    public static class DeckFullException extends CollectionException {
         public DeckFullException(String deckName) {
             super(String.format("deck '%s' is full!", deckName));
         }
     }
 
-    public static class HeroNotExistsInDeckException extends Exception {
+    public static class HeroNotExistsInDeckException extends CollectionException {
         public HeroNotExistsInDeckException() {
             super("Hero is not existed");
         }

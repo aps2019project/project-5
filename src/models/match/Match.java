@@ -1,5 +1,6 @@
 package models.match;
 
+import controllers.Manager;
 import models.Collection;
 import models.Player;
 import models.cards.Card;
@@ -48,7 +49,7 @@ public abstract class Match {
         return player.getDeck().getMinions();
     }
 
-    private Map getMap() {
+    public Map getMap() {
         return map;
     }
 

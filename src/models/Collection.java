@@ -20,7 +20,7 @@ import static views.Log.EMPTY_COLLECTION;
 public class Collection {
 
 
-    private List<Card> cards = new ArrayList<>();
+    protected List<Card> cards = new ArrayList<>();
 
     public Collection() {}
 
@@ -36,7 +36,7 @@ public class Collection {
         return this.cards;
     }
 
-    public void addCard(Card member) {
+    public void addCard(Card member) throws CollectionException {
         this.cards.add(member);
     }
 
@@ -124,7 +124,16 @@ public class Collection {
         throw new CardNotFoundException();
     }
 
-    public static class CardNotFoundException extends Exception {
+    public static class CollectionException extends Exception {
+        CollectionException(String message) {
+            super(message);
+        }
+        CollectionException() {
+            super();
+        }
+    }
+
+    public static class CardNotFoundException extends CollectionException {
         public CardNotFoundException() {
             super(CARD_NOT_FOUND.toString());
         }
@@ -134,13 +143,13 @@ public class Collection {
         }
     }
 
-    public static class ItemsFullException extends Exception {
+    public static class ItemsFullException extends CollectionException {
         public ItemsFullException() {
             super(ITEMS_ARE_FULL.toString());
         }
     }
 
-    public static class NullCollectionException extends Exception {
+    public static class NullCollectionException extends CollectionException {
         public NullCollectionException() {
             super(EMPTY_COLLECTION.toString());
         }

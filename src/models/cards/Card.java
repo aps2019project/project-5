@@ -12,7 +12,7 @@ public class Card {
     private String description;
     private String name;
     private int price;
-    int maxDistanceToMove=2;
+    final int maxDistanceToMove = 2;
 
     public Card(Card card) {
         this.cell = card.cell;

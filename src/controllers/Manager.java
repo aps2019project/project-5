@@ -202,4 +202,7 @@ public class Manager {
         return shop.searchCard(name);
     }
 
+    public static void insertCard(String cardName, int x, int y) throws CardNotFoundException {
+        playingMatch.getMap().insertCard(getActivePlayer().getHand().getCard(cardName), x - 1, y - 1);
+    }
 }
