@@ -152,7 +152,7 @@ public class Account {
     }
 
     public Card getCard(String name) {
-        for (Card card : collection.getCards()) {
+        for (Card card : collection.getCardsList()) {
             if (card.getName().equalsIgnoreCase(name)) {
                 return card;
             }

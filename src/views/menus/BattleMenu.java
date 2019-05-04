@@ -84,7 +84,9 @@ public class BattleMenu implements Menu {
         showMinions(Manager.showMyMinions());
     }
 
-    public static void showOponnent(Matcher matcher) {
+    public static void showOponnent(Matcher matcher) {}
+
+    public static void showOpponent(Matcher matcher){
         showMinions(Manager.showOpponentMinions());
     }
 
@@ -104,7 +106,11 @@ public class BattleMenu implements Menu {
 
     public static void selectCard(Matcher matcher) {
         int cardID = Integer.parseInt(matcher.group("cardID"));
-        Manager.selectCard(cardID);
+        try {
+            Manager.selectCard(cardID);
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(e);
+        }
     }
 
     public static void moveTo(Matcher matcher) {
@@ -150,5 +156,6 @@ public class BattleMenu implements Menu {
     public static void help(Matcher matcher) {
         Menu.help(new BattleMenu().getCommands());
     }
+
 
 }

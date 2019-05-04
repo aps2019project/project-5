@@ -9,7 +9,7 @@ import models.items.UsableItem;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Deck {
+public class Deck extends Collection{
     private ArrayList<Card> cards = new ArrayList<>();
     private String name;
 

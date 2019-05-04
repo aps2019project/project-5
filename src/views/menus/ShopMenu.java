@@ -77,7 +77,10 @@ public class ShopMenu implements Menu {
                 "sell [CardId]",
                 "\t\t\tsell cards in collection"
         ));
-
+        commands.add(new Command(
+                "^(?i)select (?<cardID>\\d+)",
+                "selectCard"
+        ));
 
     }
 
@@ -193,6 +196,14 @@ public class ShopMenu implements Menu {
 
     }
 
+    public static void selectCard(Matcher matcher) {
+        int cardID = Integer.parseInt(matcher.group("cardID"));
+        try {
+            Manager.selectCard(cardID);
+        } catch (CardNotFoundException e) {
+            Output.err(e);
+        }
+    }
 
 
 }
