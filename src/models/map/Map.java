@@ -1,14 +1,24 @@
 package models.map;
 
+import models.Collection;
 import models.Player;
 import models.cards.Card;
 import views.Error;
 
 public class Map {
     public int ROW_NUMBER = 5, COLUMN_NUMBER = 9;
+    // TODO: 5/4/19 add cells
     private Cell[][] cells = new Cell[ROW_NUMBER][COLUMN_NUMBER];
+    private Collection cards = new Collection();
 
-    public Cell getCell(int x, int y) {
+
+    public Collection getCards() {
+        return this.cards;
+    }
+
+    public Cell getCell(int x, int y) throws InvalidCellException {
+        if (!cellExist(x, y))
+            throw new InvalidCellException(Error.INVALID_CELL.toString());
         return cells[x][y];
     }
 
@@ -20,19 +30,23 @@ public class Map {
         return isBetween(x, 0, ROW_NUMBER) && isBetween(y, 0, COLUMN_NUMBER);
     }
 
-    public void insertCard(Card card, int x, int y) throws InvalidTargetExcetion {
-        if( !cellExist(x, y) || getCell(x, y).isFull()) {
-            throw new InvalidTargetExcetion(Error.INVALID_TARGET.toString());
+    public void insertCard(Card card, Cell cell) throws InvalidCellException, Collection.CollectionException {
+        if (cell.isFull())
+            throw new InvalidCellException(Error.INVALID_TARGET.toString());
+        if (cards.contains(card)) {
+            // TODO: 5/4/19 check if contains
         }
+        cell.setCard(card);
+        cards.addCard(card);
     }
 
-    public class InvalidTargetExcetion extends Exception {
-        public InvalidTargetExcetion(String message) {
+    public class InvalidCellException extends Exception {
+        public InvalidCellException(String message) {
             super(message);
         }
     }
 
-    public boolean isValidMove(Card card, Player opponnentPlayer, Cell cell2) {
+    public boolean isValidMove(Card card, Player opponentPlayer, Cell cell2) {
         Cell cell1 = card.getCell();
         int maxDistance = card.getMaxDistance();
         int distance = Cell.manhattanDistance(cell1, cell2);
@@ -45,7 +59,7 @@ public class Map {
             if (cell1.getX() < cell2.getX()) dx = 1;
             if (cell1.getY() > cell2.getY()) dy = -1;
             if (cell1.getY() < cell2.getY()) dx = 1;
-            if (opponnentPlayer.getActiveCards().contains(cells[cell1.getX() + dx][cell1.getY() + dy] .getCard())) return false;
+            if (opponentPlayer.getActiveCards().contains(cells[cell1.getX() + dx][cell1.getY() + dy] .getCard())) return false;
         }
         return true;
 

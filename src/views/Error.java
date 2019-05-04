@@ -21,8 +21,9 @@ public enum Error {
     CANT_PLAY_WITH_YOURSELF("You can't play with yourself."),
     INVALID_MOVE("invalid move!"),
     SELECTED_DECK_IS_INVALID("Selected deck is invalid"),
-    SELECTED_DECK_IS_INVALID("Selected deck is invalid"),
-    INVALID_TARGET("Invalid target");
+    INVALID_TARGET("Invalid target"),
+    NOT_ENOUGH_MANA("You don't have enough mana."),
+    INVALID_CELL("Invalid cell.");
 
 
     private String message;

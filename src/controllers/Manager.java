@@ -6,7 +6,10 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.cards.Minion;
+import models.map.Cell;
+import models.map.Map;
 import models.match.Match;
+import views.Error;
 import views.Input;
 import views.InputAI;
 
@@ -97,7 +100,7 @@ public class Manager {
     }
 
     public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
-            CardNotFoundException, Deck.HeroExistsInDeckException, Deck.DeckFullException, Deck.HeroNotExistsInDeckException {
+            Collection.CollectionException {
         Card card = account.getCollection().getCard(cardName);
         Deck deck = account.getDeck(deckName);
         deck.addCard(card);
@@ -168,7 +171,7 @@ public class Manager {
     }
 
     public static List<Minion> showOpponentMinions() {
-        return playingMatch.showOpponentMinions();
+        return playingMatch.showOponentMinions();
     }
 
     public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {
@@ -194,7 +197,7 @@ public class Manager {
         return opponentUsername.equals("");
     }
 
-    public static void moveTo(int x, int y) throws Match.InvalidMoveException {
+    public static void moveTo(int x, int y) throws Match.InvalidMoveException, Map.InvalidCellException {
         playingMatch.moveTo(x,y);
     }
 
@@ -202,7 +205,13 @@ public class Manager {
         return shop.searchCard(name);
     }
 
-    public static void insertCard(String cardName, int x, int y) throws CardNotFoundException {
-        playingMatch.getMap().insertCard(getActivePlayer().getHand().getCard(cardName), x - 1, y - 1);
+    public static void insertCard(String cardName, int x, int y) throws Collection.CollectionException,
+            Map.InvalidCellException, Player.NotEnoughManaException {
+        Card card = getActivePlayer().getHand().getCard(cardName);
+        Cell cell = playingMatch.getMap().getCell(x - 1, y - 1);
+        if(playingMatch.getActivePlayer().getMana() < card.getNessacaryManaToInsert())
+            throw new Player.NotEnoughManaException(Error.NOT_ENOUGH_MANA.toString());
+        playingMatch.getMap().insertCard(card, cell);
+        getActivePlayer().insertCard(card, cell);
     }
 }

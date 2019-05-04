@@ -3,6 +3,7 @@ package models;
 import models.cards.Card;
 import models.items.Flag;
 import models.items.Item;
+import models.map.Cell;
 import views.Input;
 
 import java.util.ArrayList;
@@ -55,8 +56,14 @@ public class Player {
         this.selectedCard = selectedCard;
     }
 
-    public void insertCard(Card card) {
+    public void insertCard(Card card, Cell cell) throws Collection.CollectionException {
+        changeMana(-card.getNessacaryManaToInsert());
+        activateCard(card);
+        card.setCell(cell);
+    }
 
+    private void activateCard(Card card) throws Collection.CollectionException {
+        activeCards.addCard(card);
     }
 
     public Deck getDeck() {
@@ -120,5 +127,15 @@ public class Player {
 
     public Card getCard(int cardID) throws Collection.CardNotFoundException {
         return activeCards.getCard(cardID);
+    }
+
+    public void changeMana(int mana) {
+        this.mana += mana;
+    }
+
+    public static class NotEnoughManaException extends Exception {
+        public NotEnoughManaException(String message) {
+            super(message);
+        }
     }
 }

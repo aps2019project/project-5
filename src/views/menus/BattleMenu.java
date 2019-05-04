@@ -1,10 +1,11 @@
 package views.menus;
 
 import controllers.Manager;
-import models.Account;
 import models.Collection;
+import models.Player;
 import models.cards.Card;
 import models.cards.Minion;
+import models.map.Map;
 import models.match.Match;
 import views.Command;
 import views.Error;
@@ -164,7 +165,7 @@ public class BattleMenu implements Menu {
         int y = Integer.parseInt(matcher.group("y"));
         try {
             Manager.insertCard(cardName, x, y);
-        } catch (Exception?? e) {
+        } catch (Map.InvalidCellException | Collection.CollectionException | Player.NotEnoughManaException e) {
             Output.err(e);
         }
     }
