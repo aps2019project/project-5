@@ -125,6 +125,15 @@ public class Collection {
         throw new CardNotFoundException();
     }
 
+    public boolean contains(Card card) {
+        try {
+            getCard(card.getID());
+        }  catch (CardNotFoundException e) {
+            return false;
+        }
+        return true;
+    }
+
     public static class CollectionException extends Exception {
         CollectionException(String message) {
             super(message);

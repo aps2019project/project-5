@@ -66,7 +66,7 @@ public class Manager {
         return shop.searchCards(cardName);
     }
 
-    public static void buy(String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
+    public static void buy(String cardName) throws Collection.CollectionException, NotEnoughDrakeException {
         shop.buy(account, cardName);
     }
 

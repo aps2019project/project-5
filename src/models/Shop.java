@@ -12,6 +12,7 @@ import java.util.List;
 
 
 public class Shop {
+    private static final int ITEMS_MAX_NUMBER = 3;
     private Collection cardsCollection = new Collection();
     private static Shop shopInstance = null;
 
@@ -46,11 +47,11 @@ public class Shop {
         return cardsCollection.getCard(cardName);
     }
 
-    public void buy(Account account, String cardName) throws CardNotFoundException, NotEnoughDrakeException, ItemsFullException {
+    public void buy(Account account, String cardName) throws Collection.CollectionException, NotEnoughDrakeException {
         Card card = shopInstance.searchCard(cardName);
         if (account.getDrake() < card.getPrice())
             throw new NotEnoughDrakeException();
-        if (account.getItemsNumber() == 3)
+        if (account.getItemsNumber() == ITEMS_MAX_NUMBER)
             throw new ItemsFullException();
         account.addCardToCollection(card);
         account.incrementDrake(-card.getPrice());

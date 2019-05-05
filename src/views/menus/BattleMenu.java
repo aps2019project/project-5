@@ -136,7 +136,7 @@ public class BattleMenu implements Menu {
             Manager.moveTo(x, y);
             Card card = Manager.getActivePlayer().getSelectedCard();
             Output.log(String.format("%s moved to %d %d", card.getName(), x, y));
-        } catch (Match.InvalidMoveException e) {
+        } catch (Match.InvalidMoveException | Map.InvalidCellException e) {
             Output.err(Error.INVALID_MOVE);
         }
 
