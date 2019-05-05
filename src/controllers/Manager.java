@@ -202,4 +202,9 @@ public class Manager {
         return shop.searchCard(name);
     }
 
+
+    public static void attack(int ID) throws Match.CardAttackIsNotAvailableException, Match.TiredMinionException,
+            CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack {
+        playingMatch.attack(ID);
+    }
 }

@@ -2,12 +2,15 @@ package models.match;
 
 import models.Collection;
 import models.Player;
+import models.cards.AttackType;
+import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Minion;
 import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -90,7 +93,7 @@ public abstract class Match {
         return allActiveCards;
     }
 
-    public List<Minion> showOponentMinions() {
+    public List<Minion> showOpponentMinions() {
         return getInActivePlayer().getDeck().getMinions();
     }
 
@@ -101,12 +104,70 @@ public abstract class Match {
         if (!map.isValidMove(card, this.getInActivePlayer(), cell2)) throw new InvalidMoveException();
         map.getCell(card.getCell().getX(), card.getCell().getY()).removeCard();
         map.getCell(x2, y2).addCard(card);
+        card.setCell(cell2);
+        card.setMoveAvailable(false);
     }
 
+    public void isValidAttack(Card card, Card opponentCard) throws CardAttackIsNotAvailableException, OpponentMinionIsNotAvailableForAttack, TiredMinionException {
+        Player player = getActivePlayer();
+        if (!(card instanceof Attacker)) {
+            throw new CardAttackIsNotAvailableException();
+        }
+        if (((Attacker) card).getAttackType() == AttackType.RANGED) {
+            if (((Attacker) card).getRange() <
+                    Cell.manhattanDistance(card.getCell(), opponentCard.getCell()) ||
+                    (Math.abs(card.getCell().getX() - opponentCard.getCell().getX()) <= 1 &&
+                            Math.abs(card.getCell().getY() - opponentCard.getCell().getY()) <= 1)) {
+                throw new OpponentMinionIsNotAvailableForAttack();
+            }
+        }
+
+        if (((Attacker) card).getAttackType() == AttackType.MELEE) {
+            if (Math.abs(card.getCell().getX() - opponentCard.getCell().getX()) > 1 &&
+                    Math.abs(card.getCell().getY() - opponentCard.getCell().getY()) > 1)
+                throw new OpponentMinionIsNotAvailableForAttack();
+        }
+
+        if (!((Attacker) card).getTurnAttackAvailability()) throw new TiredMinionException();
+    }
+
+    public void attack(int ID) throws Collection.CardNotFoundException, CardAttackIsNotAvailableException, TiredMinionException, OpponentMinionIsNotAvailableForAttack {
+        Card card = getActivePlayer().getSelectedCard();
+        Card opponentCard = getInActivePlayer().getActiveCards().getCard(ID);
+        isValidAttack(card, opponentCard);
+        card.setMoveAvailable(false);
+        ((Attacker) opponentCard).decrementCurrentHealth(((Attacker) card).getAttackPoint());
+        try {
+            isValidAttack(opponentCard, card);
+            ((Attacker) card).decrementCurrentHealth(((Attacker) opponentCard).getAttackPoint());
+        } catch (Exception e) {
+
+        }
+
+    }
 
     public static class InvalidMoveException extends Exception {
         public InvalidMoveException() {
             super("Invalid Move!");
+        }
+    }
+
+    public class CardAttackIsNotAvailableException extends Exception {
+        public CardAttackIsNotAvailableException() {
+            super("Invalid attack");
+        }
+    }
+
+    public class OpponentMinionIsNotAvailableForAttack extends Exception {
+        public OpponentMinionIsNotAvailableForAttack() {
+            super("opponentMinionIsNotAvailable!");
+        }
+    }
+
+
+    public class TiredMinionException extends Exception {
+        public TiredMinionException() {
+            super("Minion is Tired!");
         }
     }
 }

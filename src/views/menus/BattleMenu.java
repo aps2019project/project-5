@@ -53,6 +53,10 @@ public class BattleMenu implements Menu {
                 "^(?i)Move\\s+to\\s+((?<x>\\d+),(?<y>\\d+)",
                 "moveTo"
         ));
+        commands.add(new Command(
+                "^(?i)attack\\s+(?<card>[A-z ]+",
+                "attack"
+        ));
     }
 
     @Override
@@ -84,9 +88,10 @@ public class BattleMenu implements Menu {
         showMinions(Manager.showMyMinions());
     }
 
-    public static void showOponnent(Matcher matcher) {}
+    public static void showOponnent(Matcher matcher) {
+    }
 
-    public static void showOpponent(Matcher matcher){
+    public static void showOpponent(Matcher matcher) {
         showMinions(Manager.showOpponentMinions());
     }
 
@@ -127,6 +132,16 @@ public class BattleMenu implements Menu {
     }
 
     public static void attack(Matcher matcher) {
+        int cardID = Integer.parseInt(matcher.group("card"));
+        try {
+            Manager.attack(cardID);
+        } catch (Match.CardAttackIsNotAvailableException e) {
+            
+        } catch (Match.TiredMinionException e) {
+
+        } catch (Collection.CardNotFoundException e) {
+        } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
+        }
     }
 
     public static void useSpecialPower(Matcher matcher) {
@@ -139,6 +154,10 @@ public class BattleMenu implements Menu {
     }
 
     public static void endTurn(Matcher matcher) {
+
+
+        //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
+
     }
 
     public static void showCollectables(Matcher matcher) {
