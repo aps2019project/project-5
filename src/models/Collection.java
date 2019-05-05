@@ -102,7 +102,7 @@ public class Collection {
         List<Card> cards = filterByName("^" + cardName + "$").stream().map(
                 marketObject -> (Card) marketObject
         ).collect(Collectors.toList());
-        if (cards.size() != 1) {
+        if (cards.size() == 0) {
             throw new CardNotFoundException();
         }
         return cards.get(0);
@@ -128,7 +128,7 @@ public class Collection {
     public boolean contains(Card card) {
         try {
             getCard(card.getID());
-        }  catch (CardNotFoundException e) {
+        } catch (CardNotFoundException e) {
             return false;
         }
         return true;
@@ -138,6 +138,7 @@ public class Collection {
         CollectionException(String message) {
             super(message);
         }
+
         CollectionException() {
             super();
         }
