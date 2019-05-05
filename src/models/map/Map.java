@@ -1,16 +1,10 @@
 package models.map;
 
-import models.Collection;
 import models.Player;
 import models.cards.Card;
-import views.Error;
 
 public class Map {
-    public int ROW_NUMBER = 5, COLUMN_NUMBER = 9;
-    // TODO: 5/4/19 add cells
-    private Cell[][] cells = new Cell[ROW_NUMBER][COLUMN_NUMBER];
-    private Collection cards = new Collection();
-
+    private Cell[][] cells = new Cell[5][9];
 
     public Collection getCards() {
         return this.cards;
@@ -52,6 +46,7 @@ public class Map {
         int distance = Cell.manhattanDistance(cell1, cell2);
         if (distance > card.getMaxDistance()) return false;
         if (cell2.getCard() != null) return false;
+        if (!card.isMoveAvailable()) return false;
         int dx = 0;
         int dy = 0;
         if (distance >= 2) {
@@ -59,7 +54,8 @@ public class Map {
             if (cell1.getX() < cell2.getX()) dx = 1;
             if (cell1.getY() > cell2.getY()) dy = -1;
             if (cell1.getY() < cell2.getY()) dx = 1;
-            if (opponentPlayer.getActiveCards().contains(cells[cell1.getX() + dx][cell1.getY() + dy] .getCard())) return false;
+            if (opponentPlayer.getActiveCards().getCardsList().contains(cells[cell1.getX() + dx][cell1.getY() + dy].getCard()))
+                return false;
         }
         return true;
 

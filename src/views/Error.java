@@ -23,7 +23,11 @@ public enum Error {
     SELECTED_DECK_IS_INVALID("Selected deck is invalid"),
     INVALID_TARGET("Invalid target"),
     NOT_ENOUGH_MANA("You don't have enough mana."),
-    INVALID_CELL("Invalid cell.");
+    INVALID_CELL("Invalid cell."),
+    INVALID_MOVE("invalid target!"),
+    CARD_ATTACK_IS_NOT_AVAILABLE("card with '%d' is not available"),
+    OPPONENT_MINION_IS_NOT_AVAILABLE("minion opponent is not available for attack"),
+    SELECTED_DECK_IS_INVALID("Selected deck is invalid");
 
 
     private String message;

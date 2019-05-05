@@ -13,6 +13,7 @@ public class Card {
     private int price;
     final int MAX_DISTANCE_TO_MOVE = 2;
     private int nessacaryManaToInsert;
+    private boolean isMoveAvailable;
 
     public Card(Card card) {
         this.cell = card.cell;
@@ -46,6 +47,10 @@ public class Card {
         return this.cell;
     }
 
+    public void setCell(Cell cell) {
+        this.cell = cell;
+    }
+
     public Buff getBuff() {
         return this.buff;
     }
@@ -64,10 +69,11 @@ public class Card {
         this.price = price;
     }
 
-    public String showInfo(){
-        StringBuilder result=new StringBuilder();
+    public String showInfo() {
+        StringBuilder result = new StringBuilder();
         return result.toString();
     }
+
     public String getName() {
         return name;
     }
@@ -92,7 +98,13 @@ public class Card {
         return this.nessacaryManaToInsert;
     }
 
-    public void setCell(Cell cell) {
-        this.cell = cell;
+    public boolean isMoveAvailable() {
+        return isMoveAvailable;
     }
+
+    public void setMoveAvailable(boolean moveAvailable) {
+        isMoveAvailable = moveAvailable;
+    }
+
 }
+

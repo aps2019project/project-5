@@ -171,7 +171,7 @@ public class Manager {
     }
 
     public static List<Minion> showOpponentMinions() {
-        return playingMatch.showOponentMinions();
+        return playingMatch.showOpponentMinions();
     }
 
     public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {
@@ -198,7 +198,7 @@ public class Manager {
     }
 
     public static void moveTo(int x, int y) throws Match.InvalidMoveException, Map.InvalidCellException {
-        playingMatch.moveTo(x,y);
+        playingMatch.moveTo(x, y);
     }
 
     public static Card showCardInfo(String name) throws CardNotFoundException {
@@ -214,4 +214,14 @@ public class Manager {
         playingMatch.getMap().insertCard(card, cell);
         getActivePlayer().insertCard(card, cell);
     }
+
+    public static void attack(int ID) throws Match.CardAttackIsNotAvailableException, Match.TiredMinionException,
+            CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack {
+        playingMatch.attack(ID);
+    }
+
+    public static Hand showHand() {
+        return getActivePlayer().getHand();
+    }
+
 }

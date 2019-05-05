@@ -22,7 +22,8 @@ public class Collection {
 
     protected List<Card> cards = new ArrayList<>();
 
-    public Collection() {}
+    public Collection() {
+    }
 
     public Collection(List<Card> cards) {
         this.cards = new ArrayList<>(cards);
@@ -117,7 +118,7 @@ public class Collection {
     }
 
     public Card getCard(int cardID) throws CardNotFoundException {
-        for (Card card :cards) {
+        for (Card card : cards) {
             if (card.getID() == cardID)
                 return card;
         }

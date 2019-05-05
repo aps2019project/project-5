@@ -10,7 +10,16 @@ public class Attacker extends Card {
     private int currentHealth;
     private AttackType attackType;
     private Spell specialPower;
+    private boolean turnAttackAvailability;
     Flag flag;
+
+    public void setTurnAttackAvailability(boolean b) {
+        this.turnAttackAvailability = b;
+    }
+
+    public boolean getTurnAttackAvailability() {
+        return this.turnAttackAvailability;
+    }
 
 
     public Attacker(int id, String name, String description, int manaPoint, int price, int health, int attackPoint,
@@ -61,5 +70,9 @@ public class Attacker extends Card {
     @Override
     public String showInfo() {
         return super.showInfo();
+    }
+
+    public void decrementHP(int attackPoint){
+        this.currentHealth-=attackPoint;
     }
 }

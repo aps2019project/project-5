@@ -3,6 +3,7 @@ package views.menus;
 import controllers.Manager;
 import models.Collection;
 import models.Player;
+import models.Hand;
 import models.cards.Card;
 import models.cards.Minion;
 import models.map.Map;
@@ -55,6 +56,14 @@ public class BattleMenu implements Menu {
                 "moveTo"
         ));
         commands.add(new Command(
+                "^(?i)attack\\s+(?<card>[A-z ]+",
+                "attack"
+        ));
+        commands.add(new Command(
+                "^(?i)show\\s+hand",
+                "showHand"
+        ));
+        commands.add(new Command(
                 "^(?i)insert (?<cardName>\\w+) in \\((?<x>\\d+), (?<y>\\d+)\\)$",
                 "insert"
         ));
@@ -90,9 +99,10 @@ public class BattleMenu implements Menu {
         showMinions(Manager.showMyMinions());
     }
 
-    public static void showOponnent(Matcher matcher) {}
+    public static void showOponnent(Matcher matcher) {
+    }
 
-    public static void showOpponent(Matcher matcher){
+    public static void showOpponent(Matcher matcher) {
         showMinions(Manager.showOpponentMinions());
     }
 
@@ -100,13 +110,13 @@ public class BattleMenu implements Menu {
     }
 
     public static void showCardInfo(Matcher matcher) {
-        String name=matcher.group("name");
+        String name = matcher.group("name");
         try {
-            Card card=Manager.showCardInfo(name);
+            Card card = Manager.showCardInfo(name);
             Output.log(card.showInfo());
 
         } catch (Collection.CardNotFoundException e) {
-            e.printStackTrace();
+            Output.err(Error.CARD_NOT_FOUND);
         }
     }
 
@@ -133,18 +143,44 @@ public class BattleMenu implements Menu {
     }
 
     public static void attack(Matcher matcher) {
+        int cardID = Integer.parseInt(matcher.group("card"));
+        try {
+            Manager.attack(cardID);
+        } catch (Match.CardAttackIsNotAvailableException e) {
+            Output.err(String.format(String.valueOf(Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
+        } catch (Match.TiredMinionException e) {
+            Output.err(String.format(String.valueOf(Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_FOUND);
+        } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
+            Output.err(Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
+        }
     }
 
     public static void useSpecialPower(Matcher matcher) {
     }
 
     public static void showHand(Matcher matcher) {
+        Output.log("Hand:");
+        Hand hand = Manager.showHand();
+        hand.getCards().forEach(card ->
+        {
+            Output.log("\n\t");
+            Output.log(card.getName());
+        });
+        Output.log("Next Card:\n\t");
+        Output.log(hand.getNextCard().getName());
+
     }
 
     public static void insertCard(Matcher matcher) {
     }
 
     public static void endTurn(Matcher matcher) {
+
+
+        //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
+
     }
 
     public static void showCollectibles(Matcher matcher) {
