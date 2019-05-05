@@ -54,10 +54,15 @@ public class PreBattleMenu implements Menu {
     public void handleMenu() {
 
         int result = askQuestion("Select your game state:", "Story Game", "Custom Game");
-        boolean isStory = result == 1;
+        int gameMode = result;
 
         result = askQuestion("Choose Player Numbers:", "Single Player", "Multi Player");
         boolean AIMode = result == 1;
+
+        if(gameMode == 1) {
+            result = askQuestion("Select Game Mode:", "Death match", "Multi flag mode", "Single flag mode");
+            gameMode = result + 1;
+        }
 
         String opponentName = "";
         if(!AIMode) {
@@ -82,7 +87,7 @@ public class PreBattleMenu implements Menu {
             opponentName = "AI User";
         }
 
-        Manager.setMatchData(AIMode, isStory, opponentName);
+        Manager.setMatchData(AIMode, gameMode, opponentName);
 
     }
 }

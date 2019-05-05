@@ -6,7 +6,10 @@ import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.cards.Minion;
+import models.match.DeathMatch;
 import models.match.Match;
+import models.match.MultiFlagMatch;
+import models.match.SingleFlagMatch;
 import views.Input;
 import views.InputAI;
 
@@ -171,7 +174,7 @@ public class Manager {
         return playingMatch.showOpponentMinions();
     }
 
-    public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {
+    public static void setMatchData(boolean isAIMode, int gameMode, String username) {
         opponentUsername = username;
         if (!isOpponentNull()) {
             Account opponent;
@@ -179,8 +182,18 @@ public class Manager {
                 opponent = Account.getAiAccount();
             else
                 opponent = Account.getAccounts().get(username);
-            if (!isStoryMode) {
-
+            if (gameMode == 1 /* story mode */ ) {
+                matches.add(new DeathMatch());
+                matches.add(new MultiFlagMatch());
+                matches.add(new SingleFlagMatch());
+                playingMatch = matches.get(0);
+                matches.remove(0);
+            } else if (gameMode == 2 /* death match */ ) {
+                playingMatch = new DeathMatch();
+            } else if (gameMode == 3 /* multi flag match */ ) {
+                playingMatch = new MultiFlagMatch();
+            } else if (gameMode == 4 /* single flag match */ ) {
+                playingMatch = new SingleFlagMatch();
             }
             if (opponent == null) {
                 opponentUsername = "";
