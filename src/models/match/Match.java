@@ -1,5 +1,6 @@
 package models.match;
 
+import models.Account;
 import models.Collection;
 import models.Player;
 import models.cards.AttackType;
@@ -54,7 +55,9 @@ public abstract class Match {
         return map;
     }
 
-    protected Match() {
+    protected Match(Account account1, Account account2) {
+        Player player1 = new Player(account1);
+        Player player2 = new Player(account2);
 
     }
 

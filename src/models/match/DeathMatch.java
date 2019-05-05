@@ -1,12 +1,13 @@
 package models.match;
 
+import models.Account;
 import models.Player;
 
 import java.text.DecimalFormat;
 
 public class DeathMatch extends Match {
-    public DeathMatch() {
-        super();
+    public DeathMatch(Account account1 , Account account2) {
+        super(account1, account2);
     }
 
     @Override

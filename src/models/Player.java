@@ -31,7 +31,7 @@ public class Player {
         this.mana = mana;
     }
 
-    private Player(Account account) {
+    public Player(Account account) {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
         this.shuffleDeck();

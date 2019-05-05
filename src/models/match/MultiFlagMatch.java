@@ -1,5 +1,6 @@
 package models.match;
 
+import models.Account;
 import models.Player;
 import models.items.Flag;
 
@@ -8,8 +9,8 @@ import java.util.List;
 public class MultiFlagMatch extends Match {
     List<Flag> flags;
 
-    public MultiFlagMatch() {
-        super();
+    public MultiFlagMatch(Account account1 , Account account2) {
+        super(account1, account2);
     }
 
     public void setFlags() {

@@ -59,7 +59,7 @@ public class PreBattleMenu implements Menu {
         result = askQuestion("Choose Player Numbers:", "Single Player", "Multi Player");
         boolean AIMode = result == 1;
 
-        if(gameMode == 1) {
+        if(gameMode == 2) {
             result = askQuestion("Select Game Mode:", "Death match", "Multi flag mode", "Single flag mode");
             gameMode = result + 1;
         }
