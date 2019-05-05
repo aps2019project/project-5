@@ -133,6 +133,8 @@ public class ShopMenu implements Menu {
             Output.err(Error.NOT_ENOUGH_DRAKE);
         } catch (Collection.ItemsFullException e) {
             Output.err(Error.ITEMS_ARE_FULL);
+        } catch (Collection.CollectionException e) {
+            Output.err(e);
         }
     }
 

@@ -133,7 +133,7 @@ public class Account {
         return ranking;
     }
 
-    public void addCardToCollection (Card card) {
+    public void addCardToCollection (Card card) throws Collection.CollectionException {
         collection.addCard(card);
     }
 

@@ -13,7 +13,6 @@ import models.map.Map;
 import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class Match {
     private Map map;
@@ -51,7 +50,7 @@ public abstract class Match {
         return player.getDeck().getMinions();
     }
 
-    private Map getMap() {
+    public Map getMap() {
         return map;
     }
 
@@ -98,7 +97,7 @@ public abstract class Match {
     }
 
 
-    public void moveTo(int x2, int y2) throws InvalidMoveException {
+    public void moveTo(int x2, int y2) throws InvalidMoveException, Map.InvalidCellException {
         Card card = getActivePlayer().getSelectedCard();
         Cell cell2 = map.getCell(x2, y2);
         if (!map.isValidMove(card, this.getInActivePlayer(), cell2)) throw new InvalidMoveException();

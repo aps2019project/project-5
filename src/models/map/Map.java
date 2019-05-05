@@ -1,13 +1,49 @@
 package models.map;
 
+import models.Collection;
 import models.Player;
 import models.cards.Card;
+import views.Error;
 
 public class Map {
+    public final static int ROW_NUMBER = 5, COLUMN_NUMBER = 9;
+    // TODO: 5/5/19 write to cells
     private Cell[][] cells = new Cell[5][9];
+    private Collection cards = new Collection();
 
-    public Cell getCell(int x, int y) {
+    public Collection getCards() {
+        return this.cards;
+    }
+
+
+    public Cell getCell(int x, int y) throws InvalidCellException {
+        if (!cellExist(x, y))
+            throw new InvalidCellException(Error.INVALID_CELL.toString());
         return cells[x][y];
+    }
+
+    private boolean isBetween(int number, int down, int up) {
+        return  number >= down && number < up;
+    }
+
+    public boolean cellExist(int x, int y) {
+        return isBetween(x, 0, ROW_NUMBER) && isBetween(y, 0, COLUMN_NUMBER);
+    }
+
+    public void insertCard(Card card, Cell cell) throws InvalidCellException, Collection.CollectionException {
+        if (cell.isFull())
+            throw new InvalidCellException(Error.INVALID_TARGET.toString());
+        if (!cards.contains(card)) {
+            // TODO: 5/4/19 check if contains
+        }
+        cell.setCard(card);
+        cards.addCard(card);
+    }
+
+    public class InvalidCellException extends Exception {
+        public InvalidCellException(String message) {
+            super(message);
+        }
     }
 
     public boolean isValidMove(Card card, Player opponentPlayer, Cell cell2) {

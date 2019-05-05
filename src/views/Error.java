@@ -19,10 +19,13 @@ public enum Error {
     WRONG_CHOICE("Wrong Choice !"),
     PLAYERS_DECK_IS_NOT_VALID("Player's deck is not valid"),
     CANT_PLAY_WITH_YOURSELF("You can't play with yourself."),
-    INVALID_MOVE("invalid target!"),
+    INVALID_MOVE("invalid move!"),
+    SELECTED_DECK_IS_INVALID("Selected deck is invalid"),
+    INVALID_TARGET("Invalid target"),
+    NOT_ENOUGH_MANA("You don't have enough mana."),
+    INVALID_CELL("Invalid cell."),
     CARD_ATTACK_IS_NOT_AVAILABLE("card with '%d' is not available"),
-    OPPONENT_MINION_IS_NOT_AVAILABLE("minion opponent is not available for attack"),
-    SELECTED_DECK_IS_INVALID("Selected deck is invalid");
+    OPPONENT_MINION_IS_NOT_AVAILABLE("minion opponent is not available for attack");
 
 
     private String message;

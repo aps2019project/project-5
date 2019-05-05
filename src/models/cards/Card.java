@@ -1,7 +1,6 @@
 package models.cards;
 
 import models.cards.spell.Buff;
-import models.cards.spell.Spell;
 import models.map.Cell;
 
 public class Card {
@@ -12,7 +11,8 @@ public class Card {
     private String description;
     private String name;
     private int price;
-    int maxDistanceToMove = 2;
+    final int MAX_DISTANCE_TO_MOVE = 2;
+    private int nessacaryManaToInsert;
     private boolean isMoveAvailable;
 
     public Card(Card card) {
@@ -92,6 +92,10 @@ public class Card {
     public int getMaxDistance() {
         return this.getMaxDistance();
 
+    }
+
+    public int getNessacaryManaToInsert() {
+        return this.nessacaryManaToInsert;
     }
 
     public boolean isMoveAvailable() {

@@ -1,11 +1,12 @@
 package views.menus;
 
 import controllers.Manager;
-import models.Account;
 import models.Collection;
+import models.Player;
 import models.Hand;
 import models.cards.Card;
 import models.cards.Minion;
+import models.map.Map;
 import models.match.Match;
 import views.Command;
 import views.Error;
@@ -62,6 +63,11 @@ public class BattleMenu implements Menu {
                 "^(?i)show\\s+hand",
                 "showHand"
         ));
+        commands.add(new Command(
+                "^(?i)insert (?<cardName>\\w+) in \\((?<x>\\d+), (?<y>\\d+)\\)$",
+                "insert"
+        ));
+
     }
 
     @Override
@@ -130,7 +136,7 @@ public class BattleMenu implements Menu {
             Manager.moveTo(x, y);
             Card card = Manager.getActivePlayer().getSelectedCard();
             Output.log(String.format("%s moved to %d %d", card.getName(), x, y));
-        } catch (Match.InvalidMoveException e) {
+        } catch (Match.InvalidMoveException | Map.InvalidCellException e) {
             Output.err(Error.INVALID_MOVE);
         }
 
@@ -177,16 +183,27 @@ public class BattleMenu implements Menu {
 
     }
 
-    public static void showCollectables(Matcher matcher) {
+    public static void showCollectibles(Matcher matcher) {
     }
 
-    public static void selectCollectable(Matcher matcher) {
+    public static void selectCollectible(Matcher matcher) {
     }
 
-    public static void showCollectableInfo(Matcher matcher) {
+    public static void showCollectibleInfo(Matcher matcher) {
     }
 
-    public static void useCollectable(Matcher matcher) {
+    public static void useCollectible(Matcher matcher) {
+    }
+
+    public static void insert(Matcher matcher) {
+        String cardName = matcher.group("cardName");
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        try {
+            Manager.insertCard(cardName, x, y);
+        } catch (Map.InvalidCellException | Collection.CollectionException | Player.NotEnoughManaException e) {
+            Output.err(e);
+        }
     }
 
     public static void help(Matcher matcher) {
