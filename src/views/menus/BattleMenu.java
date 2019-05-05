@@ -3,6 +3,7 @@ package views.menus;
 import controllers.Manager;
 import models.Account;
 import models.Collection;
+import models.Hand;
 import models.cards.Card;
 import models.cards.Minion;
 import models.match.Match;
@@ -56,6 +57,10 @@ public class BattleMenu implements Menu {
         commands.add(new Command(
                 "^(?i)attack\\s+(?<card>[A-z ]+",
                 "attack"
+        ));
+        commands.add(new Command(
+                "^(?i)show\\s+hand",
+                "showHand"
         ));
     }
 
@@ -150,6 +155,16 @@ public class BattleMenu implements Menu {
     }
 
     public static void showHand(Matcher matcher) {
+        Output.log("Hand:");
+        Hand hand = Manager.showHand();
+        hand.getCards().forEach(card ->
+        {
+            Output.log("\n\t");
+            Output.log(card.getName());
+        });
+        Output.log("Next Card:\n\t");
+        Output.log(hand.getNextCard().getName());
+
     }
 
     public static void insertCard(Matcher matcher) {

@@ -195,7 +195,7 @@ public class Manager {
     }
 
     public static void moveTo(int x, int y) throws Match.InvalidMoveException {
-        playingMatch.moveTo(x,y);
+        playingMatch.moveTo(x, y);
     }
 
     public static Card showCardInfo(String name) throws CardNotFoundException {
@@ -207,4 +207,9 @@ public class Manager {
             CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack {
         playingMatch.attack(ID);
     }
+
+    public static Hand showHand() {
+        return getActivePlayer().getHand();
+    }
+
 }
