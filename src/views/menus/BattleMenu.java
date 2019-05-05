@@ -136,11 +136,13 @@ public class BattleMenu implements Menu {
         try {
             Manager.attack(cardID);
         } catch (Match.CardAttackIsNotAvailableException e) {
-            
+            Output.err(String.format(String.valueOf(Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
         } catch (Match.TiredMinionException e) {
-
+            Output.err(String.format(String.valueOf(Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
         } catch (Collection.CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_FOUND);
         } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
+            Output.err(Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
         }
     }
 

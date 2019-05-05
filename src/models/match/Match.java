@@ -111,7 +111,7 @@ public abstract class Match {
     public void isValidAttack(Card card, Card opponentCard) throws CardAttackIsNotAvailableException, OpponentMinionIsNotAvailableForAttack, TiredMinionException {
         Player player = getActivePlayer();
         if (!(card instanceof Attacker)) {
-            throw new CardAttackIsNotAvailableException();
+            throw new CardAttackIsNotAvailableException(card.getID());
         }
         if (((Attacker) card).getAttackType() == AttackType.RANGED) {
             if (((Attacker) card).getRange() <
@@ -128,7 +128,7 @@ public abstract class Match {
                 throw new OpponentMinionIsNotAvailableForAttack();
         }
 
-        if (!((Attacker) card).getTurnAttackAvailability()) throw new TiredMinionException();
+        if (!((Attacker) card).getTurnAttackAvailability()) throw new TiredMinionException(card.getID());
     }
 
     public void attack(int ID) throws Collection.CardNotFoundException, CardAttackIsNotAvailableException, TiredMinionException, OpponentMinionIsNotAvailableForAttack {
@@ -153,8 +153,14 @@ public abstract class Match {
     }
 
     public class CardAttackIsNotAvailableException extends Exception {
-        public CardAttackIsNotAvailableException() {
+        private int id;
+        public CardAttackIsNotAvailableException(int id) {
             super("Invalid attack");
+            this.id = id;
+        }
+
+        public int getId() {
+            return id;
         }
     }
 
@@ -166,8 +172,14 @@ public abstract class Match {
 
 
     public class TiredMinionException extends Exception {
-        public TiredMinionException() {
+        int id;
+        public TiredMinionException(int id) {
             super("Minion is Tired!");
+            this.id=id;
+        }
+
+        public int getId() {
+            return id;
         }
     }
 }
