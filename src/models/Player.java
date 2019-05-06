@@ -105,12 +105,13 @@ public class Player {
         Collections.shuffle(deck.getCards());
         try {
             deck.addCard(hero);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     public Hero getHero() throws HeroDeadException {
-        for(Attacker attacker : activeCards)
-            if(attacker instanceof Hero)
+        for (Attacker attacker : activeCards)
+            if (attacker instanceof Hero)
                 return (Hero) attacker;
         throw new HeroDeadException("Hero doesn't exists in active cards");
     }
@@ -149,9 +150,9 @@ public class Player {
     }
 
     public Card getCard(String cardID) throws Collection.CardNotFoundException {
-        for(Attacker attacker : activeCards)
-            if(attacker.getID().equals(cardID))
-                return attacker;
+        for (Card card : activeCards)
+            if (card.getID().equals(cardID))
+                return card;
         throw new Collection.CardNotFoundException("Card with this id not found");
     }
 

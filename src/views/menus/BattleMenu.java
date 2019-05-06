@@ -64,13 +64,13 @@ public class BattleMenu implements Menu {
                 "\t\t\t\tMoves selected card of active player to cell (x, y)"
         ));
         commands.add(new Command(
-                "^(?i)attack\\s+(?<cardID>[A-z ]+)$",
+                "^(?i)attack\\s+(?<cardID>.+)$",
                 "attack",
                 "attack [enemyCardID]",
                 "\t\t\tattacks to enemy card by the selected card"
         ));
         commands.add(new Command(
-                "^(?i)insert\\s+(?<cardName>\\w+)\\s+in\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
+                "^(?i)insert\\s+(?<cardName>.+)\\s+in\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
                 "insert",
                 "Insert [cardName] in ([x], [y])",
                 "\tInserts card to cell (x, y)"
@@ -84,7 +84,7 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)select\\s+(?<cardID>[A-z ]+)$",
+                "^(?i)select\\s+(?<cardID>.+)$",
                 "selectCard",
                 "select [CardName]",
                 "\t\t\t\tselects a card to attack"
@@ -194,7 +194,6 @@ public class BattleMenu implements Menu {
 
     public static void endTurn(Matcher matcher) {
 
-
         //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
 
     }
@@ -236,7 +235,6 @@ public class BattleMenu implements Menu {
             Output.err(e);
         }
     }
-
 
 
 }

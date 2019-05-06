@@ -9,7 +9,10 @@ import models.map.Cell;
 import models.map.Map;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public abstract class Match {
     private Map map;
@@ -53,7 +56,11 @@ public abstract class Match {
 
     public List<Minion> showMyMinions() {
         Player player = this.getActivePlayer();
-        return player.getDeck().getMinions();
+        return player.getActiveCards().stream().filter(
+                card -> card instanceof Minion
+        ).map(
+                (card) -> (Minion) card
+        ).collect(Collectors.toList());
     }
 
     public Map getMap() {
@@ -71,11 +78,13 @@ public abstract class Match {
         try {
             cell1 = map.getCell(2, 0);
             cell2 = map.getCell(2, 8);
-        } catch (Map.InvalidCellException ignored) {}
+        } catch (Map.InvalidCellException ignored) {
+        }
         try {
             map.insertCard(hero1, cell1);
             map.insertCard(hero2, cell2);
-        } catch (Map.InvalidCellException | Map.InvalidTargetCellException | Player.HeroDeadException ignored) {}
+        } catch (Map.InvalidCellException | Map.InvalidTargetCellException | Player.HeroDeadException ignored) {
+        }
         hero1.setCell(cell1);
         hero2.setCell(cell2);
         players[0].getActiveCards().add(hero1);
@@ -108,8 +117,8 @@ public abstract class Match {
     }
 
     public Card getCard(String cardID) throws Collection.CardNotFoundException {
-        for(Card card : getActiveCards()) {
-            if(card.getID().equals(cardID))
+        for (Card card : getActiveCards()) {
+            if (card.getID().equals(cardID))
                 return card;
         }
         throw new Collection.CardNotFoundException("Card not found");
