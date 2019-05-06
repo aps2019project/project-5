@@ -9,7 +9,7 @@ import models.items.UsableItem;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Deck extends Collection {
+public class Deck {
     private String name;
     private List<Card> cards = new ArrayList<>();
 
@@ -17,7 +17,7 @@ public class Deck extends Collection {
         return false;
     }
 
-    public void addCard(Card card) throws CollectionException {
+    public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
         if (this.getHero() != null && card instanceof Hero)
             throw new HeroExistsInDeckException(card.getName(), this.name);
         if (cards.size() == 20)
@@ -133,19 +133,19 @@ public class Deck extends Collection {
     }
 
 
-    public static class HeroExistsInDeckException extends CollectionException {
+    public static class HeroExistsInDeckException extends Exception {
         public HeroExistsInDeckException(String cardName, String deckName) {
             super(String.format("card '%s' exists in deck '%s'", cardName, deckName));
         }
     }
 
-    public static class DeckFullException extends CollectionException {
+    public static class DeckFullException extends Exception {
         public DeckFullException(String deckName) {
             super(String.format("deck '%s' is full!", deckName));
         }
     }
 
-    public static class HeroNotExistsInDeckException extends CollectionException {
+    public static class HeroNotExistsInDeckException extends Exception {
         public HeroNotExistsInDeckException() {
             super("Hero is not existed");
         }

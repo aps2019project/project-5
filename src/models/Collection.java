@@ -42,7 +42,7 @@ public class Collection {
         return cards;
     }
 
-    public void addCard(Card card) throws CollectionException {
+    public void addCard(Card card) {
         if (cards.containsKey(card)){
             int num = cards.get(card);
             cards.replace(card, num, num + 1);
@@ -139,7 +139,7 @@ public class Collection {
 
     public Card getCardByID(String cardID) throws CardNotFoundException {
         for (Card card : cards.keySet()) {
-            if (card.getCardID().equalsIgnoreCase(cardID))
+            if (card.getID().equalsIgnoreCase(cardID))
                 return card;
         }
         throw new CardNotFoundException();
@@ -147,7 +147,7 @@ public class Collection {
 
     public boolean contains(Card card) {
         try {
-            getCardByID(card.getCardID());
+            getCardByID(card.getID());
         }  catch (CardNotFoundException e) {
             return false;
         }

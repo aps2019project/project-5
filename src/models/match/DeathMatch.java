@@ -1,6 +1,7 @@
 package models.match;
 
 import models.Account;
+import models.Collection;
 import models.Player;
 
 import java.text.DecimalFormat;

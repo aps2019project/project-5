@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class Match {
     private Map map;
     protected Player[] players = new Player[2];
-    private int turn;
+    private int turn = 0;
     private ArrayList<Item> collectibleItems = new ArrayList<>();
     final int PLAYERS_COUNT = 2;
     private boolean isStory;
@@ -54,7 +54,7 @@ public abstract class Match {
         return map;
     }
 
-    protected Match(Account account1, Account account2) throws Collection.CollectionException {
+    protected Match(Account account1, Account account2) {
         Player player1 = new Player(account1);
         Player player2 = new Player(account2);
 
@@ -155,13 +155,13 @@ public abstract class Match {
     }
 
     public class CardAttackIsNotAvailableException extends Exception {
-        private int id;
-        public CardAttackIsNotAvailableException(int id) {
+        private String id;
+        public CardAttackIsNotAvailableException(String id) {
             super("Invalid attack");
             this.id = id;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
     }
