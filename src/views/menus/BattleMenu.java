@@ -55,10 +55,6 @@ public class BattleMenu implements Menu {
                 "attack"
         ));
         commands.add(new Command(
-                "^(?i)show\\s+hand",
-                "showHand"
-        ));
-        commands.add(new Command(
                 "^(?i)insert (?<cardName>\\w+) in \\((?<x>\\d+), (?<y>\\d+)\\)$",
                 "insert"
         ));
@@ -169,10 +165,10 @@ public class BattleMenu implements Menu {
 
     public static void showHand(Matcher matcher) {
         Output.log("Hand:");
-        Hand hand = Manager.showHand();
+        Hand hand = Manager.getHand();
         hand.getCards().forEach(card -> {
             Output.log("\n\t");
-            Output.log(card.getName());
+            Output.log(card.getID());
         });
         Output.log("Next Card:\n\t");
         Output.log(hand.getNextCard().getName());
@@ -209,6 +205,8 @@ public class BattleMenu implements Menu {
             Manager.insertCard(cardName, x, y);
         } catch (Map.InvalidCellException | Collection.CollectionException | Player.NotEnoughManaException e) {
             Output.err(e);
+        } catch (Map.InvalidTargetCellException e) {
+            e.printStackTrace();
         }
     }
 

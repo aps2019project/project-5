@@ -13,7 +13,6 @@ public class Card implements Comparable {
     private String name;
     private int price;
     final int MAX_DISTANCE_TO_MOVE = 2;
-    private int nessacaryManaToInsert;
     private boolean isMoveAvailable;
 
     public Card(Card card) {
@@ -100,10 +99,6 @@ public class Card implements Comparable {
     public int getMaxDistance() {
         return this.getMaxDistance();
 
-    }
-
-    public int getNessacaryManaToInsert() {
-        return this.nessacaryManaToInsert;
     }
 
     public boolean isMoveAvailable() {

@@ -2,6 +2,7 @@ package models;
 
 import models.cards.Attacker;
 import models.cards.Card;
+import models.cards.Hero;
 import models.cards.spell.Spell;
 import models.items.Flag;
 import models.items.Item;
@@ -15,7 +16,7 @@ import java.util.List;
 public class Player {
     private Account account;
     private Deck deck;
-    private Hand hand;
+    private Hand hand = new Hand();
     private Card selectedCard;
     private int flags;
     private List<Item> collectedItems = new ArrayList<>();
@@ -36,6 +37,12 @@ public class Player {
     public Player(Account account) {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
+        Hero hero = this.deck.getHero();
+        try {
+            deck.removeCard(hero);
+        } catch (Collection.CardNotFoundException e) {
+            e.printStackTrace();
+        }
         this.shuffleDeck();
         this.setHand();
         this.setCardsId();
@@ -59,7 +66,7 @@ public class Player {
     }
 
     public void insertCard(Card card, Cell cell) throws Collection.CollectionException {
-        changeMana(-card.getNessacaryManaToInsert());
+        changeMana(-card.getManaPoint());
         if (card instanceof Attacker) {
             activateCard((Attacker) card);
             card.setCell(cell);
@@ -69,7 +76,7 @@ public class Player {
         }
     }
 
-    private void activateCard(Attacker attacker) throws Collection.CollectionException {
+    private void activateCard(Attacker attacker) {
         activeCards.addCard(attacker);
     }
 
