@@ -7,7 +7,8 @@ public class Card implements Comparable{
     private Cell cell;
     private Buff buff;
     private int manaPoint;
-    private String cardID;
+    private String username;
+    private int id;
     private String description;
     private String name;
     private int price;
@@ -15,15 +16,13 @@ public class Card implements Comparable{
     private int nessacaryManaToInsert;
     private boolean isMoveAvailable;
 
-    // cardID = playerName +
-    public Card(Card card, String cardID) {
+    public Card(Card card) {
         this.cell = card.cell;
         this.buff = card.buff;
         this.manaPoint = card.manaPoint;
         this.description = card.description;
         this.name = card.name;
         this.price = card.price;
-        this.cardID = cardID;
     }
 
     public String getDescription() {
@@ -33,15 +32,21 @@ public class Card implements Comparable{
     public void moveCard(Cell cell) {
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void attack(Cell cell) {
     }
 
-    public String getCardID() {
-        return this.cardID;
+    public String getID() {
+        // return this.cardID;
+        return String.format("%s_%s_%d", username, name, id);
+        // TODO: Implement
     }
 
-    public void setCardID(String cardID) {
-        this.cardID = cardID;
+    public void setID(int id) {
+        this.id = id;
     }
 
     public Cell getCell() {
@@ -62,8 +67,8 @@ public class Card implements Comparable{
 
 
     // this constructor can be called only in hero, minion and usable item class
-    protected Card(String cardID, String name, String description, int manaPoint, int price) {
-        this.cardID = cardID;
+    protected Card(int id, String name, String description, int manaPoint, int price) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.manaPoint = manaPoint;
@@ -109,7 +114,7 @@ public class Card implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return this.cardID.compareTo(((Card)o).getName());
+        return this.getID().compareTo(((Card)o).getName());
     }
 }
 

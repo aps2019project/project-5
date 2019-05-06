@@ -104,6 +104,7 @@ public class Manager {
     public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
             Collection.CollectionException {
         Card card = account.getCollection().getCard(cardName);
+        card.setUsername(account.getUsername());
         Deck deck = account.getDeck(deckName);
         deck.addCard(card);
 
