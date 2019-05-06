@@ -18,7 +18,6 @@ import java.util.regex.Matcher;
 public class BattleMenu implements Menu {
 
     public BattleMenu() {
-        // TODO: Add commands.
         commands.add(new Command(
                 "^(?i)Game info$",
                 "gameInfo"
@@ -51,11 +50,11 @@ public class BattleMenu implements Menu {
                 "moveTo"
         ));
         commands.add(new Command(
-                "^(?i)attack\\s+(?<cardID>[A-z ]+)$",
+                "^(?i)attack\\s+(?<cardID>.+)$",
                 "attack"
         ));
         commands.add(new Command(
-                "^(?i)insert\\s+(?<cardName>\\w+)\\s+in\\s+\\((?<x>\\d+),\\s+(?<y>\\d+)\\)$",
+                "^(?i)insert\\s+(?<cardName>.+)\\s+in\\s+\\((?<x>\\d+),\\s+(?<y>\\d+)\\)$",
                 "insert"
         ));
         commands.add(new Command(
@@ -64,7 +63,7 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)select\\s+(?<name>[A-z ]+)$",
+                "^(?i)select\\s+(?<name>.+)$",
                 "selectCard",
                 "select [CardName]",
                 "select "
@@ -177,7 +176,6 @@ public class BattleMenu implements Menu {
 
     public static void endTurn(Matcher matcher) {
 
-
         //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
 
     }
@@ -212,7 +210,7 @@ public class BattleMenu implements Menu {
     }
 
     public static void selectCard(Matcher matcher) {
-        String cardID = matcher.group("cardID");
+        String cardID = matcher.group("name");
         try {
             Manager.selectCard(cardID);
         } catch (Collection.CardNotFoundException e) {
