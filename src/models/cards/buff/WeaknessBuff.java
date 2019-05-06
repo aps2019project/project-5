@@ -7,8 +7,8 @@ public class WeaknessBuff extends Buff {
 
     private int powerPoint;
 
-    public WeaknessBuff(int powerPoint, int activeTime) {
-        super(activeTime);
+    public WeaknessBuff(int powerPoint, int activeTime, boolean isContinous) {
+        super(activeTime,isContinous);
         this.powerPoint = powerPoint;
     }
 
@@ -18,6 +18,7 @@ public class WeaknessBuff extends Buff {
 
     @Override
     public void buffEffect(Card card) {
+        if (!isContinous) super.activeTime++;
         ((Attacker) card).decrementAP(this.powerPoint);
     }
 }

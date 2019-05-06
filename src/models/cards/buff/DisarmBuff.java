@@ -8,13 +8,13 @@ public class DisarmBuff extends Buff {
         return activeTime;
     }
 
-    public DisarmBuff(int activeTime) {
-        super(activeTime);
+    public DisarmBuff(int activeTime, boolean isContinous) {
+        super(activeTime, isContinous);
     }
 
     @Override
     public void buffEffect(Card card) {
-        activeTime += 0;
+        if (!isContinous) activeTime += 0;
         ((Attacker) card).setCounterAttackAbility(false);
     }
 }

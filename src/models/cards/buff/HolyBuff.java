@@ -6,8 +6,8 @@ import models.cards.Card;
 public class HolyBuff extends Buff {
     private int healthPoint;
 
-    public HolyBuff(int healthPoint, int activeTime) {
-        super(activeTime);
+    public HolyBuff(int healthPoint, int activeTime, boolean isContinious) {
+        super(activeTime, isContinious);
         this.healthPoint = healthPoint;
     }
 
@@ -17,6 +17,7 @@ public class HolyBuff extends Buff {
 
     @Override
     public void buffEffect(Card card) {
+        if (!isContinous) super.activeTime++;
         ((Attacker) card).decrementHP(this.healthPoint);
     }
 }

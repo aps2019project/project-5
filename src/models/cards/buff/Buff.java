@@ -8,9 +8,11 @@ public abstract class Buff {
 
     int activeTime;
     private int maxActiveTime;
+    boolean isContinous;
 
-    public Buff(int maxActiveTime) {
+    public Buff(int maxActiveTime, boolean isContinous) {
         this.maxActiveTime = maxActiveTime;
+        this.isContinous = isContinous;
     }
 
     public abstract void buffEffect(Card card);

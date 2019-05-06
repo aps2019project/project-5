@@ -6,8 +6,8 @@ import models.cards.Card;
 public class PowerBuff extends Buff {
     private int powerPoint;
 
-    public PowerBuff(int powerPoint, int activeTime) {
-        super(activeTime);
+    public PowerBuff(int powerPoint, int activeTime, boolean isContinous) {
+        super(activeTime, isContinous);
         this.powerPoint = powerPoint;
     }
 
@@ -17,6 +17,7 @@ public class PowerBuff extends Buff {
 
     @Override
     public void buffEffect(Card card) {
+        if (!isContinous) super.activeTime++;
         ((Attacker) card).incrementAP(this.powerPoint);
     }
 }

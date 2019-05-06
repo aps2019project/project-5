@@ -6,8 +6,8 @@ import models.cards.Card;
 public class PoisonBuff extends Buff {
     private int powerPoint;
 
-    public PoisonBuff(int maxActiveTime, int powerPoint) {
-        super(maxActiveTime);
+    public PoisonBuff(int maxActiveTime, int powerPoint, boolean isContinious) {
+        super(maxActiveTime, isContinious);
         this.powerPoint = powerPoint;
     }
 
@@ -17,7 +17,7 @@ public class PoisonBuff extends Buff {
 
     @Override
     public void buffEffect(Card card) {
-        super.activeTime++;
+        if (!super.isContinous) super.activeTime++;
         ((Attacker) card).decrementAP(this.powerPoint);
     }
 }
