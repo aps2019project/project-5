@@ -40,9 +40,11 @@ public class Card implements Comparable {
     }
 
     public String getID() {
-        // return this.cardID;
         return String.format("%s_%s_%d", username, name, id);
-        // TODO: Implement
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setID(int id) {
@@ -114,7 +116,11 @@ public class Card implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return this.getID().compareTo(((Card)o).getName());
+        return this.getName().compareTo(((Card) o).getName());
+    }
+
+    public String getUsername() {
+        return username;
     }
 }
 

@@ -41,6 +41,7 @@ public interface Menu {
                     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
+                    break;
                 }
             }
             if(!matches)

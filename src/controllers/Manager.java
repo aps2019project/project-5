@@ -119,7 +119,7 @@ public class Manager {
                 playingMatch.getInfo();
     }
 
-    public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
+    public static boolean isValid(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
         return deck.isValid();
     }
@@ -173,7 +173,7 @@ public class Manager {
         return playingMatch.showOpponentMinions();
     }
 
-    public static void setMatchData(boolean isAIMode, int gameMode, String username) throws Collection.CollectionException {
+    public static void setMatchData(boolean isAIMode, int gameMode, String username) {
         opponentUsername = username;
         if (!isOpponentNull()) {
             Account opponent;

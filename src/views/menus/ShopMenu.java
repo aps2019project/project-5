@@ -26,7 +26,7 @@ public class ShopMenu implements Menu {
                 "^(?i)return$",
                 "",
                 "return",
-                "return to MainMenu."
+                "\t\t\t\t\treturn to MainMenu."
         ));
 
         commands.add(new Command(
@@ -37,7 +37,7 @@ public class ShopMenu implements Menu {
                 "^(?i)show$",
                 "show",
                 "show",
-                "Show all cards and items."
+                "\t\t\t\t\tShow all cards and items."
         ));
         commands.add(new Command(
                 "^(?i)buy\\s+(?<cardName>[A-z ]+)$",
@@ -57,18 +57,19 @@ public class ShopMenu implements Menu {
                 "show collection",
                 "\t\t\tshow all cards in account's collection"
         ));
-        commands.add(new Command(
-                "^(?i)search\\s+(?<cardName>[A-z ]+)$",
-                "search",
-                "search [String]",
-                "\t\t\tshow all cards that their name's contains '[String]'"
-        ));
 
         commands.add(new Command(
                 "^(?i)search\\s+collection\\s+(?<cardName>[A-z ]+)$",
                 "searchCollection",
                 "search collection [String]",
                 "show all cards in account's collection that their name contains '[String]'"
+        ));
+
+        commands.add(new Command(
+                "^(?i)search\\s+(?<cardName>[A-z ]+)$",
+                "search",
+                "search [String]",
+                "\t\t\tshow all cards that their name's contains '[String]'"
         ));
 
         commands.add(new Command(
@@ -100,7 +101,7 @@ public class ShopMenu implements Menu {
             Manager.searchCardInShop(cardName).forEach(
                     card -> Output.log(card.toString()));
         } catch (CardNotFoundException e) {
-            Output.err(e);
+            Output.err(Error.CARD_NOT_EXISTS_IN_SHOP);
         }
     }
 
@@ -110,7 +111,7 @@ public class ShopMenu implements Menu {
             Manager.searchMyCard(cardName).forEach(
                     card -> Output.log(card.toString()));
         } catch (CardNotFoundException e) {
-            Output.err(e);
+            Output.err(Error.CARD_NOT_FOUND);
         }
     }
 
@@ -136,7 +137,7 @@ public class ShopMenu implements Menu {
             Manager.sell(name);
             Output.log(Log.SELLING_SUCCESSFUL);
         } catch (CardNotFoundException e) {
-            Output.err(e);
+            Output.err(Error.CARD_NOT_FOUND);
         }
     }
 

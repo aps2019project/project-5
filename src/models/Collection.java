@@ -115,10 +115,10 @@ public class Collection {
     }
 
     public List<Card> getCardsList(String cardName) throws CardNotFoundException {
-        List<Card> foundCard = filterByName(cardName);
-        if (foundCard.size() == 0)
+        List<Card> foundCards = filterByName(cardName);
+        if (foundCards.size() == 0)
             throw new CardNotFoundException();
-        return foundCard;
+        return foundCards;
     }
 
     public Card getCard(String cardName) throws CardNotFoundException {

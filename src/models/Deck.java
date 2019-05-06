@@ -103,20 +103,20 @@ public class Deck {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append("Heroes :\n\t");
+        result.append("Heroes :\n");
         if (this.getHero() != null)
-            result.append(this.getHero().toString());
-        result.append("\nItems :\n");
+            result.append("\t").append(this.getHero().toString()).append("\n");
+        result.append("Items :\n");
         for (UsableItem item : this.getItems()) {
             result.append("\t");
             result.append(item.toString());
             result.append("\n");
         }
-        result.append("Cards : \n");
+        result.append("Cards : ");
         this.cards.stream().filter(card -> card instanceof Spell || card instanceof Minion)
                 .forEach(card -> {
-                            result.append(card.toString());
                             result.append("\n\t");
+                            result.append(card.toString());
                         }
                 );
         return result.toString();
