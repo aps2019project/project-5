@@ -4,7 +4,9 @@ import models.cards.AttackType;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
+import models.cards.buff.Buff;
 import models.cards.spell.SpecialPowerActivateTime;
+import models.cards.spell.Spell;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,6 +123,36 @@ public class JsonParser {
             heroes.add(hero);
         }
         return heroes;
+    }
+
+    public static List<Card> getSpells() throws FileNotFoundException, JSONException {
+        JSONArray spellsJSON = new JSONArray(getFileData(FileReader.SPELLS_DATA));
+        List<Object> spellsObject = toList(spellsJSON);
+        ArrayList<Card> spells = new ArrayList<>();
+        int id = 1;
+        for(Object spellObject : spellsObject) {
+            HashMap<String, Object> spellHashMap = (HashMap<String, Object>) spellObject;
+            AttackType attackType = null;
+            try {
+                attackType = AttackType.valueOf((String) spellHashMap.get("attackType"));
+            } catch (Exception ignored) {}
+            Spell spell = new Spell(
+                    id++,
+                    (String) spellHashMap.get("name"),
+                    (String) spellHashMap.get("description"),
+                    (int) spellHashMap.get("manaPoint"),
+                    (int) spellHashMap.get("price")
+            );
+            List<Object> buffs = (List<Object>) spellHashMap.get("effect");
+            for(Object buffObject : buffs) {
+                HashMap<String, Object> buffHashMap = (HashMap<String, Object>) buffObject;
+                Buff buff;
+
+                // TODO: Add buff to spell's buffs
+            }
+            spells.add(spell);
+        }
+        return spells;
     }
 
     public static void main(String[] args) throws FileNotFoundException, JSONException {

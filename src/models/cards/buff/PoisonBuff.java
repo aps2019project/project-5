@@ -17,7 +17,7 @@ public class PoisonBuff extends Buff {
 
     @Override
     public void buffEffect(Card card) {
-        if (!super.isContinous) super.activeTime++;
+        if (!super.isContinues) super.activeTime++;
         ((Attacker) card).decrementHP(this.healthPoint);
     }
 }

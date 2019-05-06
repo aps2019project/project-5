@@ -6,9 +6,9 @@
     "targetType": "AN_OPPONENT_FORCE",
     "effect": [
       {
-        "name": "Disarm",
-        "isContinous": true,
-        "activeTime":
+        "name": "DisarmBuff",
+        "isContinues": true,
+        "activeTime": 0
       }
     ]
   },
@@ -20,11 +20,11 @@
     "effect": [
       {
         "name": "OPPONENT_BUFF_KILLER",
-        "isContinous": false
+        "isContinues": false
       },
       {
         "name": "MY_BUFF_KILLER",
-        "isContinous": false
+        "isContinues": false
       }
     ]
   },
@@ -36,7 +36,7 @@
     "effect": [
       {
         "name": "PowerBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 1,
         "powerPoint": 2
       }
@@ -50,7 +50,7 @@
     "effect": [
       {
         "name": "PoisonBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 1,
         "healthPoint": 4
       }
@@ -64,7 +64,7 @@
     "effect": [
       {
         "name": "PowerBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 1,
         "powerPoint": 4
       }
@@ -85,7 +85,7 @@
     "effect": [
       {
         "name": "PoisonBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 1
       }
     ]
@@ -105,26 +105,26 @@
     "effect": [
       {
         "name": "PowerBuff",
-        "isContinous": false,
+        "isContinues": false,
         "powerPoint": 4,
         "activeTime": 3
       },
       {
-        "name": "Disarm",
-        "isContinous": false,
+        "name": "DisarmBuff",
+        "isContinues": false,
         "activeTime": 3
       }
     ]
   },
   {
-    "name": "All Disarm",
+    "name": "All DisarmBuff",
     "price": 2000,
     "manaPoint": 9,
     "targetType": "ALL_OPPONENT_FORCE",
     "effect": [
       {
-        "name": "Disarm",
-        "isContinous": false,
+        "name": "DisarmBuff",
+        "isContinues": false,
         "activeTime": 1
       }
     ]
@@ -137,7 +137,7 @@
     "effect": [
       {
         "name": "PoisonBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 4,
         "healthPoint": 1
       }
@@ -151,12 +151,12 @@
     "effect": [
       {
         "name": "OPPONENT_BUFF_KILLER",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 1
       },
       {
         "name": "MY_BUFF_KILLER",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 1
       }
     ]
@@ -169,19 +169,19 @@
     "effect": [
       {
         "name": "PoisonBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 1,
         "healthPoint": 6
       },
       {
         "name": "HolyBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 3,
         "healthPoint": 1
       },
       {
         "name": "HolyBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 3,
         "healthPoint": 1
       }
@@ -195,7 +195,7 @@
     "effect": [
       {
         "name": "PowerBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 1,
         "powerPoint": 6
       }
@@ -209,7 +209,7 @@
     "effect": [
       {
         "name": "PowerBuff",
-        "isContinous": true,
+        "isContinues": true,
         "activateTime": 0,
         "powerPoint": 2
       }
@@ -223,7 +223,7 @@
     "effect": [
       {
         "name": "poisonBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activateTime": 1,
         "powerPoint": 6
       }
@@ -237,7 +237,7 @@
     "effect": [
       {
         "name": "WeaknessBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activateTime": 1,
         "powerPoint": 4
       }
@@ -251,13 +251,13 @@
     "effect": [
       {
         "name": "PoisonBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activateTime": 1,
         "healthPoint": 6
       },
       {
         "name": "PowerBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activateTime": 1,
         "powerPoint": 8
       }
@@ -278,7 +278,7 @@
     "effect": [
       {
         "name": "StunBuff",
-        "isContinous": false,
+        "isContinues": false,
         "activeTime": 2
       }
     ]

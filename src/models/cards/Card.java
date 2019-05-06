@@ -1,6 +1,6 @@
 package models.cards;
 
-import models.cards.spell.Buff;
+import models.cards.buff.Buff;
 import models.map.Cell;
 
 public class Card implements Comparable {

@@ -18,7 +18,7 @@ public class WeaknessBuff extends Buff {
 
     @Override
     public void buffEffect(Card card) {
-        if (!isContinous) super.activeTime++;
+        if (!isContinues) super.activeTime++;
         ((Attacker) card).decrementAP(this.powerPoint);
     }
 }

@@ -1,6 +1,7 @@
 package models.cards.spell;
 
 import models.cards.Card;
+import models.cards.buff.Buff;
 import models.map.Cell;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +28,9 @@ public class Spell extends Card {
     }
 
     public String showInfo(){
-        StringBuilder result=new StringBuilder();
-        result.append(String.format
-                        ("Spell :\nname : %s\nMP : %d\ncost : %d\ndesc : %s"
-                ,this.getName(),this.getManaPoint(),this.getPrice(),this.getDescription()));
-        return result.toString();
+        return String.format
+                ("Spell :\nname : %s\nMP : %d\ncost : %d\ndesc : %s"
+                        , this.getName(), this.getManaPoint(), this.getPrice(), this.getDescription());
 
     }
 }

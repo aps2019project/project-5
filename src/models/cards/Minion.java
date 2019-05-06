@@ -1,9 +1,7 @@
 package models.cards;
 
-import models.cards.spell.Buff;
+import models.cards.buff.Buff;
 import models.cards.spell.SpecialPowerActivateTime;
-import models.items.Flag;
-
 import java.util.ArrayList;
 
 public class Minion extends Attacker {
