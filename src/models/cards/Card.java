@@ -3,13 +3,23 @@ package models.cards;
 import models.cards.spell.Buff;
 import models.map.Cell;
 
-public class Card implements Comparable{
+public class Card implements Comparable {
     private Cell cell;
     private Buff buff;
     private int manaPoint;
     private String cardID;
     private String description;
     private String name;
+    int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private int price;
     final int MAX_DISTANCE_TO_MOVE = 2;
     private int nessacaryManaToInsert;
@@ -109,7 +119,11 @@ public class Card implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return this.cardID.compareTo(((Card)o).getName());
+        return this.cardID.compareTo(((Card) o).getName());
+    }
+
+    public String getID() {
+        return cardID;
     }
 }
 
