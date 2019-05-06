@@ -9,7 +9,7 @@ public class SingleFlagMatch extends Match {
 
 
     private int WINNING_TURN = 12;
-    Flag flag ;
+    Flag flag = new Flag();
 
     public SingleFlagMatch(Account account1 , Account account2) {
         super(account1, account2);

@@ -9,6 +9,12 @@ public class Cell {
     private Item item;
     private Attacker attacker;
 
+    public Cell(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public Cell() {}
 
     public void setAttacker(Attacker attacker) {
         this.attacker = attacker;
