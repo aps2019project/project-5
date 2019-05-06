@@ -109,8 +109,11 @@ public class Player {
     }
 
     private void setHand() {
+        hand = new Hand();
         for (int i = 0; i < 5; i++) {
-            hand.addCard(deck.getCards().get(i));
+            Card card = deck.getCards().get(0);
+            hand.getCards().add(card);
+            hand.getCards().remove(card);
         }
     }
 

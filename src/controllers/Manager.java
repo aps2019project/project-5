@@ -214,9 +214,9 @@ public class Manager {
         return shop.searchCard(name);
     }
 
-    public static void insertCard(String cardName, int x, int y) throws Collection.CollectionException,
+    public static void insertCard(String cardID, int x, int y) throws Collection.CollectionException,
             Map.InvalidCellException, Player.NotEnoughManaException {
-        Card card = getActivePlayer().getHand().getCard(cardName);
+        Card card = getActivePlayer().getHand().getCard(cardID);
         Cell cell = playingMatch.getMap().getCell(x - 1, y - 1);
         if(playingMatch.getActivePlayer().getMana() < card.getNessacaryManaToInsert())
             throw new Player.NotEnoughManaException(Error.NOT_ENOUGH_MANA.toString());
@@ -233,4 +233,7 @@ public class Manager {
         return getActivePlayer().getHand();
     }
 
+    public static Map getMap() {
+        return playingMatch.getMap();
+    }
 }

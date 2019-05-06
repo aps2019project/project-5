@@ -16,6 +16,11 @@ public class Map {
         return this.cards;
     }
 
+    public Map() {
+        for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 9; j++)
+                cells[i][j] = new Cell();
+    }
 
     public Cell getCell(int x, int y) throws InvalidCellException {
         if (!cellExist(x, y))

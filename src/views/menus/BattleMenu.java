@@ -43,15 +43,15 @@ public class BattleMenu implements Menu {
                 "showCardInfo"
         ));
         commands.add(new Command(
-                "^(?i)show\\s+hand(?<hand>)",
+                "^(?i)show\\s+hand$",
                 "showHand"
         ));
         commands.add(new Command(
-                "^(?i)Move\\s+to\\s+((?<x>\\d+),(?<y>\\d+)",
+                "^(?i)Move\\s+to\\s+\\((?<x>\\d+),(?<y>\\d+)\\)$",
                 "moveTo"
         ));
         commands.add(new Command(
-                "^(?i)attack\\s+(?<card>[A-z ]+",
+                "^(?i)attack\\s+(?<cardID>[A-z ]+)$",
                 "attack"
         ));
         commands.add(new Command(
@@ -72,6 +72,13 @@ public class BattleMenu implements Menu {
                 "selectCard",
                 "select [CardName]",
                 "select "
+        ));
+
+        commands.add(new Command(
+                "^(?i)show\\s+map$",
+                "showMap",
+                "show map",
+                "prints map"
         ));
     }
 
@@ -125,6 +132,10 @@ public class BattleMenu implements Menu {
         }
     }
 
+    public static void showMap(Matcher matcher) {
+        Output.log(Manager.getMap().toString());
+    }
+
     public static void moveTo(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
@@ -139,7 +150,7 @@ public class BattleMenu implements Menu {
     }
 
     public static void attack(Matcher matcher) {
-        String cardID = matcher.group("card");
+        String cardID = matcher.group("cardID");
         try {
             Manager.attack(cardID);
         } catch (Match.CardAttackIsNotAvailableException e) {
@@ -159,8 +170,7 @@ public class BattleMenu implements Menu {
     public static void showHand(Matcher matcher) {
         Output.log("Hand:");
         Hand hand = Manager.showHand();
-        hand.getCardsList().forEach(card ->
-        {
+        hand.getCards().forEach(card -> {
             Output.log("\n\t");
             Output.log(card.getName());
         });
