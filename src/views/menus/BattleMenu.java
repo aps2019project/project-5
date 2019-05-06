@@ -166,9 +166,7 @@ public class BattleMenu implements Menu {
     public static void showHand(Matcher matcher) {
         Output.log("Hand:");
         Hand hand = Manager.getHand();
-        hand.getCards().forEach(card -> {
-            Output.log(card.getID());
-        });
+        hand.getCards().forEach(card -> Output.log(card.getID()));
         Output.log("Next Card:");
         Output.log(hand.getNextCard().getName());
 

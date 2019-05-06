@@ -41,8 +41,8 @@ public class Player {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
         this.shuffleDeck();
-        this.setHand();
         this.setCardsId();
+        this.setHand();
         this.setNextCard();
     }
 
