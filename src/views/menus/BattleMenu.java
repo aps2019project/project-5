@@ -30,11 +30,6 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)select (?<cardID>\\d+)",
-                "selectCard"
-        ));
-
-        commands.add(new Command(
                 "^(?i)show\\s+my\\s+minions",
                 "showMyMinions"
         ));
@@ -67,7 +62,17 @@ public class BattleMenu implements Menu {
                 "^(?i)insert (?<cardName>\\w+) in \\((?<x>\\d+), (?<y>\\d+)\\)$",
                 "insert"
         ));
+        commands.add(new Command(
+                "^(?i)end turn$",
+                "endTurn"
+        ));
 
+        commands.add(new Command(
+                "^(?i)select\\s+(?<name>[A-z ]+)$",
+                "selectCard",
+                "select [CardName]",
+                "select "
+        ));
     }
 
     @Override
@@ -120,15 +125,6 @@ public class BattleMenu implements Menu {
         }
     }
 
-    public static void selectCard(Matcher matcher) {
-        int cardID = Integer.parseInt(matcher.group("cardID"));
-        try {
-            Manager.selectCard(cardID);
-        } catch (Collection.CardNotFoundException e) {
-            Output.err(e);
-        }
-    }
-
     public static void moveTo(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
@@ -143,7 +139,7 @@ public class BattleMenu implements Menu {
     }
 
     public static void attack(Matcher matcher) {
-        int cardID = Integer.parseInt(matcher.group("card"));
+        String cardID = matcher.group("card");
         try {
             Manager.attack(cardID);
         } catch (Match.CardAttackIsNotAvailableException e) {
@@ -163,7 +159,7 @@ public class BattleMenu implements Menu {
     public static void showHand(Matcher matcher) {
         Output.log("Hand:");
         Hand hand = Manager.showHand();
-        hand.getCards().forEach(card ->
+        hand.getCardsList().forEach(card ->
         {
             Output.log("\n\t");
             Output.log(card.getName());
@@ -210,5 +206,13 @@ public class BattleMenu implements Menu {
         Menu.help(new BattleMenu().getCommands());
     }
 
+    public static void selectCard(Matcher matcher) {
+        String cardID = matcher.group("cardID");
+        try {
+            Manager.selectCard(cardID);
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(e);
+        }
+    }
 
 }

@@ -9,7 +9,9 @@ import models.items.Flag;
 import models.items.UsableItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -19,33 +21,45 @@ import static views.Log.EMPTY_COLLECTION;
 
 public class Collection {
 
-
-    protected List<Card> cards = new ArrayList<>();
+    protected Map<Card, Integer> cards = new HashMap<>();
 
     public Collection() {
     }
 
-    public Collection(List<Card> cards) {
-        this.cards = new ArrayList<>(cards);
+    public Collection(Map<Card, Integer> cards) {
+        this.cards = new HashMap<>(cards);
     }
 
-    public void addCards(List<Card> cards) {
-        this.cards.addAll(cards);
+    public void addCards(Map<Card, Integer> cards) {
+        this.cards.putAll(cards);
     }
 
     public List<Card> getCardsList() {
-        return this.cards;
+        return ListToMap(cards);
     }
 
-    public void addCard(Card member) throws CollectionException {
-        this.cards.add(member);
+    public Map<Card, Integer> getCardsMap() {
+        return cards;
+    }
+
+    public void addCard(Card card) throws CollectionException {
+        if (cards.containsKey(card)){
+            int num = cards.get(card);
+            cards.replace(card, num, num + 1);
+            return;
+        }
+        this.cards.put(card, 1);
+    }
+
+    private List<Card> ListToMap(Map<Card, Integer> map) {
+        return new ArrayList<>(map.keySet());
     }
 
     public List<Card> filterByName(String keyword) {
         String regex = String.format("(?i)%s", keyword);
         if (cards.size() == 0)
-            return cards;
-        return cards.stream().filter(
+            return ListToMap(cards);
+        return cards.keySet().stream().filter(
                 (card) -> {
                     Pattern pattern = Pattern.compile(regex);
                     Matcher matcher = pattern.matcher(card.getName());
@@ -55,7 +69,7 @@ public class Collection {
     }
 
     public List<Hero> getHeroes() {
-        return cards.stream().filter(
+        return cards.keySet().stream().filter(
                 (card) -> (card instanceof Hero)
         ).map(
                 (card) -> ((Hero) card)
@@ -63,7 +77,7 @@ public class Collection {
     }
 
     public List<Minion> getMinions() {
-        return cards.stream().filter(
+        return cards.keySet().stream().filter(
                 (card) -> (card instanceof Minion)
         ).map(
                 (card) -> ((Minion) card)
@@ -71,7 +85,7 @@ public class Collection {
     }
 
     public List<Spell> getSpells() {
-        return cards.stream().filter(
+        return cards.keySet().stream().filter(
                 (card) -> (card instanceof Spell)
         ).map(
                 (card) -> ((Spell) card)
@@ -79,7 +93,7 @@ public class Collection {
     }
 
     public List<UsableItem> getUsableItems() {
-        return cards.stream().filter(
+        return cards.keySet().stream().filter(
                 (card) -> (card instanceof UsableItem)
         ).map(
                 (card) -> ((UsableItem) card)
@@ -87,8 +101,14 @@ public class Collection {
     }
 
     public void removeCard(Card card) throws CardNotFoundException {
-        if (!cards.remove(card))
+        if (!cards.containsKey(card))
             throw new CardNotFoundException();
+        int number = cards.get(card);
+        if(cards.get(card) == 1) {
+            cards.remove(card);
+            return;
+        }
+        cards.replace(card, number, number - 1);
     }
 
     public List<Card> getCardsList(String cardName) throws CardNotFoundException {
@@ -99,9 +119,7 @@ public class Collection {
     }
 
     public Card getCard(String cardName) throws CardNotFoundException {
-        List<Card> cards = filterByName("^" + cardName + "$").stream().map(
-                marketObject -> (Card) marketObject
-        ).collect(Collectors.toList());
+        List<Card> cards = new ArrayList<>(filterByName("^" + cardName + "$"));
         if (cards.size() != 1) {
             throw new CardNotFoundException();
         }
@@ -109,7 +127,7 @@ public class Collection {
     }
 
     public List<Flag> getFlags() {
-        return cards.stream()
+        return cards.keySet().stream()
                 .filter(
                         card -> card instanceof Attacker
                 ).map(
@@ -117,9 +135,9 @@ public class Collection {
                 ).collect(Collectors.toList());
     }
 
-    public Card getCard(int cardID) throws CardNotFoundException {
-        for (Card card : cards) {
-            if (card.getID() == cardID)
+    public Card getCardByID(String cardID) throws CardNotFoundException {
+        for (Card card : cards.keySet()) {
+            if (card.getCardID().equalsIgnoreCase(cardID))
                 return card;
         }
         throw new CardNotFoundException();
@@ -127,7 +145,7 @@ public class Collection {
 
     public boolean contains(Card card) {
         try {
-            getCard(card.getID());
+            getCardByID(card.getCardID());
         }  catch (CardNotFoundException e) {
             return false;
         }

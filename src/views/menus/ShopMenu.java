@@ -72,14 +72,10 @@ public class ShopMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)sell\\s+(?<name>[A-z ]+)$",
+                "^(?i)sell\\s+(?<cardName>[A-z ]+)$",
                 "sell",
-                "sell [CardId]",
+                "sell [CardName]",
                 "\t\t\tsell cards in collection"
-        ));
-        commands.add(new Command(
-                "^(?i)select (?<cardID>\\d+)",
-                "selectCard"
         ));
 
     }
@@ -139,14 +135,13 @@ public class ShopMenu implements Menu {
     }
 
     public static void sell(Matcher matcher) {
-        String name = matcher.group("name");
+        String name = matcher.group("cardName");
         try {
             Manager.sell(name);
             Output.log(Log.SELLING_SUCCESSFUL);
         } catch (CardNotFoundException e) {
             Output.err(e);
         }
-
     }
 
     public static void help(Matcher matcher) {
@@ -196,15 +191,6 @@ public class ShopMenu implements Menu {
                     spells.get(i).getPrice() + "$");
         }
 
-    }
-
-    public static void selectCard(Matcher matcher) {
-        int cardID = Integer.parseInt(matcher.group("cardID"));
-        try {
-            Manager.selectCard(cardID);
-        } catch (CardNotFoundException e) {
-            Output.err(e);
-        }
     }
 
 

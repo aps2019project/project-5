@@ -134,6 +134,7 @@ public class Account {
     }
 
     public void addCardToCollection (Card card) throws Collection.CollectionException {
+        if (collection.contains(card))
         collection.addCard(card);
     }
 

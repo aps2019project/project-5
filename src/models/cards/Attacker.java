@@ -22,9 +22,9 @@ public class Attacker extends Card {
     }
 
 
-    public Attacker(int id, String name, String description, int manaPoint, int price, int health, int attackPoint,
+    public Attacker(String cardID, String name, String description, int manaPoint, int price, int health, int attackPoint,
                     AttackType attackType, int range) {
-        super(id, name, description, manaPoint, price);
+        super(cardID, name, description, manaPoint, price);
         this.currentHealth = this.health = health;
         this.attackPoint = attackPoint;
         this.attackType = attackType;

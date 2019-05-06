@@ -5,6 +5,7 @@ import models.cards.Card;
 import models.Collection.CardNotFoundException;
 import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
+import models.items.UsableItem;
 import org.json.JSONException;
 
 import java.io.FileNotFoundException;
@@ -51,7 +52,7 @@ public class Shop {
         Card card = shopInstance.searchCard(cardName);
         if (account.getDrake() < card.getPrice())
             throw new NotEnoughDrakeException();
-        if (account.getItemsNumber() == ITEMS_MAX_NUMBER)
+        if (card instanceof UsableItem && account.getItemsNumber() == ITEMS_MAX_NUMBER)
             throw new ItemsFullException();
         account.addCardToCollection(card);
         account.incrementDrake(-card.getPrice());

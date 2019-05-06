@@ -14,8 +14,8 @@ public class Spell extends Card {
         return targetType;
     }
 
-    public Spell(int id, String name, String description, int manaPoint, int price) {
-        super(id, name, description, manaPoint, price);
+    public Spell(String cardID, String name, String description, int manaPoint, int price) {
+        super(cardID, name, description, manaPoint, price);
     }
 
     @Override

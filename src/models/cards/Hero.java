@@ -12,9 +12,9 @@ public class Hero extends Attacker {
                 " - Special power : " + getSpecialPower();
     }
 
-    public Hero(int id, String name, String description, int manaPoint, int price, int health, int attackPoint,
+    public Hero(String cardID, String name, String description, int manaPoint, int price, int health, int attackPoint,
                 AttackType attackType, int range, int coolDown) {
-        super(id, name, description, manaPoint, price, health, attackPoint, attackType, range);
+        super(cardID, name, description, manaPoint, price, health, attackPoint, attackType, range);
         this.coolDown = coolDown;
     }
 
