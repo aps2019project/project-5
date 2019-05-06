@@ -215,7 +215,7 @@ public class Manager {
     }
 
     public static void insertCard(String cardName, int x, int y) throws Collection.CollectionException,
-            Map.InvalidCellException, Player.NotEnoughManaException {
+            Map.InvalidCellException, Player.NotEnoughManaException, Map.InvalidTargetCellException {
         Card card = getActivePlayer().getHand().getCard(cardName);
         Cell cell = playingMatch.getMap().getCell(x - 1, y - 1);
         if(playingMatch.getActivePlayer().getMana() < card.getNessacaryManaToInsert())
