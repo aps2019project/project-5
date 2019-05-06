@@ -26,10 +26,23 @@ public class Map {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+        String username = null;
         for(int i = 0; i < 5; i++) {
             for(int j = 0; j < 9; j++) {
-//                if(cells[i][j].getCard())
+                if(cells[i][j].getAttacker() == null)
+                    stringBuilder.append(" _ ");
+                else {
+                    if(username == null)
+                        username = cells[i][j].getAttacker().getUsername();
+                    char cardPrefix;
+                    if(cells[i][j].getAttacker().getUsername().equals(username))
+                        cardPrefix = '+';
+                    else
+                        cardPrefix = '-';
+                    stringBuilder.append(String.format("%c%02d", cardPrefix, cells[i][j].getAttacker().getId()));
+                }
             }
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
