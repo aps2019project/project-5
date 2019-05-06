@@ -47,7 +47,7 @@ public class Map {
         return stringBuilder.toString();
     }
 
-    private boolean isBetween(int number, int down, int up) {
+    private static boolean isBetween(int number, int down, int up) {
         return number >= down && number < up;
     }
 
