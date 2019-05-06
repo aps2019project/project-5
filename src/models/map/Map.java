@@ -41,16 +41,19 @@ public class Map {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        String username = null;
+        String username1 = null;
+        String username2 = null;
         for(int i = 0; i < 5; i++) {
             for(int j = 0; j < 9; j++) {
                 if(cells[i][j].getAttacker() == null)
                     stringBuilder.append(" _ ");
                 else {
-                    if(username == null)
-                        username = cells[i][j].getAttacker().getUsername();
+                    if(username1 == null)
+                        username1 = cells[i][j].getAttacker().getUsername();
+                    if(username2 == null && username1 != null && !cells[i][j].getAttacker().getUsername().equals(username1))
+                        username2 = cells[i][j].getAttacker().getUsername();
                     char cardPrefix;
-                    if(cells[i][j].getAttacker().getUsername().equals(username))
+                    if(cells[i][j].getAttacker().getUsername().equals(username1))
                         cardPrefix = '+';
                     else
                         cardPrefix = '-';
@@ -59,6 +62,7 @@ public class Map {
             }
             stringBuilder.append("\n");
         }
+        stringBuilder.append(String.format("+: %s\n-: %s", username1, username2));
         return stringBuilder.toString();
     }
 

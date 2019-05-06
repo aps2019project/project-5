@@ -41,8 +41,8 @@ public class Player {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
         this.shuffleDeck();
-        this.setHand();
         this.setCardsId();
+        this.setHand();
         this.setNextCard();
     }
 
@@ -120,7 +120,7 @@ public class Player {
         for (int i = 0; i < 5; i++) {
             Card card = deck.getCards().get(0);
             hand.getCards().add(card);
-            hand.getCards().remove(card);
+            deck.getCards().remove(card);
         }
     }
 
