@@ -6,8 +6,9 @@ import models.cards.Card;
 public class PowerBuff extends Buff {
     private int powerPoint;
 
-    public PowerBuff(int healthPoint) {
-        this.powerPoint = healthPoint;
+    public PowerBuff(int powerPoint, int activeTime) {
+        super(activeTime);
+        this.powerPoint = powerPoint;
     }
 
     public int getPowerPoint() {

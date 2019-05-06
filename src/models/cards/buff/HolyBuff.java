@@ -6,7 +6,8 @@ import models.cards.Card;
 public class HolyBuff extends Buff {
     private int healthPoint;
 
-    public HolyBuff(int healthPoint) {
+    public HolyBuff(int healthPoint, int activeTime) {
+        super(activeTime);
         this.healthPoint = healthPoint;
     }
 

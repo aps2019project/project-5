@@ -6,8 +6,9 @@ import models.cards.Card;
 public class PoisonBuff extends Buff {
     private int powerPoint;
 
-    public PoisonBuff(int healthPoint) {
-        this.powerPoint = healthPoint;
+    public PoisonBuff(int maxActiveTime, int powerPoint) {
+        super(maxActiveTime);
+        this.powerPoint = powerPoint;
     }
 
     public int getPowerPoint() {
@@ -16,6 +17,7 @@ public class PoisonBuff extends Buff {
 
     @Override
     public void buffEffect(Card card) {
+        super.activeTime++;
         ((Attacker) card).decrementAP(this.powerPoint);
     }
 }
