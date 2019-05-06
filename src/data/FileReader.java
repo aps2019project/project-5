@@ -6,8 +6,9 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class FileReader {
-    public static final String MINIONS_DATA = "minions.json";
-    public static final String HEROES_DATA = "heroes.json";
+    static final String MINIONS_DATA = "minions.json";
+    static final String HEROES_DATA = "heroes.json";
+    static final String SPELLS_DATA = "spell.json";
 
     public String getFileContent(String fileName) throws FileNotFoundException {
         URL url = FileReader.class.getResource(fileName);
