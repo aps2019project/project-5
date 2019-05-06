@@ -73,6 +73,7 @@ public class MainMenu implements Menu {
         } else {
             new PreBattleMenu().handleMenu();
             if(!Manager.isOpponentNull()) {
+                BattleMenu.endTurn(null);
                 new BattleMenu().handleMenu();
             }
         }

@@ -5,6 +5,8 @@ import models.cards.Card;
 import models.Collection.CardNotFoundException;
 import models.Account.NotEnoughDrakeException;
 import models.cards.Minion;
+import models.items.CollectableItem;
+import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
 import models.match.DeathMatch;
@@ -246,5 +248,40 @@ public class Manager {
 
     public static void endTurn() {
         playingMatch.nextTurn();
+    }
+
+    public static List<Item> getCollectableItems() {
+        return getActivePlayer().getCollectedItems();
+    }
+
+    public static void selectCollectableItem(String itemID) {
+        getActivePlayer().selectCollectibleItem(itemID);
+    }
+
+    public static CollectableItem getSelectedCollectableItem() throws Player.NoItemSelectedException {
+        CollectableItem collectableItem = getActivePlayer().getSelectedCollectableItem();
+        if (collectableItem == null)
+            throw new Player.NoItemSelectedException(Error.NO_ITEM_SELECTED.toString());
+        return collectableItem;
+    }
+
+    public static void useCollectableItem(int x, int y) {
+        // TODO: 5/7/19 use item in cell(x, y)
+    }
+
+    public static Card getNextCard() {
+        return getActivePlayer().getHand().getNextCard();
+    }
+
+    public static Card getCardInGraveyard(String cardID) throws CardNotFoundException {
+        Card card = playingMatch.getGraveyardCard(cardID);
+        if (card == null) {
+            throw new CardNotFoundException(Error.CARD_NOT_FOUND_IN_GRAVEYARD.toString());
+        }
+        return card;
+    }
+
+    public static List<Card> getCardsInGraveyard() {
+        return playingMatch.getGraveyardCards();
     }
 }

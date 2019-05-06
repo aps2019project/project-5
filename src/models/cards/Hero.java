@@ -26,7 +26,7 @@ public class Hero extends Attacker {
     @Override
     public String showInfo() {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("Hero :\nname : %s\ncost : %d\ndesc : %s"
+        result.append(String.format("Hero :\n\tname : %s\n\tcost : %d\n\tdesc : %s"
                 , this.getName(), this.getPrice(), this.getDescription()));
 
         return result.toString();

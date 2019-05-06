@@ -2,13 +2,13 @@ package models.items;
 
 import models.map.Cell;
 
-public class CollectableItems extends Item {
+public class CollectableItem extends Item {
     private boolean isCollected;
     private CollectableTypes collectableTypes;
     private String playerName;
     private int id;
 
-    public CollectableItems(String name, Cell cell, String description) {
+    public CollectableItem(String name, Cell cell, String description) {
         super(name, cell, description);
     }
 

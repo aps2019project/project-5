@@ -112,7 +112,7 @@ public class CollectionMenu implements Menu {
                     (card) -> Output.log(card.toString())
             );
         } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         }
 
     }
@@ -154,7 +154,7 @@ public class CollectionMenu implements Menu {
         } catch (Deck.HeroExistsInDeckException e) {
             Output.err(Error.HERO_EXISTS_IN_DECK);
         } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         }
 
     }
@@ -166,7 +166,7 @@ public class CollectionMenu implements Menu {
             Manager.removeCardFromDeck(cardName, deckName);
             Output.log(Log.CARD_REMOVED_FROM_COLLECTION);
         } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         } catch (Account.DeckNotFoundException e) {
             Output.err(Error.DECK_NOT_FOUND);
         }
