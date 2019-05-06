@@ -87,12 +87,7 @@ public class PreBattleMenu implements Menu {
         } else {
             opponentName = "AI User";
         }
-
-        try {
-            Manager.setMatchData(AIMode, gameMode, opponentName);
-        } catch (Collection.CollectionException e) {
-            e.printStackTrace();
-        }
+        Manager.setMatchData(AIMode, gameMode, opponentName);
 
     }
 }

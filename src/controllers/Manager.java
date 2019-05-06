@@ -4,7 +4,6 @@ import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
 import models.Account.NotEnoughDrakeException;
-import models.cards.Hero;
 import models.cards.Minion;
 import models.map.Cell;
 import models.map.Map;
@@ -102,11 +101,16 @@ public class Manager {
             Account.DeckNotFoundException, Deck.HeroExistsInDeckException,
             Deck.HeroNotExistsInDeckException, Deck.DeckFullException, CardNotFoundException {
         Deck deck = account.getDeck(deckName);
-        Card card =  Card.getInstanceOf(account.getCollection().getCard(cardName));
-        card.setUsername(account.getUsername());
-        if (deck.countNumberOf(card) == account.getCollection().getNumberOf(account.getCard(cardName)))
+        addCardToDeck(account, deck, cardName);
+    }
+
+    public static void addCardToDeck(Account account, Deck deck, String cardName) throws CardNotFoundException,
+            Deck.HeroExistsInDeckException, Deck.HeroNotExistsInDeckException, Deck.DeckFullException {
+        Card newCard = Card.getInstanceOf(account.getCollection().getCard(cardName));
+        newCard.setUsername(account.getUsername());
+        if (deck.countNumberOf(newCard) == account.getCollection().getNumberOf(account.getCard(cardName)))
             throw new CardNotFoundException();
-        deck.addCard(card);
+        deck.addCard(newCard);
     }
 
     public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException,
@@ -176,12 +180,12 @@ public class Manager {
         return playingMatch.showOpponentMinions();
     }
 
-    public static void setMatchData(boolean isAIMode, int gameMode, String username) throws Collection.CollectionException {
+    public static void setMatchData(boolean isAIMode, int gameMode, String username) {
         opponentUsername = username;
         if (!isOpponentNull()) {
             Account opponent;
             if (isAIMode)
-                opponent = Account.getAiAccount();
+                opponent = Account.getAIAccount();
             else
                 opponent = Account.getAccounts().get(username);
             if (gameMode == 1 /* story mode */ ) {
