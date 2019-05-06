@@ -3,7 +3,7 @@ package models.cards;
 import models.cards.spell.Buff;
 import models.map.Cell;
 
-public class Card implements Comparable{
+public class Card implements Comparable {
     private Cell cell;
     private Buff buff;
     private int manaPoint;

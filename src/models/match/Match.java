@@ -155,13 +155,13 @@ public abstract class Match {
     }
 
     public class CardAttackIsNotAvailableException extends Exception {
-        private String id;
-        public CardAttackIsNotAvailableException(String id) {
+        private int id;
+        public CardAttackIsNotAvailableException(int id) {
             super("Invalid attack");
             this.id = id;
         }
 
-        public String getId() {
+        public int getId() {
             return id;
         }
     }
@@ -175,9 +175,10 @@ public abstract class Match {
 
     public class TiredMinionException extends Exception {
         String id;
+
         public TiredMinionException(String id) {
             super("Minion is Tired!");
-            this.id=id;
+            this.id = id;
         }
 
         public String getId() {
