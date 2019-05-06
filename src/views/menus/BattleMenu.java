@@ -20,7 +20,7 @@ public class BattleMenu implements Menu {
     public BattleMenu() {
         // TODO: Add commands.
         commands.add(new Command(
-                "^(?i)Game info$",
+                "^(?i)game info$",
                 "gameInfo"
         ));
 
@@ -84,7 +84,7 @@ public class BattleMenu implements Menu {
     }
 
     public static void gameInfo(Matcher matcher) {
-        Manager.getMatchInfo();
+        Output.log(Manager.getMatchInfo());
     }
 
     private static void showMinions(List<Minion> minions) {

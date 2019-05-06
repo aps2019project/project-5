@@ -11,16 +11,19 @@ public class Flag extends Item {
         super(name, cell, "");
         tokenTurn = -1;
     }
+    public Flag() {
+        super();
+    }
 
     public int getTokenTurn() {
         return tokenTurn;
     }
 
     public boolean isGotten() {
-        return tokenTurn != -1;
+        return owner != null;
     }
 
-    public void realese() {
+    public void release() {
         this.tokenTurn = -1;
         this.owner = null;
     }

@@ -121,8 +121,8 @@ public class Manager {
     }
 
     public static String getMatchInfo() {
-        return "Player 1 mana: " + playingMatch.getPlayer1().getMana() +
-                "Player 2 mana: " + playingMatch.getPlayer2().getMana() +
+        return "Player 1 mana: " + playingMatch.getPlayer1().getMana() + "\t ||| \t" +
+                "Player 2 mana: " + playingMatch.getPlayer2().getMana() + "\n" +
                 playingMatch.getInfo();
     }
 
