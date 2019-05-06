@@ -23,6 +23,11 @@ public abstract class Buff {
         return buffType;
     }
 
+    public boolean buffIsActivated() {
+        if (isContinues) return true;
+        return activeTime <= maxActiveTime;
+    }
+
     public void setBuffType(BuffType buffType) {
         this.buffType = buffType;
     }
@@ -32,7 +37,8 @@ public abstract class Buff {
         this.isContinues = isContinous;
     }
 
-    public Buff() {}
+    public Buff() {
+    }
 
     public abstract void buffEffect(Card card);
 

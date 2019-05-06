@@ -21,6 +21,10 @@ public class Attacker extends Card {
         return buffActivated;
     }
 
+    public void makeBuffClear() {
+        buffActivated = new ArrayList<>();
+    }
+
     public void addBuffActivated(Buff buff) {
         this.buffActivated.add(buff);
     }

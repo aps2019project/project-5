@@ -18,6 +18,6 @@ public class HolyBuff extends Buff {
     @Override
     public void buffEffect(Card card) {
         if (!isContinues) super.activeTime++;
-        ((Attacker) card).decrementHP(this.healthPoint);
+        ((Attacker) card).incrementHP(this.healthPoint);
     }
 }

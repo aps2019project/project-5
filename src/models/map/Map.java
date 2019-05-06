@@ -13,6 +13,7 @@ import views.Error;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static models.cards.spell.TargetType.SQUARE3x3;
 
 public class Map {
