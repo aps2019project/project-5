@@ -4,6 +4,7 @@ import models.Account;
 import models.Collection;
 import models.Player;
 import models.cards.*;
+import models.cards.buff.Buff;
 import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
@@ -41,11 +42,33 @@ public abstract class Match {
     }
 
     public void setTurn() {
-        players[1].getActiveCards().forEach(
-                attacker -> attacker.getBuffActivated().forEach(
-                        buff -> buff.buffEffect(attacker)
-                )
+        List<Buff> disActivated1 = new ArrayList<>();
+        List<Buff> disActivated2 = new ArrayList<>();
+
+        players[0].getActiveCards().forEach(
+                attacker -> {
+                    attacker.getBuffActivated().forEach(
+                            buff -> {
+                                if (!buff.buffIsActivated()) disActivated1.add(buff);
+                                else buff.buffEffect(attacker);
+                            }
+                    );
+                    attacker.getBuffActivated().removeAll(disActivated1);
+                }
+
         );
+        players[1].getActiveCards().forEach(
+                attacker -> {
+                    attacker.getBuffActivated().forEach(
+                            buff -> {
+                                if (!buff.buffIsActivated()) disActivated2.add(buff);
+                                else buff.buffEffect(attacker);
+                            }
+                    );
+                    attacker.getBuffActivated().removeAll(disActivated2);
+                }
+        );
+
     }
 
     public void nextTurn() {
