@@ -11,7 +11,6 @@ import views.Log;
 import views.Output;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -44,7 +43,7 @@ public class CollectionMenu implements Menu {
                 "^(?i)show\\s+(?i)all\\s+(?i)decks$",
                 "showAllDecks",
                 "show all decks",
-                "\t\t\t\t\t\tshows name of all decks."
+                "\t\t\t\t\t\tshows all decks details."
         ));
 
         commands.add(new Command(
@@ -67,7 +66,7 @@ public class CollectionMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)search\\s+(?<card>[A-z ]+)$",
+                "^(?i)search\\s+(?<cardName>[A-z ]+)$",
                 "searchCard",
                 "search [String]",
                 "\t\t\t\t\t\tShows cards in player's collection that their name contains [String]"
@@ -177,11 +176,11 @@ public class CollectionMenu implements Menu {
     public static void validateDeck(Matcher matcher) {
         String deckName = matcher.group("deck");
         try {
-            if (Manager.validateDeck(deckName))
+            if (Manager.isValid(deckName))
                 Output.log(Log.DECK_IS_COMPLETED);
             else Output.err(Error.DECK_IS_NOT_COMPLETE);
         } catch (Account.DeckNotFoundException e) {
-            Output.err(Error.DECK_IS_NOT_COMPLETE);
+            Output.err(Error.DECK_NOT_FOUND);
         }
     }
 
