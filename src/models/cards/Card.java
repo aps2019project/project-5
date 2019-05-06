@@ -116,7 +116,7 @@ public class Card implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return this.getID().compareTo(((Card)o).getName());
+        return this.getName().compareTo(((Card) o).getName());
     }
 
     public String getUsername() {

@@ -61,7 +61,7 @@ public class Map {
         if (!cards.contains(card)) {
             // TODO: 5/4/19 check if contains
         }
-       if (card instanceof Attacker) cell.setAttacker((Attacker) card);
+        if (card instanceof Attacker) cell.setAttacker((Attacker) card);
         cards.addCard(card);
     }
 

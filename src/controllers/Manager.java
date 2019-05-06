@@ -173,7 +173,7 @@ public class Manager {
         return playingMatch.showOpponentMinions();
     }
 
-    public static void setMatchData(boolean isAIMode, int gameMode, String username) throws Collection.CollectionException {
+    public static void setMatchData(boolean isAIMode, int gameMode, String username) {
         opponentUsername = username;
         if (!isOpponentNull()) {
             Account opponent;

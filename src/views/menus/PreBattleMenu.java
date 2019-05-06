@@ -69,12 +69,13 @@ public class PreBattleMenu implements Menu {
         if(!AIMode) {
             Output.log("Enter opponent's name:");
             int attemptsCount = 0;
-            while (opponentName.equals("") && attemptsCount < 3 ) {
+            while (opponentName.equals("") && attemptsCount < 3) {
                 attemptsCount++;
                 opponentName = Input.getString("");
                 try {
                     if(!Manager.canPlay(opponentName)) {
                         Output.err(Error.PLAYERS_DECK_IS_NOT_VALID);
+                        opponentName = "";
                     }
                 } catch (Account.InvalidUsernameException e) {
                     Output.err(Error.USERNAME_NOT_FOUND);
@@ -88,11 +89,7 @@ public class PreBattleMenu implements Menu {
             opponentName = "AI User";
         }
 
-        try {
-            Manager.setMatchData(AIMode, gameMode, opponentName);
-        } catch (Collection.CollectionException e) {
-            e.printStackTrace();
-        }
+        Manager.setMatchData(AIMode, gameMode, opponentName);
 
     }
 }
