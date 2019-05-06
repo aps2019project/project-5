@@ -18,63 +18,83 @@ import java.util.regex.Matcher;
 public class BattleMenu implements Menu {
 
     public BattleMenu() {
-        // TODO: Add commands.
         commands.add(new Command(
-                "^(?i)game info$",
-                "gameInfo"
+                "^(?i)game\\s+info$",
+                "gameInfo",
+                "Game Info",
+                "\t\t\t\t\t\tshows game details based on going match"
         ));
 
         commands.add(new Command(
                 "^(?i)return$",
-                ""
+                "return",
+                "Return",
+                "\t\t\t\t\t\t\treturns to main menu"
         ));
 
         commands.add(new Command(
-                "^(?i)show\\s+my\\s+minions",
-                "showMyMinions"
+                "^(?i)show\\s+my\\s+minions$",
+                "showMyMinions",
+                "Show My Minions",
+                "\t\t\t\t\tshows active player minions"
         ));
 
         commands.add(new Command(
                 "^(?i)help$",
-                "help"
+                "help",
+                "Help",
+                "\t\t\t\t\t\t\tshows battle menu help"
         ));
         commands.add(new Command(
-                "^(?i)show\\s+card(?<card>)\\s+info$",
-                "showCardInfo"
+                "^(?i)show\\s+card\\s+(?<cardName>\\w+)\\s+info$",
+                "showCardInfo",
+                "Show Card [cardName] Info",
+                "\t\tShows card info "
         ));
         commands.add(new Command(
                 "^(?i)show\\s+hand$",
-                "showHand"
+                "showHand",
+                "show hand",
+                "\t\t\t\t\t\tshows active player hand"
         ));
         commands.add(new Command(
-                "^(?i)Move\\s+to\\s+\\((?<x>\\d+),(?<y>\\d+)\\)$",
-                "moveTo"
+                "^(?i)move\\s+to\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\)$",
+                "moveTo",
+                "Move to ([x], [y])",
+                "\t\t\t\tMoves selected card of active player to cell (x, y)"
         ));
         commands.add(new Command(
                 "^(?i)attack\\s+(?<cardID>[A-z ]+)$",
-                "attack"
+                "attack",
+                "attack [enemyCardID]",
+                "\t\t\tattacks to enemy card by the selected card"
         ));
         commands.add(new Command(
-                "^(?i)insert (?<cardName>\\w+) in \\((?<x>\\d+), (?<y>\\d+)\\)$",
-                "insert"
+                "^(?i)insert\\s+(?<cardName>\\w+)\\s+in\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
+                "insert",
+                "Insert [cardName] in ([x], [y])",
+                "\tInserts card to cell (x, y)"
+
         ));
         commands.add(new Command(
-                "^(?i)end turn$",
-                "endTurn"
+                "^(?i)end\\s+turn$",
+                "endTurn",
+                "End Turn",
+                "\t\t\t\t\t\tGives turn to opponent"
         ));
 
         commands.add(new Command(
-                "^(?i)select\\s+(?<name>[A-z ]+)$",
+                "^(?i)select\\s+(?<cardID>[A-z ]+)$",
                 "selectCard",
                 "select [CardName]",
-                "select "
+                "\t\t\t\tselects a card to attack"
         ));
 
         commands.add(new Command(
                 "^(?i)show\\s+map$",
                 "showMap",
                 "show map",
-                "prints map"
+                "\t\t\t\t\t\tprints map"
         ));
     }
 
@@ -107,9 +127,6 @@ public class BattleMenu implements Menu {
         showMinions(Manager.showMyMinions());
     }
 
-    public static void showOponnent(Matcher matcher) {
-    }
-
     public static void showOpponent(Matcher matcher) {
         showMinions(Manager.showOpponentMinions());
     }
@@ -118,7 +135,7 @@ public class BattleMenu implements Menu {
     }
 
     public static void showCardInfo(Matcher matcher) {
-        String name = matcher.group("name");
+        String name = matcher.group("cardName");
         try {
             Card card = Manager.showCardInfo(name);
             Output.log(card.showInfo());
@@ -208,7 +225,7 @@ public class BattleMenu implements Menu {
     }
 
     public static void help(Matcher matcher) {
-        Menu.help(new BattleMenu().getCommands());
+        Menu.help(commands);
     }
 
     public static void selectCard(Matcher matcher) {
