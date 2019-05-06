@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class Match {
     private Map map;
     protected Player[] players = new Player[2];
-    private int turn;
+    private int turn = 0;
     private ArrayList<Item> collectibleItems = new ArrayList<>();
     final int PLAYERS_COUNT = 2;
     private boolean isStory;
@@ -156,7 +156,6 @@ public abstract class Match {
 
     public class CardAttackIsNotAvailableException extends Exception {
         private String id;
-
         public CardAttackIsNotAvailableException(String id) {
             super("Invalid attack");
             this.id = id;

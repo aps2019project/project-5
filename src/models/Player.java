@@ -94,7 +94,7 @@ public class Player {
     public void setCardsId() {
         int i = 0;
         for (Card card : getDeck().getCards())
-            card.setId(++i);
+            card.setID(++i);
     }
 
     private void shuffleDeck() {

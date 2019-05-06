@@ -1,6 +1,7 @@
 package data;
 
 import models.cards.AttackType;
+import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
@@ -61,10 +62,10 @@ public class JsonParser {
     }
 
 
-    public static List<Minion> getMinions() throws FileNotFoundException, JSONException {
+    public static List<Card> getMinions() throws FileNotFoundException, JSONException {
         JSONArray minionsJSON = new JSONArray(getFileData(FileReader.MINIONS_DATA));
         List<Object> minionsObject = toList(minionsJSON);
-        ArrayList<Minion> minions = new ArrayList<>();
+        ArrayList<Card> minions = new ArrayList<>();
         int id = 1;
         for(Object minionObject : minionsObject) {
             HashMap<String, Object> minionHashMap = (HashMap<String, Object>) minionObject;
@@ -93,10 +94,10 @@ public class JsonParser {
         return minions;
     }
 
-    public static List<Hero> getHeroes() throws FileNotFoundException, JSONException {
+    public static List<Card> getHeroes() throws FileNotFoundException, JSONException {
         JSONArray heroesJSON = new JSONArray(getFileData(FileReader.HEROES_DATA));
         List<Object> heroesObject = toList(heroesJSON);
-        ArrayList<Hero> heroes = new ArrayList<>();
+        ArrayList<Card> heroes = new ArrayList<>();
         int id = 1;
         for(Object heroObject : heroesObject) {
             HashMap<String, Object> heroHashMap = (HashMap<String, Object>) heroObject;
@@ -122,9 +123,8 @@ public class JsonParser {
         return heroes;
     }
 
-
     public static void main(String[] args) throws FileNotFoundException, JSONException {
-        List<Hero> heroes = getHeroes();
+        List<Card> heroes = getHeroes();
         System.out.println(heroes.toString());
     }
 

@@ -8,6 +8,7 @@ import views.Error;
 import views.Input;
 import views.Output;
 
+import javax.security.auth.login.AccountException;
 import javax.swing.plaf.OptionPaneUI;
 import java.nio.channels.AcceptPendingException;
 import java.util.ArrayList;
@@ -87,7 +88,11 @@ public class PreBattleMenu implements Menu {
             opponentName = "AI User";
         }
 
-        Manager.setMatchData(AIMode, gameMode, opponentName);
+        try {
+            Manager.setMatchData(AIMode, gameMode, opponentName);
+        } catch (Collection.CollectionException e) {
+            e.printStackTrace();
+        }
 
     }
 }

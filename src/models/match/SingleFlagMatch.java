@@ -1,6 +1,7 @@
 package models.match;
 
 import models.Account;
+import models.Collection;
 import models.Player;
 import models.items.Flag;
 
@@ -10,7 +11,7 @@ public class SingleFlagMatch extends Match {
     private int WINNING_TURN = 12;
     Flag flag ;
 
-    public SingleFlagMatch(Account account1 , Account account2){
+    public SingleFlagMatch(Account account1 , Account account2) {
         super(account1, account2);
     }
 

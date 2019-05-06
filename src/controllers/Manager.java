@@ -82,18 +82,14 @@ public class Manager {
         }
     }
 
-    public static Collection getShopCollection() throws Collection.NullCollectionException {
+    public static Collection getShopCollection() {
         Collection collection = shop.getCardsCollection();
-        if (collection == null)
-            throw new Collection.NullCollectionException();
         return shop.getCardsCollection();
     }
 
 
-    public static Collection getMyCollection() throws Collection.NullCollectionException {
+    public static Collection getMyCollection() {
         Collection collection = account.getCollection();
-        if (collection == null)
-            throw new Collection.NullCollectionException();
         return collection;
     }
 
@@ -101,12 +97,13 @@ public class Manager {
         return account.getCollection().getCardsList(cardName);
     }
 
-    public static void addCardToDeck(String cardName, String deckName) throws Account.DeckNotFoundException,
-            Collection.CollectionException {
+    public static void addCardToDeck(String cardName, String deckName) throws
+            Account.DeckNotFoundException, Deck.HeroExistsInDeckException,
+            Deck.HeroNotExistsInDeckException, Deck.DeckFullException, CardNotFoundException {
         Card card = account.getCollection().getCard(cardName);
+        card.setUsername(account.getUsername());
         Deck deck = account.getDeck(deckName);
         deck.addCard(card);
-
     }
 
     public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException,
@@ -176,7 +173,7 @@ public class Manager {
         return playingMatch.showOpponentMinions();
     }
 
-    public static void setMatchData(boolean isAIMode, int gameMode, String username) {
+    public static void setMatchData(boolean isAIMode, int gameMode, String username) throws Collection.CollectionException {
         opponentUsername = username;
         if (!isOpponentNull()) {
             Account opponent;

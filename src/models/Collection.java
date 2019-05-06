@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static views.Error.*;
-import static views.Log.EMPTY_COLLECTION;
 
 public class Collection {
 
@@ -34,6 +33,10 @@ public class Collection {
         this.cards.putAll(cards);
     }
 
+    public void addCards(List<Card> cards) {
+        cards.forEach(this::addCard);
+    }
+
     public List<Card> getCardsList() {
         return ListToMap(cards);
     }
@@ -42,7 +45,7 @@ public class Collection {
         return cards;
     }
 
-    public void addCard(Card card) throws CollectionException {
+    public void addCard(Card card) {
         if (cards.containsKey(card)){
             int num = cards.get(card);
             cards.replace(card, num, num + 1);
@@ -51,7 +54,7 @@ public class Collection {
         this.cards.put(card, 1);
     }
 
-    private List<Card> ListToMap(Map<Card, Integer> map) {
+    private static List<Card> ListToMap(Map<Card, Integer> map) {
         return new ArrayList<>(map.keySet());
     }
 
@@ -139,7 +142,7 @@ public class Collection {
 
     public Card getCardByID(String cardID) throws CardNotFoundException {
         for (Card card : cards.keySet()) {
-            if (card.getCardID().equalsIgnoreCase(cardID))
+            if (card.getID().equalsIgnoreCase(cardID))
                 return card;
         }
         throw new CardNotFoundException();
@@ -147,7 +150,7 @@ public class Collection {
 
     public boolean contains(Card card) {
         try {
-            getCardByID(card.getCardID());
+            getCardByID(card.getID());
         }  catch (CardNotFoundException e) {
             return false;
         }
@@ -177,12 +180,6 @@ public class Collection {
     public static class ItemsFullException extends CollectionException {
         public ItemsFullException() {
             super(ITEMS_ARE_FULL.toString());
-        }
-    }
-
-    public static class NullCollectionException extends CollectionException {
-        public NullCollectionException() {
-            super(EMPTY_COLLECTION.toString());
         }
     }
 
