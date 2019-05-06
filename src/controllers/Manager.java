@@ -82,18 +82,14 @@ public class Manager {
         }
     }
 
-    public static Collection getShopCollection() throws Collection.NullCollectionException {
+    public static Collection getShopCollection() {
         Collection collection = shop.getCardsCollection();
-        if (collection == null)
-            throw new Collection.NullCollectionException();
         return shop.getCardsCollection();
     }
 
 
-    public static Collection getMyCollection() throws Collection.NullCollectionException {
+    public static Collection getMyCollection() {
         Collection collection = account.getCollection();
-        if (collection == null)
-            throw new Collection.NullCollectionException();
         return collection;
     }
 

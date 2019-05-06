@@ -91,11 +91,7 @@ public class ShopMenu implements Menu {
     }
 
     public static void showMyCollection(Matcher matcher) {
-        try {
-            showCollection(Manager.getMyCollection(), "Sell");
-        } catch (Collection.NullCollectionException npException) {
-            Output.err(npException);
-        }
+        showCollection(Manager.getMyCollection(), "Sell");
     }
 
     public static void search(Matcher matcher) {
@@ -153,11 +149,7 @@ public class ShopMenu implements Menu {
     }
 
     public static void show(Matcher matcher) {
-        try {
-            showCollection(Manager.getShopCollection(), "Buy");
-        } catch (Collection.NullCollectionException e) {
-            Output.err(e);
-        }
+        showCollection(Manager.getShopCollection(), "Buy");
     }
 
     public static void showCollection(Collection collection, String buyOrSell) {

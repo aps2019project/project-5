@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static views.Error.*;
-import static views.Log.EMPTY_COLLECTION;
 
 public class Collection {
 
@@ -32,6 +31,10 @@ public class Collection {
 
     public void addCards(Map<Card, Integer> cards) {
         this.cards.putAll(cards);
+    }
+
+    public void addCards(List<Card> cards) {
+        cards.forEach(this::addCard);
     }
 
     public List<Card> getCardsList() {
@@ -51,7 +54,7 @@ public class Collection {
         this.cards.put(card, 1);
     }
 
-    private List<Card> ListToMap(Map<Card, Integer> map) {
+    private static List<Card> ListToMap(Map<Card, Integer> map) {
         return new ArrayList<>(map.keySet());
     }
 
@@ -177,12 +180,6 @@ public class Collection {
     public static class ItemsFullException extends CollectionException {
         public ItemsFullException() {
             super(ITEMS_ARE_FULL.toString());
-        }
-    }
-
-    public static class NullCollectionException extends CollectionException {
-        public NullCollectionException() {
-            super(EMPTY_COLLECTION.toString());
         }
     }
 
