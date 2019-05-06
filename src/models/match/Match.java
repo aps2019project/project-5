@@ -3,11 +3,7 @@ package models.match;
 import models.Account;
 import models.Collection;
 import models.Player;
-import models.cards.AttackType;
-import models.cards.Attacker;
-import models.cards.Card;
-import models.cards.Minion;
-import models.cards.buff.Buff;
+import models.cards.*;
 import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
@@ -42,35 +38,16 @@ public abstract class Match {
     }
 
     public void setTurn() {
-        List<Buff> removeBuffs = new ArrayList<>();
-        players[0].getActiveCards().getCardsList().forEach(
-                attacker -> {
-                    ((Attacker) attacker).getBuffActivated().forEach(
-                            buff -> {
-                                if (buff.buffIsActivated()) {
-                                    buff.buffEffect(attacker);
-                                } else removeBuffs.addAll(((Attacker) attacker).getBuffActivated());
-                            }
-                    );
-                    ((Attacker) attacker).getBuffActivated().removeAll(removeBuffs);
-                });
-        players[1].getActiveCards().getCardsList().forEach(
-                attacker -> {
-                    ((Attacker) attacker).getBuffActivated().forEach(
-                            buff -> {
-                                if (buff.buffIsActivated()) {
-                                    buff.buffEffect(attacker);
-                                } else removeBuffs.addAll(((Attacker) attacker).getBuffActivated());
-                                ((Attacker) attacker).getBuffActivated().removeAll(removeBuffs);
-                            }
-                    );
-                }
+        players[1].getActiveCards().forEach(
+                attacker -> attacker.getBuffActivated().forEach(
+                        buff -> buff.buffEffect(attacker)
+                )
         );
     }
 
     public void nextTurn() {
         turn++;
-        setTurn();
+
         // TODO: Implement
     }
 
@@ -84,8 +61,26 @@ public abstract class Match {
     }
 
     protected Match(Account account1, Account account2) {
-        Player player1 = new Player(account1);
-        Player player2 = new Player(account2);
+        map = new Map();
+        players[0] = new Player(account1);
+        players[1] = new Player(account2);
+        Hero hero1 = players[0].getDeck().getHero();
+        Hero hero2 = players[1].getDeck().getHero();
+        Cell cell1 = new Cell();
+        Cell cell2 = new Cell();
+        try {
+            cell1 = map.getCell(2, 0);
+            cell2 = map.getCell(2, 8);
+        } catch (Map.InvalidCellException ignored) {}
+        try {
+            map.insertCard(hero1, cell1);
+            map.insertCard(hero2, cell2);
+        } catch (Map.InvalidCellException | Map.InvalidTargetCellException | Player.HeroDeadException ignored) {}
+        hero1.setCell(cell1);
+        hero2.setCell(cell2);
+        players[0].getActiveCards().add(hero1);
+        players[1].getActiveCards().add(hero2);
+
     }
 
     abstract public Player getWinner();
@@ -113,13 +108,18 @@ public abstract class Match {
     }
 
     public Card getCard(String cardID) throws Collection.CardNotFoundException {
-        return getActiveCards().getCardByID(cardID);
+        for(Card card : getActiveCards()) {
+            if(card.getID().equals(cardID))
+                return card;
+        }
+        throw new Collection.CardNotFoundException("Card not found");
     }
 
-    private Collection getActiveCards() {
-        Collection allActiveCards = new Collection(players[0].getActiveCards().getCardsMap());
-        allActiveCards.addCards(players[1].getActiveCards().getCardsMap());
-        return allActiveCards;
+    private ArrayList<Attacker> getActiveCards() {
+        ArrayList<Attacker> activeCards = new ArrayList<>();
+        activeCards.addAll(players[0].getActiveCards());
+        activeCards.addAll(players[1].getActiveCards());
+        return activeCards;
     }
 
     public List<Minion> showOpponentMinions() {
@@ -160,10 +160,10 @@ public abstract class Match {
         if (!((Attacker) card).getTurnAttackAvailability()) throw new TiredMinionException(card.getID());
     }
 
-    public void attack(String cardID) throws Collection.CardNotFoundException, CardAttackIsNotAvailableException,
-            TiredMinionException, OpponentMinionIsNotAvailableForAttack {
+    public void attack(String cardID) throws CardAttackIsNotAvailableException,
+            TiredMinionException, OpponentMinionIsNotAvailableForAttack, Collection.CardNotFoundException {
         Card card = getActivePlayer().getSelectedCard();
-        Card opponentCard = getInActivePlayer().getActiveCards().getCardByID(cardID);
+        Card opponentCard = getInActivePlayer().getActiveCard(cardID);
         isValidAttack(card, opponentCard);
         card.setMoveAvailable(false);
         ((Attacker) opponentCard).decrementCurrentHealth(((Attacker) card).getAttackPoint());

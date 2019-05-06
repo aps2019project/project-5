@@ -20,10 +20,7 @@ public class MultiFlagMatch extends Match {
 
     @Override
     public Player getWinner() {
-        for (int i = 0; i < PLAYERS_COUNT; i++) {
-            if (players[i].getFlags().size() >= 1. * flags.size() / 2)
-                return players[i];
-        }
+
         return null;
     }
 

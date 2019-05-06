@@ -26,6 +26,11 @@ public class Map {
         return this.cards;
     }
 
+    public Map() {
+        for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 9; j++)
+                cells[i][j] = new Cell();
+    }
 
     public Cell getCell(int x, int y) throws InvalidCellException {
         if (!cellExist(x, y))
@@ -65,7 +70,7 @@ public class Map {
         return isBetween(x, 0, ROW_NUMBER) && isBetween(y, 0, COLUMN_NUMBER);
     }
 
-    public void insertCard(Card card, Cell cell) throws InvalidCellException, Collection.CollectionException, InvalidTargetCellException {
+    public void insertCard(Card card, Cell cell) throws InvalidCellException, InvalidTargetCellException, Player.HeroDeadException {
         if (cell.isFull())
             throw new InvalidCellException(Error.INVALID_TARGET.toString());
         if (!cards.contains(card)) {
@@ -83,13 +88,13 @@ public class Map {
 
     }
 
-    private List<Cell> getEffectCells(Spell spell, Cell cell) throws InvalidTargetCellException {
+    private List<Cell> getEffectCells(Spell spell, Cell cell) throws InvalidTargetCellException, Player.HeroDeadException {
         TargetType targetType = spell.getTargetType();
         List<Cell> targetCells = new ArrayList<>();
         Attacker attacker = cell.getAttacker();
         switch (targetType) {
             case MY_HERO:
-                if (attacker == Manager.getActivePlayer().getActiveCards().getHeroes().get(0)) {
+                if (attacker == Manager.getActivePlayer().getHero()) {
                     targetCells.add(cell);
                     return targetCells;
                 }
@@ -112,7 +117,7 @@ public class Map {
             case SQUARE3x3:
                 break;
             case ALL_MY_FORCE:
-                Manager.getActivePlayer().getActiveCards().getCardsList().forEach(
+                Manager.getActivePlayer().getActiveCards().forEach(
                         card -> targetCells.add(card.getCell())
                 );
                 return targetCells;
@@ -129,7 +134,7 @@ public class Map {
                 }
                 break;
             case ALL_OPPONENT_FORCES:
-                Manager.getInActivePlayer().getActiveCards().getCardsList().forEach(
+                Manager.getInActivePlayer().getActiveCards().forEach(
                         card -> targetCells.add(card.getCell())
                 );
                 return targetCells;
@@ -171,7 +176,7 @@ public class Map {
             if (cell1.getX() < cell2.getX()) dx = 1;
             if (cell1.getY() > cell2.getY()) dy = -1;
             if (cell1.getY() < cell2.getY()) dx = 1;
-            if (opponentPlayer.getActiveCards().getCardsList().contains(cells[cell1.getX() + dx][cell1.getY() + dy].getAttacker()))
+            if (opponentPlayer.getActiveCards().contains(cells[cell1.getX() + dx][cell1.getY() + dy].getAttacker()))
                 return false;
         }
         return true;

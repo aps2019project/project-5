@@ -1,26 +1,30 @@
 package models;
 
+import controllers.Manager;
 import models.cards.Attacker;
 import models.cards.Card;
+import models.cards.Hero;
 import models.cards.spell.Spell;
 import models.items.Flag;
 import models.items.Item;
 import models.map.Cell;
+import models.map.Map;
 import views.Input;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player {
     private Account account;
     private Deck deck;
-    private Hand hand;
+    private Hand hand = new Hand();
     private Card selectedCard;
     private int flags;
     private List<Item> collectedItems = new ArrayList<>();
     private ArrayList<Card> graveYard;
-    private Collection activeCards;
+    private ArrayList<Attacker> activeCards = new ArrayList<>();
     private int mana;
     private Input input;
     private String decision;
@@ -59,7 +63,7 @@ public class Player {
     }
 
     public void insertCard(Card card, Cell cell) throws Collection.CollectionException {
-        changeMana(-card.getNessacaryManaToInsert());
+        changeMana(-card.getManaPoint());
         if (card instanceof Attacker) {
             activateCard((Attacker) card);
             card.setCell(cell);
@@ -69,8 +73,8 @@ public class Player {
         }
     }
 
-    private void activateCard(Attacker attacker) throws Collection.CollectionException {
-        activeCards.addCard(attacker);
+    private void activateCard(Attacker attacker) {
+        activeCards.add(attacker);
     }
 
     public Deck getDeck() {
@@ -85,17 +89,8 @@ public class Player {
         this.collectedItems.add(collectedItems);
     }
 
-
-    public List<Flag> getFlags() {
-        return activeCards.getFlags();
-    }
-
-    public Collection getActiveCards() {
+    public ArrayList<Attacker> getActiveCards() {
         return activeCards;
-    }
-
-    public boolean hasFlag() {
-        return getFlags().size() > 0;
     }
 
     public void setCardsId() {
@@ -105,12 +100,27 @@ public class Player {
     }
 
     private void shuffleDeck() {
+        Hero hero = deck.getHero();
+        deck.getCards().remove(hero);
         Collections.shuffle(deck.getCards());
+        try {
+            deck.addCard(hero);
+        } catch (Exception ignored) {}
+    }
+
+    public Hero getHero() throws HeroDeadException {
+        for(Attacker attacker : activeCards)
+            if(attacker instanceof Hero)
+                return (Hero) attacker;
+        throw new HeroDeadException("Hero doesn't exists in active cards");
     }
 
     private void setHand() {
+        hand = new Hand();
         for (int i = 0; i < 5; i++) {
-            hand.addCard(deck.getCards().get(i));
+            Card card = deck.getCards().get(0);
+            hand.getCards().add(card);
+            hand.getCards().remove(card);
         }
     }
 
@@ -118,6 +128,13 @@ public class Player {
         hand.setNextCard(deck.getCards().get(5));
     }
 
+    public Attacker getActiveCard(String cardID) throws Collection.CardNotFoundException {
+        try {
+            return activeCards.stream().filter(card -> card.getID().equals(cardID)).collect(Collectors.toList()).get(0);
+        } catch (Exception e) {
+            throw new Collection.CardNotFoundException("Card not found with this ID");
+        }
+    }
 
     public void decide() {
 
@@ -132,7 +149,10 @@ public class Player {
     }
 
     public Card getCard(String cardID) throws Collection.CardNotFoundException {
-        return activeCards.getCardByID(cardID);
+        for(Attacker attacker : activeCards)
+            if(attacker.getID().equals(cardID))
+                return attacker;
+        throw new Collection.CardNotFoundException("Card with this id not found");
     }
 
     public void changeMana(int mana) {
@@ -141,6 +161,12 @@ public class Player {
 
     public static class NotEnoughManaException extends Exception {
         public NotEnoughManaException(String message) {
+            super(message);
+        }
+    }
+
+    public static class HeroDeadException extends Exception {
+        public HeroDeadException(String message) {
             super(message);
         }
     }

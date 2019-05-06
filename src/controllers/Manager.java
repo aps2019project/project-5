@@ -214,11 +214,11 @@ public class Manager {
         return shop.searchCard(name);
     }
 
-    public static void insertCard(String cardName, int x, int y) throws Collection.CollectionException,
-            Map.InvalidCellException, Player.NotEnoughManaException, Map.InvalidTargetCellException {
-        Card card = getActivePlayer().getHand().getCard(cardName);
+    public static void insertCard(String cardID, int x, int y) throws Collection.CollectionException,
+            Map.InvalidCellException, Player.NotEnoughManaException, Map.InvalidTargetCellException, Player.HeroDeadException {
+        Card card = getActivePlayer().getHand().getCard(cardID);
         Cell cell = playingMatch.getMap().getCell(x - 1, y - 1);
-        if(playingMatch.getActivePlayer().getMana() < card.getNessacaryManaToInsert())
+        if(playingMatch.getActivePlayer().getMana() < card.getManaPoint())
             throw new Player.NotEnoughManaException(Error.NOT_ENOUGH_MANA.toString());
         playingMatch.getMap().insertCard(card, cell);
         getActivePlayer().insertCard(card, cell);
@@ -229,8 +229,11 @@ public class Manager {
         playingMatch.attack(ID);
     }
 
-    public static Hand showHand() {
+    public static Hand getHand() {
         return getActivePlayer().getHand();
     }
 
+    public static Map getMap() {
+        return playingMatch.getMap();
+    }
 }

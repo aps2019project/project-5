@@ -17,13 +17,7 @@ public class SingleFlagMatch extends Match {
 
     @Override
     public Player getWinner() {
-        for (int i = 0; i < PLAYERS_COUNT; i++) {
-            if(!players[i].hasFlag())
-                continue;
-            if(getTurn() - players[i].getFlags().get(0).getTokenTurn() >= WINNING_TURN ) {
-                return players[i];
-            }
-        }
+
         return null;
     }
 
