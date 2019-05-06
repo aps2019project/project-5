@@ -4,7 +4,7 @@ import models.cards.AttackType;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
-import models.cards.buff.Buff;
+import models.cards.buff.*;
 import models.cards.spell.SpecialPowerActivateTime;
 import models.cards.spell.Spell;
 import org.json.JSONArray;
@@ -146,8 +146,47 @@ public class JsonParser {
             List<Object> buffs = (List<Object>) spellHashMap.get("effect");
             for(Object buffObject : buffs) {
                 HashMap<String, Object> buffHashMap = (HashMap<String, Object>) buffObject;
-                Buff buff;
+                Buff buff = new Buff() {
+                    @Override
+                    public void buffEffect(Card card) {}
+                };
 
+                if(((String) buffHashMap.get("name")).equalsIgnoreCase("DisarmBuff")) {
+                    buff = new DisarmBuff(
+                            (int) buffHashMap.get("activeTime"),
+                            (boolean) buffHashMap.get("isContinues")
+                    );
+                } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("HolyBuff")) {
+                    buff = new HolyBuff(
+                            (int) buffHashMap.get("healthPoint"),
+                            (int) buffHashMap.get("activeTime"),
+                            (boolean) buffHashMap.get("isContinues")
+                    );
+                } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("PoisonBuff")) {
+                    buff = new PoisonBuff(
+                            (int) buffHashMap.get("activeTime"),
+                            (int) buffHashMap.get("healthPoint"),
+                            (boolean) buffHashMap.get("isContinues")
+                    );
+                } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("PowerBuff")) {
+                    buff = new PowerBuff(
+                            (int) buffHashMap.get("powerPoint"),
+                            (int) buffHashMap.get("activeTime"),
+                            (boolean) buffHashMap.get("isContinues")
+                    );
+                } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("StunBuff")) {
+                    buff = new StunBuff(
+                            (int) buffHashMap.get("activeTime"),
+                            (boolean) buffHashMap.get("isContinues")
+                    );
+                } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("WeaknessBuff")) {
+                    buff = new WeaknessBuff(
+                            (int) buffHashMap.get("powerPoint"),
+                            (int) buffHashMap.get("activeTime"),
+                            (boolean) buffHashMap.get("isContinues")
+                    );
+                }
+                spell.getBuffs().add(buff);
                 // TODO: Add buff to spell's buffs
             }
             spells.add(spell);

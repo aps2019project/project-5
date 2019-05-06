@@ -12,7 +12,7 @@ public class Spell extends Card {
 
     private TargetType targetType;
 
-    private ArrayList<Buff> buff = new ArrayList<>();
+    private ArrayList<Buff> buffs = new ArrayList<>();
 
     public TargetType getTargetType() {
         return targetType;
@@ -34,6 +34,9 @@ public class Spell extends Card {
                 ("Spell :\nname : %s\nMP : %d\ncost : %d\ndesc : %s"
                         , this.getName(), this.getManaPoint(), this.getPrice(), this.getDescription()));
         return result.toString();
+    }
 
+    public ArrayList<Buff> getBuffs() {
+        return buffs;
     }
 }

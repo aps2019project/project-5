@@ -32,6 +32,8 @@ public abstract class Buff {
         this.isContinues = isContinous;
     }
 
+    public Buff() {}
+
     public abstract void buffEffect(Card card);
 
     public static class CardIsNotAvailableException extends Exception {
