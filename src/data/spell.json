@@ -3,144 +3,284 @@
     "name": "Total Disarm",
     "price": 1000,
     "manaPoint": 0,
-    "targetType": {},
-    "effect": {}
+    "targetType": "AN_OPPONENT_FORCE",
+    "effect": [
+      {
+        "name": "Disarm",
+        "isContinous": true,
+        "activeTime":
+      }
+    ]
   },
   {
     "name": "Area Dispel",
-    "price":1500,
-    "manaPoint":2,
-    "targetType": {},
-    "effect": {}
+    "price": 1500,
+    "manaPoint": 2,
+    "targetType": "SQUARE2x2",
+    "effect": [
+      {
+        "name": "OPPONENT_BUFF_KILLER",
+        "isContinous": false
+      },
+      {
+        "name": "MY_BUFF_KILLER",
+        "isContinous": false
+      }
+    ]
   },
   {
     "name": "Empower",
-    "price":250,
-    "manaPoint":1,
-    "targetType": {},
-    "effect": {}
+    "price": 250,
+    "manaPoint": 1,
+    "targetType": "MY_FORCE",
+    "effect": [
+      {
+        "name": "PowerBuff",
+        "isContinous": false,
+        "activeTime": 1,
+        "powerPoint": 2
+      }
+    ]
   },
   {
     "name": "Fireball",
-    "price":400,
-    "manaPoint":1,
-    "targetType": {},
-    "effect": {}
+    "price": 400,
+    "manaPoint": 1,
+    "targetType": "AN_OPPONENT_FORCE",
+    "effect": [
+      {
+        "name": "PoisonBuff",
+        "isContinous": false,
+        "activeTime": 1,
+        "healthPoint": 4
+      }
+    ]
   },
   {
     "name": "God strength",
-    "price":450,
-    "manaPoint":2,
-    "targetType": {},
-    "effect": {}
+    "price": 450,
+    "manaPoint": 2,
+    "targetType": "MY_HERO",
+    "effect": [
+      {
+        "name": "PowerBuff",
+        "isContinous": false,
+        "activeTime": 1,
+        "powerPoint": 4
+      }
+    ]
   },
   {
     "name": "Fireball",
-    "price":600,
-    "manaPoint":3,
+    "price": 600,
+    "manaPoint": 3,
     "targetType": {},
     "effect": {}
   },
   {
     "name": "Lighting Bolt",
-    "price":1250,
-    "manaPoint":2,
-    "targetType": {},
-    "effect": {}
+    "price": 1250,
+    "manaPoint": 2,
+    "targetType": "OPPONENT_HERO",
+    "effect": [
+      {
+        "name": "PoisonBuff",
+        "isContinous": false,
+        "activeTime": 1
+      }
+    ]
   },
   {
     "name": "Poison Lake",
-    "price":900,
-    "manaPoint":5,
+    "price": 900,
+    "manaPoint": 5,
     "targetType": {},
     "effect": {}
   },
   {
     "name": "Madness",
-    "price":650,
-    "manaPoint":0,
-    "targetType": {},
-    "effect": {}
+    "price": 650,
+    "manaPoint": 0,
+    "targetType": "MY_FORCE",
+    "effect": [
+      {
+        "name": "PowerBuff",
+        "isContinous": false,
+        "powerPoint": 4,
+        "activeTime": 3
+      },
+      {
+        "name": "Disarm",
+        "isContinous": false,
+        "activeTime": 3
+      }
+    ]
   },
   {
     "name": "All Disarm",
-    "price":2000,
-    "manaPoint":9,
-    "targetType": {},
-    "effect": {}
+    "price": 2000,
+    "manaPoint": 9,
+    "targetType": "ALL_OPPONENT_FORCE",
+    "effect": [
+      {
+        "name": "Disarm",
+        "isContinous": false,
+        "activeTime": 1
+      }
+    ]
   },
   {
     "name": "All Poison",
-    "price":1500,
-    "manaPoint":8,
-    "targetType": {},
-    "effect": {}
+    "price": 1500,
+    "manaPoint": 8,
+    "targetType": "ALL_OPPONENT_FORCE",
+    "effect": [
+      {
+        "name": "PoisonBuff",
+        "isContinous": false,
+        "activeTime": 4,
+        "healthPoint": 1
+      }
+    ]
   },
   {
     "name": "Dispel",
-    "price":2100,
-    "manaPoint":0,
-    "targetType": {},
-    "effect": {}
+    "price": 2100,
+    "manaPoint": 0,
+    "targetType": "OPPONENT_FORCE_OR_MY_FORCE",
+    "effect": [
+      {
+        "name": "OPPONENT_BUFF_KILLER",
+        "isContinous": false,
+        "activeTime": 1
+      },
+      {
+        "name": "MY_BUFF_KILLER",
+        "isContinous": false,
+        "activeTime": 1
+      }
+    ]
   },
   {
     "name": "Health With Profit",
-    "price":2250,
-    "manaPoint":0,
-    "targetType": {},
-    "effect": {}
+    "price": 2250,
+    "manaPoint": 0,
+    "targetType": "MY_FORCE",
+    "effect": [
+      {
+        "name": "PoisonBuff",
+        "isContinous": false,
+        "activeTime": 1,
+        "healthPoint": 6
+      },
+      {
+        "name": "HolyBuff",
+        "isContinous": false,
+        "activeTime": 3,
+        "healthPoint": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinous": false,
+        "activeTime": 3,
+        "healthPoint": 1
+      }
+    ]
   },
   {
     "name": "Power Up",
-    "price":2500,
-    "manaPoint":2,
-    "targetType": {},
-    "effect": {}
+    "price": 2500,
+    "manaPoint": 2,
+    "targetType": "MY_FORCE",
+    "effect": [
+      {
+        "name": "PowerBuff",
+        "isContinous": false,
+        "activeTime": 1,
+        "powerPoint": 6
+      }
+    ]
   },
   {
     "name": "All Power",
-    "price":2500,
-    "manaPoint":2,
-    "targetType": {},
-    "effect": {}
+    "price": 2500,
+    "manaPoint": 2,
+    "targetType": "ALL_MY_FORCE",
+    "effect": [
+      {
+        "name": "PowerBuff",
+        "isContinous": true,
+        "activateTime": 0,
+        "powerPoint": 2
+      }
+    ]
   },
   {
     "name": "All Attack",
-    "price":1500,
-    "manaPoint":4,
-    "targetType": {},
-    "effect": {}
+    "price": 1500,
+    "manaPoint": 4,
+    "targetType": "ALL_OPPONENT_FORCE_IN_ONE_COLUMN",
+    "effect": [
+      {
+        "name": "poisonBuff",
+        "isContinous": false,
+        "activateTime": 1,
+        "powerPoint": 6
+      }
+    ]
   },
-
   {
     "name": "Weakening",
-    "price":1000,
-    "manaPoint":1,
-    "targetType": {},
-    "effect": {}
+    "price": 1000,
+    "manaPoint": 1,
+    "targetType": "ONE_OPPONENT_MINION",
+    "effect": [
+      {
+        "name": "WeaknessBuff",
+        "isContinous": false,
+        "activateTime": 1,
+        "powerPoint": 4
+      }
+    ]
   },
-
   {
     "name": "Sacrifice",
-    "price":1600,
-    "manaPoint":2,
-    "targetType": {},
-    "effect": {}
+    "price": 1600,
+    "manaPoint": 2,
+    "targetType": "MY_MINION",
+    "effect": [
+      {
+        "name": "PoisonBuff",
+        "isContinous": false,
+        "activateTime": 1,
+        "healthPoint": 6
+      },
+      {
+        "name": "PowerBuff",
+        "isContinous": false,
+        "activateTime": 1,
+        "powerPoint": 8
+      }
+    ]
   },
-
   {
     "name": "Kings Guard",
-    "price":1750,
-    "manaPoint":9,
-    "targetType": {},
+    "price": 1750,
+    "manaPoint": 9,
+    "targetType": "",
     "effect": {}
   },
-
   {
     "name": "Shock",
-    "price":1200,
-    "manaPoint":9,
-    "targetType": {},
-    "effect": {}
+    "price": 1200,
+    "manaPoint": 9,
+    "targetType": "AN_OPPONENT_HERO",
+    "effect": [
+      {
+        "name": "StunBuff",
+        "isContinous": false,
+        "activeTime": 2
+      }
+    ]
   }
 ]
