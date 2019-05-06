@@ -1,5 +1,6 @@
 package models.match;
 
+import models.Account;
 import models.Collection;
 import models.Player;
 import models.cards.AttackType;
@@ -10,7 +11,6 @@ import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +54,9 @@ public abstract class Match {
         return map;
     }
 
-    protected Match() {
+    protected Match(Account account1, Account account2) throws Collection.CollectionException {
+        Player player1 = new Player(account1);
+        Player player2 = new Player(account2);
 
     }
 
@@ -82,13 +84,13 @@ public abstract class Match {
         return players[turn % 2];
     }
 
-    public Card getCard(int cardID) throws Collection.CardNotFoundException {
-        return getActiveCards().getCard(cardID);
+    public Card getCard(String cardID) throws Collection.CardNotFoundException {
+        return getActiveCards().getCardByID(cardID);
     }
 
     private Collection getActiveCards() {
-        Collection allActiveCards = new Collection(players[0].getActiveCards().getCardsList());
-        allActiveCards.addCards(players[1].getActiveCards().getCardsList());
+        Collection allActiveCards = new Collection(players[0].getActiveCards().getCardsMap());
+        allActiveCards.addCards(players[1].getActiveCards().getCardsMap());
         return allActiveCards;
     }
 
@@ -130,9 +132,10 @@ public abstract class Match {
         if (!((Attacker) card).getTurnAttackAvailability()) throw new TiredMinionException(card.getID());
     }
 
-    public void attack(int ID) throws Collection.CardNotFoundException, CardAttackIsNotAvailableException, TiredMinionException, OpponentMinionIsNotAvailableForAttack {
+    public void attack(String cardID) throws Collection.CardNotFoundException, CardAttackIsNotAvailableException,
+            TiredMinionException, OpponentMinionIsNotAvailableForAttack {
         Card card = getActivePlayer().getSelectedCard();
-        Card opponentCard = getInActivePlayer().getActiveCards().getCard(ID);
+        Card opponentCard = getInActivePlayer().getActiveCards().getCardByID(cardID);
         isValidAttack(card, opponentCard);
         card.setMoveAvailable(false);
         ((Attacker) opponentCard).decrementCurrentHealth(((Attacker) card).getAttackPoint());

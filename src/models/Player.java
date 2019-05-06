@@ -31,7 +31,7 @@ public class Player {
         this.mana = mana;
     }
 
-    private Player(Account account) {
+    public Player(Account account) throws Collection.CollectionException {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
         this.shuffleDeck();
@@ -101,9 +101,9 @@ public class Player {
         Collections.shuffle(deck.getCards());
     }
 
-    private void setHand() {
+    private void setHand() throws Collection.CollectionException {
         for (int i = 0; i < 5; i++) {
-            hand.getCards().add(deck.getCards().get(i));
+            hand.addCard(deck.getCards().get(i));
         }
     }
 
@@ -125,8 +125,8 @@ public class Player {
         this.selectedCard = card;
     }
 
-    public Card getCard(int cardID) throws Collection.CardNotFoundException {
-        return activeCards.getCard(cardID);
+    public Card getCard(String cardID) throws Collection.CardNotFoundException {
+        return activeCards.getCardByID(cardID);
     }
 
     public void changeMana(int mana) {

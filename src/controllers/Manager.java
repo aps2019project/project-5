@@ -3,12 +3,14 @@ package controllers;
 import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
-import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.cards.Minion;
 import models.map.Cell;
 import models.map.Map;
+import models.match.DeathMatch;
 import models.match.Match;
+import models.match.MultiFlagMatch;
+import models.match.SingleFlagMatch;
 import views.Error;
 import views.Input;
 import views.InputAI;
@@ -151,7 +153,7 @@ public class Manager {
         return playingMatch.getInActivePlayer();
     }
 
-    public static void selectCard(int cardID) throws CardNotFoundException {
+    public static void selectCard(String cardID) throws CardNotFoundException {
         playingMatch.getActivePlayer().selectCard(playingMatch.getActivePlayer().getCard(cardID));
     }
 
@@ -174,7 +176,7 @@ public class Manager {
         return playingMatch.showOpponentMinions();
     }
 
-    public static void setMatchData(boolean isAIMode, boolean isStoryMode, String username) {
+    public static void setMatchData(boolean isAIMode, int gameMode, String username) {
         opponentUsername = username;
         if (!isOpponentNull()) {
             Account opponent;
@@ -182,8 +184,18 @@ public class Manager {
                 opponent = Account.getAiAccount();
             else
                 opponent = Account.getAccounts().get(username);
-            if (!isStoryMode) {
-
+            if (gameMode == 1 /* story mode */ ) {
+                matches.add(new DeathMatch());
+                matches.add(new MultiFlagMatch());
+                matches.add(new SingleFlagMatch());
+                playingMatch = matches.get(0);
+                matches.remove(0);
+            } else if (gameMode == 2 /* death match */ ) {
+                playingMatch = new DeathMatch();
+            } else if (gameMode == 3 /* multi flag match */ ) {
+                playingMatch = new MultiFlagMatch();
+            } else if (gameMode == 4 /* single flag match */ ) {
+                playingMatch = new SingleFlagMatch();
             }
             if (opponent == null) {
                 opponentUsername = "";
@@ -215,7 +227,7 @@ public class Manager {
         getActivePlayer().insertCard(card, cell);
     }
 
-    public static void attack(int ID) throws Match.CardAttackIsNotAvailableException, Match.TiredMinionException,
+    public static void attack(String ID) throws Match.CardAttackIsNotAvailableException, Match.TiredMinionException,
             CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack {
         playingMatch.attack(ID);
     }
