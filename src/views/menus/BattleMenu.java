@@ -198,6 +198,7 @@ public class BattleMenu implements Menu {
     }
 
     public static void endTurn(Matcher matcher) {
+        Manager.endTurn();
 
         //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
 

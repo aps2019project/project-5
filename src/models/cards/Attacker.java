@@ -15,6 +15,16 @@ public class Attacker extends Card {
     private Spell specialPower;
     private boolean turnAttackAvailability;
     private boolean counterAttackAbility;
+    private boolean moveAbility;
+
+    public boolean isMoveAbility() {
+        return moveAbility;
+    }
+
+    public void setMoveAbility(boolean moveAbility) {
+        this.moveAbility = moveAbility;
+    }
+
     private ArrayList<Buff> buffActivated = new ArrayList<>();
 
     public ArrayList<Buff> getBuffActivated() {
@@ -59,10 +69,10 @@ public class Attacker extends Card {
 
     public Attacker(Card card) {
         super(card);
-        this.currentHealth = this.health = ((Attacker)card).health;
-        this.attackPoint = ((Attacker)card).attackPoint;
-        this.attackType = ((Attacker)card).attackType;
-        this.range = ((Attacker)card).range;
+        this.currentHealth = this.health = ((Attacker) card).health;
+        this.attackPoint = ((Attacker) card).attackPoint;
+        this.attackType = ((Attacker) card).attackType;
+        this.range = ((Attacker) card).range;
 
     }
 

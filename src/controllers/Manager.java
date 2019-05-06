@@ -243,4 +243,8 @@ public class Manager {
     public static Map getMap() {
         return playingMatch.getMap();
     }
+
+    public static void endTurn() {
+        playingMatch.nextTurn();
+    }
 }

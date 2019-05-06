@@ -41,33 +41,29 @@ public abstract class Match {
         return players[1];
     }
 
-    public void setTurn() {
-        List<Buff> disActivated1 = new ArrayList<>();
-        List<Buff> disActivated2 = new ArrayList<>();
-        getActivePlayer().setMana(turn / 2 + 2);
-        players[0].getActiveCards().forEach(
+    private void turnPreparing(Player player) {
+        List<Buff> disActivated = new ArrayList<>();
+        player.getActiveCards().forEach(
                 attacker -> {
+                    attacker.setCounterAttackAbility(true);
+                    attacker.setTurnAttackAvailability(true);
+                    attacker.setTurnAttackAvailability(true);
                     attacker.getBuffActivated().forEach(
                             buff -> {
-                                if (!buff.buffIsActivated()) disActivated1.add(buff);
+                                if (!buff.buffIsActivated()) disActivated.add(buff);
                                 else buff.buffEffect(attacker);
                             }
                     );
-                    attacker.getBuffActivated().removeAll(disActivated1);
+                    attacker.getBuffActivated().removeAll(disActivated);
                 }
 
         );
-        players[1].getActiveCards().forEach(
-                attacker -> {
-                    attacker.getBuffActivated().forEach(
-                            buff -> {
-                                if (!buff.buffIsActivated()) disActivated2.add(buff);
-                                else buff.buffEffect(attacker);
-                            }
-                    );
-                    attacker.getBuffActivated().removeAll(disActivated2);
-                }
-        );
+    }
+
+    public void setTurn() {
+        getActivePlayer().setMana(turn / 2 + 2);
+        turnPreparing(players[0]);
+        turnPreparing(players[1]);
 
     }
 
