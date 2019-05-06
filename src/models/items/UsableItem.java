@@ -10,8 +10,8 @@ public class UsableItem extends Card {
         return itemEffect;
     }
 
-    public UsableItem(int id, String name, String description, int manaPoint, int price, ItemEffect itemEffect) {
-        super(id, name, description, manaPoint, price);
+    public UsableItem(String cardID, String name, String description, int manaPoint, int price, ItemEffect itemEffect) {
+        super(cardID, name, description, manaPoint, price);
         this.itemEffect = itemEffect;
     }
 }

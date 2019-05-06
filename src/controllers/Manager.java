@@ -3,7 +3,6 @@ package controllers;
 import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
-import models.Collection.ItemsFullException;
 import models.Account.NotEnoughDrakeException;
 import models.cards.Minion;
 import models.map.Cell;
@@ -154,7 +153,7 @@ public class Manager {
         return playingMatch.getInActivePlayer();
     }
 
-    public static void selectCard(int cardID) throws CardNotFoundException {
+    public static void selectCard(String cardID) throws CardNotFoundException {
         playingMatch.getActivePlayer().selectCard(playingMatch.getActivePlayer().getCard(cardID));
     }
 
@@ -228,7 +227,7 @@ public class Manager {
         getActivePlayer().insertCard(card, cell);
     }
 
-    public static void attack(int ID) throws Match.CardAttackIsNotAvailableException, Match.TiredMinionException,
+    public static void attack(String ID) throws Match.CardAttackIsNotAvailableException, Match.TiredMinionException,
             CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack {
         playingMatch.attack(ID);
     }

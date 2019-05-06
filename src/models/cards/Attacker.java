@@ -11,6 +11,16 @@ public class Attacker extends Card {
     private AttackType attackType;
     private Spell specialPower;
     private boolean turnAttackAvailability;
+    private boolean counterAttackAbility;
+
+    public boolean isCounterAttackAbility() {
+        return counterAttackAbility;
+    }
+
+    public void setCounterAttackAbility(boolean counterAttackAbility) {
+        this.counterAttackAbility = counterAttackAbility;
+    }
+
     Flag flag;
 
     public void setTurnAttackAvailability(boolean b) {
@@ -22,9 +32,9 @@ public class Attacker extends Card {
     }
 
 
-    public Attacker(int id, String name, String description, int manaPoint, int price, int health, int attackPoint,
+    public Attacker(String cardID, String name, String description, int manaPoint, int price, int health, int attackPoint,
                     AttackType attackType, int range) {
-        super(id, name, description, manaPoint, price);
+        super(cardID, name, description, manaPoint, price);
         this.currentHealth = this.health = health;
         this.attackPoint = attackPoint;
         this.attackType = attackType;
@@ -72,7 +82,21 @@ public class Attacker extends Card {
         return super.showInfo();
     }
 
-    public void decrementHP(int attackPoint){
-        this.currentHealth-=attackPoint;
+    public void decrementHP(int attackPoint) {
+        this.currentHealth -= attackPoint;
     }
+
+    public void incrementHP(int healthPoint) {
+        this.currentHealth += healthPoint;
+    }
+
+
+    public void incrementAP(int attackPoint) {
+        this.attackPoint += attackPoint;
+    }
+
+    public void decrementAP(int attackPoint) {
+        this.attackPoint -= attackPoint;
+    }
+
 }

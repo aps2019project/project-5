@@ -8,10 +8,6 @@ import java.util.List;
 public class Hand extends Collection{
     private Card nextCard;
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
     public Card getNextCard() {
         return nextCard;
     }

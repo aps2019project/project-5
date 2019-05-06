@@ -1,5 +1,8 @@
 package models.cards.spell;
 
+import models.cards.Attacker;
+import models.map.Cell;
+
 public class Buff {
     private BuffType type;
 
@@ -14,7 +17,7 @@ public class Buff {
         DISARM_BUFF
     }
 
-    public void holyBuffEffect() {
+    public void holyBuffEffect(int healthImprove, Cell cell) {
     }
 
     public void powerEffect() {

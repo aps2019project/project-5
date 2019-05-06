@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class Deck extends Collection{
     private String name;
+    private List<Card> cards = new ArrayList<>();
 
     public boolean isComplete() {
         return false;

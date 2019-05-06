@@ -3,11 +3,11 @@ package models.cards;
 import models.cards.spell.Buff;
 import models.map.Cell;
 
-public class Card {
+public class Card implements Comparable{
     private Cell cell;
     private Buff buff;
     private int manaPoint;
-    private int id;
+    private String cardID;
     private String description;
     private String name;
     private int price;
@@ -15,22 +15,15 @@ public class Card {
     private int nessacaryManaToInsert;
     private boolean isMoveAvailable;
 
-    public Card(Card card) {
+    // cardID = playerName +
+    public Card(Card card, String cardID) {
         this.cell = card.cell;
         this.buff = card.buff;
         this.manaPoint = card.manaPoint;
-        this.id = card.id;
         this.description = card.description;
         this.name = card.name;
         this.price = card.price;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getID() {
-        return id;
+        this.cardID = cardID;
     }
 
     public String getDescription() {
@@ -41,6 +34,14 @@ public class Card {
     }
 
     public void attack(Cell cell) {
+    }
+
+    public String getCardID() {
+        return this.cardID;
+    }
+
+    public void setCardID(String cardID) {
+        this.cardID = cardID;
     }
 
     public Cell getCell() {
@@ -61,8 +62,8 @@ public class Card {
 
 
     // this constructor can be called only in hero, minion and usable item class
-    protected Card(int id, String name, String description, int manaPoint, int price) {
-        this.id = id;
+    protected Card(String cardID, String name, String description, int manaPoint, int price) {
+        this.cardID = cardID;
         this.name = name;
         this.description = description;
         this.manaPoint = manaPoint;
@@ -106,5 +107,9 @@ public class Card {
         isMoveAvailable = moveAvailable;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        return this.cardID.compareTo(((Card)o).getName());
+    }
 }
 

@@ -1,16 +1,29 @@
 package models.cards;
 
+import models.cards.spell.Buff;
 import models.cards.spell.SpecialPowerActivateTime;
 import models.items.Flag;
+
+import java.util.ArrayList;
 
 public class Minion extends Attacker {
     int comboAbility;
 
+    public ArrayList<Buff> getBuffs() {
+        return buffs;
+    }
+
+    public void addBuff(Buff buff) {
+        this.buffs.add(buff);
+    }
+
+    private ArrayList<Buff> buffs = new ArrayList<>();
+
     public SpecialPowerActivateTime specialPowerActivateTime;
 
-    public Minion(int id, String name, String description, int manaPoint, int price, int health, int attackPoint,
+    public Minion(String cardID, String name, String description, int manaPoint, int price, int health, int attackPoint,
                   AttackType attackType, int range, SpecialPowerActivateTime specialPowerActivateTime) {
-        super(id, name, description, manaPoint, price, health, attackPoint, attackType, range);
+        super(cardID, name, description, manaPoint, price, health, attackPoint, attackType, range);
         this.specialPowerActivateTime = specialPowerActivateTime;
     }
 
@@ -35,7 +48,7 @@ public class Minion extends Attacker {
     public String showInfo() {
         StringBuilder result = new StringBuilder();
         result.append(String.format("Minion :\nName : %s\nHP : %d\tAP : %d\tMP : %d\nRange : %d\nCombo-Ability : %d\ncost : %d\nDesc : %s",
-                this.getName(), this.getHealth(), this.getAttackPoint(), this.getManaPoint(), this.getRange(),comboAbility , this.getPrice(), this.getDescription()));
+                this.getName(), this.getHealth(), this.getAttackPoint(), this.getManaPoint(), this.getRange(), comboAbility, this.getPrice(), this.getDescription()));
         return result.toString();
     }
 }
