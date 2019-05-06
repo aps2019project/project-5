@@ -91,14 +91,12 @@ public class Map {
                         card -> targetCells.add(card.getCell())
                 );
                 return targetCells;
-            break;
             case AN_OPPONENT_FORCE:
                 if (Manager.getInActivePlayer().getActiveCards().contains(attacker)) {
                     targetCells.add(cell);
                     return targetCells;
                 }
                 return targetCells;
-            break;
             case AN_OPPONENT_MINION:
                 if (Manager.getInActivePlayer().getActiveCards().contains(attacker) && attacker instanceof Minion) {
                     targetCells.add(cell);
@@ -110,7 +108,6 @@ public class Map {
                         card -> targetCells.add(card.getCell())
                 );
                 return targetCells;
-            break;
             case OPPONENT_FORCE_OR_MY_FORCE:
                 if (Manager.getActivePlayer().getActiveCards().contains(attacker) ||
                         Manager.getInActivePlayer().getActiveCards().contains(attacker)) {
@@ -118,7 +115,6 @@ public class Map {
                     return targetCells;
                 }
                 return targetCells;
-            break;
             case ALL_OPPONENT_FORCES_IN_ONE_COLUMN:
                 for (int i = 0; i < 5; i++) {
                     if (cells[i][cell.getY()].getAttacker() != null) {
@@ -126,7 +122,6 @@ public class Map {
                     }
                 }
                 return targetCells;
-            break;
         }
         throw new InvalidTargetCellException();
     }
