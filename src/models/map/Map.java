@@ -22,6 +22,17 @@ public class Map {
         return cells[x][y];
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 9; j++) {
+//                if(cells[i][j].getCard())
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     private boolean isBetween(int number, int down, int up) {
         return  number >= down && number < up;
     }
