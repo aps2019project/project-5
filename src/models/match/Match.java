@@ -54,7 +54,7 @@ public abstract class Match {
         return map;
     }
 
-    protected Match(Account account1, Account account2) throws Collection.CollectionException {
+    protected Match(Account account1, Account account2) {
         Player player1 = new Player(account1);
         Player player2 = new Player(account2);
 

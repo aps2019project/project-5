@@ -31,7 +31,7 @@ public class Player {
         this.mana = mana;
     }
 
-    public Player(Account account) throws Collection.CollectionException {
+    public Player(Account account) {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
         this.shuffleDeck();
@@ -101,7 +101,7 @@ public class Player {
         Collections.shuffle(deck.getCards());
     }
 
-    private void setHand() throws Collection.CollectionException {
+    private void setHand() {
         for (int i = 0; i < 5; i++) {
             hand.addCard(deck.getCards().get(i));
         }
