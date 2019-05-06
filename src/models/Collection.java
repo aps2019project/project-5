@@ -33,6 +33,10 @@ public class Collection {
         this.cards.putAll(cards);
     }
 
+    public int getNumberOf(Card card) {
+        return cards.get(card);
+    }
+
     public void addCards(List<Card> cards) {
         cards.forEach(this::addCard);
     }

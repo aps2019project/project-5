@@ -4,6 +4,7 @@ import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
 import models.Account.NotEnoughDrakeException;
+import models.cards.Hero;
 import models.cards.Minion;
 import models.map.Cell;
 import models.map.Map;
@@ -100,9 +101,11 @@ public class Manager {
     public static void addCardToDeck(String cardName, String deckName) throws
             Account.DeckNotFoundException, Deck.HeroExistsInDeckException,
             Deck.HeroNotExistsInDeckException, Deck.DeckFullException, CardNotFoundException {
-        Card card = account.getCollection().getCard(cardName);
-        card.setUsername(account.getUsername());
         Deck deck = account.getDeck(deckName);
+        Card card =  Card.getInstanceOf(account.getCollection().getCard(cardName));
+        card.setUsername(account.getUsername());
+        if (deck.countNumberOf(card) == account.getCollection().getNumberOf(account.getCard(cardName)))
+            throw new CardNotFoundException();
         deck.addCard(card);
     }
 

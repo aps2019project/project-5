@@ -1,6 +1,8 @@
 package models.cards;
 
 import models.cards.buff.Buff;
+import models.cards.spell.Spell;
+import models.items.UsableItem;
 import models.map.Cell;
 
 public class Card implements Comparable {
@@ -23,6 +25,18 @@ public class Card implements Comparable {
         this.description = card.description;
         this.name = card.name;
         this.price = card.price;
+    }
+
+    public static Card getInstanceOf(Card card) {
+        if (card instanceof Hero)
+            return new Hero(card);
+        if (card instanceof Minion)
+            return new Minion(card);
+        if (card instanceof UsableItem)
+            return new UsableItem(card);
+        if (card instanceof Spell)
+            return new Spell(card);
+        return null;
     }
 
     public String getDescription() {
@@ -114,7 +128,7 @@ public class Card implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return this.getID().compareTo(((Card)o).getName());
+        return this.getName().compareTo(((Card)o).getName());
     }
 }
 

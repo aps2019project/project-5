@@ -22,6 +22,10 @@ public class Spell extends Card {
         super(id, name, description, manaPoint, price);
     }
 
+    public Spell(Card card) {
+        super(card);
+    }
+
 
     @Override
     public String toString() {
