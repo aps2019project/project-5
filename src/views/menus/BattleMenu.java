@@ -205,7 +205,7 @@ public class BattleMenu implements Menu {
             Manager.insertCard(cardName, x, y);
         } catch (Map.InvalidCellException | Collection.CollectionException | Player.NotEnoughManaException e) {
             Output.err(e);
-        } catch (Map.InvalidTargetCellException e) {
+        } catch (Map.InvalidTargetCellException | Player.HeroDeadException e) {
             e.printStackTrace();
         }
     }
