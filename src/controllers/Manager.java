@@ -185,17 +185,17 @@ public class Manager {
             else
                 opponent = Account.getAccounts().get(username);
             if (gameMode == 1 /* story mode */ ) {
-                matches.add(new DeathMatch());
-                matches.add(new MultiFlagMatch());
-                matches.add(new SingleFlagMatch());
+                matches.add(new DeathMatch(account, opponent));
+                matches.add(new MultiFlagMatch(account, opponent));
+                matches.add(new SingleFlagMatch(account, opponent));
                 playingMatch = matches.get(0);
                 matches.remove(0);
             } else if (gameMode == 2 /* death match */ ) {
-                playingMatch = new DeathMatch();
+                playingMatch = new DeathMatch(account, opponent);
             } else if (gameMode == 3 /* multi flag match */ ) {
-                playingMatch = new MultiFlagMatch();
+                playingMatch = new MultiFlagMatch(account, opponent);
             } else if (gameMode == 4 /* single flag match */ ) {
-                playingMatch = new SingleFlagMatch();
+                playingMatch = new SingleFlagMatch(account, opponent);
             }
             if (opponent == null) {
                 opponentUsername = "";
