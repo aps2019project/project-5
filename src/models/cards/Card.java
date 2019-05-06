@@ -130,7 +130,6 @@ public class Card implements Comparable {
 
     public String getUsername() {
         return username;
-        return this.getName().compareTo(((Card)o).getName());
     }
 }
 
