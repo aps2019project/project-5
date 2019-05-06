@@ -214,7 +214,7 @@ public class Manager {
     }
 
     public static void moveTo(int x, int y) throws Match.InvalidMoveException, Map.InvalidCellException {
-        playingMatch.moveTo(x, y);
+        playingMatch.moveTo(x - 1, y - 1);
     }
 
     public static Card showCardInfo(String name) throws CardNotFoundException {

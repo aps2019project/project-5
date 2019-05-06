@@ -62,8 +62,17 @@ public class Player {
         this.selectedCard = selectedCard;
     }
 
+    private void setNextHand(Card card) {
+        hand.getCards().remove(card);
+        hand.getCards().add(hand.getNextCard());
+        Card card1 = deck.getCards().get(0);
+        hand.setNextCard(card1);
+        deck.getCards().remove(card1);
+    }
+
     public void insertCard(Card card, Cell cell) throws Collection.CollectionException {
         changeMana(-card.getManaPoint());
+        setNextHand(card);
         if (card instanceof Attacker) {
             activateCard((Attacker) card);
             card.setCell(cell);
