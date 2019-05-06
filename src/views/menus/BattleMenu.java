@@ -41,6 +41,13 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
+                "^(?i)show\\s+opponent\\s+minions$",
+                "showOpponentMinions",
+                "Show opponent Minions",
+                "\t\t\t\t\tshows inactive player minions"
+        ));
+
+        commands.add(new Command(
                 "^(?i)help$",
                 "help",
                 "Help",
@@ -128,11 +135,8 @@ public class BattleMenu implements Menu {
         showMinions(Manager.showMyMinions());
     }
 
-    public static void showOpponent(Matcher matcher) {
-        showMinions(Manager.showOpponentMinions());
-    }
-
     public static void showOpponentMinions(Matcher matcher) {
+        showMinions(Manager.showOpponentMinions());
     }
 
     public static void showCardInfo(Matcher matcher) {

@@ -44,7 +44,7 @@ public abstract class Match {
     public void setTurn() {
         List<Buff> disActivated1 = new ArrayList<>();
         List<Buff> disActivated2 = new ArrayList<>();
-
+        getActivePlayer().setMana(turn / 2 + 2);
         players[0].getActiveCards().forEach(
                 attacker -> {
                     attacker.getBuffActivated().forEach(
@@ -73,12 +73,11 @@ public abstract class Match {
 
     public void nextTurn() {
         turn++;
-
+        setTurn();
         // TODO: Implement
     }
 
-    public List<Minion> showMyMinions() {
-        Player player = this.getActivePlayer();
+    public List<Minion> showMinions(Player player) {
         return player.getActiveCards().stream().filter(
                 card -> card instanceof Minion
         ).map(
