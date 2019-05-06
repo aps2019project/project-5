@@ -40,8 +40,8 @@ public class Player {
     public Player(Account account) {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
-        this.shuffleDeck();
         this.setCardsId();
+        this.shuffleDeck();
         this.setHand();
         this.setNextCard();
     }
