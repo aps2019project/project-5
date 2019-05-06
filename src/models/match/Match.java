@@ -69,9 +69,9 @@ public abstract class Match {
     }
 
     protected Match(Account account1, Account account2) {
-        Player player1 = new Player(account1);
-        Player player2 = new Player(account2);
-
+        map = new Map();
+        players[0] = new Player(account1);
+        players[1] = new Player(account2);
     }
 
     abstract public Player getWinner();

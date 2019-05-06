@@ -1,8 +1,11 @@
 package models.cards.spell;
 
+import controllers.Manager;
+import models.Player;
 import models.cards.Card;
 import models.cards.buff.Buff;
 import models.map.Cell;
+import models.map.Map;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ public class Spell extends Card {
     private TargetType targetType;
 
     private ArrayList<Buff> buffs = new ArrayList<>();
+
 
     public TargetType getTargetType() {
         return targetType;

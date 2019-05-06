@@ -15,7 +15,6 @@ public class Card implements Comparable {
     private String name;
     private int price;
     final int MAX_DISTANCE_TO_MOVE = 2;
-    private int nessacaryManaToInsert;
     private boolean isMoveAvailable;
 
     public Card(Card card) {
@@ -54,9 +53,11 @@ public class Card implements Comparable {
     }
 
     public String getID() {
-        // return this.cardID;
         return String.format("%s_%s_%d", username, name, id);
-        // TODO: Implement
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setID(int id) {
@@ -114,10 +115,6 @@ public class Card implements Comparable {
 
     }
 
-    public int getNessacaryManaToInsert() {
-        return this.nessacaryManaToInsert;
-    }
-
     public boolean isMoveAvailable() {
         return isMoveAvailable;
     }
@@ -128,6 +125,11 @@ public class Card implements Comparable {
 
     @Override
     public int compareTo(Object o) {
+        return this.getName().compareTo(((Card) o).getName());
+    }
+
+    public String getUsername() {
+        return username;
         return this.getName().compareTo(((Card)o).getName());
     }
 }

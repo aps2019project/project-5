@@ -3,7 +3,7 @@ package models.cards.spell;
 public enum TargetType {
     AN_OPPONENT_FORCE("attack to one enemy minion."),
     SQUARE2x2("attack to a 2×2 square in map."),
-    ALL_OPPONENT_HEROES("attack to all enemy minion."),
+    ALL_OPPONENT_FORCES("attack to all enemy minion."),
     MY_FORCE("apply to my force."),
     MY_HERO("apply to my hero"),
     OPPONENT_FORCE_OR_MY_FORCE(""),
