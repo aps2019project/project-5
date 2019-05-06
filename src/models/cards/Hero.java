@@ -18,6 +18,11 @@ public class Hero extends Attacker {
         this.coolDown = coolDown;
     }
 
+    public Hero(Card card) {
+        super(card);
+        this.coolDown = ((Hero)card).coolDown;
+    }
+
     @Override
     public String showInfo() {
         StringBuilder result = new StringBuilder();

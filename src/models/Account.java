@@ -1,6 +1,8 @@
 package models;
 
+import controllers.Manager;
 import models.cards.Card;
+import views.Output;
 
 import java.util.*;
 
@@ -15,8 +17,57 @@ public class Account {
     private int drake = 15000;
     private int winCount = 0;
 
-    public static Account getAiAccount() {
-        return new Account("AI", "password");
+    public static Account getAIAccount() {
+        Account account = new Account("AI", "password");
+        try {
+            Shop.getInstance().buy(account, "rostam");
+            Shop.getInstance().buy(account, "fire dragon");
+            Shop.getInstance().buy(account, "eagle");
+            Shop.getInstance().buy(account, "Hog Head Demon");
+            Shop.getInstance().buy(account, "Persian Swordsman");
+            Shop.getInstance().buy(account, "Persian Horse Rider");
+            Shop.getInstance().buy(account, "Persian Horse Rider");
+            Shop.getInstance().buy(account, "Persian Horse Rider");
+            Shop.getInstance().buy(account, "Persian Horse Rider");
+            Shop.getInstance().buy(account, "Persian Champion");
+            Shop.getInstance().buy(account, "Persian Champion");
+            Shop.getInstance().buy(account, "Turan Archer");
+            Shop.getInstance().buy(account, "Turan Archer");
+            Shop.getInstance().buy(account, "Turan Wand");
+            Shop.getInstance().buy(account, "Turan Wand");
+            Shop.getInstance().buy(account, "persian horse rider");
+            Shop.getInstance().buy(account, "persian horse rider");
+            Shop.getInstance().buy(account, "persian horse rider");
+            Shop.getInstance().buy(account, "persian horse rider");
+            Shop.getInstance().buy(account, "persian horse rider");
+            Shop.getInstance().buy(account, "persian horse rider");
+            account.addDeck(new Deck("AIDeck"));
+            Deck deck = account.getDeck("AIDeck");
+            Manager.addCardToDeck(account, deck, "rostam");
+            Manager.addCardToDeck(account, deck, "fire dragon");
+            Manager.addCardToDeck(account, deck, "eagle");
+            Manager.addCardToDeck(account, deck, "Hog Head Demon");
+            Manager.addCardToDeck(account, deck, "Persian Swordsman");
+            Manager.addCardToDeck(account, deck, "Persian Horse Rider");
+            Manager.addCardToDeck(account, deck, "Persian Horse Rider");
+            Manager.addCardToDeck(account, deck, "Persian Horse Rider");
+            Manager.addCardToDeck(account, deck, "Persian Horse Rider");
+            Manager.addCardToDeck(account, deck, "Persian Champion");
+            Manager.addCardToDeck(account, deck, "Persian Champion");
+            Manager.addCardToDeck(account, deck, "Turan Archer");
+            Manager.addCardToDeck(account, deck, "Turan Archer");
+            Manager.addCardToDeck(account, deck, "Turan Wand");
+            Manager.addCardToDeck(account, deck, "Turan Wand");
+            Manager.addCardToDeck(account, deck, "persian horse rider");
+            Manager.addCardToDeck(account, deck, "persian horse rider");
+            Manager.addCardToDeck(account, deck, "persian horse rider");
+            Manager.addCardToDeck(account, deck, "persian horse rider");
+            Manager.addCardToDeck(account, deck, "persian horse rider");
+            account.setMainDeck(deck);
+        } catch (Exception e) {
+            Output.err(e);
+        }
+        return account;
     }
 
     public int getDrake() {

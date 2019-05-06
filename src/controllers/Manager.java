@@ -100,10 +100,17 @@ public class Manager {
     public static void addCardToDeck(String cardName, String deckName) throws
             Account.DeckNotFoundException, Deck.HeroExistsInDeckException,
             Deck.HeroNotExistsInDeckException, Deck.DeckFullException, CardNotFoundException {
-        Card card = account.getCollection().getCard(cardName);
-        card.setUsername(account.getUsername());
         Deck deck = account.getDeck(deckName);
-        deck.addCard(card);
+        addCardToDeck(account, deck, cardName);
+    }
+
+    public static void addCardToDeck(Account account, Deck deck, String cardName) throws CardNotFoundException,
+            Deck.HeroExistsInDeckException, Deck.HeroNotExistsInDeckException, Deck.DeckFullException {
+        Card newCard = Card.getInstanceOf(account.getCollection().getCard(cardName));
+        newCard.setUsername(account.getUsername());
+        if (deck.countNumberOf(newCard) == account.getCollection().getNumberOf(account.getCard(cardName)))
+            throw new CardNotFoundException();
+        deck.addCard(newCard);
     }
 
     public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException,
@@ -178,7 +185,7 @@ public class Manager {
         if (!isOpponentNull()) {
             Account opponent;
             if (isAIMode)
-                opponent = Account.getAiAccount();
+                opponent = Account.getAIAccount();
             else
                 opponent = Account.getAccounts().get(username);
             if (gameMode == 1 /* story mode */ ) {

@@ -14,4 +14,9 @@ public class UsableItem extends Card {
         super(id, name, description, manaPoint, price);
         this.itemEffect = itemEffect;
     }
+
+    public UsableItem(Card card) {
+        super(card);
+        this.itemEffect = ((UsableItem)card).itemEffect;
+    }
 }

@@ -57,6 +57,15 @@ public class Attacker extends Card {
         this.range = range;
     }
 
+    public Attacker(Card card) {
+        super(card);
+        this.currentHealth = this.health = ((Attacker)card).health;
+        this.attackPoint = ((Attacker)card).attackPoint;
+        this.attackType = ((Attacker)card).attackType;
+        this.range = ((Attacker)card).range;
+
+    }
+
     public int getHealth() {
         return health;
     }

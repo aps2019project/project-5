@@ -25,6 +25,11 @@ public class Minion extends Attacker {
         this.specialPowerActivateTime = specialPowerActivateTime;
     }
 
+    public Minion(Card card) {
+        super(card);
+        this.specialPowerActivateTime = ((Minion)card).specialPowerActivateTime;
+    }
+
 
     @Override
     public String toString() {

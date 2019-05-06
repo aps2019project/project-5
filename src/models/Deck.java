@@ -13,10 +13,6 @@ public class Deck {
     private String name;
     private List<Card> cards = new ArrayList<>();
 
-    public boolean isComplete() {
-        return false;
-    }
-
     public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
         if (this.getHero() != null && card instanceof Hero)
             throw new HeroExistsInDeckException(card.getName(), this.name);
@@ -47,14 +43,6 @@ public class Deck {
             throw new Collection.CardNotFoundException();
         }
         cards.remove(card);
-    }
-
-    public void addItem(UsableItem usableItem) {
-
-    }
-
-    public void removeItem(UsableItem usableItem) {
-
     }
 
     public Deck(String name) {
@@ -137,6 +125,10 @@ public class Deck {
         public HeroExistsInDeckException(String cardName, String deckName) {
             super(String.format("card '%s' exists in deck '%s'", cardName, deckName));
         }
+    }
+
+    public long countNumberOf(Card card) {
+        return cards.stream().filter(tmpCard -> tmpCard.getName().equals(card.getName())).count();
     }
 
     public static class DeckFullException extends Exception {
