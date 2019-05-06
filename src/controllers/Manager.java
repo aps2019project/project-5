@@ -119,7 +119,7 @@ public class Manager {
                 playingMatch.getInfo();
     }
 
-    public static boolean validateDeck(String deckName) throws Account.DeckNotFoundException {
+    public static boolean isValid(String deckName) throws Account.DeckNotFoundException {
         Deck deck = account.getDeck(deckName);
         return deck.isValid();
     }
