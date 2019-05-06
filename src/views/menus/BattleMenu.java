@@ -55,7 +55,7 @@ public class BattleMenu implements Menu {
                 "attack"
         ));
         commands.add(new Command(
-                "^(?i)insert (?<cardName>\\w+) in \\((?<x>\\d+), (?<y>\\d+)\\)$",
+                "^(?i)insert\\s+(?<cardName>\\w+)\\s+in\\s+\\((?<x>\\d+),\\s+(?<y>\\d+)\\)$",
                 "insert"
         ));
         commands.add(new Command(
@@ -222,7 +222,6 @@ public class BattleMenu implements Menu {
             Output.err(e);
         }
     }
-
 
 
 }
