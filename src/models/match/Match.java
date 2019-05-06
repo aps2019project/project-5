@@ -62,8 +62,8 @@ public abstract class Match {
 
     protected Match(Account account1, Account account2) {
         map = new Map();
-        players[0] = new Player(account1, true);
-        players[1] = new Player(account2, false);
+        players[0] = new Player(account1);
+        players[1] = new Player(account2);
         Hero hero1 = players[0].getDeck().getHero();
         Hero hero2 = players[1].getDeck().getHero();
         Cell cell1 = new Cell();

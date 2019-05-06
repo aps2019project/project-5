@@ -37,7 +37,7 @@ public class Player {
         this.mana = mana;
     }
 
-    public Player(Account account, boolean isFirstPlayer) {
+    public Player(Account account) {
         this.account = account;
         this.deck = new Deck(account.getMainDeck());
         this.shuffleDeck();
