@@ -10,6 +10,7 @@ import models.map.Map;
 import models.match.Match;
 import views.Command;
 import views.Error;
+import views.Log;
 import views.Output;
 
 import java.util.List;
@@ -213,6 +214,7 @@ public class BattleMenu implements Menu {
         String cardID = matcher.group("name");
         try {
             Manager.selectCard(cardID);
+            Output.log("card selected!");
         } catch (Collection.CardNotFoundException e) {
             Output.err(e);
         }
