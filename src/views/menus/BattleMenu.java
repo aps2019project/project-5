@@ -167,10 +167,9 @@ public class BattleMenu implements Menu {
         Output.log("Hand:");
         Hand hand = Manager.getHand();
         hand.getCards().forEach(card -> {
-            Output.log("\n\t");
             Output.log(card.getID());
         });
-        Output.log("Next Card:\n\t");
+        Output.log("Next Card:");
         Output.log(hand.getNextCard().getName());
 
     }
