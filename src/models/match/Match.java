@@ -40,8 +40,22 @@ public abstract class Match {
         return players[1];
     }
 
+    public void setTurn() {
+        players[0].getActiveCards().getCardsList().forEach(attacker -> {
+            ((Attacker) attacker).getBuffActivated().forEach(buff -> buff.buffEffect(attacker));
+        });
+        players[1].getActiveCards().getCardsList().forEach(
+                attacker -> {
+                    ((Attacker) attacker).getBuffActivated().forEach(
+                            buff -> buff.buffEffect(attacker)
+                    );
+                }
+        );
+    }
+
     public void nextTurn() {
         turn++;
+
         // TODO: Implement
     }
 
@@ -104,7 +118,7 @@ public abstract class Match {
         Cell cell2 = map.getCell(x2, y2);
         if (!map.isValidMove(card, this.getInActivePlayer(), cell2)) throw new InvalidMoveException();
         map.getCell(card.getCell().getX(), card.getCell().getY()).removeCard();
-        map.getCell(x2, y2).addCard(card);
+        if (card instanceof Attacker) map.getCell(x2, y2).addCard((Attacker) card);
         card.setCell(cell2);
         card.setMoveAvailable(false);
     }
@@ -156,6 +170,7 @@ public abstract class Match {
 
     public class CardAttackIsNotAvailableException extends Exception {
         private String id;
+
         public CardAttackIsNotAvailableException(String id) {
             super("Invalid attack");
             this.id = id;
