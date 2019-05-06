@@ -1,7 +1,10 @@
 package models.cards;
 
+import models.cards.buff.Buff;
 import models.cards.spell.Spell;
 import models.items.Flag;
+
+import java.util.ArrayList;
 
 public class Attacker extends Card {
     private int health;
@@ -12,6 +15,15 @@ public class Attacker extends Card {
     private Spell specialPower;
     private boolean turnAttackAvailability;
     private boolean counterAttackAbility;
+    private ArrayList<Buff> buffActivated = new ArrayList<>();
+
+    public ArrayList<Buff> getBuffActivated() {
+        return buffActivated;
+    }
+
+    public void addBuffActivated(Buff buff) {
+        this.buffActivated.add(buff);
+    }
 
     public boolean isCounterAttackAbility() {
         return counterAttackAbility;

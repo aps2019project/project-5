@@ -2,6 +2,7 @@ package models.map;
 
 import models.Collection;
 import models.Player;
+import models.cards.Attacker;
 import models.cards.Card;
 import views.Error;
 
@@ -34,7 +35,7 @@ public class Map {
     }
 
     private boolean isBetween(int number, int down, int up) {
-        return  number >= down && number < up;
+        return number >= down && number < up;
     }
 
     public boolean cellExist(int x, int y) {
@@ -47,7 +48,7 @@ public class Map {
         if (!cards.contains(card)) {
             // TODO: 5/4/19 check if contains
         }
-        cell.setCard(card);
+       if (card instanceof Attacker) cell.setAttacker((Attacker) card);
         cards.addCard(card);
     }
 
@@ -62,7 +63,7 @@ public class Map {
         int maxDistance = card.getMaxDistance();
         int distance = Cell.manhattanDistance(cell1, cell2);
         if (distance > card.getMaxDistance()) return false;
-        if (cell2.getCard() != null) return false;
+        if (cell2.getAttacker() != null) return false;
         if (!card.isMoveAvailable()) return false;
         int dx = 0;
         int dy = 0;
@@ -71,7 +72,7 @@ public class Map {
             if (cell1.getX() < cell2.getX()) dx = 1;
             if (cell1.getY() > cell2.getY()) dy = -1;
             if (cell1.getY() < cell2.getY()) dx = 1;
-            if (opponentPlayer.getActiveCards().getCardsList().contains(cells[cell1.getX() + dx][cell1.getY() + dy].getCard()))
+            if (opponentPlayer.getActiveCards().getCardsList().contains(cells[cell1.getX() + dx][cell1.getY() + dy].getAttacker()))
                 return false;
         }
         return true;

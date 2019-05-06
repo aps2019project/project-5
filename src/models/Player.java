@@ -1,6 +1,8 @@
 package models;
 
+import models.cards.Attacker;
 import models.cards.Card;
+import models.cards.spell.Spell;
 import models.items.Flag;
 import models.items.Item;
 import models.map.Cell;
@@ -58,12 +60,17 @@ public class Player {
 
     public void insertCard(Card card, Cell cell) throws Collection.CollectionException {
         changeMana(-card.getNessacaryManaToInsert());
-        activateCard(card);
-        card.setCell(cell);
+        if (card instanceof Attacker) {
+            activateCard((Attacker) card);
+            card.setCell(cell);
+        }
+        if (card instanceof Spell) {
+
+        }
     }
 
-    private void activateCard(Card card) throws Collection.CollectionException {
-        activeCards.addCard(card);
+    private void activateCard(Attacker attacker) throws Collection.CollectionException {
+        activeCards.addCard(attacker);
     }
 
     public Deck getDeck() {
@@ -110,7 +117,6 @@ public class Player {
     private void setNextCard() {
         hand.setNextCard(deck.getCards().get(5));
     }
-
 
 
     public void decide() {

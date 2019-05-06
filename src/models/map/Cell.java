@@ -1,16 +1,17 @@
 package models.map;
 
+import models.cards.Attacker;
 import models.cards.Card;
 import models.items.Item;
 
 public class Cell {
     private int x, y;
     private Item item;
-    private Card card;
+    private Attacker attacker;
 
 
-    public void setCard(Card card) {
-        this.card = card;
+    public void setAttacker(Attacker attacker) {
+        this.attacker = attacker;
     }
 
 
@@ -26,12 +27,12 @@ public class Cell {
         return item;
     }
 
-    public Card getCard() {
-        return card;
+    public Attacker getAttacker() {
+        return attacker;
     }
 
     public boolean isFull() {
-        return card != null;
+        return attacker != null;
     }
 
     public static int manhattanDistance(int x1, int y1, int x2, int y2) {
@@ -43,11 +44,11 @@ public class Cell {
     }
 
     public void removeCard() {
-        this.card = null;
+        this.attacker = null;
     }
 
-    public void addCard(Card card) {
-        this.card = card;
+    public void addCard(Attacker attacker) {
+        this.attacker = attacker;
     }
 
     @Override
