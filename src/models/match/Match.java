@@ -7,6 +7,7 @@ import models.cards.AttackType;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Minion;
+import models.cards.buff.Buff;
 import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
@@ -41,13 +42,27 @@ public abstract class Match {
     }
 
     public void setTurn() {
-        players[0].getActiveCards().getCardsList().forEach(attacker -> {
-            ((Attacker) attacker).getBuffActivated().forEach(buff -> buff.buffEffect(attacker));
-        });
+        List<Buff> removeBuffs = new ArrayList<>();
+        players[0].getActiveCards().getCardsList().forEach(
+                attacker -> {
+                    ((Attacker) attacker).getBuffActivated().forEach(
+                            buff -> {
+                                if (buff.buffIsActivated()) {
+                                    buff.buffEffect(attacker);
+                                } else removeBuffs.addAll(((Attacker) attacker).getBuffActivated());
+                            }
+                    );
+                    ((Attacker) attacker).getBuffActivated().removeAll(removeBuffs);
+                });
         players[1].getActiveCards().getCardsList().forEach(
                 attacker -> {
                     ((Attacker) attacker).getBuffActivated().forEach(
-                            buff -> buff.buffEffect(attacker)
+                            buff -> {
+                                if (buff.buffIsActivated()) {
+                                    buff.buffEffect(attacker);
+                                } else removeBuffs.addAll(((Attacker) attacker).getBuffActivated());
+                                ((Attacker) attacker).getBuffActivated().removeAll(removeBuffs);
+                            }
                     );
                 }
         );
@@ -55,7 +70,7 @@ public abstract class Match {
 
     public void nextTurn() {
         turn++;
-
+        setTurn();
         // TODO: Implement
     }
 
@@ -71,7 +86,6 @@ public abstract class Match {
     protected Match(Account account1, Account account2) {
         Player player1 = new Player(account1);
         Player player2 = new Player(account2);
-
     }
 
     abstract public Player getWinner();
