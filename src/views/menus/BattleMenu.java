@@ -180,8 +180,8 @@ public class BattleMenu implements Menu {
         commands.add(new Command(
                 "^(?i)exit",
                 "exit",
-                "Exit",
-                "Exits from graveyard"
+                "Ex",
+                "Exits from graveyard"//
         ));
 
 
