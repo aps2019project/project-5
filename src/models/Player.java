@@ -65,9 +65,9 @@ public class Player {
     private void setNextHand(Card card) {
         hand.getCards().remove(card);
         hand.getCards().add(hand.getNextCard());
-        Card card1 = deck.getCards().get(0);
-        hand.setNextCard(card1);
-        deck.getCards().remove(card1);
+//        Card card1 = deck.getCards().get(0);
+        hand.setNextCard(deck.getCards().get(0));
+        deck.getCards().remove(deck.getCards().get(0));
     }
 
     public void insertCard(Card card, Cell cell) throws Collection.CollectionException {
