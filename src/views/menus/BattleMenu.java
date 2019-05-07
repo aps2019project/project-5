@@ -111,7 +111,7 @@ public class BattleMenu implements Menu {
                 "^(?i)use\\s+special\\s+power\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
                 "useSpecialPower",
                 "Use Special Power ([x], [y])",
-                "\t\t\tUses special power of selected card"
+                "\tUses special power of selected card"
         ));
 
         commands.add(new Command(
@@ -132,14 +132,14 @@ public class BattleMenu implements Menu {
                 "^(?i)show\\s+info$",
                 "showInfo",
                 "Show Info",
-                "\t\t\t\t\tShows info of the selected collectable item"
+                "\t\t\t\t\t\tShows info of the selected collectable item"
         ));
 
         commands.add(new Command(
                 "^(?i)use\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
                 "useCollectableItem",
                 "Use ([x], [y])",
-                "\t\t\tUses selected collectable item in (x, y)"
+                "\t\t\t\t\tUses selected collectable item in (x, y)"
         ));
 
         commands.add(new Command(
@@ -160,28 +160,28 @@ public class BattleMenu implements Menu {
                 "^(?i)show\\s+info\\s+(?<cardID>\\d+)$",
                 "showInfoInGraveyard",
                 "Show Info [cardID]",
-                "\t\t\t\t\tPrints info about a card in graveyard"
+                "\t\t\t\tPrints info about a card in graveyard"
         ));
 
         commands.add(new Command(
                 "^(?i)show\\s+cards$",
                 "showCards",
                 "Show Cards",
-                "\t\t\t\t\tPrints cards of graveyard"
+                "\t\t\t\t\t\tPrints cards of graveyard"
         ));
 
         commands.add(new Command(
                 "^(?i)end\\s+game$",
                 "",
                 "End Game",
-                "\t\t\t\t\t turns back to the battle menu in the end of match"
+                "\t\t\t\t\t\tturns back to the battle menu in the end of match"
         ));
 
         commands.add(new Command(
                 "^(?i)exit",
                 "exit",
-                "Ex",
-                "Exits from graveyard"//
+                "Exit",
+                "\t\t\t\t\t\t\tExits from graveyard"
         ));
 
 
