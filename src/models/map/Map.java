@@ -137,7 +137,7 @@ public class Map {
                     return targetCells;
                 }
                 break;
-            case ALL_OPPONENT_FORCES:
+            case ALL_OPPONENT_FORCE:
                 Manager.getInActivePlayer().getActiveCards().forEach(
                         card -> targetCells.add(card.getCell())
                 );
@@ -149,13 +149,15 @@ public class Map {
                     return targetCells;
                 }
                 return targetCells;
-            case ALL_OPPONENT_FORCES_IN_ONE_COLUMN:
+            case ALL_OPPONENT_FORCE_IN_ONE_COLUMN:
                 for (int i = 0; i < 5; i++) {
                     if (cells[i][cell.getY()].getAttacker() != null) {
                         targetCells.add(cells[i][cell.getY()]);
                     }
                 }
                 return targetCells;
+            case OPPONENT_HERO:
+
         }
         throw new InvalidTargetCellException();
     }

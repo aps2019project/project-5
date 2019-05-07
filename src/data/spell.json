@@ -8,7 +8,7 @@
       {
         "name": "DisarmBuff",
         "isContinues": true,
-        "activeTime": 0
+        "maxActivateTime": 0
       }
     ]
   },
@@ -37,7 +37,7 @@
       {
         "name": "PowerBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "powerPoint": 2
       }
     ]
@@ -51,7 +51,7 @@
       {
         "name": "PoisonBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "healthPoint": 4
       }
     ]
@@ -65,7 +65,7 @@
       {
         "name": "PowerBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "powerPoint": 4
       }
     ]
@@ -86,7 +86,7 @@
       {
         "name": "PoisonBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "healthPoint": 8
       }
     ]
@@ -108,12 +108,12 @@
         "name": "PowerBuff",
         "isContinues": false,
         "powerPoint": 4,
-        "activeTime": 3
+        "maxActivateTime": 3
       },
       {
         "name": "DisarmBuff",
         "isContinues": false,
-        "activeTime": 3
+        "maxActivateTime": 3
       }
     ]
   },
@@ -126,7 +126,7 @@
       {
         "name": "DisarmBuff",
         "isContinues": false,
-        "activeTime": 1
+        "maxActivateTime": 1
       }
     ]
   },
@@ -139,7 +139,7 @@
       {
         "name": "PoisonBuff",
         "isContinues": false,
-        "activeTime": 4,
+        "maxActivateTime": 4,
         "healthPoint": 1
       }
     ]
@@ -153,12 +153,12 @@
       {
         "name": "OPPONENT_BUFF_KILLER",
         "isContinues": false,
-        "activeTime": 1
+        "maxActivateTime": 1
       },
       {
         "name": "MY_BUFF_KILLER",
         "isContinues": false,
-        "activeTime": 1
+        "maxActivateTime": 1
       }
     ]
   },
@@ -171,19 +171,19 @@
       {
         "name": "PoisonBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "healthPoint": 6
       },
       {
         "name": "HolyBuff",
         "isContinues": false,
-        "activeTime": 3,
+        "maxActivateTime": 3,
         "healthPoint": 1
       },
       {
         "name": "HolyBuff",
         "isContinues": false,
-        "activeTime": 3,
+        "maxActivateTime": 3,
         "healthPoint": 1
       }
     ]
@@ -197,7 +197,7 @@
       {
         "name": "PowerBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "powerPoint": 6
       }
     ]
@@ -211,7 +211,7 @@
       {
         "name": "PowerBuff",
         "isContinues": true,
-        "activeTime": 0,
+        "maxActivateTime": 0,
         "powerPoint": 2
       }
     ]
@@ -234,7 +234,7 @@
     "name": "Weakening",
     "price": 1000,
     "manaPoint": 1,
-    "targetType": "ONE_OPPONENT_MINION",
+    "targetType": "AN_OPPONENT_MINION",
     "effect": [
       {
         "name": "WeaknessBuff",
@@ -275,7 +275,7 @@
     "name": "Shock",
     "price": 1200,
     "manaPoint": 9,
-    "targetType": "AN_OPPONENT_HERO",
+    "targetType": "OPPONENT_HERO",
     "effect": [
       {
         "name": "StunBuff",
