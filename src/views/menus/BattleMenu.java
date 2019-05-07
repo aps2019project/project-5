@@ -212,7 +212,7 @@ public class BattleMenu implements Menu {
                         minion.getHealth() +
                         ", location : " +
                         String.format("(%s,%s) power : %s"
-                                , minion.getCell().getX(), minion.getCell().getY(), minion.getAttackPoint());
+                                , minion.getCell().getX() + 1, minion.getCell().getY() + 1, minion.getAttackPoint());
                 Output.log(result);
             }
         );
@@ -400,7 +400,7 @@ public class BattleMenu implements Menu {
                     hero.getHealth() +
                     ", location : " +
                     String.format("(%s,%s) power : %s"
-                            , hero.getCell().getX(), hero.getCell().getY(), hero.getAttackPoint()));
+                            , hero.getCell().getX() + 1, hero.getCell().getY() + 1, hero.getAttackPoint()));
         } catch (Player.HeroDeadException e) {
             Output.err(Error.HERO_DEATH);
         }

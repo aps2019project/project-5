@@ -170,7 +170,7 @@ public class Map {
         Cell cell1 = card.getCell();
         int maxDistance = card.getMaxDistance();
         int distance = Cell.manhattanDistance(cell1, cell2);
-        if (distance > card.getMaxDistance()) return false;
+        if (distance > maxDistance) return false;
         if (cell2.getAttacker() != null) return false;
         if (!((Attacker) card).getMoveAbility()) return false;
         int dx = 0;
@@ -180,8 +180,7 @@ public class Map {
             if (cell1.getX() < cell2.getX()) dx = 1;
             if (cell1.getY() > cell2.getY()) dy = -1;
             if (cell1.getY() < cell2.getY()) dx = 1;
-            if (opponentPlayer.getActiveCards().contains(cells[cell1.getX() + dx][cell1.getY() + dy].getAttacker()))
-                return false;
+            return !opponentPlayer.getActiveCards().contains(cells[cell1.getX() + dx][cell1.getY() + dy].getAttacker());
         }
         return true;
 

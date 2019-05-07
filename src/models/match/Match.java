@@ -168,7 +168,6 @@ public abstract class Match {
     public void moveTo(int x2, int y2) throws InvalidMoveException, Map.InvalidCellException {
         Card card = getActivePlayer().getSelectedCard();
         Cell cell2 = map.getCell(x2, y2);
-        System.out.println(x2 + " " + y2);
         if (!map.isValidMove(card, this.getInActivePlayer(), cell2)) throw new InvalidMoveException();
         map.getCell(card.getCell().getX(), card.getCell().getY()).removeCard();
         if (card instanceof Attacker) map.getCell(x2, y2).addCard((Attacker) card);
