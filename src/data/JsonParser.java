@@ -153,36 +153,36 @@ public class JsonParser {
 
                 if(((String) buffHashMap.get("name")).equalsIgnoreCase("DisarmBuff")) {
                     buff = new DisarmBuff(
-                            (int) buffHashMap.get("activeTime"),
+                            (int) buffHashMap.get("maxActivateTime"),
                             (boolean) buffHashMap.get("isContinues")
                     );
                 } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("HolyBuff")) {
                     buff = new HolyBuff(
                             (int) buffHashMap.get("healthPoint"),
-                            (int) buffHashMap.get("activeTime"),
+                            (int) buffHashMap.get("maxActivateTime"),
                             (boolean) buffHashMap.get("isContinues")
                     );
                 } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("PoisonBuff")) {
                     buff = new PoisonBuff(
-                            (int) buffHashMap.get("activeTime"),
+                            (int) buffHashMap.get("maxActivateTime"),
                             (int) buffHashMap.get("healthPoint"),
                             (boolean) buffHashMap.get("isContinues")
                     );
                 } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("PowerBuff")) {
                     buff = new PowerBuff(
                             (int) buffHashMap.get("powerPoint"),
-                            (int) buffHashMap.get("activeTime"),
+                            (int) buffHashMap.get("maxActivateTime"),
                             (boolean) buffHashMap.get("isContinues")
                     );
                 } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("StunBuff")) {
                     buff = new StunBuff(
-                            (int) buffHashMap.get("activeTime"),
+                            (int) buffHashMap.get("maxActivateTime"),
                             (boolean) buffHashMap.get("isContinues")
                     );
                 } else if(((String) buffHashMap.get("name")).equalsIgnoreCase("WeaknessBuff")) {
                     buff = new WeaknessBuff(
                             (int) buffHashMap.get("powerPoint"),
-                            (int) buffHashMap.get("activeTime"),
+                            (int) buffHashMap.get("maxActivateTime"),
                             (boolean) buffHashMap.get("isContinues")
                     );
                 }
