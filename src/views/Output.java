@@ -7,6 +7,7 @@ import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
+import models.items.CollectableItem;
 import models.items.Item;
 
 import java.nio.channels.AcceptPendingException;
@@ -65,4 +66,20 @@ public class Output {
     public static void log(int number) {
         System.out.println(number);
     }
+
+    public static void log(List<Item> collectableItems) {
+        Output.log("Collected Items :");
+        collectableItems.forEach(item -> {
+            Output.log( "\n\t" + item.toString());
+        });
+    }
+
+    public static void log(CollectableItem selectedCollectableItem) {
+        Output.log(selectedCollectableItem.toString());
+    }
+
+    public static void log(Card card) {
+        Output.log(card.toString());
+    }
+
 }

@@ -111,7 +111,7 @@ public class ShopMenu implements Menu {
             Manager.searchMyCard(cardName).forEach(
                     card -> Output.log(card.toString()));
         } catch (CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         }
     }
 
@@ -137,7 +137,7 @@ public class ShopMenu implements Menu {
             Manager.sell(name);
             Output.log(Log.SELLING_SUCCESSFUL);
         } catch (CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         }
     }
 

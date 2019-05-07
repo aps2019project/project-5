@@ -6,17 +6,19 @@ import models.Player;
 import models.Hand;
 import models.cards.Card;
 import models.cards.Minion;
+import models.items.Item;
 import models.map.Map;
 import models.match.Match;
 import views.Command;
 import views.Error;
-import views.Log;
 import views.Output;
 
 import java.util.List;
 import java.util.regex.Matcher;
 
 public class BattleMenu implements Menu {
+
+    boolean isInGraveYard = false;
 
     public BattleMenu() {
         commands.add(new Command(
@@ -28,7 +30,7 @@ public class BattleMenu implements Menu {
 
         commands.add(new Command(
                 "^(?i)return$",
-                "return",
+                "",
                 "Return",
                 "\t\t\t\t\t\t\treturns to main menu"
         ));
@@ -43,8 +45,8 @@ public class BattleMenu implements Menu {
         commands.add(new Command(
                 "^(?i)show\\s+opponent\\s+minions$",
                 "showOpponentMinions",
-                "Show opponent Minions",
-                "\t\t\t\t\tshows inactive player minions"
+                "Show Opponent Minions",
+                "\t\t\tShows inactive player minions"
         ));
 
         commands.add(new Command(
@@ -104,6 +106,89 @@ public class BattleMenu implements Menu {
                 "show map",
                 "\t\t\t\t\t\tprints map"
         ));
+
+        commands.add(new Command(
+                "^(?i)use\\s+special\\s+power\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
+                "useSpecialPower",
+                "Use Special Power ([x], [y])",
+                "\tUses special power of selected card"
+        ));
+
+        commands.add(new Command(
+                "^(?i)show\\s+collectables$",
+                "showCollectables",
+                "Show Collectables",
+                "\t\t\t\tprints collectibles items"
+        ));
+
+        commands.add(new Command(
+                "^(?i)select\\s+(?<itemID>.+)$",
+                "selectCollectable",
+                "Select [collectableID]",
+                "\t\t\tSelects collectable item"
+        ));
+
+        commands.add(new Command(
+                "^(?i)show\\s+info$",
+                "showInfo",
+                "Show Info",
+                "\t\t\t\t\t\tShows info of the selected collectable item"
+        ));
+
+        commands.add(new Command(
+                "^(?i)use\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
+                "useCollectableItem",
+                "Use ([x], [y])",
+                "\t\t\t\t\tUses selected collectable item in (x, y)"
+        ));
+
+        commands.add(new Command(
+                "^(?i)show\\s+next\\s+card$",
+                "showNextCard",
+                "Show Next Card",
+                "\t\t\t\t\tPrints next card that is going to be added to hand"
+        ));
+
+        commands.add(new Command(
+                "^(?i)enter\\s+graveyard$",
+                "enterGraveyard",
+                "Enter Graveyard",
+                "\t\t\t\t\tEnters graveyard"
+        ));
+
+        commands.add(new Command(
+                "^(?i)show\\s+info\\s+(?<cardID>\\d+)$",
+                "showInfoInGraveyard",
+                "Show Info [cardID]",
+                "\t\t\t\tPrints info about a card in graveyard"
+        ));
+
+        commands.add(new Command(
+                "^(?i)show\\s+cards$",
+                "showCards",
+                "Show Cards",
+                "\t\t\t\t\t\tPrints cards of graveyard"
+        ));
+
+        commands.add(new Command(
+                "^(?i)end\\s+game$",
+                "",
+                "End Game",
+                "\t\t\t\t\t\tturns back to the battle menu in the end of match"
+        ));
+
+        commands.add(new Command(
+                "^(?i)exit",
+                "exit",
+                "Exit",
+                "\t\t\t\t\t\t\tExits from graveyard"
+        ));
+
+
+        // TODO: 5/7/19 add help command
+
+        // TODO: 5/7/19 add combo attack command
+
     }
 
     @Override
@@ -140,13 +225,12 @@ public class BattleMenu implements Menu {
     }
 
     public static void showCardInfo(Matcher matcher) {
-        String name = matcher.group("cardName");
+        String cardName = matcher.group("cardName");
         try {
-            Card card = Manager.showCardInfo(name);
-            Output.log(card.showInfo());
-
+            Card card = Manager.showCardInfo(cardName);
+            Output.log( card.showInfo());
         } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         }
     }
 
@@ -176,25 +260,23 @@ public class BattleMenu implements Menu {
         } catch (Match.TiredMinionException e) {
             Output.err(String.format(String.valueOf(Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
         } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
             Output.err(Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
         }
     }
 
     public static void useSpecialPower(Matcher matcher) {
+
     }
 
     public static void showHand(Matcher matcher) {
         Output.log("Hand:");
         Hand hand = Manager.getHand();
-        hand.getCards().forEach(card -> Output.log(card.getID()));
+        hand.getCards().forEach(card -> Output.log("\t" + card.getID()));
         Output.log("Next Card:");
-        Output.log(hand.getNextCard().getName());
+        Output.log("\t" + hand.getNextCard().getName());
 
-    }
-
-    public static void insertCard(Matcher matcher) {
     }
 
     public static void endTurn(Matcher matcher) {
@@ -204,10 +286,14 @@ public class BattleMenu implements Menu {
 
     }
 
-    public static void showCollectibles(Matcher matcher) {
+    public static void showCollectables(Matcher matcher) {
+        List<Item> collectableItems = Manager.getCollectableItems();
+        Output.log(collectableItems);
     }
 
-    public static void selectCollectible(Matcher matcher) {
+    public static void selectCollectable(Matcher matcher) {
+        String itemID = matcher.group("itemID");
+        Manager.selectCollectableItem(itemID);
     }
 
     public static void showCollectibleInfo(Matcher matcher) {
@@ -223,7 +309,7 @@ public class BattleMenu implements Menu {
         try {
             Manager.insertCard(cardName, x, y);
         } catch (Map.InvalidCellException | Collection.CollectionException | Player.NotEnoughManaException e) {
-            Output.err(e);
+            Output.err(Error.CARD_NOT_IN_HAND);
         } catch (Map.InvalidTargetCellException | Player.HeroDeadException e) {
             e.printStackTrace();
         }
@@ -239,9 +325,63 @@ public class BattleMenu implements Menu {
             Manager.selectCard(cardID);
             Output.log("card selected!");
         } catch (Collection.CardNotFoundException e) {
-            Output.err(e);
+            Output.err(Error.CARD_NOT_FOUND);
         }
     }
 
+    public void showInfo(Matcher matcher) {
+        try {
+            Output.log(Manager.getSelectedCollectableItem());
+        } catch (Player.NoItemSelectedException e) {
+            Output.err(Error.NO_ITEM_SELECTED);
+        }
+    }
 
+    public void useCollectableItem(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        Manager.useCollectableItem(x, y);
+    }
+
+    public void showNextCard(Matcher matcher) {
+        Card nextCard = Manager.getNextCard();
+        Output.log(nextCard);
+    }
+
+    public void enterGraveyard(Matcher matcher) {
+        if (isInGraveYard) {
+            Output.err(Error.ALREADY_IN_GRAVEYARD);
+        }
+        isInGraveYard = true;
+    }
+
+    public void exit(Matcher matcher) {
+        if (!isInGraveYard) {
+            Output.err(Error.NOT_IN_GRAVEYARD);
+        }
+        isInGraveYard = false;
+    }
+
+    public void showInfoInGraveyard(Matcher matcher) {
+        if (!isInGraveYard) {
+            Output.err(Error.NOT_IN_GRAVEYARD);
+            return;
+        }
+        String cardID = matcher.group("cardID");
+        try {
+            Manager.getCardInGraveyard(cardID);
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_FOUND_IN_GRAVEYARD);
+        }
+    }
+
+    public void showCards(Matcher matcher) {
+        if (!isInGraveYard) {
+            Output.err(Error.NOT_IN_GRAVEYARD);
+            return;
+        }
+        List<Card> cards = Manager.getCardsInGraveyard();
+        Output.log("Graveyard Cards :");
+        cards.forEach(Output::log);
+    }
 }

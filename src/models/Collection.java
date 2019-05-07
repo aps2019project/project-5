@@ -173,7 +173,7 @@ public class Collection {
 
     public static class CardNotFoundException extends CollectionException {
         public CardNotFoundException() {
-            super(CARD_NOT_FOUND.toString());
+            super(CARD_NOT_FOUND_IN_COLLECTION.toString());
         }
 
         public CardNotFoundException(String message) {

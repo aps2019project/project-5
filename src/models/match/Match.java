@@ -1,5 +1,6 @@
 package models.match;
 
+import controllers.Manager;
 import models.Account;
 import models.Collection;
 import models.Player;
@@ -11,6 +12,7 @@ import models.map.Map;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -24,6 +26,15 @@ public abstract class Match {
     private boolean isStory;
     private boolean isAIMode;
     private MatchMode matchMode;
+    private java.util.Map<String, Card> graveyardCards = new HashMap<>();
+
+    public List<Card> getGraveyardCards() {
+        return new ArrayList<>(graveyardCards.values());
+    }
+
+    public void addCardToGraveyard(Card card) {
+        graveyardCards.put(card.getID(), card);
+    }
 
     public void setAIMode(boolean AIMode) {
         isAIMode = AIMode;
@@ -201,6 +212,10 @@ public abstract class Match {
 
         }
 
+    }
+
+    public Card getGraveyardCard(String cardID) {
+        return graveyardCards.get(cardID);
     }
 
     public static class InvalidMoveException extends Exception {
