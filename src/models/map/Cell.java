@@ -2,12 +2,14 @@ package models.map;
 
 import models.cards.Attacker;
 import models.cards.Card;
+import models.items.Flag;
 import models.items.Item;
 
 public class Cell {
     private int x, y;
     private Item item;
     private Attacker attacker;
+    private Flag flag;
 
     public Cell(int x, int y) {
         this.x = x;
@@ -60,5 +62,13 @@ public class Cell {
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
+    }
+
+    public void setFlag(Flag flag) {
+        this.flag = flag;
+    }
+
+    public boolean hasFlag() {
+        return flag != null;
     }
 }

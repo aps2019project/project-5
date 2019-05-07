@@ -3,16 +3,15 @@ package models;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
-import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.items.CollectableItem;
+import models.items.Flag;
 import models.items.Item;
 import models.map.Cell;
 import views.Error;
 import views.Input;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +20,12 @@ public class Player {
     private Deck deck;
     private Hand hand = new Hand();
     private Card selectedCard;
-    private int flags;
+    private int flagsNumber;
     private List<Item> collectedItems = new ArrayList<>();
     private ArrayList<Card> graveYard;
     private ArrayList<Attacker> activeCards = new ArrayList<>();
     private int mana;
     private Input input;
-    private String decision;
     private CollectableItem selectedCollectableItem;
 
     public Account getAccount() {
@@ -49,6 +47,11 @@ public class Player {
         this.shuffleDeck();
         this.setHand();
         this.setNextCard();
+    }
+
+    public String getDecision() {
+        AI ai = (AI)account;
+        return ai.getDecision();
     }
 
     public ArrayList<Card> getGraveYard() {
@@ -95,7 +98,7 @@ public class Player {
     }
 
     public void incrementFlags() {
-        this.flags += flags;
+        this.flagsNumber += flagsNumber;
     }
 
     public void setCollectedItems(Item collectedItems) {
@@ -149,18 +152,6 @@ public class Player {
             throw new Collection.CardNotFoundException("Card not found with this ID");
         }
     }
-    int t = 0;
-    public void decide() {
-        if (t % 2 == 0)
-            this.decision = "show hand";
-        else
-            this.decision = "end turn";
-        t = (t + 1) % 2;
-    }
-
-    public String getDecision() {
-        return decision;
-    }
 
     public void selectCard(Card card) {
         this.selectedCard = card;
@@ -198,6 +189,19 @@ public class Player {
     public boolean collectableItemIsSelected() {
         return selectedCollectableItem != null;
     }
+
+    public boolean hasFlag() {
+        return this.flagsNumber > 0;
+    }
+
+    public List<Flag> getFlags() {
+        return activeCards.stream().map(Attacker::getFlag).collect(Collectors.toList());
+    }
+
+    public int getFlagsNumber() {
+        return flagsNumber;
+    }
+
 
     public static class NotEnoughManaException extends Exception {
         public NotEnoughManaException(String message) {

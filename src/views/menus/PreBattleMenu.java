@@ -64,6 +64,23 @@ public class PreBattleMenu implements Menu {
             result = askQuestion("Select Game Mode:", "Death match", "Multi flag mode", "Single flag mode");
             gameMode = result + 1;
         }
+        if(result > 1){
+
+            if (result == 2)
+                result = 1;
+            if (result == 3) {
+                Output.log("How many flags do you want to have?(between 2 and 9");
+                result = 0;
+                do {
+                    try {
+                        result = Integer.parseInt(Input.getString(""));
+                    } catch (Exception ignored) {}
+                    if(!(result < 2 || result > 9))
+                        Output.log("Enter a valid number !");
+                } while (result < 2 || result > 9);
+            }
+            Manager.setMapFlags(result);
+        }
 
         String opponentName = "";
         if(!AIMode) {

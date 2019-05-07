@@ -10,10 +10,8 @@ import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.lang.reflect.MalformedParameterizedTypeException;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -69,6 +67,22 @@ public abstract class Match {
                 }
 
         );
+    }
+
+    public static int random(int min, int max) {
+        return (int)(Math.random() * ((max - min) + 1)) + min ;
+    }
+
+    public void setFlagsInMap(int flagsCount) {
+        if (flagsCount % 2 == 1) {
+            map.setFlag(random(1, Map.ROW_NUMBER), Map.COLUMN_NUMBER / 2 + 1);
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < flagsCount / 2; j++) {
+                    map.setFlag(random(1, Map.ROW_NUMBER), (int) Math.ceil(1.0 * Map.COLUMN_NUMBER / 2) * i +
+                            random(1, Map.COLUMN_NUMBER / 2));
+                }
+            }
+        }
     }
 
     public void setTurn() {

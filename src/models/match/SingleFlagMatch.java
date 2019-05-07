@@ -1,7 +1,6 @@
 package models.match;
 
 import models.Account;
-import models.Collection;
 import models.Player;
 import models.items.Flag;
 
@@ -17,14 +16,20 @@ public class SingleFlagMatch extends Match {
 
     @Override
     public Player getWinner() {
-
+        for (int i = 0; i < PLAYERS_COUNT; i++) {
+            if(!players[i].hasFlag())
+                continue;
+            if(getTurn() - players[i].getFlags().get(0).getTokenTurn() >= WINNING_TURN ) {
+                return players[i];
+            }
+        }
         return null;
     }
 
     @Override
     public String getInfo() {
         String result = "Flag is in " + flag.getCell() + " cell and ";
-        if(flag.isGotten())
+        if(flag.isToken())
             result += "in hand of player number " + (flag.getTokenTurn() % 2 + 1) +
                     " attacker "  + flag.getOwner().getName() +
                     ".";

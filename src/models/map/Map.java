@@ -8,6 +8,7 @@ import models.cards.Card;
 import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.cards.spell.TargetType;
+import models.items.Flag;
 import views.Error;
 
 import java.util.ArrayList;
@@ -45,9 +46,7 @@ public class Map {
         String username2 = null;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
-                if (cells[i][j].getAttacker() == null)
-                    stringBuilder.append(" _ ");
-                else {
+                if (cells[i][j].getAttacker() != null) {
                     if (username1 == null)
                         username1 = cells[i][j].getAttacker().getUsername();
                     if (username2 == null && username1 != null && !cells[i][j].getAttacker().getUsername().equals(username1))
@@ -58,7 +57,11 @@ public class Map {
                     else
                         cardPrefix = '-';
                     stringBuilder.append(String.format("%c%02d", cardPrefix, cells[i][j].getAttacker().getId()));
-                }
+                } else if (cells[i][j].hasFlag()) {
+                    stringBuilder.append("F");
+                } else
+                    stringBuilder.append(" _ ");
+
             }
             stringBuilder.append("\n");
         }
@@ -160,6 +163,10 @@ public class Map {
 
         }
         throw new InvalidTargetCellException();
+    }
+
+    public void setFlag(int x, int y) {
+        cells[x][y].setFlag(new Flag());
     }
 
     public class InvalidCellException extends Exception {
