@@ -47,7 +47,6 @@ public class Player {
 
     public String getDecision() {
         AI ai = (AI)account;
-        ai.decide();
         return ai.getDecision();
     }
 

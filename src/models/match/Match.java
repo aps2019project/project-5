@@ -69,9 +69,8 @@ public abstract class Match {
         );
     }
 
-    public int random(int min, int max) {
-        Random random = new Random();
-        return min + random.nextInt() % (max - min + 1) ;
+    public static int random(int min, int max) {
+        return (int)(Math.random() * ((max - min) + 1)) + min ;
     }
 
     public void setFlagsInMap(int flagsCount) {
