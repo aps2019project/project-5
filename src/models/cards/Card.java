@@ -69,7 +69,6 @@ public class Card implements Comparable {
     }
 
     public void setCell(Cell cell) {
-        System.out.println("Cell from " + this.cell + " changed to " + cell);
         this.cell = cell;
     }
 
