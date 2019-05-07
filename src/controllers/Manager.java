@@ -146,7 +146,6 @@ public class Manager {
     }
 
     public static String getAIMove() {
-        playingMatch.getPlayer2().decide();
         return playingMatch.getPlayer2().getDecision();
     }
 
@@ -186,7 +185,7 @@ public class Manager {
         if (!isOpponentNull()) {
             Account opponent;
             if (isAIMode) {
-                opponent = Account.getAIAccount();
+                opponent = AI.getAIAccount();
             }
             else
                 opponent = Account.getAccounts().get(username);
@@ -207,6 +206,9 @@ public class Manager {
                 opponentUsername = "";
             }
             playingMatch.setAIMode(isAIMode);
+            if (isAIMode) {
+                ((AI) opponent).setMatch(playingMatch);
+            }
         }
     }
 
@@ -324,5 +326,9 @@ public class Manager {
         ).map(
                 card -> (UsableItem) card)
                 .collect(Collectors.toList());
+    }
+
+    public static void setMapFlags(int result) {
+        playingMatch.setFlagsInMap(result);
     }
 }

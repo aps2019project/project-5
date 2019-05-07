@@ -1,10 +1,8 @@
 package models.match;
 
 import models.Account;
-import models.Collection;
 import models.Player;
 import models.items.Flag;
-import models.map.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,10 @@ public class MultiFlagMatch extends Match {
 
     @Override
     public Player getWinner() {
-
+        for (int i = 0; i < PLAYERS_COUNT; i++) {
+            if(players[i].getFlags().size() >= 1.*flags.size()/2)
+                return players[i];
+        }
         return null;
     }
 
@@ -31,7 +32,7 @@ public class MultiFlagMatch extends Match {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < flags.size(); i++) {
             Flag flag = flags.get(i);
-            if (flag.isGotten()) {
+            if (flag.isToken()) {
                 result.append(flag.getName()).append(" is token by attacker ").append(flag.getOwner().getName()).append(" of player number ").append(flag.getTokenTurn() % 2 + 1);
             } else {
                 result.append(flag.getName()).append(" is not token.");

@@ -19,7 +19,7 @@ public class Flag extends Item {
         return tokenTurn;
     }
 
-    public boolean isGotten() {
+    public boolean isToken() {
         return owner != null;
     }
 
