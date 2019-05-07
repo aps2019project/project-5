@@ -17,6 +17,7 @@ import views.Error;
 import views.Output;
 
 import java.util.ArrayList;
+import javax.swing.plaf.OptionPaneUI;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -72,7 +73,7 @@ public class BattleMenu implements Menu {
                 "\t\t\t\t\t\tshows active player hand"
         ));
         commands.add(new Command(
-                "^(?i)move\\s+to\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
+                "^(?i)move\\s+to\\s+\\(?\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)?$",
                 "moveTo",
                 "Move to ([x], [y])",
                 "\t\t\t\tMoves selected card of active player to cell (x, y)"
@@ -84,7 +85,7 @@ public class BattleMenu implements Menu {
                 "\t\t\tattacks to enemy card by the selected card"
         ));
         commands.add(new Command(
-                "^(?i)insert\\s+(?<cardName>.+)\\s+in\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
+                "^(?i)insert\\s+(?<cardName>.+)\\s+in\\s+\\(?\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)?$",
                 "insert",
                 "Insert [cardName] in ([x], [y])",
                 "\tInserts card to cell (x, y)"
@@ -112,7 +113,7 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)use\\s+special\\s+power\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
+                "^(?i)use\\s+special\\s+power\\s+\\(?\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)?$",
                 "useSpecialPower",
                 "Use Special Power ([x], [y])",
                 "\tUses special power of selected card"
@@ -133,7 +134,7 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)use\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
+                "^(?i)use\\s+\\(?\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)?$",
                 "useCollectableItem",
                 "Use ([x], [y])",
                 "\t\t\t\t\tUses selected collectable item in (x, y)"
@@ -298,9 +299,15 @@ public class BattleMenu implements Menu {
         int y = Integer.parseInt(matcher.group("y"));
         try {
             Manager.insertCard(cardName, x, y);
-        } catch (Map.InvalidCellException | Collection.CollectionException | Player.NotEnoughManaException e) {
-            Output.err(Error.CARD_NOT_IN_HAND);
-        } catch (Map.InvalidTargetCellException | Player.HeroDeadException e) {
+        } catch (Player.NotEnoughManaException e) {
+            Output.err(Error.NOT_ENOUGH_MANA);
+        } catch (Player.HeroDeadException e) {
+            Output.err(e.getMessage());
+        } catch (Map.InvalidCellException e) {
+            Output.err(e.getMessage());
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_FOUND);
+        } catch (Map.InvalidTargetCellException e) {
             e.printStackTrace();
         }
     }
