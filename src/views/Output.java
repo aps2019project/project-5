@@ -79,7 +79,7 @@ public class Output {
     }
 
     public static void log(Card card) {
-        Output.log(card.toString());
+        Output.log( "\t" + card.toString());
     }
 
 }

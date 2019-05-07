@@ -28,4 +28,10 @@ public class CollectableItem extends Item {
 
     }
 
+    public static class NoCollectableItemSelected extends Exception{
+        public NoCollectableItemSelected(String message) {
+            super(message);
+        }
+    }
+
 }
