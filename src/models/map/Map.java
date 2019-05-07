@@ -76,7 +76,7 @@ public class Map {
 
     public void insertCard(Card card, Cell cell) throws InvalidCellException, InvalidTargetCellException, Player.HeroDeadException {
         if (cell.isFull())
-            throw new InvalidCellException(Error.INVALID_TARGET.toString());
+            throw new InvalidCellException(Error.CELL_FULL.toString());
         if (!cards.contains(card)) {
             // TODO: 5/4/19 check if contains
         }

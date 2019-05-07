@@ -53,7 +53,7 @@ public class Card implements Comparable {
     }
 
     public String getID() {
-        return String.format("%s_%s_", username, name) + id;
+        return String.format("%s_%s_%d", username, name, id);
     }
 
     public int getId() {
