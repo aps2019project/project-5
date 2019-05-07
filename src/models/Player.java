@@ -1,14 +1,12 @@
 package models;
 
-import controllers.Manager;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.spell.Spell;
-import models.items.Flag;
+import models.items.CollectableItem;
 import models.items.Item;
 import models.map.Cell;
-import models.map.Map;
 import views.Input;
 
 import java.util.ArrayList;
@@ -28,6 +26,7 @@ public class Player {
     private int mana;
     private Input input;
     private String decision;
+    private CollectableItem selectedCollectableItem;
 
     public int getMana() {
         return mana;
@@ -169,6 +168,20 @@ public class Player {
         this.mana += mana;
     }
 
+    public List<Item> getCollectedItems() {
+        return collectedItems;
+    }
+
+    public void selectCollectibleItem(String itemID) {
+        this.selectedCollectableItem = (CollectableItem) collectedItems.stream().filter(
+                item -> ((CollectableItem)item).getID().equals(itemID))
+                .collect(Collectors.toList()).get(0);
+    }
+
+    public CollectableItem getSelectedCollectableItem() {
+        return selectedCollectableItem;
+    }
+
     public static class NotEnoughManaException extends Exception {
         public NotEnoughManaException(String message) {
             super(message);
@@ -177,6 +190,12 @@ public class Player {
 
     public static class HeroDeadException extends Exception {
         public HeroDeadException(String message) {
+            super(message);
+        }
+    }
+
+    public static class NoItemSelectedException extends Exception{
+        public NoItemSelectedException(String message) {
             super(message);
         }
     }

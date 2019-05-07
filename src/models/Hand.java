@@ -19,7 +19,7 @@ public class Hand {
 
     public Card getCard(String cardID) throws Collection.CardNotFoundException {
         for(Card card : cards)
-            if(card.getID().equals(cardID))
+            if(card.getID().equalsIgnoreCase(cardID))
                 return card;
         throw new Collection.CardNotFoundException("Card not found in hand");
     }
