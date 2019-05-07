@@ -27,9 +27,10 @@ public class Map {
     }
 
     public Map() {
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 9; j++)
-                cells[i][j] = new Cell();
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++) {
+                cells[i][j] = new Cell(i, j);
+            }
     }
 
     public Cell getCell(int x, int y) throws InvalidCellException {
@@ -43,17 +44,17 @@ public class Map {
         StringBuilder stringBuilder = new StringBuilder();
         String username1 = null;
         String username2 = null;
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 9; j++) {
-                if(cells[i][j].getAttacker() == null)
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (cells[i][j].getAttacker() == null)
                     stringBuilder.append(" _ ");
                 else {
-                    if(username1 == null)
+                    if (username1 == null)
                         username1 = cells[i][j].getAttacker().getUsername();
-                    if(username2 == null && username1 != null && !cells[i][j].getAttacker().getUsername().equals(username1))
+                    if (username2 == null && username1 != null && !cells[i][j].getAttacker().getUsername().equals(username1))
                         username2 = cells[i][j].getAttacker().getUsername();
                     char cardPrefix;
-                    if(cells[i][j].getAttacker().getUsername().equals(username1))
+                    if (cells[i][j].getAttacker().getUsername().equals(username1))
                         cardPrefix = '+';
                     else
                         cardPrefix = '-';
@@ -170,9 +171,13 @@ public class Map {
         Cell cell1 = card.getCell();
         int maxDistance = card.getMaxDistance();
         int distance = Cell.manhattanDistance(cell1, cell2);
+        System.out.println(distance);
         if (distance > card.getMaxDistance()) return false;
+        System.out.println("sdsds\n");
         if (cell2.getAttacker() != null) return false;
-        if (!card.isMoveAvailable()) return false;
+        System.out.println("sdadwdwc\n");
+        if (!((Attacker) card).getMoveAbility()) return false;
+        System.out.println("sdadwxeexeec\n");
         int dx = 0;
         int dy = 0;
         if (distance >= 2) {
@@ -180,6 +185,7 @@ public class Map {
             if (cell1.getX() < cell2.getX()) dx = 1;
             if (cell1.getY() > cell2.getY()) dy = -1;
             if (cell1.getY() < cell2.getY()) dx = 1;
+            System.out.println("sdadwxeexeec\n");
             if (opponentPlayer.getActiveCards().contains(cells[cell1.getX() + dx][cell1.getY() + dy].getAttacker()))
                 return false;
         }

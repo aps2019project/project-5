@@ -228,7 +228,7 @@ public class BattleMenu implements Menu {
         String cardName = matcher.group("cardName");
         try {
             Card card = Manager.showCardInfo(cardName);
-            Output.log( card.showInfo());
+            Output.log(card.showInfo());
         } catch (Collection.CardNotFoundException e) {
             Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         }
@@ -245,9 +245,12 @@ public class BattleMenu implements Menu {
             Manager.moveTo(x, y);
             Card card = Manager.getActivePlayer().getSelectedCard();
             Output.log(String.format("%s moved to %d %d", card.getName(), x, y));
-        } catch (Match.InvalidMoveException | Map.InvalidCellException e) {
+        } catch (Match.InvalidMoveException e) {
             Output.err(Error.INVALID_MOVE);
+        } catch (Map.InvalidCellException e) {
+
         }
+
 
     }
 
