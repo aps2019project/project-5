@@ -31,10 +31,9 @@ public enum Error {
     NOT_IN_GRAVEYARD("You are not in graveyard"),
     ALREADY_IN_GRAVEYARD( "You were already in graveyard"),
     CARD_NOT_FOUND_IN_GRAVEYARD("Card not found in graveyard"),
-    NO_ITEM_SELECTED("No collectable item selected"),
     CARD_SELECTED("card selected!"),
-    ITEM_SELECTED("Collectable item selected."),
-    NO_ITEM("Item with this ID not found.");
+    ITEM_SELECTED("Collectible item selected."),
+    NO_ITEM("Item with this ID not found."),
     NO_ITEM_SELECTED("No collectible item selected"),
     HERO_DEATH("Your hero dead.");
 
