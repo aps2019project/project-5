@@ -150,9 +150,7 @@ public class JsonParser {
                         (String)
                                 spellHashMap.get("targetType")
                 );
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            } catch (Exception e) {}
             spell.setTargetType(targetType);
             List<Object> buffs = (List<Object>) spellHashMap.get("effect");
             for(Object buffObject : buffs) {

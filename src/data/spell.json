@@ -74,7 +74,7 @@
     "name": "Fireball",
     "price": 600,
     "manaPoint": 3,
-    "targetType": {},
+    "targetType": "",
     "effect": []
   },
   {
@@ -95,7 +95,7 @@
     "name": "Poison Lake",
     "price": 900,
     "manaPoint": 5,
-    "targetType": {},
+    "targetType": "",
     "effect": []
   },
   {
