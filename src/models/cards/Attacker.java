@@ -17,7 +17,7 @@ public class Attacker extends Card {
     private boolean counterAttackAbility;
     private boolean moveAbility;
 
-    public boolean isMoveAbility() {
+    public boolean getMoveAbility() {
         return moveAbility;
     }
 

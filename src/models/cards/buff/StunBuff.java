@@ -11,7 +11,7 @@ public class StunBuff extends Buff {
     @Override
     public void buffEffect(Card card) {
         if (!isContinues) super.activeTime++;
-        card.setMoveAvailable(false);
+        ((Attacker) card).setMoveAbility(false);
         ((Attacker) card).setTurnAttackAvailability(false);
     }
 }

@@ -15,7 +15,7 @@ public class Card implements Comparable {
     private String name;
     private int price;
     final int MAX_DISTANCE_TO_MOVE = 2;
-    private boolean isMoveAvailable;
+    private boolean isMoveAvailable = true;
 
     public Card(Card card) {
         this.cell = card.cell;
@@ -117,9 +117,9 @@ public class Card implements Comparable {
     }
 
     public boolean isMoveAvailable() {
+
         return isMoveAvailable;
     }
-
     public void setMoveAvailable(boolean moveAvailable) {
         isMoveAvailable = moveAvailable;
     }

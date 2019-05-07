@@ -43,17 +43,17 @@ public class Map {
         StringBuilder stringBuilder = new StringBuilder();
         String username1 = null;
         String username2 = null;
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 9; j++) {
-                if(cells[i][j].getAttacker() == null)
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (cells[i][j].getAttacker() == null)
                     stringBuilder.append(" _ ");
                 else {
-                    if(username1 == null)
+                    if (username1 == null)
                         username1 = cells[i][j].getAttacker().getUsername();
-                    if(username2 == null && username1 != null && !cells[i][j].getAttacker().getUsername().equals(username1))
+                    if (username2 == null && username1 != null && !cells[i][j].getAttacker().getUsername().equals(username1))
                         username2 = cells[i][j].getAttacker().getUsername();
                     char cardPrefix;
-                    if(cells[i][j].getAttacker().getUsername().equals(username1))
+                    if (cells[i][j].getAttacker().getUsername().equals(username1))
                         cardPrefix = '+';
                     else
                         cardPrefix = '-';
@@ -172,7 +172,7 @@ public class Map {
         int distance = Cell.manhattanDistance(cell1, cell2);
         if (distance > card.getMaxDistance()) return false;
         if (cell2.getAttacker() != null) return false;
-        if (!card.isMoveAvailable()) return false;
+        if (!((Attacker) card).getMoveAbility()) return false;
         int dx = 0;
         int dy = 0;
         if (distance >= 2) {

@@ -248,8 +248,8 @@ public class Manager {
         return getActivePlayer().getCollectedItems();
     }
 
-    public static void selectCollectableItem(String itemID) {
-        getActivePlayer().selectCollectibleItem(itemID);
+    public static void selectCollectableItem(String itemID) throws Player.ItemNotFoundException {
+        getActivePlayer().selectCollectableItem(itemID);
     }
 
     public static CollectableItem getSelectedCollectableItem() throws Player.NoItemSelectedException {
@@ -259,7 +259,10 @@ public class Manager {
         return collectableItem;
     }
 
-    public static void useCollectableItem(int x, int y) {
+    public static void useCollectableItem(int x, int y) throws CollectableItem.NoCollectableItemSelected {
+        if (!getActivePlayer().collectableItemIsSelected()) {
+            throw new CollectableItem.NoCollectableItemSelected(Error.NO_ITEM_SELECTED.toString());
+        }
         // TODO: 5/7/19 use item in cell(x, y)
     }
 
