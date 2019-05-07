@@ -111,7 +111,7 @@ public class Card implements Comparable {
     }
 
     public int getMaxDistance() {
-        return this.getMaxDistance();
+        return this.MAX_DISTANCE_TO_MOVE;
 
     }
 
