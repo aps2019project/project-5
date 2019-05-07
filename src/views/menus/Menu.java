@@ -3,7 +3,6 @@ package views.menus;
 import controllers.Manager;
 import views.Command;
 import views.Error;
-import views.Input;
 import views.Output;
 
 import java.lang.reflect.InvocationTargetException;
@@ -31,8 +30,7 @@ public interface Menu {
                     if(command.getFunctionName().equals(""))
                         return;
                     matches = true;
-
-                    Method method = null;
+                    Method method ;
                     try {
                         method = getClass().getMethod(command.getFunctionName(), Matcher.class);
                         Object object = method.invoke(null, matcher);

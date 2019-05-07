@@ -1,10 +1,14 @@
 package models.match;
 
+import controllers.Manager;
 import models.Account;
 import models.Collection;
 import models.Player;
+import models.cards.Card;
 
 import java.text.DecimalFormat;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DeathMatch extends Match {
     public DeathMatch(Account account1 , Account account2) {
@@ -14,7 +18,7 @@ public class DeathMatch extends Match {
     @Override
     public Player getWinner() {
         for (int i = 0; i < PLAYERS_COUNT; i++) {
-            if(players[i].getDeck().getHero().getCurrentHealth() <= 0)
+            if(Manager.getHero(new LinkedList<>(players[i].getActiveCards())).get(0).getCurrentHealth()  <= 0)
                 return players[(i + 1) % 2];
         }
         return null;
