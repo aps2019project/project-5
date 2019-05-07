@@ -4,7 +4,9 @@ import controllers.Manager;
 import models.Collection;
 import models.Player;
 import models.Hand;
+import models.cards.Attacker;
 import models.cards.Card;
+import models.cards.Hero;
 import models.cards.Minion;
 import models.items.Item;
 import models.map.Map;
@@ -13,6 +15,7 @@ import views.Command;
 import views.Error;
 import views.Output;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -68,7 +71,7 @@ public class BattleMenu implements Menu {
                 "\t\t\t\t\t\tshows active player hand"
         ));
         commands.add(new Command(
-                "^(?i)move\\s+to\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\)$",
+                "^(?i)move\\s+to\\s+\\(\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)$",
                 "moveTo",
                 "Move to ([x], [y])",
                 "\t\t\t\tMoves selected card of active player to cell (x, y)"
@@ -157,6 +160,13 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
+                "^(?i)show\\s+my\\s+hero$",
+                "showMyHero",
+                "Show My Hero",
+                "\t\t\t\tShow Active player's hero."
+        ));
+
+        commands.add(new Command(
                 "^(?i)show\\s+info\\s+(?<cardID>\\d+)$",
                 "showInfoInGraveyard",
                 "Show Info [cardID]",
@@ -200,19 +210,18 @@ public class BattleMenu implements Menu {
         Output.log(Manager.getMatchInfo());
     }
 
-    private static void showMinions(List<Minion> minions) {
-        minions.forEach(minion -> {
-                    StringBuilder result = new StringBuilder();
-                    result.append(minion.getID());
-                    result.append(" : ");
-                    result.append(minion.getName());
-                    result.append(", health : ");
-                    result.append(minion.getHealth());
-                    result.append(", location : ");
-                    result.append(String.format("(%s,%s) power : %s"
-                            , minion.getCell().getX(), minion.getCell().getY(), minion.getAttackPoint()));
-                    Output.log(result.toString());
-                }
+    private static void showMinions(List<Minion> attackers) {
+        attackers.forEach(minion -> {
+                String result = minion.getID() +
+                        " : " +
+                        minion.getName() +
+                        ", health : " +
+                        minion.getHealth() +
+                        ", location : " +
+                        String.format("(%s,%s) power : %s"
+                                , minion.getCell().getX(), minion.getCell().getY(), minion.getAttackPoint());
+                Output.log(result);
+            }
         );
     }
 
@@ -273,22 +282,22 @@ public class BattleMenu implements Menu {
     public static void showHand(Matcher matcher) {
         Output.log("Hand:");
         Hand hand = Manager.getHand();
-        hand.getCards().forEach(card -> Output.log("\t" + card.getID()));
+        hand.getCards().forEach(card -> Output.log("\t" + card.getID() + "\t Mana: " + card.getManaPoint()));
         Output.log("Next Card:");
-        Output.log("\t" + hand.getNextCard().getName());
-
+        Output.log("\t" + hand.getNextCard().getID() + "\t Mana: " + hand.getNextCard().getManaPoint());
+        Output.log("Mana: " + Manager.getActivePlayer().getMana());
     }
 
     public static void endTurn(Matcher matcher) {
         Manager.endTurn();
 
-        //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
+        // bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
 
     }
 
     public static void showCollectables(Matcher matcher) {
-        List<Item> collectableItems = Manager.getCollectableItems();
-        Output.log(collectableItems);
+        List<Item> collectibleItems = Manager.getCollectableItems();
+        Output.log(collectibleItems);
     }
 
     public static void selectCollectable(Matcher matcher) {
@@ -297,9 +306,11 @@ public class BattleMenu implements Menu {
     }
 
     public static void showCollectibleInfo(Matcher matcher) {
+
     }
 
     public static void useCollectible(Matcher matcher) {
+
     }
 
     public static void insert(Matcher matcher) {
@@ -383,5 +394,21 @@ public class BattleMenu implements Menu {
         List<Card> cards = Manager.getCardsInGraveyard();
         Output.log("Graveyard Cards :");
         cards.forEach(Output::log);
+    }
+
+    public static void showMyHero(Matcher matcher) {
+        try {
+            Hero hero = Manager.getActivePlayer().getHero();
+            Output.log(hero.getID() +
+                    " : " +
+                    hero.getName() +
+                    ", health : " +
+                    hero.getHealth() +
+                    ", location : " +
+                    String.format("(%s,%s) power : %s"
+                            , hero.getCell().getX(), hero.getCell().getY(), hero.getAttackPoint()));
+        } catch (Player.HeroDeadException e) {
+            Output.err(Error.HERO_DEATH);
+        }
     }
 }

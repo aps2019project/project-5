@@ -29,7 +29,7 @@ public class Map {
     public Map() {
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 9; j++)
-                cells[i][j] = new Cell();
+                cells[i][j] = new Cell(i, j);
     }
 
     public Cell getCell(int x, int y) throws InvalidCellException {

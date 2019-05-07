@@ -69,7 +69,7 @@ public class Player {
         deck.getCards().remove(deck.getCards().get(0));
     }
 
-    public void insertCard(Card card, Cell cell) throws Collection.CollectionException {
+    public void insertCard(Card card, Cell cell) {
         changeMana(-card.getManaPoint());
         setNextHand(card);
         if (card instanceof Attacker) {

@@ -28,20 +28,18 @@ public class MultiFlagMatch extends Match {
 
     @Override
     public String getInfo() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < flags.size(); i++) {
             Flag flag = flags.get(i);
             if (flag.isGotten()) {
-                result += flag.getName() + " is token by attacker " +
-                        flag.getOwner().getName() + " of player number " +
-                        (flag.getTokenTurn() % 2 + 1);
+                result.append(flag.getName()).append(" is token by attacker ").append(flag.getOwner().getName()).append(" of player number ").append(flag.getTokenTurn() % 2 + 1);
             } else {
-                result += flag.getName() + " is not token.";
+                result.append(flag.getName()).append(" is not token.");
             }
             if (i != flags.size() - 1)
-                result += "\n";
+                result.append("\n");
         }
-        return result;
+        return result.toString();
     }
 
 

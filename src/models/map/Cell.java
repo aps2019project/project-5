@@ -59,6 +59,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return "(" + x + ", " + y + " )";
+        return "(" + x + ", " + y + ")";
     }
 }

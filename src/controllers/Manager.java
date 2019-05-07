@@ -76,19 +76,13 @@ public class Manager {
 
     public static void sell(String cardName) throws CardNotFoundException {
         shop.sell(account, cardName);
-        for (Deck deck : account.getDecks()) {
-            deck.getCards().stream()
-                    .filter(card -> card.getName().equalsIgnoreCase(cardName))
-                    .forEach(card -> deck.getCards().remove(card));
-
-        }
+        // TODO: remove selling cards from decks
     }
 
     public static Collection getShopCollection() {
         Collection collection = shop.getCardsCollection();
         return shop.getCardsCollection();
     }
-
 
     public static Collection getMyCollection() {
         Collection collection = account.getCollection();

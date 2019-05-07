@@ -31,7 +31,8 @@ public enum Error {
     NOT_IN_GRAVEYARD("You are not in graveyard"),
     ALREADY_IN_GRAVEYARD( "You were already in graveyard"),
     CARD_NOT_FOUND_IN_GRAVEYARD("Card not found in graveyard"),
-    NO_ITEM_SELECTED("No collectable item selected");
+    NO_ITEM_SELECTED("No collectible item selected"),
+    HERO_DEATH("Your hero dead.");
 
     private String message;
 
