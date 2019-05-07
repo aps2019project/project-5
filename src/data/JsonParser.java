@@ -7,6 +7,7 @@ import models.cards.Minion;
 import models.cards.buff.*;
 import models.cards.spell.SpecialPowerActivateTime;
 import models.cards.spell.Spell;
+import models.cards.spell.TargetType;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -143,6 +144,16 @@ public class JsonParser {
                     (int) spellHashMap.get("manaPoint"),
                     (int) spellHashMap.get("price")
             );
+            TargetType targetType = null;
+            try {
+                targetType = TargetType.valueOf(
+                        (String)
+                                spellHashMap.get("targetType")
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            spell.setTargetType(targetType);
             List<Object> buffs = (List<Object>) spellHashMap.get("effect");
             for(Object buffObject : buffs) {
                 HashMap<String, Object> buffHashMap = (HashMap<String, Object>) buffObject;
@@ -151,7 +162,7 @@ public class JsonParser {
                     public void buffEffect(Card card) {}
                 };
 
-                if(((String) buffHashMap.get("name")).equalsIgnoreCase("DisarmBuff")) {
+                if(((String) buffHashMap.get("name")).equalsIgnoreCase("DisarmBuffDisarmBuff")) {
                     buff = new DisarmBuff(
                             (int) buffHashMap.get("maxActivateTime"),
                             (boolean) buffHashMap.get("isContinues")

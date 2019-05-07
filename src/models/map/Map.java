@@ -28,8 +28,8 @@ public class Map {
     }
 
     public Map() {
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 9; j++)
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++)
                 cells[i][j] = new Cell(i, j);
     }
 
@@ -78,8 +78,8 @@ public class Map {
     }
 
     public void insertCard(Card card, Cell cell) throws InvalidCellException, InvalidTargetCellException, Player.HeroDeadException {
-        if (cell.isFull())
-            throw new InvalidCellException(Error.CELL_FULL.toString());
+        if (cell.isFull() && (card instanceof Minion))
+            throw new InvalidCellException(Error.INVALID_TARGET.toString());
         if (!cards.contains(card)) {
             // TODO: 5/4/19 check if contains
         }
@@ -140,7 +140,7 @@ public class Map {
                     return targetCells;
                 }
                 break;
-            case ALL_OPPONENT_FORCES:
+            case ALL_OPPONENT_FORCE:
                 Manager.getInActivePlayer().getActiveCards().forEach(
                         card -> targetCells.add(card.getCell())
                 );
@@ -152,13 +152,15 @@ public class Map {
                     return targetCells;
                 }
                 return targetCells;
-            case ALL_OPPONENT_FORCES_IN_ONE_COLUMN:
+            case ALL_OPPONENT_FORCE_IN_ONE_COLUMN:
                 for (int i = 0; i < 5; i++) {
                     if (cells[i][cell.getY()].getAttacker() != null) {
                         targetCells.add(cells[i][cell.getY()]);
                     }
                 }
                 return targetCells;
+            case OPPONENT_HERO:
+
         }
         throw new InvalidTargetCellException();
     }

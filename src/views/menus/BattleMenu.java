@@ -429,6 +429,7 @@ public class BattleMenu implements Menu {
         cards.forEach(Output::log);
     }
 
+
     public static void showMyHero(Matcher matcher) {
         try {
             Hero hero = Manager.getActivePlayer().getHero();

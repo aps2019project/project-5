@@ -22,6 +22,10 @@ public class Spell extends Card {
         return targetType;
     }
 
+    public void setTargetType(TargetType targetType) {
+        this.targetType = targetType;
+    }
+
     public Spell(int id, String name, String description, int manaPoint, int price) {
         super(id, name, description, manaPoint, price);
     }
