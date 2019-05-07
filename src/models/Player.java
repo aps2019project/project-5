@@ -7,6 +7,7 @@ import models.cards.spell.Spell;
 import models.items.CollectableItem;
 import models.items.Item;
 import models.map.Cell;
+import views.Error;
 import views.Input;
 
 import java.util.ArrayList;
@@ -150,9 +151,9 @@ public class Player {
 
     public Card getCard(String cardID) throws Collection.CardNotFoundException {
         for (Card card : activeCards)
-            if (card.getID().equals(cardID))
+            if (card.getID().equalsIgnoreCase(cardID))
                 return card;
-        throw new Collection.CardNotFoundException("Card with this id not found");
+        throw new Collection.CardNotFoundException(Error.CARD_NOT_FOUND.toString());
     }
 
     public void changeMana(int mana) {
@@ -163,14 +164,22 @@ public class Player {
         return collectedItems;
     }
 
-    public void selectCollectibleItem(String itemID) {
-        this.selectedCollectableItem = (CollectableItem) collectedItems.stream().filter(
-                item -> ((CollectableItem)item).getID().equals(itemID))
-                .collect(Collectors.toList()).get(0);
+    public void selectCollectableItem(String itemID) throws ItemNotFoundException {
+        List<CollectableItem> collectableItems =  collectedItems.stream().filter(
+                item -> ((CollectableItem)item).getID().equals(itemID)).map(
+                        item -> (CollectableItem)item)
+                .collect(Collectors.toList());
+        if(collectableItems.size() == 0)
+            throw new ItemNotFoundException(Error.NO_ITEM.toString());
+        this.selectedCollectableItem = collectableItems.get(0);
     }
 
     public CollectableItem getSelectedCollectableItem() {
         return selectedCollectableItem;
+    }
+
+    public boolean collectableItemIsSelected() {
+        return selectedCollectableItem != null;
     }
 
     public static class NotEnoughManaException extends Exception {
@@ -187,6 +196,12 @@ public class Player {
 
     public static class NoItemSelectedException extends Exception{
         public NoItemSelectedException(String message) {
+            super(message);
+        }
+    }
+
+    public class ItemNotFoundException extends Throwable {
+        public ItemNotFoundException(String message) {
             super(message);
         }
     }

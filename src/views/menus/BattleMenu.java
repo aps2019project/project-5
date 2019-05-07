@@ -6,6 +6,7 @@ import models.Player;
 import models.Hand;
 import models.cards.Card;
 import models.cards.Minion;
+import models.items.CollectableItem;
 import models.items.Item;
 import models.map.Map;
 import models.match.Match;
@@ -18,7 +19,7 @@ import java.util.regex.Matcher;
 
 public class BattleMenu implements Menu {
 
-    boolean isInGraveYard = false;
+    private static boolean isInGraveYard = false;
 
     public BattleMenu() {
         commands.add(new Command(
@@ -94,10 +95,10 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)select\\s+(?<cardID>.+)$",
-                "selectCard",
-                "select [CardName]",
-                "\t\t\t\tselects a card to attack"
+                "^(?i)select\\s+(?<id>.+)$",
+                "select",
+                "select [cardID | collectableItemID]",
+                "\t\t\t\tselects a card or a collectable item to attack"
         ));
 
         commands.add(new Command(
@@ -119,13 +120,6 @@ public class BattleMenu implements Menu {
                 "showCollectables",
                 "Show Collectables",
                 "\t\t\t\tprints collectibles items"
-        ));
-
-        commands.add(new Command(
-                "^(?i)select\\s+(?<itemID>.+)$",
-                "selectCollectable",
-                "Select [collectableID]",
-                "\t\t\tSelects collectable item"
         ));
 
         commands.add(new Command(
@@ -157,7 +151,7 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)show\\s+info\\s+(?<cardID>\\d+)$",
+                "^(?i)show\\s+info\\s+(?<cardID>.+)$",
                 "showInfoInGraveyard",
                 "Show Info [cardID]",
                 "\t\t\t\tPrints info about a card in graveyard"
@@ -178,18 +172,18 @@ public class BattleMenu implements Menu {
         ));
 
         commands.add(new Command(
-                "^(?i)exit",
+                "^(?i)exit( graveyard)?$",
                 "exit",
                 "Exit",
                 "\t\t\t\t\t\t\tExits from graveyard"
         ));
-
 
         // TODO: 5/7/19 add help command
 
         // TODO: 5/7/19 add combo attack command
 
     }
+
 
     @Override
     public String getMenuName() {
@@ -281,25 +275,12 @@ public class BattleMenu implements Menu {
 
     public static void endTurn(Matcher matcher) {
         Manager.endTurn();
-
         //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
-
     }
 
     public static void showCollectables(Matcher matcher) {
         List<Item> collectableItems = Manager.getCollectableItems();
         Output.log(collectableItems);
-    }
-
-    public static void selectCollectable(Matcher matcher) {
-        String itemID = matcher.group("itemID");
-        Manager.selectCollectableItem(itemID);
-    }
-
-    public static void showCollectibleInfo(Matcher matcher) {
-    }
-
-    public static void useCollectible(Matcher matcher) {
     }
 
     public static void insert(Matcher matcher) {
@@ -319,17 +300,26 @@ public class BattleMenu implements Menu {
         Menu.help(commands);
     }
 
-    public static void selectCard(Matcher matcher) {
-        String cardID = matcher.group("cardID");
+    public static void select(Matcher matcher) {
+        String id = matcher.group("id");
         try {
-            Manager.selectCard(cardID);
-            Output.log("card selected!");
+            Manager.selectCard(id);
+            Output.log(Error.CARD_SELECTED.toString());
         } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND);
+            boolean flag = false;
+            try {
+                Manager.selectCollectableItem(id);
+                Output.log(Error.ITEM_SELECTED.toString());
+                flag = true;
+            } catch (Player.ItemNotFoundException e1) {
+                Output.err(Error.NO_ITEM);
+            }
+            if (!flag)
+                Output.err(Error.CARD_NOT_FOUND);
         }
     }
 
-    public void showInfo(Matcher matcher) {
+    public static void showInfo(Matcher matcher) {
         try {
             Output.log(Manager.getSelectedCollectableItem());
         } catch (Player.NoItemSelectedException e) {
@@ -337,32 +327,36 @@ public class BattleMenu implements Menu {
         }
     }
 
-    public void useCollectableItem(Matcher matcher) {
+    public static void useCollectableItem(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        Manager.useCollectableItem(x, y);
+        try {
+            Manager.useCollectableItem(x, y);
+        } catch (CollectableItem.NoCollectableItemSelected noCollectableItemSelected) {
+            Output.err(noCollectableItemSelected.getMessage());
+        }
     }
 
-    public void showNextCard(Matcher matcher) {
+    public static void showNextCard(Matcher matcher) {
         Card nextCard = Manager.getNextCard();
         Output.log(nextCard);
     }
 
-    public void enterGraveyard(Matcher matcher) {
+    public static void enterGraveyard(Matcher matcher) {
         if (isInGraveYard) {
             Output.err(Error.ALREADY_IN_GRAVEYARD);
         }
         isInGraveYard = true;
     }
 
-    public void exit(Matcher matcher) {
+    public static void exit(Matcher matcher) {
         if (!isInGraveYard) {
             Output.err(Error.NOT_IN_GRAVEYARD);
         }
         isInGraveYard = false;
     }
 
-    public void showInfoInGraveyard(Matcher matcher) {
+    public static void showInfoInGraveyard(Matcher matcher) {
         if (!isInGraveYard) {
             Output.err(Error.NOT_IN_GRAVEYARD);
             return;
@@ -375,7 +369,7 @@ public class BattleMenu implements Menu {
         }
     }
 
-    public void showCards(Matcher matcher) {
+    public static void showCards(Matcher matcher) {
         if (!isInGraveYard) {
             Output.err(Error.NOT_IN_GRAVEYARD);
             return;
@@ -384,4 +378,6 @@ public class BattleMenu implements Menu {
         Output.log("Graveyard Cards :");
         cards.forEach(Output::log);
     }
+
+
 }
