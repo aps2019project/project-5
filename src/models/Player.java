@@ -111,7 +111,7 @@ public class Player {
     private void shuffleDeck() {
         Hero hero = deck.getHero();
         deck.getCards().remove(hero);
-        Collections.shuffle(deck.getCards());
+//        Collections.shuffle(deck.getCards());
         try {
             deck.addCard(hero);
         } catch (Exception ignored) {
@@ -174,11 +174,11 @@ public class Player {
     }
 
     public void selectCollectableItem(String itemID) throws ItemNotFoundException {
-        List<CollectableItem> collectableItems =  collectedItems.stream().filter(
-                item -> ((CollectableItem)item).getID().equals(itemID)).map(
-                        item -> (CollectableItem)item)
+        List<CollectableItem> collectableItems = collectedItems.stream().filter(
+                item -> ((CollectableItem) item).getID().equals(itemID)).map(
+                item -> (CollectableItem) item)
                 .collect(Collectors.toList());
-        if(collectableItems.size() == 0)
+        if (collectableItems.size() == 0)
             throw new ItemNotFoundException(Error.NO_ITEM.toString());
         this.selectedCollectableItem = collectableItems.get(0);
     }
@@ -203,7 +203,7 @@ public class Player {
         }
     }
 
-    public static class NoItemSelectedException extends Exception{
+    public static class NoItemSelectedException extends Exception {
         public NoItemSelectedException(String message) {
             super(message);
         }

@@ -29,7 +29,7 @@ public enum Error {
     OPPONENT_MINION_IS_NOT_AVAILABLE("minion opponent is not available for attack"),
     CARD_NOT_IN_HAND("Card not found in hand"),
     NOT_IN_GRAVEYARD("You are not in graveyard"),
-    ALREADY_IN_GRAVEYARD( "You were already in graveyard"),
+    ALREADY_IN_GRAVEYARD("You were already in graveyard"),
     CARD_NOT_FOUND_IN_GRAVEYARD("Card not found in graveyard"),
     CARD_SELECTED("card selected!"),
     ITEM_SELECTED("Collectible item selected."),

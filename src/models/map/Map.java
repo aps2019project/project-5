@@ -27,8 +27,8 @@ public class Map {
     }
 
     public Map() {
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 9; j++)
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++)
                 cells[i][j] = new Cell(i, j);
     }
 
@@ -75,7 +75,7 @@ public class Map {
     }
 
     public void insertCard(Card card, Cell cell) throws InvalidCellException, InvalidTargetCellException, Player.HeroDeadException {
-        if (cell.isFull())
+        if (cell.isFull() && (card instanceof Minion))
             throw new InvalidCellException(Error.INVALID_TARGET.toString());
         if (!cards.contains(card)) {
             // TODO: 5/4/19 check if contains

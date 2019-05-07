@@ -205,16 +205,16 @@ public class BattleMenu implements Menu {
 
     private static void showMinions(List<Minion> attackers) {
         attackers.forEach(minion -> {
-                String result = minion.getID() +
-                        " : " +
-                        minion.getName() +
-                        ", health : " +
-                        minion.getHealth() +
-                        ", location : " +
-                        String.format("(%s,%s) power : %s"
-                                , minion.getCell().getX() + 1, minion.getCell().getY() + 1, minion.getAttackPoint());
-                Output.log(result);
-            }
+                    String result = minion.getID() +
+                            " : " +
+                            minion.getName() +
+                            ", health : " +
+                            minion.getHealth() +
+                            ", location : " +
+                            String.format("(%s,%s) power : %s"
+                                    , minion.getCell().getX() + 1, minion.getCell().getY() + 1, minion.getAttackPoint());
+                    Output.log(result);
+                }
         );
     }
 
@@ -298,10 +298,14 @@ public class BattleMenu implements Menu {
         int y = Integer.parseInt(matcher.group("y"));
         try {
             Manager.insertCard(cardName, x, y);
-        } catch (Map.InvalidCellException | Collection.CollectionException | Player.NotEnoughManaException e) {
+        } catch (Collection.CollectionException e) {
             Output.err(Error.CARD_NOT_IN_HAND);
+        } catch (Player.NotEnoughManaException e) {
+            Output.err(Error.NOT_ENOUGH_MANA);
         } catch (Map.InvalidTargetCellException | Player.HeroDeadException e) {
             e.printStackTrace();
+        } catch (Map.InvalidCellException e) {
+            Output.err(Error.INVALID_CELL);
         }
     }
 
@@ -387,7 +391,6 @@ public class BattleMenu implements Menu {
         Output.log("Graveyard Cards :");
         cards.forEach(Output::log);
     }
-
 
 
     public static void showMyHero(Matcher matcher) {
