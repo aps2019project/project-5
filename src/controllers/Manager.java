@@ -4,9 +4,12 @@ import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
 import models.Account.NotEnoughDrakeException;
+import models.cards.Hero;
 import models.cards.Minion;
+import models.cards.spell.Spell;
 import models.items.CollectableItem;
 import models.items.Item;
+import models.items.UsableItem;
 import models.map.Cell;
 import models.map.Map;
 import models.match.DeathMatch;
@@ -19,6 +22,8 @@ import views.InputAI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.stream.Collectors;
 
 public class Manager {
     private static Account account;
@@ -180,8 +185,9 @@ public class Manager {
         opponentUsername = username;
         if (!isOpponentNull()) {
             Account opponent;
-            if (isAIMode)
+            if (isAIMode) {
                 opponent = Account.getAIAccount();
+            }
             else
                 opponent = Account.getAccounts().get(username);
             if (gameMode == 1 /* story mode */) {
@@ -200,6 +206,7 @@ public class Manager {
             if (opponent == null) {
                 opponentUsername = "";
             }
+            playingMatch.setAIMode(isAIMode);
         }
     }
 
@@ -231,6 +238,9 @@ public class Manager {
     public static void attack(String ID) throws Match.CardAttackIsNotAvailableException, Match.TiredMinionException,
             CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack {
         playingMatch.attack(ID);
+        if (playingMatch.isFinished()) {
+            // TODO: 5/7/19 finishing game
+        }
     }
 
     public static Hand getHand() {
@@ -256,13 +266,13 @@ public class Manager {
     public static CollectableItem getSelectedCollectableItem() throws Player.NoItemSelectedException {
         CollectableItem collectableItem = getActivePlayer().getSelectedCollectableItem();
         if (collectableItem == null)
-            throw new Player.NoItemSelectedException(Error.NO_ITEM_SELECTED.toString());
+            throw new Player.NoItemSelectedException(Error.NO_SELECTABLE_ITEM_SELECTED.toString());
         return collectableItem;
     }
 
     public static void useCollectableItem(int x, int y) throws CollectableItem.NoCollectableItemSelected {
         if (!getActivePlayer().collectableItemIsSelected()) {
-            throw new CollectableItem.NoCollectableItemSelected(Error.NO_ITEM_SELECTED.toString());
+            throw new CollectableItem.NoCollectableItemSelected(Error.NO_SELECTABLE_ITEM_SELECTED.toString());
         }
         // TODO: 5/7/19 use item in cell(x, y)
     }
@@ -281,5 +291,38 @@ public class Manager {
 
     public static List<Card> getCardsInGraveyard() {
         return playingMatch.getGraveyardCards();
+    }
+
+    public static boolean isAITurn() {
+        return playingMatch.isAIMode() && (playingMatch.getTurn() & 1) != 1;
+    }
+
+    public static List<Hero> getHero(List<Card> cards) {
+        return cards.stream().filter(
+                card -> card instanceof Hero).map(
+                        card -> (Hero) card)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Minion> getMinion(List<Card> cards) {
+        return cards.stream().filter(
+                card -> card instanceof Minion).map(
+                card -> (Minion) card)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Spell> getSpell(List<Card> cards) {
+        return cards.stream().filter(
+                card -> card instanceof Spell).map(
+                card -> (Spell) card)
+                .collect(Collectors.toList());
+    }
+
+    public static List<UsableItem> getItem(List<Card> cards) {
+        return cards.stream().filter(
+                card -> card instanceof UsableItem
+        ).map(
+                card -> (UsableItem) card)
+                .collect(Collectors.toList());
     }
 }

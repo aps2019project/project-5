@@ -65,7 +65,6 @@ public class Player {
     private void setNextHand(Card card) {
         hand.getCards().remove(card);
         hand.getCards().add(hand.getNextCard());
-//        Card card1 = deck.getCards().get(0);
         hand.setNextCard(deck.getCards().get(0));
         deck.getCards().remove(deck.getCards().get(0));
     }
@@ -111,7 +110,7 @@ public class Player {
     private void shuffleDeck() {
         Hero hero = deck.getHero();
         deck.getCards().remove(hero);
-        Collections.shuffle(deck.getCards());
+//        Collections.shuffle(deck.getCards());
         try {
             deck.addCard(hero);
         } catch (Exception ignored) {
@@ -140,14 +139,18 @@ public class Player {
 
     public Attacker getActiveCard(String cardID) throws Collection.CardNotFoundException {
         try {
-            return activeCards.stream().filter(card -> card.getID().equals(cardID)).collect(Collectors.toList()).get(0);
+            return activeCards.stream().filter(card -> card.getID().equalsIgnoreCase(cardID)).collect(Collectors.toList()).get(0);
         } catch (Exception e) {
             throw new Collection.CardNotFoundException("Card not found with this ID");
         }
     }
-
+    int t = 0;
     public void decide() {
-
+        if (t % 2 == 0)
+            this.decision = "show hand";
+        else
+            this.decision = "end turn";
+        t = (t + 1) % 2;
     }
 
     public String getDecision() {

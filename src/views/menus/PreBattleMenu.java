@@ -87,6 +87,7 @@ public class PreBattleMenu implements Menu {
             }
         } else {
             opponentName = "AI User";
+
         }
         Manager.setMatchData(AIMode, gameMode, opponentName);
 

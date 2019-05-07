@@ -4,7 +4,6 @@ import controllers.Manager;
 import models.Collection;
 import models.Player;
 import models.Hand;
-import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
@@ -14,10 +13,12 @@ import models.map.Map;
 import models.match.Match;
 import views.Command;
 import views.Error;
+import views.InputAI;
 import views.Output;
 
-import java.util.ArrayList;
-import javax.swing.plaf.OptionPaneUI;
+import javax.print.attribute.standard.MediaName;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -196,6 +197,39 @@ public class BattleMenu implements Menu {
     }
 
     @Override
+    public void handleMenu() {
+        while(true) {
+            String inputCommand ;
+            if (Manager.isAITurn()){
+                inputCommand = InputAI.getInstance().getCommand();
+            }
+            else
+                inputCommand = Manager.getInput().getCommand(getMenuName());
+            boolean matches = false;
+            for(Command command : getCommands()) {
+                Matcher matcher = command.getPattern().matcher(inputCommand);
+                if(matcher.find()) {
+                    if(command.getFunctionName().equals(""))
+                        return;
+                    matches = true;
+                    Method method ;
+                    try {
+                        method = getClass().getMethod(command.getFunctionName(), Matcher.class);
+                        Object object = method.invoke(null, matcher);
+                        if(object != null && object.equals(Boolean.FALSE))
+                            return;
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
+            }
+            if(!matches)
+                Output.err(Error.INVALID_COMMAND.toString());
+        }
+    }
+
+    @Override
     public String getMenuName() {
         return "BattleMenu";
     }
@@ -325,7 +359,7 @@ public class BattleMenu implements Menu {
             boolean flag = false;
             try {
                 Manager.selectCollectableItem(id);
-                Output.log(Error.ITEM_SELECTED.toString());
+                Output.log(Error.COLLECTABLE_ITEM_SELECTED.toString());
                 flag = true;
             } catch (Player.ItemNotFoundException e1) {
                 Output.err(Error.NO_ITEM);
@@ -339,7 +373,7 @@ public class BattleMenu implements Menu {
         try {
             Output.log(Manager.getSelectedCollectableItem());
         } catch (Player.NoItemSelectedException e) {
-            Output.err(Error.NO_ITEM_SELECTED);
+            Output.err(Error.NO_SELECTABLE_ITEM_SELECTED);
         }
     }
 
@@ -394,8 +428,6 @@ public class BattleMenu implements Menu {
         Output.log("Graveyard Cards :");
         cards.forEach(Output::log);
     }
-
-
 
     public static void showMyHero(Matcher matcher) {
         try {
