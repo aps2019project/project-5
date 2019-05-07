@@ -3,6 +3,7 @@ package models;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
+import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.items.CollectableItem;
 import models.items.Item;

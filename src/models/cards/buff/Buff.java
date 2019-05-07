@@ -6,35 +6,15 @@ public abstract class Buff {
     int activeTime;
     private int maxActiveTime;
     boolean isContinues;
-    BuffType buffType;
-
-    public enum BuffType {
-        DISARM_BUFF,
-        HOLY_BUFF,
-        POISON_BUFF,
-        POWER_BUFF,
-        STUN_BUFF,
-        WEAKNESS_BUFF,
-        OPPONENT_BUFF_KILLER,
-        MY_BUFF_KILLER;
-    }
-
-    public BuffType getBuffType() {
-        return buffType;
-    }
 
     public boolean buffIsActivated() {
         if (isContinues) return true;
         return activeTime <= maxActiveTime;
     }
 
-    public void setBuffType(BuffType buffType) {
-        this.buffType = buffType;
-    }
-
-    public Buff(int maxActiveTime, boolean isContinous) {
+    public Buff(int maxActiveTime, boolean isContinues) {
         this.maxActiveTime = maxActiveTime;
-        this.isContinues = isContinous;
+        this.isContinues = isContinues;
     }
 
     public Buff() {

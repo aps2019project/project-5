@@ -223,9 +223,9 @@
     "targetType": "ALL_OPPONENT_FORCE_IN_ONE_COLUMN",
     "effect": [
       {
-        "name": "poisonBuff",
+        "name": "PoisonBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "healthPoint": 6
       }
     ]
@@ -239,7 +239,7 @@
       {
         "name": "WeaknessBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "powerPoint": 4
       }
     ]
@@ -253,13 +253,13 @@
       {
         "name": "PoisonBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "healthPoint": 6
       },
       {
         "name": "PowerBuff",
         "isContinues": false,
-        "activeTime": 1,
+        "maxActivateTime": 1,
         "powerPoint": 8
       }
     ]
@@ -280,7 +280,7 @@
       {
         "name": "StunBuff",
         "isContinues": false,
-        "activeTime": 2
+        "maxActivateTime": 2
       }
     ]
   }
