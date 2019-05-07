@@ -84,6 +84,10 @@ public class Account {
 
     public static final Comparator<Account> compare = Comparator.comparingInt(Account::getWinCount);
 
+    public void addWinCount() {
+        winCount++;
+    }
+
     public Deck getMainDeck() {
         return mainDeck;
     }

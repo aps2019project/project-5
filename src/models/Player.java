@@ -30,6 +30,10 @@ public class Player {
     private String decision;
     private CollectableItem selectedCollectableItem;
 
+    public Account getAccount() {
+        return account;
+    }
+
     public int getMana() {
         return mana;
     }

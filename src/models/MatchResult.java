@@ -7,6 +7,11 @@ public class MatchResult {
     private boolean won;
     private Date matchDate;
 
+    public MatchResult(Account opponent, boolean won, Date matchDate) {
+        this.opponent = opponent;
+        this.won = won;
+        this.matchDate = matchDate;
+    }
 
     public Account getOpponent() {
         return opponent;

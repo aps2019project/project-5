@@ -123,6 +123,14 @@ public abstract class Match {
 
     abstract public Player getWinner();
 
+    public Player getLoser() {
+        if(getWinner() == players[0])
+            return players[1];
+        else if(getWinner() == players[1])
+            return players[0];
+        return null;
+    }
+
     public boolean isFinished() {
         return getWinner() != null;
     }

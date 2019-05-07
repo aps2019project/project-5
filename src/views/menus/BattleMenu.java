@@ -289,10 +289,14 @@ public class BattleMenu implements Menu {
         }
     }
 
-    public static void attack(Matcher matcher) {
+    public static boolean attack(Matcher matcher) {
         String cardID = matcher.group("cardID");
         try {
             Manager.attack(cardID);
+            if(Manager.getPlayingMatch() == null) {
+                Output.log("Player " + Manager.getWinner().getUsername() + " wins.");
+                return false;
+            }
         } catch (Match.CardAttackIsNotAvailableException e) {
             Output.err(String.format(String.valueOf(Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
         } catch (Match.TiredMinionException e) {
@@ -302,6 +306,7 @@ public class BattleMenu implements Menu {
         } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
             Output.err(Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
         }
+        return true;
     }
 
     public static void useSpecialPower(Matcher matcher) {

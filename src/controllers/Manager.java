@@ -21,8 +21,8 @@ import views.Input;
 import views.InputAI;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Spliterator;
 import java.util.stream.Collectors;
 
 public class Manager {
@@ -30,7 +30,7 @@ public class Manager {
     private static Match playingMatch;
     private static Shop shop = Shop.getInstance();
     private static ArrayList<Match> matches = new ArrayList<>();
-
+    private static Account winnerPlayer = null;
     private static String opponentUsername;
 
     public static Account getAccount() {
@@ -43,6 +43,10 @@ public class Manager {
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
         account = Account.getAccount(username, password);
+    }
+
+    public static Account getWinner() {
+        return winnerPlayer;
     }
 
     public static ArrayList<Account> getLeaderboard() {
@@ -239,7 +243,13 @@ public class Manager {
             CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack {
         playingMatch.attack(ID);
         if (playingMatch.isFinished()) {
-            // TODO: 5/7/19 finishing game
+            Account winner = playingMatch.getWinner().getAccount();
+            winnerPlayer = winner;
+            Account loser = playingMatch.getLoser().getAccount();
+            winner.getMatchHistory().add(new MatchResult(loser, true, new Date()));
+            loser.getMatchHistory().add(new MatchResult(winner, false, new Date()));
+            winner.addWinCount();
+            playingMatch = null;
         }
     }
 
