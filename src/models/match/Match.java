@@ -9,6 +9,7 @@ import models.cards.buff.Buff;
 import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
+import views.Error;
 
 import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.*;
@@ -201,8 +202,11 @@ public abstract class Match {
         ((Attacker) card).setMoveAbility(false);
     }
 
-    public void isValidAttack(Card card, Card opponentCard) throws CardAttackIsNotAvailableException, OpponentMinionIsNotAvailableForAttack, TiredMinionException {
+    public void isValidAttack(Card card, Card opponentCard) throws CardAttackIsNotAvailableException, OpponentMinionIsNotAvailableForAttack, TiredMinionException, Player.CardNotSelectedException {
         Player player = getActivePlayer();
+        if (card == null || opponentCard == null) {
+            throw new Player.CardNotSelectedException(Error.CARD_NOT_SELECTED.toString());
+        }
         if (!(card instanceof Attacker)) {
             throw new CardAttackIsNotAvailableException(card.getID());
         }
@@ -225,7 +229,8 @@ public abstract class Match {
     }
 
     public void attack(String cardID) throws CardAttackIsNotAvailableException,
-            TiredMinionException, OpponentMinionIsNotAvailableForAttack, Collection.CardNotFoundException {
+            TiredMinionException, OpponentMinionIsNotAvailableForAttack, Collection.CardNotFoundException,
+            Player.CardNotSelectedException {
         Card card = getActivePlayer().getSelectedCard();
         Card opponentCard = getInActivePlayer().getActiveCard(cardID);
         isValidAttack(card, opponentCard);

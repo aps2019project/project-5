@@ -242,7 +242,7 @@ public class Manager {
     }
 
     public static void attack(String ID) throws Match.CardAttackIsNotAvailableException, Match.TiredMinionException,
-            CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack {
+            CardNotFoundException, Match.OpponentMinionIsNotAvailableForAttack, Player.CardNotSelectedException {
         playingMatch.attack(ID);
         if (playingMatch.isFinished()) {
             Account winner = playingMatch.getWinner().getAccount();
