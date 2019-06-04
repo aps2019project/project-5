@@ -1,6 +1,6 @@
 package models.map;
 
-import controllers.Manager;
+import controllers.logic.Manager;
 import models.Collection;
 import models.Player;
 import models.cards.Attacker;

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.logic;
 
 import models.*;
 import models.cards.Card;

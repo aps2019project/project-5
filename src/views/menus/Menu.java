@@ -1,6 +1,6 @@
 package views.menus;
 
-import controllers.Manager;
+import controllers.logic.Manager;
 import views.Command;
 import views.Error;
 import views.Output;

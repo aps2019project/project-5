@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="views.menus.AccountMenu"
+            prefHeight="768.0" prefWidth="1024.0" style="-fx-background-image: url(../resources/background.jpg);">
+
+</StackPane>

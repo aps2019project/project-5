@@ -1,6 +1,6 @@
 package views;
 
-import controllers.Manager;
+import controllers.logic.Manager;
 
 public class InputAI extends Input {
 

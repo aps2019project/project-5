@@ -1,6 +1,6 @@
 package views.menus;
 
-import controllers.Manager;
+import controllers.logic.Manager;
 import models.Account;
 import models.Collection;
 import models.cards.Hero;

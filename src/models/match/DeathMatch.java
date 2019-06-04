@@ -1,6 +1,6 @@
 package models.match;
 
-import controllers.Manager;
+import controllers.logic.Manager;
 import models.Account;
 import models.Player;
 
