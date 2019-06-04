@@ -14,9 +14,6 @@ import views.Error;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import static models.cards.spell.TargetType.SQUARE3x3;
-
 public class Map {
     public final static int ROW_NUMBER = 5, COLUMN_NUMBER = 9;
     // TODO: 5/5/19 write to cells

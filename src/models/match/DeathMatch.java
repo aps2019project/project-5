@@ -2,13 +2,9 @@ package models.match;
 
 import controllers.Manager;
 import models.Account;
-import models.Collection;
 import models.Player;
-import models.cards.Card;
 
-import java.text.DecimalFormat;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DeathMatch extends Match {
     public DeathMatch(Account account1 , Account account2) {

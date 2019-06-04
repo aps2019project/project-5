@@ -1,6 +1,5 @@
 package models.match;
 
-import controllers.Manager;
 import models.Account;
 import models.Collection;
 import models.Player;
@@ -10,9 +9,7 @@ import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
 
-import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public abstract class Match {
@@ -70,7 +67,7 @@ public abstract class Match {
     }
 
     public static int random(int min, int max) {
-        return (int)(Math.random() * ((max - min) + 1)) + min ;
+        return (int) (Math.random() * ((max - min) + 1)) + min;
     }
 
     public void setFlagsInMap(int flagsCount) {
@@ -138,9 +135,9 @@ public abstract class Match {
     abstract public Player getWinner();
 
     public Player getLoser() {
-        if(getWinner() == players[0])
+        if (getWinner() == players[0])
             return players[1];
-        else if(getWinner() == players[1])
+        else if (getWinner() == players[1])
             return players[0];
         return null;
     }
@@ -236,6 +233,16 @@ public abstract class Match {
             ((Attacker) card).decrementCurrentHealth(((Attacker) opponentCard).getAttackPoint());
         } catch (Exception e) {
 
+        }
+        if (((Attacker) opponentCard).getCurrentHealth() <= 0) {
+            addCardToGraveyard(opponentCard);
+            getActiveCards().remove(opponentCard);
+            map.getCards().removeCard(opponentCard);
+        }
+        if (((Attacker) card).getCurrentHealth() <= 0) {
+            addCardToGraveyard(opponentCard);
+            getActiveCards().remove(opponentCard);
+            map.getCards().removeCard(opponentCard);
         }
 
     }

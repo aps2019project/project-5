@@ -2,7 +2,6 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
-import models.match.Match;
 import views.*;
 import views.Error;
 

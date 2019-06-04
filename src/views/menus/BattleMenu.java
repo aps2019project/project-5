@@ -16,7 +16,6 @@ import views.Error;
 import views.InputAI;
 import views.Output;
 
-import javax.print.attribute.standard.MediaName;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -442,7 +441,7 @@ public class BattleMenu implements Menu {
                     " : " +
                     hero.getName() +
                     ", health : " +
-                    hero.getHealth() +
+                    hero.getCurrentHealth() +
                     ", location : " +
                     String.format("(%s,%s) power : %s"
                             , hero.getCell().getX() + 1, hero.getCell().getY() + 1, hero.getAttackPoint()));

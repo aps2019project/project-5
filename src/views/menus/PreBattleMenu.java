@@ -2,15 +2,11 @@ package views.menus;
 
 import controllers.Manager;
 import models.Account;
-import models.Collection;
 import views.Command;
 import views.Error;
 import views.Input;
 import views.Output;
 
-import javax.security.auth.login.AccountException;
-import javax.swing.plaf.OptionPaneUI;
-import java.nio.channels.AcceptPendingException;
 import java.util.ArrayList;
 
 import static views.Error.WRONG_CHOICE;

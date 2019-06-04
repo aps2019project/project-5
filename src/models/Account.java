@@ -1,9 +1,6 @@
 package models;
 
-import controllers.Manager;
 import models.cards.Card;
-import views.Output;
-
 import java.util.*;
 
 public class Account {
@@ -14,10 +11,8 @@ public class Account {
     private Collection collection = new Collection();
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
-    private int drake = 15000;
+    private int drake = 1500000;
     private int winCount = 0;
-
-
 
     public int getDrake() {
         return drake;
