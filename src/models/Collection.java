@@ -127,7 +127,7 @@ public class Collection {
 
     public Card getCard(String cardName) throws CardNotFoundException {
         List<Card> cards = filterByName("^" + cardName + "$").stream().map(
-                marketObject -> (Card) marketObject
+                marketObject -> marketObject
         ).collect(Collectors.toList());
         if (cards.size() == 0) {
             throw new CardNotFoundException();

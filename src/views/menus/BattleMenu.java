@@ -304,6 +304,8 @@ public class BattleMenu implements Menu {
             Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
         } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
             Output.err(Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
+        } catch (Player.CardNotSelectedException e) {
+            Output.err(Error.CARD_NOT_SELECTED);
         }
         return true;
     }

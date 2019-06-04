@@ -36,7 +36,8 @@ public enum Error {
     COLLECTABLE_ITEM_SELECTED("Collectible item selected."),
     NO_ITEM("Item with this ID not found."),
     HERO_DEATH("Your hero dead."),
-    CELL_FULL("Cell is full");
+    CELL_FULL("Cell is full"),
+    CARD_NOT_SELECTED("No card has been selected");
 
     private String message;
 

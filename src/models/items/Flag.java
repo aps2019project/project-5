@@ -11,6 +11,7 @@ public class Flag extends Item {
         super(name, cell, "");
         tokenTurn = -1;
     }
+
     public Flag() {
         super();
     }

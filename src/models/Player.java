@@ -226,4 +226,11 @@ public class Player {
             super(message);
         }
     }
+
+    public static class CardNotSelectedException extends Exception {
+        public CardNotSelectedException(String message) {
+            super(message);
+        }
+    }
+
 }
