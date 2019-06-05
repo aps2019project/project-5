@@ -1,15 +1,27 @@
 package views.menus;
 
+import com.sun.prism.Graphics;
 import controllers.logic.Manager;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import models.Account;
 import views.*;
 import views.Error;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class AccountMenu implements Menu {
     private ArrayList<Command> commands = new ArrayList<>();
+    @FXML
+    private ListView listView = new ListView();
 
     public AccountMenu() {
         // TODO: Add Commands
@@ -83,10 +95,17 @@ public class AccountMenu implements Menu {
         }
     }
 
-    public static void showRanking(Matcher matcher) {
-        ArrayList<Account> accounts = Manager.getLeaderboard();
-        for(Account account : accounts) {
-            Output.print(account);
+    public void showRanking(Matcher matcher) {
+        try {
+            Stage rankWin = new Stage();
+            Parent root = FXMLLoader.load(Graphics.class.getResource("layouts/showRanking.fxml"));
+            Scene scene = new Scene(root, 500, 500);
+            rankWin.initModality(Modality.WINDOW_MODAL);
+            rankWin.setScene(scene);
+            ArrayList<Account> accounts = Manager.getLeaderboard();
+            listView.getItems().addAll(accounts);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
