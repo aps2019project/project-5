@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 
-<StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="views.menus.AccountMenu"
-            prefHeight="768.0" prefWidth="1024.0" style="-fx-background-image: url(../resources/background.jpg);">
-
-</StackPane>
+<GridPane prefWidth="1920.0" prefHeight="1080.0" styleClass="container-account-menu"
+          xmlns="http://javafx.com/javafx/8.0.172-ea" alignment="center" xmlns:fx="">
+    <JFXTabPane GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="500" prefHeight="500" styleClass="tab-pane">
+        <Tab text="LOG IN">
+            <GridPane vgap="20" hgap="20" style="-fx-padding: 50px;">
+                <JFXTextField fx:id="loginUsername" promptText="Username" prefWidth="400" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="input-text"/>
+                <JFXPasswordField fx:id="loginPassword" promptText="Password" prefWidth="400" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="input-text"/>
+                <JFXButton fx:id="loginButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="LOG IN" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+            </GridPane>
+        </Tab>
+        <Tab text="SIGN UP">
+            <GridPane vgap="20" hgap="20" style="-fx-padding: 50px;">
+                <JFXTextField id="signupUsername" promptText="Username" prefWidth="400" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="input-text"/>
+                <JFXPasswordField id="signupPassword" promptText="Password" prefWidth="400" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="input-text"/>
+                <JFXButton id="signupButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="SIGN UP" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+            </GridPane>
+        </Tab>
+    </JFXTabPane>
+</GridPane>

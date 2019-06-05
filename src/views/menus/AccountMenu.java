@@ -1,10 +1,12 @@
 package views.menus;
 
 import controllers.logic.Manager;
+import javafx.fxml.FXML;
 import models.Account;
 import views.*;
 import views.Error;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
