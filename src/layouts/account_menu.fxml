@@ -7,8 +7,9 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 
-<GridPane prefWidth="1920.0" prefHeight="1080.0" styleClass="container-account-menu"
-          xmlns="http://javafx.com/javafx/8.0.172-ea" alignment="center" xmlns:fx="">
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.menus.AccountMenu"
+          stylesheets="@../resources/stylesheets/style.css" styleClass="container-account-menu" alignment="center">
     <JFXTabPane GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="500" prefHeight="500" styleClass="tab-pane">
         <Tab text="LOG IN">
             <GridPane vgap="20" hgap="20" style="-fx-padding: 50px;">
@@ -19,10 +20,11 @@
         </Tab>
         <Tab text="SIGN UP">
             <GridPane vgap="20" hgap="20" style="-fx-padding: 50px;">
-                <JFXTextField id="signupUsername" promptText="Username" prefWidth="400" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="input-text"/>
-                <JFXPasswordField id="signupPassword" promptText="Password" prefWidth="400" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="input-text"/>
-                <JFXButton id="signupButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="SIGN UP" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <JFXTextField fx:id="signupUsername" promptText="Username" prefWidth="400" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="input-text"/>
+                <JFXPasswordField fx:id="signupPassword" promptText="Password" prefWidth="400" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="input-text"/>
+                <JFXButton fx:id="signupButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="SIGN UP" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
             </GridPane>
         </Tab>
     </JFXTabPane>
+    <JFXButton text="salam" GridPane.rowIndex="10" GridPane.columnIndex="10"/>
 </GridPane>

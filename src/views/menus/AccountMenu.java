@@ -1,5 +1,8 @@
 package views.menus;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.Graphics;
 import controllers.logic.Manager;
 import javafx.fxml.FXML;
@@ -13,15 +16,17 @@ import models.Account;
 import views.*;
 import views.Error;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class AccountMenu implements Menu {
+    public JFXTextField loginUsername, signupUsername;
+    public JFXPasswordField loginPassword, signupPassword;
+    public JFXButton loginButton, signupButton;
     private ArrayList<Command> commands = new ArrayList<>();
-    @FXML
-    private ListView listView = new ListView();
+
+    public ListView listView;
 
     public AccountMenu() {
         // TODO: Add Commands
@@ -98,7 +103,7 @@ public class AccountMenu implements Menu {
     public void showRanking(Matcher matcher) {
         try {
             Stage rankWin = new Stage();
-            Parent root = FXMLLoader.load(Graphics.class.getResource("layouts/showRanking.fxml"));
+            Parent root = FXMLLoader.load(Graphics.class.getResource("layouts/ranking.fxml"));
             Scene scene = new Scene(root, 500, 500);
             rankWin.initModality(Modality.WINDOW_MODAL);
             rankWin.setScene(scene);

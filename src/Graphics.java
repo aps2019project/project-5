@@ -1,16 +1,14 @@
-import com.jfoenix.controls.JFXDialog;
-import com.sun.javafx.cursor.ImageCursorFrame;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import resources.Fog;
 
-import javax.swing.text.AbstractDocument;
 import java.io.IOException;
 
 public class Graphics extends Application {
@@ -19,9 +17,9 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
+        Fog fog = new Fog(400, 400, Color.rgb(0, 0, 0));
         Parent root = FXMLLoader.load(Graphics.class.getResource("layouts/account_menu.fxml"));
-        Scene scene = new Scene(root, 1920, 1080);
-        scene.getStylesheets().add("resources/stylesheets/style.css");
+        Scene scene = new Scene(new StackPane(fog.getView()), 1920, 1080);
         stage.setFullScreen(true);
         setCursor(scene);
         stage.setScene(scene);
