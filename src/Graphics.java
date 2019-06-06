@@ -17,9 +17,9 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
-        Fog fog = new Fog(400, 400, Color.rgb(0, 0, 0));
+//        Fog fog = new Fog(400, 400, Color.rgb(0, 0, 0));
         Parent root = FXMLLoader.load(Graphics.class.getResource("layouts/account_menu.fxml"));
-        Scene scene = new Scene(new StackPane(fog.getView()), 1920, 1080);
+        Scene scene = new Scene(root, 1920, 1080);
         stage.setFullScreen(true);
         setCursor(scene);
         stage.setScene(scene);

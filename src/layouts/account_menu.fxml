@@ -6,7 +6,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXPasswordField?>
-
 <GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.menus.AccountMenu"
           stylesheets="@../resources/stylesheets/style.css" styleClass="container-account-menu" alignment="center">
