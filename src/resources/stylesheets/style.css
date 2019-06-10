@@ -1,0 +1,39 @@
+.container-account-menu {
+    -fx-background-image: url("../background.jpg");
+}
+
+.btn-primary {
+    -fx-background-color: #f36f20;
+}
+
+.btn-lg {
+    -fx-padding: 1em 3em;
+    -fx-font-size: 1em;
+    -fx-border-radius: 0.3em;
+    -fx-font-weight: bold;
+}
+
+.btn-sm {
+    -fx-padding: 0.25em 0.5em;
+    -fx-font-size: 0.75em;
+    -fx-border-radius: 0.2em;
+}
+
+.input-text {
+    -fx-background-color: #383838;
+    -jfx-focus-color: #F47B20;
+    -jfx-unfocus-color: #FFC20E;
+    -fx-text-fill: white;
+    -fx-font-size: 1.5em;
+    -fx-prompt-text-fill: #666;
+    -fx-padding: 20px 10px 20px 10px;
+}
+
+.tab-header-background {
+    -fx-background-color: #383838;
+}
+
+.tab-pane {
+    -fx-background-color: #292929;
+    -fx-text-alignment: center;
+}

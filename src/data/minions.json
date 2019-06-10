@@ -1,0 +1,222 @@
+[
+  {
+    "name": "Persian Archer",
+    "price": 300,
+    "manaPoint": 2,
+    "health": 6,
+    "attackPoint": 4,
+    "attackType": "RANGED",
+    "range": 7,
+    "specialPower": null,
+    "specialPowerActivate": "ON_ATTACK"
+  },
+  {
+    "name": "Persian Swordsman",
+    "price": 400,
+    "manaPoint": 2,
+    "health": 6,
+    "attackPoint": 4,
+    "attackType": "MELEE",
+    "range": 0,
+    "specialPower": {},
+    "specialPowerActivate": "ON_ATTACK"
+  },
+  {
+    "name": "Persian Lancer",
+    "price": 500,
+    "manaPoint": 1,
+    "health": 5,
+    "attackPoint": 3,
+    "attackType": "HYBRID",
+    "range": 3,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Persian Horse Rider",
+    "price": 200,
+    "manaPoint": 4,
+    "health": 10,
+    "attackPoint": 6,
+    "attackType": "MELEE",
+    "range": 0,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Persian Champion",
+    "price": 600,
+    "manaPoint": 9,
+    "health": 24,
+    "attackPoint": 6,
+    "attackType": "MELEE",
+    "range": 0,
+    "specialPower": {},
+    "specialPowerActivate": "ON_ATTACK"
+  },
+  {
+    "name": "Persian General",
+    "price": 800,
+    "manaPoint": 7,
+    "health": 12,
+    "attackPoint": 4,
+    "attackType": "RANGED",
+    "range": 5,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Turan Archer",
+    "price": 500,
+    "manaPoint": 1,
+    "health": 3,
+    "attackPoint": 4,
+    "attackType": "RANGED",
+    "range": 5,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Turan Sling",
+    "price": 600,
+    "manaPoint": 1,
+    "health": 4,
+    "attackPoint": 2,
+    "attackType": "RANGED",
+    "range": 7,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Turan Lancer",
+    "price": 600,
+    "manaPoint": 1,
+    "health": 4,
+    "attackPoint": 4,
+    "attackType": "HYBRID",
+    "range": 3,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Turan Spy",
+    "price": 700,
+    "manaPoint": 4,
+    "health": 6,
+    "attackPoint": 6,
+    "attackType": "MELEE",
+    "range": 0,
+    "specialPower": {},
+    "specialPowerActivate": "ON_ATTACK"
+  },
+  {
+    "name": "Turan Wand",
+    "price": 450,
+    "manaPoint": 2,
+    "health": 3,
+    "attackPoint": 10,
+    "attackType": "MELEE",
+    "range": 0,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Turan Prince",
+    "price": 800,
+    "manaPoint": 6,
+    "health": 6,
+    "attackPoint": 10,
+    "attackType": "MELEE",
+    "range": 0,
+    "specialPower": "COMBO",
+    "specialPowerActivate": "COMBO"
+  },
+  {
+    "name": "Black Demon",
+    "price": 300,
+    "manaPoint": 9,
+    "health": 14,
+    "attackPoint": 10,
+    "attackType": "HYBRID",
+    "range": 7,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Giant Catapult",
+    "price": 300,
+    "manaPoint": 9,
+    "health": 12,
+    "attackPoint": 12,
+    "attackType": "RANGED",
+    "range": 7,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Eagle",
+    "price": 200,
+    "manaPoint": 2,
+    "health": 0,
+    "attackPoint": 2,
+    "attackType": "RANGED",
+    "range": 3,
+    "specialPower": {},
+    "specialPowerActivate": "PASSIVE"
+  },
+  {
+    "name": "Hog Head Demon",
+    "price": 300,
+    "manaPoint": 6,
+    "health": 16,
+    "attackPoint": 8,
+    "attackType": "MELEE",
+    "range": 0,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "One Eye Giant",
+    "price": 500,
+    "manaPoint": 7,
+    "health": 12,
+    "attackPoint": 11,
+    "attackType": "HYBRID",
+    "range": 3,
+    "specialPower": {},
+    "specialPowerActivate": "ON_DEATH"
+  },
+  {
+    "name": "Poisoned Snake",
+    "price": 300,
+    "manaPoint": 4,
+    "health": 5,
+    "attackPoint": 6,
+    "attackType": "RANGED",
+    "range": 4,
+    "specialPower": {},
+    "specialPowerActivate": "ON_ATTACK"
+  },
+  {
+    "name": "Fire Dragon",
+    "price": 250,
+    "manaPoint": 5,
+    "health": 9,
+    "attackPoint": 5,
+    "attackType": "RANGED",
+    "range": 4,
+    "specialPower": null,
+    "specialPowerActivate": null
+  },
+  {
+    "name": "Predator Lion",
+    "price": 600,
+    "manaPoint": 2,
+    "health": 1,
+    "attackPoint": 8,
+    "attackType": "MELEE",
+    "range": 0,
+    "specialPower": {},
+    "specialPowerActivate": "ON_ATTACK"
+  }
+]

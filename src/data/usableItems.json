@@ -1,0 +1,119 @@
+[
+  {
+    "name": "Crown of wisdom",
+    "price": 300,
+    "applyingBuffs": [
+      {
+        "name": "ManaBuff",
+        "isContinues": false,
+        "maxActivationTime": 3
+      }
+    ]
+  },
+  {
+    "name": "King Wisdom",
+    "price": 9000,
+    "applyingBuffs": [
+      {
+        "name": "ManaBuff",
+        "isContinues": true
+      }
+    ]
+  },
+  {
+    "name": "Namoose separ",
+    "price": 300,
+    "applyingBuffs": [
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      },
+      {
+        "name": "HolyBuff",
+        "isContinues": false,
+        "maxActivationTime": 1
+      }
+    ]
+  },
+  {
+    "name": "Damol Arc",
+    "price": 30000,
+    "applyingBuffs": []
+  },
+  {
+    "name": "Terror Hood",
+    "price": 5000,
+    "applyingBuffs": []
+  },
+  {
+    "name": "Assassination Dagger",
+    "price": 15000,
+    "applyingBuffs": []
+  },
+  {
+    "name": "Poisonous Dagger",
+    "price": 7000,
+    "applyingBuffs": []
+  },
+  {
+    "name": "Shock Hammer",
+    "price": 15000,
+    "applyingBuffs": []
+  },
+  {
+    "name": "Assassination Dagger",
+    "price": 25000,
+    "applyingBuffs": []
+  },
+  {
+    "name": "Baptism",
+    "price": 20000,
+    "applyingBuffs": []
+  },
+  {
+    "name": "Full of simorgh",
+    "price": 3500,
+    "applyingBuffs": []
+  }
+]
