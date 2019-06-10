@@ -3,13 +3,13 @@ package views.menus;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.sun.prism.Graphics;
 import controllers.logic.Manager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Account;
@@ -120,5 +120,13 @@ public class AccountMenu implements Menu {
 
     public static void help(Matcher matcher) {
         Menu.help(new AccountMenu().getCommands());
+    }
+
+    public void login(MouseEvent mouseEvent) {
+        try {
+            Graphics.showMainMenu();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

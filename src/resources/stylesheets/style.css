@@ -29,6 +29,10 @@
     -fx-padding: 20px 10px 20px 10px;
 }
 
+.tab-header-background {
+    -fx-background-color: #383838;
+}
+
 .tab-pane {
     -fx-background-color: #292929;
     -fx-text-alignment: center;

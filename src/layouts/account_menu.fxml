@@ -14,7 +14,7 @@
             <GridPane vgap="20" hgap="20" style="-fx-padding: 50px;">
                 <JFXTextField fx:id="loginUsername" promptText="Username" prefWidth="400" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="input-text"/>
                 <JFXPasswordField fx:id="loginPassword" promptText="Password" prefWidth="400" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="input-text"/>
-                <JFXButton fx:id="loginButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="LOG IN" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <JFXButton fx:id="loginButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="LOG IN" GridPane.rowIndex="10" GridPane.columnIndex="0" onMouseClicked="#login"/>
             </GridPane>
         </Tab>
         <Tab text="SIGN UP">
