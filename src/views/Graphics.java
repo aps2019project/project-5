@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Graphics extends Application {
     public static Stage stage;
 
-    private static Parent accountMenuRoot, mainMenuRoot;
+    public static Parent accountMenuRoot, mainMenuRoot;
 
     static {
         try {
@@ -20,7 +20,7 @@ public class Graphics extends Application {
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(-1);
+            System.exit(1);
         }
     }
 
@@ -28,17 +28,10 @@ public class Graphics extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
         Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Image image = new Image("resources/ui/cursor.png"); //pass in the image path
+        scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
-    }
-
-    private static void setCursor(Scene scene) {
-        Image image = new Image("resources/cursor.png"); //pass in the image path
-        scene.setCursor(new ImageCursor(image));
-    }
-
-    public static void showMainMenu() {
-        stage.getScene().setRoot(mainMenuRoot);
     }
 }

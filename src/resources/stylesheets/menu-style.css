@@ -1,0 +1,8 @@
+* {
+    -fx-font-family: "Bahnschrift";
+}
+
+.container {
+    -fx-background-image: url(/resources/scenes/background.jpg);
+    -fx-background-size: cover;
+}

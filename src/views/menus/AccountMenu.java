@@ -121,8 +121,4 @@ public class AccountMenu implements Menu {
     public static void help(Matcher matcher) {
         Menu.help(new AccountMenu().getCommands());
     }
-
-    public void login(MouseEvent mouseEvent) {
-        Graphics.showMainMenu();
-    }
 }

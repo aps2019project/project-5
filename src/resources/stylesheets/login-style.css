@@ -1,5 +1,5 @@
 .container-account-menu {
-    -fx-background-image: url("../login-background.jpg");
+    -fx-background-image: url("../scenes/login-background.jpg");
     -fx-background-size: cover;
 }
 
@@ -16,7 +16,7 @@
 }
 
 * {
-    -fx-font-family: "Lato Light";
+    -fx-font-family: "Bahnschrift";
 }
 
 .check-box {

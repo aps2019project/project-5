@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.GridPane?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Tab?>
 <?import com.jfoenix.controls.JFXButton?>
@@ -11,10 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.menus.AccountMenu" spacing="20"
-      stylesheets="@../resources/stylesheets/style.css" styleClass="container-account-menu" alignment="center">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.AccountMenu" spacing="20"
+      stylesheets="@../resources/stylesheets/login-style.css" styleClass="container-account-menu" alignment="center">
     <ImageView fitWidth="500" fitHeight="108">
-        <Image url="/resources/logo.png"/>
+        <Image url="/resources/ui/logo.png"/>
     </ImageView>
     <JFXTabPane styleClass="tab-pane">
         <Tab text="LOG IN" styleClass="duelystTab">
@@ -22,15 +21,15 @@
                 <JFXTextField fx:id="loginUsername" promptText="Username" styleClass="input-text"/>
                 <JFXPasswordField fx:id="loginPassword" promptText="Password" styleClass="input-text"/>
                 <JFXCheckBox text="Remember Me" styleClass="check-box"/>
-                <JFXButton fx:id="loginButton" styleClass="btn-primary, btn-lg" text="LOG IN"/>
+                <JFXButton fx:id="loginButton" styleClass="btn-primary, btn-lg" text="LOG IN" onMouseClicked="#login"/>
             </VBox>
         </Tab>
         <Tab text="SIGN UP" styleClass="duelystTab">
             <VBox styleClass="tab-items" spacing="25">
-                <JFXTextField fx:id="signupUsername" promptText="Username" styleClass="input-text"/>
-                <JFXPasswordField fx:id="signupPassword" promptText="Password" styleClass="input-text"/>
-                <JFXPasswordField fx:id="signupPassword2" promptText="Password" styleClass="input-text"/>
-                <JFXButton fx:id="signupButton" styleClass="btn-primary, btn-lg" text="LOG IN"/>
+                <JFXTextField fx:id="signUpUsername" promptText="Username" styleClass="input-text"/>
+                <JFXPasswordField fx:id="signUpPassword" promptText="Password" styleClass="input-text"/>
+                <JFXPasswordField fx:id="signUpPasswordRematch" promptText="Password" styleClass="input-text"/>
+                <JFXButton fx:id="signUpButton" styleClass="btn-primary, btn-lg" text="SIGN UP"/>
             </VBox>
         </Tab>
     </JFXTabPane>

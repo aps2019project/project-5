@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<AnchorPane xmlns="http://javafx.com/javafx" styleClass="container"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="views.menus.MainMenu"
-            prefHeight="400.0" prefWidth="600.0">
-    <Button text="salam"/>
+            stylesheets="/resources/stylesheets/menu-style.css">
+
 </AnchorPane>
