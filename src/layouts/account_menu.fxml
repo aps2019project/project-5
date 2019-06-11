@@ -10,20 +10,19 @@
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.menus.AccountMenu"
           stylesheets="@../resources/stylesheets/style.css" styleClass="container-account-menu" alignment="center">
     <JFXTabPane GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="500" prefHeight="500" styleClass="tab-pane">
-        <Tab text="LOG IN">
+        <Tab text="LOG IN" styleClass="duelystTab">
             <GridPane vgap="20" hgap="20" style="-fx-padding: 50px;">
                 <JFXTextField fx:id="loginUsername" promptText="Username" prefWidth="400" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="input-text"/>
                 <JFXPasswordField fx:id="loginPassword" promptText="Password" prefWidth="400" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="input-text"/>
-                <JFXButton fx:id="loginButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="LOG IN" GridPane.rowIndex="10" GridPane.columnIndex="0" onMouseClicked="#login"/>
+                <JFXButton fx:id="loginButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="LOG IN" GridPane.rowIndex="8" GridPane.columnIndex="0" onMouseClicked="#login"/>
             </GridPane>
         </Tab>
-        <Tab text="SIGN UP">
+        <Tab text="SIGN UP" styleClass="duelystTab">
             <GridPane vgap="20" hgap="20" style="-fx-padding: 50px;">
                 <JFXTextField fx:id="signupUsername" promptText="Username" prefWidth="400" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="input-text"/>
                 <JFXPasswordField fx:id="signupPassword" promptText="Password" prefWidth="400" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="input-text"/>
-                <JFXButton fx:id="signupButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="SIGN UP" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <JFXButton fx:id="signupButton" styleClass="btn-primary, btn-lg" prefWidth="400" text="SIGN UP" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
             </GridPane>
         </Tab>
     </JFXTabPane>
-    <JFXButton text="salam" GridPane.rowIndex="10" GridPane.columnIndex="10"/>
 </GridPane>

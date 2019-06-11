@@ -33,7 +33,26 @@
     -fx-background-color: #383838;
 }
 
+.tab-header-area {
+    -fx-padding: 0 -150 0 150;
+}
+
 .tab-pane {
     -fx-background-color: #292929;
     -fx-text-alignment: center;
+}
+
+.duelystTab {
+    -fx-padding: 15;
+}
+
+.duelystTab:selected {
+    -fx-background-image: url(/resources/bnea-triangle@2x.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top center;
+}
+
+* {
+    /*-fx-font-family: "Lato Light";*/
 }
