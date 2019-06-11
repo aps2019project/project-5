@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXBadge?>
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicCollectionMenu" spacing="20"
+      stylesheets="@../resources/stylesheets/login-style.css" styleClass="container-account-menu" alignment="center">
+    <JFXTabPane styleClass="tab-pane">
+        <Tab text="SEARCH" styleClass="duelystTab">
+            <VBox styleClass="tab-items" spacing="25">
+                <JFXTextField fx:id="searchingCardNameTxt" promptText="Sample Card Name" styleClass="input-text"/>
+                <JFXButton fx:id="searchCardBtn" styleClass="btn-primary, btn-lg" text="Search" onMouseClicked="#searchCard"/>
+                <JFXTextField fx:id="newDeckNameTxt" promptText="Sample Deck" styleClass="input-text"/>
+                <JFXButton fx:id="saveDeckBtn" styleClass="btn-primary, btn-lg" text="Save" onMouseClicked="#createNewDeck"/>
+                <JFXListView fx:id="decksList" >
+                    <JFXButton fx:id="deck" text="firstDeck" onMouseClicked="#selectDeck"/>
+                </JFXListView>
+                <JFXListView fx:id="cardList" >
+                    <JFXButton fx:id="card1" text="card1" onMouseClicked="#addCardToDeck"/>
+                </JFXListView>
+            </VBox>
+        </Tab>
+    </JFXTabPane>
+</VBox>

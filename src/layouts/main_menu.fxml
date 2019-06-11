@@ -8,22 +8,22 @@
 <?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx" styleClass="container"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="views.menus.MainMenu"
+            fx:controller="views.graphics.GraphicMainMenu"
             stylesheets="/resources/stylesheets/menu-style.css">
-    <Button styleClass="round-button, shop-button" layoutX="1770" layoutY="930"/>
+    <Button styleClass="round-button, shop-button" layoutX="1770" layoutY="930" onMouseClicked="#shop"/>
     <Label alignment="BOTTOM_CENTER" text="SHOP" styleClass="round-button-label" layoutX="1770" layoutY="1000"/>
-    <Button styleClass="round-button, profile-button" layoutX="1670" layoutY="930"/>
+    <Button styleClass="round-button, profile-button" layoutX="1670" layoutY="930" onMouseClicked="#profile"/>
     <Label alignment="BOTTOM_CENTER" text="PROFILE" styleClass="round-button-label" layoutX="1670" layoutY="1000"/>
     <Button styleClass="round-button, quests-button" layoutX="1570" layoutY="930"/>
-    <Label alignment="BOTTOM_CENTER" text="PROFILE" styleClass="round-button-label" layoutX="1570" layoutY="1000"/>
+    <Label alignment="BOTTOM_CENTER" text="QUESTS" styleClass="round-button-label" layoutX="1570" layoutY="1000"/>
     <ImageView layoutX="100" layoutY="100" fitWidth="375" fitHeight="81">
         <Image url="/resources/ui/logo.png"/>
     </ImageView>
 
-    <Label text="PLAY" styleClass="menu-button" layoutX="200" layoutY="230"/>
-    <Label text="WATCH" styleClass="menu-button" layoutX="200" layoutY="310"/>
-    <Label text="COLLECTION" styleClass="menu-button" layoutX="200" layoutY="390"/>
+    <Label text="PLAY" styleClass="menu-button" layoutX="200" layoutY="230" onMouseClicked="#matchSelect"/>
+    <Label text="WATCH" styleClass="menu-button" layoutX="200" layoutY="310" onMouseClicked="#watch"/>
+    <Label text="COLLECTION" styleClass="menu-button" layoutX="200" layoutY="390" onMouseClicked="#collection"/>
     <Label text="MYSTERY CRATES" styleClass="menu-button" layoutX="200" layoutY="470"/>
-    <Label text="CODEX" styleClass="menu-button" layoutX="200" layoutY="550"/>
+    <Label text="CODEX" styleClass="menu-button" layoutX="200" layoutY="550" onMouseClicked="#codex"/>
 
 </AnchorPane>
