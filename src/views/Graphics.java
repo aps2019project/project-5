@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import resources.Fog;
@@ -16,10 +17,15 @@ import java.io.IOException;
 public class Graphics extends Application {
     public static Stage stage;
 
-    public static Parent accountMenuRoot, mainMenuRoot;
+    public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot, matchSelectRoot, play, profileRoot;
 
     static {
         try {
+            //TODO : make true roots;
+            profileRoot = new GridPane();
+            matchSelectRoot = new GridPane();
+            play = new GridPane();
+            shopMenuRoot = new GridPane();
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
         } catch (IOException e) {
