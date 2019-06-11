@@ -3,9 +3,9 @@
 }
 
 .container {
-    -fx-background-image:   url(/resources/scenes/login-background.jpg),
-                            url(/resources/scenes/foreground@2x.png),
-                            url(/resources/scenes/pillars_far@2x.png);
+    -fx-background-image: url(/resources/scenes/login-background.jpg),
+    url(/resources/scenes/foreground@2x.png),
+    url(/resources/scenes/pillars_far@2x.png);
     -fx-background-repeat: no-repeat, no-repeat;
     -fx-background-size: cover, 1600 484, 1379 1000;
     -fx-background-position: top center, right bottom, left bottom;

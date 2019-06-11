@@ -20,10 +20,10 @@
         <Image url="/resources/ui/logo.png"/>
     </ImageView>
 
-    <Label text="PLAY" styleClass="menu-button" layoutX="200" layoutY="230"/>
-    <Label text="WATCH" styleClass="menu-button" layoutX="200" layoutY="310"/>
-    <Label text="COLLECTION" styleClass="menu-button" layoutX="200" layoutY="390"/>
+    <Label text="PLAY" styleClass="menu-button" layoutX="200" layoutY="230" onMouseClicked="#matchSelect"/>
+    <Label text="WATCH" styleClass="menu-button" layoutX="200" layoutY="310" onMouseClicked="#watch"/>
+    <Label text="COLLECTION" styleClass="menu-button" layoutX="200" layoutY="390" onMouseClicked="#collection"/>
     <Label text="MYSTERY CRATES" styleClass="menu-button" layoutX="200" layoutY="470"/>
-    <Label text="CODEX" styleClass="menu-button" layoutX="200" layoutY="550"/>
+    <Label text="CODEX" styleClass="menu-button" layoutX="200" layoutY="550" onMouseClicked="#codex"/>
 
 </AnchorPane>

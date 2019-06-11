@@ -17,12 +17,16 @@ import java.io.IOException;
 public class Graphics extends Application {
     public static Stage stage;
 
-    public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot, matchSelectRoot, play, profileRoot;
+    public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
+            matchSelectRoot, play, profileRoot, watchRoot, collectionMenuRoot, codexRoot;
 
     static {
         try {
             //TODO : make true roots;
             profileRoot = new GridPane();
+            watchRoot = new GridPane();
+            collectionMenuRoot = new GridPane();
+            codexRoot = new GridPane();
             matchSelectRoot = new GridPane();
             play = new GridPane();
             shopMenuRoot = new GridPane();
