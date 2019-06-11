@@ -341,4 +341,8 @@ public class Manager {
     public static void setMapFlags(int result) {
         playingMatch.setFlagsInMap(result);
     }
+
+    public static Deck getDeck(String deckName) throws Account.DeckNotFoundException {
+        return getAccount().getDeck(deckName);
+    }
 }

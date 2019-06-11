@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -27,6 +28,7 @@ public class Graphics extends Application {
     static {
         try {
             //TODO : make true roots;
+            createTestUser();
             profileRoot = new GridPane();
             watchRoot = new GridPane();
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
@@ -42,13 +44,21 @@ public class Graphics extends Application {
         }
     }
 
+    public static void alert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        alert.showAndWait();
+    }
+
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
 //        Fog fog = new Fog(500, 500, new Color(1, 0, 0, 1));
 //        AnchorPane a = new AnchorPane(fog.getView());
 
-        createTestUser();
 
         Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         Image image = new Image("resources/ui/cursor.png");
@@ -58,7 +68,7 @@ public class Graphics extends Application {
         stage.show();
     }
 
-    private void createTestUser() {
+    private static void createTestUser() {
         try {
             ClientManager.createAccount("ali", "ali");
             ClientManager.createAccount("mahdi", "mahdi");
@@ -76,8 +86,8 @@ public class Graphics extends Application {
             ClientManager.buy("Persian Horse Rider");
             ClientManager.buy("Persian Horse Rider");
             ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy(" Persian Champion");
-            ClientManager.buy(" Persian Champion");
+            ClientManager.buy("Persian Champion");
+            ClientManager.buy("Persian Champion");
             ClientManager.buy("Turan Archer");
             ClientManager.buy("Turan Archer");
             ClientManager.buy("Turan Wand");
