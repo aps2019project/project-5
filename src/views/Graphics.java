@@ -43,7 +43,7 @@ public class Graphics extends Application {
         stage = primaryStage;
 //        Fog fog = new Fog(500, 500, new Color(1, 0, 0, 1));
 //        AnchorPane a = new AnchorPane(fog.getView());
-        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         Image image = new Image("resources/ui/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);

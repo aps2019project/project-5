@@ -37,8 +37,6 @@
 }
 
 .input-text {
-    -jfx-focus-color: #F47B20;
-    -jfx-unfocus-color: #FFC20E;
     -fx-font-size: 25;
     -fx-text-fill: #ffffff;
     -fx-background-color: #383838;
@@ -47,6 +45,11 @@
 
 .input-text:focused .input-text:hover {
     -fx-background-color: #434343;
+}
+
+.wrong {
+    -jfx-focus-color: #FF0000;
+    -jfx-unfocus-color: #FF0000;
 }
 
 .tab-header-background {
