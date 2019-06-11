@@ -4,11 +4,11 @@
 
 .container {
     -fx-background-image: url(/resources/scenes/login-background.jpg),
-    url(/resources/scenes/foreground@2x.png),
-    url(/resources/scenes/pillars_far@2x.png);
-    -fx-background-repeat: no-repeat, no-repeat;
-    -fx-background-size: cover, 1600 484, 1379 1000;
-    -fx-background-position: top center, right bottom, left bottom;
+    url(/resources/scenes/pillars_near@2x.png),
+    url(/resources/scenes/foreground@2x.png);
+    -fx-background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    -fx-background-size: cover, 1530 1110, 1600 484;
+    -fx-background-position: top center, -400 -30, 400 700;
 }
 
 .round-button {
@@ -17,6 +17,10 @@
     -fx-background-repeat: no-repeat;
     -fx-pref-width: 64px;
     -fx-pref-height: 64px;
+}
+
+.round-button:hover {
+    -fx-effect: innershadow(gaussian, rgba(255, 255, 255, 0.5), 20, 0.3, -5, -5);
 }
 
 .round-button-label {
