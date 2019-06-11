@@ -30,3 +30,4 @@ public class AccountMenu implements Initializable {
         Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
     }
 }
+
