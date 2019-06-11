@@ -123,10 +123,6 @@ public class AccountMenu implements Menu {
     }
 
     public void login(MouseEvent mouseEvent) {
-        try {
-            Graphics.showMainMenu();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Graphics.showMainMenu();
     }
 }

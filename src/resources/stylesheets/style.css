@@ -1,5 +1,6 @@
 .container-account-menu {
-    -fx-background-image: url("../background.jpg");
+    -fx-background-image: url("../login-background.jpg");
+    -fx-background-size: cover;
 }
 
 .btn-primary {
@@ -11,6 +12,18 @@
     -fx-font-size: 1em;
     -fx-border-radius: 0.3em;
     -fx-font-weight: bold;
+    -fx-pref-width: 420;
+}
+
+* {
+    -fx-font-family: "Lato Light";
+}
+
+.check-box {
+    -fx-font-size: 15;
+    -fx-text-fill: #666;
+    -jfx-checked-color: #F57B20;
+    -jfx-unchecked-color: #F57B20;
 }
 
 .btn-sm {
@@ -20,13 +33,16 @@
 }
 
 .input-text {
-    -fx-background-color: #383838;
     -jfx-focus-color: #F47B20;
     -jfx-unfocus-color: #FFC20E;
-    -fx-text-fill: white;
-    -fx-font-size: 1.5em;
-    -fx-prompt-text-fill: #666;
-    -fx-padding: 20px 10px 20px 10px;
+    -fx-font-size: 25;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #383838;
+    -fx-pref-height: 40;
+}
+
+.input-text:focused .input-text:hover {
+    -fx-background-color: #434343;
 }
 
 .tab-header-background {
@@ -40,19 +56,21 @@
 .tab-pane {
     -fx-background-color: #292929;
     -fx-text-alignment: center;
+    -fx-pref-width: 500;
+    -fx-max-width: 500;
 }
 
 .duelystTab {
     -fx-padding: 15;
 }
 
+.tab-items {
+    -fx-padding: 40px;
+}
+
 .duelystTab:selected {
-    -fx-background-image: url(/resources/bnea-triangle@2x.png);
+    -fx-background-image: url(/resources/triangle.png);
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: top center;
-}
-
-* {
-    /*-fx-font-family: "Lato Light";*/
 }

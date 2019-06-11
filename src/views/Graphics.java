@@ -12,14 +12,23 @@ import java.io.IOException;
 public class Graphics extends Application {
     public static Stage stage;
 
+    private static Parent accountMenuRoot, mainMenuRoot;
+
+    static {
+        try {
+            accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
+            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         stage = primaryStage;
-        // Fog fog = new Fog(400, 400, Color.rgb(0, 0, 0));
-        Parent root = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         stage.setFullScreen(true);
-        setCursor(scene);
         stage.setScene(scene);
         stage.show();
     }
@@ -29,10 +38,7 @@ public class Graphics extends Application {
         scene.setCursor(new ImageCursor(image));
     }
 
-    public static void showMainMenu() throws IOException {
-        Parent root = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
-        Scene scene = new Scene(root, 1920, 1080);
-        setCursor(scene);
-        stage.setScene(scene);
+    public static void showMainMenu() {
+        stage.getScene().setRoot(mainMenuRoot);
     }
 }
