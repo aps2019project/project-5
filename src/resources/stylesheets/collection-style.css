@@ -1,0 +1,83 @@
+.container-account-menu {
+    -fx-background-image: url(/resources/scenes/login-background.jpg),
+    url(/resources/scenes/pillars_near@2x.png),
+    url(/resources/scenes/foreground@2x.png);
+    -fx-background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    -fx-background-size: cover, 1530 1110, 1600 484;
+    -fx-background-position: top center, -400 -30, 400 700;
+}
+
+.btn-primary {
+    -fx-background-color: #f36f20;
+}
+
+.btn-lg {
+    -fx-padding: 1em 3em;
+    -fx-font-size: 1em;
+    -fx-border-radius: 0.3em;
+    -fx-font-weight: bold;
+    -fx-pref-width: 420;
+}
+
+* {
+    -fx-font-family: "Bahnschrift";
+}
+
+.check-box {
+    -fx-font-size: 15;
+    -fx-text-fill: #666;
+    -jfx-checked-color: #F57B20;
+    -jfx-unchecked-color: #F57B20;
+}
+
+.btn-sm {
+    -fx-padding: 0.25em 0.5em;
+    -fx-font-size: 0.75em;
+    -fx-border-radius: 0.2em;
+}
+
+.input-text {
+    -fx-font-size: 25;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #383838;
+    -fx-pref-height: 40;
+}
+
+.input-text:focused .input-text:hover {
+    -fx-background-color: #434343;
+}
+
+.wrong {
+    -jfx-focus-color: #FF0000;
+    -jfx-unfocus-color: #FF0000;
+}
+
+.tab-header-background {
+    -fx-background-color: #383838;
+}
+
+.tab-header-area {
+    -fx-padding: 0 -150 0 150;
+}
+
+.tab-pane {
+    -fx-background-color: #292929;
+    -fx-text-alignment: center;
+    -fx-pref-width: 500;
+    -fx-max-width: 500;
+}
+
+.duelystTab {
+    -fx-padding: 15;
+}
+
+.tab-items {
+    -fx-padding: 40px;
+}
+
+.duelystTab:selected {
+    -fx-background-image: url(/resources/triangle.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top center;
+}

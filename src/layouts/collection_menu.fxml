@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicAccountMenu" spacing="20"
+      stylesheets="@../resources/stylesheets/login-style.css" styleClass="container-account-menu" alignment="center">
+    <ImageView fitWidth="500" fitHeight="108">
+        <Image url="/resources/ui/logo.png"/>
+    </ImageView>
+    <JFXTabPane styleClass="tab-pane">
+        <Tab text="LOG IN" styleClass="duelystTab">
+            <VBox styleClass="tab-items" spacing="25">
+                <JFXTextField fx:id="loginUsernameTxt" promptText="Username" styleClass="input-text"/>
+                <JFXPasswordField fx:id="loginPasswordTxt" promptText="Password" styleClass="input-text"/>
+                <JFXCheckBox text="Remember Me" styleClass="check-box"/>
+                <JFXButton fx:id="loginBtn" styleClass="btn-primary, btn-lg" text="LOG IN" onMouseClicked="#login"/>
+            </VBox>
+        </Tab>
+        <Tab text="SIGN UP" styleClass="duelystTab">
+            <VBox styleClass="tab-items" spacing="25">
+                <JFXTextField fx:id="signUpUsernameTxt" promptText="Username" styleClass="input-text"/>
+                <JFXPasswordField fx:id="signUpPasswordTxt" promptText="Password" styleClass="input-text"/>
+                <JFXPasswordField fx:id="signUpPasswordRematchTxt" promptText="Password" styleClass="input-text"/>
+                <JFXButton fx:id="signUpBtn" styleClass="btn-primary, btn-lg" text="SIGN UP" onMouseClicked="#signUp"/>
+            </VBox>
+        </Tab>
+    </JFXTabPane>
+</VBox>
