@@ -1,6 +1,7 @@
 package views.menus;
 
 import controllers.logic.Manager;
+import javafx.scene.input.MouseEvent;
 import views.Command;
 import views.Error;
 import views.Output;
