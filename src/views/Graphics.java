@@ -6,7 +6,11 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import resources.Fog;
+
 import java.io.IOException;
 
 public class Graphics extends Application {
@@ -27,8 +31,10 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
-        Image image = new Image("resources/ui/cursor.png"); //pass in the image path
+//        Fog fog = new Fog(500, 500, new Color(1, 0, 0, 1));
+//        AnchorPane a = new AnchorPane(fog.getView());
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Image image = new Image("resources/ui/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
         stage.setScene(scene);

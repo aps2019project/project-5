@@ -3,6 +3,48 @@
 }
 
 .container {
-    -fx-background-image: url(/resources/scenes/background.jpg);
+    -fx-background-image:   url(/resources/scenes/login-background.jpg),
+                            url(/resources/scenes/foreground@2x.png),
+                            url(/resources/scenes/pillars_far@2x.png);
+    -fx-background-repeat: no-repeat, no-repeat;
+    -fx-background-size: cover, 1600 484, 1379 1000;
+    -fx-background-position: top center, right bottom, left bottom;
+}
+
+.round-button {
+    -fx-background-color: rgba(0, 0, 0, 0);
     -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-pref-width: 64px;
+    -fx-pref-height: 64px;
+}
+
+.round-button-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-pref-width: 64px;
+    -fx-text-alignment: center;
+}
+
+.shop-button {
+    -fx-background-image: url(/resources/ui/buttons/armory@2x.png);
+}
+
+.profile-button {
+    -fx-background-image: url(/resources/ui/buttons/profile@2x.png);
+}
+
+.quests-button {
+    -fx-background-image: url(/resources/ui/buttons/quests@2x.png);
+}
+
+.menu-button {
+    -fx-text-fill: white;
+    -fx-font-size: 35px;
+    -fx-background-color: transparent;
+}
+
+.menu-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
 }
