@@ -1,126 +1,61 @@
-package views.menus;
+package views.graphics;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import controllers.ClientManager;
 import controllers.logic.Manager;
+import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 import models.Account;
 import models.Collection;
 import models.Deck;
 import models.cards.Card;
-import views.Command;
 import views.Error;
 import views.Log;
 import views.Output;
 
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
-public class CollectionMenu implements Menu {
-    private ArrayList<Command> commands = new ArrayList<>();
+public class GraphicCollectionMenu implements Initializable {
 
-    public CollectionMenu() {
-        commands.add(new Command(
-                "^(?i)return$",
-                "",
-                "return",
-                "\t\t\t\t\t\t\t\treturn to MainMenu."
-        ));
 
-        commands.add(new Command(
-                "^(?i)create\\s+(?i)deck\\s+(?<name>\\w+)$",
-                "createDeck",
-                "create deck [DeckName]",
-                "\t\t\t\tcreate new empty deck."
-        ));
+    public JFXTextField searchingCardNameTxt;
+    public JFXButton searchCardBtn;
+    public JFXTextField newDeckNameTxt;
+    public JFXButton saveDeckBtn;
+    public JFXButton card1;
+    public JFXButton deck;
+    String selectedDeckName;
 
-        commands.add(new Command(
-                "^(?i)delete\\s+(?i)deck\\s+(?<name>\\w+)$",
-                "deleteDeck",
-                "delete deck [DeckName]",
-                "\t\t\t\tdeletes the deck."
-        ));
-
-        commands.add(new Command(
-                "^(?i)show\\s+(?i)all\\s+(?i)decks$",
-                "showAllDecks",
-                "show all decks",
-                "\t\t\t\t\t\tshows all decks details."
-        ));
-
-        commands.add(new Command(
-                "^(?i)help$",
-                "help"
-        ));
-
-        commands.add(new Command(
-                "^(?i)add\\s+(?<card>[A-z ]+)\\s+to\\s+deck\\s+(?<deck>\\w+)$",
-                "addCardToDeck",
-                "add [CardName] to deck [DeckName]",
-                "\tAdds card to deck."
-        ));
-
-        commands.add(new Command(
-                "^(?i)remove\\s+(?<card>[A-z ]+)\\s+from\\s+deck\\s+(?<deck>\\w+)$",
-                "removeCardFromDeck",
-                "remove [CardName] from deck [DeckName]",
-                "Removes card from deck."
-        ));
-
-        commands.add(new Command(
-                "^(?i)search\\s+(?<cardName>[A-z ]+)$",
-                "searchCard",
-                "search [String]",
-                "\t\t\t\t\t\tShows cards in player's collection that their name contains [String]"
-        ));
-
-        commands.add(new Command(
-                "^(?i)validate\\s+deck\\s+(?<deck>\\w+)$",
-                "validateDeck",
-                "validate deck [DeckName]",
-                "\t\t\tCheck if deck is valid or isn't"
-        ));
-
-        commands.add(new Command(
-                "^(?i)select\\s+deck\\s+(?<deck>\\w+)$",
-                "selectDeck",
-                "select deck [DeckName]",
-                "\t\t\t\tSets deck as main deck"
-        ));
-
-        commands.add(new Command(
-                "^(?i)show\\s+deck\\s+(?<deck>\\w+)$",
-                "showDeck",
-                "show deck [DeckName]",
-                "\t\t\t\tShows cards of deck."
-        ));
+    private void changeAsWrong(JFXTextField textField, boolean isWrong) {
+        if (isWrong) {
+            textField.setStyle("-jfx-focus-color: #FF0000; -jfx-unfocus-color: #FF0000;");
+        } else {
+            textField.setStyle("-jfx-focus-color: #F47B20; -jfx-unfocus-color: #FFC20E;");
+        }
     }
 
-    @Override
-    public String getMenuName() {
-        return "CollectionMenu";
-    }
 
-    @Override
-    public ArrayList<Command> getCommands() {
-        return this.commands;
-    }
-
-    public static void searchCard(Matcher matcher) {
-        String cardName = matcher.group("cardName");
+    public void searchCard() {
+        String cardName = searchingCardNameTxt.getText();
         try {
-            List<Card> cards = Manager.searchMyCard(cardName);
+            List<Card> cards = ClientManager.searchMyCard(cardName);
             cards.forEach(
                     (card) -> Output.log(card.toString())
             );
         } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
+            changeAsWrong(searchingCardNameTxt, true);
         }
 
     }
 
-    public static void createDeck(Matcher matcher) {
-        String deckName = matcher.group("name");
+    public void createNewDeck() {
+        String deckName = newDeckNameTxt.getText();
         try {
-            Manager.createDeck(deckName);
+            ClientManager.createDeck(deckName);
             Output.log(Log.DECK_CREATED);
         } catch (Account.NotLoggedInException e) {
             Output.err(Error.NOT_LOGGED_IN);
@@ -139,23 +74,19 @@ public class CollectionMenu implements Menu {
         }
     }
 
-    public static void addCardToDeck(Matcher matcher) {
-        String cardId = matcher.group("card");
-        String deckName = matcher.group("deck");
+    public void addCardToDeck() {
+        String cardId = card1.getText();
+        String deckName = selectedDeckName;
         try {
-            Manager.addCardToDeck(cardId, deckName);
+            ClientManager.addCardToDeck(cardId, deckName);
             Output.log(Log.CARD_ADDED_TO_DECK);
-        } catch (Account.DeckNotFoundException e) {
-            Output.err(Error.DECK_NOT_FOUND);
         } catch (Deck.HeroNotExistsInDeckException e) {
             Output.err(Error.HERO_NOT_EXISTS_IN_DECK);
         } catch (Deck.DeckFullException e) {
             Output.err(Error.DECK_FULL_EXCEPTION);
         } catch (Deck.HeroExistsInDeckException e) {
             Output.err(Error.HERO_EXISTS_IN_DECK);
-        } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
-        }
+        } catch (Collection.CardNotFoundException | Account.DeckNotFoundException ignored) { }
 
     }
 
@@ -215,8 +146,18 @@ public class CollectionMenu implements Menu {
 
     }
 
-    public static void help(Matcher matcher) {
-        Menu.help(new CollectionMenu().getCommands());
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        searchingCardNameTxt.setStyle("-jfx-focus-color: #F47B20; -jfx-unfocus-color: #FFC20E;");
+
+        searchingCardNameTxt.textProperty().addListener(((observable, oldValue, newValue) -> {
+            changeAsWrong(searchingCardNameTxt, false);
+        }));
     }
 
+    public void selectDeck(MouseEvent mouseEvent) {
+        selectedDeckName = deck.getText();
+    }
 }

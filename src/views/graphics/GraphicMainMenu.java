@@ -6,7 +6,7 @@ import views.Graphics;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenu {
+public class GraphicMainMenu {
 
     public void shop(MouseEvent mouseEvent) {
         Graphics.stage.getScene().setRoot(Graphics.shopMenuRoot);

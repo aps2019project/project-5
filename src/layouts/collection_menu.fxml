@@ -9,27 +9,24 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXBadge?>
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicAccountMenu" spacing="20"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicCollectionMenu" spacing="20"
       stylesheets="@../resources/stylesheets/login-style.css" styleClass="container-account-menu" alignment="center">
-    <ImageView fitWidth="500" fitHeight="108">
-        <Image url="/resources/ui/logo.png"/>
-    </ImageView>
     <JFXTabPane styleClass="tab-pane">
-        <Tab text="LOG IN" styleClass="duelystTab">
+        <Tab text="SEARCH" styleClass="duelystTab">
             <VBox styleClass="tab-items" spacing="25">
-                <JFXTextField fx:id="loginUsernameTxt" promptText="Username" styleClass="input-text"/>
-                <JFXPasswordField fx:id="loginPasswordTxt" promptText="Password" styleClass="input-text"/>
-                <JFXCheckBox text="Remember Me" styleClass="check-box"/>
-                <JFXButton fx:id="loginBtn" styleClass="btn-primary, btn-lg" text="LOG IN" onMouseClicked="#login"/>
-            </VBox>
-        </Tab>
-        <Tab text="SIGN UP" styleClass="duelystTab">
-            <VBox styleClass="tab-items" spacing="25">
-                <JFXTextField fx:id="signUpUsernameTxt" promptText="Username" styleClass="input-text"/>
-                <JFXPasswordField fx:id="signUpPasswordTxt" promptText="Password" styleClass="input-text"/>
-                <JFXPasswordField fx:id="signUpPasswordRematchTxt" promptText="Password" styleClass="input-text"/>
-                <JFXButton fx:id="signUpBtn" styleClass="btn-primary, btn-lg" text="SIGN UP" onMouseClicked="#signUp"/>
+                <JFXTextField fx:id="searchingCardNameTxt" promptText="Sample Card Name" styleClass="input-text"/>
+                <JFXButton fx:id="searchCardBtn" styleClass="btn-primary, btn-lg" text="Search" onMouseClicked="#searchCard"/>
+                <JFXTextField fx:id="newDeckNameTxt" promptText="Sample Deck" styleClass="input-text"/>
+                <JFXButton fx:id="saveDeckBtn" styleClass="btn-primary, btn-lg" text="Save" onMouseClicked="#createNewDeck"/>
+                <JFXListView fx:id="decksList" >
+                    <JFXButton fx:id="deck" text="firstDeck" onMouseClicked="#selectDeck"/>
+                </JFXListView>
+                <JFXListView fx:id="cardList" >
+                    <JFXButton fx:id="card1" text="card1" onMouseClicked="#addCardToDeck"/>
+                </JFXListView>
             </VBox>
         </Tab>
     </JFXTabPane>
