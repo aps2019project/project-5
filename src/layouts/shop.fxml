@@ -10,7 +10,7 @@
             fx:controller="views.graphics.ShopController"
             prefHeight="1080" prefWidth="1920"
             styleClass="shop-container" stylesheets="@../resources/stylesheets/shop-style.css">
-    <JFXMasonryPane AnchorPane.topAnchor="130" AnchorPane.rightAnchor="40" fx:id="cardsPane"
+    <JFXMasonryPane AnchorPane.topAnchor="130" AnchorPane.rightAnchor="40" fx:id="cardContainer"
                     AnchorPane.leftAnchor="400" AnchorPane.bottomAnchor="40" styleClass="cards">
 
     </JFXMasonryPane>

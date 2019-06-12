@@ -97,7 +97,6 @@ public class ClientManager {
     }
 
     public static Collection getShopCollection() {
-        Collection collection = shop.getCardsCollection();
         return shop.getCardsCollection();
     }
 

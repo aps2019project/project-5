@@ -19,6 +19,23 @@
     -fx-prompt-text-fill: #999;
 }
 
-.cards {
-    -fx-background-color: rgba(0, 0, 0, 0.2);
+.cardsPane {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 300px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.card-pane {
+    -fx-background-image: url(/resources/craftable_spell@2x.png);
+    -fx-pref-width: 200;
+    -fx-pref-height: 262;
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+}
+
+.card-pane:hover {
+    -fx-background-image: url(/resources/reveal_glow_spell@2x.png);
+    -fx-background-size: cover;
 }
