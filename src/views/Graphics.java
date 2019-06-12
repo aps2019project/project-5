@@ -33,7 +33,7 @@ public class Graphics extends Application {
             codexRoot = new GridPane();
             matchSelectRoot = new GridPane();
             play = new GridPane();
-            shopMenuRoot = new GridPane();
+            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
         } catch (IOException e) {
@@ -50,7 +50,7 @@ public class Graphics extends Application {
 
         createTestUser();
 
-        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Scene scene = new Scene(shopMenuRoot, 1920, 1080);
         Image image = new Image("resources/ui/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);

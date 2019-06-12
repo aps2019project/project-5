@@ -1,3 +1,20 @@
-.container {
+.shop-container {
     -fx-background-image: url(/resources/background-blur.jpg);
+    -fx-background-size: cover;
+}
+
+.shop-search {
+    -fx-pref-width: 300px;
+    -fx-background-radius: 30px;
+    -fx-padding: 20px;
+    -fx-border-width: 0px;
+    -fx-font-size: 15;
+    -fx-text-fill: #DCDCDC;
+    -fx-background-color: #0C1022;
+    -fx-effect: None;
+    -fx-background-image: url(/resources/search-icon.png);
+    -fx-background-size: 35 35;
+    -fx-background-position: 250 10;
+    -fx-background-repeat: no-repeat;
+    -fx-prompt-text-fill: #999;
 }
