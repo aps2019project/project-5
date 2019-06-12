@@ -20,18 +20,18 @@ public class Shop {
     {
         try {
             cardsCollection.addCards(JsonParser.getMinions());
-        } catch (FileNotFoundException | JSONException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
             cardsCollection.addCards(JsonParser.getHeroes());
-        } catch (FileNotFoundException | JSONException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
             cardsCollection.addCards(JsonParser.getSpells());
-        } catch (FileNotFoundException | JSONException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
