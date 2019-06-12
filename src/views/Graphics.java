@@ -27,7 +27,7 @@ public class Graphics extends Application {
             watchRoot = new GridPane();
             collectionMenuRoot = new GridPane();
             codexRoot = new GridPane();
-            matchSelectRoot = new GridPane();
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/matchSelect.fxml"));
             play = new GridPane();
             shopMenuRoot = new GridPane();
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
