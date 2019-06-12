@@ -18,3 +18,7 @@
     -fx-background-repeat: no-repeat;
     -fx-prompt-text-fill: #999;
 }
+
+.cards {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}

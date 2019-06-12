@@ -10,7 +10,8 @@
             fx:controller="views.graphics.ShopController"
             prefHeight="1080" prefWidth="1920"
             styleClass="shop-container" stylesheets="@../resources/stylesheets/shop-style.css">
-    <JFXMasonryPane>
+    <JFXMasonryPane AnchorPane.topAnchor="130" AnchorPane.rightAnchor="40" fx:id="cardsPane"
+                    AnchorPane.leftAnchor="400" AnchorPane.bottomAnchor="40" styleClass="cards">
 
     </JFXMasonryPane>
     <TextField styleClass="shop-search" promptText="Search" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="40"/>

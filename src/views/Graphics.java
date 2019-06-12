@@ -56,8 +56,8 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
-//        Fog fog = new Fog(500, 500, new Color(1, 0, 0, 1));
-//        AnchorPane a = new AnchorPane(fog.getView());
+        Fog fog = new Fog(500, 500, new Color(1, 0, 0, 1));
+        AnchorPane a = new AnchorPane(fog.getView());
 
 
         Scene scene = new Scene(shopMenuRoot, 1920, 1080);
