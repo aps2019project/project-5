@@ -76,12 +76,7 @@ public class GraphicAccountMenu implements Initializable {
         }
         try {
             ClientManager.createAccount(username, password);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Account Created");
-            alert.setHeaderText("Congrats");
-            alert.setContentText("Your account created successfully");
-
-            alert.showAndWait();
+            Graphics.alert("Account Created", "Congrats", "Your account created successfully");
         } catch (Account.UsernameExistsException ignored) {
             changeAsWrong(signUpUsernameTxt, true);
         }

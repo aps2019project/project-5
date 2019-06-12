@@ -58,6 +58,10 @@ public class Collection {
         this.cards.put(card, 1);
     }
 
+    public int getNumberOfCard(Card card) {
+        return cards.get(card);
+    }
+
     private static List<Card> ListToMap(Map<Card, Integer> map) {
         return new ArrayList<>(map.keySet());
     }
@@ -126,9 +130,7 @@ public class Collection {
     }
 
     public Card getCard(String cardName) throws CardNotFoundException {
-        List<Card> cards = filterByName("^" + cardName + "$").stream().map(
-                marketObject -> marketObject
-        ).collect(Collectors.toList());
+        List<Card> cards = new ArrayList<>(filterByName("^" + cardName + "$"));
         if (cards.size() == 0) {
             throw new CardNotFoundException();
         }
@@ -159,6 +161,10 @@ public class Collection {
             return false;
         }
         return true;
+    }
+
+    public boolean hasCard(Card card) {
+        return cards.containsKey(card);
     }
 
     public static class CollectionException extends Exception {

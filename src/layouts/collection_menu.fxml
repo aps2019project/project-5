@@ -21,12 +21,9 @@
                 <JFXButton fx:id="searchCardBtn" styleClass="btn-primary, btn-lg" text="Search" onMouseClicked="#searchCard"/>
                 <JFXTextField fx:id="newDeckNameTxt" promptText="Sample Deck" styleClass="input-text"/>
                 <JFXButton fx:id="saveDeckBtn" styleClass="btn-primary, btn-lg" text="Save" onMouseClicked="#createNewDeck"/>
-                <JFXListView fx:id="decksList" >
-                    <JFXButton fx:id="deck" text="firstDeck" onMouseClicked="#selectDeck"/>
-                </JFXListView>
-                <JFXListView fx:id="cardList" >
-                    <JFXButton fx:id="card1" text="card1" onMouseClicked="#addCardToDeck"/>
-                </JFXListView>
+                <JFXListView fx:id="deckList"/>
+                <JFXListView fx:id="cardList"/>
+                <JFXListView fx:id="selectedDeckCardList"/>
             </VBox>
         </Tab>
     </JFXTabPane>

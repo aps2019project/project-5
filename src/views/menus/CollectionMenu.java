@@ -207,7 +207,7 @@ public class CollectionMenu implements Menu {
     public static void showDeck(Matcher matcher) {
         String deckName = matcher.group("deck");
         try {
-            Deck deck = Manager.getAccount().getDeck(deckName);
+            Deck deck = Manager.getDeck(deckName);
             Output.log(deck.toString());
         } catch (Account.DeckNotFoundException e) {
             Output.err(Error.DECK_NOT_FOUND);

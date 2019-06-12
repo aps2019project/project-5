@@ -83,6 +83,14 @@ public class ClientManager {
         shop.buy(account, cardName);
     }
 
+    public static Deck getDeck(String deckName) throws Account.DeckNotFoundException {
+        return getAccount().getDeck(deckName);
+    }
+
+    public static int getNumberOfCard(Card card) {
+        return account.getCollection().getNumberOfCard(card);
+    }
+
     public static void sell(String cardName) throws CardNotFoundException {
         shop.sell(account, cardName);
         // TODO: remove selling cards from decks
@@ -350,4 +358,7 @@ public class ClientManager {
         return false;
     }
 
+    public static boolean hasCard(String cardId) throws CardNotFoundException {
+        return account.getCollection().hasCard(account.getCollection().getCardByID(cardId));
+    }
 }
