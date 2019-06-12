@@ -32,5 +32,6 @@
         <Label text="Single Flag Mode" styleClass="menu-button" layoutX="710" layoutY="650"/>
         <Label text="Multi Flag Mode" styleClass="menu-button" layoutX="1060" layoutY="650"/>
         <Label text="Extra" styleClass="menu-button" layoutX="1440" layoutY="650"/>
+        <Label text="Back" styleClass="back-button" layoutX="40" layoutY="40" onMouseClicked="#back"/>
     </children>
 </AnchorPane>

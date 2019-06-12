@@ -81,3 +81,13 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: top center;
 }
+
+.back-button {
+    -fx-text-fill: white;
+    -fx-font-size: 35px;
+    -fx-background-color: transparent;
+}
+
+.back-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
+}

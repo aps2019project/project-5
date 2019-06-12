@@ -184,7 +184,7 @@ public class GraphicCollectionMenu implements Initializable {
 
 
         searchingCardNameTxt.textProperty().addListener(((observable, oldValue, newValue) -> {
-            if (newValue.equals("")){
+            if (newValue.equals("")) {
                 cardList.getItems().clear();
                 ClientManager.getMyCollection().getCardsList().forEach(card -> {
                     addCardToCollectionList(card);
@@ -196,7 +196,8 @@ public class GraphicCollectionMenu implements Initializable {
                 ClientManager.searchMyCard(newValue).forEach(card -> {
                     addCardToCollectionList(card);
                 });
-            } catch (Collection.CardNotFoundException ignored) { }
+            } catch (Collection.CardNotFoundException ignored) {
+            }
         }));
 
         newDeckNameTxt.textProperty().addListener(((observable, oldValue, newValue) -> {
@@ -262,4 +263,7 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
 
+    public void back(MouseEvent mouseEvent) {
+        Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
+    }
 }

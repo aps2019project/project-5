@@ -9,6 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.control.Label?>
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicAccountMenu" spacing="20"
       stylesheets="@../resources/stylesheets/login-style.css" styleClass="container-account-menu" alignment="center">
@@ -33,4 +34,6 @@
             </VBox>
         </Tab>
     </JFXTabPane>
+    <Label text="Back" styleClass="back-button" layoutX="40" layoutY="40" onMouseClicked="#back"/>
+
 </VBox>
