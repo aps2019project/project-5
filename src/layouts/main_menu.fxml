@@ -6,9 +6,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<AnchorPane xmlns="http://javafx.com/javafx" styleClass="container"
+<AnchorPane xmlns="http://javafx.com/javafx" styleClass="shop-container"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="views.graphics.MainMenu"
+            fx:controller="views.graphics.GraphicMainMenu"
             stylesheets="/resources/stylesheets/menu-style.css">
     <Button styleClass="round-button, shop-button" layoutX="1770" layoutY="930" onMouseClicked="#shop"/>
     <Label alignment="BOTTOM_CENTER" text="SHOP" styleClass="round-button-label" layoutX="1770" layoutY="1000"/>

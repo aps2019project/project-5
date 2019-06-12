@@ -1,9 +1,9 @@
-package controllers.logic;
+package controllers;
 
 import models.*;
-import models.cards.Card;
-import models.Collection.CardNotFoundException;
 import models.Account.NotEnoughDrakeException;
+import models.Collection.CardNotFoundException;
+import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Manager {
+public class ClientManager {
     private static Account account;
     private static Match playingMatch;
     private static Shop shop = Shop.getInstance();
@@ -37,8 +37,8 @@ public class Manager {
         return account;
     }
 
-    public static void addAccount(Account account) throws Account.UsernameExistsException {
-        Account.addAccount(account);
+    public static void createAccount(String username, String password) throws Account.UsernameExistsException {
+        Account.addAccount(new Account(username, password));
     }
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
@@ -83,13 +83,20 @@ public class Manager {
         shop.buy(account, cardName);
     }
 
+    public static Deck getDeck(String deckName) throws Account.DeckNotFoundException {
+        return getAccount().getDeck(deckName);
+    }
+
+    public static int getNumberOfCard(Card card) {
+        return account.getCollection().getNumberOfCard(card);
+    }
+
     public static void sell(String cardName) throws CardNotFoundException {
         shop.sell(account, cardName);
         // TODO: remove selling cards from decks
     }
 
     public static Collection getShopCollection() {
-        Collection collection = shop.getCardsCollection();
         return shop.getCardsCollection();
     }
 
@@ -342,7 +349,15 @@ public class Manager {
         playingMatch.setFlagsInMap(result);
     }
 
-    public static Deck getDeck(String deckName) throws Account.DeckNotFoundException {
-        return getAccount().getDeck(deckName);
+    public static boolean accountExists(String username) {
+        for (String usernameIt:Account.getAccounts().keySet()) {
+            if (username.equals(usernameIt))
+                return true;
+        }
+        return false;
+    }
+
+    public static boolean hasCard(String cardId) throws CardNotFoundException {
+        return account.getCollection().hasCard(account.getCollection().getCardByID(cardId));
     }
 }
