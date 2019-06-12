@@ -39,3 +39,12 @@
     -fx-background-image: url(/resources/reveal_glow_spell@2x.png);
     -fx-background-size: cover;
 }
+
+.card-name-label {
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+* {
+    -fx-font-family: "Bahnschrift";
+}

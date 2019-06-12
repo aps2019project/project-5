@@ -2,17 +2,20 @@
 
 <?import javafx.scene.layout.*?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXMasonryPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="views.graphics.ShopController"
             prefHeight="1080" prefWidth="1920"
             styleClass="shop-container" stylesheets="@../resources/stylesheets/shop-style.css">
-    <JFXMasonryPane AnchorPane.topAnchor="130" AnchorPane.rightAnchor="40" fx:id="cardContainer"
-                    AnchorPane.leftAnchor="400" AnchorPane.bottomAnchor="40" styleClass="cards">
+    <ScrollPane AnchorPane.topAnchor="130" AnchorPane.rightAnchor="40" style="-fx-background-color: transparent;"
+                   AnchorPane.leftAnchor="510" AnchorPane.bottomAnchor="40">
+        <JFXMasonryPane fx:id="cardContainer" prefWidth="1350" prefHeight="910" style="-fx-background-color: transparent;">
 
-    </JFXMasonryPane>
+        </JFXMasonryPane>
+    </ScrollPane>
     <TextField styleClass="shop-search" promptText="Search" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="40"/>
 </AnchorPane>

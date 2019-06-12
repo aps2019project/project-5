@@ -3,6 +3,8 @@ package views.graphics;
 import com.jfoenix.controls.JFXMasonryPane;
 import controllers.ClientManager;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +28,7 @@ public class ShopController implements Initializable {
     }
 
     private void updateCards(String q) {
+        cardContainer.getChildren().removeAll();
         List<Card> cards = new ArrayList<>();
         if(q == null || q.equals("")) {
             cards = ClientManager.getShopCollection().getCardsList();
@@ -37,9 +40,16 @@ public class ShopController implements Initializable {
 
         cards.forEach(card -> {
             AnchorPane cardPane = new AnchorPane();
-            System.out.println(card.getName());
             cardPane.getStyleClass().add("card-pane");
             cardPane.setPrefSize(200, 262);
+
+            Label cardName = new Label(card.getName());
+            cardName.relocate(15, 200);
+            cardName.setPrefWidth(200);
+            cardName.setAlignment(Pos.CENTER);
+            cardName.getStyleClass().add("card-name-label");
+            cardPane.getChildren().add(cardName);
+
             cardContainer.getChildren().add(cardPane);
         });
     }
