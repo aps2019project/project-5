@@ -11,6 +11,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXBadge?>
+<?import javafx.scene.control.Label?>
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicCollectionMenu" spacing="20"
       stylesheets="@../resources/stylesheets/login-style.css" styleClass="container-account-menu" alignment="center">
@@ -18,13 +19,16 @@
         <Tab text="SEARCH" styleClass="duelystTab">
             <VBox styleClass="tab-items" spacing="25">
                 <JFXTextField fx:id="searchingCardNameTxt" promptText="Sample Card Name" styleClass="input-text"/>
-                <JFXButton fx:id="searchCardBtn" styleClass="btn-primary, btn-lg" text="Search" onMouseClicked="#searchCard"/>
+                <JFXButton fx:id="searchCardBtn" styleClass="btn-primary, btn-lg" text="Search"
+                           onMouseClicked="#searchCard"/>
                 <JFXTextField fx:id="newDeckNameTxt" promptText="Sample Deck" styleClass="input-text"/>
-                <JFXButton fx:id="saveDeckBtn" styleClass="btn-primary, btn-lg" text="Save" onMouseClicked="#createNewDeck"/>
+                <JFXButton fx:id="saveDeckBtn" styleClass="btn-primary, btn-lg" text="Save"
+                           onMouseClicked="#createNewDeck"/>
                 <JFXListView fx:id="deckList"/>
                 <JFXListView fx:id="cardList"/>
                 <JFXListView fx:id="selectedDeckCardList"/>
             </VBox>
         </Tab>
     </JFXTabPane>
+    <Label text="Back" styleClass="back-button" layoutX="40" layoutY="40" onMouseClicked="#back"/>
 </VBox>

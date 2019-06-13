@@ -140,4 +140,8 @@ public class GraphicAccountMenu implements Initializable {
             changeAsWrong(loginPasswordTxt, false);
         }));
     }
+
+    public void back(MouseEvent mouseEvent) {
+        Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
+    }
 }
