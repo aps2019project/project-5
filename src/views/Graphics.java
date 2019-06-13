@@ -57,9 +57,6 @@ public class Graphics extends Application {
     public void start(Stage primaryStage) {
         /// For test:
         createTestUser();
-        try {
-            ClientManager.login("ali", "ali");
-        } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {}
 
         loadLayouts();
         stage = primaryStage;
@@ -80,11 +77,11 @@ public class Graphics extends Application {
             ClientManager.createAccount("ali", "ali");
             ClientManager.createAccount("mahdi", "mahdi");
             ClientManager.createAccount("amin", "amin");
+
             ClientManager.login("ali", "ali");
             ClientManager.buy("empower");
             ClientManager.buy("fire dragon");
             ClientManager.buy("fire dragon");
-            ClientManager.buy("Eagle");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Persian Swordsman");
             ClientManager.buy("rostam");
@@ -112,7 +109,6 @@ public class Graphics extends Application {
             ClientManager.buy("empower");
             ClientManager.buy("fire dragon");
             ClientManager.buy("fire dragon");
-            ClientManager.buy("Eagle");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Persian Swordsman");
             ClientManager.buy("rostam");
@@ -134,6 +130,12 @@ public class Graphics extends Application {
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
+
+
+            try {
+                ClientManager.login("ali", "ali");
+            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {}
+
 
         } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) { }
 
