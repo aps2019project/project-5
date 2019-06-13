@@ -33,7 +33,7 @@ public class Graphics extends Application {
             singleFlagRoot = new GridPane();
             deathMatchRoot = new GridPane();
             deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_Select.fxml"));
+//            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_Select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
@@ -64,7 +64,7 @@ public class Graphics extends Application {
         loadLayouts();
         stage = primaryStage;
 
-        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Scene scene = new Scene(collectionMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
