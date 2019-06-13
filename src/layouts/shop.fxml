@@ -4,18 +4,25 @@
 
 <?import com.jfoenix.controls.JFXMasonryPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="views.graphics.ShopController"
             prefHeight="1080" prefWidth="1920"
             styleClass="shop-container" stylesheets="@../resources/stylesheets/shop-style.css">
-    <ScrollPane AnchorPane.topAnchor="130" AnchorPane.rightAnchor="40" style="-fx-background-color: transparent;"
-                   AnchorPane.leftAnchor="510" AnchorPane.bottomAnchor="40">
-        <JFXMasonryPane fx:id="cardContainer" prefWidth="1350" prefHeight="910" style="-fx-background-color: transparent;">
-
-        </JFXMasonryPane>
+    <ScrollPane AnchorPane.topAnchor="130" AnchorPane.rightAnchor="40" hbarPolicy="NEVER" styleClass="shop-card-container"
+                   AnchorPane.leftAnchor="480" AnchorPane.bottomAnchor="40">
+        <JFXMasonryPane fx:id="cardContainer" prefWidth="1350" prefHeight="910" styleClass="inner-container"/>
     </ScrollPane>
-    <TextField styleClass="shop-search" promptText="Search" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="40"/>
+    <TextField fx:id="searchField" styleClass="shop-search" promptText="Search" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="40"/>
+    <ImageView fx:id="backBtn" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100" fitHeight="100">
+        <Image url="/resources/ui/buttons/back-button.png"/>
+    </ImageView>
+    <Label fx:id="filterNone" styleClass="shop-filter-label, selected" text="All Cards" AnchorPane.leftAnchor="480" AnchorPane.topAnchor="50"/>
+    <Label fx:id="filterHeroes" styleClass="shop-filter-label" text="Heroes" AnchorPane.leftAnchor="630" AnchorPane.topAnchor="50"/>
+    <Label fx:id="filterMinions" styleClass="shop-filter-label" text="Minions" AnchorPane.leftAnchor="780" AnchorPane.topAnchor="50"/>
+    <Label fx:id="filterSpells" styleClass="shop-filter-label" text="Spells" AnchorPane.leftAnchor="930" AnchorPane.topAnchor="50"/>
 </AnchorPane>

@@ -8,15 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Account;
 import models.Collection;
-import resources.Fog;
-import views.graphics.GraphicAccountMenu;
 
 import java.io.IOException;
 
@@ -131,8 +126,7 @@ public class Graphics extends Application {
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
 
-        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) {
-        }
+        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) { }
 
     }
 }

@@ -77,7 +77,7 @@
 }
 
 .duelystTab:selected {
-    -fx-background-image: url(/resources/triangle.png);
+    -fx-background-image: url(/resources/ui/triangle.png);
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: top center;

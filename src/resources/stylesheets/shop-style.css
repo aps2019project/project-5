@@ -42,9 +42,43 @@
 
 .card-name-label {
     -fx-text-fill: white;
-    -fx-font-size: 20;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}
+
+.card-type-label {
+    -fx-text-fill: white;
+    -fx-font-size: 13;
 }
 
 * {
     -fx-font-family: "Bahnschrift";
+}
+
+.shop-card-container {
+    -fx-padding: 15;
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-background-radius: 10;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.inner-container {
+    -fx-background-color: transparent;
+}
+
+.shop-filter-label {
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+    -fx-background-color: transparent;
+}
+
+.shop-filter-label:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 30, 0.5, 0, 0);
+}
+
+.selected, .selected:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 30, 0.7, 0, 0);
 }
