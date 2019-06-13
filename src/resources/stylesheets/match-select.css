@@ -18,7 +18,7 @@
 }
 
 .death-match {
-    -fx-background-image: url(/resources/play/play_mode_sandbox.jpg), url(/resources/play/game-select-plate.png);
+    -fx-background-image: url(/resources/images/play/play_mode_sandbox.jpg), url(/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 550, 300 62;
     -fx-background-position: center, 0 550;
     -fx-background-repeat: no-repeat, no-repeat;
@@ -30,21 +30,21 @@
 }
 
 .capture-the-flag {
-    -fx-background-image: url(/resources/play/play_mode_rankedladder@2x.jpg), url(/resources/play/game-select-plate.png);
+    -fx-background-image: url(/resources/images/play/play_mode_rankedladder@2x.jpg), url(/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 550, 300 62;
     -fx-background-position: center, 0 550;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .multi-flag-mode {
-    -fx-background-image: url(/resources/play/gate_010.jpg), url(/resources/play/game-select-plate.png);
+    -fx-background-image: url(/resources/images/play/gate_010.jpg), url(/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 550, 300 62;
     -fx-background-position: center, 0 550;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .extra-mode {
-    -fx-background-image: url(/resources/play/play_mode_arenagauntlet.jpg), url(/resources/play/game-select-plate.png);
+    -fx-background-image: url(/resources/images/play/play_mode_arenagauntlet.jpg), url(/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 550, 300 62;
     -fx-background-position: center, 0 550;
     -fx-background-repeat: no-repeat, no-repeat;

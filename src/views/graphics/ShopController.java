@@ -1,6 +1,5 @@
 package views.graphics;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import controllers.ClientManager;
 import javafx.fxml.Initializable;
@@ -83,9 +82,9 @@ public class ShopController implements Initializable {
         try {
             Image image;
             if(isAttacker)
-                image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
+                image = new Image("/resources/images/cards/" + card.getName() + "_breathing.gif");
             else
-                image = new Image("/resources/cards/" + card.getName() + ".gif");
+                image = new Image("/resources/images/cards/" + card.getName() + ".gif");
             ImageView imageView = new ImageView(image);
             if(isAttacker) {
                 imageView.relocate(30, -10);
