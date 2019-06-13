@@ -55,3 +55,16 @@
 .exit-button {
     -fx-background-image: url(/resources/images/buttons/exit.png);
 }
+
+.drakes {
+    -fx-background-image: url(/resources/images/shop/shop-drake.png),
+    url(/resources/images/shop/drake.png);
+    -fx-background-size: 180 73, 50 50;
+    -fx-background-repeat: no-repeat, no-repeat;
+    -fx-background-position: center, 30 15;
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+    -fx-pref-width: 180;
+    -fx-pref-height: 73;
+    -fx-padding: 8 0 0 40;
+}

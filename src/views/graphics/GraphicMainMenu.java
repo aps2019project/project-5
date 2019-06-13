@@ -1,7 +1,9 @@
 package views.graphics;
 
+import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -15,6 +17,7 @@ public class GraphicMainMenu implements Initializable {
     public ImageView foreground;
     public ImageView pillars;
     public AnchorPane root;
+    public Label drakes;
 
     private TranslateTransition foregroundTransition;
     private TranslateTransition pillarsTransition;
@@ -47,6 +50,7 @@ public class GraphicMainMenu implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
         pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
+        drakes.setText(ClientManager.getAccount().getDrakeString());
 
         root.setOnMouseMoved(event -> {
             foregroundTransition.setToX(-event.getX() / 40);

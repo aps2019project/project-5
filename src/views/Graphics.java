@@ -1,24 +1,17 @@
 package views;
 
-import com.jfoenix.controls.JFXDialog;
 import controllers.ClientManager;
-import controllers.Manager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotResult;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import models.Account;
 import models.Collection;
-import org.omg.CORBA.MARSHAL;
 
 import java.io.IOException;
 
@@ -64,12 +57,12 @@ public class Graphics extends Application {
         /// For test:
         createTestUser();
         try {
-            Manager.login("ali", "ali");
+            ClientManager.login("ali", "ali");
         } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {}
 
         loadLayouts();
         stage = primaryStage;
-        Scene scene = new Scene(shopMenuRoot, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);

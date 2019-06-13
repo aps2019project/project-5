@@ -37,7 +37,7 @@ public class ShopController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         updateCards("", filterType);
 
-        drakes.setText(Manager.getAccount().getDrakeString());
+        drakes.setText(ClientManager.getAccount().getDrakeString());
 
         backBtn.setOnMouseClicked(event -> Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot));
 
