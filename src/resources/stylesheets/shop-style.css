@@ -27,7 +27,6 @@
 }
 
 .card-pane {
-    -fx-background-image: url(/resources/craftable_spell@2x.png);
     -fx-pref-width: 200;
     -fx-pref-height: 262;
     -fx-background-size: cover;
@@ -35,9 +34,32 @@
     -fx-background-color: transparent;
 }
 
-.card-pane:hover {
-    -fx-background-image: url(/resources/reveal_glow_spell@2x.png);
-    -fx-background-size: cover;
+.attacker-pane {
+    -fx-background-image: url(/resources/craftable_unit@2x.png);
+}
+
+.shop-card-health {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.shop-card-power {
+    -fx-text-fill: yellow;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.attacker-pane:hover {
+    -fx-background-image: url(/resources/neutral_prismatic_unit@2x.png);
+}
+
+.spell-pane {
+    -fx-background-image: url(/resources/craftable_spell@2x.png);
+}
+
+.spell-pane:hover {
+    -fx-background-image: url(/resources/neutral_prismatic_spell@2x.png);
 }
 
 .card-name-label {
@@ -93,5 +115,4 @@
     -fx-border-radius: 0.3em;
     -fx-font-weight: bold;
     -fx-pref-width: 0;
-    -fx-position-shape: relative;
 }

@@ -4,11 +4,15 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import controllers.ClientManager;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import models.Account;
 import views.Graphics;
 
@@ -23,6 +27,9 @@ public class GraphicAccountMenu implements Initializable {
     public JFXButton signUpBtn;
     public JFXTextField signUpUsernameTxt;
     public JFXPasswordField signUpPasswordRematchTxt;
+    public ImageView pillars;
+    public ImageView foreground;
+    public AnchorPane root;
 
 
     public void login(MouseEvent mouseEvent) {
@@ -90,6 +97,19 @@ public class GraphicAccountMenu implements Initializable {
             else
                 changeAsWrong(signUpUsernameTxt, false);
         });
+
+        root.setOnMouseMoved(event -> {
+            TranslateTransition foregroundTransition = new TranslateTransition(Duration.seconds(4), foreground);
+            foregroundTransition.setToX(-event.getX() / 40);
+            foregroundTransition.setToY(-event.getY() / 40);
+            foregroundTransition.play();
+
+            TranslateTransition pillarsTransition = new TranslateTransition(Duration.seconds(4), pillars);
+            pillarsTransition.setToX(event.getX() / 100);
+            pillarsTransition.setToY(event.getY() / 100);
+            pillarsTransition.play();
+        });
+
 
         signUpPasswordTxt.textProperty().addListener(((observable, oldPass, newPass) -> {
             if (!newPass.equals(""))

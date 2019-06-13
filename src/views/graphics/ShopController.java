@@ -3,6 +3,7 @@ package views.graphics;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import controllers.ClientManager;
+import controllers.Manager;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -12,7 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import models.Account;
 import models.Collection;
+import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
@@ -57,12 +60,17 @@ public class ShopController implements Initializable {
     }
 
     public static AnchorPane getCardPane(Card card, boolean isInShop) {
+        boolean isAttacker = card instanceof Hero || card instanceof Minion;
         AnchorPane cardPane = new AnchorPane();
         cardPane.getStyleClass().add("card-pane");
+        if (isAttacker)
+            cardPane.getStyleClass().add("attacker-pane");
+        else
+            cardPane.getStyleClass().add("spell-pane");
         cardPane.setPrefSize(200, 262);
 
         Label cardName = new Label(card.getName().toUpperCase());
-        cardName.relocate(15, 140);
+        cardName.relocate(15, 130);
         cardName.setPrefWidth(200);
         cardName.setAlignment(Pos.CENTER);
         cardName.getStyleClass().add("card-name-label");
@@ -70,7 +78,7 @@ public class ShopController implements Initializable {
 
         String type = card instanceof Minion ? "MINION" : (card instanceof Hero ? "HERO" : "SPELL");
         Label cardType = new Label(type);
-        cardType.relocate(15, 160);
+        cardType.relocate(15, 150);
         cardType.setPrefWidth(200);
         cardType.setAlignment(Pos.CENTER);
         cardType.getStyleClass().add("card-type-label");
@@ -78,14 +86,13 @@ public class ShopController implements Initializable {
 
         try {
             Image image;
-            boolean isAttacker = card instanceof Hero || card instanceof Minion;
             if (isAttacker)
                 image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
             else
                 image = new Image("/resources/cards/" + card.getName() + ".gif");
             ImageView imageView = new ImageView(image);
             if (isAttacker) {
-                imageView.relocate(30, 0);
+                imageView.relocate(30, -10);
                 imageView.setFitWidth(160);
                 imageView.setFitHeight(147);
             } else {
@@ -96,22 +103,23 @@ public class ShopController implements Initializable {
             cardPane.getChildren().add(imageView);
         } catch (Exception ignored) {
         }
-        cardPane.setOnMouseClicked(clicked -> {
-            Button buy = new Button("Buy");
-            buy.setLayoutX(cardPane.getLayoutX());
-            buy.setLayoutX(cardPane.getLayoutY() + cardPane.getHeight() - buy.getHeight());
-            buy.getStyleClass().addAll("btn-primary", "btn-lg");
-            Button cancel = new Button("Cancel");
-            buy.setLayoutX(cardPane.getLayoutX() + buy.getWidth() + 60);
-            buy.setLayoutX(cardPane.getLayoutY() + cardPane.getHeight() - buy.getHeight());
-            cancel.getStyleClass().addAll("btn-primary", "btn-lg");
-            buy.setOnMouseClicked(event -> {
 
-            });
-            cancel.setOnMouseClicked(event -> {
+        if (isAttacker) {
+            Label health = new Label("" + ((Attacker) card).getHealth());
+            health.getStyleClass().add("shop-card-health");
+            health.relocate(157, 163);
+            health.setPrefWidth(30);
+            health.setAlignment(Pos.CENTER);
 
-            });
-        });
+            Label power = new Label("" + ((Attacker) card).getAttackPoint());
+            power.getStyleClass().add("shop-card-power");
+            power.relocate(38, 163);
+            power.setPrefWidth(30);
+            power.setAlignment(Pos.CENTER);
+
+            cardPane.getChildren().addAll(power, health);
+        }
+
         return cardPane;
     }
 
@@ -130,6 +138,32 @@ public class ShopController implements Initializable {
         cards.forEach(card -> {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
+                cardPane.setOnMouseClicked(event -> {
+                    // TODO: buying the card.
+                    JFXButton buy = new JFXButton("Buy");
+                    buy.setText("Buy");
+                    buy.setLayoutX(130);
+                    buy.setLayoutY(220);
+                    buy.setPrefWidth(500);
+                    buy.getStyleClass().addAll("btn-primary", "btn-lg");
+                    JFXButton cancel = new JFXButton("Cancel");
+                    cancel.setLayoutX(10);
+                    cancel.setLayoutY(220);
+                    cancel.setPrefWidth(100);
+                    cancel.getStyleClass().addAll("btn-primary", "btn-lg");
+                    cardPane.getChildren().addAll(buy, cancel);
+                    buy.setOnMouseClicked(bought -> {
+                        try {
+                            Manager.buy(card.getName());
+                        } catch (Exception ignored) {
+                        }
+                        cardPane.getChildren().removeAll(buy, cancel);
+
+                    });
+                    cancel.setOnMouseClicked(canceled -> {
+                        cardPane.getChildren().removeAll(buy, cancel);
+                    });
+                });
                 cardContainer.getChildren().add(cardPane);
             }
         });
