@@ -18,23 +18,44 @@
 }
 
 .death-match {
-    -fx-background-image: url(/resources/play/play_mode_sandbox.jpg);
+    -fx-background-image: url(/resources/play/play_mode_sandbox.jpg), url(/resources/play/game-select-plate.png);
+    -fx-background-size: 300 550, 300 62;
+    -fx-background-position: center, 0 550;
+    -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .game-select {
-    -fx-effect: dropshadow(three-pass-box, grey, 10, 0, 0, 0);
-    -fx-background-size: cover;
-    -fx-background-position: center;
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0.5, 5, 5);
+    -fx-padding: 400 0 0 0;
 }
 
 .capture-the-flag {
-    -fx-background-image: url(/resources/play/play_mode_rankedladder@2x.jpg);
+    -fx-background-image: url(/resources/play/play_mode_rankedladder@2x.jpg), url(/resources/play/game-select-plate.png);
+    -fx-background-size: 300 550, 300 62;
+    -fx-background-position: center, 0 550;
+    -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .multi-flag-mode {
-    -fx-background-image: url(/resources/play/gate_010.jpg);
+    -fx-background-image: url(/resources/play/gate_010.jpg), url(/resources/play/game-select-plate.png);
+    -fx-background-size: 300 550, 300 62;
+    -fx-background-position: center, 0 550;
+    -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .extra-mode {
-    -fx-background-image: url(/resources/play/play_mode_arenagauntlet.jpg);
+    -fx-background-image: url(/resources/play/play_mode_arenagauntlet.jpg), url(/resources/play/game-select-plate.png);
+    -fx-background-size: 300 550, 300 62;
+    -fx-background-position: center, 0 550;
+    -fx-background-repeat: no-repeat, no-repeat;
+}
+
+.choose-game-title {
+    -fx-pref-width: 300;
+    -fx-alignment: center;
+    -fx-font-size: 25;
+    -fx-text-alignment: center;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.3, 1, 1);
 }
