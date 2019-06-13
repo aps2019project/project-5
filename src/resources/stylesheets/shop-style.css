@@ -12,7 +12,7 @@
     -fx-text-fill: #DCDCDC;
     -fx-background-color: #0C1022;
     -fx-effect: None;
-    -fx-background-image: url(/resources/search-icon.png);
+    -fx-background-image: url(/resources/images/shop/search-icon.png);
     -fx-background-size: 35 35;
     -fx-background-position: 250 10;
     -fx-background-repeat: no-repeat;
@@ -35,7 +35,7 @@
 }
 
 .attacker-pane {
-    -fx-background-image: url(/resources/craftable_unit@2x.png);
+    -fx-background-image: url(/resources/images/shop/craftable_unit@2x.png);
 }
 
 .shop-card-health {
@@ -51,15 +51,15 @@
 }
 
 .attacker-pane:hover {
-    -fx-background-image: url(/resources/neutral_prismatic_unit@2x.png);
+    -fx-background-image: url(/resources/images/shop/neutral_prismatic_unit@2x.png);
 }
 
 .spell-pane {
-    -fx-background-image: url(/resources/craftable_spell@2x.png);
+    -fx-background-image: url(/resources/images/shop/craftable_spell@2x.png);
 }
 
 .spell-pane:hover {
-    -fx-background-image: url(/resources/neutral_prismatic_spell@2x.png);
+    -fx-background-image: url(/resources/images/shop/neutral_prismatic_spell@2x.png);
 }
 
 .card-name-label {
@@ -92,16 +92,17 @@
 }
 
 .shop-filter-label {
-    -fx-text-fill: white;
     -fx-font-size: 25px;
     -fx-background-color: transparent;
+    -fx-text-fill: #ddd;
 }
 
 .shop-filter-label:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 30, 0.5, 0, 0);
+    -fx-text-fill: white;
 }
 
 .selected, .selected:hover {
+    -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 30, 0.7, 0, 0);
 }
 

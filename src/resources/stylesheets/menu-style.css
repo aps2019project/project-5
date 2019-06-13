@@ -3,7 +3,7 @@
 }
 
 .shop-container {
-    -fx-background-image: url(/resources/scenes/login-background.jpg);
+    -fx-background-image: url(/resources/images/scenes/login-background.jpg);
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: top center;
@@ -30,23 +30,24 @@
 }
 
 .shop-button {
-    -fx-background-image: url(/resources/ui/buttons/armory@2x.png);
+    -fx-background-image: url(/resources/images/buttons/armory@2x.png);
 }
 
 .profile-button {
-    -fx-background-image: url(/resources/ui/buttons/profile@2x.png);
+    -fx-background-image: url(/resources/images/buttons/profile@2x.png);
 }
 
 .quests-button {
-    -fx-background-image: url(/resources/ui/buttons/quests@2x.png);
+    -fx-background-image: url(/resources/images/buttons/quests@2x.png);
 }
 
 .menu-button {
-    -fx-text-fill: white;
+    -fx-text-fill: #DDD;
     -fx-font-size: 35px;
     -fx-background-color: transparent;
 }
 
 .menu-button:hover {
+    -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
 }

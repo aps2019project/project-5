@@ -11,11 +11,11 @@
             fx:controller="views.graphics.GraphicMainMenu"
             stylesheets="/resources/stylesheets/menu-style.css">
     <ImageView fx:id="pillars" fitWidth="1530" fitHeight="1110" AnchorPane.leftAnchor="-400" AnchorPane.topAnchor="-30">
-        <Image url="/resources/scenes/pillars_near@2x.png"/>
+        <Image url="/resources/images/scenes/pillars_near@2x.png"/>
     </ImageView>
 
     <ImageView fx:id="foreground" fitWidth="1600" fitHeight="484" layoutX="400" layoutY="700">
-        <Image url="/resources/scenes/foreground@2x.png"/>
+        <Image url="/resources/images/scenes/foreground@2x.png"/>
     </ImageView>
 
     <Button styleClass="round-button, shop-button" layoutX="1770" layoutY="930" onMouseClicked="#shop"/>
@@ -25,7 +25,7 @@
     <Button styleClass="round-button, quests-button" layoutX="1570" layoutY="930"/>
     <Label alignment="BOTTOM_CENTER" text="QUESTS" styleClass="round-button-label" layoutX="1570" layoutY="1000"/>
     <ImageView layoutX="100" layoutY="100" fitWidth="375" fitHeight="81">
-        <Image url="/resources/ui/logo.png"/>
+        <Image url="/resources/images/logo.png"/>
     </ImageView>
 
     <Label text="PLAY" styleClass="menu-button" layoutX="200" layoutY="230" onMouseClicked="#matchSelect"/>

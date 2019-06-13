@@ -1,11 +1,5 @@
-.container {
-    -fx-background-image: url("/resources/play/play_background.jpg");
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
-}
-
-.matchSelect:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
+.match-select {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 40, 0.5, 10, 10);
 }
 
 .menu-button {
@@ -15,12 +9,53 @@
     -fx-background-color: transparent;
 }
 
-.back-button {
-    -fx-text-fill: white;
-    -fx-font-size: 35px;
-    -fx-background-color: transparent;
+.container {
+    -fx-background-color: #272A35;
 }
 
-.back-button:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
+* {
+    font-family: "Bahnschrift";
+}
+
+.death-match {
+    -fx-background-image: url(/resources/images/play/play_mode_sandbox.jpg), url(/resources/images/play/game-select-plate.png);
+    -fx-background-size: 300 550, 300 62;
+    -fx-background-position: center, 0 550;
+    -fx-background-repeat: no-repeat, no-repeat;
+}
+
+.game-select {
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0.5, 5, 5);
+    -fx-padding: 400 0 0 0;
+}
+
+.capture-the-flag {
+    -fx-background-image: url(/resources/images/play/play_mode_rankedladder@2x.jpg), url(/resources/images/play/game-select-plate.png);
+    -fx-background-size: 300 550, 300 62;
+    -fx-background-position: center, 0 550;
+    -fx-background-repeat: no-repeat, no-repeat;
+}
+
+.multi-flag-mode {
+    -fx-background-image: url(/resources/images/play/gate_010.jpg), url(/resources/images/play/game-select-plate.png);
+    -fx-background-size: 300 550, 300 62;
+    -fx-background-position: center, 0 550;
+    -fx-background-repeat: no-repeat, no-repeat;
+}
+
+.extra-mode {
+    -fx-background-image: url(/resources/images/play/play_mode_arenagauntlet.jpg), url(/resources/images/play/game-select-plate.png);
+    -fx-background-size: 300 550, 300 62;
+    -fx-background-position: center, 0 550;
+    -fx-background-repeat: no-repeat, no-repeat;
+}
+
+.choose-game-title {
+    -fx-pref-width: 300;
+    -fx-alignment: center;
+    -fx-font-size: 25;
+    -fx-text-alignment: center;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.3, 1, 1);
 }
