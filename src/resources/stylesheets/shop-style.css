@@ -61,12 +61,12 @@
     -fx-background-radius: 10;
 }
 
-.inner-container {
+.scroll-pane .viewport {
     -fx-background-color: transparent;
 }
 
-* .inner-container {
-    -fx-background-color: rgba(255, 0, 0, 0.5);
+.inner-container {
+    -fx-background-color: transparent;
 }
 
 .back-button {

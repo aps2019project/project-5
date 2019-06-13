@@ -8,15 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Account;
 import models.Collection;
-import resources.Fog;
-import views.graphics.GraphicAccountMenu;
 
 import java.io.IOException;
 
@@ -34,7 +29,7 @@ public class Graphics extends Application {
             watchRoot = new GridPane();
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             codexRoot = new GridPane();
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/matchSelect.fxml"));
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             play = new GridPane();
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));

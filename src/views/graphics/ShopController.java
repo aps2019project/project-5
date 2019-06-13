@@ -6,6 +6,7 @@ import controllers.ClientManager;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import models.Collection;
@@ -59,6 +60,13 @@ public class ShopController implements Initializable {
             cardType.getStyleClass().add("card-type-label");
             cardPane.getChildren().add(cardType);
 
+            try {
+                Image image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
+                ImageView imageView = new ImageView(image);
+                imageView.relocate(65, 30);
+                cardType.setPrefWidth(200);
+                cardPane.getChildren().add(imageView);
+            } catch (Exception ignored) {}
             cardContainer.getChildren().add(cardPane);
         });
     }
