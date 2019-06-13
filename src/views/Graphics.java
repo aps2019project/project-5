@@ -20,7 +20,7 @@ public class Graphics extends Application {
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
             matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, deathMatchRoot,
-            singleFlagRoot, multiFlagRoot;
+            singleFlagRoot, multiFlagRoot, deckSelectRoot;
 
     static {
         try {
@@ -33,7 +33,7 @@ public class Graphics extends Application {
             singleFlagRoot = new GridPane();
             deathMatchRoot = new GridPane();
             deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_Select.fxml"));
+//            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_Select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
@@ -70,6 +70,9 @@ public class Graphics extends Application {
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void loadLayouts() {
     }
 
     private static void createTestUser() {
