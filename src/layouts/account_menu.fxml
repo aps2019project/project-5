@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea"
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea" fx:id="root"
             stylesheets="@../resources/stylesheets/login-style.css" styleClass="container-account-menu"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicAccountMenu">
     <ImageView fx:id="pillars" fitWidth="1530" fitHeight="1110" AnchorPane.leftAnchor="-400" AnchorPane.topAnchor="-30">
@@ -20,8 +20,8 @@
     <ImageView fx:id="foreground" fitWidth="1600" fitHeight="484" layoutX="400" layoutY="700">
         <Image url="/resources/scenes/foreground@2x.png"/>
     </ImageView>
-    <VBox prefHeight="400.0" prefWidth="600.0" spacing="20" alignment="center">
-        <ImageView fitWidth="500" fitHeight="108" AnchorPane.leftAnchor="">
+    <VBox prefHeight="600.0" prefWidth="600.0" spacing="20" alignment="center" AnchorPane.leftAnchor="660" AnchorPane.topAnchor="200">
+        <ImageView fitWidth="500" fitHeight="108">
             <Image url="/resources/ui/logo.png"/>
         </ImageView>
         <JFXTabPane styleClass="tab-pane">
