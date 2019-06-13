@@ -12,13 +12,15 @@ import models.cards.spell.Spell;
 import models.cards.spell.TargetType;
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
 import java.util.*;
 
 public class JsonParser {
     private static YaGson yagson = new YaGson();
-    private static Type cardArrayType = new TypeToken<List<Card>>(){}.getType();
+    private static Type cardArrayType = new TypeToken<List<Card>>() {
+    }.getType();
 
     public static String getFileData(String filename) throws FileNotFoundException {
         return new FileReader().getFileContent(filename);

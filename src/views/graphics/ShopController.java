@@ -86,7 +86,7 @@ public class ShopController implements Initializable {
 
         try {
             Image image;
-            if(isAttacker)
+            if (isAttacker)
                 image = new Image("/resources/images/cards/" + card.getName() + "_breathing.gif");
             else
                 image = new Image("/resources/images/cards/" + card.getName() + ".gif");
@@ -101,7 +101,8 @@ public class ShopController implements Initializable {
                 imageView.setFitHeight(120);
             }
             cardPane.getChildren().add(imageView);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         if (isAttacker) {
             Label health = new Label("" + ((Attacker) card).getHealth());
@@ -130,7 +131,8 @@ public class ShopController implements Initializable {
         } else {
             try {
                 cards = ClientManager.searchCardInShop(q);
-            } catch (Collection.CardNotFoundException ignored) {}
+            } catch (Collection.CardNotFoundException ignored) {
+            }
         }
 
         cards.forEach(card -> {

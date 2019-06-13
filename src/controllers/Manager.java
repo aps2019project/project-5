@@ -1,5 +1,8 @@
 package controllers;
 
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
+import com.gilecode.yagson.com.google.gson.stream.JsonReader;
 import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
@@ -20,6 +23,10 @@ import views.Error;
 import views.Input;
 import views.InputAI;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +39,24 @@ public class Manager {
     private static ArrayList<Match> matches = new ArrayList<>();
     private static Account winnerPlayer = null;
     private static String opponentUsername;
+    private static ArrayList<Account> accounts = new ArrayList<>();
+    private static YaGson accountParser = new YaGson();
+    private static FileReader accountsJson;
+    private static Type accountArrays = new TypeToken<List<Account>>() {
+    }.getType();
+
+    static {
+        try {
+            accountsJson = new FileReader("data/accounts.json");
+            JsonReader getAccount = new JsonReader(accountsJson);
+            accounts = accountParser.fromJson(getAccount, accountArrays);
+        } catch (FileNotFoundException e) {
+        }
+    }
+
+    public static void saveAccounts() {
+        accounts
+    }
 
     public static Account getAccount() {
         return account;
@@ -190,8 +215,7 @@ public class Manager {
             Account opponent;
             if (isAIMode) {
                 opponent = AI.getAIAccount();
-            }
-            else
+            } else
                 opponent = Account.getAccounts().get(username);
             if (gameMode == 1 /* story mode */) {
                 matches.add(new DeathMatch(account, opponent));
@@ -312,7 +336,7 @@ public class Manager {
     public static List<Hero> getHero(List<Card> cards) {
         return cards.stream().filter(
                 card -> card instanceof Hero).map(
-                        card -> (Hero) card)
+                card -> (Hero) card)
                 .collect(Collectors.toList());
     }
 
