@@ -31,6 +31,9 @@ public class GraphicAccountMenu implements Initializable {
     public ImageView foreground;
     public AnchorPane root;
 
+    private TranslateTransition foregroundTransition;
+    private TranslateTransition pillarsTransition;
+
 
     public void login(MouseEvent mouseEvent) {
         boolean isWrong = false;
@@ -91,6 +94,9 @@ public class GraphicAccountMenu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        foregroundTransition = new TranslateTransition(Duration.seconds(2), foreground);
+        pillarsTransition = new TranslateTransition(Duration.seconds(2), pillars);
+
         signUpUsernameTxt.textProperty().addListener((observable, oldUsername, newUsername) -> {
             if (ClientManager.accountExists(newUsername))
                 changeAsWrong(signUpUsernameTxt, true);
@@ -99,12 +105,10 @@ public class GraphicAccountMenu implements Initializable {
         });
 
         root.setOnMouseMoved(event -> {
-            TranslateTransition foregroundTransition = new TranslateTransition(Duration.seconds(4), foreground);
             foregroundTransition.setToX(-event.getX() / 40);
             foregroundTransition.setToY(-event.getY() / 40);
             foregroundTransition.play();
 
-            TranslateTransition pillarsTransition = new TranslateTransition(Duration.seconds(4), pillars);
             pillarsTransition.setToX(event.getX() / 100);
             pillarsTransition.setToY(event.getY() / 100);
             pillarsTransition.play();
