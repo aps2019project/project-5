@@ -1,4 +1,5 @@
 .container-account-menu {
+    -fx-background-image: url(/resources/images/scenes/login-background.jpg);
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: top center;

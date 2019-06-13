@@ -64,7 +64,7 @@ public class Graphics extends Application {
         loadLayouts();
         stage = primaryStage;
 
-        Scene scene = new Scene(collectionMenuRoot, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
