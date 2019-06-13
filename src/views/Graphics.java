@@ -34,7 +34,7 @@ public class Graphics extends Application {
             watchRoot = new GridPane();
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             codexRoot = new GridPane();
-            matchSelectRoot = new GridPane();
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/matchSelect.fxml"));
             play = new GridPane();
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
