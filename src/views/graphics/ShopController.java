@@ -139,17 +139,14 @@ public class ShopController implements Initializable {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
                 cardPane.setOnMouseClicked(event -> {
-                    // TODO: buying the card.
                     JFXButton buy = new JFXButton("Buy");
                     buy.setText("Buy");
-                    buy.setLayoutX(130);
+                    buy.setLayoutX(125);
                     buy.setLayoutY(220);
-                    buy.setPrefWidth(500);
                     buy.getStyleClass().addAll("btn-primary", "btn-lg");
                     JFXButton cancel = new JFXButton("Cancel");
                     cancel.setLayoutX(10);
                     cancel.setLayoutY(220);
-                    cancel.setPrefWidth(100);
                     cancel.getStyleClass().addAll("btn-primary", "btn-lg");
                     cardPane.getChildren().addAll(buy, cancel);
                     buy.setOnMouseClicked(bought -> {
