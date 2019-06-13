@@ -19,7 +19,22 @@
 
 .death-match {
     -fx-background-image: url(/resources/play/play_mode_sandbox.jpg);
+}
+
+.game-select {
     -fx-effect: dropshadow(three-pass-box, grey, 10, 0, 0, 0);
     -fx-background-size: cover;
     -fx-background-position: center;
+}
+
+.capture-the-flag {
+    -fx-background-image: url(/resources/play/play_mode_rankedladder@2x.jpg);
+}
+
+.multi-flag-mode {
+    -fx-background-image: url(/resources/play/gate_010.jpg);
+}
+
+.extra-mode {
+    -fx-background-image: url(/resources/play/play_mode_arenagauntlet.jpg);
 }
