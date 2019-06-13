@@ -2,6 +2,7 @@ package views;
 
 import com.jfoenix.controls.JFXDialog;
 import controllers.ClientManager;
+import controllers.Manager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Account;
 import models.Collection;
+import org.omg.CORBA.MARSHAL;
 
 import java.io.IOException;
 
@@ -27,7 +29,7 @@ public class Graphics extends Application {
             matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, deathMatchRoot,
             singleFlagRoot, multiFlagRoot;
 
-    static {
+    static void loadLayouts() {
         try {
             //TODO : make true roots;
             createTestUser();
@@ -59,9 +61,15 @@ public class Graphics extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        stage = primaryStage;
+        /// For test:
+        createTestUser();
+        try {
+            Manager.login("ali", "ali");
+        } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {}
 
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        loadLayouts();
+        stage = primaryStage;
+        Scene scene = new Scene(shopMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
