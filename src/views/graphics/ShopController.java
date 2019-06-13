@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import models.Collection;
+import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
@@ -55,12 +56,17 @@ public class ShopController implements Initializable {
     }
 
     public static AnchorPane getCardPane(Card card, boolean isInShop) {
+        boolean isAttacker = card instanceof Hero || card instanceof Minion;
         AnchorPane cardPane = new AnchorPane();
         cardPane.getStyleClass().add("card-pane");
+        if(isAttacker)
+            cardPane.getStyleClass().add("attacker-pane");
+        else
+            cardPane.getStyleClass().add("spell-pane");
         cardPane.setPrefSize(200, 262);
 
         Label cardName = new Label(card.getName().toUpperCase());
-        cardName.relocate(15, 140);
+        cardName.relocate(15, 130);
         cardName.setPrefWidth(200);
         cardName.setAlignment(Pos.CENTER);
         cardName.getStyleClass().add("card-name-label");
@@ -68,7 +74,7 @@ public class ShopController implements Initializable {
 
         String type = card instanceof Minion ? "MINION" : (card instanceof Hero ? "HERO" : "SPELL");
         Label cardType = new Label(type);
-        cardType.relocate(15, 160);
+        cardType.relocate(15, 150);
         cardType.setPrefWidth(200);
         cardType.setAlignment(Pos.CENTER);
         cardType.getStyleClass().add("card-type-label");
@@ -76,14 +82,13 @@ public class ShopController implements Initializable {
 
         try {
             Image image;
-            boolean isAttacker = card instanceof Hero || card instanceof Minion;
             if(isAttacker)
                 image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
             else
                 image = new Image("/resources/cards/" + card.getName() + ".gif");
             ImageView imageView = new ImageView(image);
             if(isAttacker) {
-                imageView.relocate(30, 0);
+                imageView.relocate(30, -10);
                 imageView.setFitWidth(160);
                 imageView.setFitHeight(147);
             } else {
@@ -93,6 +98,12 @@ public class ShopController implements Initializable {
             }
             cardPane.getChildren().add(imageView);
         } catch (Exception ignored) {}
+
+        if(isAttacker) {
+            Label health = new Label("" + ((Attacker) card).getHealth());
+            health.getStyleClass().add("shop-card-health");
+            cardPane.getChildren().add(health);
+        }
 
         return cardPane;
     }
