@@ -61,10 +61,15 @@ public class ShopController implements Initializable {
             cardPane.getChildren().add(cardType);
 
             try {
-                Image image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
+                Image image;
+                if(card instanceof Hero || card instanceof Minion)
+                    image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
+                else
+                    image = new Image("/resources/cards/" + card.getName() + ".gif");
                 ImageView imageView = new ImageView(image);
-                imageView.relocate(65, 30);
-                cardType.setPrefWidth(200);
+                imageView.relocate(30, 0);
+                imageView.setFitWidth(160);
+                imageView.setFitHeight(147);
                 cardPane.getChildren().add(imageView);
             } catch (Exception ignored) {}
             cardContainer.getChildren().add(cardPane);
