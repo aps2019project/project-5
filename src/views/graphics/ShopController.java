@@ -82,7 +82,7 @@ public class ShopController implements Initializable {
     }
 
     private void updateCards(String q) {
-        cardContainer.getChildren().removeAll();
+        cardContainer.getChildren().clear();
         List<Card> cards = new ArrayList<>();
         if(q == null || q.equals("")) {
             cards = ClientManager.getShopCollection().getCardsList();
