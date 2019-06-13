@@ -1,12 +1,25 @@
 package views.graphics;
 
+import javafx.animation.TranslateTransition;
+import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import resources.Fog;
 import views.Graphics;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GraphicMainMenu {
+public class GraphicMainMenu implements Initializable {
+
+    public AnchorPane fogContainer;
+    public ImageView foreground;
+    public ImageView pillars;
+    public AnchorPane root;
 
     public void shop(MouseEvent mouseEvent) {
         Graphics.stage.getScene().setRoot(Graphics.shopMenuRoot);
@@ -30,5 +43,20 @@ public class GraphicMainMenu {
 
     public void codex(MouseEvent mouseEvent) {
         Graphics.stage.getScene().setRoot(Graphics.collectionMenuRoot);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        root.setOnMouseMoved(event -> {
+            TranslateTransition foregroundTransition = new TranslateTransition(Duration.seconds(4), foreground);
+            foregroundTransition.setToX(-event.getX() / 40);
+            foregroundTransition.setToY(-event.getY() / 40);
+            foregroundTransition.play();
+
+            TranslateTransition pillarsTransition = new TranslateTransition(Duration.seconds(4), pillars);
+            pillarsTransition.setToX(event.getX() / 100);
+            pillarsTransition.setToY(event.getY() / 100);
+            pillarsTransition.play();
+        });
     }
 }

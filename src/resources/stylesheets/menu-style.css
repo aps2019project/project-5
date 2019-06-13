@@ -3,12 +3,10 @@
 }
 
 .shop-container {
-    -fx-background-image: url(/resources/scenes/login-background.jpg),
-    url(/resources/scenes/pillars_near@2x.png),
-    url(/resources/scenes/foreground@2x.png);
-    -fx-background-repeat: no-repeat, no-repeat, no-repeat;
-    -fx-background-size: cover, 1530 1110, 1600 484;
-    -fx-background-position: top center, -400 -30, 400 700;
+    -fx-background-image: url(/resources/scenes/login-background.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: top center;
 }
 
 .round-button {

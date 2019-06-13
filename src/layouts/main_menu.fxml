@@ -7,9 +7,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx" styleClass="shop-container"
-            xmlns:fx="http://javafx.com/fxml"
+            xmlns:fx="http://javafx.com/fxml" fx:id="root"
             fx:controller="views.graphics.GraphicMainMenu"
             stylesheets="/resources/stylesheets/menu-style.css">
+    <ImageView fx:id="pillars" fitWidth="1530" fitHeight="1110" AnchorPane.leftAnchor="-400" AnchorPane.topAnchor="-30">
+        <Image url="/resources/scenes/pillars_near@2x.png"/>
+    </ImageView>
+
+    <ImageView fx:id="foreground" fitWidth="1600" fitHeight="484" layoutX="400" layoutY="700">
+        <Image url="/resources/scenes/foreground@2x.png"/>
+    </ImageView>
+
     <Button styleClass="round-button, shop-button" layoutX="1770" layoutY="930" onMouseClicked="#shop"/>
     <Label alignment="BOTTOM_CENTER" text="SHOP" styleClass="round-button-label" layoutX="1770" layoutY="1000"/>
     <Button styleClass="round-button, profile-button" layoutX="1670" layoutY="930" onMouseClicked="#profile"/>

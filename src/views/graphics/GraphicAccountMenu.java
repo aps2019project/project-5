@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import models.Account;
 import views.Graphics;
@@ -23,6 +24,8 @@ public class GraphicAccountMenu implements Initializable {
     public JFXButton signUpBtn;
     public JFXTextField signUpUsernameTxt;
     public JFXPasswordField signUpPasswordRematchTxt;
+    public ImageView pillars;
+    public ImageView foreground;
 
 
     public void login(MouseEvent mouseEvent) {
