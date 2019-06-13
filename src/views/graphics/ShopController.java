@@ -111,6 +111,9 @@ public class ShopController implements Initializable {
         cards.forEach(card -> {
             if(card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
+                cardPane.setOnMouseClicked(event -> {
+                    // TODO: buying the card.
+                });
                 cardContainer.getChildren().add(cardPane);
             }
         });
