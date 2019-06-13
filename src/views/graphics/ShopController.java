@@ -3,8 +3,10 @@ package views.graphics;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import controllers.ClientManager;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -39,15 +41,15 @@ public class ShopController implements Initializable {
 
         searchField.textProperty().addListener(((observable, oldValue, newValue) -> updateCards(newValue, filterType)));
 
-        Label[] filterLabels = new Label[] {filterNone, filterHeroes, filterMinions, filterSpells};
-        for(Label filterLabel : filterLabels) {
+        Label[] filterLabels = new Label[]{filterNone, filterHeroes, filterMinions, filterSpells};
+        for (Label filterLabel : filterLabels) {
             filterLabel.setOnMouseClicked(event -> {
-                for(Label otherLabel : filterLabels)
+                for (Label otherLabel : filterLabels)
                     otherLabel.getStyleClass().remove("selected");
                 filterLabel.getStyleClass().add("selected");
-                if(filterLabel == filterHeroes) filterType = Hero.class;
-                else if(filterLabel == filterMinions) filterType = Minion.class;
-                else if(filterLabel == filterSpells) filterType = Spell.class;
+                if (filterLabel == filterHeroes) filterType = Hero.class;
+                else if (filterLabel == filterMinions) filterType = Minion.class;
+                else if (filterLabel == filterSpells) filterType = Spell.class;
                 else filterType = Card.class;
                 updateCards(searchField.getText(), filterType);
             });
@@ -77,12 +79,12 @@ public class ShopController implements Initializable {
         try {
             Image image;
             boolean isAttacker = card instanceof Hero || card instanceof Minion;
-            if(isAttacker)
+            if (isAttacker)
                 image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
             else
                 image = new Image("/resources/cards/" + card.getName() + ".gif");
             ImageView imageView = new ImageView(image);
-            if(isAttacker) {
+            if (isAttacker) {
                 imageView.relocate(30, 0);
                 imageView.setFitWidth(160);
                 imageView.setFitHeight(147);
@@ -92,24 +94,41 @@ public class ShopController implements Initializable {
                 imageView.setFitHeight(120);
             }
             cardPane.getChildren().add(imageView);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
+        cardPane.setOnMouseClicked(clicked -> {
+            Button buy = new Button("Buy");
+            buy.setLayoutX(cardPane.getLayoutX());
+            buy.setLayoutX(cardPane.getLayoutY() + cardPane.getHeight() - buy.getHeight());
+            buy.getStyleClass().addAll("btn-primary", "btn-lg");
+            Button cancel = new Button("Cancel");
+            buy.setLayoutX(cardPane.getLayoutX() + buy.getWidth() + 60);
+            buy.setLayoutX(cardPane.getLayoutY() + cardPane.getHeight() - buy.getHeight());
+            cancel.getStyleClass().addAll("btn-primary", "btn-lg");
+            buy.setOnMouseClicked(event -> {
 
+            });
+            cancel.setOnMouseClicked(event -> {
+
+            });
+        });
         return cardPane;
     }
 
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
         List<Card> cards = new ArrayList<>();
-        if(q == null || q.equals("")) {
+        if (q == null || q.equals("")) {
             cards = ClientManager.getShopCollection().getCardsList();
         } else {
             try {
                 cards = ClientManager.searchCardInShop(q);
-            } catch (Collection.CardNotFoundException ignored) {}
+            } catch (Collection.CardNotFoundException ignored) {
+            }
         }
 
         cards.forEach(card -> {
-            if(card.getClass() == type || type == Card.class) {
+            if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
                 cardContainer.getChildren().add(cardPane);
             }
