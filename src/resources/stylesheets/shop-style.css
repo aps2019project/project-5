@@ -92,15 +92,16 @@
 }
 
 .shop-filter-label {
-    -fx-text-fill: white;
     -fx-font-size: 25px;
     -fx-background-color: transparent;
+    -fx-text-fill: #ddd;
 }
 
 .shop-filter-label:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 30, 0.5, 0, 0);
+    -fx-text-fill: white;
 }
 
 .selected, .selected:hover {
+    -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 30, 0.7, 0, 0);
 }
