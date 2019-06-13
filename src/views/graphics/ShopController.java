@@ -105,7 +105,14 @@ public class ShopController implements Initializable {
             health.relocate(157, 163);
             health.setPrefWidth(30);
             health.setAlignment(Pos.CENTER);
-            cardPane.getChildren().add(health);
+
+            Label power = new Label("" + ((Attacker) card).getAttackPoint());
+            power.getStyleClass().add("shop-card-power");
+            power.relocate(38, 163);
+            power.setPrefWidth(30);
+            power.setAlignment(Pos.CENTER);
+
+            cardPane.getChildren().addAll(power, health);
         }
 
         return cardPane;

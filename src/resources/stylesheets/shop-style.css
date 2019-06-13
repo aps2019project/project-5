@@ -44,6 +44,12 @@
     -fx-font-size: 20;
 }
 
+.shop-card-power {
+    -fx-text-fill: yellow;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
 .attacker-pane:hover {
     -fx-background-image: url(/resources/neutral_prismatic_unit@2x.png);
 }
