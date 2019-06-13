@@ -38,10 +38,10 @@
         <JFXTextField fx:id="newDeckNameTxt" promptText="Sample Deck" styleClass="input-text"/>
         <JFXButton fx:id="saveDeckBtn" onMouseClicked="#createNewDeck" styleClass="btn-primary, btn-lg" text="Save"/>
         <ScrollPane hbarPolicy="NEVER" styleClass="shop-card-container" prefHeight="400">
-            <VBox fx:id="deckList" styleClass="inner-container"/>
+            <VBox fx:id="deckList" styleClass="inner-container" spacing="10"/>
         </ScrollPane>
         <ScrollPane hbarPolicy="NEVER" styleClass="shop-card-container" prefHeight="400">
-            <VBox fx:id="selectedDeckCardList" styleClass="inner-container"/>
+            <VBox fx:id="selectedDeckCardList" styleClass="inner-container" spacing="10"/>
         </ScrollPane>
     </VBox>
 </AnchorPane>
