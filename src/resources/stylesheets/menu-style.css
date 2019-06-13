@@ -42,11 +42,12 @@
 }
 
 .menu-button {
-    -fx-text-fill: white;
+    -fx-text-fill: #DDD;
     -fx-font-size: 35px;
     -fx-background-color: transparent;
 }
 
 .menu-button:hover {
+    -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
 }
