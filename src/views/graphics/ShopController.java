@@ -14,8 +14,10 @@ import models.Collection;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
+import models.cards.spell.Spell;
 import views.Graphics;
 
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +28,30 @@ public class ShopController implements Initializable {
     public JFXMasonryPane cardContainer;
     public ImageView backBtn;
     public TextField searchField;
+    public Label filterNone, filterHeroes, filterMinions, filterSpells;
+    public Type filterType = Card.class;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        updateCards("");
+        updateCards("", filterType);
 
         backBtn.setOnMouseClicked(event -> Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot));
 
-        searchField.textProperty().addListener(((observable, oldValue, newValue) -> {
-            updateCards(newValue);
-        }));
+        searchField.textProperty().addListener(((observable, oldValue, newValue) -> updateCards(newValue, filterType)));
+
+        Label[] filterLabels = new Label[] {filterNone, filterHeroes, filterMinions, filterSpells};
+        for(Label filterLabel : filterLabels) {
+            filterLabel.setOnMouseClicked(event -> {
+                for(Label otherLabel : filterLabels)
+                    otherLabel.getStyleClass().remove("selected");
+                filterLabel.getStyleClass().add("selected");
+                if(filterLabel == filterHeroes) filterType = Hero.class;
+                else if(filterLabel == filterMinions) filterType = Minion.class;
+                else if(filterLabel == filterSpells) filterType = Spell.class;
+                else filterType = Card.class;
+                updateCards(searchField.getText(), filterType);
+            });
+        }
     }
 
     public static AnchorPane getCardPane(Card card, boolean isInShop) {
@@ -81,7 +97,7 @@ public class ShopController implements Initializable {
         return cardPane;
     }
 
-    private void updateCards(String q) {
+    private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
         List<Card> cards = new ArrayList<>();
         if(q == null || q.equals("")) {
@@ -93,8 +109,10 @@ public class ShopController implements Initializable {
         }
 
         cards.forEach(card -> {
-            AnchorPane cardPane = getCardPane(card, true);
-            cardContainer.getChildren().add(cardPane);
+            if(card.getClass() == type || type == Card.class) {
+                AnchorPane cardPane = getCardPane(card, true);
+                cardContainer.getChildren().add(cardPane);
+            }
         });
     }
 }
