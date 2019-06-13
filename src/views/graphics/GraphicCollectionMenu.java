@@ -9,17 +9,11 @@ import controllers.Manager;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import models.Account;
@@ -47,8 +41,8 @@ public class GraphicCollectionMenu implements Initializable {
     public JFXTextField newDeckNameTxt;
     public JFXButton saveDeckBtn;
     public JFXButton deck;
-    public JFXMasonryPane deckList;
-    public JFXMasonryPane selectedDeckCardList;
+    public VBox deckList;
+    public VBox selectedDeckCardList;
     public AnchorPane selectedDeck;
 
     public JFXMasonryPane cardContainer;
@@ -103,10 +97,12 @@ public class GraphicCollectionMenu implements Initializable {
         }
         try {
             ClientManager.createDeck(deckName);
-            deckList.getChildren().add(getDeckPane(deckName));
+            AnchorPane deckPane = getDeckPane(deckName);
+//            deckList.getChildren().add(new Label("Deck Name: " + deckName));
+            deckList.getChildren().add(deckPane);
         } catch (Account.DeckExistsException e) {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, true);
-        } catch (Account.NotLoggedInException ignored) { }
+        } catch (Account.NotLoggedInException ignored) {}
     }
 
     public AnchorPane getDeckPane(String deckName) {
