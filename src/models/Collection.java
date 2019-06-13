@@ -59,7 +59,7 @@ public class Collection {
     }
 
     public int getNumberOfCard(Card card) {
-        return cards.get(card);
+        return cards.get(card); // TODO: 6/12/19 odd null pointer exception
     }
 
     private static List<Card> ListToMap(Map<Card, Integer> map) {
