@@ -1,11 +1,5 @@
-.container {
-    -fx-background-image: url("/resources/play/play_background.jpg");
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
-}
-
-.matchSelect:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
+.match-select {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 40, 0.5, 10, 10);
 }
 
 .menu-button {
@@ -15,12 +9,17 @@
     -fx-background-color: transparent;
 }
 
-.back-button {
-    -fx-text-fill: white;
-    -fx-font-size: 35px;
-    -fx-background-color: transparent;
+.container {
+    -fx-background-color: #272A35;
 }
 
-.back-button:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
+* {
+    font-family: "Bahnschrift";
+}
+
+.death-match {
+    -fx-background-image: url(/resources/play/play_mode_sandbox.jpg);
+    -fx-effect: dropshadow(three-pass-box, grey, 10, 0, 0, 0);
+    -fx-background-size: cover;
+    -fx-background-position: center;
 }
