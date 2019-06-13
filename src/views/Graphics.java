@@ -1,15 +1,20 @@
 package views;
 
+import com.jfoenix.controls.JFXDialog;
 import controllers.ClientManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotResult;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.Account;
 import models.Collection;
 
@@ -56,7 +61,7 @@ public class Graphics extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
 
-        Scene scene = new Scene(shopMenuRoot, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);

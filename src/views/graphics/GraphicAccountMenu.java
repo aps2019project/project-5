@@ -1,17 +1,18 @@
 package views.graphics;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import models.Account;
 import views.Graphics;
@@ -30,6 +31,7 @@ public class GraphicAccountMenu implements Initializable {
     public ImageView pillars;
     public ImageView foreground;
     public AnchorPane root;
+    public StackPane rootStackPane;
 
     private TranslateTransition foregroundTransition;
     private TranslateTransition pillarsTransition;
@@ -40,6 +42,7 @@ public class GraphicAccountMenu implements Initializable {
 
         try {
             ClientManager.login(loginUsernameTxt.getText(), loginPasswordTxt.getText());
+            Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
         } catch (Account.InvalidPasswordException e) {
             isWrong = true;
             changeAsWrong(loginPasswordTxt, true);
@@ -84,9 +87,13 @@ public class GraphicAccountMenu implements Initializable {
             changeAsWrong(signUpPasswordRematchTxt, true);
             return;
         }
+
         try {
             ClientManager.createAccount(username, password);
             Graphics.alert("Account Created", "Congrats", "Your account created successfully");
+            signUpUsernameTxt.setText("");
+            signUpPasswordTxt.setText("");
+            signUpPasswordRematchTxt.setText("");
         } catch (Account.UsernameExistsException ignored) {
             changeAsWrong(signUpUsernameTxt, true);
         }

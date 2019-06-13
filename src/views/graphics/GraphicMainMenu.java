@@ -1,6 +1,5 @@
 package views.graphics;
 
-import controllers.logic.Manager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -46,8 +45,8 @@ public class GraphicMainMenu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        foregroundTransition = new TranslateTransition(Duration.seconds(2), foreground);
-        pillarsTransition = new TranslateTransition(Duration.seconds(2), pillars);
+        foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
+        pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
 
         root.setOnMouseMoved(event -> {
             foregroundTransition.setToX(-event.getX() / 40);
