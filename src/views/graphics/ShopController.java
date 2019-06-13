@@ -6,6 +6,7 @@ import controllers.ClientManager;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +14,7 @@ import models.Collection;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
+import views.Graphics;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,10 +25,60 @@ public class ShopController implements Initializable {
 
     public JFXMasonryPane cardContainer;
     public ImageView backBtn;
+    public TextField searchField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateCards("");
+
+        backBtn.setOnMouseClicked(event -> Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot));
+
+        searchField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            updateCards(newValue);
+        }));
+    }
+
+    public static AnchorPane getCardPane(Card card, boolean isInShop) {
+        AnchorPane cardPane = new AnchorPane();
+        cardPane.getStyleClass().add("card-pane");
+        cardPane.setPrefSize(200, 262);
+
+        Label cardName = new Label(card.getName().toUpperCase());
+        cardName.relocate(15, 140);
+        cardName.setPrefWidth(200);
+        cardName.setAlignment(Pos.CENTER);
+        cardName.getStyleClass().add("card-name-label");
+        cardPane.getChildren().add(cardName);
+
+        String type = card instanceof Minion ? "MINION" : (card instanceof Hero ? "HERO" : "SPELL");
+        Label cardType = new Label(type);
+        cardType.relocate(15, 160);
+        cardType.setPrefWidth(200);
+        cardType.setAlignment(Pos.CENTER);
+        cardType.getStyleClass().add("card-type-label");
+        cardPane.getChildren().add(cardType);
+
+        try {
+            Image image;
+            boolean isAttacker = card instanceof Hero || card instanceof Minion;
+            if(isAttacker)
+                image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
+            else
+                image = new Image("/resources/cards/" + card.getName() + ".gif");
+            ImageView imageView = new ImageView(image);
+            if(isAttacker) {
+                imageView.relocate(30, 0);
+                imageView.setFitWidth(160);
+                imageView.setFitHeight(147);
+            } else {
+                imageView.relocate(55, 25);
+                imageView.setFitWidth(120);
+                imageView.setFitHeight(120);
+            }
+            cardPane.getChildren().add(imageView);
+        } catch (Exception ignored) {}
+
+        return cardPane;
     }
 
     private void updateCards(String q) {
@@ -41,37 +93,7 @@ public class ShopController implements Initializable {
         }
 
         cards.forEach(card -> {
-            AnchorPane cardPane = new AnchorPane();
-            cardPane.getStyleClass().add("card-pane");
-            cardPane.setPrefSize(200, 262);
-
-            Label cardName = new Label(card.getName().toUpperCase());
-            cardName.relocate(15, 140);
-            cardName.setPrefWidth(200);
-            cardName.setAlignment(Pos.CENTER);
-            cardName.getStyleClass().add("card-name-label");
-            cardPane.getChildren().add(cardName);
-
-            String type = card instanceof Minion ? "MINION" : (card instanceof Hero ? "HERO" : "SPELL");
-            Label cardType = new Label(type);
-            cardType.relocate(15, 160);
-            cardType.setPrefWidth(200);
-            cardType.setAlignment(Pos.CENTER);
-            cardType.getStyleClass().add("card-type-label");
-            cardPane.getChildren().add(cardType);
-
-            try {
-                Image image;
-                if(card instanceof Hero || card instanceof Minion)
-                    image = new Image("/resources/cards/" + card.getName() + "_breathing.gif");
-                else
-                    image = new Image("/resources/cards/" + card.getName() + ".gif");
-                ImageView imageView = new ImageView(image);
-                imageView.relocate(30, 0);
-                imageView.setFitWidth(160);
-                imageView.setFitHeight(147);
-                cardPane.getChildren().add(imageView);
-            } catch (Exception ignored) {}
+            AnchorPane cardPane = getCardPane(card, true);
             cardContainer.getChildren().add(cardPane);
         });
     }

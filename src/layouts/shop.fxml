@@ -5,7 +5,6 @@
 <?import com.jfoenix.controls.JFXMasonryPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ScrollPane?>
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
@@ -17,7 +16,7 @@
                    AnchorPane.leftAnchor="480" AnchorPane.bottomAnchor="40">
         <JFXMasonryPane fx:id="cardContainer" prefWidth="1350" prefHeight="910" styleClass="inner-container"/>
     </ScrollPane>
-    <TextField styleClass="shop-search" promptText="Search" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="40"/>
+    <TextField fx:id="searchField" styleClass="shop-search" promptText="Search" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="40"/>
     <ImageView styleClass="back-button" fx:id="backBtn" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100" fitHeight="100">
         <Image url="/resources/ui/buttons/back-button.png"/>
     </ImageView>
