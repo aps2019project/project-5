@@ -9,7 +9,7 @@
             fx:controller="views.graphics.GraphicMatchSelect"
             prefHeight="1080" prefWidth="1920" styleClass="match-select-container"
             stylesheets="/resources/stylesheets/match-select.css">
-    <ImageView onMouseClicked="#back" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100" fitHeight="100">
+    <ImageView onMouseClicked="#backToMatchSelect" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100" fitHeight="100">
         <Image url="/resources/images/buttons/back-button.png"/>
     </ImageView>
 

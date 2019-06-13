@@ -20,7 +20,7 @@ public class Graphics extends Application {
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
             matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, deathMatchRoot,
-            singleFlagRoot, multiFlagRoot;
+            singleFlagRoot, multiFlagRoot, deckSelectRoot;
 
     static void loadLayouts() {
         try {
@@ -32,6 +32,7 @@ public class Graphics extends Application {
             multiFlagRoot = new GridPane();
             singleFlagRoot = new GridPane();
             deathMatchRoot = new GridPane();
+            deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_Select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
