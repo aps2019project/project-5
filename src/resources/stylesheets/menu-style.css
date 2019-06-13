@@ -13,8 +13,8 @@
     -fx-background-color: rgba(0, 0, 0, 0);
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
-    -fx-pref-width: 64px;
-    -fx-pref-height: 64px;
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
 }
 
 .round-button:hover {
@@ -25,7 +25,7 @@
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-pref-width: 64px;
+    -fx-pref-width: 70px;
     -fx-text-alignment: center;
 }
 
@@ -50,4 +50,8 @@
 .menu-button:hover {
     -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
+}
+
+.exit-button {
+    -fx-background-image: url(/resources/images/buttons/exit.png);
 }

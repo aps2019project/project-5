@@ -1,5 +1,6 @@
 package views.graphics;
 
+import controllers.logic.Manager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -57,5 +58,9 @@ public class GraphicMainMenu implements Initializable {
             pillarsTransition.setToY(event.getY() / 100);
             pillarsTransition.play();
         });
+    }
+
+    public void logout(MouseEvent mouseEvent) {
+        Graphics.stage.getScene().setRoot(Graphics.accountMenuRoot);
     }
 }

@@ -18,12 +18,14 @@
         <Image url="/resources/images/scenes/foreground@2x.png"/>
     </ImageView>
 
-    <Button styleClass="round-button, shop-button" layoutX="1770" layoutY="930" onMouseClicked="#shop"/>
-    <Label alignment="BOTTOM_CENTER" text="SHOP" styleClass="round-button-label" layoutX="1770" layoutY="1000"/>
-    <Button styleClass="round-button, profile-button" layoutX="1670" layoutY="930" onMouseClicked="#profile"/>
-    <Label alignment="BOTTOM_CENTER" text="PROFILE" styleClass="round-button-label" layoutX="1670" layoutY="1000"/>
-    <Button styleClass="round-button, quests-button" layoutX="1570" layoutY="930"/>
-    <Label alignment="BOTTOM_CENTER" text="QUESTS" styleClass="round-button-label" layoutX="1570" layoutY="1000"/>
+    <Button styleClass="round-button, exit-button" layoutX="1770" layoutY="930" onMouseClicked="#logout"/>
+    <Label alignment="BOTTOM_CENTER" text="LOGOUT" styleClass="round-button-label" layoutX="1770" layoutY="1010"/>
+    <Button styleClass="round-button, shop-button" layoutX="1670" layoutY="930" onMouseClicked="#shop"/>
+    <Label alignment="BOTTOM_CENTER" text="SHOP" styleClass="round-button-label" layoutX="1670" layoutY="1010"/>
+    <Button styleClass="round-button, profile-button" layoutX="1570" layoutY="930" onMouseClicked="#profile"/>
+    <Label alignment="BOTTOM_CENTER" text="PROFILE" styleClass="round-button-label" layoutX="1570" layoutY="1010"/>
+    <Button styleClass="round-button, quests-button" layoutX="1470" layoutY="930"/>
+    <Label alignment="BOTTOM_CENTER" text="QUESTS" styleClass="round-button-label" layoutX="1470" layoutY="1010"/>
     <ImageView layoutX="100" layoutY="100" fitWidth="375" fitHeight="81">
         <Image url="/resources/images/logo.png"/>
     </ImageView>
