@@ -42,7 +42,6 @@
     -fx-text-fill: red;
     -fx-font-weight: bold;
     -fx-font-size: 20;
-    -fx-text-alignment: center;
 }
 
 .attacker-pane:hover {

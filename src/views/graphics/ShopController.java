@@ -102,6 +102,9 @@ public class ShopController implements Initializable {
         if(isAttacker) {
             Label health = new Label("" + ((Attacker) card).getHealth());
             health.getStyleClass().add("shop-card-health");
+            health.relocate(157, 163);
+            health.setPrefWidth(30);
+            health.setAlignment(Pos.CENTER);
             cardPane.getChildren().add(health);
         }
 
