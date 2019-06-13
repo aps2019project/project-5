@@ -56,7 +56,7 @@ public class Graphics extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
 
-        Scene scene = new Scene(matchSelectRoot, 1920, 1080);
+        Scene scene = new Scene(shopMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
