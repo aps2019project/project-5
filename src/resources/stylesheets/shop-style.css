@@ -105,3 +105,15 @@
     -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 30, 0.7, 0, 0);
 }
+
+.btn-primary {
+    -fx-background-color: #f36f20;
+}
+
+.btn-lg {
+    -fx-padding: 1em 3em;
+    -fx-font-size: 10px;
+    -fx-border-radius: 0.3em;
+    -fx-font-weight: bold;
+    -fx-pref-width: 90px;
+}

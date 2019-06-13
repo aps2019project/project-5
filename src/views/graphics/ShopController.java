@@ -1,14 +1,19 @@
 package views.graphics;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import controllers.ClientManager;
+import controllers.Manager;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import models.Account;
 import models.Collection;
 import models.cards.Attacker;
 import models.cards.Card;
@@ -39,15 +44,15 @@ public class ShopController implements Initializable {
 
         searchField.textProperty().addListener(((observable, oldValue, newValue) -> updateCards(newValue, filterType)));
 
-        Label[] filterLabels = new Label[] {filterNone, filterHeroes, filterMinions, filterSpells};
-        for(Label filterLabel : filterLabels) {
+        Label[] filterLabels = new Label[]{filterNone, filterHeroes, filterMinions, filterSpells};
+        for (Label filterLabel : filterLabels) {
             filterLabel.setOnMouseClicked(event -> {
-                for(Label otherLabel : filterLabels)
+                for (Label otherLabel : filterLabels)
                     otherLabel.getStyleClass().remove("selected");
                 filterLabel.getStyleClass().add("selected");
-                if(filterLabel == filterHeroes) filterType = Hero.class;
-                else if(filterLabel == filterMinions) filterType = Minion.class;
-                else if(filterLabel == filterSpells) filterType = Spell.class;
+                if (filterLabel == filterHeroes) filterType = Hero.class;
+                else if (filterLabel == filterMinions) filterType = Minion.class;
+                else if (filterLabel == filterSpells) filterType = Spell.class;
                 else filterType = Card.class;
                 updateCards(searchField.getText(), filterType);
             });
@@ -58,7 +63,7 @@ public class ShopController implements Initializable {
         boolean isAttacker = card instanceof Hero || card instanceof Minion;
         AnchorPane cardPane = new AnchorPane();
         cardPane.getStyleClass().add("card-pane");
-        if(isAttacker)
+        if (isAttacker)
             cardPane.getStyleClass().add("attacker-pane");
         else
             cardPane.getStyleClass().add("spell-pane");
@@ -86,7 +91,7 @@ public class ShopController implements Initializable {
             else
                 image = new Image("/resources/images/cards/" + card.getName() + ".gif");
             ImageView imageView = new ImageView(image);
-            if(isAttacker) {
+            if (isAttacker) {
                 imageView.relocate(30, -10);
                 imageView.setFitWidth(160);
                 imageView.setFitHeight(147);
@@ -98,7 +103,7 @@ public class ShopController implements Initializable {
             cardPane.getChildren().add(imageView);
         } catch (Exception ignored) {}
 
-        if(isAttacker) {
+        if (isAttacker) {
             Label health = new Label("" + ((Attacker) card).getHealth());
             health.getStyleClass().add("shop-card-health");
             health.relocate(157, 163);
@@ -120,7 +125,7 @@ public class ShopController implements Initializable {
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
         List<Card> cards = new ArrayList<>();
-        if(q == null || q.equals("")) {
+        if (q == null || q.equals("")) {
             cards = ClientManager.getShopCollection().getCardsList();
         } else {
             try {
@@ -129,10 +134,30 @@ public class ShopController implements Initializable {
         }
 
         cards.forEach(card -> {
-            if(card.getClass() == type || type == Card.class) {
+            if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
                 cardPane.setOnMouseClicked(event -> {
-                    // TODO: buying the card.
+                    JFXButton buy = new JFXButton("Buy");
+                    buy.setText("Buy");
+                    buy.setLayoutX(125);
+                    buy.setLayoutY(220);
+                    buy.getStyleClass().addAll("btn-primary", "btn-lg");
+                    JFXButton cancel = new JFXButton("Cancel");
+                    cancel.setLayoutX(10);
+                    cancel.setLayoutY(220);
+                    cancel.getStyleClass().addAll("btn-primary", "btn-lg");
+                    cardPane.getChildren().addAll(buy, cancel);
+                    buy.setOnMouseClicked(bought -> {
+                        try {
+                            Manager.buy(card.getName());
+                        } catch (Exception ignored) {
+                        }
+                        cardPane.getChildren().removeAll(buy, cancel);
+
+                    });
+                    cancel.setOnMouseClicked(canceled -> {
+                        cardPane.getChildren().removeAll(buy, cancel);
+                    });
                 });
                 cardContainer.getChildren().add(cardPane);
             }
