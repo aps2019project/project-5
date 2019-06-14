@@ -14,10 +14,7 @@ public class GraphicMatchSelect {
     public VBox deathMatchContainer;
     public VBox captureTheFlagContainer;
     public VBox multiFlagContainer;
-    public VBox multiPlayer;
-    public VBox singlePlayer;
-    public VBox customGame;
-    public VBox storyMode;
+
 
 
     public void back(MouseEvent mouseEvent) {
