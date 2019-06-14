@@ -150,7 +150,7 @@ public class ShopController implements Initializable {
                     cardPane.getChildren().addAll(buy, cancel);
                     buy.setOnMouseClicked(bought -> {
                         try {
-                            Manager.buy(card.getName());
+                            ClientManager.buy(card.getName());
                         } catch (Exception ignored) {
                         }
                         cardPane.getChildren().removeAll(buy, cancel);

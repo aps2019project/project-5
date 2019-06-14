@@ -8,6 +8,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AccountDataStream {
@@ -29,18 +30,19 @@ public class AccountDataStream {
         }
     }
 
-    public static ArrayList<Account> loadAccounts() {
+    public static HashMap<String, Account> loadAccounts() {
+        HashMap<String, Account> result = new HashMap<>();
         ArrayList<Account> accounts = new ArrayList<>();
         try {
             YaGson accountLoader = new YaGson();
             java.io.FileReader accountReader = new java.io.FileReader(file);
             accounts = accountLoader.fromJson(accountReader, accountsArray);
             accountReader.close();
-
         } catch (IOException e) {
             System.out.println("loading is not supported");
         }
-        return accounts;
+        accounts.forEach(account -> result.put(account.getUsername(), account));
+        return result;
 
     }
 }

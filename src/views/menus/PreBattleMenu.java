@@ -1,5 +1,6 @@
 package views.menus;
 
+import controllers.ClientManager;
 import controllers.logic.Manager;
 import models.Account;
 import views.Command;
@@ -25,9 +26,9 @@ public class PreBattleMenu implements Menu {
 
     private int askQuestion(String question, String... choices) {
         Output.log(question);
-        int i = 1 ;
-        for (String choice:choices) {
-            Output.log(i++ + ". " + choice );
+        int i = 1;
+        for (String choice : choices) {
+            Output.log(i++ + ". " + choice);
         }
         int result = 0;
         while (result == 0) {
@@ -41,7 +42,7 @@ public class PreBattleMenu implements Menu {
                     if (chosen.trim().equalsIgnoreCase(choices[j]))
                         return j + 1;
             }
-            if(result == 0)
+            if (result == 0)
                 Output.err(WRONG_CHOICE);
         }
         return result;
@@ -56,11 +57,11 @@ public class PreBattleMenu implements Menu {
         result = askQuestion("Choose Player Numbers:", "Single Player", "Multi Player");
         boolean AIMode = result == 1;
 
-        if(gameMode == 2) {
+        if (gameMode == 2) {
             result = askQuestion("Select Game Mode:", "Death match", "Multi flag mode", "Single flag mode");
             gameMode = result + 1;
         }
-        if(result > 1){
+        if (result > 1) {
 
             if (result == 2)
                 result = 1;
@@ -70,8 +71,9 @@ public class PreBattleMenu implements Menu {
                 do {
                     try {
                         result = Integer.parseInt(Input.getString(""));
-                    } catch (Exception ignored) {}
-                    if(!(result < 2 || result > 9))
+                    } catch (Exception ignored) {
+                    }
+                    if (!(result < 2 || result > 9))
                         Output.log("Enter a valid number !");
                 } while (result < 2 || result > 9);
             }
@@ -79,14 +81,14 @@ public class PreBattleMenu implements Menu {
         }
 
         String opponentName = "";
-        if(!AIMode) {
+        if (!AIMode) {
             Output.log("Enter opponent's name:");
             int attemptsCount = 0;
             while (opponentName.equals("") && attemptsCount < 3) {
                 attemptsCount++;
                 opponentName = Input.getString("");
                 try {
-                    if(!Manager.canPlay(opponentName)) {
+                    if (!Manager.canPlay(opponentName)) {
                         Output.err(Error.PLAYERS_DECK_IS_NOT_VALID);
                         opponentName = "";
                     }
@@ -102,7 +104,7 @@ public class PreBattleMenu implements Menu {
             opponentName = "AI User";
 
         }
-        Manager.setMatchData(AIMode, gameMode, opponentName);
+        Manager.setMatchData(AIMode, ClientManager.GameMode.getGame(gameMode), opponentName);
 
     }
 }

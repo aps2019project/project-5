@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import views.Graphics;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,7 +30,7 @@ public class GraphicMainMenu implements Initializable {
     }
 
     public void matchSelect(MouseEvent mouseEvent) {
-        Graphics.stage.getScene().setRoot(Graphics.matchSelectRoot);
+        Graphics.setMenu(MULTI_SINGLE);
     }
 
     public void profile(MouseEvent mouseEvent) {

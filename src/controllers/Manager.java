@@ -46,26 +46,13 @@ public class Manager {
     private static Type accountArrays = new TypeToken<List<Account>>() {
     }.getType();
 
-    static {
-        try {
-            accountsJson = new FileReader("/data/accounts.json");
-            JsonReader getAccount = new JsonReader(accountsJson);
-        } catch (FileNotFoundException e) {
-        }
-    }
-
-    public static void saveAccounts() {
-    }
 
     public static Account getAccount() {
         return account;
     }
 
     public static void addAccount(Account account) throws Account.UsernameExistsException {
-        Account.getAccounts().clear();
-        AccountDataStream.loadAccounts().forEach(account1 -> Account.getAccounts().put(account1.getUsername(), account1));
         Account.addAccount(account);
-        AccountDataStream.saveAccounts();
     }
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {

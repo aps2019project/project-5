@@ -9,10 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import models.Account;
 import models.Collection;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Graphics extends Application {
@@ -65,9 +68,12 @@ public class Graphics extends Application {
         ACCOUNT_MENU("../layouts/account_menu.fxml"),
         MATCH_SELECT_MENU("../layouts/match_select.fxml"),
         MAIN_MENU("../layouts/main_menu.fxml"),
-        DECK_SELECTION_MENU("../layouts/deck_select.fxml");
-
+        DECK_SELECTION_MENU("../layouts/deck_select.fxml"),
+        MATCH("../layouts/match.fxml"),
+        MULTI_SINGLE("../layouts/multi_single.fxml"),
+        CUSTOM_SELECT("../layouts/custom_select.fxml");
         String menuPath;
+
         Menu(String menuPath) {
             this.menuPath = menuPath;
         }
@@ -75,18 +81,27 @@ public class Graphics extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        playMusic("Afsar.mp3");
         /// For test:
         createTestUser();
 
         loadLayouts();
         stage = primaryStage;
 
-        Scene scene = new Scene(battleRoot, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void playMusic(String musicFile) {
+        Media sound = new Media(new File("src/resources/sounds/" + musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
     }
 
     private void loadLayouts() {
@@ -150,10 +165,12 @@ public class Graphics extends Application {
 
             try {
                 ClientManager.login("ali", "ali");
-            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {}
+            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {
+            }
 
 
-        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) { }
+        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) {
+        }
 
     }
 }
