@@ -9,7 +9,6 @@ public class FileReader {
     static final String MINIONS_DATA = "minions.json";
     static final String HEROES_DATA = "heroes.json";
     static final String SPELLS_DATA = "spell.json";
-    static final String Accounts_Data = "accounts.json";
 
     public String getFileContent(String fileName) throws FileNotFoundException {
         URL url = FileReader.class.getResource(fileName);
