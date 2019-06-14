@@ -13,6 +13,7 @@ public class Deck {
     private String name;
     private List<Card> cards = new ArrayList<>();
 
+
     public void addCard(Card card) throws HeroExistsInDeckException, DeckFullException, HeroNotExistsInDeckException {
         if (this.getHero() != null && card instanceof Hero)
             throw new HeroExistsInDeckException(card.getName(), this.name);
