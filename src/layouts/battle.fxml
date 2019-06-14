@@ -11,9 +11,13 @@
             stylesheets="/resources/stylesheets/battle.css"
             prefHeight="1920.0" prefWidth="1080.0" styleClass="battle-container">
 
-    <ImageView fitWidth="1920" fitHeight="1080">
+    <ImageView fitWidth="2300" fitHeight="1293" AnchorPane.topAnchor="-107" AnchorPane.leftAnchor="-190">
         <Image url="/resources/images/battle/battlemap5_middleground@2x.png"/>
     </ImageView>
+
+    <AnchorPane fx:id="gameBoard" AnchorPane.rightAnchor="500" AnchorPane.leftAnchor="500"
+                styleClass="game-board" AnchorPane.topAnchor="310" AnchorPane.bottomAnchor="330">
+    </AnchorPane>
 
     <ImageView AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" fitWidth="600" fitHeight="457">
         <Image url="/resources/images/battle/battlemap5_foreground_001@2x.png"/>
@@ -22,10 +26,5 @@
     <ImageView AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fitWidth="500" fitHeight="405">
         <Image url="/resources/images/battle/battlemap5_foreground_002@2x.png"/>
     </ImageView>
-
-    <AnchorPane fx:id="gameBoard" AnchorPane.rightAnchor="550" AnchorPane.leftAnchor="550"
-                styleClass="game-board" AnchorPane.topAnchor="350" AnchorPane.bottomAnchor="320">
-
-    </AnchorPane>
 
 </AnchorPane>
