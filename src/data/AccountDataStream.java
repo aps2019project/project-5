@@ -2,19 +2,13 @@ package data;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonWriter;
 import models.Account;
 
-import javax.print.DocFlavor;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 
 public class AccountDataStream {
     private static Type accountsArray = new TypeToken<List<Account>>() {
@@ -26,7 +20,7 @@ public class AccountDataStream {
         ArrayList<Account> accounts = new ArrayList<>();
         Account.getAccounts().forEach((name, account) -> accounts.add(account));
         try {
-            Gson saveAccounts = new Gson();
+            YaGson saveAccounts = new YaGson();
             FileWriter accountWriter = new FileWriter(file);
             accountWriter.write(saveAccounts.toJson(accounts));
             accountWriter.flush();
@@ -38,7 +32,7 @@ public class AccountDataStream {
     public static ArrayList<Account> loadAccounts() {
         ArrayList<Account> accounts = new ArrayList<>();
         try {
-            Gson accountLoader = new Gson();
+            YaGson accountLoader = new YaGson();
             java.io.FileReader accountReader = new java.io.FileReader(file);
             accounts = accountLoader.fromJson(accountReader, accountsArray);
             accountReader.close();
