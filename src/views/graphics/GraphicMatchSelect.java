@@ -41,15 +41,5 @@ public class GraphicMatchSelect {
         Graphics.setMenu(MATCH);
     }
 
-    public void multiPlayer(MouseEvent mouseEvent) {
-    }
 
-    public void singlePlayer(MouseEvent mouseEvent) {
-    }
-
-    public void customGame(MouseEvent mouseEvent) {
-    }
-
-    public void storyMode(MouseEvent mouseEvent) {
-    }
 }

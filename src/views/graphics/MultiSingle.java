@@ -1,6 +1,9 @@
 package views.graphics;
 
 import javafx.scene.input.MouseEvent;
+import views.Graphics;
+
+import static views.Graphics.Menu.MATCH_SELECT_MENU;
 
 public class MultiSingle {
 
@@ -11,5 +14,6 @@ public class MultiSingle {
     }
 
     public void back(MouseEvent mouseEvent) {
+        Graphics.setMenu(MATCH_SELECT_MENU);
     }
 }

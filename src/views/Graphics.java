@@ -67,7 +67,9 @@ public class Graphics extends Application {
         MATCH_SELECT_MENU("../layouts/match_select.fxml"),
         MAIN_MENU("../layouts/main_menu.fxml"),
         DECK_SELECTION_MENU("../layouts/deck_select.fxml"),
-        MATCH("../layouts/match.fxml");
+        MATCH("../layouts/match.fxml"),
+        MULTI_SINGLE("../layouts/multi_single.fxml"),
+        CUSTOM_SELECT("../layouts/custom_select.fxml");
         String menuPath;
 
         Menu(String menuPath) {
