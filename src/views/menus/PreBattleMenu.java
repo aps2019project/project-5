@@ -1,5 +1,6 @@
 package views.menus;
 
+import controllers.ClientManager;
 import controllers.logic.Manager;
 import models.Account;
 import views.Command;
@@ -103,7 +104,7 @@ public class PreBattleMenu implements Menu {
             opponentName = "AI User";
 
         }
-        Manager.setMatchData(AIMode, Manager.GameMode.getGame(gameMode), opponentName);
+        Manager.setMatchData(AIMode, ClientManager.GameMode.getGame(gameMode), opponentName);
 
     }
 }

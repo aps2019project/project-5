@@ -20,7 +20,7 @@ public class Graphics extends Application {
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
             matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, deathMatchRoot,
-            singleFlagRoot, multiFlagRoot, deckSelectRoot;
+            singleFlagRoot, multiFlagRoot, matchRoot;
 
     static {
         try {
@@ -32,7 +32,6 @@ public class Graphics extends Application {
             multiFlagRoot = new GridPane();
             singleFlagRoot = new GridPane();
             deathMatchRoot = new GridPane();
-            deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
@@ -67,9 +66,10 @@ public class Graphics extends Application {
         ACCOUNT_MENU("../layouts/account_menu.fxml"),
         MATCH_SELECT_MENU("../layouts/match_select.fxml"),
         MAIN_MENU("../layouts/main_menu.fxml"),
-        DECK_SELECTION_MENU("../layouts/deck_select.fxml");
-
+        DECK_SELECTION_MENU("../layouts/deck_select.fxml"),
+        MATCH("../layouts/match.fxml");
         String menuPath;
+
         Menu(String menuPath) {
             this.menuPath = menuPath;
         }
@@ -83,7 +83,7 @@ public class Graphics extends Application {
         loadLayouts();
         stage = primaryStage;
 
-        Scene scene = new Scene(collectionMenuRoot, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
@@ -152,10 +152,12 @@ public class Graphics extends Application {
 
             try {
                 ClientManager.login("ali", "ali");
-            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {}
+            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {
+            }
 
 
-        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) { }
+        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) {
+        }
 
     }
 }
