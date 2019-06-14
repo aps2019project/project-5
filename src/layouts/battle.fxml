@@ -2,10 +2,24 @@
 
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="views.graphics.GraphicBattleController"
             stylesheets="/resources/stylesheets/battle.css"
             prefHeight="400.0" prefWidth="600.0" styleClass="battle-container">
+    <ImageView fitWidth="1920" fitHeight="1080">
+        <Image url="/resources/images/battle/battlemap5_middleground@2x.png"/>
+    </ImageView>
+
+    <ImageView AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" fitWidth="600" fitHeight="457">
+        <Image url="/resources/images/battle/battlemap5_foreground_001@2x.png"/>
+    </ImageView>
+
+    <ImageView AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fitWidth="400" fitHeight="324">
+        <Image url="/resources/images/battle/battlemap5_foreground_002@2x.png"/>
+    </ImageView>
+
 
 </AnchorPane>
