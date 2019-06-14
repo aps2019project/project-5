@@ -33,7 +33,7 @@ public class Graphics extends Application {
             singleFlagRoot = new GridPane();
             deathMatchRoot = new GridPane();
             deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
-//            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_Select.fxml"));
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
@@ -51,6 +51,28 @@ public class Graphics extends Application {
         alert.setContentText(content);
 
         alert.showAndWait();
+    }
+
+    public static void setMenu(Menu menu) {
+        try {
+            Graphics.stage.getScene().setRoot(FXMLLoader.load(Graphics.class.getResource(menu.menuPath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public enum Menu {
+        COLLECTION_MENU("../layouts/collection_menu.fxml"),
+        SHOP_MENU("../layouts/shop.fxml"),
+        ACCOUNT_MENU("../layouts/account_menu.fxml"),
+        MATCH_SELECT_MENU("../layouts/match_select.fxml"),
+        MAIN_MENU("../layouts/main_menu.fxml"),
+        DECK_SELECTION_MENU("../layouts/deck_select.fxml");
+
+        String menuPath;
+        Menu(String menuPath) {
+            this.menuPath = menuPath;
+        }
     }
 
     @Override
@@ -96,8 +118,6 @@ public class Graphics extends Application {
             ClientManager.buy("Turan Archer");
             ClientManager.buy("Turan Wand");
             ClientManager.buy("Turan Wand");
-            ClientManager.buy("One Eye Giant");
-            ClientManager.buy("One Eye Giant");
             ClientManager.buy("persian horse rider");
             ClientManager.buy("persian horse rider");
             ClientManager.buy("Hog Head Demon");
@@ -123,8 +143,6 @@ public class Graphics extends Application {
             ClientManager.buy("Turan Archer");
             ClientManager.buy("Turan Wand");
             ClientManager.buy("Turan Wand");
-            ClientManager.buy("One Eye Giant");
-            ClientManager.buy("One Eye Giant");
             ClientManager.buy("persian horse rider");
             ClientManager.buy("persian horse rider");
             ClientManager.buy("Hog Head Demon");

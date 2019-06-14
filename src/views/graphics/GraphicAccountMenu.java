@@ -16,9 +16,12 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import models.Account;
 import views.Graphics;
+import views.menus.MainMenu;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static views.Graphics.Menu.MAIN_MENU;
 
 public class GraphicAccountMenu implements Initializable {
     public JFXPasswordField signUpPasswordTxt;
@@ -38,23 +41,15 @@ public class GraphicAccountMenu implements Initializable {
 
 
     public void login(MouseEvent mouseEvent) {
-        boolean isWrong = false;
-
         try {
             ClientManager.login(loginUsernameTxt.getText(), loginPasswordTxt.getText());
-            Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
+            Graphics.setMenu(MAIN_MENU);
         } catch (Account.InvalidPasswordException e) {
-            isWrong = true;
             changeAsWrong(loginPasswordTxt, true);
         } catch (Account.InvalidUsernameException e) {
-            isWrong = true;
             changeAsWrong(loginUsernameTxt, true);
         }
 
-        if (isWrong)
-            return;
-
-        Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
     }
 
     private void changeAsWrong(JFXTextField textField, boolean isWrong) {
