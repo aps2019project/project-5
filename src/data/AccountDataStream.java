@@ -22,10 +22,11 @@ public class AccountDataStream {
     private static URL url = AccountDataStream.class.getResource("accounts.json");
     private static File file = new File(url.getPath());
 
-    public static void saveAccounts(ArrayList<Account> accounts) {
+    public static void saveAccounts() {
+        ArrayList<Account> accounts = new ArrayList<>();
+        Account.getAccounts().forEach((name, account) -> accounts.add(account));
         try {
             Gson saveAccounts = new Gson();
-
             FileWriter accountWriter = new FileWriter(file);
             accountWriter.write(saveAccounts.toJson(accounts));
             accountWriter.flush();
@@ -47,15 +48,5 @@ public class AccountDataStream {
         }
         return accounts;
 
-    }
-
-    public static void main(String[] args) {
-        Account a = new Account("dsas", "sd");
-        Account b = new Account("ads", "sdde");
-        ArrayList<Account> a2 = new ArrayList<>();
-        (a2).add(a);
-        a2.add(b);
-        saveAccounts(a2);
-        System.out.println(loadAccounts().get(1));
     }
 }
