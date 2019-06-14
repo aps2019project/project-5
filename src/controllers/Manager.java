@@ -63,11 +63,11 @@ public class Manager {
 
     public static void addAccount(Account account) throws Account.UsernameExistsException {
         Account.getAccounts().clear();
-
-        AccountDataStream.loadAccounts().forEach(account1 -> {
-
-        });
+        ArrayList<Account> toSave = new ArrayList<>();
+        AccountDataStream.loadAccounts().forEach(account1 -> Account.getAccounts().put(account1.getUsername(), account1));
         Account.addAccount(account);
+        Account.getAccounts().forEach((name, account1) -> toSave.add(account1));
+        AccountDataStream.saveAccounts(toSave);
     }
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
