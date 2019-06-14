@@ -12,11 +12,17 @@ public class Account {
     private Collection collection = new Collection();
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
-    private int drake = 1500000;
+    private int drake = 45000000; // TODO: 6/14/19 very big number for test!
     private int winCount = 0;
 
     public int getDrake() {
         return drake;
+    }
+
+    public String getDrakeString() {
+        if(drake < 1000) return "" + drake;
+        if(drake < 10000) return (((float) (drake / 100)) / 10) + "K";
+        return drake / 1000 + "K";
     }
 
     public void setMainDeck(Deck mainDeck) {

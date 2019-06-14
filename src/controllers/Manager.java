@@ -82,6 +82,10 @@ public class Manager {
         return Account.getRanking();
     }
 
+    public static java.util.Map<String, Account> getAccounts() {
+        return Account.getAccounts();
+    }
+
     public static Match getPlayingMatch() {
         return playingMatch;
     }

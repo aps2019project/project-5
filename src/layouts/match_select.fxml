@@ -8,19 +8,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<AnchorPane styleClass="container"
+<AnchorPane styleClass="match-select-container"
             stylesheets="/resources/stylesheets/match-select.css" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.MatchSelect" prefHeight="400.0"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicMatchSelect" prefHeight="400.0"
             prefWidth="600.0">
     <VBox alignment="center" spacing="50" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <HBox alignment="CENTER" spacing="50">
-            <VBox fx:id="deathMatchContainer" styleClass="death-match, game-select" prefWidth="300" prefHeight="612" alignment="CENTER">
+            <VBox fx:id="deathMatchContainer" styleClass="death-match, game-select" prefWidth="300" prefHeight="612" alignment="CENTER" onMouseClicked="#deathMatch">
                 <Label text="Death Match" styleClass="choose-game-title"/>
             </VBox>
-            <VBox fx:id="captureTheFlagContainer" styleClass="capture-the-flag, game-select" prefWidth="300" prefHeight="550" alignment="CENTER">
+            <VBox fx:id="captureTheFlagContainer" styleClass="capture-the-flag, game-select" prefWidth="300" prefHeight="550" alignment="CENTER" onMouseClicked="#captureTheFlag">
                 <Label text="Capture The Flag" styleClass="choose-game-title"/>
             </VBox>
-            <VBox fx:id="multiFlagContainer" styleClass="multi-flag-mode, game-select" prefWidth="300" prefHeight="550" alignment="CENTER">
+            <VBox fx:id="multiFlagContainer" styleClass="multi-flag-mode, game-select" prefWidth="300" prefHeight="550" alignment="CENTER" onMouseClicked="#multiFlagMode">
                 <Label text="Multi Flag Mode" styleClass="choose-game-title"/>
             </VBox>
             <VBox fx:id="ExtraContainer" styleClass="extra-mode, game-select" prefWidth="300" prefHeight="550" alignment="CENTER">

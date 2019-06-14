@@ -35,7 +35,7 @@ public class Deck {
     public boolean hasCard(String cardName) {
         return (this.cards.stream().filter(
                 card -> card.getName().equalsIgnoreCase(cardName)
-        ).count() == 1);
+        ).count() >= 1);
     }
 
     public void removeCard(Card card) throws Collection.CardNotFoundException {

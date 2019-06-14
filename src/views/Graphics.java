@@ -20,7 +20,7 @@ public class Graphics extends Application {
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
             matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, deathMatchRoot,
-            singleFlagRoot, multiFlagRoot;
+            singleFlagRoot, multiFlagRoot, deckSelectRoot;
 
     static {
         try {
@@ -32,7 +32,8 @@ public class Graphics extends Application {
             multiFlagRoot = new GridPane();
             singleFlagRoot = new GridPane();
             deathMatchRoot = new GridPane();
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_Select.fxml"));
+            deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
@@ -52,11 +53,37 @@ public class Graphics extends Application {
         alert.showAndWait();
     }
 
+    public static void setMenu(Menu menu) {
+        try {
+            Graphics.stage.getScene().setRoot(FXMLLoader.load(Graphics.class.getResource(menu.menuPath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public enum Menu {
+        COLLECTION_MENU("../layouts/collection_menu.fxml"),
+        SHOP_MENU("../layouts/shop.fxml"),
+        ACCOUNT_MENU("../layouts/account_menu.fxml"),
+        MATCH_SELECT_MENU("../layouts/match_select.fxml"),
+        MAIN_MENU("../layouts/main_menu.fxml"),
+        DECK_SELECTION_MENU("../layouts/deck_select.fxml");
+
+        String menuPath;
+        Menu(String menuPath) {
+            this.menuPath = menuPath;
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
+        /// For test:
+        createTestUser();
+
+        loadLayouts();
         stage = primaryStage;
 
-        Scene scene = new Scene(shopMenuRoot, 1920, 1080);
+        Scene scene = new Scene(collectionMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
@@ -64,16 +91,19 @@ public class Graphics extends Application {
         stage.show();
     }
 
+    private void loadLayouts() {
+    }
+
     private static void createTestUser() {
         try {
             ClientManager.createAccount("ali", "ali");
             ClientManager.createAccount("mahdi", "mahdi");
             ClientManager.createAccount("amin", "amin");
+
             ClientManager.login("ali", "ali");
             ClientManager.buy("empower");
             ClientManager.buy("fire dragon");
             ClientManager.buy("fire dragon");
-            ClientManager.buy("Eagle");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Persian Swordsman");
             ClientManager.buy("rostam");
@@ -88,8 +118,6 @@ public class Graphics extends Application {
             ClientManager.buy("Turan Archer");
             ClientManager.buy("Turan Wand");
             ClientManager.buy("Turan Wand");
-            ClientManager.buy("One Eye Giant");
-            ClientManager.buy("One Eye Giant");
             ClientManager.buy("persian horse rider");
             ClientManager.buy("persian horse rider");
             ClientManager.buy("Hog Head Demon");
@@ -101,7 +129,6 @@ public class Graphics extends Application {
             ClientManager.buy("empower");
             ClientManager.buy("fire dragon");
             ClientManager.buy("fire dragon");
-            ClientManager.buy("Eagle");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Persian Swordsman");
             ClientManager.buy("rostam");
@@ -116,13 +143,17 @@ public class Graphics extends Application {
             ClientManager.buy("Turan Archer");
             ClientManager.buy("Turan Wand");
             ClientManager.buy("Turan Wand");
-            ClientManager.buy("One Eye Giant");
-            ClientManager.buy("One Eye Giant");
             ClientManager.buy("persian horse rider");
             ClientManager.buy("persian horse rider");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
+
+
+            try {
+                ClientManager.login("ali", "ali");
+            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {}
+
 
         } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) { }
 

@@ -2,104 +2,60 @@ package views.graphics;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXMasonryPane;
 import com.jfoenix.controls.JFXTextField;
 import controllers.ClientManager;
-import controllers.logic.Manager;
+import controllers.Manager;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import models.Account;
 import models.Collection;
 import models.Deck;
+import models.cards.Attacker;
 import models.cards.Card;
-import views.Error;
+import models.cards.Hero;
+import models.cards.Minion;
+import models.cards.spell.Spell;
+import sun.invoke.empty.Empty;
+import sun.util.resources.cldr.bas.CalendarData_bas_CM;
 import views.Graphics;
-import views.Log;
-import views.Output;
 
+import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
+
+import static views.graphics.ShopController.getCardPane;
 
 public class GraphicCollectionMenu implements Initializable {
 
 
-    public JFXTextField searchingCardNameTxt;
-    public JFXButton searchCardBtn;
     public JFXTextField newDeckNameTxt;
     public JFXButton saveDeckBtn;
-    public JFXButton card1;
     public JFXButton deck;
-    public JFXListView deckList;
-    public JFXListView selectedDeckCardList;
-    public JFXListView cardList;
-    String selectedDeckName;
+    public VBox deckList;
+    public VBox selectedDeckCardList;
+    public AnchorPane selectedDeck;
+    private final Background ordinaryBackground = new Background(new BackgroundFill(Color.VIOLET,
+            new CornerRadii(5), Insets.EMPTY));
+    private final Background deleteBackground = new Background(new BackgroundFill(Color.RED,
+            new CornerRadii(5), Insets.EMPTY));
 
-    public static void deleteDeck(Matcher matcher) {
-        String deckName = matcher.group("name");
-        try {
-            Manager.deleteDeck(deckName);
-            Output.log(Log.DECK_DELETED);
-        } catch (Account.DeckNotFoundException e) {
-            Output.err(Error.DECK_NOT_FOUND);
-        }
-    }
+    public JFXMasonryPane cardContainer;
+    public ImageView backBtn;
+    public TextField searchField;
+    public Label filterNone, filterHeroes, filterMinions, filterSpells;
+    public Type filterType = Card.class;
 
-    public static void removeCardFromDeck(Matcher matcher) {
-        String cardName = matcher.group("card");
-        String deckName = matcher.group("deck");
-        try {
-            Manager.removeCardFromDeck(cardName, deckName);
-            Output.log(Log.CARD_REMOVED_FROM_COLLECTION);
-        } catch (Collection.CardNotFoundException e) {
-            Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
-        } catch (Account.DeckNotFoundException e) {
-            Output.err(Error.DECK_NOT_FOUND);
-        }
-
-    }
-
-    public static void validateDeck(Matcher matcher) {
-        String deckName = matcher.group("deck");
-        try {
-            if (Manager.isValid(deckName))
-                Output.log(Log.DECK_IS_COMPLETED);
-            else Output.err(Error.DECK_IS_NOT_COMPLETE);
-        } catch (Account.DeckNotFoundException e) {
-            Output.err(Error.DECK_NOT_FOUND);
-        }
-    }
-
-    public static void selectDeck(Matcher matcher) {
-        String deckName = matcher.group("deck");
-        try {
-            Manager.selectDeck(deckName);
-            Output.log(Log.DECK_SELECTED);
-        } catch (Account.DeckNotFoundException e) {
-            Output.err(Error.DECK_NOT_FOUND);
-        }
-    }
-
-    public static void showAllDecks(Matcher matcher) {
-        try {
-            List<Deck> decks = Manager.getDecks();
-            for (Deck deck : decks)
-                Output.print(deck);
-        } catch (Account.NotLoggedInException e) {
-            Output.err(Error.NOT_LOGGED_IN);
-        }
-    }
-
-    public static void showDeck(Matcher matcher) {
-        String deckName = matcher.group("deck");
-        try {
-            Deck deck = Manager.getAccount().getDeck(deckName);
-            Output.log(deck.toString());
-        } catch (Account.DeckNotFoundException e) {
-            Output.err(Error.DECK_NOT_FOUND);
-        }
-
-    }
 
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
         button.setDisable(isWrong);
@@ -110,160 +66,167 @@ public class GraphicCollectionMenu implements Initializable {
         }
     }
 
-    public void searchCard() {
-        String cardName = searchingCardNameTxt.getText();
-        if (cardName.equals("")) {
-            changeAsWrong(searchingCardNameTxt, searchCardBtn, true);
-            return;
-        }
-        try {
-            List<Card> cards = ClientManager.searchMyCard(cardName);
-            cards.forEach(card -> {
-                cardList.getItems().clear();
-                addCardToCollectionList(card);
-            });
-        } catch (Collection.CardNotFoundException e) {
-            changeAsWrong(searchingCardNameTxt, searchCardBtn, true);
-        }
-
-    }
-
     public void createNewDeck() {
         String deckName = newDeckNameTxt.getText();
         if (deckName.equals("")) {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, true);
+            return;
         }
         try {
             ClientManager.createDeck(deckName);
-            JFXButton newDeckBtn = new JFXButton(deckName);
-            newDeckBtn.setStyle("-fx-padding: 1em 3em;" +
-                    "    -fx-font-size: 1em;" +
-                    "    -fx-border-radius: 0.3em;" +
-                    "    -fx-font-weight: bold;" +
-                    "    -fx-pref-width: 420;" +
-                    "    -fx-background-color: #f36f20;"); // TODO: 6/11/19 tamiz kari haye css
-            newDeckBtn.setOnMouseClicked(event -> {
-                selectedDeckCardList.getItems().clear();
-                try {
-                    ClientManager.getDeck(deckName).getCards().forEach(card -> {
-                        int number = 2; // TODO: 6/12/19   //ClientManager.getNumberOfCard(card);
-                        String cardBtnText = card.getName();
-                        if (number > 1)
-                            cardBtnText += " ×" + number;
-                        JFXButton cardBtn = new JFXButton(cardBtnText);
-                        newDeckBtn.setStyle("-fx-padding: 1em 3em;" +
-                                "    -fx-font-size: 1em;" +
-                                "    -fx-border-radius: 0.3em;" +
-                                "    -fx-font-weight: bold;" +
-                                "    -fx-pref-width: 420;" +
-                                "    -fx-background-color: #f36f20;"); // TODO: 6/11/19 tamiz kari haye css
-                        selectedDeckCardList.getItems().add(cardBtn);
-                    });
-                } catch (Account.DeckNotFoundException ignored) {
-                }
-                selectedDeckCardList.setVisible(true);
-                selectedDeckName = newDeckBtn.getText();
-            });
-            deckList.getItems().add(newDeckBtn);
+            AnchorPane deckPane = getDeckPane(deckName);
+            deckList.getChildren().add(deckPane);
         } catch (Account.DeckExistsException e) {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, true);
-        } catch (Account.NotLoggedInException ignored) {
-        }
+        } catch (Account.NotLoggedInException ignored) {}
     }
 
-    public void selectDeck(MouseEvent mouseEvent) {
-        selectedDeckName = deck.getText();
+    public AnchorPane getDeckPane(String deckName) {
+        AnchorPane deckPane = new AnchorPane();
+        deckPane.setPrefSize(180, 50);
+
+        deckPane.setBackground(ordinaryBackground);
+
+        Label cardNameLbl = new Label(deckName);
+        cardNameLbl.relocate(15, 25);
+        cardNameLbl.setPrefWidth(200);
+        cardNameLbl.setAlignment(Pos.CENTER);
+        cardNameLbl.getStyleClass().add("card-name-label");
+        deckPane.getChildren().add(cardNameLbl);
+
+        JFXButton deleteDeckBtn = new JFXButton("Delete");
+        deleteDeckBtn.setBackground(deleteBackground);
+        deleteDeckBtn.setOnMouseClicked(event -> {
+            try {
+                ClientManager.deleteDeck(((Label)deckPane.getChildren().get(0)).getText());
+                deckList.getChildren().remove(deckPane);
+                if (selectedDeck == deckPane) {
+                    selectedDeck = null;
+                    selectedDeckCardList.getChildren().clear();
+                }
+            } catch (Account.DeckNotFoundException ignored) { }
+        });
+        deckPane.getChildren().add(deleteDeckBtn);
+
+        deckPane.setOnMouseClicked(event -> {
+            selectedDeckCardList.getChildren().clear();
+            try {
+                ClientManager.getDeck(deckName).getCards().forEach(card ->
+                        selectedDeckCardList.getChildren().add(getMiniCardPane(card.getName(), false)));
+            } catch (Account.DeckNotFoundException ignored) { }
+            selectedDeck = deckPane;
+        });
+
+        return deckPane;
+    }
+
+
+    public AnchorPane getMiniCardPane(String cardName, boolean isInShop) {
+
+        AnchorPane cardPane = new AnchorPane();
+
+        cardPane.setPrefSize(200, 50);
+
+        cardPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(5), Insets.EMPTY)));
+
+        Label cardNameLbl = new Label(cardName.toUpperCase());
+        cardNameLbl.relocate(15, 10 );
+        cardNameLbl.setPrefWidth(200);
+        cardNameLbl.setAlignment(Pos.CENTER);
+        cardNameLbl.getStyleClass().add("card-name-label");
+        cardPane.getChildren().add(cardNameLbl);
+
+        JFXButton deleteBtn = new JFXButton("remove");
+        deleteBtn.setBackground(deleteBackground);
+        deleteBtn.setOnMouseClicked(event -> {
+            try {
+                ClientManager.removeCardFromDeck(cardName, ((Label)selectedDeck.getChildren().get(0)).getText());
+                selectedDeckCardList.getChildren().remove(cardPane);
+                if (!ClientManager.isValid(((Label)selectedDeck.getChildren().get(0)).getText()))
+                    selectedDeck.setBackground(ordinaryBackground);
+            } catch (Collection.CardNotFoundException | Account.DeckNotFoundException ignored) { }
+        });
+        cardPane.getChildren().add(deleteBtn);
+
+        return cardPane;
+    }
+
+    private void updateCards(String q, Type type) {
+        cardContainer.getChildren().clear();
+        List<Card> cards = new ArrayList<>();
+        if (q == null || q.equals("")) {
+            cards = ClientManager.getMyCollection().getCardsList();
+        } else {
+            try {
+                cards = ClientManager.searchMyCard(q);
+            } catch (Collection.CardNotFoundException ignored) {}
+        }
+
+        cards.forEach(card -> {
+            if (card.getClass() == type || type == Card.class) {
+                AnchorPane cardPane = getCardPane(card, true);
+                cardPane.setOnMouseClicked(event -> {
+                    if (selectedDeck == null) {
+                        Graphics.alert("Error", "Can't add card", "please select a deck first.");
+                        return;
+                    }
+                    try {
+                        String cardName = ((Label)cardPane.getChildren().get(0)).getText();
+                        String deckName = ((Label)selectedDeck.getChildren().get(0)).getText();
+                        ClientManager.addCardToDeck(cardName, deckName);
+                        selectedDeckCardList.getChildren().add(getMiniCardPane(cardName, false));
+                        if (ClientManager.isValid(deckName))
+                            selectedDeck.setBackground(new Background(new BackgroundFill(Color.GREEN,
+                                    CornerRadii.EMPTY, Insets.EMPTY)));
+                    } catch (Deck.DeckFullException e) {
+                        Graphics.alert("Error", "Can't add card to deck", "your deck is full.");
+                    }catch (Deck.HeroExistsInDeckException e) {
+                        Graphics.alert("Error", "Can't add hero to deck", "You can have exacly one hero in any deck.");
+                    } catch (Deck.HeroNotExistsInDeckException e) {
+                        Graphics.alert("Error", "Can't add hero to deck", "You should have at least one hero in your deck.");
+                    } catch (Collection.CardNotFoundException ignored) {
+                        Graphics.alert("Error", "Can't add card to deck", "You don't have more of this card in your collection");
+                    } catch (Account.DeckNotFoundException ignored) { }
+
+                });
+                cardContainer.getChildren().add(cardPane);
+            }
+        });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        searchingCardNameTxt.setStyle("-jfx-focus-color: #F47B20; -jfx-unfocus-color: #FFC20E;");
 
-        ClientManager.getMyCollection().getCardsList().forEach(card -> addCardToCollectionList(card));
-
-
-        searchingCardNameTxt.textProperty().addListener(((observable, oldValue, newValue) -> {
-            if (newValue.equals("")) {
-                cardList.getItems().clear();
-                ClientManager.getMyCollection().getCardsList().forEach(card -> {
-                    addCardToCollectionList(card);
-                });
-            }
-            changeAsWrong(searchingCardNameTxt, searchCardBtn, false);
-            try {
-                cardList.getItems().clear();
-                ClientManager.searchMyCard(newValue).forEach(card -> {
-                    addCardToCollectionList(card);
-                });
-            } catch (Collection.CardNotFoundException ignored) {
-            }
-        }));
 
         newDeckNameTxt.textProperty().addListener(((observable, oldValue, newValue) -> {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, false);
         }));
 
-        selectedDeckCardList.setVisible(false);
-    }
+        try {
+            ClientManager.getDecks().forEach(deck -> deckList.getChildren().add(getDeckPane(deck.getName())));
+        } catch (Account.NotLoggedInException ignored) { }
 
-    private void addCardToCollectionList(Card card) {
-        JFXButton button = new JFXButton(card.getName());
-        button.setStyle("-fx-padding: 1em 3em;" +
-                "    -fx-font-size: 1em;" +
-                "    -fx-border-radius: 0.3em;" +
-                "    -fx-font-weight: bold;" +
-                "    -fx-pref-width: 420;" +
-                "    -fx-background-color: #f36f20;"); // TODO: 6/11/19 tamiz kari haye css
-        button.setOnMouseClicked(event -> {
-            if (selectedDeckName == null) {
-                Graphics.alert("Error", "No deck selected", "Please select a deck then " +
-                        "try for adding card to it");
-                return;
-            }
-            String cardId = button.getText();
-            try {
-                ClientManager.addCardToDeck(cardId, selectedDeckName);
-                if (ClientManager.hasCard(cardId)) {
-                    for (Object obj : selectedDeckCardList.getItems()) {
-                        JFXButton btn = (JFXButton) obj;
-                        if (btn.getText().equals(cardId)) {
-                            int number = ClientManager.getNumberOfCard(card);
-                            String cardBtnText = card.getName();
-                            if (number > 1)
-                                cardBtnText += " ×" + number;
-                            btn.setText(cardBtnText);
-                            break;
-                        }
-                    }
-                } else {
-                    JFXButton btn = new JFXButton(cardId);
-                    btn.setStyle("-fx-padding: 1em 3em;" +
-                            "    -fx-font-size: 1em;" +
-                            "    -fx-border-radius: 0.3em;" +
-                            "    -fx-font-weight: bold;" +
-                            "    -fx-pref-width: 420;" +
-                            "    -fx-background-color: #f36f20;"); // TODO: 6/11/19 tamiz kari haye css
-                    selectedDeckCardList.getItems().add(btn);
-                }
-            } catch (Deck.HeroNotExistsInDeckException e) {
-                Graphics.alert("Sorry", "Can't add card to deck!",
-                        "You should have one hero in your deck");
-            } catch (Deck.DeckFullException e) {
-                Graphics.alert("Sorry", "Can't add card to deck!",
-                        "This dock is full.");
-            } catch (Deck.HeroExistsInDeckException e) {
-                Graphics.alert("Sorry", "Can't add card to deck!",
-                        "You can't have more than one hero in your deck");
-            } catch (Collection.CardNotFoundException | Account.DeckNotFoundException ignored) {
-            }
+        updateCards("", filterType);
 
-        });
-        cardList.getItems().add(button);
+        backBtn.setOnMouseClicked(event -> Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot));
+
+        searchField.textProperty().addListener(((observable, oldValue, newValue) -> updateCards(newValue, filterType)));
+
+        Label[] filterLabels = new Label[]{filterNone, filterHeroes, filterMinions, filterSpells};
+        for (Label filterLabel : filterLabels) {
+            filterLabel.setOnMouseClicked(event -> {
+                for (Label otherLabel : filterLabels)
+                    otherLabel.getStyleClass().remove("selected");
+                filterLabel.getStyleClass().add("selected");
+                if (filterLabel == filterHeroes) filterType = Hero.class;
+                else if (filterLabel == filterMinions) filterType = Minion.class;
+                else if (filterLabel == filterSpells) filterType = Spell.class;
+                else filterType = Card.class;
+                updateCards(searchField.getText(), filterType);
+            });
+        }
     }
 
 
-    public void back(MouseEvent mouseEvent) {
-        Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
-    }
 }

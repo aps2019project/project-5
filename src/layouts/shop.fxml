@@ -25,4 +25,5 @@
     <Label fx:id="filterHeroes" styleClass="shop-filter-label" text="Heroes" AnchorPane.leftAnchor="630" AnchorPane.topAnchor="50"/>
     <Label fx:id="filterMinions" styleClass="shop-filter-label" text="Minions" AnchorPane.leftAnchor="780" AnchorPane.topAnchor="50"/>
     <Label fx:id="filterSpells" styleClass="shop-filter-label" text="Spells" AnchorPane.leftAnchor="930" AnchorPane.topAnchor="50"/>
+    <Label styleClass="drakes" alignment="center" fx:id="drakes" AnchorPane.topAnchor="130" AnchorPane.leftAnchor="160"/>
 </AnchorPane>

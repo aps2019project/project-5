@@ -4,16 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import controllers.ClientManager;
 import controllers.Manager;
-import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import models.Account;
 import models.Collection;
 import models.cards.Attacker;
 import models.cards.Card;
@@ -29,16 +26,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ShopController implements Initializable {
-
     public JFXMasonryPane cardContainer;
     public ImageView backBtn;
     public TextField searchField;
     public Label filterNone, filterHeroes, filterMinions, filterSpells;
-    public Type filterType = Card.class;
+    private Type filterType = Card.class;
+    public Label drakes;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateCards("", filterType);
+
+        drakes.setText(ClientManager.getAccount().getDrakeString());
 
         backBtn.setOnMouseClicked(event -> Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot));
 

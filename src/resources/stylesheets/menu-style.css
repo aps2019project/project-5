@@ -13,8 +13,8 @@
     -fx-background-color: rgba(0, 0, 0, 0);
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
-    -fx-pref-width: 64px;
-    -fx-pref-height: 64px;
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
 }
 
 .round-button:hover {
@@ -25,7 +25,7 @@
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-pref-width: 64px;
+    -fx-pref-width: 70px;
     -fx-text-alignment: center;
 }
 
@@ -50,4 +50,21 @@
 .menu-button:hover {
     -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
+}
+
+.exit-button {
+    -fx-background-image: url(/resources/images/buttons/exit.png);
+}
+
+.drakes {
+    -fx-background-image: url(/resources/images/shop/shop-drake.png),
+    url(/resources/images/shop/drake.png);
+    -fx-background-size: 180 73, 50 50;
+    -fx-background-repeat: no-repeat, no-repeat;
+    -fx-background-position: center, 30 15;
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+    -fx-pref-width: 180;
+    -fx-pref-height: 73;
+    -fx-padding: 8 0 0 40;
 }

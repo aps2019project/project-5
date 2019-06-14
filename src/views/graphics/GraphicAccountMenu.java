@@ -1,23 +1,27 @@
 package views.graphics;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import models.Account;
 import views.Graphics;
+import views.menus.MainMenu;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static views.Graphics.Menu.MAIN_MENU;
 
 public class GraphicAccountMenu implements Initializable {
     public JFXPasswordField signUpPasswordTxt;
@@ -30,28 +34,22 @@ public class GraphicAccountMenu implements Initializable {
     public ImageView pillars;
     public ImageView foreground;
     public AnchorPane root;
+    public StackPane rootStackPane;
 
     private TranslateTransition foregroundTransition;
     private TranslateTransition pillarsTransition;
 
 
     public void login(MouseEvent mouseEvent) {
-        boolean isWrong = false;
-
         try {
             ClientManager.login(loginUsernameTxt.getText(), loginPasswordTxt.getText());
+            Graphics.setMenu(MAIN_MENU);
         } catch (Account.InvalidPasswordException e) {
-            isWrong = true;
             changeAsWrong(loginPasswordTxt, true);
         } catch (Account.InvalidUsernameException e) {
-            isWrong = true;
             changeAsWrong(loginUsernameTxt, true);
         }
 
-        if (isWrong)
-            return;
-
-        Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
     }
 
     private void changeAsWrong(JFXTextField textField, boolean isWrong) {
@@ -84,9 +82,13 @@ public class GraphicAccountMenu implements Initializable {
             changeAsWrong(signUpPasswordRematchTxt, true);
             return;
         }
+
         try {
             ClientManager.createAccount(username, password);
             Graphics.alert("Account Created", "Congrats", "Your account created successfully");
+            signUpUsernameTxt.setText("");
+            signUpPasswordTxt.setText("");
+            signUpPasswordRematchTxt.setText("");
         } catch (Account.UsernameExistsException ignored) {
             changeAsWrong(signUpUsernameTxt, true);
         }

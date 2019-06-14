@@ -1,7 +1,9 @@
 package views.graphics;
 
+import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -10,17 +12,20 @@ import views.Graphics;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static views.Graphics.Menu.*;
+
 public class GraphicMainMenu implements Initializable {
 
     public ImageView foreground;
     public ImageView pillars;
     public AnchorPane root;
+    public Label drakes;
 
     private TranslateTransition foregroundTransition;
     private TranslateTransition pillarsTransition;
 
     public void shop(MouseEvent mouseEvent) {
-        Graphics.stage.getScene().setRoot(Graphics.shopMenuRoot);
+        Graphics.setMenu(SHOP_MENU);
     }
 
     public void matchSelect(MouseEvent mouseEvent) {
@@ -36,17 +41,18 @@ public class GraphicMainMenu implements Initializable {
     }
 
     public void collection(MouseEvent mouseEvent) {
-        Graphics.stage.getScene().setRoot(Graphics.collectionMenuRoot);
+        Graphics.setMenu(COLLECTION_MENU);
     }
 
     public void codex(MouseEvent mouseEvent) {
-        Graphics.stage.getScene().setRoot(Graphics.collectionMenuRoot);
+        Graphics.setMenu(COLLECTION_MENU);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        foregroundTransition = new TranslateTransition(Duration.seconds(2), foreground);
-        pillarsTransition = new TranslateTransition(Duration.seconds(2), pillars);
+        foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
+        pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
+        drakes.setText(ClientManager.getAccount().getDrakeString());
 
         root.setOnMouseMoved(event -> {
             foregroundTransition.setToX(-event.getX() / 40);
@@ -57,5 +63,9 @@ public class GraphicMainMenu implements Initializable {
             pillarsTransition.setToY(event.getY() / 100);
             pillarsTransition.play();
         });
+    }
+
+    public void logout(MouseEvent mouseEvent) {
+        Graphics.setMenu(ACCOUNT_MENU);
     }
 }
