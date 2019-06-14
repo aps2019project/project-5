@@ -1,7 +1,6 @@
 package views.graphics;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.skins.JFXRadioButtonSkin;
 import controllers.ClientManager;
 import controllers.Manager;
 import javafx.fxml.Initializable;
@@ -25,6 +24,7 @@ import models.cards.spell.Spell;
 import sun.invoke.empty.Empty;
 import sun.util.resources.cldr.bas.CalendarData_bas_CM;
 import views.Graphics;
+import views.menus.MainMenu;
 
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static views.Graphics.Menu.MAIN_MENU;
+import static views.Graphics.playMusic;
 import static views.graphics.ShopController.getCardPane;
 
 public class GraphicCollectionMenu implements Initializable {
@@ -67,6 +69,7 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
     public void createNewDeck() {
+        Graphics.playMusic("sfx_ui_select.m4a");
         String deckName = newDeckNameTxt.getText();
         if (deckName.equals("")) {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, true);
@@ -87,7 +90,7 @@ public class GraphicCollectionMenu implements Initializable {
         deckPane.setBackground(ordinaryBackground);
 
         Label cardNameLbl = new Label(deckName);
-        cardNameLbl.relocate(15, 25);
+        cardNameLbl.relocate(15, 12);
         cardNameLbl.setPrefWidth(200);
         cardNameLbl.setAlignment(Pos.CENTER);
         cardNameLbl.getStyleClass().add("card-name-label");
@@ -95,19 +98,22 @@ public class GraphicCollectionMenu implements Initializable {
 
         JFXRadioButton radioButton = new JFXRadioButton("");
         radioButton.setToggleGroup(selectedDeckToggleGroup);
-        radioButton.relocate(210, 17);
+        radioButton.relocate(5, 17);
         radioButton.setOnMouseClicked(event -> {
+            Graphics.playMusic("sfx_ui_select.m4a");
             try {
                 if (ClientManager.isValid(deckName))
                     ClientManager.selectDeck(deckName);
             } catch (Account.DeckNotFoundException ignored) { }
         });
-        radioButton.setDisable(true);
+        radioButton.setVisible(false);
         deckPane.getChildren().add(radioButton);
 
         JFXButton deleteDeckBtn = new JFXButton("Delete");
+        deleteDeckBtn.setVisible(false);
         deleteDeckBtn.setBackground(deleteBackground);
         deleteDeckBtn.setOnMouseClicked(event -> {
+            Graphics.playMusic("sfx_ui_select.m4a");
             try {
                 if (radioButton.isSelected())
                     ClientManager.selectDeck(null);
@@ -120,11 +126,15 @@ public class GraphicCollectionMenu implements Initializable {
             } catch (Account.DeckNotFoundException ignored) { }
         });
         deckPane.getChildren().add(deleteDeckBtn);
-        AnchorPane.setTopAnchor(deleteDeckBtn, 2.0);
-        AnchorPane.setLeftAnchor(deleteDeckBtn, 82.5);
+        AnchorPane.setTopAnchor(deleteDeckBtn, 12.0);
+        AnchorPane.setRightAnchor(deleteDeckBtn, 5.0);
 
+
+        deckPane.setOnMouseEntered(event -> deleteDeckBtn.setVisible(true));
+        deckPane.setOnMouseExited(event -> deleteDeckBtn.setVisible(false));
 
         deckPane.setOnMouseClicked(event -> {
+            Graphics.playMusic("sfx_ui_select.m4a");
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
             deckList.getChildren().forEach(node -> {
                 AnchorPane nodePane = (AnchorPane)node;
@@ -162,8 +172,12 @@ public class GraphicCollectionMenu implements Initializable {
         cardPane.getChildren().add(cardNameLbl);
 
         JFXButton deleteBtn = new JFXButton("remove");
+        deleteBtn.setVisible(false);
+        deleteBtn.setOnMouseDragEntered(event -> deleteBtn.setVisible(true));
+        deleteBtn.setOnMouseDragExited(event -> deleteBtn.setVisible(false));
         deleteBtn.setBackground(deleteBackground);
         deleteBtn.setOnMouseClicked(event -> {
+            Graphics.playMusic("sfx_ui_select.m4a");
             try {
                 final String selectedDeckName = ((Label) selectedDeck.getChildren().get(0)).getText();
                 ClientManager.removeCardFromDeck(cardName, selectedDeckName);
@@ -175,13 +189,17 @@ public class GraphicCollectionMenu implements Initializable {
                 });
                 if (!ClientManager.isValid(selectedDeckName)) {
                     selectedDeck.setBackground(selectedDeckBackGround);
-                    selectedDeck.getChildren().get(1).setDisable(true);
+                    selectedDeck.getChildren().get(1).setVisible(false);
+                    ((JFXRadioButton)(selectedDeck.getChildren().get(1))).setSelected(false);
                 }
             } catch (Collection.CardNotFoundException | Account.DeckNotFoundException ignored) { }
         });
         AnchorPane.setTopAnchor(deleteBtn, 28.0);
         AnchorPane.setLeftAnchor(deleteBtn, 82.5);
         cardPane.getChildren().add(deleteBtn);
+
+        cardPane.setOnMouseEntered(event -> deleteBtn.setVisible(true));
+        cardPane.setOnMouseExited(event -> deleteBtn.setVisible(false));
 
         return cardPane;
     }
@@ -201,6 +219,7 @@ public class GraphicCollectionMenu implements Initializable {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
                 cardPane.setOnMouseClicked(event -> {
+                    Graphics.playMusic("sfx_ui_select.m4a");
                     if (selectedDeck == null) {
                         Graphics.alert("Error", "Can't add card", "please select a deck first.");
                         return;
@@ -212,7 +231,7 @@ public class GraphicCollectionMenu implements Initializable {
                         selectedDeckCardList.getChildren().add(getMiniCardPane(cardName, false));
                         if (ClientManager.isValid(deckName)) {
                             selectedDeck.setBackground(validBackground);
-                            selectedDeck.getChildren().get(1).setDisable(false);
+                            selectedDeck.getChildren().get(1).setVisible(true);
                         }
                     } catch (Deck.DeckFullException e) {
                         Graphics.alert("Error", "Can't add card to deck", "your deck is full.");
@@ -234,6 +253,7 @@ public class GraphicCollectionMenu implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
+        newDeckNameTxt.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
 
         newDeckNameTxt.textProperty().addListener(((observable, oldValue, newValue) -> {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, false);
@@ -245,13 +265,19 @@ public class GraphicCollectionMenu implements Initializable {
 
         updateCards("", filterType);
 
-        backBtn.setOnMouseClicked(event -> Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot));
+        backBtn.setOnMouseClicked(event -> {
+            Graphics.playMusic("sfx_ui_select.m4a");
+            Graphics.setMenu(MAIN_MENU);
+        });
+
+        searchField.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
 
         searchField.textProperty().addListener(((observable, oldValue, newValue) -> updateCards(newValue, filterType)));
 
         Label[] filterLabels = new Label[]{filterNone, filterHeroes, filterMinions, filterSpells};
         for (Label filterLabel : filterLabels) {
             filterLabel.setOnMouseClicked(event -> {
+                Graphics.playMusic("sfx_ui_select.m4a");
                 for (Label otherLabel : filterLabels)
                     otherLabel.getStyleClass().remove("selected");
                 filterLabel.getStyleClass().add("selected");

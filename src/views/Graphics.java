@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -32,13 +33,13 @@ public class Graphics extends Application {
             profileRoot = new GridPane();
             watchRoot = new GridPane();
             codexRoot = new GridPane();
-            battleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
-            deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
-            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
-            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
+//            battleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
+//            deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
+//            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
+//            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
+//            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
+//            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
-            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -82,7 +83,6 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        playMusic("Afsar.mp3");
         /// For test:
         createTestUser();
 
@@ -90,7 +90,6 @@ public class Graphics extends Application {
         stage = primaryStage;
 
         Scene scene = new Scene(accountMenuRoot, 1920, 1080);
-        scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
@@ -98,10 +97,12 @@ public class Graphics extends Application {
         stage.show();
     }
 
-    public static void playMusic(String musicFile) {
-        Media sound = new Media(new File("src/resources/sounds/" + musicFile).toURI().toString());
+    public static MediaPlayer playMusic(String musicPath) {
+//        new AudioClip(new File("src/resources/sounds/" + musicPath).toURI().toString()).play();
+        Media sound = new Media(new File("src/resources/sounds/" + musicPath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
+        return mediaPlayer;
     }
 
     private void loadLayouts() {
