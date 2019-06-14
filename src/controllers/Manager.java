@@ -3,6 +3,7 @@ package controllers;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
 import com.gilecode.yagson.com.google.gson.stream.JsonReader;
+import data.AccountDataStream;
 import models.*;
 import models.cards.Card;
 import models.Collection.CardNotFoundException;
@@ -47,15 +48,13 @@ public class Manager {
 
     static {
         try {
-            accountsJson = new FileReader("data/accounts.json");
+            accountsJson = new FileReader("/data/accounts.json");
             JsonReader getAccount = new JsonReader(accountsJson);
-            accounts = accountParser.fromJson(getAccount, accountArrays);
         } catch (FileNotFoundException e) {
         }
     }
 
     public static void saveAccounts() {
-        accounts
     }
 
     public static Account getAccount() {
@@ -63,6 +62,11 @@ public class Manager {
     }
 
     public static void addAccount(Account account) throws Account.UsernameExistsException {
+        Account.getAccounts().clear();
+
+        AccountDataStream.loadAccounts().forEach(account1 -> {
+
+        });
         Account.addAccount(account);
     }
 
