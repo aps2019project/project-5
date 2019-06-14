@@ -44,6 +44,8 @@ public class Account {
     }
 
     public Deck getDeck(String name) throws DeckNotFoundException {
+        if (name == null)
+            return null;
         for (Deck deck : decks)
             if (deck.getName().equals(name))
                 return deck;
