@@ -100,7 +100,7 @@ public class Graphics extends Application {
     }
 
     public static void playMusic(String musicFile) {
-        Media sound = new Media(new File("src/resources/sounds/" +  musicFile ).toURI().toString());
+        Media sound = new Media(new File("src/resources/sounds/" + musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
@@ -166,10 +166,12 @@ public class Graphics extends Application {
 
             try {
                 ClientManager.login("ali", "ali");
-            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {}
+            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {
+            }
 
 
-        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) { }
+        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) {
+        }
 
     }
 }

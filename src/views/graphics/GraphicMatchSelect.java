@@ -16,9 +16,8 @@ public class GraphicMatchSelect {
     public VBox multiFlagContainer;
 
 
-
     public void back(MouseEvent mouseEvent) {
-        Graphics.setMenu(MAIN_MENU);
+        Graphics.setMenu(CUSTOM_SELECT);
     }
 
     public void backToMatchSelect(MouseEvent mouseEvent) {

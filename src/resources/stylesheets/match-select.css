@@ -10,9 +10,10 @@
 }
 
 .match-select-container {
-    -fx-background-image: url(/resources/images/play/play_background.jpg);
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
+    /*-fx-background-image: url(/resources/images/play/play_background.jpg);*/
+    /*-fx-background-repeat: no-repeat;*/
+    /*-fx-background-size: cover;*/
+    -fx-background-color: #272A35;
 }
 
 * {
