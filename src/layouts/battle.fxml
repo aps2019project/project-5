@@ -4,11 +4,13 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Button?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="views.graphics.GraphicBattleController"
             stylesheets="/resources/stylesheets/battle.css"
-            prefHeight="400.0" prefWidth="600.0" styleClass="battle-container">
+            prefHeight="1920.0" prefWidth="1080.0" styleClass="battle-container">
+
     <ImageView fitWidth="1920" fitHeight="1080">
         <Image url="/resources/images/battle/battlemap5_middleground@2x.png"/>
     </ImageView>
@@ -17,9 +19,13 @@
         <Image url="/resources/images/battle/battlemap5_foreground_001@2x.png"/>
     </ImageView>
 
-    <ImageView AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fitWidth="400" fitHeight="324">
+    <ImageView AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fitWidth="500" fitHeight="405">
         <Image url="/resources/images/battle/battlemap5_foreground_002@2x.png"/>
     </ImageView>
 
+    <AnchorPane fx:id="gameBoard" AnchorPane.rightAnchor="550" AnchorPane.leftAnchor="550"
+                styleClass="game-board" AnchorPane.topAnchor="350" AnchorPane.bottomAnchor="320">
+
+    </AnchorPane>
 
 </AnchorPane>

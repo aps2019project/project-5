@@ -3,3 +3,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 }
+
+.game-board {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+}
