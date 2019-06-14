@@ -20,7 +20,6 @@ public class GraphicMatchSelect {
     public VBox storyMode;
 
 
-
     public void back(MouseEvent mouseEvent) {
         Graphics.setMenu(MAIN_MENU);
     }
@@ -30,7 +29,7 @@ public class GraphicMatchSelect {
     }
 
     public void deathMatch(MouseEvent mouseEvent) {
-        Graphics.setMenu(MATCH);
+        Graphics.setMenu(CUSTOM_SELECT);
     }
 
     public void captureTheFlag(MouseEvent mouseEvent) {
