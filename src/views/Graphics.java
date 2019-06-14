@@ -20,7 +20,7 @@ public class Graphics extends Application {
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
             matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, deathMatchRoot,
-            singleFlagRoot, multiFlagRoot, deckSelectRoot;
+            singleFlagRoot, multiFlagRoot, deckSelectRoot, battleRoot;
 
     static {
         try {
@@ -29,9 +29,7 @@ public class Graphics extends Application {
             profileRoot = new GridPane();
             watchRoot = new GridPane();
             codexRoot = new GridPane();
-            multiFlagRoot = new GridPane();
-            singleFlagRoot = new GridPane();
-            deathMatchRoot = new GridPane();
+            battleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
             deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
@@ -83,7 +81,7 @@ public class Graphics extends Application {
         loadLayouts();
         stage = primaryStage;
 
-        Scene scene = new Scene(collectionMenuRoot, 1920, 1080);
+        Scene scene = new Scene(battleRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);

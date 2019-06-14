@@ -1,0 +1,5 @@
+.battle-container {
+    -fx-background-image: url(/resources/images/battle/battlemap5_background@2x.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
