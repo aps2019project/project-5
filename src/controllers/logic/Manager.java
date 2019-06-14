@@ -33,6 +33,25 @@ public class Manager {
     private static Account winnerPlayer = null;
     private static String opponentUsername;
 
+    public static enum GameMode {
+        StoryMode, DeathMatch, SingleFlag, MultiFlag;
+
+        public static GameMode getGame(int num) {
+            switch (num) {
+                case 1:
+                    return StoryMode;
+                case 2:
+                    return DeathMatch;
+                case 3:
+                    return SingleFlag;
+                case 4:
+                    return MultiFlag;
+            }
+            return null;
+
+        }
+    }
+
     public static Account getAccount() {
         return account;
     }
@@ -184,26 +203,25 @@ public class Manager {
         return playingMatch.showMinions(getInActivePlayer());
     }
 
-    public static void setMatchData(boolean isAIMode, int gameMode, String username) {
+    public static void setMatchData(boolean isAIMode, GameMode gameMode, String username) {
         opponentUsername = username;
         if (!isOpponentNull()) {
             Account opponent;
             if (isAIMode) {
                 opponent = AI.getAIAccount();
-            }
-            else
+            } else
                 opponent = Account.getAccounts().get(username);
-            if (gameMode == 1 /* story mode */) {
+            if (gameMode == GameMode.StoryMode /* story mode */) {
                 matches.add(new DeathMatch(account, opponent));
                 matches.add(new MultiFlagMatch(account, opponent));
                 matches.add(new SingleFlagMatch(account, opponent));
                 playingMatch = matches.get(0);
                 matches.remove(0);
-            } else if (gameMode == 2 /* death match */) {
+            } else if (gameMode == GameMode.DeathMatch/* death match */) {
                 playingMatch = new DeathMatch(account, opponent);
-            } else if (gameMode == 3 /* multi flag match */) {
+            } else if (gameMode == GameMode.MultiFlag/* multi flag match */) {
                 playingMatch = new MultiFlagMatch(account, opponent);
-            } else if (gameMode == 4 /* single flag match */) {
+            } else if (gameMode == GameMode.SingleFlag/* single flag match */) {
                 playingMatch = new SingleFlagMatch(account, opponent);
             }
             if (opponent == null) {
@@ -312,7 +330,7 @@ public class Manager {
     public static List<Hero> getHero(List<Card> cards) {
         return cards.stream().filter(
                 card -> card instanceof Hero).map(
-                        card -> (Hero) card)
+                card -> (Hero) card)
                 .collect(Collectors.toList());
     }
 
