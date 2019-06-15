@@ -24,8 +24,8 @@
         <ImageView fitWidth="500" fitHeight="108">
             <Image url="/resources/images/logo.png"/>
         </ImageView>
-        <JFXTabPane styleClass="tab-pane">
-            <Tab text="LOG IN" styleClass="duelystTab">
+        <JFXTabPane fx:id="tabs" styleClass="tab-pane">
+            <Tab fx:id="loginTab" text="LOG IN" styleClass="duelystTab">
                 <VBox styleClass="tab-items" spacing="25">
                     <JFXTextField fx:id="loginUsernameTxt" promptText="Username" styleClass="input-text"/>
                     <JFXPasswordField fx:id="loginPasswordTxt" promptText="Password" styleClass="input-text"/>

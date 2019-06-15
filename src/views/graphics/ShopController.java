@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static views.Graphics.Menu.MAIN_MENU;
+
 public class ShopController implements Initializable {
     public JFXMasonryPane cardContainer;
     public ImageView backBtn;
@@ -39,13 +41,17 @@ public class ShopController implements Initializable {
 
         drakes.setText(ClientManager.getAccount().getDrakeString());
 
-        backBtn.setOnMouseClicked(event -> Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot));
+        backBtn.setOnMouseClicked(event -> {
+            Graphics.playMusic("sfx_ui_select.m4a");
+            Graphics.setMenu(MAIN_MENU);
+        });
 
         searchField.textProperty().addListener(((observable, oldValue, newValue) -> updateCards(newValue, filterType)));
 
         Label[] filterLabels = new Label[]{filterNone, filterHeroes, filterMinions, filterSpells};
         for (Label filterLabel : filterLabels) {
             filterLabel.setOnMouseClicked(event -> {
+                Graphics.playMusic("sfx_ui_select.m4a");
                 for (Label otherLabel : filterLabels)
                     otherLabel.getStyleClass().remove("selected");
                 filterLabel.getStyleClass().add("selected");
@@ -138,6 +144,7 @@ public class ShopController implements Initializable {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
                 cardPane.setOnMouseClicked(event -> {
+                    Graphics.playMusic("sfx_ui_select.m4a");
                     JFXButton buy = new JFXButton("Buy");
                     buy.setText("Buy");
                     buy.setLayoutX(125);
@@ -149,6 +156,7 @@ public class ShopController implements Initializable {
                     cancel.getStyleClass().addAll("btn-primary", "btn-lg");
                     cardPane.getChildren().addAll(buy, cancel);
                     buy.setOnMouseClicked(bought -> {
+                        Graphics.playMusic("sfx_ui_select.m4a");
                         try {
                             ClientManager.buy(card.getName());
                         } catch (Exception ignored) {
@@ -157,6 +165,7 @@ public class ShopController implements Initializable {
 
                     });
                     cancel.setOnMouseClicked(canceled -> {
+                        Graphics.playMusic("sfx_ui_select.m4a");
                         cardPane.getChildren().removeAll(buy, cancel);
                     });
                 });

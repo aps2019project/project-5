@@ -1,5 +1,6 @@
 package views;
 
+import com.dd.plist.PropertyListFormatException;
 import controllers.ClientManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import models.Account;
+import models.Action;
 import models.Collection;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Graphics extends Application {
     public static Stage stage;
@@ -37,8 +43,8 @@ public class Graphics extends Application {
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
-            accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
+            accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -82,7 +88,7 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-//        playMusic("Afsar.mp3");
+
         /// For test:
         createTestUser();
 
@@ -97,10 +103,12 @@ public class Graphics extends Application {
         stage.show();
     }
 
-    public static void playMusic(String musicFile) {
-        Media sound = new Media(new File("src/resources/sounds/" + musicFile).toURI().toString());
+    public static MediaPlayer playMusic(String musicPath) {
+//        new AudioClip(new File("src/resources/sounds/" + musicPath).toURI().toString()).play();
+        Media sound = new Media(new File("src/resources/sounds/" + musicPath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
+        return mediaPlayer;
     }
 
     private static void createTestUser() {
