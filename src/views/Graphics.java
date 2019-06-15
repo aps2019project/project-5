@@ -82,14 +82,13 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        playMusic("Afsar.mp3");
+//        playMusic("Afsar.mp3");
         /// For test:
         createTestUser();
 
-        loadLayouts();
         stage = primaryStage;
 
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Scene scene = new Scene(battleRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
@@ -102,9 +101,6 @@ public class Graphics extends Application {
         Media sound = new Media(new File("src/resources/sounds/" + musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-    }
-
-    private void loadLayouts() {
     }
 
     private static void createTestUser() {
