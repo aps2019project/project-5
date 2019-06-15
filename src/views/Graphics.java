@@ -1,6 +1,5 @@
 package views;
 
-import com.dd.plist.PropertyListFormatException;
 import controllers.ClientManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,26 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import models.Account;
-import models.Action;
 import models.Collection;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 
 public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
-            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, deathMatchRoot,
-            singleFlagRoot, multiFlagRoot, deckSelectRoot, battleRoot;
+            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot,
+            deckSelectRoot, battleRoot;
 
     static {
         try {
@@ -94,7 +87,7 @@ public class Graphics extends Application {
 
         stage = primaryStage;
 
-        Scene scene = new Scene(battleRoot, 1920, 1080);
+        Scene scene = new Scene(collectionMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
