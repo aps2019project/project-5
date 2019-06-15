@@ -7,8 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import views.Graphics;
+import views.menus.MainMenu;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +20,7 @@ import static views.Graphics.playMusic;
 
 public class GraphicMainMenu implements Initializable {
 
+    private MediaPlayer music;
     public ImageView foreground;
     public ImageView pillars;
     public AnchorPane root;
@@ -59,7 +62,7 @@ public class GraphicMainMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        playMusic("music_collection.m4a");
+        music = playMusic("music_collection.m4a");
 
         foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
         pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
@@ -77,6 +80,7 @@ public class GraphicMainMenu implements Initializable {
     }
 
     public void logout(MouseEvent mouseEvent) {
+        music.stop();
         Graphics.setMenu(ACCOUNT_MENU);
     }
 }

@@ -1,5 +1,6 @@
 package views.graphics;
 
+import com.dd.plist.PropertyListFormatException;
 import com.jfoenix.controls.*;
 import controllers.ClientManager;
 import controllers.Manager;
@@ -12,8 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import models.Account;
+import models.Action;
 import models.Collection;
 import models.Deck;
 import models.cards.Attacker;
@@ -21,13 +24,18 @@ import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
+import org.xml.sax.SAXException;
 import sun.invoke.empty.Empty;
 import sun.util.resources.cldr.bas.CalendarData_bas_CM;
 import views.Graphics;
+import views.SpriteMaker;
 import views.menus.MainMenu;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -126,6 +134,7 @@ public class GraphicCollectionMenu implements Initializable {
             } catch (Account.DeckNotFoundException ignored) { }
         });
         deckPane.getChildren().add(deleteDeckBtn);
+        deleteDeckBtn.resize(180, 50);
         AnchorPane.setTopAnchor(deleteDeckBtn, 12.0);
         AnchorPane.setRightAnchor(deleteDeckBtn, 5.0);
 
@@ -165,13 +174,16 @@ public class GraphicCollectionMenu implements Initializable {
 
 
         Label cardNameLbl = new Label(cardName.toUpperCase());
-        cardNameLbl.relocate(15, 10 );
+        cardNameLbl.relocate(15, 17 );
         cardNameLbl.setPrefWidth(200);
         cardNameLbl.setAlignment(Pos.CENTER);
         cardNameLbl.getStyleClass().add("card-name-label");
         cardPane.getChildren().add(cardNameLbl);
 
+
+
         JFXButton deleteBtn = new JFXButton("remove");
+        deleteBtn.setPrefSize(220, 50);
         deleteBtn.setVisible(false);
         deleteBtn.setOnMouseDragEntered(event -> deleteBtn.setVisible(true));
         deleteBtn.setOnMouseDragExited(event -> deleteBtn.setVisible(false));
@@ -194,9 +206,8 @@ public class GraphicCollectionMenu implements Initializable {
                 }
             } catch (Collection.CardNotFoundException | Account.DeckNotFoundException ignored) { }
         });
-        AnchorPane.setTopAnchor(deleteBtn, 28.0);
-        AnchorPane.setLeftAnchor(deleteBtn, 82.5);
         cardPane.getChildren().add(deleteBtn);
+
 
         cardPane.setOnMouseEntered(event -> deleteBtn.setVisible(true));
         cardPane.setOnMouseExited(event -> deleteBtn.setVisible(false));
@@ -247,10 +258,32 @@ public class GraphicCollectionMenu implements Initializable {
                 cardContainer.getChildren().add(cardPane);
             }
         });
+
+
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        ImageView tmp = SpriteMaker.getAndShowAnimation("sample", Action.ATTACK, 10);
+        deckList.getChildren().add(tmp);
+
+        ImageView tmp2 = SpriteMaker.getAndShowAnimation("sample", Action.IDLE, 10);
+        deckList.getChildren().add(tmp2);
+
+        ImageView tmp3 = SpriteMaker.getAndShowAnimation("sample", Action.BREATHING, 10);
+        deckList.getChildren().add(tmp3);
+
+        ImageView tmp4 = SpriteMaker.getAndShowAnimation("sample", Action.HIT, 10);
+        deckList.getChildren().add(tmp4);
+
+        ImageView tmp5 = SpriteMaker.getAndShowAnimation("sample", Action.DEATH, 10);
+        deckList.getChildren().add(tmp5);
+
+        ImageView tmp6 = SpriteMaker.getAndShowAnimation("sample", Action.RUN, 10);
+        deckList.getChildren().add(tmp6);
+
 
 
         newDeckNameTxt.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));

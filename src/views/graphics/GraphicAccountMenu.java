@@ -1,14 +1,11 @@
 package views.graphics;
 
+import com.dd.plist.PropertyListFormatException;
 import com.jfoenix.controls.*;
 import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -16,10 +13,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import models.Account;
+import models.Action;
+import org.xml.sax.SAXException;
 import views.Graphics;
-import views.menus.MainMenu;
+import views.SpriteMaker;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 import static views.Graphics.Menu.MAIN_MENU;
@@ -37,6 +39,8 @@ public class GraphicAccountMenu implements Initializable {
     public ImageView foreground;
     public AnchorPane root;
     public StackPane rootStackPane;
+    public JFXTabPane tabs;
+    public Tab loginTab;
 
     private MediaPlayer music;
 
@@ -161,6 +165,18 @@ public class GraphicAccountMenu implements Initializable {
         signUpPasswordTxt.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         signUpUsernameTxt.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         signUpPasswordRematchTxt.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
+
+        // for just pressing enter for login:
+        //        root.setOnKeyPressed(event -> {
+//            if (event.getCode() == KeyCode.ENTER)
+//                if (loginTab.isSelected())
+//                    loginBtn.fire();
+//                else
+//                    signUpBtn.fire();
+//        });
+
+        loginBtn.setDefaultButton(true);
+
 
     }
 

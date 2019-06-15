@@ -1,5 +1,6 @@
 package views;
 
+import com.dd.plist.PropertyListFormatException;
 import controllers.ClientManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +15,14 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import models.Account;
+import models.Action;
 import models.Collection;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Graphics extends Application {
     public static Stage stage;
@@ -33,12 +38,12 @@ public class Graphics extends Application {
             profileRoot = new GridPane();
             watchRoot = new GridPane();
             codexRoot = new GridPane();
-//            battleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
-//            deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
-//            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
-//            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
-//            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
-//            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
+            battleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
+            deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
+            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
+            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
+            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,13 +88,14 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+
         /// For test:
         createTestUser();
 
         loadLayouts();
         stage = primaryStage;
 
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Scene scene = new Scene(collectionMenuRoot, 1920, 1080);
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
