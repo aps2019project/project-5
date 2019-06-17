@@ -5,9 +5,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.Button?>
-<?import com.jfoenix.controls.JFXButton?>
 <AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+            xmlns:fx="http://javafx.com/fxml" fx:id="root"
             fx:controller="views.graphics.GraphicBattleController"
             stylesheets="/resources/stylesheets/battle.css"
             prefHeight="1920.0" prefWidth="1080.0" styleClass="battle-container">
@@ -30,8 +29,8 @@
 
     <Button styleClass="end-turn-button" text="END TURN" AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="40"/>
 
-    <AnchorPane styleClass="graveyard-container" AnchorPane.topAnchor="280" AnchorPane.leftAnchor="0">
-        <Button styleClass="graveyard-open" AnchorPane.rightAnchor="43" AnchorPane.topAnchor="357"/>
+    <AnchorPane fx:id="graveyardContainer" styleClass="graveyard-container" AnchorPane.topAnchor="280" AnchorPane.leftAnchor="-115">
+        <Button fx:id="graveyardButton" styleClass="graveyard-button, button-open" AnchorPane.rightAnchor="43" AnchorPane.topAnchor="357" onMouseClicked="#graveyardToggle"/>
     </AnchorPane>
 
 </AnchorPane>

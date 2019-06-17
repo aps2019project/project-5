@@ -48,12 +48,23 @@
     -fx-background-size: cover;
 }
 
-.graveyard-open {
-    -fx-background-image: url(/resources/images/battle/ui/battlelog_button_expand@2x.png);
+.graveyard-button {
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-pref-height: 140;
     -fx-pref-width: 40;
     -fx-background-color: transparent;
+}
+
+
+.button-open {
+    -fx-background-image: url(/resources/images/battle/ui/battlelog_button_expand@2x.png);
+}
+.button-close {
+    -fx-background-image: url(/resources/images/battle/ui/battlelog_button_collapse@2x.png);
+}
+
+.button-close:hover {
+    -fx-background-image: url(/resources/images/battle/ui/battlelog_button_collapse_glow@2x.png);
 }
