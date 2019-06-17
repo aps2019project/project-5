@@ -68,3 +68,11 @@
 .button-close:hover {
     -fx-background-image: url(/resources/images/battle/ui/battlelog_button_collapse_glow@2x.png);
 }
+
+.graveyard-scroll-pane {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+}
+
+.graveyard-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}

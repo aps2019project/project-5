@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -17,6 +18,7 @@ public class GraphicBattleController implements Initializable {
     public Button graveyardButton;
     public AnchorPane root;
     public AnchorPane graveyardContainer;
+    public VBox graveyardCards; // Dead cards must be added to it's children.
     private boolean isGraveyardOpen = false;
 
     private void createMapCells() {
