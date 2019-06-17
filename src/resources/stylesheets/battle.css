@@ -42,6 +42,18 @@
 
 .graveyard-container {
     -fx-background-image: url(/resources/images/battle/ui/graveyard.png);
-    -fx-pref-width: 150;
-    -fx-pref-height: 500;
+    -fx-pref-width: 195;
+    -fx-pref-height: 650;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.graveyard-open {
+    -fx-background-image: url(/resources/images/battle/ui/battlelog_button_expand@2x.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-height: 140;
+    -fx-pref-width: 40;
+    -fx-background-color: transparent;
 }
