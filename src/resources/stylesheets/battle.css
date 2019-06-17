@@ -39,3 +39,9 @@
 .end-turn-button:disabled {
     -fx-background-image: url(/resources/images/battle/ui/button_end_turn_enemy.png);
 }
+
+.graveyard-container {
+    -fx-background-image: url(/resources/images/battle/ui/graveyard.png);
+    -fx-pref-width: 150;
+    -fx-pref-height: 500;
+}

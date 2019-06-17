@@ -30,4 +30,7 @@
 
     <Button styleClass="end-turn-button" text="END TURN" AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="40"/>
 
+    <AnchorPane styleClass="graveyard-container" AnchorPane.topAnchor="400" AnchorPane.leftAnchor="10">
+    </AnchorPane>
+
 </AnchorPane>
