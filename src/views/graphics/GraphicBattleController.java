@@ -54,14 +54,13 @@ public class GraphicBattleController implements Initializable {
         if(!isGraveyardOpen) {
             graveyardButton.getStyleClass().remove("button-open");
             graveyardButton.getStyleClass().add("button-close");
-            TranslateTransition t = new TranslateTransition(new Duration(500), graveyardContainer);
+            TranslateTransition t = new TranslateTransition(new Duration(1000), graveyardContainer);
             t.setToX(115);
             t.play();
         } else {
             graveyardButton.getStyleClass().add("button-open");
             graveyardButton.getStyleClass().remove("button-close");
-            AnchorPane.setLeftAnchor(graveyardContainer, -115d);
-            TranslateTransition t = new TranslateTransition(new Duration(500), graveyardContainer);
+            TranslateTransition t = new TranslateTransition(new Duration(1000), graveyardContainer);
             t.setToX(0);
             t.play();
         }
