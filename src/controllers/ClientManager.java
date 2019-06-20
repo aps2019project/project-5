@@ -130,8 +130,13 @@ public class ClientManager {
     }
 
     public static Collection getMyCollection() {
-        Collection collection = account.getCollection();
-        return collection;
+        try {
+
+            Collection collection = account.getCollection();
+            return collection;
+        } catch (Exception e) {
+        }
+        return null;
     }
 
     public static List<Card> searchMyCard(String cardName) throws CardNotFoundException {
@@ -230,7 +235,7 @@ public class ClientManager {
         ClientManager.isAIMode = isAIMode;
     }
 
-    public static void  setGameMode(GameMode gameMode) {
+    public static void setGameMode(GameMode gameMode) {
         switch (gameMode) {
             case STORY_MODE:
                 matches.add(new DeathMatch(account, opponent));
