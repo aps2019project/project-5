@@ -69,12 +69,21 @@ public class Graphics extends Application {
         MAIN_MENU("../layouts/main_menu.fxml"),
         MULTI_SINGLE("../layouts/multi_single.fxml"),
         CUSTOM_SELECT("../layouts/custom_select.fxml"),
-        BATTLE("../layouts/battle.fxml");
+        BATTLE("../layouts/battle.fxml"),
+        CUSTOM_CARD("../layouts/custom_card.fxml");
         String menuPath;
+
+        public String getMenuPath() {
+            return menuPath;
+        }
 
         Menu(String menuPath) {
             this.menuPath = menuPath;
         }
+    }
+
+    public static void createNewStage(Stage stage) {
+
     }
 
     @Override

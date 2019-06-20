@@ -130,3 +130,12 @@
     -fx-pref-height: 73;
     -fx-padding: 8 0 0 40;
 }
+
+.custom-card {
+    -fx-pref-width: 200;
+    -fx-pref-height:75;
+    -fx-background-color: yellow;
+    -fx-font-family: "Bahnschrift";
+    -fx-font-width: bold;
+    -fx-font-size: 18;
+}

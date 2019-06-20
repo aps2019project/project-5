@@ -4,13 +4,17 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import controllers.ClientManager;
 import controllers.Manager;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import models.Collection;
 import models.cards.Attacker;
 import models.cards.Card;
@@ -19,12 +23,14 @@ import models.cards.Minion;
 import models.cards.spell.Spell;
 import views.Graphics;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static views.Graphics.Menu.CUSTOM_CARD;
 import static views.Graphics.Menu.MAIN_MENU;
 
 public class ShopController implements Initializable {
@@ -32,6 +38,7 @@ public class ShopController implements Initializable {
     public ImageView backBtn;
     public TextField searchField;
     public Label filterNone, filterHeroes, filterMinions, filterSpells;
+    public JFXButton addCustomCard;
     private Type filterType = Card.class;
     public Label drakes;
 
@@ -172,5 +179,20 @@ public class ShopController implements Initializable {
                 cardContainer.getChildren().add(cardPane);
             }
         });
+    }
+
+    public void addCustomCard(MouseEvent mouseEvent) {
+        Stage stage = new Stage();
+        stage.setWidth(700);
+        stage.setHeight(500);
+        stage.setX(700);
+        stage.setY(250);
+        stage.setScene(new Scene(new AnchorPane()));
+//        try {
+//            System.out.println(System.getProperty("user.dir"));
+//            stage.getScene().setRoot(FXMLLoader.load(Graphics.class.getResource(CUSTOM_CARD.getMenuPath())));
+//        } catch (IOException ignored) { }
+        stage.show();
+
     }
 }
