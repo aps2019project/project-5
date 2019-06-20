@@ -10,7 +10,7 @@
 <?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="views.graphics.MultiSingle"
+            fx:controller="views.graphics.GraphicPreBattleMenu"
             prefHeight="400.0" prefWidth="600.0" stylesheets="/resources/stylesheets/match-select.css"
             styleClass="match-select-container">
     <VBox alignment="center" spacing="50" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
@@ -29,7 +29,7 @@
 
         </HBox>
     </VBox>
-    <ImageView onMouseClicked="#back" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100"
+    <ImageView onMouseClicked="#backToMainMenu" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100"
                fitHeight="100">
         <Image url="/resources/images/buttons/back-button.png"/>
     </ImageView>

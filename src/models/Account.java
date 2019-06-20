@@ -3,6 +3,7 @@ package models;
 import data.AccountDataStream;
 import models.cards.Card;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.util.*;
 
 public class Account {
@@ -16,6 +17,10 @@ public class Account {
     private Deck mainDeck;
     private int drake = 45000000; // TODO: 6/14/19 very big number for test!
     private int winCount = 0;
+
+    public static Account getAccount(String opponentUsername) throws AccountNotFoundException {
+        return accounts.get(opponentUsername);
+    }
 
     static {
         accounts = AccountDataStream.loadAccounts();

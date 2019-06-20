@@ -21,6 +21,7 @@ import views.Error;
 import views.Input;
 import views.InputAI;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,21 +34,27 @@ public class ClientManager {
     private static ArrayList<Match> matches = new ArrayList<>();
     private static Account winnerPlayer = null;
     private static String opponentUsername;
+    private static Account opponent;
+    private static boolean isAIMode;
+
+    public static Deck getMainDeck() {
+        return account.getMainDeck();
+    }
 
 
     public static enum GameMode {
-        StoryMode, DeathMatch, SingleFlag, MultiFlag;
+        STORY_MODE, DEATH_MATCH, SINGLE_FLAG, MULTI_FLAG;
 
         public static GameMode getGame(int num) {
             switch (num) {
                 case 1:
-                    return StoryMode;
+                    return STORY_MODE;
                 case 2:
-                    return DeathMatch;
+                    return DEATH_MATCH;
                 case 3:
-                    return SingleFlag;
+                    return SINGLE_FLAG;
                 case 4:
-                    return MultiFlag;
+                    return MULTI_FLAG;
             }
             return null;
 
@@ -213,6 +220,40 @@ public class ClientManager {
         return playingMatch.showMinions(getInActivePlayer());
     }
 
+    public static void setOpponent(String opponentUsername, boolean isAIMode) throws AccountNotFoundException {
+        if (isAIMode) {
+            opponent = AI.getAIAccount();
+        } else {
+            opponent = Account.getAccount(opponentUsername);
+            ClientManager.opponentUsername = opponentUsername;
+        }
+        ClientManager.isAIMode = isAIMode;
+    }
+
+    public static void  setGameMode(GameMode gameMode) {
+        switch (gameMode) {
+            case STORY_MODE:
+                matches.add(new DeathMatch(account, opponent));
+                matches.add(new MultiFlagMatch(account, opponent));
+                matches.add(new SingleFlagMatch(account, opponent));
+                playingMatch = matches.get(0);
+                matches.remove(0);
+                break;
+            case DEATH_MATCH:
+                playingMatch = new DeathMatch(account, opponent);
+                break;
+            case MULTI_FLAG:
+                playingMatch = new MultiFlagMatch(account, opponent);
+                break;
+            case SINGLE_FLAG:
+                playingMatch = new SingleFlagMatch(account, opponent);
+                break;
+        }
+        if (isAIMode)
+            ((AI) opponent).setMatch(playingMatch);
+        playingMatch.setAIMode(isAIMode);
+    }
+
     public static void setMatchData(boolean isAIMode, GameMode gameMode, String username) {
         opponentUsername = username;
         if (!isOpponentNull()) {
@@ -221,17 +262,17 @@ public class ClientManager {
                 opponent = AI.getAIAccount();
             } else
                 opponent = Account.getAccounts().get(username);
-            if (gameMode == GameMode.StoryMode /* story mode */) {
+            if (gameMode == GameMode.STORY_MODE /* story mode */) {
                 matches.add(new DeathMatch(account, opponent));
                 matches.add(new MultiFlagMatch(account, opponent));
                 matches.add(new SingleFlagMatch(account, opponent));
                 playingMatch = matches.get(0);
                 matches.remove(0);
-            } else if (gameMode == GameMode.DeathMatch/* death match */) {
+            } else if (gameMode == GameMode.DEATH_MATCH/* death match */) {
                 playingMatch = new DeathMatch(account, opponent);
-            } else if (gameMode == GameMode.MultiFlag/* multi flag match */) {
+            } else if (gameMode == GameMode.MULTI_FLAG/* multi flag match */) {
                 playingMatch = new MultiFlagMatch(account, opponent);
-            } else if (gameMode == GameMode.SingleFlag/* single flag match */) {
+            } else if (gameMode == GameMode.SINGLE_FLAG/* single flag match */) {
                 playingMatch = new SingleFlagMatch(account, opponent);
             }
             if (opponent == null) {
@@ -382,4 +423,37 @@ public class ClientManager {
     public static boolean hasCard(String cardId) throws CardNotFoundException {
         return account.getCollection().hasCard(account.getCollection().getCardByID(cardId));
     }
+
+    public static boolean isMainDeckSelected() {
+        return Deck.isValid(account.getMainDeck());
+    }
+
+
+//    public static void setOpponent(String opponentUsername) {
+//        if (isAIMode) {
+//            opponent = AI.getAIAccount();
+//        } else {
+//            // TODO: 6/20/19 s
+//        }
+//    }
+
+
+//        if (!isOpponentNull()) {
+//            Account opponent;
+//            if (gameMode == ClientManager.GameMode.STORY_MODE /* story mode */) {
+//                matches.add(new DEATH_MATCH(account, opponent));
+//                matches.add(new MultiFlagMatch(account, opponent));
+//                matches.add(new SingleFlagMatch(account, opponent));
+//                playingMatch = matches.get(0);
+//                matches.remove(0);
+//            } else if (gameMode == ClientManager.GameMode.DEATH_MATCH/* death match */) {
+//                playingMatch = new DEATH_MATCH(account, opponent);
+//            } else if (gameMode == ClientManager.GameMode.MULTI_FLAG/* multi flag match */) {
+//                playingMatch = new MultiFlagMatch(account, opponent);
+//            } else if (gameMode == ClientManager.GameMode.SINGLE_FLAG/* single flag match */) {
+//                playingMatch = new SingleFlagMatch(account, opponent);
+//            }
+//        }
+//    }
+
 }

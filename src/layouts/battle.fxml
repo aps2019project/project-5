@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml" fx:id="root"
+            fx:controller="views.graphics.GraphicBattleController"
+            stylesheets="/resources/stylesheets/battle.css"
+            prefHeight="1920.0" prefWidth="1080.0" styleClass="battle-container">
+
+    <ImageView fitWidth="2300" fitHeight="1293" AnchorPane.topAnchor="-107" AnchorPane.leftAnchor="-190">
+        <Image url="/resources/images/battle/battlemap5_middleground@2x.png"/>
+    </ImageView>
+
+    <AnchorPane fx:id="gameBoard" AnchorPane.rightAnchor="500" AnchorPane.leftAnchor="500"
+                styleClass="game-board" AnchorPane.topAnchor="310" AnchorPane.bottomAnchor="330">
+    </AnchorPane>
+
+    <ImageView AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" fitWidth="600" fitHeight="457">
+        <Image url="/resources/images/battle/battlemap5_foreground_001@2x.png"/>
+    </ImageView>
+
+    <ImageView AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fitWidth="500" fitHeight="405">
+        <Image url="/resources/images/battle/battlemap5_foreground_002@2x.png"/>
+    </ImageView>
+
+    <Button styleClass="end-turn-button" text="END TURN" AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="40"/>
+
+    <AnchorPane fx:id="graveyardContainer" styleClass="graveyard-container" AnchorPane.topAnchor="280" AnchorPane.leftAnchor="-115">
+        <ScrollPane styleClass="graveyard-scroll-pane" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="90">
+            <VBox fx:id="graveyardCards"/>
+        </ScrollPane>
+        <Button fx:id="graveyardButton" styleClass="graveyard-button, button-open" AnchorPane.rightAnchor="43" AnchorPane.topAnchor="357" onMouseClicked="#graveyardToggle"/>
+    </AnchorPane>
+
+</AnchorPane>
