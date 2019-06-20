@@ -70,7 +70,7 @@
 }
 
 .graveyard-scroll-pane {
-    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-color: transparent;
 }
 
 .graveyard-scroll-pane .viewport {
