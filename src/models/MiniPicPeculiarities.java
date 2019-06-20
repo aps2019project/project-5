@@ -11,7 +11,4 @@ public class MiniPicPeculiarities {
         this.height = height;
     }
 
-    public MiniPicPeculiarities() {
-
-    }
 }

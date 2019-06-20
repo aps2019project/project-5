@@ -257,6 +257,7 @@ public class GraphicCollectionMenu implements Initializable {
                 });
                 cardContainer.getChildren().add(cardPane);
             }
+
         });
 
 
@@ -265,25 +266,6 @@ public class GraphicCollectionMenu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        ImageView tmp = SpriteMaker.getAndShowAnimation("sample", Action.ATTACK, 10);
-        deckList.getChildren().add(tmp);
-
-        ImageView tmp2 = SpriteMaker.getAndShowAnimation("sample", Action.IDLE, 10);
-        deckList.getChildren().add(tmp2);
-
-        ImageView tmp3 = SpriteMaker.getAndShowAnimation("sample", Action.BREATHING, 10);
-        deckList.getChildren().add(tmp3);
-
-        ImageView tmp4 = SpriteMaker.getAndShowAnimation("sample", Action.HIT, 10);
-        deckList.getChildren().add(tmp4);
-
-        ImageView tmp5 = SpriteMaker.getAndShowAnimation("sample", Action.DEATH, 10);
-        deckList.getChildren().add(tmp5);
-
-        ImageView tmp6 = SpriteMaker.getAndShowAnimation("sample", Action.RUN, 10);
-        deckList.getChildren().add(tmp6);
-
 
 
         newDeckNameTxt.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
