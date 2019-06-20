@@ -1,11 +1,13 @@
 package views.graphics;
 
+import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.effect.PerspectiveTransform;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +15,11 @@ import java.util.ResourceBundle;
 public class GraphicBattleController implements Initializable {
     public AnchorPane gameBoard;
     public AnchorPane[][] cell = new AnchorPane[5][9];
+    public Button graveyardButton;
+    public AnchorPane root;
+    public AnchorPane graveyardContainer;
+    public VBox graveyardCards; // Dead cards must be added to it's children.
+    private boolean isGraveyardOpen = false;
 
     private void createMapCells() {
         for(int i = 0; i < 5; i++) {
@@ -43,5 +50,22 @@ public class GraphicBattleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createMapCells();
+    }
+
+    public void graveyardToggle(MouseEvent mouseEvent) {
+        if(!isGraveyardOpen) {
+            graveyardButton.getStyleClass().remove("button-open");
+            graveyardButton.getStyleClass().add("button-close");
+            TranslateTransition t = new TranslateTransition(new Duration(1000), graveyardContainer);
+            t.setToX(115);
+            t.play();
+        } else {
+            graveyardButton.getStyleClass().add("button-open");
+            graveyardButton.getStyleClass().remove("button-close");
+            TranslateTransition t = new TranslateTransition(new Duration(1000), graveyardContainer);
+            t.setToX(0);
+            t.play();
+        }
+        isGraveyardOpen = !isGraveyardOpen;
     }
 }
