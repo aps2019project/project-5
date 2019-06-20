@@ -17,6 +17,8 @@ public class Attacker extends Card {
     private boolean counterAttackAbility;
     private boolean moveAbility;
 
+    private ArrayList<Buff> buffActivated = new ArrayList<>();
+
     public boolean getMoveAbility() {
         return moveAbility;
     }
@@ -25,9 +27,8 @@ public class Attacker extends Card {
         this.moveAbility = moveAbility;
     }
 
-    private ArrayList<Buff> buffActivated = new ArrayList<>();
-
     public ArrayList<Buff> getBuffActivated() {
+
         return buffActivated;
     }
 

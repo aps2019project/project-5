@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import models.Account;
 import views.Graphics;
 
 import java.net.URL;
@@ -68,5 +69,9 @@ public class GraphicMainMenu implements Initializable {
 
     public void logout(MouseEvent mouseEvent) {
         Graphics.setMenu(ACCOUNT_MENU);
+    }
+
+    public void save(MouseEvent mouseEvent) {
+        Account.saveAccounts();
     }
 }

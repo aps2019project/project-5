@@ -1,11 +1,13 @@
 package models;
 
+import data.AccountDataStream;
 import models.cards.Card;
 
 import java.util.*;
 
 public class Account {
     private static Map<String, Account> accounts = new HashMap<>();
+
     private List<MatchResult> matchHistory = new ArrayList<>();
     private String username;
     private String password;
@@ -15,13 +17,21 @@ public class Account {
     private int drake = 45000000; // TODO: 6/14/19 very big number for test!
     private int winCount = 0;
 
+    static {
+        accounts = AccountDataStream.loadAccounts();
+    }
+
+    public static void saveAccounts() {
+        AccountDataStream.saveAccounts();
+    }
+
     public int getDrake() {
         return drake;
     }
 
     public String getDrakeString() {
-        if(drake < 1000) return "" + drake;
-        if(drake < 10000) return (((float) (drake / 100)) / 10) + "K";
+        if (drake < 1000) return "" + drake;
+        if (drake < 10000) return (((float) (drake / 100)) / 10) + "K";
         return drake / 1000 + "K";
     }
 
@@ -141,7 +151,7 @@ public class Account {
         return ranking;
     }
 
-    public void addCardToCollection(Card card)  {
+    public void addCardToCollection(Card card) {
         collection.addCard(card);
     }
 

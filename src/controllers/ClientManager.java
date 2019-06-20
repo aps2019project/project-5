@@ -1,5 +1,6 @@
 package controllers;
 
+import data.AccountDataStream;
 import models.*;
 import models.Account.NotEnoughDrakeException;
 import models.Collection.CardNotFoundException;
@@ -33,6 +34,7 @@ public class ClientManager {
     private static Account winnerPlayer = null;
     private static String opponentUsername;
 
+
     public static enum GameMode {
         StoryMode, DeathMatch, SingleFlag, MultiFlag;
 
@@ -57,8 +59,8 @@ public class ClientManager {
     }
 
     public static void createAccount(String username, String password) throws Account.UsernameExistsException {
-
         Account.addAccount(new Account(username, password));
+        AccountDataStream.saveAccounts();
     }
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
