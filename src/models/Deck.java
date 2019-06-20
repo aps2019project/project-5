@@ -115,6 +115,10 @@ public class Deck {
         return !(cards.size() < 20 || this.getHero() == null);
     }
 
+    public static boolean isValid(Deck deck) {
+        return deck != null && deck.getCards().size() == 20 && deck.getHero() != null;
+    }
+
     public static class CardExistsInDeckException extends Exception {
         public CardExistsInDeckException(String cardName, String deckName) {
             super(String.format("card '%s' exists in deck '%s'", cardName, deckName));

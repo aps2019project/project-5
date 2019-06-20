@@ -179,7 +179,7 @@ public class BattleMenu implements Menu {
                 "^(?i)end\\s+game$",
                 "",
                 "End Game",
-                "\t\t\t\t\t\tturns back to the battle menu in the end of match"
+                "\t\t\t\t\t\tturns backToMultiSingle to the battle menu in the end of match"
         ));
 
         commands.add(new Command(
