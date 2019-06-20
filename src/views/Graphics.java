@@ -14,6 +14,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import models.Account;
 import models.Collection;
+import models.Deck;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -21,8 +23,7 @@ public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
-            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot,
-            deckSelectRoot, battleRoot;
+            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot;
 
     static {
         try {
@@ -32,7 +33,6 @@ public class Graphics extends Application {
             watchRoot = new GridPane();
             codexRoot = new GridPane();
             battleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
-            deckSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/deck_select.fxml"));
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
@@ -67,10 +67,9 @@ public class Graphics extends Application {
         ACCOUNT_MENU("../layouts/account_menu.fxml"),
         MATCH_SELECT_MENU("../layouts/match_select.fxml"),
         MAIN_MENU("../layouts/main_menu.fxml"),
-        DECK_SELECTION_MENU("../layouts/deck_select.fxml"),
-        MATCH("../layouts/match.fxml"),
         MULTI_SINGLE("../layouts/multi_single.fxml"),
-        CUSTOM_SELECT("../layouts/custom_select.fxml");
+        CUSTOM_SELECT("../layouts/custom_select.fxml"),
+        BATTLE("../layouts/battle.fxml");
         String menuPath;
 
         Menu(String menuPath) {
@@ -87,7 +86,7 @@ public class Graphics extends Application {
 
         stage = primaryStage;
 
-        Scene scene = new Scene(battleRoot, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
@@ -133,6 +132,7 @@ public class Graphics extends Application {
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
+            ClientManager.createDeck("aliDeck");
 
 
             ClientManager.login("mahdi", "mahdi");
@@ -158,15 +158,57 @@ public class Graphics extends Application {
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
             ClientManager.buy("Hog Head Demon");
+            ClientManager.createDeck("mahdiDeck");
+            ClientManager.createDeck("mahdiDeck2");
+            ClientManager.createDeck("mahdiDeck3");
+            ClientManager.addCardToDeck("empower", "mahdiDeck");
+            ClientManager.addCardToDeck("fire dragon", "mahdiDeck");
+            ClientManager.addCardToDeck("fire dragon", "mahdiDeck");
+            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck");
+            ClientManager.addCardToDeck("Persian Swordsman", "mahdiDeck");
+            ClientManager.addCardToDeck("rostam", "mahdiDeck");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck");
+            ClientManager.addCardToDeck("Persian Champion", "mahdiDeck");
+            ClientManager.addCardToDeck("Persian Champion", "mahdiDeck");
+            ClientManager.addCardToDeck("Turan Archer", "mahdiDeck");
+            ClientManager.addCardToDeck("Turan Archer", "mahdiDeck");
+            ClientManager.addCardToDeck("Turan Wand", "mahdiDeck");
+            ClientManager.addCardToDeck("Turan Wand", "mahdiDeck");
+            ClientManager.addCardToDeck("persian horse rider", "mahdiDeck");
+            ClientManager.addCardToDeck("persian horse rider", "mahdiDeck");
+            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck");
+            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck");
+
+            ClientManager.addCardToDeck("empower", "mahdiDeck2");
+            ClientManager.addCardToDeck("fire dragon", "mahdiDeck2");
+            ClientManager.addCardToDeck("fire dragon", "mahdiDeck2");
+            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck2");
+            ClientManager.addCardToDeck("Persian Swordsman", "mahdiDeck2");
+            ClientManager.addCardToDeck("rostam", "mahdiDeck2");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
+            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck2");
+            ClientManager.addCardToDeck("Persian Champion", "mahdiDeck2");
+            ClientManager.addCardToDeck("Turan Archer", "mahdiDeck2");
+            ClientManager.addCardToDeck("Turan Archer", "mahdiDeck2");
+            ClientManager.addCardToDeck("Turan Wand", "mahdiDeck2");
+            ClientManager.addCardToDeck("Turan Wand", "mahdiDeck2");
+            ClientManager.addCardToDeck("persian horse rider", "mahdiDeck2");
+            ClientManager.addCardToDeck("persian horse rider", "mahdiDeck2");
+            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
+            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck2");
+
+            ClientManager.selectDeck("mahdiDeck");
 
 
-            try {
-                ClientManager.login("ali", "ali");
-            } catch (Account.InvalidUsernameException | Account.InvalidPasswordException ignored) {
-            }
 
-
-        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException ignored) {
+        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException | Account.NotLoggedInException | Account.DeckExistsException | Account.DeckNotFoundException | Deck.HeroExistsInDeckException | Deck.HeroNotExistsInDeckException | Deck.DeckFullException ignored) {
+//            ignored.printStackTrace();
         }
 
     }

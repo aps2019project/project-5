@@ -104,6 +104,7 @@ public class GraphicCollectionMenu implements Initializable {
         cardNameLbl.getStyleClass().add("card-name-label");
         deckPane.getChildren().add(cardNameLbl);
 
+
         JFXRadioButton radioButton = new JFXRadioButton("");
         radioButton.setToggleGroup(selectedDeckToggleGroup);
         radioButton.relocate(5, 17);
@@ -116,6 +117,16 @@ public class GraphicCollectionMenu implements Initializable {
         });
         radioButton.setVisible(false);
         deckPane.getChildren().add(radioButton);
+        boolean deckIsValid = false;
+        try {
+            deckIsValid = ClientManager.isValid(deckName);
+        } catch (Account.DeckNotFoundException ignored) { };
+        Background backgroundBtn = (deckIsValid ? validBackground : ordinaryBackground);
+        deckPane.setBackground(backgroundBtn);
+        final String mainDeckName = ClientManager.getMainDeck().getName();
+        radioButton.setSelected(mainDeckName.equals(deckName));
+        radioButton.setVisible(deckIsValid);
+
 
         JFXButton deleteDeckBtn = new JFXButton("Delete");
         deleteDeckBtn.setVisible(false);
@@ -148,8 +159,13 @@ public class GraphicCollectionMenu implements Initializable {
             deckList.getChildren().forEach(node -> {
                 AnchorPane nodePane = (AnchorPane)node;
                 try {
-                    Background background = (ClientManager.isValid(((Label)nodePane.getChildren().get(0)).getText())) ? validBackground : ordinaryBackground;
+                    boolean isValid = ClientManager.isValid(((Label)nodePane.getChildren().get(0)).getText());
+                    Background background = (isValid ? validBackground : ordinaryBackground);
                     nodePane.setBackground(background);
+                    JFXRadioButton rbtn = (JFXRadioButton) nodePane.getChildren().get(1);
+                    rbtn.setSelected(mainDeckName.equals(((Label) nodePane.getChildren().get(0)).getText()));
+                    rbtn.setVisible(isValid);
+
                 } catch (Account.DeckNotFoundException ignored) { }
             });
             deckPane.setBackground(selectedDeckBackGround);

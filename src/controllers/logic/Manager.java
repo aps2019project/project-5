@@ -185,6 +185,7 @@ public class Manager {
         return playingMatch.showMinions(getInActivePlayer());
     }
 
+
     public static void setMatchData(boolean isAIMode, ClientManager.GameMode gameMode, String username) {
         opponentUsername = username;
         if (!isOpponentNull()) {
@@ -193,17 +194,17 @@ public class Manager {
                 opponent = AI.getAIAccount();
             } else
                 opponent = Account.getAccounts().get(username);
-            if (gameMode == ClientManager.GameMode.StoryMode /* story mode */) {
+            if (gameMode == ClientManager.GameMode.STORY_MODE /* story mode */) {
                 matches.add(new DeathMatch(account, opponent));
                 matches.add(new MultiFlagMatch(account, opponent));
                 matches.add(new SingleFlagMatch(account, opponent));
                 playingMatch = matches.get(0);
                 matches.remove(0);
-            } else if (gameMode == ClientManager.GameMode.DeathMatch/* death match */) {
+            } else if (gameMode == ClientManager.GameMode.DEATH_MATCH/* death match */) {
                 playingMatch = new DeathMatch(account, opponent);
-            } else if (gameMode == ClientManager.GameMode.MultiFlag/* multi flag match */) {
+            } else if (gameMode == ClientManager.GameMode.MULTI_FLAG/* multi flag match */) {
                 playingMatch = new MultiFlagMatch(account, opponent);
-            } else if (gameMode == ClientManager.GameMode.SingleFlag/* single flag match */) {
+            } else if (gameMode == ClientManager.GameMode.SINGLE_FLAG/* single flag match */) {
                 playingMatch = new SingleFlagMatch(account, opponent);
             }
             if (opponent == null) {
