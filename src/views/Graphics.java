@@ -26,7 +26,7 @@ public class Graphics extends Application {
 
     static {
         try {
-            //TODO : make true roots;
+            // TODO : make true roots;
             createTestUser();
             profileRoot = new GridPane();
             watchRoot = new GridPane();
@@ -40,7 +40,7 @@ public class Graphics extends Application {
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
+            System.exit(1000);
         }
     }
 
@@ -87,7 +87,7 @@ public class Graphics extends Application {
 
         stage = primaryStage;
 
-        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Scene scene = new Scene(battleRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
@@ -97,7 +97,7 @@ public class Graphics extends Application {
     }
 
     public static MediaPlayer playMusic(String musicPath) {
-//        new AudioClip(new File("src/resources/sounds/" + musicPath).toURI().toString()).play();
+//      new AudioClip(new File("src/resources/sounds/" + musicPath).toURI().toString()).play();
         Media sound = new Media(new File("src/resources/sounds/" + musicPath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();

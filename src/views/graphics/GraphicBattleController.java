@@ -3,7 +3,9 @@ package views.graphics;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.PerspectiveTransform;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -19,6 +21,8 @@ public class GraphicBattleController implements Initializable {
     public AnchorPane root;
     public AnchorPane graveyardContainer;
     public VBox graveyardCards; // Dead cards must be added to it's children.
+    public ImageView handItem0_image, handItem1_image, handItem2_image, handItem3_image, handItem4_image;
+    public Label handItem0_label, handItem1_label, handItem2_label, handItem3_label, handItem4_label;
     private boolean isGraveyardOpen = false;
 
     private void createMapCells() {
