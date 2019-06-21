@@ -25,7 +25,7 @@ public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
-            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot, customCardRoot;
+            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, customCardRoot;
 
     static {
         try {
@@ -38,7 +38,9 @@ public class Graphics extends Application {
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
-            customCardRoot = FXMLLoader.load(Graphics.class.getResource(CUSTOM_CARD.getMenuPath()));
+            customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
+            multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
+            customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1000);
@@ -77,12 +79,16 @@ public class Graphics extends Application {
         MULTI_SINGLE(multiSingleRoot),
         CUSTOM_SELECT(customSelectRoot),
         BATTLE("../layouts/battle.fxml"),
-        CUSTOM_CARD(new GridPane());
+        CUSTOM_CARD(customCardRoot);
         Parent root;
         String file;
 
         Menu(Parent root) {
             this.root = root;
+        }
+
+        Menu(String file) {
+            this.file = file;
         }
 
         public String getFile() {
