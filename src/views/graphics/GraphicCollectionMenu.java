@@ -65,6 +65,7 @@ public class GraphicCollectionMenu implements Initializable {
     public Label filterNone, filterHeroes, filterMinions, filterSpells;
     public Type filterType = Card.class;
     private YaGson deckJson = new YaGson();
+    final File savedDecksPath = new File("src" + File.separator + "data" + File.separator + "saved-decks");
 
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
         button.setDisable(isWrong);
@@ -370,11 +371,7 @@ public class GraphicCollectionMenu implements Initializable {
         final DirectoryChooser directoryChooser = new DirectoryChooser();
 
 
-        if (System.getProperty("os.name").equals("Linux")) {
-            directoryChooser.setInitialDirectory(new File("src/data/saved-decks"));
-        } else if(System.getProperty("os.name").equals("Windows")) {
-            directoryChooser.setInitialDirectory(new File("src\\data\\saved-decks"));
-        }
+        directoryChooser.setInitialDirectory(savedDecksPath);
         directoryChooser.setTitle("Please select a Directory to save your deck");
 
         Stage fileChooserStage = new Stage();
@@ -390,11 +387,8 @@ public class GraphicCollectionMenu implements Initializable {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("deck", "*.deck"));
 
-        if (System.getProperty("os.name").equals("Linux")) {
-            fileChooser.setInitialDirectory(new File("src/data/saved-decks"));
-        } else if(System.getProperty("os.name").equals("Windows")) {
-            fileChooser.setInitialDirectory(new File("src\\data\\saved-decks"));
-        }
+
+        fileChooser.setInitialDirectory(savedDecksPath);
         fileChooser.setTitle("Please select a valid .json File");
 
         File file = fileChooser.showOpenDialog(Graphics.stage);

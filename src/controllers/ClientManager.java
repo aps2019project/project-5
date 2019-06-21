@@ -445,32 +445,9 @@ public class ClientManager {
         return Deck.isValid(account.getMainDeck());
     }
 
-
-//    public static void setOpponent(String opponentUsername) {
-//        if (isAIMode) {
-//            opponent = AI.getAIAccount();
-//        } else {
-//            // TODO: 6/20/19 s
-//        }
-//    }
-
-
-//        if (!isOpponentNull()) {
-//            Account opponent;
-//            if (gameMode == ClientManager.GameMode.STORY_MODE /* story mode */) {
-//                matches.add(new DEATH_MATCH(account, opponent));
-//                matches.add(new MultiFlagMatch(account, opponent));
-//                matches.add(new SingleFlagMatch(account, opponent));
-//                playingMatch = matches.get(0);
-//                matches.remove(0);
-//            } else if (gameMode == ClientManager.GameMode.DEATH_MATCH/* death match */) {
-//                playingMatch = new DEATH_MATCH(account, opponent);
-//            } else if (gameMode == ClientManager.GameMode.MULTI_FLAG/* multi flag match */) {
-//                playingMatch = new MultiFlagMatch(account, opponent);
-//            } else if (gameMode == ClientManager.GameMode.SINGLE_FLAG/* single flag match */) {
-//                playingMatch = new SingleFlagMatch(account, opponent);
-//            }
-//        }
-//    }
-
+    public static List<Cell> getAvailableCells(Card card) {
+        List<Cell> cells = new ArrayList<>();
+        getMe().getActiveCards().forEach(cardIt -> getMap().getNeighbors(cardIt.getCell()));
+        return cells;
+    }
 }
