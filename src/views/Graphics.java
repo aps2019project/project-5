@@ -15,9 +15,13 @@ import javafx.stage.Stage;
 import models.Account;
 import models.Collection;
 import models.Deck;
+import views.menus.MainMenu;
 
 import java.io.File;
 import java.io.IOException;
+
+import static views.Graphics.Menu.CUSTOM_CARD;
+import static views.Graphics.Menu.MAIN_MENU;
 
 public class Graphics extends Application {
     public static Stage stage;
@@ -28,9 +32,11 @@ public class Graphics extends Application {
     static {
         try {
             createTestUser();
-            profileRoot = new GridPane();
-            watchRoot = new GridPane();
-            codexRoot = new GridPane();
+            GridPane tmpGridPane = new GridPane();
+            tmpGridPane.setOnMouseClicked(event -> setMenu(MAIN_MENU));
+            profileRoot = tmpGridPane;
+            watchRoot = tmpGridPane;
+            codexRoot = tmpGridPane;
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
