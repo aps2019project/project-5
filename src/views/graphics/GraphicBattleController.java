@@ -30,6 +30,7 @@ public class GraphicBattleController implements Initializable {
     public ImageView player1ProfileImage, player2ProfileImage;
     public ImageView player1Mana0, player1Mana1, player1Mana2, player1Mana3, player1Mana4, player1Mana5, player1Mana6, player1Mana7, player1Mana8;
     public ImageView player2Mana0, player2Mana1, player2Mana2, player2Mana3, player2Mana4, player2Mana5, player2Mana6, player2Mana7, player2Mana8;
+    public Label player1Name, player2Name;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
     private ImageView[] player1Mana = new ImageView[9];
@@ -70,6 +71,8 @@ public class GraphicBattleController implements Initializable {
         updateHand();
         showProfiles();
         updateMana();
+        player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername());
+        player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername());
     }
 
     private void showProfiles() {

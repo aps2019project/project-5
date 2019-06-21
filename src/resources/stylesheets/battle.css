@@ -112,3 +112,10 @@
 .mana-bar-item {
     -fx-effect: dropshadow(three-pass-box, black, 20, 0.3, 1, 1);
 }
+
+.player-name-label {
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0.4, 1, 1);
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+}

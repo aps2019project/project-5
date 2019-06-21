@@ -123,4 +123,6 @@
     <ImageView fx:id="player1ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="-50"/>
     <ImageView fx:id="player2ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="-50"/>
 
+    <Label fx:id="player1Name" text="SALAM" styleClass="player-name-label" AnchorPane.leftAnchor="260" AnchorPane.topAnchor="50"/>
+    <Label fx:id="player2Name" text="SALAM" styleClass="player-name-label" AnchorPane.rightAnchor="260" AnchorPane.topAnchor="50"/>
 </AnchorPane>
