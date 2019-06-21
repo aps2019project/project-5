@@ -388,6 +388,7 @@ public class GraphicCollectionMenu implements Initializable {
 
     private File getFile() {
         final FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("deck", "*.deck"));
 
         try {
             fileChooser.setInitialDirectory(new File("src/data/saved-decks"));
@@ -396,11 +397,7 @@ public class GraphicCollectionMenu implements Initializable {
         }
         fileChooser.setTitle("Please select a valid .json File");
 
-        Stage fileChooserStage = new Stage();
-        fileChooserStage.setScene(new Scene(new AnchorPane()));
-
-
-        File file = fileChooser.showOpenDialog(fileChooserStage);
+        File file = fileChooser.showOpenDialog(Graphics.stage);
 
         return file;
     }
@@ -437,7 +434,7 @@ public class GraphicCollectionMenu implements Initializable {
     public void exportDeck(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
 
-        String deckName = ((Label)selectedDeck.getChildren().get(0)).getText();
+        String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
 
         Deck deck = null;
         try {
