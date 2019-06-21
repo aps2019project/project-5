@@ -38,7 +38,7 @@ public class Graphics extends Application {
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
-            customCardRoot = FXMLLoader.load(Graphics.class.getResource(CUSTOM_CARD.getMenuPath()));
+            customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1000);
@@ -76,7 +76,7 @@ public class Graphics extends Application {
         MAIN_MENU(mainMenuRoot),
         MULTI_SINGLE(multiSingleRoot),
         CUSTOM_SELECT(customSelectRoot),
-        BATTLE("../layouts/battle.fxml"),
+        BATTLE(battleRoot),
         CUSTOM_CARD(new GridPane());
         Parent root;
         String file;
