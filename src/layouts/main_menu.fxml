@@ -35,7 +35,7 @@
     <Label text="COLLECTION" styleClass="menu-button" layoutX="200" layoutY="390" onMouseClicked="#collection"/>
     <Label text="MYSTERY CRATES" styleClass="menu-button" layoutX="200" layoutY="470"/>
     <Label text="CODEX" styleClass="menu-button" layoutX="200" layoutY="550" onMouseClicked="#codex"/>
-
+    <Label text="SAVE" styleClass="menu-button" layoutX="200" layoutY="630" onMouseClicked="#save"/>
     <Label styleClass="drakes" alignment="center" fx:id="drakes" layoutY="940" layoutX="1220"/>
 
 </AnchorPane>

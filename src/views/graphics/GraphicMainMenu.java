@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import models.Account;
 import views.Graphics;
 import views.menus.MainMenu;
 
@@ -70,7 +71,7 @@ public class GraphicMainMenu implements Initializable {
 
         foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
         pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
-        drakes.setText(ClientManager.getAccount().getDrakeString());
+//        drakes.setText(ClientManager.getAccount().getDrakeString());
 
         root.setOnMouseMoved(event -> {
             foregroundTransition.setToX(-event.getX() / 40);
@@ -86,5 +87,9 @@ public class GraphicMainMenu implements Initializable {
     public void logout(MouseEvent mouseEvent) {
         music.stop();
         Graphics.setMenu(ACCOUNT_MENU);
+    }
+
+    public void save(MouseEvent mouseEvent) {
+        Account.saveAccounts();
     }
 }
