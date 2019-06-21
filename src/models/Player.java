@@ -24,7 +24,7 @@ public class Player {
     private List<Item> collectedItems = new ArrayList<>();
     private ArrayList<Card> graveYard;
     private ArrayList<Attacker> activeCards = new ArrayList<>();
-    private int mana;
+    private int mana = 2;
     private Input input;
     private CollectableItem selectedCollectableItem;
 

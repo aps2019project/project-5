@@ -23,15 +23,15 @@ public class Account {
     }
 
     static {
-//        accounts = AccountDataStream.loadAccounts();
+        accounts = AccountDataStream.loadAccounts();
     }
 
     public static void saveAccounts() {
-//        AccountDataStream.saveAccounts();
+        AccountDataStream.saveAccounts();
     }
 
     public static void loadAccounts() {
-//        accounts = AccountDataStream.loadAccounts();
+        accounts = AccountDataStream.loadAccounts();
     }
 
 
@@ -99,7 +99,7 @@ public class Account {
     }
 
     public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
-//        accounts = AccountDataStream.loadAccounts();
+        accounts = AccountDataStream.loadAccounts();
         for (Map.Entry<String, Account> entry : accounts.entrySet()) {
             System.out.println(entry.getKey());
             if (entry.getValue().username.equals(username)) {
@@ -134,7 +134,7 @@ public class Account {
         if (!doesAccountExists(user))
             accounts.put(user.username, user);
         else throw new UsernameExistsException(user.username);
-//        AccountDataStream.saveAccounts();
+        AccountDataStream.saveAccounts();
     }
 
     public void deleteDeck(String deckName) throws DeckNotFoundException {

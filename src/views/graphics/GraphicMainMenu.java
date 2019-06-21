@@ -71,7 +71,7 @@ public class GraphicMainMenu implements Initializable {
 
         foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
         pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
-        drakes.setText(ClientManager.getAccount().getDrakeString());
+//        drakes.setText(ClientManager.getAccount().getDrakeString());
 
         root.setOnMouseMoved(event -> {
             foregroundTransition.setToX(-event.getX() / 40);
