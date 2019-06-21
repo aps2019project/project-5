@@ -21,7 +21,7 @@ import static views.Graphics.playMusic;
 
 public class GraphicMainMenu implements Initializable {
 
-    private MediaPlayer music;
+    public static MediaPlayer music;
     public ImageView foreground;
     public ImageView pillars;
     public AnchorPane root;
@@ -67,7 +67,6 @@ public class GraphicMainMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        music = playMusic("music_collection.m4a");
 
         foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
         pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
