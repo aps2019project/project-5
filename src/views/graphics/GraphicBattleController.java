@@ -28,6 +28,7 @@ public class GraphicBattleController implements Initializable {
     public ImageView handItem0_image, handItem1_image, handItem2_image, handItem3_image, handItem4_image;
     public Label handItem0_label, handItem1_label, handItem2_label, handItem3_label, handItem4_label;
     public AnchorPane handItem0_container, handItem1_container, handItem2_container, handItem3_container, handItem4_container;
+    public ImageView player1ProfileImage;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
     private Label[] handItemMana = new Label[5];
@@ -63,6 +64,11 @@ public class GraphicBattleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createMapCells();
+        copyHandViewsToArray();
+        updateHand();
+    }
+
+    private void copyHandViewsToArray() {
         handItemImages[0] = handItem0_image;
         handItemImages[1] = handItem1_image;
         handItemImages[2] = handItem2_image;
@@ -78,7 +84,6 @@ public class GraphicBattleController implements Initializable {
         handItemContainer[2] = handItem2_container;
         handItemContainer[3] = handItem3_container;
         handItemContainer[4] = handItem4_container;
-        updateHand();
     }
 
     public void updateHand() {

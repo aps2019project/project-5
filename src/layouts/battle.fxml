@@ -87,7 +87,9 @@
             </ImageView>
             <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="7" styleClass="hand-card-mana" alignment="center" fx:id="handItem4_label"/>
         </AnchorPane>
-
     </HBox>
+
+    <ImageView fx:id="player1ProfileImage">
+    </ImageView>
 
 </AnchorPane>
