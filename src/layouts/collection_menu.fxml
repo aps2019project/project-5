@@ -9,9 +9,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1080" prefWidth="1920" styleClass="shop-container" stylesheets="@../resources/stylesheets/shop-style.css" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicCollectionMenu">
+<AnchorPane prefHeight="1080" prefWidth="1920" styleClass="shop-container" stylesheets="@../resources/stylesheets/collection-style.css" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicCollectionMenu">
     <ScrollPane hbarPolicy="NEVER" layoutX="421.0" layoutY="140.0" prefHeight="900.0" prefWidth="1199.0" styleClass="shop-card-container" AnchorPane.bottomAnchor="40" AnchorPane.leftAnchor="421.0" AnchorPane.rightAnchor="300" AnchorPane.topAnchor="140.0">
         <JFXMasonryPane fx:id="cardContainer" prefHeight="902.0" prefWidth="1160.0" styleClass="inner-container" />
     </ScrollPane>
@@ -23,7 +24,7 @@
     <Label fx:id="filterHeroes" layoutX="571.0" layoutY="55.0" styleClass="shop-filter-label" text="Heroes" AnchorPane.leftAnchor="571.0" AnchorPane.topAnchor="55.0" />
     <Label fx:id="filterMinions" layoutX="721.0" layoutY="55.0" styleClass="shop-filter-label" text="Minions" AnchorPane.leftAnchor="721.0" AnchorPane.topAnchor="55.0" />
     <Label fx:id="filterSpells" layoutX="871.0" layoutY="55.0" styleClass="shop-filter-label" text="Spells" AnchorPane.leftAnchor="871.0" AnchorPane.topAnchor="55.0" />
-    <VBox alignment="TOP_CENTER" layoutX="1644.0" layoutY="140.0" prefHeight="900.0" prefWidth="256.0" spacing="20"  stylesheets="@../resources/stylesheets/login-style.css" AnchorPane.bottomAnchor="40" AnchorPane.leftAnchor="1644.0" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="140.0" xmlns="http://javafx.com/javafx/8.0.172-ea">
+    <VBox alignment="TOP_CENTER" layoutX="1644.0" layoutY="140.0" prefHeight="900.0" prefWidth="256.0" spacing="20" stylesheets="@../resources/stylesheets/login-style.css" AnchorPane.bottomAnchor="40" AnchorPane.leftAnchor="1644.0" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="140.0" xmlns="http://javafx.com/javafx/8.0.172-ea">
         <JFXTextField fx:id="newDeckNameTxt" promptText="Sample Deck" styleClass="input-text" />
         <JFXButton fx:id="saveDeckBtn" onMouseClicked="#createNewDeck" styleClass="btn-primary, btn-lg" text="Save" />
         <ScrollPane hbarPolicy="NEVER" prefHeight="400" styleClass="shop-card-container">
@@ -33,6 +34,13 @@
             <VBox fx:id="selectedDeckCardList" spacing="10" styleClass="inner-container" />
         </ScrollPane>
     </VBox>
-    <JFXButton fx:id="importDeckBtn" text="Import Deck" styleClass="btn-primary, btn-lg" AnchorPane.leftAnchor="80" AnchorPane.bottomAnchor="40" onMouseClicked="#importDeck"/>
-    <JFXButton fx:id="exportDeckBtn" text="Export Deck" styleClass="btn-primary, btn-lg" AnchorPane.leftAnchor="80" AnchorPane.bottomAnchor="110" onMouseClicked="#exportDeck"/>
+
+    <HBox  styleClass="file-chooser" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="40.0" >
+        <JFXTextField fx:id="exportPathTxt" prefWidth="156.0" promptText="/path/to/deck.json" styleClass="path-field" />
+        <JFXButton fx:id="exportDeckBtn" onMouseClicked="#exportDeck" styleClass="btn-primary, btn-lg, path-btn" text="Export Deck" AnchorPane.bottomAnchor="5" AnchorPane.rightAnchor="5" />
+    </HBox>
+    <HBox  styleClass="file-chooser" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" >
+        <JFXTextField fx:id="importPathTxt" prefWidth="156.0" promptText="/path/to/deck.json" styleClass="path-field" />
+        <JFXButton fx:id="importDeckBtn" onMouseClicked="#importDeck" styleClass="btn-primary, btn-lg, path-btn" text="Import Deck" AnchorPane.bottomAnchor="5" AnchorPane.rightAnchor="5" />
+    </HBox>
 </AnchorPane>

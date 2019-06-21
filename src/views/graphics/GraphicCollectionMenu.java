@@ -1,47 +1,43 @@
 package views.graphics;
 
-import com.dd.plist.PropertyListFormatException;
 import com.jfoenix.controls.*;
 import controllers.ClientManager;
-import controllers.Manager;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import models.Account;
-import models.Action;
 import models.Collection;
 import models.Deck;
-import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
-import org.xml.sax.SAXException;
-import sun.invoke.empty.Empty;
-import sun.util.resources.cldr.bas.CalendarData_bas_CM;
 import views.Graphics;
-import views.SpriteMaker;
-import views.menus.MainMenu;
 
-import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static views.Graphics.Menu.MAIN_MENU;
-import static views.Graphics.playMusic;
 import static views.graphics.ShopController.getCardPane;
 
 public class GraphicCollectionMenu implements Initializable {
@@ -55,6 +51,8 @@ public class GraphicCollectionMenu implements Initializable {
     public AnchorPane selectedDeck;
     public JFXButton importDeckBtn;
     public JFXButton exportDeckBtn;
+    public JFXTextField exportPathTxt;
+    public JFXTextField importPathTxt;
     private ToggleGroup selectedDeckToggleGroup = new ToggleGroup();
     private final Background ordinaryBackground = new Background(new BackgroundFill(Color.VIOLET,
             new CornerRadii(5), Insets.EMPTY));
@@ -89,6 +87,7 @@ public class GraphicCollectionMenu implements Initializable {
             ClientManager.createDeck(deckName);
             AnchorPane deckPane = getDeckPane(deckName);
             deckList.getChildren().add(deckPane);
+            newDeckNameTxt.setText("");
         } catch (Account.DeckExistsException e) {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, true);
         } catch (Account.NotLoggedInException ignored) {}
@@ -293,6 +292,9 @@ public class GraphicCollectionMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        exportPathTxt.textProperty().addListener(observable -> exportDeckBtn.setDisable(false));
+        importPathTxt.textProperty().addListener(observable -> importDeckBtn.setDisable(false));
+
         exportDeckBtn.setDisable(true);
 
         newDeckNameTxt.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
@@ -333,10 +335,62 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
 
+    private File getFileFromFileChooser() {
+        final FileChooser fileChooser = new FileChooser();
+
+        fileChooser.setInitialDirectory(new File("src/data/saved-decks"));
+        fileChooser.setTitle("Please select a valid .json File");
+
+        Stage fileChooserStage = new Stage();
+        fileChooserStage.setScene(new Scene(new AnchorPane()));
+
+
+        File file = fileChooser.showOpenDialog(fileChooserStage);
+
+        return file;
+    }
+
     public void importDeck(MouseEvent mouseEvent) {
+
+        File file = new File(importPathTxt.getText());
+        while (!file.exists())
+            file = getFileFromFileChooser();
+        importPathTxt.setText(file.getAbsolutePath());
+
+        Deck deck = new Deck("alaki");
+
+
+
+        // TODO: 6/21/19 mahdi please get the deck from file
+
+
+
+        try {
+            ClientManager.addDeck(deck);
+            deckList.getChildren().add(getDeckPane(deck.getName()));
+        } catch (Account.DeckExistsException e) {
+            Graphics.alert("Error", "Duplicate Deck", "You already have this deck");
+        }
 
     }
 
     public void exportDeck(MouseEvent mouseEvent) {
+        String deckName = ((Label)selectedDeck.getChildren().get(0)).getText();
+
+        try {
+            Deck deck = ClientManager.getDeck(deckName);
+        } catch (Account.DeckNotFoundException ignored) { }
+
+        File file = new File(exportPathTxt.getText());
+        while (!file.exists())
+            file = getFileFromFileChooser();
+        exportPathTxt.setText(file.getAbsolutePath());
+
+
+        // TODO: 6/21/19 mahdi please save this deck to json in selected file
+
+
+
+        Graphics.alert("Congrats", "Exported", "Your Deck Exported Successfully.");
     }
 }

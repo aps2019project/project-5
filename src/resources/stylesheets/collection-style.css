@@ -1,9 +1,4 @@
-.container-account-menu {
-    -fx-background-image: url(/resources/images/scenes/login-background.jpg);
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
-    -fx-background-position: top center;
-}
+
 
 .btn-primary {
     -fx-background-color: #f36f20;
@@ -11,27 +6,41 @@
 
 .btn-lg {
     -fx-padding: 1em 3em;
-    -fx-font-size: 1em;
+    -fx-font-size: 15px;
     -fx-border-radius: 0.3em;
     -fx-font-weight: bold;
-    -fx-pref-width: 420;
+}
+
+.file-chooser {
+    -fx-padding: 1em 1.5em;
+    -fx-font-size: 1em;
+    -fx-background-color: rgba(0,0, 0, 0.3);
+    -fx-background-radius: 0.5em;
+    -fx-font-weight: bold;
+    -fx-pref-width: 370px;
 }
 
 * {
     -fx-font-family: "Bahnschrift";
 }
 
-.check-box {
+.path-field {
     -fx-font-size: 15;
-    -fx-text-fill: #666;
-    -jfx-checked-color: #F57B20;
-    -jfx-unchecked-color: #F57B20;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #383838;
+    -fx-pref-height: 50;
+    -fx-pref-width: 200;
 }
 
-.btn-sm {
-    -fx-padding: 0.25em 0.5em;
-    -fx-font-size: 0.75em;
-    -fx-border-radius: 0.2em;
+.path-field:focused .path-field:hover {
+    -fx-background-color: #434343;
+}
+
+.path-btn {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-padding: 0;
+    -fx-font-size: 15px;
 }
 
 .input-text {
@@ -50,36 +59,6 @@
     -jfx-unfocus-color: #FF0000;
 }
 
-.tab-header-background {
-    -fx-background-color: #383838;
-}
-
-.tab-header-area {
-    -fx-padding: 0 -150 0 150;
-}
-
-.tab-pane {
-    -fx-background-color: #292929;
-    -fx-text-alignment: center;
-    -fx-pref-width: 500;
-    -fx-max-width: 500;
-}
-
-.duelystTab {
-    -fx-padding: 15;
-}
-
-.tab-items {
-    -fx-padding: 40px;
-}
-
-.duelystTab:selected {
-    -fx-background-image: url(/resources/images/triangle.png);
-    -fx-background-size: 20px;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: top center;
-}
-
 .back-button {
     -fx-text-fill: white;
     -fx-font-size: 35px;
@@ -89,3 +68,108 @@
 .back-button:hover {
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 40, 0.6, 0, 0);
 }
+
+.shop-container {
+    -fx-background-image: url(/resources/background-blur.jpg);
+    -fx-background-size: cover;
+}
+
+.shop-search {
+    -fx-pref-width: 300px;
+    -fx-background-radius: 30px;
+    -fx-padding: 20px;
+    -fx-border-width: 0px;
+    -fx-font-size: 15;
+    -fx-text-fill: #DCDCDC;
+    -fx-background-color: #0C1022;
+    -fx-effect: None;
+    -fx-background-image: url(/resources/images/shop/search-icon.png);
+    -fx-background-size: 35 35;
+    -fx-background-position: 250 10;
+    -fx-background-repeat: no-repeat;
+    -fx-prompt-text-fill: #999;
+}
+
+.cardsPane {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 300px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.card-pane {
+    -fx-pref-width: 200;
+    -fx-pref-height: 262;
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+}
+
+.attacker-pane {
+    -fx-background-image: url(/resources/images/shop/craftable_unit@2x.png);
+}
+
+.shop-card-health {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.shop-card-power {
+    -fx-text-fill: yellow;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.attacker-pane:hover {
+    -fx-background-image: url(/resources/images/shop/neutral_prismatic_unit@2x.png);
+}
+
+.spell-pane {
+    -fx-background-image: url(/resources/images/shop/craftable_spell@2x.png);
+}
+
+.spell-pane:hover {
+    -fx-background-image: url(/resources/images/shop/neutral_prismatic_spell@2x.png);
+}
+
+.card-name-label {
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}
+
+.card-type-label {
+    -fx-text-fill: white;
+    -fx-font-size: 13;
+}
+
+.shop-card-container {
+    -fx-padding: 15;
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-background-radius: 10;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.inner-container {
+    -fx-background-color: transparent;
+}
+
+.shop-filter-label {
+    -fx-font-size: 25px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #ddd;
+}
+
+.shop-filter-label:hover {
+    -fx-text-fill: white;
+}
+
+.selected, .selected:hover {
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 30, 0.7, 0, 0);
+}
+
