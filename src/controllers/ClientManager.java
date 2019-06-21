@@ -40,6 +40,10 @@ public class ClientManager {
         return account.getMainDeck();
     }
 
+    public static void addDeck(Deck deck) throws Account.DeckExistsException {
+        account.addDeck(deck);
+    }
+
     public static enum GameMode {
         STORY_MODE, DEATH_MATCH, SINGLE_FLAG, MULTI_FLAG;
 

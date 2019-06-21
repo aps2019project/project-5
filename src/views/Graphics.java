@@ -29,7 +29,6 @@ public class Graphics extends Application {
 
     static {
         try {
-            // TODO : make true roots;
             createTestUser();
             profileRoot = new GridPane();
             watchRoot = new GridPane();
@@ -39,10 +38,7 @@ public class Graphics extends Application {
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
-            customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
-            multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
-            customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
-
+            customCardRoot = FXMLLoader.load(Graphics.class.getResource(CUSTOM_CARD.getMenuPath()));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1000);
@@ -87,10 +83,6 @@ public class Graphics extends Application {
 
         Menu(Parent root) {
             this.root = root;
-        }
-
-        Menu(String file) {
-            this.file = file;
         }
 
         public String getFile() {
