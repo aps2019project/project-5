@@ -26,8 +26,8 @@ import static views.Graphics.Menu.MAIN_MENU;
 public class Graphics extends Application {
     public static Stage stage;
 
-    public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
-            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, customCardRoot;
+    public static Parent accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
+            matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot;
 
     static {
         try {
@@ -38,8 +38,6 @@ public class Graphics extends Application {
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
-            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
-            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
             customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
@@ -75,7 +73,7 @@ public class Graphics extends Application {
     }
 
     public enum Menu {
-        COLLECTION_MENU(collectionMenuRoot),
+        COLLECTION_MENU("../layouts/collection_menu.fxml"),
         SHOP_MENU("../layouts/shop.fxml"),
         ACCOUNT_MENU(accountMenuRoot),
         MATCH_SELECT_MENU(matchSelectRoot),
