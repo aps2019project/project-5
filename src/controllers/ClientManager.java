@@ -447,7 +447,9 @@ public class ClientManager {
 
     public static List<Cell> getAvailableCells(Card card) {
         List<Cell> cells = new ArrayList<>();
-        getMe().getActiveCards().forEach(cardIt -> getMap().getNeighbors(cardIt.getCell()));
+        getMe().getActiveCards().forEach(cardIt -> getMap().getNeighbors(cardIt.getCell()).forEach(cell -> {
+            if (!cell.isFull()) cells.add(cell);
+        }));
         return cells;
     }
 }
