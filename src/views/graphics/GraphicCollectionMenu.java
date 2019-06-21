@@ -1,5 +1,6 @@
 package views.graphics;
 
+import com.gilecode.yagson.YaGson;
 import com.jfoenix.controls.*;
 import controllers.ClientManager;
 import javafx.fxml.Initializable;
@@ -28,8 +29,7 @@ import models.cards.spell.Spell;
 import views.Graphics;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class GraphicCollectionMenu implements Initializable {
     public TextField searchField;
     public Label filterNone, filterHeroes, filterMinions, filterSpells;
     public Type filterType = Card.class;
-
+    private YaGson deckJson = new YaGson();
 
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
         button.setDisable(isWrong);
@@ -164,7 +164,8 @@ public class GraphicCollectionMenu implements Initializable {
             boolean finalDeckIsValid = false;
             try {
                 finalDeckIsValid = ClientManager.isValid(deckName);
-            } catch (Account.DeckNotFoundException ignored) { }
+            } catch (Account.DeckNotFoundException ignored) {
+            }
             exportDeckBtn.setDisable(!finalDeckIsValid);
             Graphics.playMusic("sfx_ui_select.m4a");
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
@@ -347,14 +348,10 @@ public class GraphicCollectionMenu implements Initializable {
     private File getFileFromFileChooser() {
         final FileChooser fileChooser = new FileChooser();
 
-        fileChooser.setInitialDirectory(new File("src/data/saved-decks"));
+//            fileChooser.setInitialDirectory(new File("src/data/saved-decks"));
         fileChooser.setTitle("Please select a valid .json File");
 
-        Stage fileChooserStage = new Stage();
-        fileChooserStage.setScene(new Scene(new AnchorPane()));
-
-
-        File file = fileChooser.showOpenDialog(fileChooserStage);
+        File file = fileChooser.showOpenDialog(Graphics.stage);
 
         return file;
     }
@@ -367,11 +364,13 @@ public class GraphicCollectionMenu implements Initializable {
         importPathTxt.setText(file.getAbsolutePath());
 
         Deck deck = new Deck("alaki");
-
-
-
-        // TODO: 6/21/19 mahdi please get the deck from file
-
+        try {
+            FileReader deckReader = new FileReader(file);
+            deck = deckJson.fromJson(deckReader, Deck.class);
+            deckReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         try {
@@ -384,20 +383,26 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
     public void exportDeck(MouseEvent mouseEvent) {
-        String deckName = ((Label)selectedDeck.getChildren().get(0)).getText();
-
+        String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
+        Deck deck = null;
         try {
-            Deck deck = ClientManager.getDeck(deckName);
-        } catch (Account.DeckNotFoundException ignored) { }
+            deck = ClientManager.getDeck(deckName);
+        } catch (Account.DeckNotFoundException ignored) {
+        }
 
         File file = new File(exportPathTxt.getText());
         while (!file.exists())
             file = getFileFromFileChooser();
         exportPathTxt.setText(file.getAbsolutePath());
 
-
-        // TODO: 6/21/19 mahdi please save this deck to json in selected file
-
+        try {
+            FileWriter deckWriter = new FileWriter(file);
+            deckWriter.write(deckJson.toJson(deck));
+            deckWriter.flush();
+            deckWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         Graphics.alert("Congrats", "Exported", "Your Deck Exported Successfully.");
