@@ -71,8 +71,12 @@ public class GraphicBattleController implements Initializable {
         updateHand();
         showProfiles();
         updateMana();
-        player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername());
-        player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername());
+        player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername().toUpperCase());
+        player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername().toUpperCase());
+        for(int i = 0; i < 5; i++) {
+            AnchorPane cardPane = getCardInGame(i, i);
+            root.getChildren().add(cardPane);
+        }
     }
 
     private void showProfiles() {
@@ -169,5 +173,17 @@ public class GraphicBattleController implements Initializable {
             t.play();
         }
         isGraveyardOpen = !isGraveyardOpen;
+    }
+
+    private AnchorPane getCardInGame(int row, int column) {
+        AnchorPane anchorPane = new AnchorPane();
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(160 + row * 8);
+        imageView.setFitHeight(160 + row * 8);
+        imageView.setImage(new Image("/resources/images/cards/Esfandiar_idle.gif"));
+        anchorPane.relocate(480 + column * 90, 250 + 90 * row);
+
+        anchorPane.getChildren().add(imageView);
+        return anchorPane;
     }
 }
