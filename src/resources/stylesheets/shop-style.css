@@ -39,13 +39,13 @@
 }
 
 .shop-card-health {
-    -fx-text-fill: red;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 20;
 }
 
 .shop-card-power {
-    -fx-text-fill: yellow;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 20;
 }

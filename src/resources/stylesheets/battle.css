@@ -29,7 +29,6 @@
     -fx-font-weight: bold;
     -fx-pref-width: 255;
     -fx-pref-height: 102;
-    /*-fx-effect: dropshadow(three-pass-box, black, 10, 0.8, 1, 1);*/
 }
 
 .end-turn-button:hover {
@@ -86,6 +85,11 @@
     -fx-pref-height: 180px;
     -fx-background-image: url(/resources/images/battle/ui/card_background_highlight@2x.png);
     -fx-background-size: cover;
+}
+
+.hand-item:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 
 .replace-hand-item {

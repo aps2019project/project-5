@@ -1,15 +1,19 @@
 package views.graphics;
 
+import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.PerspectiveTransform;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import models.Hand;
+import models.cards.Card;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,9 +27,13 @@ public class GraphicBattleController implements Initializable {
     public VBox graveyardCards; // Dead cards must be added to it's children.
     public ImageView handItem0_image, handItem1_image, handItem2_image, handItem3_image, handItem4_image;
     public Label handItem0_label, handItem1_label, handItem2_label, handItem3_label, handItem4_label;
+    public AnchorPane handItem0_container, handItem1_container, handItem2_container, handItem3_container, handItem4_container;
+    public ImageView player1ProfileImage;
     private boolean isGraveyardOpen = false;
-    public ImageView[] handItemImages = new ImageView[5];
-    public Label[] handItemMana = new Label[5];
+    private ImageView[] handItemImages = new ImageView[5];
+    private Label[] handItemMana = new Label[5];
+    private AnchorPane[] handItemContainer = new AnchorPane[5];
+    private Hand hand;
 
     private void createMapCells() {
         for(int i = 0; i < 5; i++) {
@@ -56,6 +64,11 @@ public class GraphicBattleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createMapCells();
+        copyHandViewsToArray();
+        updateHand();
+    }
+
+    private void copyHandViewsToArray() {
         handItemImages[0] = handItem0_image;
         handItemImages[1] = handItem1_image;
         handItemImages[2] = handItem2_image;
@@ -66,19 +79,44 @@ public class GraphicBattleController implements Initializable {
         handItemMana[2] = handItem2_label;
         handItemMana[3] = handItem3_label;
         handItemMana[4] = handItem4_label;
+        handItemContainer[0] = handItem0_container;
+        handItemContainer[1] = handItem1_container;
+        handItemContainer[2] = handItem2_container;
+        handItemContainer[3] = handItem3_container;
+        handItemContainer[4] = handItem4_container;
+    }
+
+    public void updateHand() {
+        hand = ClientManager.getHand();
+        System.out.println("Hand: \n\t" + hand.getCards().toString());
+        int index = 0;
+        for(Card card : hand.getCards()) {
+            handItemMana[index].setText("" + card.getManaPoint());
+            handItemImages[index].setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
+            int finalIndex = index;
+            handItemContainer[index].setOnMouseEntered(event -> {
+                AnchorPane cardPane = ShopController.getCardPane(card, false);
+                cardPane.relocate(handItemContainer[finalIndex].localToScene(
+                        handItemContainer[finalIndex].getBoundsInLocal()
+                ).getMinX(), 600);
+                root.getChildren().add(cardPane);
+                handItemContainer[finalIndex].setOnMouseExited(event1 -> root.getChildren().remove(cardPane));
+            });
+            index++;
+        }
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {
         if(!isGraveyardOpen) {
             graveyardButton.getStyleClass().remove("button-open");
             graveyardButton.getStyleClass().add("button-close");
-            TranslateTransition t = new TranslateTransition(new Duration(1000), graveyardContainer);
+            TranslateTransition t = new TranslateTransition(new Duration(500), graveyardContainer);
             t.setToX(115);
             t.play();
         } else {
             graveyardButton.getStyleClass().add("button-open");
             graveyardButton.getStyleClass().remove("button-close");
-            TranslateTransition t = new TranslateTransition(new Duration(1000), graveyardContainer);
+            TranslateTransition t = new TranslateTransition(new Duration(500), graveyardContainer);
             t.setToX(0);
             t.play();
         }
