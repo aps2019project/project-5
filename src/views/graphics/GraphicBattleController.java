@@ -10,11 +10,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Hand;
 import models.cards.Card;
 
+import java.awt.color.CMMException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,7 +30,9 @@ public class GraphicBattleController implements Initializable {
     public ImageView handItem0_image, handItem1_image, handItem2_image, handItem3_image, handItem4_image;
     public Label handItem0_label, handItem1_label, handItem2_label, handItem3_label, handItem4_label;
     public AnchorPane handItem0_container, handItem1_container, handItem2_container, handItem3_container, handItem4_container;
-    public ImageView player1ProfileImage;
+    public ImageView player1ProfileImage, player2ProfileImage;
+    public ImageView player1Mana0, player1Mana1, player1Mana2, player1Mana3, player1Mana4, player1Mana5, player1Mana6, player1Mana7, player1Mana8;
+    public ImageView player2Mana0, player2Mana1, player2Mana2, player2Mana3, player2Mana4, player2Mana5, player2Mana6, player2Mana7, player2Mana8;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
     private Label[] handItemMana = new Label[5];
@@ -58,7 +62,6 @@ public class GraphicBattleController implements Initializable {
         e.setLrx(950);    // Lower right
         e.setLry(480);
         gameBoard.setEffect(e);
-
     }
 
     @Override
@@ -66,6 +69,18 @@ public class GraphicBattleController implements Initializable {
         createMapCells();
         copyHandViewsToArray();
         updateHand();
+        showProfiles();
+    }
+
+    private void showProfiles() {
+        String player1HeroName = ClientManager.getPlayingMatch().getPlayer1().getDeck().getHero().getName();
+        String player2HeroName = ClientManager.getPlayingMatch().getPlayer2().getDeck().getHero().getName();
+        player1ProfileImage.setImage(new Image(
+                "/resources/images/cards/" + player1HeroName + "_logo.png"
+        ));
+        player2ProfileImage.setImage(new Image(
+                "/resources/images/cards/" + player2HeroName + "_logo.png"
+        ));
     }
 
     private void copyHandViewsToArray() {
