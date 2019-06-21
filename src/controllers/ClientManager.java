@@ -1,6 +1,7 @@
 package controllers;
 
 import data.AccountDataStream;
+import javafx.application.Platform;
 import models.*;
 import models.Account.NotEnoughDrakeException;
 import models.Collection.CardNotFoundException;
@@ -75,6 +76,19 @@ public class ClientManager {
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
         account = Account.getAccount(username, password);
+
+    }
+
+    public static Player getMe() {
+        if (playingMatch.getPlayer1().getAccount().getCollection().equals(account.getUsername()))
+            return playingMatch.getPlayer1();
+        return playingMatch.getPlayer2();
+    }
+
+    public static Player getOpponent() {
+        if (playingMatch.getPlayer1().getAccount().getCollection().equals(account.getUsername()))
+            return playingMatch.getPlayer2();
+        return playingMatch.getPlayer1();
     }
 
     public static Account getWinner() {
