@@ -171,7 +171,8 @@ public class GraphicCollectionMenu implements Initializable {
             boolean finalDeckIsValid = false;
             try {
                 finalDeckIsValid = ClientManager.isValid(deckName);
-            } catch (Account.DeckNotFoundException ignored) { }
+            } catch (Account.DeckNotFoundException ignored) {
+            }
             exportDeckBtn.setDisable(!finalDeckIsValid);
             playMusic("sfx_ui_select.m4a");
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
@@ -356,8 +357,7 @@ public class GraphicCollectionMenu implements Initializable {
 
     private File getFileFromFileChooser() {
         final FileChooser fileChooser = new FileChooser();
-
-//            fileChooser.setInitialDirectory(new File("src/data/saved-decks"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("deck", "*.deck"));
         fileChooser.setTitle("Please select a valid .json File");
 
         File file = fileChooser.showOpenDialog(Graphics.stage);
@@ -397,7 +397,7 @@ public class GraphicCollectionMenu implements Initializable {
     public void exportDeck(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
 
-        String deckName = ((Label)selectedDeck.getChildren().get(0)).getText();
+        String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
 
         Deck deck = null;
         try {
