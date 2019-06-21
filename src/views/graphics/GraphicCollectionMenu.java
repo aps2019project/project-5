@@ -1,6 +1,7 @@
 package views.graphics;
 
 import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.*;
 import controllers.ClientManager;
 import javafx.fxml.Initializable;
@@ -66,6 +67,7 @@ public class GraphicCollectionMenu implements Initializable {
     public TextField searchField;
     public Label filterNone, filterHeroes, filterMinions, filterSpells;
     public Type filterType = Card.class;
+    private YaGsonBuilder deckJsonBuilder = new YaGsonBuilder().setPrettyPrinting();
     private YaGson deckJson = new YaGson();
 
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
@@ -375,7 +377,7 @@ public class GraphicCollectionMenu implements Initializable {
             return;
         importPathTxt.setText(file.getAbsolutePath());
 
-        Deck deck = new Deck("alaki");
+        Deck deck = new Deck("new deck");
         try {
             FileReader deckReader = new FileReader(file);
             deck = deckJson.fromJson(deckReader, Deck.class);
@@ -414,6 +416,7 @@ public class GraphicCollectionMenu implements Initializable {
 
         try {
             FileWriter deckWriter = new FileWriter(file);
+            deckJson = deckJsonBuilder.create();
             deckWriter.write(deckJson.toJson(deck));
             deckWriter.flush();
             deckWriter.close();

@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class FileReader {
-    static final String MINIONS_DATA = "minion.json";
+    static final String MINIONS_DATA = "minions.json";
     static final String HEROES_DATA = "heroes.json";
     static final String SPELLS_DATA = "spell.json";
 

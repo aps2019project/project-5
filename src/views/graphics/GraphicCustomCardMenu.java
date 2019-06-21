@@ -172,7 +172,7 @@ public class GraphicCustomCardMenu {
 
             jsonCardBuilder.setPrettyPrinting();
             YaGson jsonCard = jsonCardBuilder.create();
-            URL url = FileReader.class.getResource("minion.json");
+            URL url = FileReader.class.getResource("minions.json");
             File file = new File(url.getPath());
             FileWriter cardWriter = new FileWriter(file);
             cardWriter.write(jsonCard.toJson(Shop.getInstance().getCardsCollection().getMinions()));
@@ -181,9 +181,6 @@ public class GraphicCustomCardMenu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        // TODO: 6/21/19 add card to json
 
     }
 

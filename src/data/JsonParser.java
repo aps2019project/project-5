@@ -43,11 +43,11 @@ public class JsonParser {
 
     public static void write(ArrayList<Card> c) {
         YaGson y = new YaGson();
-        URL url = FileReader.class.getResource("minion.json");
+        URL url = FileReader.class.getResource("minions.json");
         File file = new File(url.getPath());
         try {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(y.toJson(c,cardArrayType));
+            fileWriter.write(y.toJson(c, cardArrayType));
         } catch (IOException e) {
             e.printStackTrace();
         }
