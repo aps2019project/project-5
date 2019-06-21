@@ -88,8 +88,16 @@ public class GraphicBattleController implements Initializable {
         for(Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
             handItemImages[index].setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
+            int finalIndex = index;
             handItemContainer[index].setOnMouseEntered(event -> {
-
+                AnchorPane cardPane = ShopController.getCardPane(card, false);
+                cardPane.relocate(handItemContainer[finalIndex].localToScene(
+                        handItemContainer[finalIndex].getBoundsInLocal()
+                ).getMinX(), 600);
+                root.getChildren().add(cardPane);
+                handItemContainer[finalIndex].setOnMouseExited(event1 -> {
+                    root.getChildren().remove(cardPane);
+                });
             });
             index++;
         }

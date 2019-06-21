@@ -10,7 +10,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml" fx:id="root"
             fx:controller="views.graphics.GraphicBattleController"
-            stylesheets="/resources/stylesheets/battle.css"
+            stylesheets="/resources/stylesheets/battle.css, /resources/stylesheets/shop-style.css"
             prefHeight="1920.0" prefWidth="1080.0" styleClass="battle-container">
 
     <ImageView fitWidth="2300" fitHeight="1293" AnchorPane.topAnchor="-107" AnchorPane.leftAnchor="-190">

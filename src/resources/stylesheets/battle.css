@@ -29,7 +29,6 @@
     -fx-font-weight: bold;
     -fx-pref-width: 255;
     -fx-pref-height: 102;
-    /*-fx-effect: dropshadow(three-pass-box, black, 10, 0.8, 1, 1);*/
 }
 
 .end-turn-button:hover {
