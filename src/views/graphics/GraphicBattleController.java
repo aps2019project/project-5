@@ -75,7 +75,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     public void updateHand() {
-        Hand hand = ClientManager.getHand();
+        hand = ClientManager.getHand();
         System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
         for(Card card : hand.getCards()) {
