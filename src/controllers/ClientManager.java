@@ -67,7 +67,6 @@ public class ClientManager {
 
     public static void createAccount(String username, String password) throws Account.UsernameExistsException {
         Account.addAccount(new Account(username, password));
-        AccountDataStream.saveAccounts();
     }
 
     public static void login(String username, String password) throws Account.InvalidPasswordException, Account.InvalidUsernameException {
