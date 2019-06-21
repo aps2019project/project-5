@@ -3,21 +3,20 @@ package views.graphics;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.*;
+import com.sun.deploy.util.SystemUtils;
 import controllers.ClientManager;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Account;
@@ -29,12 +28,11 @@ import models.cards.Minion;
 import models.cards.spell.Spell;
 import views.Graphics;
 
-import java.awt.*;
+import java.io.File;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -69,6 +67,7 @@ public class GraphicCollectionMenu implements Initializable {
     public Type filterType = Card.class;
     private YaGsonBuilder deckJsonBuilder = new YaGsonBuilder().setPrettyPrinting();
     private YaGson deckJson = new YaGson();
+    final File savedDecksPath = new File("src" + File.separator + "data" + File.separator + "saved-decks");
 
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
         button.setDisable(isWrong);
@@ -173,8 +172,7 @@ public class GraphicCollectionMenu implements Initializable {
             boolean finalDeckIsValid = false;
             try {
                 finalDeckIsValid = ClientManager.isValid(deckName);
-            } catch (Account.DeckNotFoundException ignored) {
-            }
+            } catch (Account.DeckNotFoundException ignored) { }
             exportDeckBtn.setDisable(!finalDeckIsValid);
             playMusic("sfx_ui_select.m4a");
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
@@ -299,6 +297,20 @@ public class GraphicCollectionMenu implements Initializable {
                     }
 
                 });
+//                cardPane.setOnMousePressed(event -> {
+//                    cardPane.setMouseTransparent(true);
+//                    event.setDragDetect(true);
+//                });
+//                cardPane.setOnMouseDragged(event -> {
+//                    cardPane.startFullDrag();
+//                    event.setDragDetect(false);
+//                    AnchorPane draggingCardPane = cardPane;
+//                    System.out.println("hi");
+//                    stage.getScene().getRoot().setOnMouseMoved(mouseEvent -> {
+//                        draggingCardPane.setTranslateX(mouseEvent.getX());
+//                        draggingCardPane.setTranslateY(mouseEvent.getY());
+//                    });
+//                });
                 cardContainer.getChildren().add(cardPane);
             }
 
@@ -332,18 +344,18 @@ public class GraphicCollectionMenu implements Initializable {
         updateCards("", filterType);
 
         backBtn.setOnMouseClicked(event -> {
-            Graphics.playMusic("sfx_ui_select.m4a");
+            playMusic("sfx_ui_select.m4a");
             Graphics.setMenu(MAIN_MENU);
         });
 
-        searchField.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
+        searchField.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
 
         searchField.textProperty().addListener(((observable, oldValue, newValue) -> updateCards(newValue, filterType)));
 
         Label[] filterLabels = new Label[]{filterNone, filterHeroes, filterMinions, filterSpells};
         for (Label filterLabel : filterLabels) {
             filterLabel.setOnMouseClicked(event -> {
-                Graphics.playMusic("sfx_ui_select.m4a");
+                playMusic("sfx_ui_select.m4a");
                 for (Label otherLabel : filterLabels)
                     otherLabel.getStyleClass().remove("selected");
                 filterLabel.getStyleClass().add("selected");
@@ -357,9 +369,28 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
 
-    private File getFileFromFileChooser() {
+    private String getDirectory() {
+        final DirectoryChooser directoryChooser = new DirectoryChooser();
+
+
+        directoryChooser.setInitialDirectory(savedDecksPath);
+        directoryChooser.setTitle("Please select a Directory to save your deck");
+
+        Stage fileChooserStage = new Stage();
+        fileChooserStage.setScene(new Scene(new AnchorPane()));
+
+
+        File file = directoryChooser.showDialog(fileChooserStage);
+
+        return file.getPath();
+    }
+
+    private File getFile() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("deck", "*.deck"));
+
+
+        fileChooser.setInitialDirectory(savedDecksPath);
         fileChooser.setTitle("Please select a valid .json File");
 
         File file = fileChooser.showOpenDialog(Graphics.stage);
@@ -372,12 +403,12 @@ public class GraphicCollectionMenu implements Initializable {
 
         File file = new File(importPathTxt.getText());
         if (!file.exists())
-            file = getFileFromFileChooser();
+            file = getFile();
         if (file == null || !file.exists())
             return;
         importPathTxt.setText(file.getAbsolutePath());
 
-        Deck deck = new Deck("new deck");
+        Deck deck = null;
         try {
             FileReader deckReader = new FileReader(file);
             deck = deckJson.fromJson(deckReader, Deck.class);
@@ -409,9 +440,12 @@ public class GraphicCollectionMenu implements Initializable {
 
         File file = new File(exportPathTxt.getText());
         if (!file.exists())
-            file = getFileFromFileChooser();
-        if (file == null || !file.exists())
+            file = new File(getDirectory() + "/" + deckName + ".deck") ;
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
             return;
+        }
         exportPathTxt.setText(file.getAbsolutePath());
 
         try {

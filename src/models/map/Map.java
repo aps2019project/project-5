@@ -165,6 +165,50 @@ public class Map {
         cells[x][y].setFlag(new Flag());
     }
 
+    public Cell getLeft(Cell cell) throws InvalidCellException {
+        int x = cell.getX(), y = cell.getY() - 1;
+        return getCell(x, y);
+    }
+    public Cell getTop(Cell cell) throws InvalidCellException {
+        int x = cell.getX() - 1, y = cell.getY() ;
+        return getCell(x, y);
+    }
+    public Cell getBottom(Cell cell) throws InvalidCellException {
+        int x = cell.getX() + 1, y = cell.getY();
+        return getCell(x, y);
+    }
+    public Cell getRight(Cell cell) throws InvalidCellException {
+        int x = cell.getX(), y = cell.getY() + 1;
+        return getCell(x, y);
+    }
+
+    public List<Cell> getNeighbors(Cell cell) {
+        List<Cell> cells = new ArrayList<>();
+        try {
+            cells.add(this.getRight(cell));
+        } catch (InvalidCellException e) { }
+        try {
+            cells.add(this.getLeft(cell));
+        } catch (InvalidCellException e) { }
+        try {
+            cells.add(this.getTop(cell));
+        } catch (InvalidCellException e) { }
+        try {
+            cells.add(this.getBottom(cell));
+        } catch (InvalidCellException e) { }
+        return cells;
+    }
+
+    public List<Cell> getCells() {
+        List<Cell> cells = new ArrayList<>();
+        for (int i = 0; i < ROW_NUMBER; i++) {
+            for (int j = 0; j < COLUMN_NUMBER; j++) {
+                cells.add(this.cells[i][j]);
+            }
+        }
+        return cells;
+    }
+
     public class InvalidCellException extends Exception {
         public InvalidCellException(String message) {
             super(message);

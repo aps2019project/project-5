@@ -71,4 +71,6 @@ public class Cell {
     public boolean hasFlag() {
         return flag != null;
     }
+
+
 }

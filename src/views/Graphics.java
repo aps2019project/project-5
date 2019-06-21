@@ -31,7 +31,6 @@ public class Graphics extends Application {
 
     static {
         try {
-            createTestUser();
             GridPane tmpGridPane = new GridPane();
             tmpGridPane.setOnMouseClicked(event -> setMenu(MAIN_MENU));
             profileRoot = tmpGridPane;
@@ -130,7 +129,7 @@ public class Graphics extends Application {
 
 
 
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
