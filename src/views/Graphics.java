@@ -23,7 +23,7 @@ public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
-            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot;
+            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot;
 
     static {
         try {
@@ -32,7 +32,6 @@ public class Graphics extends Application {
             profileRoot = new GridPane();
             watchRoot = new GridPane();
             codexRoot = new GridPane();
-            battleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
@@ -54,31 +53,47 @@ public class Graphics extends Application {
     }
 
     public static void setMenu(Menu menu) {
-        try {
-            Graphics.stage.getScene().setRoot(FXMLLoader.load(Graphics.class.getResource(menu.menuPath)));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(menu == Menu.BATTLE) {
+            try {
+                Graphics.stage.getScene().setRoot(
+                        FXMLLoader.load(Graphics.class.getResource(menu.getFile()))
+                );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Graphics.stage.getScene().setRoot(menu.getRoot());
         }
+
     }
 
     public enum Menu {
-        COLLECTION_MENU("../layouts/collection_menu.fxml"),
-        SHOP_MENU("../layouts/shop.fxml"),
-        ACCOUNT_MENU("../layouts/account_menu.fxml"),
-        MATCH_SELECT_MENU("../layouts/match_select.fxml"),
-        MAIN_MENU("../layouts/main_menu.fxml"),
-        MULTI_SINGLE("../layouts/multi_single.fxml"),
-        CUSTOM_SELECT("../layouts/custom_select.fxml"),
+        COLLECTION_MENU(collectionMenuRoot),
+        SHOP_MENU(shopMenuRoot),
+        ACCOUNT_MENU(accountMenuRoot),
+        MATCH_SELECT_MENU(matchSelectRoot),
+        MAIN_MENU(mainMenuRoot),
+        MULTI_SINGLE(matchSelectRoot),
+        CUSTOM_SELECT(new GridPane()),
         BATTLE("../layouts/battle.fxml"),
-        CUSTOM_CARD("../layouts/custom_card.fxml");
-        String menuPath;
+        CUSTOM_CARD(new GridPane());
+        Parent root;
+        String file;
 
-        public String getMenuPath() {
-            return menuPath;
+        Menu(Parent root) {
+            this.root = root;
         }
 
-        Menu(String menuPath) {
-            this.menuPath = menuPath;
+        Menu(String file) {
+            this.file = file;
+        }
+
+        public String getFile() {
+            return this.file;
+        }
+
+        public Parent getRoot() {
+            return this.root;
         }
     }
 
@@ -95,7 +110,7 @@ public class Graphics extends Application {
 
         stage = primaryStage;
 
-        Scene scene = new Scene(battleRoot, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));

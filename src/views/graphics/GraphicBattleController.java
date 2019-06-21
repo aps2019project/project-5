@@ -1,5 +1,6 @@
 package views.graphics;
 
+import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import models.Hand;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -66,6 +68,11 @@ public class GraphicBattleController implements Initializable {
         handItemMana[2] = handItem2_label;
         handItemMana[3] = handItem3_label;
         handItemMana[4] = handItem4_label;
+        updateHand();
+    }
+
+    public void updateHand() {
+
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {
