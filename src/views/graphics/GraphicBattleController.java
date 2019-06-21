@@ -88,6 +88,9 @@ public class GraphicBattleController implements Initializable {
         for(Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
             handItemImages[index].setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
+            handItemContainer[index].setOnMouseEntered(event -> {
+
+            });
             index++;
         }
     }
