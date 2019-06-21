@@ -2,10 +2,13 @@ package models.cards;
 
 import models.cards.buff.Buff;
 import models.cards.spell.SpecialPowerActivateTime;
+
 import java.util.ArrayList;
 
 public class Minion extends Attacker {
     int comboAbility;
+
+    private ArrayList<Buff> buffs = new ArrayList<>();
 
     public ArrayList<Buff> getBuffs() {
         return buffs;
@@ -15,7 +18,12 @@ public class Minion extends Attacker {
         this.buffs.add(buff);
     }
 
-    private ArrayList<Buff> buffs = new ArrayList<>();
+    public void buffGarbage() {
+        buffs.forEach(buff -> {
+            if (!buff.buffIsActivated()) buffs.remove(buff);
+        });
+
+    }
 
     public SpecialPowerActivateTime specialPowerActivateTime;
 
@@ -27,7 +35,7 @@ public class Minion extends Attacker {
 
     public Minion(Card card) {
         super(card);
-        this.specialPowerActivateTime = ((Minion)card).specialPowerActivateTime;
+        this.specialPowerActivateTime = ((Minion) card).specialPowerActivateTime;
     }
 
 

@@ -1,5 +1,6 @@
 package controllers;
 
+import data.AccountDataStream;
 import models.*;
 import models.Account.NotEnoughDrakeException;
 import models.Collection.CardNotFoundException;
@@ -40,6 +41,7 @@ public class ClientManager {
         return account.getMainDeck();
     }
 
+
     public static void addDeck(Deck deck) throws Account.DeckExistsException {
         account.addDeck(deck);
     }
@@ -68,7 +70,6 @@ public class ClientManager {
     }
 
     public static void createAccount(String username, String password) throws Account.UsernameExistsException {
-
         Account.addAccount(new Account(username, password));
     }
 
@@ -232,7 +233,7 @@ public class ClientManager {
         ClientManager.isAIMode = isAIMode;
     }
 
-    public static void  setGameMode(GameMode gameMode) {
+    public static void setGameMode(GameMode gameMode) {
         switch (gameMode) {
             case STORY_MODE:
                 matches.add(new DeathMatch(account, opponent));

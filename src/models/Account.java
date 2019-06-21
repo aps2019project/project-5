@@ -1,5 +1,6 @@
 package models;
 
+import data.AccountDataStream;
 import models.cards.Card;
 
 import javax.security.auth.login.AccountNotFoundException;
@@ -7,6 +8,7 @@ import java.util.*;
 
 public class Account {
     private static Map<String, Account> accounts = new HashMap<>();
+
     private List<MatchResult> matchHistory = new ArrayList<>();
     private String username;
     private String password;
@@ -20,13 +22,26 @@ public class Account {
         return accounts.get(opponentUsername);
     }
 
+    static {
+        accounts = AccountDataStream.loadAccounts();
+    }
+
+    public static void saveAccounts() {
+        AccountDataStream.saveAccounts();
+    }
+
+    public static void loadAccounts() {
+        accounts = AccountDataStream.loadAccounts();
+    }
+
+
     public int getDrake() {
         return drake;
     }
 
     public String getDrakeString() {
-        if(drake < 1000) return "" + drake;
-        if(drake < 10000) return (((float) (drake / 100)) / 10) + "K";
+        if (drake < 1000) return "" + drake;
+        if (drake < 10000) return (((float) (drake / 100)) / 10) + "K";
         return drake / 1000 + "K";
     }
 
@@ -84,7 +99,9 @@ public class Account {
     }
 
     public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
+        accounts = AccountDataStream.loadAccounts();
         for (Map.Entry<String, Account> entry : accounts.entrySet()) {
+            System.out.println(entry.getKey());
             if (entry.getValue().username.equals(username)) {
                 if (entry.getValue().password.equals(password))
                     return entry.getValue();
@@ -117,6 +134,7 @@ public class Account {
         if (!doesAccountExists(user))
             accounts.put(user.username, user);
         else throw new UsernameExistsException(user.username);
+        AccountDataStream.saveAccounts();
     }
 
     public void deleteDeck(String deckName) throws DeckNotFoundException {
@@ -146,7 +164,7 @@ public class Account {
         return ranking;
     }
 
-    public void addCardToCollection(Card card)  {
+    public void addCardToCollection(Card card) {
         collection.addCard(card);
     }
 

@@ -36,7 +36,7 @@ public class SpriteMaker {
     private SpriteMaker(String name, Action action, int cycle) throws FileNotFoundException {
         this.name = name;
         this.action = action;
-        filePath = "src/resources/sprites/" + name ;
+        filePath = "src/resources/sprites/" + name;
         spriteFile = new File(filePath + ".plist");
         bigImage = new ImageView(new Image(new FileInputStream(filePath + ".png")));
         this.cycle = cycle;
@@ -48,7 +48,7 @@ public class SpriteMaker {
         NSDictionary imageDictionary = (NSDictionary) mainDictionary.objectForKey("frames");
         imageDictionary.getHashMap().forEach((key, values) -> {
             if (key.contains(spriteMaker.action.getCode())) {
-                NSString cornerString = (NSString)((NSDictionary) values).objectForKey("frame");
+                NSString cornerString = (NSString) ((NSDictionary) values).objectForKey("frame");
                 Pattern numberPattern = Pattern.compile("\\d+");
                 Matcher matcher = numberPattern.matcher(cornerString.toString());
                 List<Integer> pecuList = new ArrayList<>();
@@ -60,7 +60,7 @@ public class SpriteMaker {
 
     }
 
-    public static ImageView getAndShowAnimation(String name, Action action, int cycle)  {
+    public static ImageView getAndShowAnimation(String name, Action action, int cycle) {
         SpriteMaker spriteMaker = null;
         try {
             spriteMaker = new SpriteMaker(name, action, cycle);
@@ -80,7 +80,7 @@ public class SpriteMaker {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Animation animation = new SpriteAnimation(spriteMaker.bigImage, Duration.seconds(2), spriteMaker.datas );
+        Animation animation = new SpriteAnimation(spriteMaker.bigImage, Duration.seconds(2), spriteMaker.datas);
         animation.setCycleCount(cycle);
         animation.play();
         return spriteMaker.bigImage;
