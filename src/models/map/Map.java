@@ -199,6 +199,16 @@ public class Map {
         return cells;
     }
 
+    public List<Cell> getCells() {
+        List<Cell> cells = new ArrayList<>();
+        for (int i = 0; i < ROW_NUMBER; i++) {
+            for (int j = 0; j < COLUMN_NUMBER; j++) {
+                cells.add(this.cells[i][j]);
+            }
+        }
+        return cells;
+    }
+
     public class InvalidCellException extends Exception {
         public InvalidCellException(String message) {
             super(message);

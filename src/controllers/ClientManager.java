@@ -446,10 +446,12 @@ public class ClientManager {
     }
 
     public static List<Cell> getAvailableCells(Card card) {
+        if (card instanceof Spell)
+            return getMap().getCells().stream().filter(cell -> !cell.isFull()).collect(Collectors.toList());
         List<Cell> cells = new ArrayList<>();
-        getMe().getActiveCards().forEach(cardIt -> getMap().getNeighbors(cardIt.getCell()).forEach(cell -> {
-            if (!cell.isFull()) cells.add(cell);
-        }));
+        getMe().getActiveCards().forEach(cardIt -> cells.addAll(getMap().getNeighbors(cardIt.getCell()).stream()
+                .filter(cell -> !cell.isFull())
+                .collect(Collectors.toList())));
         return cells;
     }
 }
