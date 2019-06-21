@@ -1,5 +1,6 @@
 package views.graphics;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
@@ -84,11 +85,14 @@ public class GraphicMainMenu implements Initializable {
     }
 
     public void logout(MouseEvent mouseEvent) {
-        music.stop();
+        try {
+            music.stop();
+        } catch (Exception e) {}
         Graphics.setMenu(ACCOUNT_MENU);
     }
 
     public void save(MouseEvent mouseEvent) {
         Account.saveAccounts();
+        Graphics.alert("Congrats", "Account saved", "Your Account saved Successfully.");
     }
 }
