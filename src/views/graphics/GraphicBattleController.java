@@ -73,8 +73,9 @@ public class GraphicBattleController implements Initializable {
         updateMana();
         player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername().toUpperCase());
         player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername().toUpperCase());
-        for(int i = 0; i < 5; i++) {
-            AnchorPane cardPane = getCardInGame(i, i);
+        for(int i = 0; i < 5; i++)
+        for(int j = 0; j < 9; j++) {
+            AnchorPane cardPane = getCardInGame(i, j);
             root.getChildren().add(cardPane);
         }
     }
@@ -181,7 +182,7 @@ public class GraphicBattleController implements Initializable {
         imageView.setFitWidth(160 + row * 8);
         imageView.setFitHeight(160 + row * 8);
         imageView.setImage(new Image("/resources/images/cards/Esfandiar_idle.gif"));
-        anchorPane.relocate(480 + column * 90, 250 + 90 * row);
+        anchorPane.relocate(483 + column * 97 + (column - 4) * row * 2.5, 250 + 90 * row);
 
         anchorPane.getChildren().add(imageView);
         return anchorPane;
