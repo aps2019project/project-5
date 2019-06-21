@@ -1,14 +1,27 @@
 package views.graphics;
 
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.skins.JFXCheckBoxOldSkin;
+import data.FileReader;
 import javafx.event.ActionEvent;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import models.Shop;
+import models.cards.AttackType;
+import models.cards.Minion;
+import models.cards.spell.SpecialPowerActivateTime;
 import views.Graphics;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
 
 import static views.Graphics.Menu.MAIN_MENU;
 import static views.Graphics.Menu.SHOP_MENU;
@@ -31,13 +44,14 @@ public class GraphicCustomCardMenu {
     public JFXComboBox turnAttackAvCmb;
     public JFXComboBox moveAvCmb;
     public JFXComboBox attackTypeCmb;
+    public JFXTabPane tabs;
 
     public void addCard(ActionEvent actionEvent) {
         playMusic("sfx_ui_select.m4a");
         String name = nameTxt.getText();
         boolean flag = true;
 
-        if (name.equals("")){
+        if (name.equals("")) {
             changeAsWrong(nameTxt, true);
             flag = false;
         }
@@ -114,7 +128,7 @@ public class GraphicCustomCardMenu {
             flag = false;
         }
 
-        String attackType ;
+        String attackType = "";
         if (attackTypeCmb.getSelectionModel().isEmpty()) {
             flag = false;
             changeAsWrong(attackTypeCmb, true);
@@ -122,7 +136,7 @@ public class GraphicCustomCardMenu {
             attackType = attackTypeCmb.getValue().toString();
         }
 
-        String counterAttack ;
+        String counterAttack;
         if (counterAttackCmb.getSelectionModel().isEmpty()) {
             flag = false;
             changeAsWrong(counterAttackCmb, true);
@@ -130,7 +144,7 @@ public class GraphicCustomCardMenu {
             counterAttack = attackTypeCmb.getValue().toString();
         }
 
-        String turnAttack ;
+        String turnAttack;
         if (turnAttackAvCmb.getSelectionModel().isEmpty()) {
             flag = false;
             changeAsWrong(turnAttackAvCmb, true);
@@ -138,18 +152,36 @@ public class GraphicCustomCardMenu {
             turnAttack = attackTypeCmb.getValue().toString();
         }
 
-        String moveAvailale ;
+        String moveAvailale;
         if (moveAvCmb.getSelectionModel().isEmpty()) {
             flag = false;
             changeAsWrong(moveAvCmb, true);
         } else {
             moveAvailale = attackTypeCmb.getValue().toString();
-            System.out.println(moveAvailale);
         }
 
 
         if (!flag)
             return;
+        SpecialPowerActivateTime specialPowerActivateTime = SpecialPowerActivateTime.ON_ATTACK;
+        AttackType attackType1 = AttackType.getAttackType(attackType);
+        Minion minion = new Minion(id, name, "", manaPoint, price, health, attackPoint, attackType1, range, specialPowerActivateTime);
+        try {
+            Shop.getInstance().getCardsCollection().addCard(minion);
+            YaGsonBuilder jsonCardBuilder = new YaGsonBuilder();
+
+            jsonCardBuilder.setPrettyPrinting();
+            YaGson jsonCard = jsonCardBuilder.create();
+            URL url = FileReader.class.getResource("minion.json");
+            File file = new File(url.getPath());
+            FileWriter cardWriter = new FileWriter(file);
+            cardWriter.write(jsonCard.toJson(Shop.getInstance().getCardsCollection().getMinions()));
+            cardWriter.flush();
+            cardWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // TODO: 6/21/19 add card to json
 
