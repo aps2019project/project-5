@@ -6,12 +6,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.PerspectiveTransform;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Hand;
+import models.cards.Card;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,8 +28,9 @@ public class GraphicBattleController implements Initializable {
     public ImageView handItem0_image, handItem1_image, handItem2_image, handItem3_image, handItem4_image;
     public Label handItem0_label, handItem1_label, handItem2_label, handItem3_label, handItem4_label;
     private boolean isGraveyardOpen = false;
-    public ImageView[] handItemImages = new ImageView[5];
-    public Label[] handItemMana = new Label[5];
+    private ImageView[] handItemImages = new ImageView[5];
+    private Label[] handItemMana = new Label[5];
+    private Hand hand;
 
     private void createMapCells() {
         for(int i = 0; i < 5; i++) {
@@ -72,7 +75,14 @@ public class GraphicBattleController implements Initializable {
     }
 
     public void updateHand() {
-
+        Hand hand = ClientManager.getHand();
+        System.out.println("Hand: \n\t" + hand.getCards().toString());
+        int index = 0;
+        for(Card card : hand.getCards()) {
+            handItemMana[index].setText("" + card.getManaPoint());
+            handItemImages[index].setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
+            index++;
+        }
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {
