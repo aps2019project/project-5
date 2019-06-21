@@ -373,8 +373,10 @@ public class GraphicCollectionMenu implements Initializable {
         Graphics.playMusic("sfx_ui_select.m4a");
 
         File file = new File(importPathTxt.getText());
-        while (!file.exists())
+        if (!file.exists())
             file = getFileFromFileChooser();
+        if (file == null || !file.exists())
+            return;
         importPathTxt.setText(file.getAbsolutePath());
 
         Deck deck = new Deck("alaki");
@@ -404,8 +406,10 @@ public class GraphicCollectionMenu implements Initializable {
         } catch (Account.DeckNotFoundException ignored) { }
 
         File file = new File(exportPathTxt.getText());
-        while (!file.exists())
+        if (!file.exists())
             file = getFileFromFileChooser();
+        if (file == null || !file.exists())
+            return;
         exportPathTxt.setText(file.getAbsolutePath());
 
 
