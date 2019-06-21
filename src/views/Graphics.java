@@ -19,28 +19,33 @@ import models.Deck;
 import java.io.File;
 import java.io.IOException;
 
+import static views.Graphics.Menu.CUSTOM_CARD;
+
 public class Graphics extends Application {
     public static Stage stage;
 
-    public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
-            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot;
+    public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
+            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot, customCardRoot;
 
     static {
         try {
-            //TODO : make true roots;
+            // TODO : make true roots;
             createTestUser();
             profileRoot = new GridPane();
             watchRoot = new GridPane();
             codexRoot = new GridPane();
-            battleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
+            customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
+            multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
+            customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
+
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
+            System.exit(1000);
         }
     }
 
@@ -54,31 +59,46 @@ public class Graphics extends Application {
     }
 
     public static void setMenu(Menu menu) {
-        try {
-            Graphics.stage.getScene().setRoot(FXMLLoader.load(Graphics.class.getResource(menu.menuPath)));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(menu == Menu.BATTLE) {
+            try {
+                Graphics.stage.getScene().setRoot(
+                        FXMLLoader.load(Graphics.class.getResource(menu.getFile()))
+                );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Graphics.stage.getScene().setRoot(menu.getRoot());
         }
     }
 
     public enum Menu {
-        COLLECTION_MENU("../layouts/collection_menu.fxml"),
-        SHOP_MENU("../layouts/shop.fxml"),
-        ACCOUNT_MENU("../layouts/account_menu.fxml"),
-        MATCH_SELECT_MENU("../layouts/match_select.fxml"),
-        MAIN_MENU("../layouts/main_menu.fxml"),
-        MULTI_SINGLE("../layouts/multi_single.fxml"),
-        CUSTOM_SELECT("../layouts/custom_select.fxml"),
+        COLLECTION_MENU(collectionMenuRoot),
+        SHOP_MENU(shopMenuRoot),
+        ACCOUNT_MENU(accountMenuRoot),
+        MATCH_SELECT_MENU(matchSelectRoot),
+        MAIN_MENU(mainMenuRoot),
+        MULTI_SINGLE(multiSingleRoot),
+        CUSTOM_SELECT(customSelectRoot),
         BATTLE("../layouts/battle.fxml"),
-        CUSTOM_CARD("../layouts/custom_card.fxml");
-        String menuPath;
+        CUSTOM_CARD(new GridPane());
+        Parent root;
+        String file;
 
-        public String getMenuPath() {
-            return menuPath;
+        Menu(Parent root) {
+            this.root = root;
         }
 
-        Menu(String menuPath) {
-            this.menuPath = menuPath;
+        Menu(String file) {
+            this.file = file;
+        }
+
+        public String getFile() {
+            return this.file;
+        }
+
+        public Parent getRoot() {
+            return this.root;
         }
     }
 
@@ -105,7 +125,7 @@ public class Graphics extends Application {
     }
 
     public static MediaPlayer playMusic(String musicPath) {
-//        new AudioClip(new File("src/resources/sounds/" + musicPath).toURI().toString()).play();
+//      new AudioClip(new File("src/resources/sounds/" + musicPath).toURI().toString()).play();
         Media sound = new Media(new File("src/resources/sounds/" + musicPath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
