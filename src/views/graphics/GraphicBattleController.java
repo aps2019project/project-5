@@ -15,6 +15,8 @@ import javafx.util.Duration;
 import models.Hand;
 import models.cards.Card;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class GraphicBattleController implements Initializable {
@@ -38,6 +40,7 @@ public class GraphicBattleController implements Initializable {
     private Label[] handItemMana = new Label[5];
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private Hand hand;
+    private HashMap<Card, AnchorPane> cardViews = new HashMap<>();
 
     private void createMapCells() {
         for(int i = 0; i < 5; i++) {
@@ -71,8 +74,13 @@ public class GraphicBattleController implements Initializable {
         updateHand();
         showProfiles();
         updateMana();
-        player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername());
-        player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername());
+        player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername().toUpperCase());
+        player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername().toUpperCase());
+        for(int i = 0; i < 5; i++)
+        for(int j = 0; j < 9; j++) {
+            AnchorPane cardPane = getCardInGame(i, j);
+            root.getChildren().add(cardPane);
+        }
     }
 
     private void showProfiles() {
@@ -169,5 +177,17 @@ public class GraphicBattleController implements Initializable {
             t.play();
         }
         isGraveyardOpen = !isGraveyardOpen;
+    }
+
+    private AnchorPane getCardInGame(int row, int column) {
+        AnchorPane anchorPane = new AnchorPane();
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(160 + row * 8);
+        imageView.setFitHeight(160 + row * 8);
+        imageView.setImage(new Image("/resources/images/cards/Esfandiar_idle.gif"));
+        anchorPane.relocate(483 + column * 97 + (column - 4) * row * 2.5, 250 + 90 * row);
+
+        anchorPane.getChildren().add(imageView);
+        return anchorPane;
     }
 }
