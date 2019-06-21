@@ -19,8 +19,6 @@ import models.Deck;
 import java.io.File;
 import java.io.IOException;
 
-import static views.Graphics.Menu.CUSTOM_CARD;
-
 public class Graphics extends Application {
     public static Stage stage;
 
@@ -118,7 +116,7 @@ public class Graphics extends Application {
 
         stage = primaryStage;
 
-        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
