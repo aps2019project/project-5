@@ -35,6 +35,8 @@ public class GraphicBattleController implements Initializable {
     public ImageView player2Mana0, player2Mana1, player2Mana2, player2Mana3, player2Mana4, player2Mana5, player2Mana6, player2Mana7, player2Mana8;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
+    private ImageView[] player1Mana = new ImageView[9];
+    private ImageView[] player2Mana = new ImageView[9];
     private Label[] handItemMana = new Label[5];
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private Hand hand;
@@ -99,6 +101,24 @@ public class GraphicBattleController implements Initializable {
         handItemContainer[2] = handItem2_container;
         handItemContainer[3] = handItem3_container;
         handItemContainer[4] = handItem4_container;
+        player1Mana[0] = player1Mana0;
+        player1Mana[1] = player1Mana1;
+        player1Mana[2] = player1Mana2;
+        player1Mana[3] = player1Mana3;
+        player1Mana[4] = player1Mana4;
+        player1Mana[5] = player1Mana5;
+        player1Mana[6] = player1Mana6;
+        player1Mana[7] = player1Mana7;
+        player1Mana[8] = player1Mana8;
+        player2Mana[0] = player2Mana0;
+        player2Mana[1] = player2Mana1;
+        player2Mana[2] = player2Mana2;
+        player2Mana[3] = player2Mana3;
+        player2Mana[4] = player2Mana4;
+        player2Mana[5] = player2Mana5;
+        player2Mana[6] = player2Mana6;
+        player2Mana[7] = player2Mana7;
+        player2Mana[8] = player2Mana8;
     }
 
     public void updateHand() {
