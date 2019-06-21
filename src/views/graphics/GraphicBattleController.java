@@ -15,6 +15,8 @@ import javafx.util.Duration;
 import models.Hand;
 import models.cards.Card;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class GraphicBattleController implements Initializable {
@@ -38,6 +40,7 @@ public class GraphicBattleController implements Initializable {
     private Label[] handItemMana = new Label[5];
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private Hand hand;
+    private HashMap<Card, AnchorPane> cardViews = new HashMap<>();
 
     private void createMapCells() {
         for(int i = 0; i < 5; i++) {
