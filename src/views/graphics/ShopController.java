@@ -161,13 +161,15 @@ public class ShopController implements Initializable {
                     Graphics.playMusic("sfx_ui_select.m4a");
                     JFXButton buy = new JFXButton("Buy");
                     buy.setText("Buy");
-                    buy.setLayoutX(125);
-                    buy.setLayoutY(220);
-                    buy.getStyleClass().addAll("btn-primary", "btn-lg");
+                    buy.setLayoutX(110);
+                    buy.setLayoutY(210);
+                    buy.setPrefSize(90, 62);
+                    buy.getStyleClass().addAll("shop-buy-button");
                     JFXButton cancel = new JFXButton("Cancel");
-                    cancel.setLayoutX(10);
-                    cancel.setLayoutY(220);
-                    cancel.getStyleClass().addAll("btn-primary", "btn-lg");
+                    cancel.setLayoutX(25);
+                    cancel.setLayoutY(210);
+                    cancel.setPrefSize(90, 62);
+                    cancel.getStyleClass().addAll("shop-cancel-button");
                     cardPane.getChildren().addAll(buy, cancel);
                     buy.setOnMouseClicked(bought -> {
                         Graphics.playMusic("sfx_ui_select.m4a");
