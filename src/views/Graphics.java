@@ -26,11 +26,10 @@ public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
-            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot, customCardRoot;
+            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, customCardRoot;
 
     static {
         try {
-            // TODO : make true roots;
             createTestUser();
             profileRoot = new GridPane();
             watchRoot = new GridPane();
@@ -43,7 +42,6 @@ public class Graphics extends Application {
             customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
             multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
             customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
-
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1000);

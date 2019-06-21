@@ -180,7 +180,4 @@ public class GraphicAccountMenu implements Initializable {
 
     }
 
-    public void back(MouseEvent mouseEvent) {
-        Graphics.stage.getScene().setRoot(Graphics.mainMenuRoot);
-    }
 }

@@ -42,6 +42,10 @@ public class ClientManager {
     }
 
 
+    public static void addDeck(Deck deck) throws Account.DeckExistsException {
+        account.addDeck(deck);
+    }
+
     public static enum GameMode {
         STORY_MODE, DEATH_MATCH, SINGLE_FLAG, MULTI_FLAG;
 
@@ -129,13 +133,8 @@ public class ClientManager {
     }
 
     public static Collection getMyCollection() {
-        try {
-
-            Collection collection = account.getCollection();
-            return collection;
-        } catch (Exception e) {
-        }
-        return null;
+        Collection collection = account.getCollection();
+        return collection;
     }
 
     public static List<Card> searchMyCard(String cardName) throws CardNotFoundException {

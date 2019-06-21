@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Hand;
 import models.cards.Card;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,9 +27,13 @@ public class GraphicBattleController implements Initializable {
     public ImageView handItem0_image, handItem1_image, handItem2_image, handItem3_image, handItem4_image;
     public Label handItem0_label, handItem1_label, handItem2_label, handItem3_label, handItem4_label;
     public AnchorPane handItem0_container, handItem1_container, handItem2_container, handItem3_container, handItem4_container;
-    public ImageView player1ProfileImage;
+    public ImageView player1ProfileImage, player2ProfileImage;
+    public ImageView player1Mana0, player1Mana1, player1Mana2, player1Mana3, player1Mana4, player1Mana5, player1Mana6, player1Mana7, player1Mana8;
+    public ImageView player2Mana0, player2Mana1, player2Mana2, player2Mana3, player2Mana4, player2Mana5, player2Mana6, player2Mana7, player2Mana8;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
+    private ImageView[] player1Mana = new ImageView[9];
+    private ImageView[] player2Mana = new ImageView[9];
     private Label[] handItemMana = new Label[5];
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private Hand hand;
@@ -58,7 +61,6 @@ public class GraphicBattleController implements Initializable {
         e.setLrx(950);    // Lower right
         e.setLry(480);
         gameBoard.setEffect(e);
-
     }
 
     @Override
@@ -66,6 +68,19 @@ public class GraphicBattleController implements Initializable {
         createMapCells();
         copyHandViewsToArray();
         updateHand();
+        showProfiles();
+        updateMana();
+    }
+
+    private void showProfiles() {
+        String player1HeroName = ClientManager.getPlayingMatch().getPlayer1().getDeck().getHero().getName();
+        String player2HeroName = ClientManager.getPlayingMatch().getPlayer2().getDeck().getHero().getName();
+        player1ProfileImage.setImage(new Image(
+                "/resources/images/cards/" + player1HeroName + "_logo.png"
+        ));
+        player2ProfileImage.setImage(new Image(
+                "/resources/images/cards/" + player2HeroName + "_logo.png"
+        ));
     }
 
     private void copyHandViewsToArray() {
@@ -84,6 +99,24 @@ public class GraphicBattleController implements Initializable {
         handItemContainer[2] = handItem2_container;
         handItemContainer[3] = handItem3_container;
         handItemContainer[4] = handItem4_container;
+        player1Mana[0] = player1Mana0;
+        player1Mana[1] = player1Mana1;
+        player1Mana[2] = player1Mana2;
+        player1Mana[3] = player1Mana3;
+        player1Mana[4] = player1Mana4;
+        player1Mana[5] = player1Mana5;
+        player1Mana[6] = player1Mana6;
+        player1Mana[7] = player1Mana7;
+        player1Mana[8] = player1Mana8;
+        player2Mana[0] = player2Mana0;
+        player2Mana[1] = player2Mana1;
+        player2Mana[2] = player2Mana2;
+        player2Mana[3] = player2Mana3;
+        player2Mana[4] = player2Mana4;
+        player2Mana[5] = player2Mana5;
+        player2Mana[6] = player2Mana6;
+        player2Mana[7] = player2Mana7;
+        player2Mana[8] = player2Mana8;
     }
 
     public void updateHand() {
@@ -104,6 +137,18 @@ public class GraphicBattleController implements Initializable {
             });
             index++;
         }
+    }
+
+    public void updateMana() {
+        Image mana = new Image("/resources/images/battle/ui/icon_mana@2x.png");
+        Image noMana = new Image("/resources/images/battle/ui/icon_mana_inactive@2x.png");
+        int mana1 = ClientManager.getPlayingMatch().getPlayer1().getMana();
+        int mana2 = ClientManager.getPlayingMatch().getPlayer1().getMana();
+        for(int i = 0; i < 9; i++)
+            player1Mana[i].setImage(i < mana1 ? mana : noMana);
+        for(int i = 0; i < 9; i++)
+            player2Mana[i].setImage(i < mana2 ? mana : noMana);
+
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {

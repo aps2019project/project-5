@@ -16,7 +16,6 @@ import java.util.List;
 
 public class Map {
     public final static int ROW_NUMBER = 5, COLUMN_NUMBER = 9;
-    // TODO: 5/5/19 write to cells
     private Cell[][] cells = new Cell[5][9];
     private Collection cards = new Collection();
 

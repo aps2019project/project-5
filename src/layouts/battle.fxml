@@ -89,7 +89,29 @@
         </AnchorPane>
     </HBox>
 
-    <ImageView fx:id="player1ProfileImage">
-    </ImageView>
+    <ImageView fx:id="player1ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="-50"/>
+    <HBox AnchorPane.leftAnchor="250" AnchorPane.topAnchor="110">
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana0"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana1"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana2"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana3"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana4"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana5"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana6"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana7"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana8"/>
+    </HBox>
+    <HBox AnchorPane.rightAnchor="250" AnchorPane.topAnchor="110">
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana8"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana7"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana6"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana5"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana4"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana3"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana2"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana1"/>
+        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana0"/>
+    </HBox>
+    <ImageView fx:id="player2ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="-50"/>
 
 </AnchorPane>

@@ -12,6 +12,7 @@ import views.Graphics;
 
 import static views.Graphics.Menu.MAIN_MENU;
 import static views.Graphics.Menu.SHOP_MENU;
+import static views.Graphics.playMusic;
 
 public class GraphicCustomCardMenu {
 
@@ -32,6 +33,7 @@ public class GraphicCustomCardMenu {
     public JFXComboBox attackTypeCmb;
 
     public void addCard(ActionEvent actionEvent) {
+        playMusic("sfx_ui_select.m4a");
         String name = nameTxt.getText();
         boolean flag = true;
 
@@ -181,6 +183,7 @@ public class GraphicCustomCardMenu {
     }
 
     public void back(MouseEvent mouseEvent) {
+        playMusic("sfx_ui_select.m4a");
         Graphics.setMenu(SHOP_MENU);
     }
 }
