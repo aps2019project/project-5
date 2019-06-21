@@ -54,6 +54,7 @@ public class GraphicAccountMenu implements Initializable {
             ClientManager.login(loginUsernameTxt.getText(), loginPasswordTxt.getText());
             Graphics.setMenu(MAIN_MENU);
             music.stop();
+            GraphicMainMenu.music = playMusic("music_collection.m4a");
         } catch (Account.InvalidPasswordException e) {
             changeAsWrong(loginPasswordTxt, true);
         } catch (Account.InvalidUsernameException e) {
