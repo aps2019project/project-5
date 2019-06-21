@@ -76,3 +76,26 @@
 .graveyard-scroll-pane .viewport {
     -fx-background-color: transparent;
 }
+
+.hand-container {
+    -fx-pref-width: 780px;
+}
+
+.hand-item {
+    -fx-pref-width: 180px;
+    -fx-pref-height: 180px;
+    -fx-background-image: url(/resources/images/battle/ui/card_background_highlight@2x.png);
+    -fx-background-size: cover;
+}
+
+.replace-hand-item {
+    -fx-pref-width: 130;
+    -fx-pref-height: 130;
+}
+
+.hand-card-mana {
+    -fx-text-fill: blue;
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+    -fx-pref-width: 30;
+}

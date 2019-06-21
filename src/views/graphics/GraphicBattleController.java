@@ -3,7 +3,9 @@ package views.graphics;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.PerspectiveTransform;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -19,7 +21,11 @@ public class GraphicBattleController implements Initializable {
     public AnchorPane root;
     public AnchorPane graveyardContainer;
     public VBox graveyardCards; // Dead cards must be added to it's children.
+    public ImageView handItem0_image, handItem1_image, handItem2_image, handItem3_image, handItem4_image;
+    public Label handItem0_label, handItem1_label, handItem2_label, handItem3_label, handItem4_label;
     private boolean isGraveyardOpen = false;
+    public ImageView[] handItemImages = new ImageView[5];
+    public Label[] handItemMana = new Label[5];
 
     private void createMapCells() {
         for(int i = 0; i < 5; i++) {
@@ -50,6 +56,16 @@ public class GraphicBattleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createMapCells();
+        handItemImages[0] = handItem0_image;
+        handItemImages[1] = handItem1_image;
+        handItemImages[2] = handItem2_image;
+        handItemImages[3] = handItem3_image;
+        handItemImages[4] = handItem4_image;
+        handItemMana[0] = handItem0_label;
+        handItemMana[1] = handItem1_label;
+        handItemMana[2] = handItem2_label;
+        handItemMana[3] = handItem3_label;
+        handItemMana[4] = handItem4_label;
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {
