@@ -10,13 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Hand;
 import models.cards.Card;
-
-import java.awt.color.CMMException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -72,6 +69,7 @@ public class GraphicBattleController implements Initializable {
         copyHandViewsToArray();
         updateHand();
         showProfiles();
+        updateMana();
     }
 
     private void showProfiles() {
@@ -139,6 +137,18 @@ public class GraphicBattleController implements Initializable {
             });
             index++;
         }
+    }
+
+    public void updateMana() {
+        Image mana = new Image("/resources/images/battle/ui/icon_mana@2x.png");
+        Image noMana = new Image("/resources/images/battle/ui/icon_mana_inactive@2x.png");
+        int mana1 = ClientManager.getPlayingMatch().getPlayer1().getMana();
+        int mana2 = ClientManager.getPlayingMatch().getPlayer1().getMana();
+        for(int i = 0; i < 9; i++)
+            player1Mana[i].setImage(i < mana1 ? mana : noMana);
+        for(int i = 0; i < 9; i++)
+            player2Mana[i].setImage(i < mana2 ? mana : noMana);
+
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {
