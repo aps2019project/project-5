@@ -28,7 +28,7 @@
 }
 
 .game-select {
-    -fx-effect: dropshadow(three-pass-box, black, 20, 0.3, 3, 3);
+    -fx-effect: dropshadow(three-pass-box, black, 4, 0.8, 3, 3);
     -fx-padding: 400 0 0 0;
 }
 

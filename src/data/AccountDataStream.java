@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AccountDataStream {
-    private static Type accountsArray = new TypeToken<List<Account>>() {
-    }.getType();
+    private static Type accountsArray = new TypeToken<List<Account>>() {}.getType();
     private static URL url = AccountDataStream.class.getResource("accounts.json");
     private static File file = new File(url.getPath());
 

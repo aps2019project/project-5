@@ -1,6 +1,5 @@
 package views.graphics;
 
-import com.dd.plist.PropertyListFormatException;
 import com.jfoenix.controls.*;
 import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
@@ -9,19 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import models.Account;
-import models.Action;
-import org.xml.sax.SAXException;
 import views.Graphics;
-import views.SpriteMaker;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 
 import static views.Graphics.Menu.MAIN_MENU;
@@ -38,7 +29,6 @@ public class GraphicAccountMenu implements Initializable {
     public ImageView pillars;
     public ImageView foreground;
     public AnchorPane root;
-    public StackPane rootStackPane;
     public JFXTabPane tabs;
     public Tab loginTab;
 
