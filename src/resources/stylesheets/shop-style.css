@@ -112,10 +112,11 @@
 
 .btn-lg {
     -fx-padding: 1em 3em;
-    -fx-font-size: 10px;
+    -fx-font-size: 18px;
     -fx-border-radius: 0.3em;
     -fx-font-weight: bold;
-    -fx-pref-width: 90px;
+    -fx-pref-width: 300px;
+
 }
 
 .drakes {

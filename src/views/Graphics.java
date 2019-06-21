@@ -19,11 +19,13 @@ import models.Deck;
 import java.io.File;
 import java.io.IOException;
 
+import static views.Graphics.Menu.CUSTOM_CARD;
+
 public class Graphics extends Application {
     public static Stage stage;
 
-    public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot, multiSingleRoot,
-            matchSelectRoot, customSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot;
+    public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
+            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot, customCardRoot;
 
     static {
         try {
@@ -37,6 +39,7 @@ public class Graphics extends Application {
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
+            customCardRoot = FXMLLoader.load(Graphics.class.getResource(CUSTOM_CARD.getMenuPath()));
             multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
             customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
 
@@ -67,7 +70,6 @@ public class Graphics extends Application {
         } else {
             Graphics.stage.getScene().setRoot(menu.getRoot());
         }
-
     }
 
     public enum Menu {
