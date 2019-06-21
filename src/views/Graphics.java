@@ -61,7 +61,7 @@ public class Graphics extends Application {
     }
 
     public static void setMenu(Menu menu) {
-        if(menu == Menu.BATTLE) {
+        if(!menu.isPreLoaded) {
             try {
                 Graphics.stage.getScene().setRoot(
                         FXMLLoader.load(Graphics.class.getResource(menu.getFile()))
@@ -76,7 +76,7 @@ public class Graphics extends Application {
 
     public enum Menu {
         COLLECTION_MENU(collectionMenuRoot),
-        SHOP_MENU(shopMenuRoot),
+        SHOP_MENU("../layouts/shop.fxml"),
         ACCOUNT_MENU(accountMenuRoot),
         MATCH_SELECT_MENU(matchSelectRoot),
         MAIN_MENU(mainMenuRoot),
@@ -86,17 +86,24 @@ public class Graphics extends Application {
         CUSTOM_CARD(customCardRoot);
         Parent root;
         String file;
+        boolean isPreLoaded;
 
         Menu(Parent root) {
             this.root = root;
+            isPreLoaded = true;
         }
 
         Menu(String file) {
             this.file = file;
+            isPreLoaded = false;
         }
 
         public String getFile() {
             return this.file;
+        }
+
+        public boolean isPreLoaded() {
+            return isPreLoaded;
         }
 
         public Parent getRoot() {

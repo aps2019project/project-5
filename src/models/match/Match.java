@@ -84,14 +84,16 @@ public abstract class Match {
     }
 
     public void setTurn() {
-        getActivePlayer().setMana(turn / 2 + 2);
+        int mana = turn / 2 + 2;
+        if(mana > 9) mana = 9;
+        getActivePlayer().setMana(mana);
         turnPreparing(players[0]);
         turnPreparing(players[1]);
 
     }
 
     public void nextTurn() {
-        turn++;
+
         setTurn();
         // TODO: Implement
     }
