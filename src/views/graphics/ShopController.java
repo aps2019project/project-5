@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 
 import static views.Graphics.Menu.CUSTOM_CARD;
 import static views.Graphics.Menu.MAIN_MENU;
+import static views.Graphics.playMusic;
 
 public class ShopController implements Initializable {
     public JFXMasonryPane cardContainer;
@@ -182,6 +183,7 @@ public class ShopController implements Initializable {
     }
 
     public void addCustomCard(MouseEvent mouseEvent) {
+        playMusic("sfx_ui_select.m4a");
         Graphics.setMenu(CUSTOM_CARD);
 
     }

@@ -53,6 +53,8 @@ public class GraphicCollectionMenu implements Initializable {
     public VBox deckList;
     public VBox selectedDeckCardList;
     public AnchorPane selectedDeck;
+    public JFXButton importDeckBtn;
+    public JFXButton exportDeckBtn;
     private ToggleGroup selectedDeckToggleGroup = new ToggleGroup();
     private final Background ordinaryBackground = new Background(new BackgroundFill(Color.VIOLET,
             new CornerRadii(5), Insets.EMPTY));
@@ -132,6 +134,7 @@ public class GraphicCollectionMenu implements Initializable {
         deleteDeckBtn.setVisible(false);
         deleteDeckBtn.setBackground(deleteBackground);
         deleteDeckBtn.setOnMouseClicked(event -> {
+            exportDeckBtn.setDisable(true);
             Graphics.playMusic("sfx_ui_select.m4a");
             try {
                 if (radioButton.isSelected())
@@ -154,6 +157,11 @@ public class GraphicCollectionMenu implements Initializable {
         deckPane.setOnMouseExited(event -> deleteDeckBtn.setVisible(false));
 
         deckPane.setOnMouseClicked(event -> {
+            boolean finalDeckIsValid = false;
+            try {
+                finalDeckIsValid = ClientManager.isValid(deckName);
+            } catch (Account.DeckNotFoundException ignored) { }
+            exportDeckBtn.setDisable(!finalDeckIsValid);
             Graphics.playMusic("sfx_ui_select.m4a");
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
             deckList.getChildren().forEach(node -> {
@@ -205,6 +213,7 @@ public class GraphicCollectionMenu implements Initializable {
         deleteBtn.setOnMouseDragExited(event -> deleteBtn.setVisible(false));
         deleteBtn.setBackground(deleteBackground);
         deleteBtn.setOnMouseClicked(event -> {
+            exportDeckBtn.setDisable(true);
             Graphics.playMusic("sfx_ui_select.m4a");
             try {
                 final String selectedDeckName = ((Label) selectedDeck.getChildren().get(0)).getText();
@@ -258,6 +267,7 @@ public class GraphicCollectionMenu implements Initializable {
                         selectedDeckCardList.getChildren().add(getMiniCardPane(cardName, false));
                         if (ClientManager.isValid(deckName)) {
                             selectedDeck.setBackground(validBackground);
+                            exportDeckBtn.setDisable(false);
                             selectedDeck.getChildren().get(1).setVisible(true);
                         }
                     } catch (Deck.DeckFullException e) {
@@ -283,6 +293,7 @@ public class GraphicCollectionMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        exportDeckBtn.setDisable(true);
 
         newDeckNameTxt.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
 
@@ -322,4 +333,10 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
 
+    public void importDeck(MouseEvent mouseEvent) {
+
+    }
+
+    public void exportDeck(MouseEvent mouseEvent) {
+    }
 }
