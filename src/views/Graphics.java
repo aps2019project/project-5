@@ -31,12 +31,14 @@ public class Graphics extends Application {
 
     static {
         try {
-            createTestUser();
             GridPane tmpGridPane = new GridPane();
             tmpGridPane.setOnMouseClicked(event -> setMenu(MAIN_MENU));
             profileRoot = tmpGridPane;
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
+            profileRoot = new GridPane();
+            watchRoot = new GridPane();
+            codexRoot = new GridPane();
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
@@ -59,7 +61,7 @@ public class Graphics extends Application {
     }
 
     public static void setMenu(Menu menu) {
-        if(!menu.isPreLoaded) {
+        if (!menu.isPreLoaded) {
             try {
                 Graphics.stage.getScene().setRoot(
                         FXMLLoader.load(Graphics.class.getResource(menu.getFile()))
@@ -124,6 +126,8 @@ public class Graphics extends Application {
         } catch (Account.InvalidPasswordException | Account.InvalidUsernameException ignored) { }
 
         stage = primaryStage;
+
+
 
         Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
