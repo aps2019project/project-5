@@ -29,8 +29,10 @@
         <Image url="/resources/images/battle/battlemap5_foreground_002@2x.png"/>
     </ImageView>
 
+    <!-- End Turn Button -->
     <Button styleClass="end-turn-button" text="END TURN" AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="40"/>
 
+    <!-- Graveyard -->
     <AnchorPane fx:id="graveyardContainer" styleClass="graveyard-container" AnchorPane.topAnchor="180"
                 AnchorPane.leftAnchor="-115">
         <ScrollPane styleClass="graveyard-scroll-pane" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50"
@@ -41,6 +43,7 @@
                 AnchorPane.topAnchor="357" onMouseClicked="#graveyardToggle"/>
     </AnchorPane>
 
+    <!-- Hand Items -->
     <HBox AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="400" styleClass="hand-container">
         <AnchorPane styleClass="hand-item" fx:id="handItem0_container">
             <ImageView fitWidth="150" fitHeight="150" AnchorPane.leftAnchor="15" fx:id="handItem0_image">
@@ -89,29 +92,35 @@
         </AnchorPane>
     </HBox>
 
-    <ImageView fx:id="player1ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="-50"/>
+
+    <!-- Player1 ManaBar -->
     <HBox AnchorPane.leftAnchor="250" AnchorPane.topAnchor="110">
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana0"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana1"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana2"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana3"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana4"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana5"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana6"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana7"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player1Mana8"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana0"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana1"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana2"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana3"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana4"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana5"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana6"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana7"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana8"/>
     </HBox>
+
+    <!-- Player1 ManaBar -->
     <HBox AnchorPane.rightAnchor="250" AnchorPane.topAnchor="110">
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana8"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana7"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana6"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana5"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana4"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana3"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana2"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana1"/>
-        <ImageView fitWidth="40" fitHeight="44" fx:id="player2Mana0"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana8"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana7"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana6"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana5"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana4"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana3"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana2"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana1"/>
+        <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana0"/>
     </HBox>
+
+    <!-- Players Profile Image -->
+    <ImageView fx:id="player1ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="-50"/>
     <ImageView fx:id="player2ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="-50"/>
 
 </AnchorPane>
