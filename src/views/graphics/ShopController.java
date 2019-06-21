@@ -182,17 +182,7 @@ public class ShopController implements Initializable {
     }
 
     public void addCustomCard(MouseEvent mouseEvent) {
-        Stage stage = new Stage();
-        stage.setWidth(700);
-        stage.setHeight(500);
-        stage.setX(700);
-        stage.setY(250);
-        stage.setScene(new Scene(new AnchorPane()));
-//        try {
-//            System.out.println(System.getProperty("user.dir"));
-//            stage.getScene().setRoot(FXMLLoader.load(Graphics.class.getResource(CUSTOM_CARD.getMenuPath())));
-//        } catch (IOException ignored) { }
-        stage.show();
+        Graphics.setMenu(CUSTOM_CARD);
 
     }
 }

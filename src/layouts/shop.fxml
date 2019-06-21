@@ -27,5 +27,5 @@
     <Label fx:id="filterMinions" styleClass="shop-filter-label" text="Minions" AnchorPane.leftAnchor="780" AnchorPane.topAnchor="50"/>
     <Label fx:id="filterSpells" styleClass="shop-filter-label" text="Spells" AnchorPane.leftAnchor="930" AnchorPane.topAnchor="50"/>
     <Label styleClass="drakes" alignment="center" fx:id="drakes" AnchorPane.topAnchor="130" AnchorPane.leftAnchor="160"/>
-    <JFXButton fx:id="addCustomCard" text="Add Custom Card" styleClass="custom-card" AnchorPane.leftAnchor="40" AnchorPane.bottomAnchor="40" onMouseClicked="#addCustomCard"/>
+    <JFXButton fx:id="addCustomCard" text="Add Custom Card" styleClass="btn-primary, btn-lg" AnchorPane.leftAnchor="100" AnchorPane.bottomAnchor="40" onMouseClicked="#addCustomCard"/>
 </AnchorPane>

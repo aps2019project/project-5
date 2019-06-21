@@ -10,37 +10,93 @@
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXScrollPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.FakeFocusJFXTextField?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea" fx:id="root"
-            stylesheets="@../resources/stylesheets/login-style.css" styleClass="container-account-menu"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicAccountMenu">
-    <ImageView fx:id="pillars" fitWidth="1530" fitHeight="1110" AnchorPane.leftAnchor="-400" AnchorPane.topAnchor="-30">
-        <Image url="/resources/images/scenes/pillars_near@2x.png"/>
+            stylesheets="@../resources/stylesheets/custom-card.css" styleClass="shop-container"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphics.GraphicCustomCardMenu">
+    <ImageView fx:id="backBtn" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100" fitHeight="100" onMouseClicked="#back">
+        <Image url="/resources/images/buttons/back-button.png"/>
     </ImageView>
-
-    <ImageView fx:id="foreground" fitWidth="1600" fitHeight="484" layoutX="400" layoutY="700">
-        <Image url="/resources/images/scenes/foreground@2x.png"/>
-    </ImageView>
-    <VBox prefHeight="600.0" prefWidth="600.0" spacing="20" alignment="center" AnchorPane.leftAnchor="660" AnchorPane.topAnchor="200">
-        <ImageView fitWidth="500" fitHeight="108">
-            <Image url="/resources/images/logo.png"/>
-        </ImageView>
-        <JFXTabPane fx:id="tabs" styleClass="tab-pane">
-            <Tab fx:id="loginTab" text="LOG IN" styleClass="duelystTab">
-                <VBox styleClass="tab-items" spacing="25">
-                    <JFXTextField fx:id="loginUsernameTxt" promptText="Username" styleClass="input-text"/>
-                    <JFXPasswordField fx:id="loginPasswordTxt" promptText="Password" styleClass="input-text"/>
-                    <JFXCheckBox text="Remember Me" styleClass="check-box"/>
-                    <JFXButton fx:id="loginBtn" styleClass="btn-primary, btn-lg" text="LOG IN" onMouseClicked="#login"/>
-                </VBox>
-            </Tab>
-            <Tab text="SIGN UP" styleClass="duelystTab">
-                <VBox styleClass="tab-items" spacing="25">
-                    <JFXTextField fx:id="signUpUsernameTxt" promptText="Username" styleClass="input-text"/>
-                    <JFXPasswordField fx:id="signUpPasswordTxt" promptText="Password" styleClass="input-text"/>
-                    <JFXPasswordField fx:id="signUpPasswordRematchTxt" promptText="Password" styleClass="input-text"/>
-                    <JFXButton fx:id="signUpBtn" styleClass="btn-primary, btn-lg" text="SIGN UP" onMouseClicked="#signUp"/>
-                </VBox>
-            </Tab>
-        </JFXTabPane>
+    <VBox prefHeight="900.0" prefWidth="830.0" spacing="20" styleClass="text-field-container" alignment="center"
+          AnchorPane.leftAnchor="550" AnchorPane.topAnchor="100">
+        <padding><Insets top="30" /> </padding>
+        <Label styleClass="header-label" text="ADD YOUR OWN CARD"/>
+        <ScrollPane styleClass="text-field-container" hbarPolicy="NEVER" >
+            <VBox alignment="CENTER" spacing="40" styleClass="text-field-container">
+                <padding><Insets topRightBottomLeft="30" /> </padding>
+                <HBox alignment="CENTER" spacing="40" >
+                    <VBox spacing="20" >
+                        <Label fx:id="nameLbl" text="Card Name:" styleClass="label" />
+                        <Label fx:id="idLbl" text="ID:" styleClass="label" />
+                        <Label fx:id="priceLbl" text="Price:" styleClass="label" />
+                        <Label fx:id="manaPointLbl" text="Mana Point:" styleClass="label" />
+                        <Label fx:id="powerLbl" text="Power:" styleClass="label" />
+                        <Label fx:id="healthLbl" text="Health:" styleClass="label" />
+                        <Label fx:id="rangeLbl" text="Range:" styleClass="label" />
+                        <Label fx:id="attackTypeLbl" text="Attack Type:" styleClass="label" />
+                        <Label fx:id="attackPointLbl" text="Attack Point:" styleClass="label" />
+                        <Label fx:id="counterAttackLbl" text="Counter Attack:" styleClass="label" />
+                        <Label fx:id="turnAttackAvLbl" text="Is available for turn attack?" styleClass="label" />
+                        <Label fx:id="moveAvLbl" text="Has move Ability?" styleClass="label" />
+                        <Label fx:id="maxDisLbl" text="Max Distance to move:" styleClass="label" />
+                        <Label fx:id="comboAbilityLbl" text="Combo Ability:" styleClass="label" />
+                    </VBox>
+                    <VBox spacing="20" >
+                        <JFXTextField fx:id="nameTxt" promptText="my minion" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXTextField fx:id="idTxt" promptText="102" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXTextField fx:id="priceTxt" promptText="30(drakes)" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXTextField fx:id="manaPointTxt" promptText="4" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXTextField fx:id="powerTxt" promptText="20" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXTextField fx:id="healthTxt" promptText="15" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXTextField fx:id="rangeTxt" promptText="2" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXComboBox fx:id="attackTypeCmb" promptText="MELEE" styleClass="input-text" onMouseClicked="#backToNormal">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="MELEE" />
+                                    <String fx:value="HYBRID" />
+                                    <String fx:value="Ranged" />
+                                </FXCollections>
+                            </items>
+                        </JFXComboBox>
+                        <JFXTextField fx:id="attackPointTxt" promptText="3" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXComboBox fx:id="counterAttackCmb" promptText="Has" styleClass="input-text" onMouseClicked="#backToNormal">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Has" />
+                                    <String fx:value="Don't have" />
+                                </FXCollections>
+                            </items>
+                        </JFXComboBox>
+                        <JFXComboBox fx:id="turnAttackAvCmb" promptText="No" styleClass="input-text" onMouseClicked="#backToNormal">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Yes" />
+                                    <String fx:value="No" />
+                                </FXCollections>
+                            </items>
+                        </JFXComboBox>
+                        <JFXComboBox fx:id="moveAvCmb" promptText="Yes" styleClass="input-text" onMouseClicked="#backToNormal">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Yes" />
+                                    <String fx:value="No" />
+                                </FXCollections>
+                            </items>
+                        </JFXComboBox>
+                        <JFXTextField fx:id="maxDisTxt" promptText="2" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                        <JFXTextField fx:id="comboAbilityTxt" promptText="0" styleClass="input-text" onKeyTyped="#backToNormal"/>
+                    </VBox>
+                </HBox>
+                <JFXButton fx:id="addBtn" text="Add Card" styleClass="btn-primary, btn-lg" onAction="#addCard"/>
+            </VBox>
+        </ScrollPane>
     </VBox>
 </AnchorPane>

@@ -19,11 +19,13 @@ import models.Deck;
 import java.io.File;
 import java.io.IOException;
 
+import static views.Graphics.Menu.CUSTOM_CARD;
+
 public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent shopMenuRoot, accountMenuRoot, mainMenuRoot,
-            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot;
+            matchSelectRoot, profileRoot, watchRoot, collectionMenuRoot, codexRoot, battleRoot, customCardRoot;
 
     static {
         try {
@@ -38,6 +40,7 @@ public class Graphics extends Application {
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
             mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
+            customCardRoot = FXMLLoader.load(Graphics.class.getResource(CUSTOM_CARD.getMenuPath()));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
