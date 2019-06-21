@@ -27,9 +27,11 @@ public class GraphicBattleController implements Initializable {
     public VBox graveyardCards; // Dead cards must be added to it's children.
     public ImageView handItem0_image, handItem1_image, handItem2_image, handItem3_image, handItem4_image;
     public Label handItem0_label, handItem1_label, handItem2_label, handItem3_label, handItem4_label;
+    public AnchorPane handItem0_container, handItem1_container, handItem2_container, handItem3_container, handItem4_container;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
     private Label[] handItemMana = new Label[5];
+    private AnchorPane[] handItemContainer = new AnchorPane[5];
     private Hand hand;
 
     private void createMapCells() {
@@ -71,6 +73,11 @@ public class GraphicBattleController implements Initializable {
         handItemMana[2] = handItem2_label;
         handItemMana[3] = handItem3_label;
         handItemMana[4] = handItem4_label;
+        handItemContainer[0] = handItem0_container;
+        handItemContainer[1] = handItem1_container;
+        handItemContainer[2] = handItem2_container;
+        handItemContainer[3] = handItem3_container;
+        handItemContainer[4] = handItem4_container;
         updateHand();
     }
 
