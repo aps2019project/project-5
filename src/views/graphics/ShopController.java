@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -39,7 +40,7 @@ public class ShopController implements Initializable {
     public ImageView backBtn;
     public TextField searchField;
     public Label filterNone, filterHeroes, filterMinions, filterSpells;
-    public JFXButton addCustomCard;
+    public Button addCustomCard;
     private Type filterType = Card.class;
     public Label drakes;
 
@@ -159,13 +160,12 @@ public class ShopController implements Initializable {
                 AnchorPane cardPane = getCardPane(card, true);
                 cardPane.setOnMouseClicked(event -> {
                     Graphics.playMusic("sfx_ui_select.m4a");
-                    JFXButton buy = new JFXButton("Buy");
-                    buy.setText("Buy");
+                    JFXButton buy = new JFXButton("BUY");
                     buy.setLayoutX(110);
                     buy.setLayoutY(210);
                     buy.setPrefSize(90, 62);
                     buy.getStyleClass().addAll("shop-buy-button");
-                    JFXButton cancel = new JFXButton("Cancel");
+                    JFXButton cancel = new JFXButton("CANCEL");
                     cancel.setLayoutX(25);
                     cancel.setLayoutY(210);
                     cancel.setPrefSize(90, 62);
