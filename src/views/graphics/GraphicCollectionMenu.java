@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static views.Graphics.Menu.MAIN_MENU;
+import static views.Graphics.playMusic;
 import static views.graphics.ShopController.getCardPane;
 
 public class GraphicCollectionMenu implements Initializable {
@@ -77,7 +78,7 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
     public void createNewDeck() {
-        Graphics.playMusic("sfx_ui_select.m4a");
+        playMusic("sfx_ui_select.m4a");
         String deckName = newDeckNameTxt.getText();
         if (deckName.equals("")) {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, true);
@@ -110,7 +111,7 @@ public class GraphicCollectionMenu implements Initializable {
         radioButton.setToggleGroup(selectedDeckToggleGroup);
         radioButton.relocate(5, 17);
         radioButton.setOnMouseClicked(event -> {
-            Graphics.playMusic("sfx_ui_select.m4a");
+            playMusic("sfx_ui_select.m4a");
             try {
                 if (ClientManager.isValid(deckName))
                     ClientManager.selectDeck(deckName);
@@ -124,7 +125,13 @@ public class GraphicCollectionMenu implements Initializable {
         } catch (Account.DeckNotFoundException ignored) { };
         Background backgroundBtn = (deckIsValid ? validBackground : ordinaryBackground);
         deckPane.setBackground(backgroundBtn);
-        final String mainDeckName = ClientManager.getMainDeck().getName();
+        String tmp;
+        try {
+            tmp = ClientManager.getMainDeck().getName();
+        } catch (Exception e) {
+            tmp = "";
+        }
+        final String mainDeckName = tmp;
         radioButton.setSelected(mainDeckName.equals(deckName));
         radioButton.setVisible(deckIsValid);
 
@@ -134,7 +141,7 @@ public class GraphicCollectionMenu implements Initializable {
         deleteDeckBtn.setBackground(deleteBackground);
         deleteDeckBtn.setOnMouseClicked(event -> {
             exportDeckBtn.setDisable(true);
-            Graphics.playMusic("sfx_ui_select.m4a");
+            playMusic("sfx_ui_select.m4a");
             try {
                 if (radioButton.isSelected())
                     ClientManager.selectDeck(null);
@@ -161,7 +168,7 @@ public class GraphicCollectionMenu implements Initializable {
                 finalDeckIsValid = ClientManager.isValid(deckName);
             } catch (Account.DeckNotFoundException ignored) { }
             exportDeckBtn.setDisable(!finalDeckIsValid);
-            Graphics.playMusic("sfx_ui_select.m4a");
+            playMusic("sfx_ui_select.m4a");
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
             deckList.getChildren().forEach(node -> {
                 AnchorPane nodePane = (AnchorPane)node;
@@ -213,7 +220,7 @@ public class GraphicCollectionMenu implements Initializable {
         deleteBtn.setBackground(deleteBackground);
         deleteBtn.setOnMouseClicked(event -> {
             exportDeckBtn.setDisable(true);
-            Graphics.playMusic("sfx_ui_select.m4a");
+            playMusic("sfx_ui_select.m4a");
             try {
                 final String selectedDeckName = ((Label) selectedDeck.getChildren().get(0)).getText();
                 ClientManager.removeCardFromDeck(cardName, selectedDeckName);
@@ -254,7 +261,7 @@ public class GraphicCollectionMenu implements Initializable {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
                 cardPane.setOnMouseClicked(event -> {
-                    Graphics.playMusic("sfx_ui_select.m4a");
+                    playMusic("sfx_ui_select.m4a");
                     if (selectedDeck == null) {
                         Graphics.alert("Error", "Can't add card", "please select a deck first.");
                         return;
@@ -295,9 +302,12 @@ public class GraphicCollectionMenu implements Initializable {
         exportPathTxt.textProperty().addListener(observable -> exportDeckBtn.setDisable(false));
         importPathTxt.textProperty().addListener(observable -> importDeckBtn.setDisable(false));
 
+        importPathTxt.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
+        exportPathTxt.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
+
         exportDeckBtn.setDisable(true);
 
-        newDeckNameTxt.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
+        newDeckNameTxt.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
 
         newDeckNameTxt.textProperty().addListener(((observable, oldValue, newValue) -> {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, false);
@@ -310,18 +320,18 @@ public class GraphicCollectionMenu implements Initializable {
         updateCards("", filterType);
 
         backBtn.setOnMouseClicked(event -> {
-            Graphics.playMusic("sfx_ui_select.m4a");
+            playMusic("sfx_ui_select.m4a");
             Graphics.setMenu(MAIN_MENU);
         });
 
-        searchField.setOnMouseClicked(event -> Graphics.playMusic("sfx_ui_select.m4a"));
+        searchField.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
 
         searchField.textProperty().addListener(((observable, oldValue, newValue) -> updateCards(newValue, filterType)));
 
         Label[] filterLabels = new Label[]{filterNone, filterHeroes, filterMinions, filterSpells};
         for (Label filterLabel : filterLabels) {
             filterLabel.setOnMouseClicked(event -> {
-                Graphics.playMusic("sfx_ui_select.m4a");
+                playMusic("sfx_ui_select.m4a");
                 for (Label otherLabel : filterLabels)
                     otherLabel.getStyleClass().remove("selected");
                 filterLabel.getStyleClass().add("selected");
@@ -351,6 +361,7 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
     public void importDeck(MouseEvent mouseEvent) {
+        Graphics.playMusic("sfx_ui_select.m4a");
 
         File file = new File(importPathTxt.getText());
         while (!file.exists())
@@ -375,6 +386,8 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
     public void exportDeck(MouseEvent mouseEvent) {
+        Graphics.playMusic("sfx_ui_select.m4a");
+
         String deckName = ((Label)selectedDeck.getChildren().get(0)).getText();
 
         try {
