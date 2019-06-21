@@ -95,9 +95,7 @@ public class GraphicBattleController implements Initializable {
                         handItemContainer[finalIndex].getBoundsInLocal()
                 ).getMinX(), 600);
                 root.getChildren().add(cardPane);
-                handItemContainer[finalIndex].setOnMouseExited(event1 -> {
-                    root.getChildren().remove(cardPane);
-                });
+                handItemContainer[finalIndex].setOnMouseExited(event1 -> root.getChildren().remove(cardPane));
             });
             index++;
         }
@@ -107,13 +105,13 @@ public class GraphicBattleController implements Initializable {
         if(!isGraveyardOpen) {
             graveyardButton.getStyleClass().remove("button-open");
             graveyardButton.getStyleClass().add("button-close");
-            TranslateTransition t = new TranslateTransition(new Duration(1000), graveyardContainer);
+            TranslateTransition t = new TranslateTransition(new Duration(500), graveyardContainer);
             t.setToX(115);
             t.play();
         } else {
             graveyardButton.getStyleClass().add("button-open");
             graveyardButton.getStyleClass().remove("button-close");
-            TranslateTransition t = new TranslateTransition(new Duration(1000), graveyardContainer);
+            TranslateTransition t = new TranslateTransition(new Duration(500), graveyardContainer);
             t.setToX(0);
             t.play();
         }

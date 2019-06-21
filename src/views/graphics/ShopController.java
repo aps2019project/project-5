@@ -119,13 +119,19 @@ public class ShopController implements Initializable {
         if (isAttacker) {
             Label health = new Label("" + ((Attacker) card).getHealth());
             health.getStyleClass().add("shop-card-health");
-            health.relocate(157, 163);
+            if (isInShop)
+                health.relocate(157, 163);
+            else
+                health.relocate(150, 155);
             health.setPrefWidth(30);
             health.setAlignment(Pos.CENTER);
 
             Label power = new Label("" + ((Attacker) card).getAttackPoint());
             power.getStyleClass().add("shop-card-power");
-            power.relocate(38, 163);
+            if (isInShop)
+                power.relocate(38, 163);
+            else
+                power.relocate(35, 155);
             power.setPrefWidth(30);
             power.setAlignment(Pos.CENTER);
 
