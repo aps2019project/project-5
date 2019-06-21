@@ -5,17 +5,15 @@ import controllers.ClientManager;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Account;
@@ -27,19 +25,15 @@ import models.cards.Minion;
 import models.cards.spell.Spell;
 import views.Graphics;
 
-import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static views.Graphics.Menu.MAIN_MENU;
 import static views.Graphics.playMusic;
-import static views.Graphics.stage;
 import static views.graphics.ShopController.getCardPane;
 
 public class GraphicCollectionMenu implements Initializable {
@@ -369,17 +363,32 @@ public class GraphicCollectionMenu implements Initializable {
     }
 
 
-    private File getFileFromFileChooser() {
-        final FileChooser fileChooser = new FileChooser();
+    private File getPath() {
+        final DirectoryChooser directoryChooser = new DirectoryChooser();
 
-        fileChooser.setInitialDirectory(new File("src/data/saved-decks"));
-        fileChooser.setTitle("Please select a valid .json File");
+        directoryChooser.setInitialDirectory(new File("src/data/saved-decks"));
+        directoryChooser.setTitle("Please select a valid .json File");
 
         Stage fileChooserStage = new Stage();
         fileChooserStage.setScene(new Scene(new AnchorPane()));
 
 
-        File file = fileChooser.showOpenDialog(fileChooserStage);
+        File file = directoryChooser.showDialog(fileChooserStage);
+
+        return file;
+    }
+
+    private File getFile() {
+        final FileChooser directoryChooser = new FileChooser();
+
+        directoryChooser.setInitialDirectory(new File("src/data/saved-decks"));
+        directoryChooser.setTitle("Please select a valid .json File");
+
+        Stage fileChooserStage = new Stage();
+        fileChooserStage.setScene(new Scene(new AnchorPane()));
+
+
+        File file = directoryChooser.showOpenDialog(fileChooserStage);
 
         return file;
     }
@@ -389,7 +398,7 @@ public class GraphicCollectionMenu implements Initializable {
 
         File file = new File(importPathTxt.getText());
         if (!file.exists())
-            file = getFileFromFileChooser();
+            file = getFile();
         if (file == null || !file.exists())
             return;
         importPathTxt.setText(file.getAbsolutePath());
@@ -416,13 +425,14 @@ public class GraphicCollectionMenu implements Initializable {
 
         String deckName = ((Label)selectedDeck.getChildren().get(0)).getText();
 
+        Deck deck;
         try {
-            Deck deck = ClientManager.getDeck(deckName);
+            deck = ClientManager.getDeck(deckName);
         } catch (Account.DeckNotFoundException ignored) { }
 
         File file = new File(exportPathTxt.getText());
         if (!file.exists())
-            file = getFileFromFileChooser();
+            file = getPath();
         if (file == null || !file.exists())
             return;
         exportPathTxt.setText(file.getAbsolutePath());
