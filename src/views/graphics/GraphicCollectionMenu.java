@@ -39,6 +39,7 @@ import java.util.ResourceBundle;
 
 import static views.Graphics.Menu.MAIN_MENU;
 import static views.Graphics.playMusic;
+import static views.Graphics.stage;
 import static views.graphics.ShopController.getCardPane;
 
 public class GraphicCollectionMenu implements Initializable {
@@ -296,6 +297,20 @@ public class GraphicCollectionMenu implements Initializable {
                     }
 
                 });
+//                cardPane.setOnMousePressed(event -> {
+//                    cardPane.setMouseTransparent(true);
+//                    event.setDragDetect(true);
+//                });
+//                cardPane.setOnMouseDragged(event -> {
+//                    cardPane.startFullDrag();
+//                    event.setDragDetect(false);
+//                    AnchorPane draggingCardPane = cardPane;
+//                    System.out.println("hi");
+//                    stage.getScene().getRoot().setOnMouseMoved(mouseEvent -> {
+//                        draggingCardPane.setTranslateX(mouseEvent.getX());
+//                        draggingCardPane.setTranslateY(mouseEvent.getY());
+//                    });
+//                });
                 cardContainer.getChildren().add(cardPane);
             }
 
