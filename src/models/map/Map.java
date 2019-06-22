@@ -82,9 +82,8 @@ public class Map {
         if (card instanceof Attacker) cell.setAttacker((Attacker) card);
         if (card instanceof Spell) {
             List<Cell> effectedCells = getEffectCells((Spell) card, cell);
-            effectedCells.forEach(cell1 -> {
-                        cell1.getAttacker().getBuffActivated().addAll(((Spell) card).getBuffs());
-                    }
+            effectedCells.forEach(cell1
+                    -> cell1.getAttacker().getBuffActivated().addAll(((Spell) card).getBuffs())
             );
 
         }
