@@ -181,7 +181,7 @@ public class GraphicCustomCardMenu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Graphics.alert("Congrats", "Card Added", "Your new card added successfully.");
     }
 
 
