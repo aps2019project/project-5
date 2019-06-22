@@ -1,5 +1,6 @@
 package views.graphics;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
@@ -31,7 +32,7 @@ public class GraphicMainMenu implements Initializable {
     private TranslateTransition pillarsTransition;
 
     public void shop(MouseEvent mouseEvent) {
-        Graphics.playMusic("sfx_ui_select.m4a");
+        playMusic("sfx_ui_select.m4a");
         Graphics.setMenu(SHOP_MENU);
     }
 
@@ -84,11 +85,15 @@ public class GraphicMainMenu implements Initializable {
     }
 
     public void logout(MouseEvent mouseEvent) {
-        music.stop();
+        try {
+            music.stop();
+        } catch (Exception e) {}
+        playMusic("sfx_ui_select.m4a");
         Graphics.setMenu(ACCOUNT_MENU);
     }
 
     public void save(MouseEvent mouseEvent) {
         Account.saveAccounts();
+        Graphics.alert("Congrats", "Account saved", "Your Account saved Successfully.");
     }
 }
