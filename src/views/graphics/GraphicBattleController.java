@@ -13,9 +13,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Hand;
+import models.cards.Attacker;
 import models.cards.Card;
+import models.map.Cell;
+import models.map.Map;
+
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -76,11 +79,31 @@ public class GraphicBattleController implements Initializable {
         updateMana();
         player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername().toUpperCase());
         player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername().toUpperCase());
+        showCardsInBoard();
+
+//        for(int i = 0; i < 5; i++)
+//        for(int j = 0; j < 9; j++) {
+//            AnchorPane cardPane = getCardInGame(i, j);
+//            root.getChildren().add(cardPane);
+//        }
+    }
+
+    private void showCardsInBoard() {
+        root.getChildren().removeAll(cardViews.values());
+        cardViews.clear();
+        Map map = ClientManager.getPlayingMatch().getMap();
         for(int i = 0; i < 5; i++)
-        for(int j = 0; j < 9; j++) {
-            AnchorPane cardPane = getCardInGame(i, j);
-            root.getChildren().add(cardPane);
-        }
+            for(int j = 0; j < 9; j++) {
+                try {
+                    Cell cell = map.getCell(i, j);
+                    Attacker attacker = cell.getAttacker();
+                    if(attacker == null)
+                        continue;
+                    AnchorPane cardAnchorPane = getCardInGame(attacker, i, j);
+                    cardViews.put(attacker, cardAnchorPane);
+                    root.getChildren().add(cardAnchorPane);
+                } catch (Map.InvalidCellException ignored) {}
+            }
     }
 
     private void showProfiles() {
@@ -179,12 +202,15 @@ public class GraphicBattleController implements Initializable {
         isGraveyardOpen = !isGraveyardOpen;
     }
 
-    private AnchorPane getCardInGame(int row, int column) {
+    private AnchorPane getCardInGame(Card card, int row, int column) {
         AnchorPane anchorPane = new AnchorPane();
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(160 + row * 8);
+        int scale = 1;
+        if(column > 4) scale = -1;
+        imageView.setScaleX(scale);
+        imageView.setFitWidth((160 + row * 8));
         imageView.setFitHeight(160 + row * 8);
-        imageView.setImage(new Image("/resources/images/cards/Esfandiar_idle.gif"));
+        imageView.setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
         anchorPane.relocate(483 + column * 97 + (column - 4) * row * 2.5, 250 + 90 * row);
 
         anchorPane.getChildren().add(imageView);
