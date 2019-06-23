@@ -80,12 +80,7 @@ public class GraphicBattleController implements Initializable {
         player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername().toUpperCase());
         player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername().toUpperCase());
         showCardsInBoard();
-
-//        for(int i = 0; i < 5; i++)
-//        for(int j = 0; j < 9; j++) {
-//            AnchorPane cardPane = getCardInGame(i, j);
-//            root.getChildren().add(cardPane);
-//        }
+        handItem0_container.setLayoutX(-100);
     }
 
     private void showCardsInBoard() {
@@ -153,7 +148,7 @@ public class GraphicBattleController implements Initializable {
         player2Mana[8] = player2Mana8;
     }
 
-    public void updateHand() {
+    private void updateHand() {
         hand = ClientManager.getHand();
         System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
@@ -173,7 +168,7 @@ public class GraphicBattleController implements Initializable {
         }
     }
 
-    public void updateMana() {
+    private void updateMana() {
         Image mana = new Image("/resources/images/battle/ui/icon_mana@2x.png");
         Image noMana = new Image("/resources/images/battle/ui/icon_mana_inactive@2x.png");
         int mana1 = ClientManager.getPlayingMatch().getPlayer1().getMana();
@@ -213,6 +208,7 @@ public class GraphicBattleController implements Initializable {
         imageView.setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
         anchorPane.relocate(483 + column * 97 + (column - 4) * row * 2.5, 250 + 90 * row);
 
+        anchorPane.setMouseTransparent(true);
         anchorPane.getChildren().add(imageView);
         return anchorPane;
     }
