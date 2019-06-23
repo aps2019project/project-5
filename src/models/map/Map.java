@@ -9,15 +9,31 @@ import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.cards.spell.TargetType;
 import models.items.Flag;
+import models.match.Match;
 import views.Error;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Map {
     public final static int ROW_NUMBER = 5, COLUMN_NUMBER = 9;
     private Cell[][] cells = new Cell[5][9];
     private Collection cards = new Collection();
+
+    public List<Cell> getCellsDistance(Cell cell, int distance) {
+        int x = cell.getX(), y = cell.getY();
+        List<Cell> cells = new ArrayList<>();
+        for (int i = -distance; i <= distance; i++) {
+            final int remainedDistance = distance - Math.abs(i);
+            for (int j = -remainedDistance; j <= remainedDistance; j++) {
+                try {
+                    cells.add(this.getCell(x + i, y + j));
+                } catch (InvalidCellException ignored) { }
+            }
+        }
+        return cells;
+    }
 
     public Collection getCards() {
         return this.cards;

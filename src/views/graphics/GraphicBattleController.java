@@ -21,7 +21,6 @@ import models.cards.Card;
 import models.map.Cell;
 import models.map.Map;
 
-import java.awt.color.CMMException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -202,11 +201,17 @@ public class GraphicBattleController implements Initializable {
         if (selectedCard != null) {
             if (isSelectedCardInGame) {
                 cell[selectedCard.getCell().getX()][selectedCard.getCell().getY()].getStyleClass().add("selected-card-cell");
+                List<Cell> moveAbleCells = ClientManager.whereToMove(selectedCard);
+                System.out.println(moveAbleCells.size());
+                moveAbleCells.forEach(moveAbleCell -> {
+                    cell[moveAbleCell.getX()][moveAbleCell.getY()].getStyleClass().removeAll("empty-cell");
+                    cell[moveAbleCell.getX()][moveAbleCell.getY()].getStyleClass().add("can-move-cell");
+                });
             } else {
-                List<Cell> availableCells = ClientManager.getAvailableCells(selectedCard);
-                for(Cell availableCell : availableCells) {
-                    cell[availableCell.getX()][availableCell.getY()].getStyleClass().removeAll("empty-cell");
-                    cell[availableCell.getX()][availableCell.getY()].getStyleClass().add("can-insert-cell");
+                List<Cell> putAbleCells = ClientManager.whereToPut(selectedCard);
+                for(Cell putAbleCell : putAbleCells) {
+                    cell[putAbleCell.getX()][putAbleCell.getY()].getStyleClass().removeAll("empty-cell");
+                    cell[putAbleCell.getX()][putAbleCell.getY()].getStyleClass().add("can-insert-cell");
                 }
             }
         }

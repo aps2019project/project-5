@@ -15,7 +15,7 @@ public class Attacker extends Card {
     private Spell specialPower;
     private boolean turnAttackAvailability;
     private boolean counterAttackAbility;
-    private boolean moveAbility;
+    private boolean moveAbility ;
 
     private ArrayList<Buff> buffActivated = new ArrayList<>();
 
