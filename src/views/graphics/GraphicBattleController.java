@@ -21,6 +21,8 @@ import models.cards.Attacker;
 import models.cards.Card;
 import models.map.Cell;
 import models.map.Map;
+import models.match.Match;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -189,9 +191,15 @@ public class GraphicBattleController implements Initializable {
                 System.out.println("Card unselected");
             } else {
                 if(isSelectedCardInGame) {
-
-                }
-                 else {
+                    // TODO: move
+                    try {
+                        ClientManager.moveTo(row + 1, column + 1);
+                        showCardsInBoard();
+                    } catch (Match.InvalidMoveException | Map.InvalidCellException e) {
+                        System.out.println("can't move here");
+                    }
+                } else {
+                    // TODO: insert
                     try {
                         ClientManager.insertCard(selectedCard.getID(), row, column);
                         AnchorPane cardPane = getCardInGame(selectedCard, row, column);
