@@ -184,16 +184,24 @@ public class Map {
     public List<Cell> getNeighbors(Cell cell) {
         List<Cell> cells = new ArrayList<>();
         try {
-            cells.add(this.getRight(cell));
+            final Cell right = this.getRight(cell);
+            cells.add(right);
+            cells.add(getTop(right));
         } catch (InvalidCellException e) { }
         try {
-            cells.add(this.getLeft(cell));
+            final Cell left = this.getLeft(cell);
+            cells.add(left);
+            cells.add(getBottom(left));
         } catch (InvalidCellException e) { }
         try {
-            cells.add(this.getTop(cell));
+            final Cell top = this.getTop(cell);
+            cells.add(top);
+            cells.add(getLeft(top));
         } catch (InvalidCellException e) { }
         try {
-            cells.add(this.getBottom(cell));
+            final Cell bottom = this.getBottom(cell);
+            cells.add(bottom);
+            cells.add(getRight(bottom));
         } catch (InvalidCellException e) { }
         return cells;
     }

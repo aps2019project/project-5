@@ -26,6 +26,7 @@ import javax.security.auth.login.AccountNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ClientManager {
@@ -446,11 +447,13 @@ public class ClientManager {
     }
 
     public static List<Cell> getAvailableCells(Card card) {
-        if (card instanceof Spell)
-            return getMap().getCells().stream().filter(cell -> !cell.isFull()).collect(Collectors.toList());
         List<Cell> cells = new ArrayList<>();
+        if (!card.isMoveAvailable())
+            return cells;
+        if (card instanceof Spell)
+            return getMap().getCells();
         getMe().getActiveCards().forEach(cardIt -> cells.addAll(getMap().getNeighbors(cardIt.getCell()).stream()
-                .filter(cell -> !cell.isFull())
+                .filter(cell -> !cell.isFull() )
                 .collect(Collectors.toList())));
         return cells;
     }

@@ -15,17 +15,30 @@ import javafx.stage.Stage;
 import models.Account;
 import models.Collection;
 import models.Deck;
+
+import javax.security.auth.login.AccountNotFoundException;
 import java.io.File;
 import java.io.IOException;
+
 import static views.Graphics.Menu.MAIN_MENU;
 
 public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
-            matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot;
+            matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot, battleMenu, collectionMenuRoot, shopMenuRoot;
 
     static {
+
+        /// For test:
+//        createTestUser();
+        try {
+            ClientManager.login("mahdi", "mahdi");
+            ClientManager.setOpponent("AI", true);
+            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
+        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException | AccountNotFoundException ignored) { }
+
+
         try {
             GridPane tmpGridPane = new GridPane();
             tmpGridPane.setOnMouseClicked(event -> setMenu(MAIN_MENU));
@@ -41,6 +54,9 @@ public class Graphics extends Application {
             customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
             multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
             customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
+            battleMenu = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
+            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
+            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1000);
@@ -115,17 +131,12 @@ public class Graphics extends Application {
     public void start(Stage primaryStage) {
 
 
-        /// For test:
-//        createTestUser();
-        try {
-            ClientManager.login("mahdi", "mahdi");
-        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException ignored) { }
 
         stage = primaryStage;
 
 
 
-        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Scene scene = new Scene(battleMenu, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
