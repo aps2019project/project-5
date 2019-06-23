@@ -22,6 +22,7 @@ import models.Hand;
 import models.Player;
 import models.cards.Attacker;
 import models.cards.Card;
+import models.cards.spell.Spell;
 import models.map.Cell;
 import models.map.Map;
 import models.match.Match;
@@ -143,11 +144,17 @@ public class GraphicBattleController implements Initializable {
         ));
     }
 
-    private void moveCard(AnchorPane cardPane, Rectangle newPosition) {
-        TranslateTransition t = new TranslateTransition(new Duration(1000), cardPane);
+    private int getDistance(double x1, double y1, double x2, double y2) {
+        return (int) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
+
+    private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
+        int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
+        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
         t.setToX(newPosition.getX() - cardPane.getLayoutX());
         t.setToY(newPosition.getY() - cardPane.getLayoutY());
         t.play();
+        ((ImageView)cardPane.getChildren().get(0)).setImage(new Image("/resources/images/cards/" + card.getName() + "_run.gif"));
     }
 
     private void copyHandViewsToArray() {
@@ -213,7 +220,7 @@ public class GraphicBattleController implements Initializable {
                     // TODO: move
                     try {
                         ClientManager.moveTo(row + 1, column + 1);
-                        moveCard(cardViews.get(selectedCard), getCardRectangle(row, column));
+                        moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
                     } catch (Match.InvalidMoveException | Map.InvalidCellException e) {
                         System.out.println("can't move here");
                     }
@@ -262,7 +269,6 @@ public class GraphicBattleController implements Initializable {
             if (isSelectedCardInGame) {
                 cell[selectedCard.getCell().getX()][selectedCard.getCell().getY()].getStyleClass().add("selected-card-cell");
                 List<Cell> moveAbleCells = ClientManager.whereToMove(selectedCard);
-                System.out.println(moveAbleCells.size());
                 moveAbleCells.forEach(moveAbleCell -> {
                     cell[moveAbleCell.getX()][moveAbleCell.getY()].getStyleClass().removeAll("empty-cell");
                     cell[moveAbleCell.getX()][moveAbleCell.getY()].getStyleClass().add("can-move-cell");
@@ -278,12 +284,17 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateHand() {
-        Hand hand = ClientManager.getHand();
+        Hand hand = ClientManager.getMe().getHand();
+        System.out.println(ClientManager.getMe().getAccount().getUsername());
         System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
-            handItemImages[index].setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
+            String imageUrl = "/resources/images/cards/" + card.getName() + "_idle.gif";
+            if(card instanceof Spell) {
+                imageUrl = "/resources/images/cards/" + card.getName() + ".gif";
+            }
+            handItemImages[index].setImage(new Image(imageUrl));
             int finalIndex = index;
             int finalIndex1 = index;
             handItemContainer[index].setOnMouseClicked(event -> {

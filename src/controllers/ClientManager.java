@@ -82,13 +82,13 @@ public class ClientManager {
     }
 
     public static Player getMe() {
-        if (playingMatch.getPlayer1().getAccount().getCollection().equals(account.getUsername()))
+        if (playingMatch.getPlayer1().getAccount().getUsername().equals(account.getUsername()))
             return playingMatch.getPlayer1();
         return playingMatch.getPlayer2();
     }
 
     public static Player getOpponent() {
-        if (playingMatch.getPlayer1().getAccount().getCollection().equals(account.getUsername()))
+        if (playingMatch.getPlayer1().getAccount().getUsername().equals(account.getUsername()))
             return playingMatch.getPlayer2();
         return playingMatch.getPlayer1();
     }
