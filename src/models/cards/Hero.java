@@ -20,7 +20,7 @@ public class Hero extends Attacker {
 
     public Hero(Card card) {
         super(card);
-        this.coolDown = ((Hero)card).coolDown;
+        this.coolDown = ((Hero) card).coolDown;
     }
 
     @Override

@@ -36,7 +36,8 @@ public class Graphics extends Application {
             ClientManager.login("mahdi", "mahdi");
             ClientManager.setOpponent("AI", true);
             ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
-        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException | AccountNotFoundException ignored) { }
+        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException | AccountNotFoundException ignored) {
+        }
 
 
         try {
@@ -131,12 +132,10 @@ public class Graphics extends Application {
     public void start(Stage primaryStage) {
 
 
-
         stage = primaryStage;
 
 
-
-        Scene scene = new Scene(battleMenu, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
@@ -253,7 +252,6 @@ public class Graphics extends Application {
             ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck2");
 
             ClientManager.selectDeck("mahdiDeck");
-
 
 
         } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException | Account.NotLoggedInException | Account.DeckExistsException | Account.DeckNotFoundException | Deck.HeroExistsInDeckException | Deck.HeroNotExistsInDeckException | Deck.DeckFullException ignored) {

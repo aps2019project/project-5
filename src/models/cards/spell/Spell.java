@@ -27,6 +27,11 @@ public class Spell extends Card {
         super(id, name, description, manaPoint, price);
     }
 
+    public Spell(int id, String name, String description, int manaPoint, int price, Buff buff) {
+        super(id, name, description, manaPoint, price);
+        buffs.add(buff);
+    }
+
     public Spell(Card card) {
         super(card);
     }
