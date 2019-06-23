@@ -222,14 +222,19 @@ public class GraphicBattleController implements Initializable {
                     try {
                         ClientManager.insertCard(selectedCard.getID(), row + 1, column + 1);
                         AnchorPane cardPane = getCardInGame(selectedCard, row, column);
-                        ImageView i = new ImageView();
-                        AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(i, "teleport", Action.TELEPORT, 1));
+                        AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
+                                                             SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
+                                                             SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
+                                                             SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
+                                                             SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1));
                         Rectangle rect = getCardRectangle(row - 1, column - 1);
-                        teleport.setLayoutX(rect.getX() + rect.getWidth() );
-                        teleport.setLayoutY(rect.getY() + rect.getHeight() );
-                        setCard(teleport);
+                        teleport.setLayoutX(rect.getX() + 150 );
+                        teleport.setLayoutY(rect.getY() + 140 );
+                        teleport.setScaleX(2);
+                        teleport.setScaleY(2);
 //                        removeCard(teleport);
                         setCard(cardPane);
+                        setCard(teleport);
                         selectedCard = null;
                         updateMana();
                     } catch (Player.NotEnoughManaException | Map.InvalidCellException
