@@ -197,7 +197,7 @@ public class GraphicBattleController implements Initializable {
             } else {
                 List<Cell> availableCells = ClientManager.getAvailableCells(selectedCard);
                 for(Cell availableCell : availableCells) {
-                    cell[availableCell.getX()][availableCell.getY()].getStyleClass().remove("empty-cell");
+                    cell[availableCell.getX()][availableCell.getY()].getStyleClass().removeAll("empty-cell");
                     cell[availableCell.getX()][availableCell.getY()].getStyleClass().add("can-insert-cell");
                 }
             }
