@@ -140,6 +140,15 @@ public class GraphicBattleController implements Initializable {
         ));
     }
 
+    private void moveCard(AnchorPane cardPane, Rectangle newPosition) {
+        TranslateTransition t = new TranslateTransition(new Duration(1000), cardPane);
+        t.setFromX(cardPane.getLayoutX());
+        t.setFromY(cardPane.getLayoutY());
+        t.setToX(newPosition.getX());
+        t.setToY(newPosition.getY());
+        t.play();
+    }
+
     private void copyHandViewsToArray() {
         handItemImages[0] = handItem0_image;
         handItemImages[1] = handItem1_image;
