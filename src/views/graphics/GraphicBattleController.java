@@ -142,10 +142,8 @@ public class GraphicBattleController implements Initializable {
 
     private void moveCard(AnchorPane cardPane, Rectangle newPosition) {
         TranslateTransition t = new TranslateTransition(new Duration(1000), cardPane);
-        t.setFromX(cardPane.getLayoutX());
-        t.setFromY(cardPane.getLayoutY());
-        t.setToX(newPosition.getX());
-        t.setToY(newPosition.getY());
+        t.setToX(newPosition.getX() - cardPane.getLayoutX());
+        t.setToY(newPosition.getY() - cardPane.getLayoutY());
         t.play();
     }
 
@@ -212,7 +210,7 @@ public class GraphicBattleController implements Initializable {
                     // TODO: move
                     try {
                         ClientManager.moveTo(row + 1, column + 1);
-                        showCardsInBoard();
+                        moveCard(cardViews.get(selectedCard), getCardRectangle(row, column));
                     } catch (Match.InvalidMoveException | Map.InvalidCellException e) {
                         System.out.println("can't move here");
                     }
