@@ -121,8 +121,8 @@ public abstract class Match {
         Cell cell1 = new Cell();
         Cell cell2 = new Cell();
         try {
-            cell2 = map.getCell(2, 0);
-            cell1 = map.getCell(2, 8);
+            cell1 = map.getCell(2, 0);
+            cell2 = map.getCell(2, 8);
         } catch (Map.InvalidCellException ignored) {
         }
         try {
@@ -134,7 +134,6 @@ public abstract class Match {
         hero2.setCell(cell2);
         players[0].getActiveCards().add(hero1);
         players[1].getActiveCards().add(hero2);
-
     }
 
     abstract public Player getWinner();
