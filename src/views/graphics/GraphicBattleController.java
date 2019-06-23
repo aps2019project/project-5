@@ -188,6 +188,7 @@ public class GraphicBattleController implements Initializable {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
                 cell[i][j].getStyleClass().removeAll(removingStyleClassList);
+                cell[i][j].getStyleClass().add("empty-cell");
             }
         }
         if (selectedCard != null) {
@@ -196,6 +197,7 @@ public class GraphicBattleController implements Initializable {
             } else {
                 List<Cell> availableCells = ClientManager.getAvailableCells(selectedCard);
                 for(Cell availableCell : availableCells) {
+                    cell[availableCell.getX()][availableCell.getY()].getStyleClass().remove("empty-cell");
                     cell[availableCell.getX()][availableCell.getY()].getStyleClass().add("can-insert-cell");
                 }
             }
@@ -215,9 +217,15 @@ public class GraphicBattleController implements Initializable {
                 for(AnchorPane handItem : handItemContainer) {
                     handItem.getStyleClass().remove("hand-item-selected");
                 }
-                handItemContainer[finalIndex1].getStyleClass().add("hand-item-selected");
-                selectedCard = card;
-                isSelectedCardInGame = false;
+                if (!card.equals(selectedCard)) {
+                    // TODO: check if can select hand card (have enough mana)
+
+                    handItemContainer[finalIndex1].getStyleClass().add("hand-item-selected");
+                    selectedCard = card;
+                    isSelectedCardInGame = false;
+                } else {
+                    selectedCard = null;
+                }
                 updateCells();
             });
             handItemContainer[index].setOnMouseEntered(event -> {
