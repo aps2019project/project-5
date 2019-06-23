@@ -28,11 +28,8 @@ public class SpriteAnimation extends Transition {
     @Override
     protected void interpolate(double k) {
         final int index = Math.min((int) Math.floor(k * count), count - 1);
-        if (index != lastIndex) {
-            MiniPicPeculiarities peculiarities = picPeculiarities.get(index);
-            imageView.setViewport(new Rectangle2D(peculiarities.x, peculiarities.y, peculiarities.width, peculiarities.height));
-            lastIndex = index;
-        }
+        MiniPicPeculiarities peculiarities = picPeculiarities.get(index);
+        imageView.setViewport(new Rectangle2D(peculiarities.x, peculiarities.y, peculiarities.width, peculiarities.height));
     }
 
 }

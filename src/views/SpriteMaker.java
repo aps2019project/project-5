@@ -71,18 +71,11 @@ public class SpriteMaker {
         }
         try {
             loadPlist(spriteMaker);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (PropertyListFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | IOException
+                | PropertyListFormatException | SAXException | ParseException e) {
             e.printStackTrace();
         }
-        Animation animation = new SpriteAnimation(spriteMaker.bigImage, Duration.seconds(2), spriteMaker.datas);
+        Animation animation = new SpriteAnimation(spriteMaker.bigImage, Duration.seconds(0.1 * spriteMaker.datas.size()), spriteMaker.datas);
         animation.setCycleCount(cycle);
         animation.play();
         return spriteMaker.bigImage;
