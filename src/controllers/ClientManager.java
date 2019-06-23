@@ -23,6 +23,7 @@ import views.Input;
 import views.InputAI;
 
 import javax.security.auth.login.AccountNotFoundException;
+import java.io.CharArrayReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -446,15 +447,23 @@ public class ClientManager {
         return Deck.isValid(account.getMainDeck());
     }
 
-    public static List<Cell> getAvailableCells(Card card) {
+    public static List<Cell> whereToPut(Card card) {
         List<Cell> cells = new ArrayList<>();
-        if (!card.isMoveAvailable())
-            return cells;
         if (card instanceof Spell)
             return getMap().getCells();
         getMe().getActiveCards().forEach(cardIt -> cells.addAll(getMap().getNeighbors(cardIt.getCell()).stream()
                 .filter(cell -> !cell.isFull() )
                 .collect(Collectors.toList())));
+        return cells;
+    }
+
+    public  static List<Cell> whereToMove(Card card) {
+        List<Cell> cells = new ArrayList<>();
+        if (!card.isMoveAvailable())
+            return cells;
+        cells.addAll(getMap().getCellsDistance(card.getCell(), 2).stream()
+                .filter(cell -> getMap().isValidMove(card, getOpponent(), cell))
+                .collect(Collectors.toList()));
         return cells;
     }
 }

@@ -19,7 +19,6 @@ import models.cards.Card;
 import models.map.Cell;
 import models.map.Map;
 
-import java.awt.color.CMMException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -195,7 +194,7 @@ public class GraphicBattleController implements Initializable {
             if (isSelectedCardInGame) {
                 cell[selectedCard.getCell().getX()][selectedCard.getCell().getY()].getStyleClass().add("selected-card-cell");
             } else {
-                List<Cell> availableCells = ClientManager.getAvailableCells(selectedCard);
+                List<Cell> availableCells = ClientManager.whereToPut(selectedCard);
                 for(Cell availableCell : availableCells) {
                     cell[availableCell.getX()][availableCell.getY()].getStyleClass().removeAll("empty-cell");
                     cell[availableCell.getX()][availableCell.getY()].getStyleClass().add("can-insert-cell");
