@@ -92,7 +92,6 @@
         </AnchorPane>
     </HBox>
 
-
     <!-- Player1 ManaBar -->
     <HBox AnchorPane.leftAnchor="250" AnchorPane.topAnchor="110">
         <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana0"/>

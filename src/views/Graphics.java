@@ -15,12 +15,8 @@ import javafx.stage.Stage;
 import models.Account;
 import models.Collection;
 import models.Deck;
-import views.menus.MainMenu;
-
 import java.io.File;
 import java.io.IOException;
-
-import static views.Graphics.Menu.CUSTOM_CARD;
 import static views.Graphics.Menu.MAIN_MENU;
 
 public class Graphics extends Application {

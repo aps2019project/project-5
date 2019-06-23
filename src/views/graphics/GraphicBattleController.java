@@ -12,14 +12,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import models.Collection;
 import models.Hand;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.map.Cell;
 import models.map.Map;
 
+import java.awt.color.CMMException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GraphicBattleController implements Initializable {
@@ -44,13 +47,17 @@ public class GraphicBattleController implements Initializable {
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private Hand hand;
     private HashMap<Card, AnchorPane> cardViews = new HashMap<>();
+    private Card selectedCard;
+    private boolean isSelectedCardInGame = false;
 
     private void createMapCells() {
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 9; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
                 cell[i][j] = new AnchorPane();
                 AnchorPane.setLeftAnchor(cell[i][j], 102d * j);
                 AnchorPane.setTopAnchor(cell[i][j], 92d * i);
+                int finalI = i, finalJ = j;
+                cell[i][j].setOnMouseClicked(event -> clickCell(finalI, finalJ));
                 cell[i][j].setPrefWidth(100);
                 cell[i][j].setPrefHeight(90);
                 cell[i][j].getStyleClass().add("empty-cell");
@@ -80,29 +87,25 @@ public class GraphicBattleController implements Initializable {
         player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername().toUpperCase());
         player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername().toUpperCase());
         showCardsInBoard();
-
-//        for(int i = 0; i < 5; i++)
-//        for(int j = 0; j < 9; j++) {
-//            AnchorPane cardPane = getCardInGame(i, j);
-//            root.getChildren().add(cardPane);
-//        }
+        handItem0_container.setLayoutX(-100);
     }
 
     private void showCardsInBoard() {
         root.getChildren().removeAll(cardViews.values());
         cardViews.clear();
         Map map = ClientManager.getPlayingMatch().getMap();
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 9; j++) {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++) {
                 try {
                     Cell cell = map.getCell(i, j);
                     Attacker attacker = cell.getAttacker();
-                    if(attacker == null)
+                    if (attacker == null)
                         continue;
                     AnchorPane cardAnchorPane = getCardInGame(attacker, i, j);
                     cardViews.put(attacker, cardAnchorPane);
                     root.getChildren().add(cardAnchorPane);
-                } catch (Map.InvalidCellException ignored) {}
+                } catch (Map.InvalidCellException ignored) {
+                }
             }
     }
 
@@ -153,14 +156,78 @@ public class GraphicBattleController implements Initializable {
         player2Mana[8] = player2Mana8;
     }
 
-    public void updateHand() {
+    private Card getCardInCell(int x, int y) {
+        for (java.util.Map.Entry<Card, AnchorPane> cardView : cardViews.entrySet())
+            if (cardView.getKey().getCell().getX() == x && cardView.getKey().getCell().getY() == y)
+                return cardView.getKey();
+        return null;
+    }
+
+    private void clickCell(int row, int column) {
+        Card clickedCard = getCardInCell(row, column);
+        if (selectedCard == null) {
+            if(clickedCard != null) try {
+                ClientManager.selectCard(clickedCard.getID());
+                selectedCard = clickedCard;
+                isSelectedCardInGame = true;
+                System.out.println("Card Selected");
+            } catch (Collection.CardNotFoundException e) {
+                System.out.println("Can't Select Card");
+            }
+        } else {
+            if(selectedCard.equals(clickedCard)) {
+                selectedCard = null;
+                System.out.println("Card unselected");
+            }
+        }
+        updateCells();
+    }
+
+    private void updateCells() {
+        String[] removingStyleClassList = {"selected-card-cell", "can-insert-cell", "can-move-cell"};
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                cell[i][j].getStyleClass().removeAll(removingStyleClassList);
+                cell[i][j].getStyleClass().add("empty-cell");
+            }
+        }
+        if (selectedCard != null) {
+            if (isSelectedCardInGame) {
+                cell[selectedCard.getCell().getX()][selectedCard.getCell().getY()].getStyleClass().add("selected-card-cell");
+            } else {
+                List<Cell> availableCells = ClientManager.getAvailableCells(selectedCard);
+                for(Cell availableCell : availableCells) {
+                    cell[availableCell.getX()][availableCell.getY()].getStyleClass().removeAll("empty-cell");
+                    cell[availableCell.getX()][availableCell.getY()].getStyleClass().add("can-insert-cell");
+                }
+            }
+        }
+    }
+
+    private void updateHand() {
         hand = ClientManager.getHand();
         System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
-        for(Card card : hand.getCards()) {
+        for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
             handItemImages[index].setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
             int finalIndex = index;
+            int finalIndex1 = index;
+            handItemContainer[index].setOnMouseClicked(event -> {
+                for(AnchorPane handItem : handItemContainer) {
+                    handItem.getStyleClass().remove("hand-item-selected");
+                }
+                if (!card.equals(selectedCard)) {
+                    // TODO: check if can select hand card (have enough mana)
+
+                    handItemContainer[finalIndex1].getStyleClass().add("hand-item-selected");
+                    selectedCard = card;
+                    isSelectedCardInGame = false;
+                } else {
+                    selectedCard = null;
+                }
+                updateCells();
+            });
             handItemContainer[index].setOnMouseEntered(event -> {
                 AnchorPane cardPane = ShopController.getCardPane(card, false);
                 cardPane.relocate(handItemContainer[finalIndex].localToScene(
@@ -173,20 +240,20 @@ public class GraphicBattleController implements Initializable {
         }
     }
 
-    public void updateMana() {
+    private void updateMana() {
         Image mana = new Image("/resources/images/battle/ui/icon_mana@2x.png");
         Image noMana = new Image("/resources/images/battle/ui/icon_mana_inactive@2x.png");
         int mana1 = ClientManager.getPlayingMatch().getPlayer1().getMana();
         int mana2 = ClientManager.getPlayingMatch().getPlayer1().getMana();
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
             player1Mana[i].setImage(i < mana1 ? mana : noMana);
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
             player2Mana[i].setImage(i < mana2 ? mana : noMana);
 
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {
-        if(!isGraveyardOpen) {
+        if (!isGraveyardOpen) {
             graveyardButton.getStyleClass().remove("button-open");
             graveyardButton.getStyleClass().add("button-close");
             TranslateTransition t = new TranslateTransition(new Duration(500), graveyardContainer);
@@ -206,13 +273,14 @@ public class GraphicBattleController implements Initializable {
         AnchorPane anchorPane = new AnchorPane();
         ImageView imageView = new ImageView();
         int scale = 1;
-        if(column > 4) scale = -1;
+        if (column > 4) scale = -1;
         imageView.setScaleX(scale);
         imageView.setFitWidth((160 + row * 8));
         imageView.setFitHeight(160 + row * 8);
         imageView.setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
         anchorPane.relocate(483 + column * 97 + (column - 4) * row * 2.5, 250 + 90 * row);
 
+        anchorPane.setMouseTransparent(true);
         anchorPane.getChildren().add(imageView);
         return anchorPane;
     }

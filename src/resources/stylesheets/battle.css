@@ -7,11 +7,32 @@
 .game-board {}
 
 .empty-cell {
-    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: rgba(0, 0, 0, 0.05);
+}
+
+.selected-card-cell {
+    -fx-background-image: url(/resources/images/battle/ui/selected-card-background.png);
+    -fx-background-size: contain;
+}
+
+.can-insert-cell {
+    -fx-background-color: rgba(255, 255, 0, 0.3);
+}
+
+.can-insert-cell:hover {
+    -fx-background-color: rgba(255, 255, 0, 0.4);
+}
+
+.can-move-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+}
+
+.can-move-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
 }
 
 .empty-cell:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-color: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -87,7 +108,7 @@
     -fx-background-size: cover;
 }
 
-.hand-item:hover {
+.hand-item:hover, .hand-item-selected {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
 }
