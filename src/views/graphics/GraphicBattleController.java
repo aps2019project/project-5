@@ -22,6 +22,7 @@ import models.map.Map;
 import java.awt.color.CMMException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GraphicBattleController implements Initializable {
@@ -183,7 +184,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateCells() {
-        String[] removingStyleClassList = {"selected-card-cell"};
+        String[] removingStyleClassList = {"selected-card-cell", "can-insert-cell", "can-move-cell"};
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
                 cell[i][j].getStyleClass().removeAll(removingStyleClassList);
@@ -193,7 +194,10 @@ public class GraphicBattleController implements Initializable {
             if (isSelectedCardInGame) {
                 cell[selectedCard.getCell().getX()][selectedCard.getCell().getY()].getStyleClass().add("selected-card-cell");
             } else {
-
+                List<Cell> availableCells = ClientManager.getAvailableCells(selectedCard);
+                for(Cell availableCell : availableCells) {
+                    cell[availableCell.getX()][availableCell.getY()].getStyleClass().add("can-insert-cell");
+                }
             }
         }
     }
