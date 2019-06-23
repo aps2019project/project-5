@@ -50,8 +50,8 @@ public class GraphicBattleController implements Initializable {
     private boolean isSelectedCardInGame = false;
 
     private void createMapCells() {
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 9; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
                 cell[i][j] = new AnchorPane();
                 AnchorPane.setLeftAnchor(cell[i][j], 102d * j);
                 AnchorPane.setTopAnchor(cell[i][j], 92d * i);
@@ -93,17 +93,18 @@ public class GraphicBattleController implements Initializable {
         root.getChildren().removeAll(cardViews.values());
         cardViews.clear();
         Map map = ClientManager.getPlayingMatch().getMap();
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 9; j++) {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++) {
                 try {
                     Cell cell = map.getCell(i, j);
                     Attacker attacker = cell.getAttacker();
-                    if(attacker == null)
+                    if (attacker == null)
                         continue;
                     AnchorPane cardAnchorPane = getCardInGame(attacker, i, j);
                     cardViews.put(attacker, cardAnchorPane);
                     root.getChildren().add(cardAnchorPane);
-                } catch (Map.InvalidCellException ignored) {}
+                } catch (Map.InvalidCellException ignored) {
+                }
             }
     }
 
@@ -154,20 +155,45 @@ public class GraphicBattleController implements Initializable {
         player2Mana[8] = player2Mana8;
     }
 
+    private Card getCardInCell(int x, int y) {
+        for (java.util.Map.Entry<Card, AnchorPane> cardView : cardViews.entrySet())
+            if (cardView.getKey().getCell().getX() == x && cardView.getKey().getCell().getY() == y)
+                return cardView.getKey();
+        return null;
+    }
+
     private void clickCell(int row, int column) {
-        if(selectedCard == null) {
-            for(java.util.Map.Entry<Card, AnchorPane> cardView : cardViews.entrySet()) {
-                if(cardView.getKey().getCell().getX() == row && cardView.getKey().getCell().getY() == column) {
-                    Card clickedCard = cardView.getKey();
-                    try {
-                        ClientManager.selectCard(clickedCard.getID());
-                        selectedCard = clickedCard;
-                        isSelectedCardInGame = true;
-                        System.out.println("Card Selected");
-                    } catch (Collection.CardNotFoundException e) {
-                        System.out.println("Can't Select Card");
-                    }
-                }
+        Card clickedCard = getCardInCell(row, column);
+        if (selectedCard == null) {
+            if(clickedCard != null) try {
+                ClientManager.selectCard(clickedCard.getID());
+                selectedCard = clickedCard;
+                isSelectedCardInGame = true;
+                System.out.println("Card Selected");
+            } catch (Collection.CardNotFoundException e) {
+                System.out.println("Can't Select Card");
+            }
+        } else {
+            if(selectedCard.equals(clickedCard)) {
+                selectedCard = null;
+                System.out.println("Card unselected");
+            }
+        }
+        updateCells();
+    }
+
+    private void updateCells() {
+        String[] removingStyleClassList = {"selected-card-cell"};
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                cell[i][j].getStyleClass().removeAll(removingStyleClassList);
+            }
+        }
+        if (selectedCard != null) {
+            if (isSelectedCardInGame) {
+                cell[selectedCard.getCell().getX()][selectedCard.getCell().getY()].getStyleClass().add("selected-card-cell");
+            } else {
+
             }
         }
     }
@@ -176,7 +202,7 @@ public class GraphicBattleController implements Initializable {
         hand = ClientManager.getHand();
         System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
-        for(Card card : hand.getCards()) {
+        for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
             handItemImages[index].setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
             int finalIndex = index;
@@ -197,15 +223,15 @@ public class GraphicBattleController implements Initializable {
         Image noMana = new Image("/resources/images/battle/ui/icon_mana_inactive@2x.png");
         int mana1 = ClientManager.getPlayingMatch().getPlayer1().getMana();
         int mana2 = ClientManager.getPlayingMatch().getPlayer1().getMana();
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
             player1Mana[i].setImage(i < mana1 ? mana : noMana);
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
             player2Mana[i].setImage(i < mana2 ? mana : noMana);
 
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {
-        if(!isGraveyardOpen) {
+        if (!isGraveyardOpen) {
             graveyardButton.getStyleClass().remove("button-open");
             graveyardButton.getStyleClass().add("button-close");
             TranslateTransition t = new TranslateTransition(new Duration(500), graveyardContainer);
@@ -225,7 +251,7 @@ public class GraphicBattleController implements Initializable {
         AnchorPane anchorPane = new AnchorPane();
         ImageView imageView = new ImageView();
         int scale = 1;
-        if(column > 4) scale = -1;
+        if (column > 4) scale = -1;
         imageView.setScaleX(scale);
         imageView.setFitWidth((160 + row * 8));
         imageView.setFitHeight(160 + row * 8);
