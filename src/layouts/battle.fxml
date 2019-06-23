@@ -93,7 +93,7 @@
     </HBox>
 
     <!-- Player1 ManaBar -->
-    <HBox AnchorPane.leftAnchor="250" AnchorPane.topAnchor="110">
+    <HBox AnchorPane.leftAnchor="250" fx:id="mana1BarContainer" AnchorPane.topAnchor="90">
         <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana0"/>
         <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana1"/>
         <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player1Mana2"/>
@@ -106,7 +106,7 @@
     </HBox>
 
     <!-- Player1 ManaBar -->
-    <HBox AnchorPane.rightAnchor="250" AnchorPane.topAnchor="110">
+    <HBox AnchorPane.rightAnchor="250" fx:id="mana2BarContainer" AnchorPane.topAnchor="90">
         <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana8"/>
         <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana7"/>
         <ImageView fitWidth="40" styleClass="mana-bar-item" fitHeight="44" fx:id="player2Mana6"/>
