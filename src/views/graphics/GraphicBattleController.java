@@ -2,7 +2,6 @@ package views.graphics;
 
 import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

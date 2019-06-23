@@ -451,13 +451,16 @@ public class ClientManager {
         List<Cell> cells = new ArrayList<>();
         if (card instanceof Spell)
             return getMap().getCells();
-        getMe().getActiveCards().forEach(cardIt -> cells.addAll(getMap().getNeighbors(cardIt.getCell()).stream()
-                .filter(cell -> !cell.isFull() )
-                .collect(Collectors.toList())));
+        getMe().getActiveCards().forEach(
+                cardIt -> cells.addAll(getMap().getNeighbors(cardIt.getCell())
+                                .stream()
+                                .filter(
+                                        cell -> !cell.isFull()
+                                ).collect(Collectors.toList())));
         return cells;
-    }
+}
 
-    public  static List<Cell> whereToMove(Card card) {
+    public static List<Cell> whereToMove(Card card) {
         List<Cell> cells = new ArrayList<>();
         if (!card.isMoveAvailable())
             return cells;
