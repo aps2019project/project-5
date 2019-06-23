@@ -32,12 +32,6 @@ public class Graphics extends Application {
 
         /// For test:
 //        createTestUser();
-        try {
-            ClientManager.login("mahdi", "mahdi");
-            ClientManager.setOpponent("AI", true);
-            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
-        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException | AccountNotFoundException ignored) { }
-
 
         try {
             GridPane tmpGridPane = new GridPane();
@@ -54,9 +48,9 @@ public class Graphics extends Application {
             customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
             multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
             customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
-            battleMenu = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
-            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
-            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
+//            battleMenu = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
+//            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
+//            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1000);
@@ -130,13 +124,15 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-
+//        try {
+//            ClientManager.login("mahdi", "mahdi");
+//            ClientManager.setOpponent("AI", true);
+//            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
+//        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException | AccountNotFoundException ignored) { }
 
         stage = primaryStage;
 
-
-
-        Scene scene = new Scene(battleMenu, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));

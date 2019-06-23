@@ -22,6 +22,7 @@ import models.Hand;
 import models.Player;
 import models.cards.Attacker;
 import models.cards.Card;
+import models.cards.spell.Spell;
 import models.map.Cell;
 import models.map.Map;
 import models.match.Match;
@@ -278,12 +279,17 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateHand() {
-        Hand hand = ClientManager.getHand();
+        Hand hand = ClientManager.getMe().getHand();
+        System.out.println(ClientManager.getMe().getAccount().getUsername());
         System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
-            handItemImages[index].setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
+            String imageUrl = "/resources/images/cards/" + card.getName() + "_idle.gif";
+            if(card instanceof Spell) {
+                imageUrl = "/resources/images/cards/" + card.getName() + ".gif";
+            }
+            handItemImages[index].setImage(new Image(imageUrl));
             int finalIndex = index;
             int finalIndex1 = index;
             handItemContainer[index].setOnMouseClicked(event -> {
