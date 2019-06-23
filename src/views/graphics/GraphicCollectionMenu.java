@@ -3,6 +3,7 @@ package views.graphics;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.*;
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import com.sun.deploy.util.SystemUtils;
 import controllers.ClientManager;
 import javafx.fxml.Initializable;
@@ -306,7 +307,7 @@ public class GraphicCollectionMenu implements Initializable {
 //                    event.setDragDetect(false);
 //                    AnchorPane draggingCardPane = cardPane;
 //                    System.out.println("hi");
-//                    stage.getScene().getRoot().setOnMouseMoved(mouseEvent -> {
+//                    Graphics.stage.getScene().getRoot().setOnMouseMoved(mouseEvent -> {
 //                        draggingCardPane.setTranslateX(mouseEvent.getX());
 //                        draggingCardPane.setTranslateY(mouseEvent.getY());
 //                    });
