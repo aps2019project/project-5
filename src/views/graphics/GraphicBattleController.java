@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Collection;
 import models.Hand;
+import models.Player;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.map.Cell;
@@ -107,10 +108,14 @@ public class GraphicBattleController implements Initializable {
                         continue;
                     AnchorPane cardAnchorPane = getCardInGame(attacker, i, j);
                     cardViews.put(attacker, cardAnchorPane);
-                    root.getChildren().add(cardAnchorPane);
+                    setCard(cardAnchorPane);
                 } catch (Map.InvalidCellException ignored) {
                 }
             }
+    }
+
+    private void setCard(AnchorPane cardAnchorPane) {
+        root.getChildren().add(cardAnchorPane);
     }
 
     private void showProfiles() {
@@ -182,6 +187,21 @@ public class GraphicBattleController implements Initializable {
             if(selectedCard.equals(clickedCard)) {
                 selectedCard = null;
                 System.out.println("Card unselected");
+            } else {
+                if(isSelectedCardInGame) {
+
+                }
+                 else {
+                    try {
+                        ClientManager.insertCard(selectedCard.getID(), row, column);
+                        AnchorPane cardPane = getCardInGame(selectedCard, row, column);
+                        setCard(cardPane);
+                    } catch (Map.InvalidCellException | Collection.CardNotFoundException
+                            | Map.InvalidTargetCellException | Player.NotEnoughManaException ignored) {
+                    } catch (Player.HeroDeadException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
         updateCells();
