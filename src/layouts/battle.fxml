@@ -45,7 +45,7 @@
 
     <!-- Hand Items -->
     <HBox AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="400" styleClass="hand-container">
-        <AnchorPane styleClass="hand-item, hand-item-selected" fx:id="handItem0_container">
+        <AnchorPane styleClass="hand-item" fx:id="handItem0_container">
             <ImageView fitWidth="150" fitHeight="150" AnchorPane.leftAnchor="15" fx:id="handItem0_image">
                 <Image url="/resources/images/cards/Persian Archer_idle.gif"/>
             </ImageView>
@@ -91,7 +91,6 @@
             <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="7" styleClass="hand-card-mana" alignment="center" fx:id="handItem4_label"/>
         </AnchorPane>
     </HBox>
-
 
     <!-- Player1 ManaBar -->
     <HBox AnchorPane.leftAnchor="250" AnchorPane.topAnchor="110">
