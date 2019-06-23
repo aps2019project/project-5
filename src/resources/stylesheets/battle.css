@@ -7,16 +7,16 @@
 .game-board {}
 
 .empty-cell {
-    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: rgba(0, 0, 0, 0.05);
 }
 
 .selected-card-cell {
-    -fx-background-image: url(/resources/images/battle/ui/lesson_ring_glow.png);
-    -fx-background-size: cover;
+    -fx-background-image: url(/resources/images/battle/ui/selected-card-background.png);
+    -fx-background-size: contain;
 }
 
 .empty-cell:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-color: rgba(255, 255, 255, 0.1);
 }
 
 * {
