@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import models.Collection;
 import models.Hand;
@@ -114,6 +115,14 @@ public class GraphicBattleController implements Initializable {
                 } catch (Map.InvalidCellException ignored) {
                 }
             }
+    }
+
+    private Rectangle getCardRectangle(int row, int column) {
+        double x = 483 + column * 97 + (column - 4) * row * 2.5;
+        double y = 250 + 90 * row;
+        double width = 160 + row * 8;
+        double height = 160 + row * 8;
+        return new Rectangle(x, y, width, height);
     }
 
     private void setCard(AnchorPane cardAnchorPane) {
@@ -313,10 +322,11 @@ public class GraphicBattleController implements Initializable {
         int scale = 1;
         if (column > 4) scale = -1;
         imageView.setScaleX(scale);
-        imageView.setFitWidth((160 + row * 8));
-        imageView.setFitHeight(160 + row * 8);
+        Rectangle rectangle = getCardRectangle(row, column);
+        imageView.setFitWidth(rectangle.getWidth());
+        imageView.setFitHeight(rectangle.getHeight());
         imageView.setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
-        anchorPane.relocate(483 + column * 97 + (column - 4) * row * 2.5, 250 + 90 * row);
+        anchorPane.relocate(rectangle.getX(), rectangle.getY());
 
         ImageView attackPointBackground = new ImageView(new Image("/resources/images/battle/ui/icon_atk@2x.png"));
         ImageView healthPointBackground = new ImageView(new Image("/resources/images/battle/ui/icon_hp@2x.png"));
