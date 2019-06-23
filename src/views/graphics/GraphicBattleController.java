@@ -195,14 +195,14 @@ public class GraphicBattleController implements Initializable {
                 }
                  else {
                     try {
-                        ClientManager.insertCard(selectedCard.getID(), row, column);
+                        ClientManager.insertCard(selectedCard.getID(), row + 1, column + 1);
                         AnchorPane cardPane = getCardInGame(selectedCard, row, column);
                         setCard(cardPane);
-                    } catch (Map.InvalidCellException | Collection.CardNotFoundException
-                            | Map.InvalidTargetCellException | Player.NotEnoughManaException ignored) {
-                    } catch (Player.HeroDeadException e) {
-                        e.printStackTrace();
-                    }
+                        selectedCard = null;
+                        updateCells();
+                    } catch (Player.NotEnoughManaException | Map.InvalidCellException
+                            | Map.InvalidTargetCellException | Player.HeroDeadException
+                            | Collection.CardNotFoundException ignored) { }
                 }
             }
         }
