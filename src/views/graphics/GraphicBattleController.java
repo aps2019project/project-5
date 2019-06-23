@@ -3,6 +3,7 @@ package views.graphics;
 import controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.PerspectiveTransform;
@@ -302,8 +303,24 @@ public class GraphicBattleController implements Initializable {
         AnchorPane.setRightAnchor(healthPointBackground, 25.0);
         AnchorPane.setBottomAnchor(healthPointBackground, 10.0);
 
+        Label apLabel = new Label("" + ((Attacker) card).getAttackPoint());
+        Label hpLabel = new Label("" + ((Attacker) card).getCurrentHealth());
+
+        apLabel.getStyleClass().add("card-data-in-game-label");
+        hpLabel.getStyleClass().add("card-data-in-game-label");
+
+        AnchorPane.setLeftAnchor(apLabel, 35.0);
+        AnchorPane.setBottomAnchor(apLabel, 22.0);
+        apLabel.setAlignment(Pos.CENTER);
+        apLabel.setPrefWidth(30);
+
+        AnchorPane.setRightAnchor(hpLabel, 35.0);
+        AnchorPane.setBottomAnchor(hpLabel, 22.0);
+        hpLabel.setAlignment(Pos.CENTER);
+        hpLabel.setPrefWidth(30);
+
         anchorPane.setMouseTransparent(true);
-        anchorPane.getChildren().addAll(imageView, attackPointBackground, healthPointBackground);
+        anchorPane.getChildren().addAll(imageView, attackPointBackground, healthPointBackground, hpLabel, apLabel);
         return anchorPane;
     }
 }

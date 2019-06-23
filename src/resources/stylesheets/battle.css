@@ -36,7 +36,9 @@
 }
 
 .card-data-in-game-label {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
+    -fx-font-size: 18;
+    -fx-text-fill: white;
 }
 
 * {
