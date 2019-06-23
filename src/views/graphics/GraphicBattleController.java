@@ -293,13 +293,13 @@ public class GraphicBattleController implements Initializable {
         attackPointBackground.setFitWidth(50);
         attackPointBackground.setFitHeight(50);
 
-        AnchorPane.setLeftAnchor(attackPointBackground, 10.0);
+        AnchorPane.setLeftAnchor(attackPointBackground, 25.0);
         AnchorPane.setBottomAnchor(attackPointBackground, 10.0);
 
         healthPointBackground.setFitWidth(50);
         healthPointBackground.setFitHeight(50);
 
-        AnchorPane.setRightAnchor(healthPointBackground, 10.0);
+        AnchorPane.setRightAnchor(healthPointBackground, 25.0);
         AnchorPane.setBottomAnchor(healthPointBackground, 10.0);
 
         anchorPane.setMouseTransparent(true);
