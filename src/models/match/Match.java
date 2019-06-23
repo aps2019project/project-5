@@ -116,11 +116,13 @@ public abstract class Match {
         players[1] = new Player(account2);
         Hero hero1 = players[0].getDeck().getHero();
         Hero hero2 = players[1].getDeck().getHero();
+        hero1.setMoveAbility(true);
+        hero2.setMoveAbility(true);
         Cell cell1 = new Cell();
         Cell cell2 = new Cell();
         try {
-            cell1 = map.getCell(2, 0);
-            cell2 = map.getCell(2, 8);
+            cell2 = map.getCell(2, 0);
+            cell1 = map.getCell(2, 8);
         } catch (Map.InvalidCellException ignored) {
         }
         try {

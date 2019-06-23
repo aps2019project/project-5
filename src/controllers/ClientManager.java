@@ -462,7 +462,7 @@ public class ClientManager {
         if (!card.isMoveAvailable())
             return cells;
         cells.addAll(getMap().getCellsDistance(card.getCell(), 2).stream()
-                .filter(cell -> getMap().isValidMove(card, getOpponent(), cell))
+                .filter(cell -> getMap().isValidMove(card, getMe(), cell))
                 .collect(Collectors.toList()));
         return cells;
     }

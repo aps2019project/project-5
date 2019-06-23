@@ -26,7 +26,7 @@ public class Map {
         List<Cell> cells = new ArrayList<>();
         for (int i = -distance; i <= distance; i++) {
             final int remainedDistance = distance - Math.abs(i);
-            for (int j = remainedDistance; j < remainedDistance; j++) {
+            for (int j = -remainedDistance; j <= remainedDistance; j++) {
                 try {
                     cells.add(this.getCell(x + i, y + j));
                 } catch (InvalidCellException ignored) { }
