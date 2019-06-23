@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Collection;
@@ -39,6 +40,7 @@ public class GraphicBattleController implements Initializable {
     public ImageView player1Mana0, player1Mana1, player1Mana2, player1Mana3, player1Mana4, player1Mana5, player1Mana6, player1Mana7, player1Mana8;
     public ImageView player2Mana0, player2Mana1, player2Mana2, player2Mana3, player2Mana4, player2Mana5, player2Mana6, player2Mana7, player2Mana8;
     public Label player1Name, player2Name;
+    public HBox mana1BarContainer, mana2BarContainer;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
     private ImageView[] player1Mana = new ImageView[9];
@@ -86,6 +88,10 @@ public class GraphicBattleController implements Initializable {
         updateMana();
         player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername().toUpperCase());
         player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername().toUpperCase());
+        player1Name.setRotate(-3.0);
+        player2Name.setRotate(3.0);
+        mana1BarContainer.setRotate(-3.0);
+        mana2BarContainer.setRotate(3.0);
         showCardsInBoard();
         handItem0_container.setLayoutX(-100);
     }
@@ -182,6 +188,7 @@ public class GraphicBattleController implements Initializable {
         }
         updateCells();
     }
+
 
     private void updateCells() {
         String[] removingStyleClassList = {"selected-card-cell", "can-insert-cell", "can-move-cell"};
@@ -280,8 +287,23 @@ public class GraphicBattleController implements Initializable {
         imageView.setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
         anchorPane.relocate(483 + column * 97 + (column - 4) * row * 2.5, 250 + 90 * row);
 
+        ImageView attackPointBackground = new ImageView(new Image("/resources/images/battle/ui/icon_atk@2x.png"));
+        ImageView healthPointBackground = new ImageView(new Image("/resources/images/battle/ui/icon_hp@2x.png"));
+
+        attackPointBackground.setFitWidth(50);
+        attackPointBackground.setFitHeight(50);
+
+        AnchorPane.setLeftAnchor(attackPointBackground, 10.0);
+        AnchorPane.setBottomAnchor(attackPointBackground, 10.0);
+
+        healthPointBackground.setFitWidth(50);
+        healthPointBackground.setFitHeight(50);
+
+        AnchorPane.setRightAnchor(healthPointBackground, 10.0);
+        AnchorPane.setBottomAnchor(healthPointBackground, 10.0);
+
         anchorPane.setMouseTransparent(true);
-        anchorPane.getChildren().add(imageView);
+        anchorPane.getChildren().addAll(imageView, attackPointBackground, healthPointBackground);
         return anchorPane;
     }
 }
