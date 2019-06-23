@@ -7,6 +7,7 @@ import com.dd.plist.PropertyListParser;
 import javafx.animation.Animation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import models.Action;
 import models.MiniPicPeculiarities;
@@ -33,12 +34,13 @@ public class SpriteMaker {
     private ImageView bigImage;
     private ArrayList<MiniPicPeculiarities> datas = new ArrayList<>();
 
-    private SpriteMaker(String name, Action action, int cycle) throws FileNotFoundException {
+    private SpriteMaker(ImageView imageView, String name, Action action, int cycle) throws FileNotFoundException {
+        this.bigImage = imageView;
         this.name = name;
         this.action = action;
         filePath = "src/resources/sprites/" + name;
         spriteFile = new File(filePath + ".plist");
-        bigImage = new ImageView(new Image(new FileInputStream(filePath + ".png")));
+        bigImage.setImage(new Image(new FileInputStream(filePath + ".png")));
         this.cycle = cycle;
     }
 
@@ -60,10 +62,10 @@ public class SpriteMaker {
 
     }
 
-    public static ImageView getAndShowAnimation(String name, Action action, int cycle) {
+    public static ImageView getAndShowAnimation( ImageView imageView, String name, Action action, int cycle) {
         SpriteMaker spriteMaker = null;
         try {
-            spriteMaker = new SpriteMaker(name, action, cycle);
+            spriteMaker = new SpriteMaker(imageView, name, action, cycle);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

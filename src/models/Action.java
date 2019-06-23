@@ -6,7 +6,8 @@ public enum  Action {
     BREATHING("breathing"),
     HIT("hit"),
     IDLE("idle"),
-    RUN("run");
+    RUN("run"),
+    TELEPORT("teleportrecall");
 
     String code;
 
