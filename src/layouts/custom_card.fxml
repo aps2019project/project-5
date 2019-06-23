@@ -46,7 +46,6 @@
                                 <Label text="ID:" styleClass="label"/>
                                 <Label text="Price:" styleClass="label"/>
                                 <Label text="Mana Point:" styleClass="label"/>
-                                <Label text="Power:" styleClass="label"/>
                                 <Label text="Health:" styleClass="label"/>
                                 <Label text="Range:" styleClass="label"/>
                                 <Label text="Attack Type:" styleClass="label"/>
@@ -60,8 +59,6 @@
                                 <JFXTextField fx:id="priceTxt" promptText="30(drakes)" styleClass="input-text"
                                               onKeyTyped="#backToNormal"/>
                                 <JFXTextField fx:id="manaPointTxt" promptText="4" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="powerTxt" promptText="20" styleClass="input-text"
                                               onKeyTyped="#backToNormal"/>
                                 <JFXTextField fx:id="healthTxt" promptText="15" styleClass="input-text"
                                               onKeyTyped="#backToNormal"/>
@@ -79,15 +76,7 @@
                                 </JFXComboBox>
                                 <JFXTextField fx:id="attackPointTxt" promptText="3" styleClass="input-text"
                                               onKeyTyped="#backToNormal"/>
-                                <JFXComboBox fx:id="counterAttackCmb" promptText="Has" styleClass="input-text"
-                                             onMouseClicked="#backToNormal">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Has"/>
-                                            <String fx:value="Don't have"/>
-                                        </FXCollections>
-                                    </items>
-                                </JFXComboBox>
+
                             </VBox>
                         </HBox>
                         <JFXButton fx:id="addBtn" text="Add Card" styleClass="btn-primary, btn-lg" onAction="#addCard"/>
@@ -105,7 +94,6 @@
                                 <Label text="Card Name:" styleClass="label"/>
                                 <Label text="ID:" styleClass="label"/>
                                 <Label text="Price:" styleClass="label"/>
-                                <Label text="Power:" styleClass="label"/>
                                 <Label text="Mana Point:" styleClass="label"/>
                             </VBox>
                             <VBox spacing="20">
@@ -128,7 +116,7 @@
                     </VBox>
                 </ScrollPane>
             </Tab>
-            <Tab fx:id="Hero" text="MINIONS" styleClass="duelystTab">
+            <Tab fx:id="Hero" text="HERO" styleClass="duelystTab">
                 <ScrollPane styleClass="text-field-container" hbarPolicy="NEVER">
                     <VBox alignment="CENTER" spacing="40" styleClass="text-field-container">
                         <padding>
@@ -141,7 +129,6 @@
                                 <Label fx:id="heroLbl" text="ID:" styleClass="label"/>
                                 <Label fx:id="heropriceLbl" text="Price:" styleClass="label"/>
                                 <Label fx:id="heroManaPointLbl" text="Mana Point:" styleClass="label"/>
-                                <Label fx:id="heroPowerLbl" text="Power:" styleClass="label"/>
                                 <Label fx:id="heroHealthLbl" text="Health:" styleClass="label"/>
                                 <Label fx:id="heroRangeLbl" text="Range:" styleClass="label"/>
                                 <Label fx:id="heroAttackTypeLbl" text="Attack Type:" styleClass="label"/>
@@ -150,6 +137,7 @@
                                        styleClass="label"/>
                                 <Label fx:id="heroMoveAvLbl" text="Has move Ability?" styleClass="label"/>
                                 <Label fx:id="heroCoolDown" text="Cooldown" styleClass="Label"/>
+                                <Label text="range" styleClass="Label"/>
                             </VBox>
                             <VBox spacing="20">
                                 <JFXTextField fx:id="heroNameTxt" promptText="my minion" styleClass="input-text"
@@ -179,10 +167,13 @@
                                 <JFXTextField fx:id="heroAttackPointTxt" promptText="3" styleClass="input-text"
                                               onKeyTyped="#backToNormal"/>
 
+                                <JFXTextField fx:id="heroCooldown" promptText="3" styleClass="input-text"
+                                              onKeyTyped="#backToNormal"/>
+
                             </VBox>
                         </HBox>
                         <JFXButton fx:id="heroAddBtn" text="Add Card" styleClass="btn-primary, btn-lg"
-                                   onAction="#addCard"/>
+                                   onAction="#heroAddCard"/>
                     </VBox>
                 </ScrollPane>
             </Tab>

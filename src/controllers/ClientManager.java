@@ -82,13 +82,13 @@ public class ClientManager {
     }
 
     public static Player getMe() {
-        if (playingMatch.getPlayer1().getAccount().getCollection().equals(account.getUsername()))
+        if (playingMatch.getPlayer1().getAccount().getUsername().equals(account.getUsername()))
             return playingMatch.getPlayer1();
         return playingMatch.getPlayer2();
     }
 
     public static Player getOpponent() {
-        if (playingMatch.getPlayer1().getAccount().getCollection().equals(account.getUsername()))
+        if (playingMatch.getPlayer1().getAccount().getUsername().equals(account.getUsername()))
             return playingMatch.getPlayer2();
         return playingMatch.getPlayer1();
     }
@@ -451,13 +451,16 @@ public class ClientManager {
         List<Cell> cells = new ArrayList<>();
         if (card instanceof Spell)
             return getMap().getCells();
-        getMe().getActiveCards().forEach(cardIt -> cells.addAll(getMap().getNeighbors(cardIt.getCell()).stream()
-                .filter(cell -> !cell.isFull() )
-                .collect(Collectors.toList())));
+        getMe().getActiveCards().forEach(
+                cardIt -> cells.addAll(getMap().getNeighbors(cardIt.getCell())
+                                .stream()
+                                .filter(
+                                        cell -> !cell.isFull()
+                                ).collect(Collectors.toList())));
         return cells;
-    }
+}
 
-    public  static List<Cell> whereToMove(Card card) {
+    public static List<Cell> whereToMove(Card card) {
         List<Cell> cells = new ArrayList<>();
         if (!card.isMoveAvailable())
             return cells;

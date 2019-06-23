@@ -121,20 +121,18 @@ public abstract class Match {
         Cell cell1 = new Cell();
         Cell cell2 = new Cell();
         try {
-            cell2 = map.getCell(2, 0);
-            cell1 = map.getCell(2, 8);
+            cell1 = map.getCell(2, 0);
+            cell2 = map.getCell(2, 8);
         } catch (Map.InvalidCellException ignored) {
         }
         try {
             map.insertCard(hero1, cell1);
             map.insertCard(hero2, cell2);
-        } catch (Map.InvalidCellException | Map.InvalidTargetCellException | Player.HeroDeadException ignored) {
-        }
+        } catch (Map.InvalidCellException | Map.InvalidTargetCellException | Player.HeroDeadException ignored) { }
         hero1.setCell(cell1);
         hero2.setCell(cell2);
         players[0].getActiveCards().add(hero1);
         players[1].getActiveCards().add(hero2);
-
     }
 
     abstract public Player getWinner();
@@ -166,11 +164,11 @@ public abstract class Match {
     }
 
     public Player getActivePlayer() {
-        return players[(turn + 1) % 2];
+        return players[turn % 2];
     }
 
     public Player getInActivePlayer() {
-        return players[turn % 2];
+        return players[(turn + 1) % 2];
     }
 
     public Card getCard(String cardID) throws Collection.CardNotFoundException {

@@ -13,6 +13,7 @@
 .selected-card-cell {
     -fx-background-image: url(/resources/images/battle/ui/selected-card-background.png);
     -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
 }
 
 .can-insert-cell {

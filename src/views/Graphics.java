@@ -30,8 +30,6 @@ public class Graphics extends Application {
 
     static {
 
-        /// For test:
-//        createTestUser();
         try {
             ClientManager.login("mahdi", "mahdi");
             ClientManager.setOpponent("AI", true);
@@ -40,28 +38,6 @@ public class Graphics extends Application {
         }
 
 
-        try {
-            GridPane tmpGridPane = new GridPane();
-            tmpGridPane.setOnMouseClicked(event -> setMenu(MAIN_MENU));
-            profileRoot = tmpGridPane;
-            watchRoot = tmpGridPane;
-            codexRoot = tmpGridPane;
-            profileRoot = new GridPane();
-            watchRoot = new GridPane();
-            codexRoot = new GridPane();
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
-            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
-            accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
-            customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
-            multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
-            customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
-            battleMenu = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
-            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
-            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1000);
-        }
     }
 
     public static void alert(String title, String header, String content) {
@@ -128,13 +104,43 @@ public class Graphics extends Application {
 
     }
 
+    public void loadFXML() {
+        try {
+            GridPane tmpGridPane = new GridPane();
+            tmpGridPane.setOnMouseClicked(event -> setMenu(MAIN_MENU));
+            profileRoot = tmpGridPane;
+            watchRoot = tmpGridPane;
+            codexRoot = tmpGridPane;
+            profileRoot = tmpGridPane;
+            watchRoot = tmpGridPane;
+            codexRoot = tmpGridPane;
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/match_select.fxml"));
+            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/main_menu.fxml"));
+            accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/account_menu.fxml"));
+            customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
+            multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
+            customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
+            battleMenu = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
+            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
+            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1000);
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
 
+        try {
+            ClientManager.login("mahdi", "mahdi");
+            ClientManager.setOpponent("AI", true);
+            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
+        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException | AccountNotFoundException ignored) {
+        }
 
+        loadFXML();
         stage = primaryStage;
-
-
         Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");

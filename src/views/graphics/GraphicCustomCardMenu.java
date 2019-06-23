@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import models.Shop;
 import models.cards.AttackType;
 import models.cards.Card;
+import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
 import models.cards.spell.Spell;
@@ -26,6 +27,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static views.Graphics.Menu.MAIN_MENU;
 import static views.Graphics.Menu.SHOP_MENU;
@@ -37,7 +40,6 @@ public class GraphicCustomCardMenu {
     public JFXTextField idTxt;
     public JFXTextField priceTxt;
     public JFXTextField manaPointTxt;
-    public JFXTextField powerTxt;
     public JFXTextField healthTxt;
     public JFXTextField rangeTxt;
     public JFXTextField attackPointTxt;
@@ -48,9 +50,18 @@ public class GraphicCustomCardMenu {
     public JFXTextField spellIdTxt;
     public JFXTextField spellPriceTxt;
     public JFXTextField spellManaPointTxt;
-    public JFXTextField spellPowerTxt;
     public JFXTextField spellDescription;
     public JFXTextField spellBuff;
+    public JFXTextField heroNameTxt;
+    public JFXTextField heroIdTxt;
+    public JFXTextField heroPriceTxt;
+    public JFXTextField heroManaPointTxt;
+    public JFXTextField heroPowerTxt;
+    public JFXTextField heroHealthTxt;
+    public JFXTextField heroRangeTxt;
+    public JFXComboBox heroAttackTypeCmb;
+    public JFXTextField heroAttackPointTxt;
+    public JFXTextField heroCooldown;
     private boolean minionFlag;
     private boolean spellFlag;
     private boolean heroFlag;
@@ -86,18 +97,18 @@ public class GraphicCustomCardMenu {
             jsonCardBuilder.setPrettyPrinting();
             YaGson jsonCard = jsonCardBuilder.create();
             URL url = FileReader.class.getResource("minions.json");
-            ArrayList<Card> cards = new ArrayList<>();
+            List<Card> cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getMinions());
             if (type.equals("spell")) {
-                url = FileReader.class.getResource("spells.json");
-                jsonCard.toJson(Shop.getInstance().getCardsCollection().getSpells());
+                url = FileReader.class.getResource("spell.json");
+                cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getSpells());
             }
-            if (type.equals("spell")) {
-                url = FileReader.class.getResource("hero.json");
-                jsonCard.toJson(Shop.getInstance().getCardsCollection().getHeroes());
+            if (type.equals("hero")) {
+                url = FileReader.class.getResource("heroes.json");
+                cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getHeroes());
             }
             File file = new File(url.getPath());
             FileWriter cardWriter = new FileWriter(file);
-            cardWriter.write(jsonCard.toJson(Shop.getInstance().getCardsCollection().getMinions()));
+            cardWriter.write(jsonCard.toJson(cards));
             cardWriter.flush();
             cardWriter.close();
         } catch (IOException e) {
@@ -152,12 +163,11 @@ public class GraphicCustomCardMenu {
             minionFlag = false;
         }
 
-        int price = 0;
+        int price = getTextInfo(priceTxt, "minion");
 
 
         int manaPoint = getTextInfo(manaPointTxt, "minion");
 
-        int power = getTextInfo(powerTxt, "minion");
 
         int health = getTextInfo(healthTxt, "minion");
 
@@ -181,6 +191,44 @@ public class GraphicCustomCardMenu {
         saveNewCard("minion", minion);
     }
 
+    public void heroAddCard(ActionEvent actionEvent) {
+        playMusic("sfx_ui_select.m4a");
+        heroFlag = true;
+        String name = heroNameTxt.getText();
+        if (name.equals("")) {
+            System.out.println( heroNameTxt.getText());
+            changeAsWrong(heroNameTxt, true);
+            heroFlag = false;
+        }
+
+        int id = getTextInfo(heroIdTxt, "hero");
+
+        int price = getTextInfo(heroPriceTxt, "hero");
+
+
+        int manaPoint = getTextInfo(heroManaPointTxt, "hero");
+
+        int attackPoint = getTextInfo(heroAttackPointTxt, "hero");
+
+        int health = getTextInfo(heroHealthTxt, "hero");
+
+        int range = getTextInfo(heroRangeTxt, "hero");
+        int cooldown = getTextInfo(heroCooldown, "hero");
+
+        String attackType = "";
+        if (heroAttackTypeCmb.getSelectionModel().isEmpty()) {
+            heroFlag = false;
+            changeAsWrong(heroAttackTypeCmb, true);
+        } else {
+            attackType = heroAttackTypeCmb.getValue().toString();
+        }
+        if (!heroFlag)
+            return;
+        AttackType attackType1 = AttackType.getAttackType(attackType);
+        Hero hero = new Hero(id, name, "", manaPoint, price, health, attackPoint, attackType1, range, cooldown);
+        saveNewCard("hero", hero);
+    }
+
 
     private void changeAsWrong(JFXTextField textField, boolean isWrong) {
         addBtn.setDisable(isWrong);
@@ -200,6 +248,7 @@ public class GraphicCustomCardMenu {
         }
     }
 
+
     public void backToNormal(InputEvent keyEvent) {
         try {
             changeAsWrong((JFXComboBox) keyEvent.getSource(), false);
@@ -212,4 +261,6 @@ public class GraphicCustomCardMenu {
         playMusic("sfx_ui_select.m4a");
         Graphics.setMenu(SHOP_MENU);
     }
+
+
 }
