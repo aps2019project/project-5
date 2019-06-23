@@ -87,7 +87,7 @@
     -fx-background-size: cover;
 }
 
-.hand-item:hover {
+.hand-item:hover, .hand-item-selected {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
 }

@@ -12,12 +12,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import models.Collection;
 import models.Hand;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.map.Cell;
 import models.map.Map;
 
+import java.awt.color.CMMException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -44,6 +46,8 @@ public class GraphicBattleController implements Initializable {
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private Hand hand;
     private HashMap<Card, AnchorPane> cardViews = new HashMap<>();
+    private Card selectedCard;
+    private boolean isSelectedCardInGame = false;
 
     private void createMapCells() {
         for(int i = 0; i < 5; i++) {
@@ -51,6 +55,8 @@ public class GraphicBattleController implements Initializable {
                 cell[i][j] = new AnchorPane();
                 AnchorPane.setLeftAnchor(cell[i][j], 102d * j);
                 AnchorPane.setTopAnchor(cell[i][j], 92d * i);
+                int finalI = i, finalJ = j;
+                cell[i][j].setOnMouseClicked(event -> clickCell(finalI, finalJ));
                 cell[i][j].setPrefWidth(100);
                 cell[i][j].setPrefHeight(90);
                 cell[i][j].getStyleClass().add("empty-cell");
@@ -146,6 +152,24 @@ public class GraphicBattleController implements Initializable {
         player2Mana[6] = player2Mana6;
         player2Mana[7] = player2Mana7;
         player2Mana[8] = player2Mana8;
+    }
+
+    private void clickCell(int row, int column) {
+        if(selectedCard == null) {
+            for(java.util.Map.Entry<Card, AnchorPane> cardView : cardViews.entrySet()) {
+                if(cardView.getKey().getCell().getX() == row && cardView.getKey().getCell().getY() == column) {
+                    Card clickedCard = cardView.getKey();
+                    try {
+                        ClientManager.selectCard(clickedCard.getID());
+                        selectedCard = clickedCard;
+                        isSelectedCardInGame = true;
+                        System.out.println("Card Selected");
+                    } catch (Collection.CardNotFoundException e) {
+                        System.out.println("Can't Select Card");
+                    }
+                }
+            }
+        }
     }
 
     private void updateHand() {
