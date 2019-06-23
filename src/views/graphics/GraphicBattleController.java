@@ -20,7 +20,6 @@ import models.cards.Attacker;
 import models.cards.Card;
 import models.map.Cell;
 import models.map.Map;
-
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +46,6 @@ public class GraphicBattleController implements Initializable {
     private ImageView[] player2Mana = new ImageView[9];
     private Label[] handItemMana = new Label[5];
     private AnchorPane[] handItemContainer = new AnchorPane[5];
-    private Hand hand;
     private HashMap<Card, AnchorPane> cardViews = new HashMap<>();
     private Card selectedCard;
     private boolean isSelectedCardInGame = false;
@@ -189,7 +187,6 @@ public class GraphicBattleController implements Initializable {
         updateCells();
     }
 
-
     private void updateCells() {
         String[] removingStyleClassList = {"selected-card-cell", "can-insert-cell", "can-move-cell"};
         for (int i = 0; i < 5; i++) {
@@ -218,7 +215,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateHand() {
-        hand = ClientManager.getHand();
+        Hand hand = ClientManager.getHand();
         System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
         for (Card card : hand.getCards()) {
