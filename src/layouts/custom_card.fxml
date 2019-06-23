@@ -41,18 +41,16 @@
                         </padding>
                         <HBox alignment="CENTER" spacing="40">
                             <VBox spacing="20">
-                                <Label fx:id="nameLbl" text="Card Name:" styleClass="label"/>
-                                <Label fx:id="description" text="description:" styleClass="label"/>
-                                <Label fx:id="idLbl" text="ID:" styleClass="label"/>
-                                <Label fx:id="priceLbl" text="Price:" styleClass="label"/>
-                                <Label fx:id="manaPointLbl" text="Mana Point:" styleClass="label"/>
-                                <Label fx:id="powerLbl" text="Power:" styleClass="label"/>
-                                <Label fx:id="healthLbl" text="Health:" styleClass="label"/>
-                                <Label fx:id="rangeLbl" text="Range:" styleClass="label"/>
-                                <Label fx:id="attackTypeLbl" text="Attack Type:" styleClass="label"/>
-                                <Label fx:id="attackPointLbl" text="Attack Point:" styleClass="label"/>
-                                <Label fx:id="turnAttackAvLbl" text="Is available for turn attack?" styleClass="label"/>
-                                <Label fx:id="moveAvLbl" text="Has move Ability?" styleClass="label"/>
+                                <Label text="Card Name:" styleClass="label"/>
+                                <Label text="description:" styleClass="label"/>
+                                <Label text="ID:" styleClass="label"/>
+                                <Label text="Price:" styleClass="label"/>
+                                <Label text="Mana Point:" styleClass="label"/>
+                                <Label text="Power:" styleClass="label"/>
+                                <Label text="Health:" styleClass="label"/>
+                                <Label text="Range:" styleClass="label"/>
+                                <Label text="Attack Type:" styleClass="label"/>
+                                <Label text="Attack Point:" styleClass="label"/>
                             </VBox>
                             <VBox spacing="20">
                                 <JFXTextField fx:id="nameTxt" promptText="my minion" styleClass="input-text"
@@ -90,31 +88,13 @@
                                         </FXCollections>
                                     </items>
                                 </JFXComboBox>
-                                <JFXComboBox fx:id="turnAttackAvCmb" promptText="No" styleClass="input-text"
-                                             onMouseClicked="#backToNormal">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Yes"/>
-                                            <String fx:value="No"/>
-                                        </FXCollections>
-                                    </items>
-                                </JFXComboBox>
-                                <JFXComboBox fx:id="moveAvCmb" promptText="Yes" styleClass="input-text"
-                                             onMouseClicked="#backToNormal">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Yes"/>
-                                            <String fx:value="No"/>
-                                        </FXCollections>
-                                    </items>
-                                </JFXComboBox>
                             </VBox>
                         </HBox>
                         <JFXButton fx:id="addBtn" text="Add Card" styleClass="btn-primary, btn-lg" onAction="#addCard"/>
                     </VBox>
                 </ScrollPane>
             </Tab>
-            <Tab fx:id="Spell" text="Spell" styleClass="duelystTab">
+            <Tab fx:id="SPELL" text="Spell" styleClass="duelystTab">
                 <ScrollPane styleClass="text-field-container" hbarPolicy="NEVER">
                     <VBox alignment="CENTER" spacing="40" styleClass="text-field-container">
                         <padding>
@@ -122,11 +102,11 @@
                         </padding>
                         <HBox alignment="CENTER" spacing="40">
                             <VBox spacing="20">
-                                <Label fx:id="spellNameLbl" text="Card Name:" styleClass="label"/>
-                                <Label fx:id="spellIdLbl" text="ID:" styleClass="label"/>
-                                <Label fx:id="spellPriceLbl" text="Price:" styleClass="label"/>
-                                <Label fx:id="spellManaPointLbl" text="Mana Point:" styleClass="label"/>
-                                <Label fx:id="spellPowerLbl" text="Power:" styleClass="label"/>
+                                <Label text="Card Name:" styleClass="label"/>
+                                <Label text="ID:" styleClass="label"/>
+                                <Label text="Price:" styleClass="label"/>
+                                <Label text="Power:" styleClass="label"/>
+                                <Label text="Mana Point:" styleClass="label"/>
                             </VBox>
                             <VBox spacing="20">
                                 <JFXTextField fx:id="spellNameTxt" promptText="my minion" styleClass="input-text"
@@ -137,8 +117,6 @@
                                               onKeyTyped="#backToNormal"/>
                                 <JFXTextField fx:id="spellManaPointTxt" promptText="4" styleClass="input-text"
                                               onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="spellPowerTxt" promptText="20" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
                                 <JFXTextField fx:id="spellDescription" promptText="20" styleClass="input-text"
                                               onKeyTyped="#backToNormal"/>
                                 <JFXTextField fx:id="spellBuff" promptText="20" styleClass="input-text"
@@ -146,7 +124,7 @@
                             </VBox>
                         </HBox>
                         <JFXButton fx:id="spellAddBtn" text="Add Card" styleClass="btn-primary, btn-lg"
-                                   onAction="#addCard"/>
+                                   onAction="#spellAddCard"/>
                     </VBox>
                 </ScrollPane>
             </Tab>
@@ -200,33 +178,7 @@
                                 </JFXComboBox>
                                 <JFXTextField fx:id="heroAttackPointTxt" promptText="3" styleClass="input-text"
                                               onKeyTyped="#backToNormal"/>
-                                <JFXComboBox fx:id="heroCounterAttackCmb" promptText="Has" styleClass="input-text"
-                                             onMouseClicked="#backToNormal">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Has"/>
-                                            <String fx:value="Don't have"/>
-                                        </FXCollections>
-                                    </items>
-                                </JFXComboBox>
-                                <JFXComboBox fx:id="heroTurnAttackAvCmb" promptText="No" styleClass="input-text"
-                                             onMouseClicked="#backToNormal">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Yes"/>
-                                            <String fx:value="No"/>
-                                        </FXCollections>
-                                    </items>
-                                </JFXComboBox>
-                                <JFXComboBox fx:id="heroMoveAvCmb" promptText="Yes" styleClass="input-text"
-                                             onMouseClicked="#backToNormal">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Yes"/>
-                                            <String fx:value="No"/>
-                                        </FXCollections>
-                                    </items>
-                                </JFXComboBox>
+
                             </VBox>
                         </HBox>
                         <JFXButton fx:id="heroAddBtn" text="Add Card" styleClass="btn-primary, btn-lg"

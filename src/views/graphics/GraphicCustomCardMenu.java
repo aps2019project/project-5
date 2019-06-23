@@ -14,14 +14,18 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import models.Shop;
 import models.cards.AttackType;
+import models.cards.Card;
 import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
+import models.cards.spell.Spell;
 import views.Graphics;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import static views.Graphics.Menu.MAIN_MENU;
 import static views.Graphics.Menu.SHOP_MENU;
@@ -37,142 +41,60 @@ public class GraphicCustomCardMenu {
     public JFXTextField healthTxt;
     public JFXTextField rangeTxt;
     public JFXTextField attackPointTxt;
-    public JFXTextField maxDisTxt;
-    public JFXTextField comboAbilityTxt;
     public JFXButton addBtn;
-    public JFXComboBox counterAttackCmb;
-    public JFXComboBox turnAttackAvCmb;
-    public JFXComboBox moveAvCmb;
     public JFXComboBox attackTypeCmb;
     public JFXTabPane tabs;
+    public JFXTextField spellNameTxt;
+    public JFXTextField spellIdTxt;
+    public JFXTextField spellPriceTxt;
+    public JFXTextField spellManaPointTxt;
+    public JFXTextField spellPowerTxt;
+    public JFXTextField spellDescription;
+    public JFXTextField spellBuff;
+    private boolean minionFlag;
+    private boolean spellFlag;
+    private boolean heroFlag;
 
-    public void addCard(ActionEvent actionEvent) {
-        playMusic("sfx_ui_select.m4a");
-        String name = nameTxt.getText();
-        boolean flag = true;
-
-        if (name.equals("")) {
-            changeAsWrong(nameTxt, true);
-            flag = false;
-        }
-
-        int id = 0;
+    public int getTextInfo(JFXTextField t, String type) {
+        int number = 0;
         try {
-            id = Integer.parseInt(idTxt.getText());
+            number = Integer.parseInt(t.getText());
         } catch (NumberFormatException e) {
-            changeAsWrong(idTxt, true);
-            flag = false;
-        }
+            changeAsWrong(t, true);
+            switch (type) {
+                case "minion":
+                    minionFlag = false;
+                    break;
 
-        int price = 0;
+                case "hero":
+                    heroFlag = false;
+                    break;
+
+                case "spell":
+                    spellFlag = false;
+                    break;
+            }
+        }
+        return number;
+    }
+
+    public void saveNewCard(String type, Card card) {
         try {
-            price = Integer.parseInt(priceTxt.getText());
-        } catch (NumberFormatException e) {
-            changeAsWrong(priceTxt, true);
-            flag = false;
-        }
-
-        int manaPoint = 0;
-        try {
-            manaPoint = Integer.parseInt(manaPointTxt.getText());
-        } catch (NumberFormatException e) {
-            changeAsWrong(manaPointTxt, true);
-            flag = false;
-        }
-
-        int power = 0;
-        try {
-            power = Integer.parseInt(powerTxt.getText());
-        } catch (NumberFormatException e) {
-            changeAsWrong(powerTxt, true);
-            flag = false;
-        }
-
-        int health = 0;
-        try {
-            health = Integer.parseInt(healthTxt.getText());
-        } catch (NumberFormatException e) {
-            changeAsWrong(healthTxt, true);
-            flag = false;
-        }
-
-        int range = 0;
-        try {
-            range = Integer.parseInt(rangeTxt.getText());
-        } catch (NumberFormatException e) {
-            changeAsWrong(rangeTxt, true);
-            flag = false;
-        }
-
-        int attackPoint = 0;
-        try {
-            attackPoint = Integer.parseInt(attackPointTxt.getText());
-        } catch (NumberFormatException e) {
-            changeAsWrong(attackPointTxt, true);
-            flag = false;
-        }
-
-        int maxDistance = 0;
-        try {
-            maxDistance = Integer.parseInt(maxDisTxt.getText());
-        } catch (NumberFormatException e) {
-            changeAsWrong(maxDisTxt, true);
-            flag = false;
-        }
-
-        int combo = 0;
-        try {
-            combo = Integer.parseInt(comboAbilityTxt.getText());
-        } catch (NumberFormatException e) {
-            changeAsWrong(comboAbilityTxt, true);
-            flag = false;
-        }
-
-        String attackType = "";
-        if (attackTypeCmb.getSelectionModel().isEmpty()) {
-            flag = false;
-            changeAsWrong(attackTypeCmb, true);
-        } else {
-            attackType = attackTypeCmb.getValue().toString();
-        }
-
-        String counterAttack;
-        if (counterAttackCmb.getSelectionModel().isEmpty()) {
-            flag = false;
-            changeAsWrong(counterAttackCmb, true);
-        } else {
-            counterAttack = attackTypeCmb.getValue().toString();
-        }
-
-        String turnAttack;
-        if (turnAttackAvCmb.getSelectionModel().isEmpty()) {
-            flag = false;
-            changeAsWrong(turnAttackAvCmb, true);
-        } else {
-            turnAttack = attackTypeCmb.getValue().toString();
-        }
-
-        String moveAvailale;
-        if (moveAvCmb.getSelectionModel().isEmpty()) {
-            flag = false;
-            changeAsWrong(moveAvCmb, true);
-        } else {
-            moveAvailale = attackTypeCmb.getValue().toString();
-        }
-
-
-        if (!flag)
-            return;
-        SpecialPowerActivateTime specialPowerActivateTime = SpecialPowerActivateTime.ON_ATTACK;
-        AttackType attackType1 = AttackType.getAttackType(attackType);
-        Minion minion = new Minion(id, name, "", manaPoint, price, health, attackPoint, attackType1, range, specialPowerActivateTime);
-        try {
-            Shop.getInstance().getCardsCollection().addCard(minion);
+            Shop.getInstance().getCardsCollection().addCard(card);
             YaGsonBuilder jsonCardBuilder = new YaGsonBuilder();
 
             jsonCardBuilder.setPrettyPrinting();
             YaGson jsonCard = jsonCardBuilder.create();
             URL url = FileReader.class.getResource("minions.json");
+            ArrayList<Card> cards = new ArrayList<>();
+            if (type.equals("spell")) {
+                url = FileReader.class.getResource("spells.json");
+                jsonCard.toJson(Shop.getInstance().getCardsCollection().getSpells());
+            }
+            if (type.equals("spell")) {
+                url = FileReader.class.getResource("hero.json");
+                jsonCard.toJson(Shop.getInstance().getCardsCollection().getHeroes());
+            }
             File file = new File(url.getPath());
             FileWriter cardWriter = new FileWriter(file);
             cardWriter.write(jsonCard.toJson(Shop.getInstance().getCardsCollection().getMinions()));
@@ -182,6 +104,81 @@ public class GraphicCustomCardMenu {
             e.printStackTrace();
         }
         Graphics.alert("Congrats", "Card Added", "Your new card added successfully.");
+    }
+
+    public void spellAddCard(ActionEvent actionEvent) {
+        playMusic("sfx_ui_select.m4a");
+        spellFlag = true;
+
+        String name = spellNameTxt.getText();
+        if (name.equals("")) {
+            changeAsWrong(spellNameTxt, true);
+            spellFlag = false;
+        }
+
+        int id = 0;
+        try {
+            id = Integer.parseInt(spellIdTxt.getText());
+        } catch (NumberFormatException e) {
+            changeAsWrong(spellIdTxt, true);
+            spellFlag = false;
+        }
+
+        int price = getTextInfo(spellPriceTxt, "spell");
+
+
+        int manaPoint = getTextInfo(spellManaPointTxt, "spell");
+        if (!spellFlag)
+            return;
+        Spell spell = new Spell(id, name, "", manaPoint, price);
+        saveNewCard("spell", spell);
+
+    }
+
+    public void addCard(ActionEvent actionEvent) {
+        playMusic("sfx_ui_select.m4a");
+        String name = nameTxt.getText();
+        minionFlag = true;
+        if (name.equals("")) {
+            changeAsWrong(nameTxt, true);
+            minionFlag = false;
+        }
+
+        int id = 0;
+        try {
+            id = Integer.parseInt(idTxt.getText());
+        } catch (NumberFormatException e) {
+            changeAsWrong(idTxt, true);
+            minionFlag = false;
+        }
+
+        int price = 0;
+
+
+        int manaPoint = getTextInfo(manaPointTxt, "minion");
+
+        int power = getTextInfo(powerTxt, "minion");
+
+        int health = getTextInfo(healthTxt, "minion");
+
+        int range = getTextInfo(rangeTxt, "minion");
+
+        int attackPoint = getTextInfo(attackPointTxt, "minion");
+
+
+        String attackType = "";
+        if (attackTypeCmb.getSelectionModel().isEmpty()) {
+            minionFlag = false;
+            changeAsWrong(attackTypeCmb, true);
+        } else {
+            attackType = attackTypeCmb.getValue().toString();
+        }
+        if (!minionFlag)
+            return;
+        SpecialPowerActivateTime specialPowerActivateTime = SpecialPowerActivateTime.ON_ATTACK;
+        AttackType attackType1 = AttackType.getAttackType(attackType);
+        Minion minion = new Minion(id, name, "", manaPoint, price, health, attackPoint, attackType1, range, specialPowerActivateTime);
+        saveNewCard("minion", minion);
     }
 
 
