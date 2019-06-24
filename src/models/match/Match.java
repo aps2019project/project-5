@@ -9,6 +9,7 @@ import models.items.Item;
 import models.map.Cell;
 import models.map.Map;
 import views.Error;
+import views.SpriteMaker;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -271,7 +272,6 @@ public abstract class Match {
             super("Invalid attack");
             this.id = id;
         }
-
         public String getId() {
             return id;
         }

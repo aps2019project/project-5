@@ -1,5 +1,6 @@
 package views.menus;
 
+import controllers.ClientManager;
 import controllers.logic.Manager;
 import models.Collection;
 import models.Player;
@@ -24,6 +25,10 @@ import java.util.regex.Matcher;
 public class BattleMenu implements Menu {
 
     private static boolean isInGraveYard = false;
+
+    public  static List<Command> getAICommands() {
+        return commands;
+    }
 
     public BattleMenu() {
         commands.add(new Command(
@@ -359,7 +364,7 @@ public class BattleMenu implements Menu {
     public static void select(Matcher matcher) {
         String id = matcher.group("id");
         try {
-            Manager.selectCard(id);
+            ClientManager.selectCard(id);
             Output.log(Error.CARD_SELECTED.toString());
         } catch (Collection.CardNotFoundException e) {
             boolean flag = false;

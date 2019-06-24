@@ -25,12 +25,20 @@ import models.cards.spell.Spell;
 import models.map.Cell;
 import models.map.Map;
 import models.match.Match;
+import views.Command;
+import views.Graphics;
 import views.SpriteMaker;
+import views.menus.BattleMenu;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+
+import static views.Graphics.playMusic;
 
 public class GraphicBattleController implements Initializable {
     public AnchorPane gameBoard;
@@ -207,6 +215,8 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void clickCell(int row, int column) {
+        if (ClientManager.isAITurn())
+            return;
         Card clickedCard = getCardInCell(row, column);
         if (selectedCard == null) {
             if (clickedCard != null) try {
@@ -407,5 +417,32 @@ public class GraphicBattleController implements Initializable {
         anchorPane.getChildren().addAll(imageView, attackPointBackground, healthPointBackground, hpLabel, apLabel);
         return anchorPane;
     }
+
+    public void endTurn(MouseEvent mouseEvent) {
+        playMusic("sfx_ui_select.m4a");
+        ClientManager.endTurn();
+        updateMana();
+        updateHand();
+        String AIMove = "";
+        if (ClientManager.isAITurn())
+            AIMove = ClientManager.getAIMove();
+        for (Command command : BattleMenu.getAICommands()) {
+            Matcher matcher = command.getPattern().matcher(AIMove);
+            if(matcher.find()) {
+                Method method ;
+                try {
+                    method = getClass().getMethod(command.getFunctionName(), Matcher.class);
+                    Object object = method.invoke(null, matcher);
+                    if(object != null && object.equals(Boolean.FALSE))
+                        return;
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+    }
+
+
 
 }
