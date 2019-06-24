@@ -26,156 +26,149 @@
                onMouseClicked="#back">
         <Image url="/resources/images/buttons/back-button.png"/>
     </ImageView>
-    <VBox prefHeight="900.0" prefWidth="830.0" spacing="20" styleClass="text-field-container" alignment="center"
+    <VBox prefHeight="920.0" prefWidth="830.0" spacing="20" styleClass="text-field-container" alignment="center"
           AnchorPane.leftAnchor="550" AnchorPane.topAnchor="100">
-        <padding>
-            <Insets top="30"/>
-        </padding>
-        <Label styleClass="header-label" text="ADD YOUR OWN CARD"/>
-        <JFXTabPane fx:id="tabs" styleClass="tab-pane">
-            <Tab fx:id="minions" text="MINIONS" styleClass="duelystTab">
-                <ScrollPane styleClass="text-field-container" hbarPolicy="NEVER">
-                    <VBox alignment="CENTER" spacing="40" styleClass="text-field-container">
-                        <padding>
-                            <Insets topRightBottomLeft="30"/>
-                        </padding>
-                        <HBox alignment="CENTER" spacing="40">
-                            <VBox spacing="20">
-                                <Label text="Card Name:" styleClass="label"/>
-                                <Label text="description:" styleClass="label"/>
-                                <Label text="ID:" styleClass="label"/>
-                                <Label text="Price:" styleClass="label"/>
-                                <Label text="Mana Point:" styleClass="label"/>
-                                <Label text="Health:" styleClass="label"/>
-                                <Label text="Range:" styleClass="label"/>
-                                <Label text="Attack Type:" styleClass="label"/>
-                                <Label text="Attack Point:" styleClass="label"/>
-                            </VBox>
-                            <VBox spacing="20">
-                                <JFXTextField fx:id="nameTxt" promptText="my minion" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="idTxt" promptText="102" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="priceTxt" promptText="30(drakes)" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="manaPointTxt" promptText="4" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="healthTxt" promptText="15" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="rangeTxt" promptText="2" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXComboBox fx:id="attackTypeCmb" promptText="MELEE" styleClass="input-text"
-                                             onMouseClicked="#backToNormal">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="MELEE"/>
-                                            <String fx:value="HYBRID"/>
-                                            <String fx:value="Ranged"/>
-                                        </FXCollections>
-                                    </items>
-                                </JFXComboBox>
-                                <JFXTextField fx:id="attackPointTxt" promptText="3" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
 
-                            </VBox>
-                        </HBox>
-                        <JFXButton fx:id="addBtn" text="Add Card" styleClass="btn-primary, btn-lg" onAction="#addCard"/>
-                    </VBox>
-                </ScrollPane>
+        <JFXTabPane fx:id="tabs" >
+            <Tab fx:id="heroTab" text="HERO" styleClass="duelystTab">
+                <VBox alignment="CENTER" spacing="30" styleClass="text-field-container">
+                    <padding>
+                        <Insets topRightBottomLeft="30"/>
+                    </padding>
+                    <HBox alignment="CENTER" spacing="40">
+                        <VBox spacing="20">
+                            <Label fx:id="heroNameLbl" text="Card Name:" styleClass="label"/>
+                            <Label fx:id="heroDescription" text="description:" styleClass="label"/>
+                            <Label fx:id="heroLbl" text="ID:" styleClass="label"/>
+                            <Label fx:id="heropriceLbl" text="Price:" styleClass="label"/>
+                            <Label fx:id="heroManaPointLbl" text="Mana Point:" styleClass="label"/>
+                            <Label fx:id="heroHealthLbl" text="Health:" styleClass="label"/>
+                            <Label fx:id="heroRangeLbl" text="Range:" styleClass="label"/>
+                            <Label fx:id="heroAttackTypeLbl" text="Attack Type:" styleClass="label"/>
+                            <Label fx:id="heroAttackPointLbl" text="Attack Point:" styleClass="label"/>
+                            <Label fx:id="heroTurnAttackAvLbl" text="Is available for turn attack?"
+                                   styleClass="label"/>
+                            <Label fx:id="spriteAnimationHeroLbl" text="Sprite Animation Path:"
+                                   styleClass="label"/>
+                        </VBox>
+                        <VBox spacing="20">
+                            <JFXTextField fx:id="heroNameTxt" promptText="my minion" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="heroIdTxt" promptText="102" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="heroPriceTxt" promptText="30(drakes)" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="heroManaPointTxt" promptText="4" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="heroPowerTxt" promptText="20" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="heroHealthTxt" promptText="15" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="heroRangeTxt" promptText="2" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXComboBox fx:id="heroAttackTypeCmb" promptText="MELEE" styleClass="input-text"
+                                         onMouseClicked="#backToNormal">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="MELEE"/>
+                                        <String fx:value="HYBRID"/>
+                                        <String fx:value="Ranged"/>
+                                    </FXCollections>
+                                </items>
+                            </JFXComboBox>
+                            <JFXTextField fx:id="heroAttackPointTxt" promptText="3" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="heroCooldown" promptText="3" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="spriteAnimationPathHeroTxt" promptText="/path/to/spriteAnimation.jpg"
+                                          styleClass="input-text" onMouseClicked="#openFileChooser"/>
+
+                        </VBox>
+                    </HBox>
+                    <JFXButton fx:id="heroAddBtn" text="Add Card" styleClass="btn-primary, btn-lg" onAction="#addHeroCard"/>
+                </VBox>
             </Tab>
-            <Tab fx:id="SPELL" text="Spell" styleClass="duelystTab">
-                <ScrollPane styleClass="text-field-container" hbarPolicy="NEVER">
-                    <VBox alignment="CENTER" spacing="40" styleClass="text-field-container">
-                        <padding>
-                            <Insets topRightBottomLeft="30"/>
-                        </padding>
-                        <HBox alignment="CENTER" spacing="40">
-                            <VBox spacing="20">
-                                <Label text="Card Name:" styleClass="label"/>
-                                <Label text="ID:" styleClass="label"/>
-                                <Label text="Price:" styleClass="label"/>
-                                <Label text="Mana Point:" styleClass="label"/>
-                            </VBox>
-                            <VBox spacing="20">
-                                <JFXTextField fx:id="spellNameTxt" promptText="my minion" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="spellIdTxt" promptText="102" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="spellPriceTxt" promptText="30(drakes)" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="spellManaPointTxt" promptText="4" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="spellDescription" promptText="20" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="spellBuff" promptText="20" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                            </VBox>
-                        </HBox>
-                        <JFXButton fx:id="spellAddBtn" text="Add Card" styleClass="btn-primary, btn-lg"
-                                   onAction="#spellAddCard"/>
-                    </VBox>
-                </ScrollPane>
+            <Tab fx:id="minionTab" text="MINIONS" styleClass="duelystTab">
+                <VBox alignment="TOP_CENTER" spacing="30" styleClass="text-field-container">
+                    <padding>
+                        <Insets topRightBottomLeft="30"/>
+                    </padding>
+                    <HBox alignment="CENTER" spacing="80">
+                        <VBox spacing="20">
+                            <Label text="Card Name:" styleClass="label"/>
+                            <Label text="description:" styleClass="label"/>
+                            <Label text="ID:" styleClass="label"/>
+                            <Label text="Price:" styleClass="label"/>
+                            <Label text="Mana Point:" styleClass="label"/>
+                            <Label text="Health:" styleClass="label"/>
+                            <Label text="Range:" styleClass="label"/>
+                            <Label text="Attack Type:" styleClass="label"/>
+                            <Label fx:id="spriteAnimationMinionLbl" text="Sprite Animation Path:"
+                                   styleClass="label"/>
+                        </VBox>
+                        <VBox spacing="20">
+                            <JFXTextField fx:id="nameTxt" promptText="my minion" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="idTxt" promptText="102" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="priceTxt" promptText="30(drakes)" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="manaPointTxt" promptText="4" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="healthTxt" promptText="15" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="rangeTxt" promptText="2" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXComboBox fx:id="attackTypeCmb" promptText="MELEE" styleClass="input-text"
+                                         onMouseClicked="#backToNormal">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="MELEE"/>
+                                        <String fx:value="HYBRID"/>
+                                        <String fx:value="Ranged"/>
+                                    </FXCollections>
+                                </items>
+                            </JFXComboBox>
+                            <JFXTextField fx:id="attackPointTxt" promptText="3" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="spriteAnimationPathMinionTxt" promptText="/path/to/spriteAnimation.jpg"
+                                          styleClass="input-text" onMouseClicked="#openFileChooser"/>
+
+                        </VBox>
+                    </HBox>
+                    <JFXButton fx:id="addBtn" text="Add Card" styleClass="btn-primary, btn-lg" onAction="#addMinionCard"/>
+                </VBox>
             </Tab>
-            <Tab fx:id="Hero" text="HERO" styleClass="duelystTab">
-                <ScrollPane styleClass="text-field-container" hbarPolicy="NEVER">
-                    <VBox alignment="CENTER" spacing="40" styleClass="text-field-container">
-                        <padding>
-                            <Insets topRightBottomLeft="30"/>
-                        </padding>
-                        <HBox alignment="CENTER" spacing="40">
-                            <VBox spacing="20">
-                                <Label fx:id="heroNameLbl" text="Card Name:" styleClass="label"/>
-                                <Label fx:id="heroDescription" text="description:" styleClass="label"/>
-                                <Label fx:id="heroLbl" text="ID:" styleClass="label"/>
-                                <Label fx:id="heropriceLbl" text="Price:" styleClass="label"/>
-                                <Label fx:id="heroManaPointLbl" text="Mana Point:" styleClass="label"/>
-                                <Label fx:id="heroHealthLbl" text="Health:" styleClass="label"/>
-                                <Label fx:id="heroRangeLbl" text="Range:" styleClass="label"/>
-                                <Label fx:id="heroAttackTypeLbl" text="Attack Type:" styleClass="label"/>
-                                <Label fx:id="heroAttackPointLbl" text="Attack Point:" styleClass="label"/>
-                                <Label fx:id="heroTurnAttackAvLbl" text="Is available for turn attack?"
-                                       styleClass="label"/>
-                                <Label fx:id="heroMoveAvLbl" text="Has move Ability?" styleClass="label"/>
-                                <Label fx:id="heroCoolDown" text="Cooldown" styleClass="Label"/>
-                                <Label text="range" styleClass="Label"/>
-                            </VBox>
-                            <VBox spacing="20">
-                                <JFXTextField fx:id="heroNameTxt" promptText="my minion" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="heroIdTxt" promptText="102" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="heroPriceTxt" promptText="30(drakes)" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="heroManaPointTxt" promptText="4" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="heroPowerTxt" promptText="20" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="heroHealthTxt" promptText="15" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXTextField fx:id="heroRangeTxt" promptText="2" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-                                <JFXComboBox fx:id="heroAttackTypeCmb" promptText="MELEE" styleClass="input-text"
-                                             onMouseClicked="#backToNormal">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="MELEE"/>
-                                            <String fx:value="HYBRID"/>
-                                            <String fx:value="Ranged"/>
-                                        </FXCollections>
-                                    </items>
-                                </JFXComboBox>
-                                <JFXTextField fx:id="heroAttackPointTxt" promptText="3" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-
-                                <JFXTextField fx:id="heroCooldown" promptText="3" styleClass="input-text"
-                                              onKeyTyped="#backToNormal"/>
-
-                            </VBox>
-                        </HBox>
-                        <JFXButton fx:id="heroAddBtn" text="Add Card" styleClass="btn-primary, btn-lg"
-                                   onAction="#heroAddCard"/>
-                    </VBox>
-                </ScrollPane>
+            <Tab fx:id="spellTab" text="SPELL" styleClass="duelystTab">
+                <VBox alignment="TOP_CENTER" spacing="40" styleClass="text-field-container">
+                    <padding>
+                        <Insets topRightBottomLeft="30"/>
+                    </padding>
+                    <HBox alignment="CENTER" spacing="100">
+                        <VBox spacing="20">
+                            <Label text="Card Name:" styleClass="label"/>
+                            <Label text="ID:" styleClass="label"/>
+                            <Label text="Price:" styleClass="label"/>
+                            <Label text="Mana Point:" styleClass="label"/>
+                            <Label fx:id="spriteAnimationSpellLbl" text="Sprite Animation Path:"
+                                   styleClass="label"/>
+                        </VBox>
+                        <VBox spacing="20">
+                            <JFXTextField fx:id="spellNameTxt" promptText="my minion" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="spellIdTxt" promptText="102" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="spellPriceTxt" promptText="30(drakes)" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="spellManaPointTxt" promptText="4" styleClass="input-text"
+                                          onKeyTyped="#backToNormal"/>
+                            <JFXTextField fx:id="spriteAnimationPathSpellTxt" promptText="/path/to/spriteAnimation.jpg"
+                                          styleClass="input-text" onMouseClicked="#openFileChooser"/>
+                        </VBox>
+                    </HBox>
+                    <JFXButton fx:id="spellAddBtn" text="Add Card" styleClass="btn-primary, btn-lg"
+                               onAction="#addSpellCard"/>
+                </VBox>
             </Tab>
 
         </JFXTabPane>

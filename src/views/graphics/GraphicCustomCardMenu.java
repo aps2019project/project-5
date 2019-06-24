@@ -6,12 +6,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.skins.JFXCheckBoxOldSkin;
 import data.FileReader;
 import javafx.event.ActionEvent;
 import javafx.scene.input.InputEvent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
+import models.Collection;
 import models.Shop;
 import models.cards.AttackType;
 import models.cards.Card;
@@ -20,17 +21,17 @@ import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
 import models.cards.spell.Spell;
 import views.Graphics;
+import views.menus.CollectionMenu;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import static views.Graphics.Menu.MAIN_MENU;
 import static views.Graphics.Menu.SHOP_MENU;
 import static views.Graphics.playMusic;
 
@@ -50,8 +51,6 @@ public class GraphicCustomCardMenu {
     public JFXTextField spellIdTxt;
     public JFXTextField spellPriceTxt;
     public JFXTextField spellManaPointTxt;
-    public JFXTextField spellDescription;
-    public JFXTextField spellBuff;
     public JFXTextField heroNameTxt;
     public JFXTextField heroIdTxt;
     public JFXTextField heroPriceTxt;
@@ -62,9 +61,16 @@ public class GraphicCustomCardMenu {
     public JFXComboBox heroAttackTypeCmb;
     public JFXTextField heroAttackPointTxt;
     public JFXTextField heroCooldown;
+    public JFXTextField spriteAnimationPathHeroTxt;
+    public JFXTextField spriteAnimationPathMinionTxt;
+    public JFXTextField spriteAnimationPathSpellTxt;
     private boolean minionFlag;
     private boolean spellFlag;
     private boolean heroFlag;
+    private File heroSpriteFile;
+    private File minionSpriteFile;
+    private File spellSpriteFile;
+    File spriteAnimationResourcePath = new File("src" + File.separator + "resources" + File.separator + "sprites");
 
     public int getTextInfo(JFXTextField t, String type) {
         int number = 0;
@@ -117,7 +123,7 @@ public class GraphicCustomCardMenu {
         Graphics.alert("Congrats", "Card Added", "Your new card added successfully.");
     }
 
-    public void spellAddCard(ActionEvent actionEvent) {
+    public void addSpellCard(ActionEvent actionEvent) {
         playMusic("sfx_ui_select.m4a");
         spellFlag = true;
 
@@ -139,14 +145,36 @@ public class GraphicCustomCardMenu {
 
 
         int manaPoint = getTextInfo(spellManaPointTxt, "spell");
-        if (!spellFlag)
+
+        File spriteAnimation = new File(spriteAnimationPathSpellTxt.getText());
+        if (!spriteAnimation.exists()) {
+            spellFlag = false;
+            changeAsWrong(spriteAnimationPathSpellTxt, true);
+        }
+        final String regex = "(?<fileName>[\\w \\d _ -]+)\\.png";
+        String fileName = spriteAnimation.getName().replaceAll("\\.\\w+", "");
+        final String spritePath = spriteAnimation.getAbsolutePath().replaceAll(regex, "");
+        File plistFile = new File(spritePath + fileName + ".plist");
+
+        if (!plistFile.exists()) {
+            spellFlag = false;
+            changeAsWrong(spriteAnimationPathSpellTxt, true);
+        }
+
+        if (!spellFlag) {
             return;
+        }
+
+        spriteAnimation.renameTo(new File(spritePath + name + ".png"));
+        plistFile.renameTo(new File(spritePath + name + ".plist"));
+
+
         Spell spell = new Spell(id, name, "", manaPoint, price);
         saveNewCard("spell", spell);
 
     }
 
-    public void addCard(ActionEvent actionEvent) {
+    public void addMinionCard(ActionEvent actionEvent) {
         playMusic("sfx_ui_select.m4a");
         String name = nameTxt.getText();
         minionFlag = true;
@@ -183,15 +211,36 @@ public class GraphicCustomCardMenu {
         } else {
             attackType = attackTypeCmb.getValue().toString();
         }
-        if (!minionFlag)
+
+        File spriteAnimation = new File(spriteAnimationPathMinionTxt.getText());
+        if (!spriteAnimation.exists()) {
+            minionFlag = false;
+            changeAsWrong(spriteAnimationPathMinionTxt, true);
+        }
+        final String regex = "(?<fileName>[\\w \\d _ -]+)\\.png";
+        String fileName = spriteAnimation.getName().replaceAll("\\.\\w+", "");
+        final String spritePath = spriteAnimation.getAbsolutePath().replaceAll(regex, "");
+        File plistFile = new File(spritePath + fileName + ".plist");
+
+        if (!plistFile.exists()) {
+            minionFlag = false;
+            changeAsWrong(spriteAnimationPathMinionTxt, true);
+        }
+
+        if (!minionFlag) {
             return;
+        }
+
+        spriteAnimation.renameTo(new File(spritePath + name + ".png"));
+        plistFile.renameTo(new File(spritePath + name + ".plist"));
+
         SpecialPowerActivateTime specialPowerActivateTime = SpecialPowerActivateTime.ON_ATTACK;
         AttackType attackType1 = AttackType.getAttackType(attackType);
         Minion minion = new Minion(id, name, "", manaPoint, price, health, attackPoint, attackType1, range, specialPowerActivateTime);
         saveNewCard("minion", minion);
     }
 
-    public void heroAddCard(ActionEvent actionEvent) {
+    public void addHeroCard(ActionEvent actionEvent) {
         playMusic("sfx_ui_select.m4a");
         heroFlag = true;
         String name = heroNameTxt.getText();
@@ -213,6 +262,7 @@ public class GraphicCustomCardMenu {
         int health = getTextInfo(heroHealthTxt, "hero");
 
         int range = getTextInfo(heroRangeTxt, "hero");
+
         int cooldown = getTextInfo(heroCooldown, "hero");
 
         String attackType = "";
@@ -222,8 +272,32 @@ public class GraphicCustomCardMenu {
         } else {
             attackType = heroAttackTypeCmb.getValue().toString();
         }
-        if (!heroFlag)
+
+
+
+        File spriteAnimation = new File(spriteAnimationPathHeroTxt.getText());
+        if (!spriteAnimation.exists()) {
+            heroFlag = false;
+            changeAsWrong(spriteAnimationPathHeroTxt, true);
+        }
+        final String regex = "(?<fileName>[\\w \\d _ -]+)\\.png";
+        String fileName = spriteAnimation.getName().replaceAll("\\.\\w+", "");
+        final String spritePath = spriteAnimation.getAbsolutePath().replaceAll(regex, "");
+        File plistFile = new File(spritePath + fileName + ".plist");
+
+        if (!plistFile.exists()) {
+            heroFlag = false;
+            changeAsWrong(spriteAnimationPathHeroTxt, true);
+        }
+
+        if (!heroFlag) {
             return;
+        }
+
+        spriteAnimation.renameTo(new File(spritePath + name + ".png"));
+        plistFile.renameTo(new File(spritePath + name + ".plist"));
+
+
         AttackType attackType1 = AttackType.getAttackType(attackType);
         Hero hero = new Hero(id, name, "", manaPoint, price, health, attackPoint, attackType1, range, cooldown);
         saveNewCard("hero", hero);
@@ -263,4 +337,20 @@ public class GraphicCustomCardMenu {
     }
 
 
+    public void openFileChooser(MouseEvent mouseEvent) {
+        changeAsWrong((JFXTextField) mouseEvent.getSource(), false);
+        ((JFXTextField)mouseEvent.getSource()).setText(getFile().getAbsolutePath());
+    }
+
+    private File getFile() {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Sprite Animation", "*.png"));
+
+        fileChooser.setInitialDirectory(spriteAnimationResourcePath);
+        fileChooser.setTitle("Please select a sprite animation with its .plist file");
+
+        File file = fileChooser.showOpenDialog(Graphics.stage);
+
+        return file;
+    }
 }
