@@ -162,11 +162,11 @@ public class GraphicBattleController implements Initializable {
         t.setToY(newPosition.getY() - cardPane.getLayoutY());
         t.play();
         new Thread(() -> {
-            ((ImageView) cardPane.getChildren().get(0)).setImage(new Image("/resources/images/cards/" + card.getName() + "_run.gif"));
+            ImageView imageView = (ImageView) cardPane.getChildren().get(0);
+            SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.RUN, 1000);
             long newTime = System.currentTimeMillis();
-            while (System.currentTimeMillis() - newTime <= time) {
-            }
-            ((ImageView) cardPane.getChildren().get(0)).setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
+            while (System.currentTimeMillis() - newTime <= time) { }
+            SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 10000000);
 
         }).start();
     }
@@ -307,11 +307,11 @@ public class GraphicBattleController implements Initializable {
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
-            String imageUrl = "/resources/images/cards/" + card.getName() + "_idle.gif";
-            if (card instanceof Spell) {
-                imageUrl = "/resources/images/cards/" + card.getName() + ".gif";
-            }
-            handItemImages[index].setImage(new Image(imageUrl));
+//            String imageUrl = "/resources/images/cards/" + card.getName() + "_idle.gif";
+//            if (card instanceof Spell) {
+//                imageUrl = "/resources/images/cards/" + card.getName() + ".gif";
+//            }
+//            SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.BREATHING, 10000);
             int finalIndex = index;
             int finalIndex1 = index;
             handItemContainer[index].setOnMouseClicked(event -> {
@@ -373,13 +373,13 @@ public class GraphicBattleController implements Initializable {
     private AnchorPane getCardInGame(Card card, int row, int column) {
         AnchorPane anchorPane = new AnchorPane();
         ImageView imageView = new ImageView();
+        SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 1000000);
         int scale = 1;
         if (column > 4) scale = -1;
         imageView.setScaleX(scale);
         Rectangle rectangle = getCardRectangle(row, column);
         imageView.setFitWidth(rectangle.getWidth());
         imageView.setFitHeight(rectangle.getHeight());
-        imageView.setImage(new Image("/resources/images/cards/" + card.getName() + "_idle.gif"));
         anchorPane.relocate(rectangle.getX(), rectangle.getY());
 
         ImageView attackPointBackground = new ImageView(new Image("/resources/images/battle/ui/icon_atk@2x.png"));
