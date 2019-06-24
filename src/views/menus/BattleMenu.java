@@ -197,25 +197,24 @@ public class BattleMenu implements Menu {
 
     @Override
     public void handleMenu() {
-        while(true) {
-            String inputCommand ;
-            if (Manager.isAITurn()){
+        while (true) {
+            String inputCommand;
+            if (Manager.isAITurn()) {
                 inputCommand = InputAI.getInstance().getCommand();
-            }
-            else
+            } else
                 inputCommand = Manager.getInput().getCommand(getMenuName());
             boolean matches = false;
-            for(Command command : getCommands()) {
+            for (Command command : getCommands()) {
                 Matcher matcher = command.getPattern().matcher(inputCommand);
-                if(matcher.find()) {
-                    if(command.getFunctionName().equals(""))
+                if (matcher.find()) {
+                    if (command.getFunctionName().equals(""))
                         return;
                     matches = true;
-                    Method method ;
+                    Method method;
                     try {
                         method = getClass().getMethod(command.getFunctionName(), Matcher.class);
                         Object object = method.invoke(null, matcher);
-                        if(object != null && object.equals(Boolean.FALSE))
+                        if (object != null && object.equals(Boolean.FALSE))
                             return;
                     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
@@ -223,7 +222,7 @@ public class BattleMenu implements Menu {
                     break;
                 }
             }
-            if(!matches)
+            if (!matches)
                 Output.err(Error.INVALID_COMMAND.toString());
         }
     }
@@ -239,16 +238,16 @@ public class BattleMenu implements Menu {
 
     private static void showMinions(List<Minion> attackers) {
         attackers.forEach(minion -> {
-                String result = minion.getID() +
-                        " : " +
-                        minion.getName() +
-                        ", health : " +
-                        minion.getHealth() +
-                        ", location : " +
-                        String.format("(%s,%s) power : %s"
-                                , minion.getCell().getX() + 1, minion.getCell().getY() + 1, minion.getAttackPoint());
-                Output.log(result);
-            }
+                    String result = minion.getID() +
+                            " : " +
+                            minion.getName() +
+                            ", health : " +
+                            minion.getHealth() +
+                            ", location : " +
+                            String.format("(%s,%s) power : %s"
+                                    , minion.getCell().getX() + 1, minion.getCell().getY() + 1, minion.getAttackPoint());
+                    Output.log(result);
+                }
         );
     }
 
@@ -292,7 +291,7 @@ public class BattleMenu implements Menu {
         String cardID = matcher.group("cardID");
         try {
             Manager.attack(cardID);
-            if(Manager.getPlayingMatch() == null) {
+            if (Manager.getPlayingMatch() == null) {
                 Output.log("Player " + Manager.getWinner().getUsername() + " wins.");
                 return false;
             }

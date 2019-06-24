@@ -1,6 +1,7 @@
 package views.graphics;
 
 import controllers.ClientManager;
+import controllers.Manager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -292,8 +293,8 @@ public class GraphicBattleController implements Initializable {
 
     private void updateHand() {
         Hand hand = ClientManager.getMe().getHand();
-        System.out.println(ClientManager.getMe().getAccount().getUsername());
-        System.out.println("Hand: \n\t" + hand.getCards().toString());
+//        System.out.println(ClientManager.getMe().getAccount().getUsername());
+//        System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
@@ -408,4 +409,12 @@ public class GraphicBattleController implements Initializable {
         return anchorPane;
     }
 
+    public void endTurn(MouseEvent mouseEvent) {
+        ClientManager.endTurn();
+
+//        System.out.println(ClientManager.getActivePlayer().getAccount().getUsername() + " : " + ClientManager.getActivePlayer().getMana());
+        updateCells();
+        updateHand();
+        updateMana();
+    }
 }

@@ -353,6 +353,7 @@ public class ClientManager {
     }
 
     public static void endTurn() {
+
         playingMatch.nextTurn();
     }
 
@@ -453,12 +454,12 @@ public class ClientManager {
             return getMap().getCells();
         getMe().getActiveCards().forEach(
                 cardIt -> cells.addAll(getMap().getNeighbors(cardIt.getCell())
-                                .stream()
-                                .filter(
-                                        cell -> !cell.isFull()
-                                ).collect(Collectors.toList())));
+                        .stream()
+                        .filter(
+                                cell -> !cell.isFull()
+                        ).collect(Collectors.toList())));
         return cells;
-}
+    }
 
     public static List<Cell> whereToMove(Card card) {
         List<Cell> cells = new ArrayList<>();

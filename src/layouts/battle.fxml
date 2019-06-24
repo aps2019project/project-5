@@ -30,7 +30,7 @@
     </ImageView>
 
     <!-- End Turn Button -->
-    <Button styleClass="end-turn-button" text="END TURN" AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="40"/>
+    <Button styleClass="end-turn-button" text="END TURN" AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="40" onMouseClicked="#endTurn"/>
 
     <!-- Graveyard -->
     <AnchorPane fx:id="graveyardContainer" styleClass="graveyard-container" AnchorPane.topAnchor="180"
@@ -52,7 +52,8 @@
             <ImageView fitWidth="50" fitHeight="55" AnchorPane.bottomAnchor="-10" AnchorPane.leftAnchor="65">
                 <Image url="/resources/images/battle/ui/icon_mana@2x.png"/>
             </ImageView>
-            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="3" styleClass="hand-card-mana" alignment="center" fx:id="handItem0_label"/>
+            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="3" styleClass="hand-card-mana"
+                   alignment="center" fx:id="handItem0_label"/>
         </AnchorPane>
         <AnchorPane styleClass="hand-item" fx:id="handItem1_container">
             <ImageView fitWidth="150" fitHeight="150" AnchorPane.leftAnchor="15" fx:id="handItem1_image">
@@ -61,7 +62,8 @@
             <ImageView fitWidth="50" fitHeight="55" AnchorPane.bottomAnchor="-10" AnchorPane.leftAnchor="65">
                 <Image url="/resources/images/battle/ui/icon_mana@2x.png"/>
             </ImageView>
-            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="4" styleClass="hand-card-mana" alignment="center" fx:id="handItem1_label"/>
+            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="4" styleClass="hand-card-mana"
+                   alignment="center" fx:id="handItem1_label"/>
         </AnchorPane>
         <AnchorPane styleClass="hand-item" fx:id="handItem2_container">
             <ImageView fitWidth="150" fitHeight="150" AnchorPane.leftAnchor="15" fx:id="handItem2_image">
@@ -70,7 +72,8 @@
             <ImageView fitWidth="50" fitHeight="55" AnchorPane.bottomAnchor="-10" AnchorPane.leftAnchor="65">
                 <Image url="/resources/images/battle/ui/icon_mana@2x.png"/>
             </ImageView>
-            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="2" styleClass="hand-card-mana" alignment="center" fx:id="handItem2_label"/>
+            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="2" styleClass="hand-card-mana"
+                   alignment="center" fx:id="handItem2_label"/>
         </AnchorPane>
         <AnchorPane styleClass="hand-item" fx:id="handItem3_container">
             <ImageView fitWidth="150" fitHeight="150" AnchorPane.leftAnchor="15" fx:id="handItem3_image">
@@ -79,7 +82,8 @@
             <ImageView fitWidth="50" fitHeight="55" AnchorPane.bottomAnchor="-10" AnchorPane.leftAnchor="65">
                 <Image url="/resources/images/battle/ui/icon_mana@2x.png"/>
             </ImageView>
-            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="4" styleClass="hand-card-mana" alignment="center" fx:id="handItem3_label"/>
+            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="4" styleClass="hand-card-mana"
+                   alignment="center" fx:id="handItem3_label"/>
         </AnchorPane>
         <AnchorPane styleClass="hand-item" fx:id="handItem4_container">
             <ImageView fitWidth="150" fitHeight="150" AnchorPane.leftAnchor="15" fx:id="handItem4_image">
@@ -88,7 +92,8 @@
             <ImageView fitWidth="50" fitHeight="55" AnchorPane.bottomAnchor="-10" AnchorPane.leftAnchor="65">
                 <Image url="/resources/images/battle/ui/icon_mana@2x.png"/>
             </ImageView>
-            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="7" styleClass="hand-card-mana" alignment="center" fx:id="handItem4_label"/>
+            <Label AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="0" text="7" styleClass="hand-card-mana"
+                   alignment="center" fx:id="handItem4_label"/>
         </AnchorPane>
     </HBox>
 
@@ -119,8 +124,10 @@
     </HBox>
 
     <!-- Players Profile Image -->
-    <ImageView fx:id="player1ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="-50"/>
-    <ImageView fx:id="player2ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="-50"/>
+    <ImageView fx:id="player1ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image"
+               AnchorPane.leftAnchor="50" AnchorPane.topAnchor="-50"/>
+    <ImageView fx:id="player2ProfileImage" fitWidth="220" fitHeight="250" styleClass="profile-image"
+               AnchorPane.rightAnchor="50" AnchorPane.topAnchor="-50"/>
 
     <!--  -->
     <Label fx:id="player1Name" styleClass="player-name-label" AnchorPane.leftAnchor="260" AnchorPane.topAnchor="50"/>

@@ -84,8 +84,10 @@ public abstract class Match {
     }
 
     public void setTurn() {
+        turn++;
         int mana = turn / 2 + 2;
-        if(mana > 9) mana = 9;
+        System.out.println(mana);
+        if (mana > 9) mana = 9;
         getActivePlayer().setMana(mana);
         turnPreparing(players[0]);
         turnPreparing(players[1]);
@@ -93,9 +95,7 @@ public abstract class Match {
     }
 
     public void nextTurn() {
-
         setTurn();
-        // TODO: Implement
     }
 
     public List<Minion> showMinions(Player player) {
@@ -128,7 +128,8 @@ public abstract class Match {
         try {
             map.insertCard(hero1, cell1);
             map.insertCard(hero2, cell2);
-        } catch (Map.InvalidCellException | Map.InvalidTargetCellException | Player.HeroDeadException ignored) { }
+        } catch (Map.InvalidCellException | Map.InvalidTargetCellException | Player.HeroDeadException ignored) {
+        }
         hero1.setCell(cell1);
         hero2.setCell(cell2);
         players[0].getActiveCards().add(hero1);
