@@ -118,10 +118,10 @@
 
 .hand-item:hover {
     -fx-background-image: url(/resources/images/battle/ui/game-hand-card-container.png), url(/resources/images/battle/ui/card_background_highlight@2x.png);
-
 }
 
 .hand-item-selected {
+    -fx-background-image: url(/resources/images/battle/ui/game-hand-card-container.png), url(/resources/images/battle/ui/card_background_highlight@2x.png);
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
 }
