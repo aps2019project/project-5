@@ -1,8 +1,7 @@
 package views.graphics;
 
 import controllers.ClientManager;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -158,19 +157,32 @@ public class GraphicBattleController implements Initializable {
         return (int) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-    private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
+    private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card, Rectangle previousPosition) {
+        System.out.println(previousPosition.getX());
+        System.out.println(previousPosition.getY());
+        System.out.println(cardPane.getLayoutX());
+        System.out.println(cardPane.getLayoutY());
         int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
-        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
-        t.setToX(newPosition.getX() - cardPane.getLayoutX());
-        t.setToY(newPosition.getY() - cardPane.getLayoutY());
-        t.play();
+//        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
+//        t.setToX(newPosition.getX() - cardPane.getLayoutX());
+//        t.setToY(newPosition.getY() - cardPane.getLayoutY());
+//        t.play();
+        Timeline timeline = new Timeline();
+        KeyFrame end = new KeyFrame(new Duration(time),
+                new KeyValue(cardPane.layoutXProperty(), newPosition.getX()),
+                new KeyValue(cardPane.layoutYProperty(), newPosition.getY()));
+        timeline.getKeyFrames().add(end);
+//        timeline.setOnFinished(event -> {
+//                System.out.println("Location after relocation = " + newPosition.getX()
+//                        + "," + newPosition.getY() + ")");
+//        });
+        timeline.play();
         new Thread(() -> {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.RUN, 1000);
             long newTime = System.currentTimeMillis();
             while (System.currentTimeMillis() - newTime <= time) { }
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 10000000);
-
         }).start();
     }
 
@@ -238,8 +250,9 @@ public class GraphicBattleController implements Initializable {
                 if (isSelectedCardInGame) {
                     // TODO: move
                     try {
+                        Rectangle previousPosition = getCardRectangle(selectedCard.getCell().getX(), selectedCard.getCell().getY());
                         ClientManager.moveTo(row + 1, column + 1);
-                        moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
+                        moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard, previousPosition);
                     } catch (Match.InvalidMoveException | Map.InvalidCellException e) {
                         System.out.println("can't move here");
                     }
@@ -280,7 +293,6 @@ public class GraphicBattleController implements Initializable {
             }
         }
         updateCells();
-        selectedCard = null;
     }
 
     private void removeCard(AnchorPane cardPane) {
