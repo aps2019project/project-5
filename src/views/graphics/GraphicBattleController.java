@@ -1,7 +1,7 @@
 package views.graphics;
 
 import controllers.ClientManager;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import controllers.logic.Manager;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -169,10 +169,20 @@ public class GraphicBattleController implements Initializable {
 
     private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
         int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
-        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
-        t.setToX(newPosition.getX() - cardPane.getLayoutX());
-        t.setToY(newPosition.getY() - cardPane.getLayoutY());
-        t.play();
+//        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
+//        t.setToX(newPosition.getX() - cardPane.getLayoutX());
+//        t.setToY(newPosition.getY() - cardPane.getLayoutY());
+//        t.play();
+        Timeline timeline = new Timeline();
+        KeyFrame end = new KeyFrame(new Duration(time),
+                new KeyValue(cardPane.layoutXProperty(), newPosition.getX()),
+                new KeyValue(cardPane.layoutYProperty(), newPosition.getY()));
+        timeline.getKeyFrames().add(end);
+//        timeline.setOnFinished(event -> {
+//                System.out.println("Location after relocation = " + newPosition.getX()
+//                        + "," + newPosition.getY() + ")");
+//        });
+        timeline.play();
         new Thread(() -> {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.RUN, 1000);
@@ -180,7 +190,6 @@ public class GraphicBattleController implements Initializable {
             while (System.currentTimeMillis() - newTime <= time) {
             }
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 10000000);
-
         }).start();
     }
 
