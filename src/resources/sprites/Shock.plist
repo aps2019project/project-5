@@ -4,63 +4,7 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>icon_f1_chargeintobattle_000.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{49,147},{48,48}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{48,48}}</string>
-				<key>sourceSize</key>
-				<string>{48,48}</string>
-			</dict>
-
-			<key>icon_f1_chargeintobattle_001.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{147,49},{48,48}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{48,48}}</string>
-				<key>sourceSize</key>
-				<string>{48,48}</string>
-			</dict>
-
-			<key>icon_f1_chargeintobattle_002.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{147,0},{48,48}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{48,48}}</string>
-				<key>sourceSize</key>
-				<string>{48,48}</string>
-			</dict>
-
-			<key>icon_f1_chargeintobattle_003.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{98,196},{48,48}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{48,48}}</string>
-				<key>sourceSize</key>
-				<string>{48,48}</string>
-			</dict>
-
-			<key>icon_f1_chargeintobattle_004.png</key>
+			<key>icon_f1_enthrall_000.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{98,147},{48,48}}</string>
@@ -74,10 +18,10 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_005.png</key>
+			<key>icon_f1_enthrall_001.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{98,98},{48,48}}</string>
+				<string>{{245,0},{48,48}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -88,10 +32,10 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_006.png</key>
+			<key>icon_f1_enthrall_002.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{98,49},{48,48}}</string>
+				<string>{{196,196},{48,48}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -102,10 +46,10 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_000.png</key>
+			<key>icon_f1_enthrall_003.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{49,147},{48,48}}</string>
+				<string>{{196,147},{48,48}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -116,10 +60,10 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_001.png</key>
+			<key>icon_f1_enthrall_004.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{98,0},{48,48}}</string>
+				<string>{{196,98},{48,48}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -130,10 +74,10 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_002.png</key>
+			<key>icon_f1_enthrall_005.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{49,196},{48,48}}</string>
+				<string>{{196,49},{48,48}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -144,7 +88,49 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_003.png</key>
+			<key>icon_f1_enthrall_active_000.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{196,0},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_001.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{147,196},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_002.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{147,147},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_003.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{147,98},{48,48}}</string>
@@ -158,7 +144,133 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_004.png</key>
+			<key>icon_f1_enthrall_active_004.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{147,49},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_005.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{147,0},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_006.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{98,196},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_007.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{245,49},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_008.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{98,98},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_009.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{98,49},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_010.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{98,0},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_011.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{49,196},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_012.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{49,147},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_013.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{49,98},{48,48}}</string>
@@ -172,7 +284,7 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_005.png</key>
+			<key>icon_f1_enthrall_active_014.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{49,49},{48,48}}</string>
@@ -186,7 +298,7 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_006.png</key>
+			<key>icon_f1_enthrall_active_015.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{49,0},{48,48}}</string>
@@ -200,7 +312,21 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_007.png</key>
+			<key>icon_f1_enthrall_active_016.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{98,147},{48,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{48,48}}</string>
+				<key>sourceSize</key>
+				<string>{48,48}</string>
+			</dict>
+
+			<key>icon_f1_enthrall_active_017.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{0,196},{48,48}}</string>
@@ -214,7 +340,7 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_008.png</key>
+			<key>icon_f1_enthrall_active_018.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{0,147},{48,48}}</string>
@@ -228,7 +354,7 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_009.png</key>
+			<key>icon_f1_enthrall_active_019.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{0,98},{48,48}}</string>
@@ -242,7 +368,7 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_010.png</key>
+			<key>icon_f1_enthrall_active_020.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{0,49},{48,48}}</string>
@@ -256,7 +382,7 @@
 				<string>{48,48}</string>
 			</dict>
 
-			<key>icon_f1_chargeintobattle_active_011.png</key>
+			<key>icon_f1_enthrall_active_021.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{0,0},{48,48}}</string>
@@ -277,9 +403,9 @@
 			<key>format</key>
 			<integer>2</integer>
 			<key>size</key>
-			<string>{256,256}</string>
+			<string>{512,256}</string>
 			<key>textureFileName</key>
-			<string>icon_f1_chargeintobattle.png</string>
+			<string>icon_f1_enthrall.png</string>
 			</dict>
 		</dict>
 </plist>
