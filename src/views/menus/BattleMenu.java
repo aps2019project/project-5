@@ -26,7 +26,7 @@ public class BattleMenu implements Menu {
 
     private static boolean isInGraveYard = false;
 
-    public  static List<Command> getAICommands() {
+    public List<Command> getAICommands() {
         return commands;
     }
 

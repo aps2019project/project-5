@@ -63,6 +63,7 @@ public class GraphicBattleController implements Initializable {
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private HashMap<Card, AnchorPane> cardViews = new HashMap<>();
     private Card selectedCard;
+    private BattleMenu battleMenu = new BattleMenu();
     private boolean isSelectedCardInGame = false;
 
     private void createMapCells() {
@@ -426,7 +427,7 @@ public class GraphicBattleController implements Initializable {
         String AIMove = "";
         if (ClientManager.isAITurn())
             AIMove = ClientManager.getAIMove();
-        for (Command command : BattleMenu.getAICommands()) {
+        for (Command command : battleMenu.getAICommands()) {
             Matcher matcher = command.getPattern().matcher(AIMove);
             if(matcher.find()) {
                 Method method ;
