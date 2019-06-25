@@ -244,13 +244,14 @@ public abstract class Match {
         }
         if (((Attacker) opponentCard).getCurrentHealth() <= 0) {
             addCardToGraveyard(opponentCard);
-            getActiveCards().remove(opponentCard);
+            System.out.println(opponentCard.getID());
             map.getCards().removeCard(opponentCard);
+            getActiveCards().remove(opponentCard);
         }
         if (((Attacker) card).getCurrentHealth() <= 0) {
-            addCardToGraveyard(opponentCard);
-            getActiveCards().remove(opponentCard);
-            map.getCards().removeCard(opponentCard);
+            addCardToGraveyard(card);
+            getActiveCards().remove(card);
+            map.getCards().removeCard(card);
         }
 
     }

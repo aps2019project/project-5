@@ -12,6 +12,7 @@ import views.Error;
 import views.Input;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -118,7 +119,7 @@ public class Player {
     private void shuffleDeck() {
         Hero hero = deck.getHero();
         deck.getCards().remove(hero);
-//        Collections.shuffle(deck.getCards());
+        Collections.shuffle(deck.getCards());
         try {
             deck.addCard(hero);
         } catch (Exception ignored) {

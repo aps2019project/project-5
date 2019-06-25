@@ -29,7 +29,8 @@ public class Map {
             for (int j = -remainedDistance; j <= remainedDistance; j++) {
                 try {
                     cells.add(this.getCell(x + i, y + j));
-                } catch (InvalidCellException ignored) { }
+                } catch (InvalidCellException ignored) {
+                }
             }
         }
         return cells;
@@ -97,10 +98,10 @@ public class Map {
         }
         if (card instanceof Attacker) cell.setAttacker((Attacker) card);
         if (card instanceof Spell) {
-            List<Cell> effectedCells = getEffectCells((Spell) card, cell);
-            effectedCells.forEach(cell1
-                    -> cell1.getAttacker().getBuffActivated().addAll(((Spell) card).getBuffs())
-            );
+//            List<Cell> effectedCells = getEffectCells((Spell) card, cell);
+//            effectedCells.forEach(cell1
+//                    -> cell1.getAttacker().getBuffActivated().addAll(((Spell) card).getBuffs())
+//            );
 
         }
 
@@ -110,6 +111,9 @@ public class Map {
         TargetType targetType = spell.getTargetType();
         List<Cell> targetCells = new ArrayList<>();
         Attacker attacker = cell.getAttacker();
+        System.out.println(targetType);
+        if(targetType == null)
+            return getCells();
         switch (targetType) {
             case MY_HERO:
                 if (attacker == Manager.getActivePlayer().getHero()) {
@@ -130,8 +134,7 @@ public class Map {
                 }
                 break;
             case SQUARE2x2:
-                //TODO: complete squares!
-                break;
+                return getCells();
             case SQUARE3x3:
                 break;
             case ALL_MY_FORCE:
@@ -171,8 +174,8 @@ public class Map {
                 }
                 return targetCells;
             case OPPONENT_HERO:
-
         }
+
         throw new InvalidTargetCellException();
     }
 
@@ -184,14 +187,17 @@ public class Map {
         int x = cell.getX(), y = cell.getY() - 1;
         return getCell(x, y);
     }
+
     public Cell getTop(Cell cell) throws InvalidCellException {
-        int x = cell.getX() - 1, y = cell.getY() ;
+        int x = cell.getX() - 1, y = cell.getY();
         return getCell(x, y);
     }
+
     public Cell getBottom(Cell cell) throws InvalidCellException {
         int x = cell.getX() + 1, y = cell.getY();
         return getCell(x, y);
     }
+
     public Cell getRight(Cell cell) throws InvalidCellException {
         int x = cell.getX(), y = cell.getY() + 1;
         return getCell(x, y);
@@ -203,22 +209,26 @@ public class Map {
             final Cell right = this.getRight(cell);
             cells.add(right);
             cells.add(getTop(right));
-        } catch (InvalidCellException e) { }
+        } catch (InvalidCellException e) {
+        }
         try {
             final Cell left = this.getLeft(cell);
             cells.add(left);
             cells.add(getBottom(left));
-        } catch (InvalidCellException e) { }
+        } catch (InvalidCellException e) {
+        }
         try {
             final Cell top = this.getTop(cell);
             cells.add(top);
             cells.add(getLeft(top));
-        } catch (InvalidCellException e) { }
+        } catch (InvalidCellException e) {
+        }
         try {
             final Cell bottom = this.getBottom(cell);
             cells.add(bottom);
             cells.add(getRight(bottom));
-        } catch (InvalidCellException e) { }
+        } catch (InvalidCellException e) {
+        }
         return cells;
     }
 

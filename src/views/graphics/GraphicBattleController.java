@@ -185,6 +185,7 @@ public class GraphicBattleController implements Initializable {
         timeline.play();
         new Thread(() -> {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
+            Graphics.playMusic("sfx_unit_run_charge_4.m4a");
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.RUN, 1000);
             long newTime = System.currentTimeMillis();
             while (System.currentTimeMillis() - newTime <= time) {
@@ -243,6 +244,7 @@ public class GraphicBattleController implements Initializable {
         ImageView enemyImageView = (ImageView) enemyAnchor.getChildren().get(0);
         new Thread(() -> {
             double actionTime = SpriteMaker.getAnimationTime(myImageView, myCard.getName(), Action.ATTACK, 1);
+            Graphics.playMusic("sfx_f3_general_attack_impact.m4a");
             SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.ATTACK, 1);
             long time = System.currentTimeMillis();
             while (System.currentTimeMillis() - time <= actionTime) {
@@ -253,6 +255,7 @@ public class GraphicBattleController implements Initializable {
             actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.getName(), Action.ATTACK, 1);
             time = System.currentTimeMillis();
             SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.ATTACK, 1);
+            Graphics.playMusic("sfx_f3_general_attack_swing.m4a");
             while (System.currentTimeMillis() - time <= actionTime) {
             }
 
@@ -298,6 +301,7 @@ public class GraphicBattleController implements Initializable {
                             }
                         } else {
                             try {
+                                System.out.println("attack");
                                 ClientManager.attack(clickedCard.getID());
                                 attack(selectedCard, clickedCard);
 
@@ -328,8 +332,7 @@ public class GraphicBattleController implements Initializable {
                         });
                         handAnchorPane.setOnMouseEntered(event -> {
                         });
-
-
+                        selectedCard = null;
                     } catch (Player.NotEnoughManaException | Map.InvalidCellException
                             | Map.InvalidTargetCellException | Player.HeroDeadException
                             | Collection.CardNotFoundException ignored) {
@@ -342,23 +345,27 @@ public class GraphicBattleController implements Initializable {
 
     private void insertCard(int row, int column) {
         System.out.println(selectedCard);
-        AnchorPane cardPane = getCardInGame(selectedCard, row, column);
-        cardViews.put(selectedCard, cardPane);
-        AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
-                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
-                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
-                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
-                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1));
-        Rectangle rect = getCardRectangle(row - 1, column - 1);
-        teleport.setLayoutX(rect.getX() + 150);
-        teleport.setLayoutY(rect.getY() + 140);
-        teleport.setScaleX(2);
-        teleport.setScaleY(2);
-        teleport.setMouseTransparent(true);
+        if (selectedCard instanceof Attacker) {
+            AnchorPane cardPane = getCardInGame(selectedCard, row, column);
+            cardViews.put(selectedCard, cardPane);
+            AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1));
+            Rectangle rect = getCardRectangle(row - 1, column - 1);
+            teleport.setLayoutX(rect.getX() + 150);
+            teleport.setLayoutY(rect.getY() + 140);
+            teleport.setScaleX(2);
+            teleport.setScaleY(2);
+            teleport.setMouseTransparent(true);
 
-        setCard(cardPane);
-        setCard(teleport);
-        selectedCard = null;
+            setCard(cardPane);
+            setCard(teleport);
+        } else {
+
+
+        }
         updateMana();
     }
 
@@ -504,9 +511,10 @@ public class GraphicBattleController implements Initializable {
         AnchorPane.setRightAnchor(healthPointBackground, 25.0);
         AnchorPane.setBottomAnchor(healthPointBackground, 10.0);
 
-        Label apLabel = new Label("" + ((Attacker) card).getAttackPoint());
-        Label hpLabel = new Label("" + ((Attacker) card).getCurrentHealth());
-
+        Label apLabel = new Label("");
+        Label hpLabel = new Label("");
+        apLabel.setText("" + ((Attacker) card).getAttackPoint());
+        hpLabel.setText("" + ((Attacker) card).getCurrentHealth());
         apLabel.getStyleClass().add("card-data-in-game-label");
         hpLabel.getStyleClass().add("card-data-in-game-label");
 
@@ -556,6 +564,14 @@ public class GraphicBattleController implements Initializable {
         String cardID = matcher.group("cardID");
         try {
             controllers.ClientManager.attack(cardID);
+            Card card = null;
+            for (Card card1 : ClientManager.getMe().getActiveCards()) {
+                if (card1.getID().equals(cardID)) {
+                    card = card1;
+                    break;
+                }
+            }
+            if (card != null) attack(ClientManager.getOpponent().getSelectedCard(), card);
             if (controllers.ClientManager.getPlayingMatch() == null) {
                 Output.log("Player " + ClientManager.getWinner().getUsername() + " wins.");
                 return false;
@@ -634,7 +650,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     public void endTurnCommand(Matcher matcher) {
-//        ClientManager.endTurn();
+        ClientManager.endTurn();
         endTurn(null);
     }
 
