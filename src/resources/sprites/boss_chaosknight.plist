@@ -4,1572 +4,1502 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>boss_antiswarm_attack_000.png</key>
+			<key>boss_chaosknight_attack_000.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,1310},{130,130}}</string>
+				<string>{{423,1269},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_001.png</key>
+			<key>boss_chaosknight_attack_001.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{917,655},{130,130}}</string>
+				<string>{{987,564},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_002.png</key>
+			<key>boss_chaosknight_attack_002.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{917,524},{130,130}}</string>
+				<string>{{987,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_003.png</key>
+			<key>boss_chaosknight_attack_003.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{917,393},{130,130}}</string>
+				<string>{{987,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_004.png</key>
+			<key>boss_chaosknight_attack_004.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{917,262},{130,130}}</string>
+				<string>{{987,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_005.png</key>
+			<key>boss_chaosknight_attack_005.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{917,131},{130,130}}</string>
+				<string>{{987,0},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_006.png</key>
+			<key>boss_chaosknight_attack_006.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{917,0},{130,130}}</string>
+				<string>{{846,1833},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_007.png</key>
+			<key>boss_chaosknight_attack_007.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,1834},{130,130}}</string>
+				<string>{{846,1692},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_008.png</key>
+			<key>boss_chaosknight_attack_008.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,1703},{130,130}}</string>
+				<string>{{846,1551},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_009.png</key>
+			<key>boss_chaosknight_attack_009.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,1572},{130,130}}</string>
+				<string>{{846,1410},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_010.png</key>
+			<key>boss_chaosknight_attack_010.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,1441},{130,130}}</string>
+				<string>{{846,1269},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_011.png</key>
+			<key>boss_chaosknight_attack_011.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,1310},{130,130}}</string>
+				<string>{{846,1128},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_012.png</key>
+			<key>boss_chaosknight_attack_012.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,1179},{130,130}}</string>
+				<string>{{846,987},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_013.png</key>
+			<key>boss_chaosknight_attack_013.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,1048},{130,130}}</string>
+				<string>{{846,846},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_014.png</key>
+			<key>boss_chaosknight_attack_014.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,917},{130,130}}</string>
+				<string>{{846,705},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_015.png</key>
+			<key>boss_chaosknight_attack_015.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,786},{130,130}}</string>
+				<string>{{846,564},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_016.png</key>
+			<key>boss_chaosknight_attack_016.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,655},{130,130}}</string>
+				<string>{{846,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_017.png</key>
+			<key>boss_chaosknight_attack_017.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,524},{130,130}}</string>
+				<string>{{846,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_018.png</key>
+			<key>boss_chaosknight_attack_018.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,393},{130,130}}</string>
+				<string>{{846,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_019.png</key>
+			<key>boss_chaosknight_attack_019.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,262},{130,130}}</string>
+				<string>{{846,0},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_020.png</key>
+			<key>boss_chaosknight_attack_020.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,131},{130,130}}</string>
+				<string>{{705,1833},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_021.png</key>
+			<key>boss_chaosknight_attack_021.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,0},{130,130}}</string>
+				<string>{{705,1692},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_022.png</key>
+			<key>boss_chaosknight_attack_022.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,1834},{130,130}}</string>
+				<string>{{705,1551},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_023.png</key>
+			<key>boss_chaosknight_attack_023.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,1703},{130,130}}</string>
+				<string>{{705,1410},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_024.png</key>
+			<key>boss_chaosknight_attack_024.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,1572},{130,130}}</string>
+				<string>{{705,1269},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_025.png</key>
+			<key>boss_chaosknight_attack_025.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,1441},{130,130}}</string>
+				<string>{{705,1128},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_026.png</key>
+			<key>boss_chaosknight_attack_026.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,1310},{130,130}}</string>
+				<string>{{705,987},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_027.png</key>
+			<key>boss_chaosknight_attack_027.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,1179},{130,130}}</string>
+				<string>{{705,846},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_028.png</key>
+			<key>boss_chaosknight_attack_028.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,1048},{130,130}}</string>
+				<string>{{705,705},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_029.png</key>
+			<key>boss_chaosknight_attack_029.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,917},{130,130}}</string>
+				<string>{{705,564},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_030.png</key>
+			<key>boss_chaosknight_attack_030.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,786},{130,130}}</string>
+				<string>{{705,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_031.png</key>
+			<key>boss_chaosknight_attack_031.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,655},{130,130}}</string>
+				<string>{{705,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_032.png</key>
+			<key>boss_chaosknight_attack_032.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,524},{130,130}}</string>
+				<string>{{705,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_033.png</key>
+			<key>boss_chaosknight_attack_033.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,393},{130,130}}</string>
+				<string>{{705,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_034.png</key>
+			<key>boss_chaosknight_attack_034.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,262},{130,130}}</string>
+				<string>{{705,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_035.png</key>
+			<key>boss_chaosknight_attack_035.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,131},{130,130}}</string>
+				<string>{{705,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_036.png</key>
+			<key>boss_chaosknight_attack_036.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,0},{130,130}}</string>
+				<string>{{705,0},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_037.png</key>
+			<key>boss_chaosknight_attack_037.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,1834},{130,130}}</string>
+				<string>{{564,1833},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_038.png</key>
+			<key>boss_chaosknight_attack_038.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,1703},{130,130}}</string>
+				<string>{{564,1692},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_039.png</key>
+			<key>boss_chaosknight_breathing_000.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,1572},{130,130}}</string>
+				<string>{{564,1551},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_040.png</key>
+			<key>boss_chaosknight_breathing_001.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,1441},{130,130}}</string>
+				<string>{{564,1410},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_041.png</key>
+			<key>boss_chaosknight_breathing_002.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,1310},{130,130}}</string>
+				<string>{{564,1269},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_attack_042.png</key>
+			<key>boss_chaosknight_breathing_003.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,1179},{130,130}}</string>
+				<string>{{564,1128},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_000.png</key>
+			<key>boss_chaosknight_breathing_004.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,1048},{130,130}}</string>
+				<string>{{564,987},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_001.png</key>
+			<key>boss_chaosknight_breathing_005.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,917},{130,130}}</string>
+				<string>{{564,846},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_002.png</key>
+			<key>boss_chaosknight_breathing_006.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,786},{130,130}}</string>
+				<string>{{564,705},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_003.png</key>
+			<key>boss_chaosknight_breathing_007.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,655},{130,130}}</string>
+				<string>{{564,564},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_004.png</key>
+			<key>boss_chaosknight_breathing_008.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,524},{130,130}}</string>
+				<string>{{564,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_005.png</key>
+			<key>boss_chaosknight_breathing_009.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,393},{130,130}}</string>
+				<string>{{564,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_006.png</key>
+			<key>boss_chaosknight_breathing_010.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,262},{130,130}}</string>
+				<string>{{564,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_007.png</key>
+			<key>boss_chaosknight_breathing_011.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,131},{130,130}}</string>
+				<string>{{564,0},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_008.png</key>
+			<key>boss_chaosknight_breathing_012.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{524,0},{130,130}}</string>
+				<string>{{423,1833},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_009.png</key>
+			<key>boss_chaosknight_breathing_013.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,1834},{130,130}}</string>
+				<string>{{423,1692},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_010.png</key>
+			<key>boss_chaosknight_death_000.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,1703},{130,130}}</string>
+				<string>{{423,1551},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_011.png</key>
+			<key>boss_chaosknight_death_001.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,1572},{130,130}}</string>
+				<string>{{423,1410},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_012.png</key>
+			<key>boss_chaosknight_death_002.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,1441},{130,130}}</string>
+				<string>{{987,705},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_breathing_013.png</key>
+			<key>boss_chaosknight_death_003.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{917,786},{130,130}}</string>
+				<string>{{423,1128},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_000.png</key>
+			<key>boss_chaosknight_death_004.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,1179},{130,130}}</string>
+				<string>{{423,987},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_001.png</key>
+			<key>boss_chaosknight_death_005.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,1048},{130,130}}</string>
+				<string>{{423,846},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_002.png</key>
+			<key>boss_chaosknight_death_006.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,917},{130,130}}</string>
+				<string>{{423,705},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_003.png</key>
+			<key>boss_chaosknight_death_007.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,786},{130,130}}</string>
+				<string>{{423,564},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_004.png</key>
+			<key>boss_chaosknight_death_008.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,655},{130,130}}</string>
+				<string>{{423,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_005.png</key>
+			<key>boss_chaosknight_death_009.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,524},{130,130}}</string>
+				<string>{{423,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_006.png</key>
+			<key>boss_chaosknight_death_010.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,393},{130,130}}</string>
+				<string>{{423,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_007.png</key>
+			<key>boss_chaosknight_death_011.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,262},{130,130}}</string>
+				<string>{{423,0},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_008.png</key>
+			<key>boss_chaosknight_death_012.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,131},{130,130}}</string>
+				<string>{{282,1833},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_009.png</key>
+			<key>boss_chaosknight_death_013.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{393,0},{130,130}}</string>
+				<string>{{282,1692},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_010.png</key>
+			<key>boss_chaosknight_death_014.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,1834},{130,130}}</string>
+				<string>{{282,1551},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_011.png</key>
+			<key>boss_chaosknight_death_015.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,1703},{130,130}}</string>
+				<string>{{282,1410},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_012.png</key>
+			<key>boss_chaosknight_death_016.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,1572},{130,130}}</string>
+				<string>{{282,1269},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_013.png</key>
+			<key>boss_chaosknight_death_017.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,1441},{130,130}}</string>
+				<string>{{282,1128},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_014.png</key>
+			<key>boss_chaosknight_death_018.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,1310},{130,130}}</string>
+				<string>{{282,987},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_015.png</key>
+			<key>boss_chaosknight_death_019.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,1179},{130,130}}</string>
+				<string>{{282,846},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_016.png</key>
+			<key>boss_chaosknight_death_020.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,1048},{130,130}}</string>
+				<string>{{282,705},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_017.png</key>
+			<key>boss_chaosknight_death_021.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,917},{130,130}}</string>
+				<string>{{282,564},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_018.png</key>
+			<key>boss_chaosknight_death_022.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,786},{130,130}}</string>
+				<string>{{282,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_019.png</key>
+			<key>boss_chaosknight_death_023.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,655},{130,130}}</string>
+				<string>{{282,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_020.png</key>
+			<key>boss_chaosknight_death_024.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,524},{130,130}}</string>
+				<string>{{282,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_021.png</key>
+			<key>boss_chaosknight_hit_000.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,393},{130,130}}</string>
+				<string>{{282,0},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_022.png</key>
+			<key>boss_chaosknight_hit_001.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,262},{130,130}}</string>
+				<string>{{141,1833},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_023.png</key>
+			<key>boss_chaosknight_hit_002.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,131},{130,130}}</string>
+				<string>{{141,1692},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_024.png</key>
+			<key>boss_chaosknight_idle_000.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{262,0},{130,130}}</string>
+				<string>{{141,1551},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_025.png</key>
+			<key>boss_chaosknight_idle_001.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,1834},{130,130}}</string>
+				<string>{{141,1410},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_death_026.png</key>
+			<key>boss_chaosknight_idle_002.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,1703},{130,130}}</string>
+				<string>{{141,1269},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_hit_000.png</key>
+			<key>boss_chaosknight_idle_003.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,1572},{130,130}}</string>
+				<string>{{141,1128},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_hit_001.png</key>
+			<key>boss_chaosknight_idle_004.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,1441},{130,130}}</string>
+				<string>{{141,987},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_hit_002.png</key>
+			<key>boss_chaosknight_idle_005.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,1310},{130,130}}</string>
+				<string>{{141,846},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_000.png</key>
+			<key>boss_chaosknight_idle_006.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,1179},{130,130}}</string>
+				<string>{{141,705},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_001.png</key>
+			<key>boss_chaosknight_idle_007.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,1048},{130,130}}</string>
+				<string>{{141,564},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_002.png</key>
+			<key>boss_chaosknight_idle_008.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,917},{130,130}}</string>
+				<string>{{141,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_003.png</key>
+			<key>boss_chaosknight_idle_009.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,786},{130,130}}</string>
+				<string>{{141,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_004.png</key>
+			<key>boss_chaosknight_idle_010.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,655},{130,130}}</string>
+				<string>{{141,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_005.png</key>
+			<key>boss_chaosknight_idle_011.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,524},{130,130}}</string>
+				<string>{{141,0},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_006.png</key>
+			<key>boss_chaosknight_idle_012.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,393},{130,130}}</string>
+				<string>{{0,1833},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_007.png</key>
+			<key>boss_chaosknight_idle_013.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,262},{130,130}}</string>
+				<string>{{0,1692},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_008.png</key>
+			<key>boss_chaosknight_idle_014.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,131},{130,130}}</string>
+				<string>{{0,1551},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_009.png</key>
+			<key>boss_chaosknight_idle_015.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{131,0},{130,130}}</string>
+				<string>{{0,1410},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_010.png</key>
+			<key>boss_chaosknight_run_000.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,1834},{130,130}}</string>
+				<string>{{0,1269},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_011.png</key>
+			<key>boss_chaosknight_run_001.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,1703},{130,130}}</string>
+				<string>{{0,1128},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_012.png</key>
+			<key>boss_chaosknight_run_002.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,1572},{130,130}}</string>
+				<string>{{0,987},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_013.png</key>
+			<key>boss_chaosknight_run_003.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,1441},{130,130}}</string>
+				<string>{{0,846},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_014.png</key>
+			<key>boss_chaosknight_run_004.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,1310},{130,130}}</string>
+				<string>{{0,705},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_015.png</key>
+			<key>boss_chaosknight_run_005.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,1179},{130,130}}</string>
+				<string>{{0,564},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_idle_016.png</key>
+			<key>boss_chaosknight_run_006.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,1048},{130,130}}</string>
+				<string>{{0,423},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_run_000.png</key>
+			<key>boss_chaosknight_run_007.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,917},{130,130}}</string>
+				<string>{{0,282},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_run_001.png</key>
+			<key>boss_chaosknight_run_008.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,786},{130,130}}</string>
+				<string>{{0,141},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
-			<key>boss_antiswarm_run_002.png</key>
+			<key>boss_chaosknight_run_009.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,655},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{140,140}}</string>
 				<key>sourceSize</key>
-				<string>{130,130}</string>
-			</dict>
-
-			<key>boss_antiswarm_run_003.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{0,524},{130,130}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
-				<key>sourceSize</key>
-				<string>{130,130}</string>
-			</dict>
-
-			<key>boss_antiswarm_run_004.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{0,393},{130,130}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
-				<key>sourceSize</key>
-				<string>{130,130}</string>
-			</dict>
-
-			<key>boss_antiswarm_run_005.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{0,262},{130,130}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
-				<key>sourceSize</key>
-				<string>{130,130}</string>
-			</dict>
-
-			<key>boss_antiswarm_run_006.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{0,131},{130,130}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
-				<key>sourceSize</key>
-				<string>{130,130}</string>
-			</dict>
-
-			<key>boss_antiswarm_run_007.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{0,0},{130,130}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{130,130}}</string>
-				<key>sourceSize</key>
-				<string>{130,130}</string>
+				<string>{140,140}</string>
 			</dict>
 
 		</dict>
@@ -1581,7 +1511,7 @@
 			<key>size</key>
 			<string>{2048,2048}</string>
 			<key>textureFileName</key>
-			<string>boss_antiswarm.png</string>
+			<string>boss_chaosknight.png</string>
 			</dict>
 		</dict>
 </plist>

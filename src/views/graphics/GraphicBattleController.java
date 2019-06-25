@@ -249,7 +249,6 @@ public class GraphicBattleController implements Initializable {
                 System.out.println("Card unselected");
             } else {
                 if (isSelectedCardInGame) {
-                    // TODO: move
                     try {
                         Rectangle previousPosition = getCardRectangle(selectedCard.getCell().getX(), selectedCard.getCell().getY());
                         ClientManager.moveTo(row + 1, column + 1);
@@ -258,7 +257,6 @@ public class GraphicBattleController implements Initializable {
                         System.out.println("can't move here");
                     }
                 } else {
-                    // TODO: insert
                     try {
                         ClientManager.insertCard(selectedCard.getID(), row + 1, column + 1);
                         AnchorPane cardPane = getCardInGame(selectedCard, row, column);
@@ -382,6 +380,7 @@ public class GraphicBattleController implements Initializable {
             index++;
         }
     }
+
 
     private void updateMana() {
         Image mana = new Image("/resources/images/battle/ui/icon_mana@2x.png");
