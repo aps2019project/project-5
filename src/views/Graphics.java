@@ -136,8 +136,7 @@ public class Graphics extends Application {
             ClientManager.login("mahdi", "mahdi");
 //            ClientManager.setOpponent("AI", true);
 //            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
-        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException ignored) {
-        }
+        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException ignored) {}
 
         loadFXML();
         stage = primaryStage;
