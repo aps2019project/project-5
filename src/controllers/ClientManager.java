@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static controllers.Manager.getInActivePlayer;
+
 public class ClientManager {
     private static Account account;
     private static Match playingMatch;
@@ -212,7 +214,7 @@ public class ClientManager {
         return playingMatch.getActivePlayer();
     }
 
-    public static Player getInActivePlayer() {
+    public static Player getInAcjtivePlayer() {
         return playingMatch.getInActivePlayer();
     }
 
@@ -396,7 +398,7 @@ public class ClientManager {
     }
 
     public static boolean isAITurn() {
-        return playingMatch.isAIMode() && (playingMatch.getTurn() & 1) != 1;
+        return playingMatch.isAIMode() && (playingMatch.getTurn() & 1) == 1;
     }
 
     public static List<Hero> getHero(List<Card> cards) {

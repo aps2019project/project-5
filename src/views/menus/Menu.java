@@ -8,6 +8,7 @@ import views.Output;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 
 public interface Menu {
@@ -46,7 +47,10 @@ public interface Menu {
                 Output.err(Error.INVALID_COMMAND.toString());
         }
     }
-
+    public static void endTurn(Matcher matcher) {
+        Manager.endTurn();
+        //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
+    }
     static void help(ArrayList<Command> commands) {
         for(Command command : commands) {
             if(!command.hasHelp())

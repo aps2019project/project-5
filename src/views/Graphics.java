@@ -26,7 +26,7 @@ public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
-            matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot, battleMenu, collectionMenuRoot, shopMenuRoot;
+            matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot, battleMenuRoot, collectionMenuRoot, shopMenuRoot;
 
     static {
 
@@ -120,7 +120,7 @@ public class Graphics extends Application {
             customCardRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_card.fxml"));
             multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/multi_single.fxml"));
             customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/custom_select.fxml"));
-            battleMenu = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
+            battleMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/battle.fxml"));
             collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/collection_menu.fxml"));
             shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../layouts/shop.fxml"));
         } catch (IOException e) {
@@ -141,7 +141,7 @@ public class Graphics extends Application {
 
         loadFXML();
         stage = primaryStage;
-        Scene scene = new Scene(battleMenu, 1920, 1080);
+        Scene scene = new Scene(battleMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
@@ -150,8 +150,8 @@ public class Graphics extends Application {
         stage.show();
     }
 
-    public static MediaPlayer playMusic(String musicPath) {
-        Media sound = new Media(new File("src/resources/sounds/" + musicPath).toURI().toString());
+    public static MediaPlayer playMusic(String musicName) {
+        Media sound = new Media(new File("src/resources/sounds/" + musicName).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
         return mediaPlayer;

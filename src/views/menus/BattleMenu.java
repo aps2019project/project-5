@@ -1,6 +1,8 @@
 package views.menus;
 
 import controllers.ClientManager;
+import controllers.ClientManager;
+import controllers.logic.Manager;
 import models.Collection;
 import models.Player;
 import models.Hand;
@@ -24,6 +26,10 @@ import java.util.regex.Matcher;
 public class BattleMenu implements Menu {
 
     private static boolean isInGraveYard = false;
+
+    public  static List<Command> getAICommands() {
+        return commands;
+    }
 
     public BattleMenu() {
         commands.add(new Command(
@@ -252,17 +258,17 @@ public class BattleMenu implements Menu {
     }
 
     public static void showMyMinions(Matcher matcher) {
-        showMinions(ClientManager.showMyMinions());
+        showMinions(Manager.showMyMinions());
     }
 
     public static void showOpponentMinions(Matcher matcher) {
-        showMinions(ClientManager.showOpponentMinions());
+        showMinions(Manager.showOpponentMinions());
     }
 
     public static void showCardInfo(Matcher matcher) {
         String cardName = matcher.group("cardName");
         try {
-            Card card = ClientManager.showCardInfo(cardName);
+            Card card = Manager.showCardInfo(cardName);
             Output.log(card.showInfo());
         } catch (Collection.CardNotFoundException e) {
             Output.err(Error.CARD_NOT_FOUND_IN_COLLECTION);
@@ -270,15 +276,15 @@ public class BattleMenu implements Menu {
     }
 
     public static void showMap(Matcher matcher) {
-        Output.log(ClientManager.getMap().toString());
+        Output.log(Manager.getMap().toString());
     }
 
     public static void moveTo(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         try {
-            ClientManager.moveTo(x, y);
-            Card card = ClientManager.getActivePlayer().getSelectedCard();
+            Manager.moveTo(x, y);
+            Card card = Manager.getActivePlayer().getSelectedCard();
             Output.log(String.format("%s moved to %d %d", card.getName(), x, y));
         } catch (Match.InvalidMoveException e) {
             Output.err(Error.INVALID_MOVE);
@@ -290,9 +296,9 @@ public class BattleMenu implements Menu {
     public static boolean attack(Matcher matcher) {
         String cardID = matcher.group("cardID");
         try {
-            ClientManager.attack(cardID);
-            if (ClientManager.getPlayingMatch() == null) {
-                Output.log("Player " + ClientManager.getWinner().getUsername() + " wins.");
+            Manager.attack(cardID);
+            if(Manager.getPlayingMatch() == null) {
+                Output.log("Player " + Manager.getWinner().getUsername() + " wins.");
                 return false;
             }
         } catch (Match.CardAttackIsNotAvailableException e) {
@@ -315,20 +321,20 @@ public class BattleMenu implements Menu {
 
     public static void showHand(Matcher matcher) {
         Output.log("Hand:");
-        Hand hand = ClientManager.getHand();
+        Hand hand = Manager.getHand();
         hand.getCards().forEach(card -> Output.log("\t" + card.getID() + "\t Mana: " + card.getManaPoint()));
         Output.log("Next Card:");
         Output.log("\t" + hand.getNextCard().getID() + "\t Mana: " + hand.getNextCard().getManaPoint());
-        Output.log("Mana: " + ClientManager.getActivePlayer().getMana());
+        Output.log("Mana: " + Manager.getActivePlayer().getMana());
     }
 
     public static void endTurn(Matcher matcher) {
-        ClientManager.endTurn();
+        Manager.endTurn();
         //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
     }
 
     public static void showCollectables(Matcher matcher) {
-        List<Item> collectibleItems = ClientManager.getCollectableItems();
+        List<Item> collectibleItems = Manager.getCollectableItems();
         Output.log(collectibleItems);
     }
 
@@ -337,7 +343,7 @@ public class BattleMenu implements Menu {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         try {
-            ClientManager.insertCard(cardName, x, y);
+            Manager.insertCard(cardName, x, y);
         } catch (Player.NotEnoughManaException e) {
             Output.err(Error.NOT_ENOUGH_MANA);
         } catch (Player.HeroDeadException e) {
@@ -358,12 +364,12 @@ public class BattleMenu implements Menu {
     public static void select(Matcher matcher) {
         String id = matcher.group("id");
         try {
-            ClientManager.selectCard(id);
+            Manager.selectCard(id);
             Output.log(Error.CARD_SELECTED.toString());
         } catch (Collection.CardNotFoundException e) {
             boolean flag = false;
             try {
-                ClientManager.selectCollectableItem(id);
+                Manager.selectCollectableItem(id);
                 Output.log(Error.COLLECTABLE_ITEM_SELECTED.toString());
                 flag = true;
             } catch (Player.ItemNotFoundException e1) {
@@ -376,7 +382,7 @@ public class BattleMenu implements Menu {
 
     public static void showInfo(Matcher matcher) {
         try {
-            Output.log(ClientManager.getSelectedCollectableItem());
+            Output.log(Manager.getSelectedCollectableItem());
         } catch (Player.NoItemSelectedException e) {
             Output.err(Error.NO_SELECTABLE_ITEM_SELECTED);
         }
@@ -386,14 +392,14 @@ public class BattleMenu implements Menu {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         try {
-            ClientManager.useCollectableItem(x, y);
+            Manager.useCollectableItem(x, y);
         } catch (CollectableItem.NoCollectableItemSelected noCollectableItemSelected) {
             Output.err(noCollectableItemSelected.getMessage());
         }
     }
 
     public static void showNextCard(Matcher matcher) {
-        Card nextCard = ClientManager.getNextCard();
+        Card nextCard = Manager.getNextCard();
         Output.log(nextCard);
     }
 
@@ -418,7 +424,7 @@ public class BattleMenu implements Menu {
         }
         String cardID = matcher.group("cardID");
         try {
-            ClientManager.getCardInGraveyard(cardID);
+            Manager.getCardInGraveyard(cardID);
         } catch (Collection.CardNotFoundException e) {
             Output.err(Error.CARD_NOT_FOUND_IN_GRAVEYARD);
         }
@@ -429,7 +435,7 @@ public class BattleMenu implements Menu {
             Output.err(Error.NOT_IN_GRAVEYARD);
             return;
         }
-        List<Card> cards = ClientManager.getCardsInGraveyard();
+        List<Card> cards = Manager.getCardsInGraveyard();
         Output.log("Graveyard Cards :");
         cards.forEach(Output::log);
     }
@@ -437,7 +443,7 @@ public class BattleMenu implements Menu {
 
     public static void showMyHero(Matcher matcher) {
         try {
-            Hero hero = ClientManager.getActivePlayer().getHero();
+            Hero hero = Manager.getActivePlayer().getHero();
             Output.log(hero.getID() +
                     " : " +
                     hero.getName() +

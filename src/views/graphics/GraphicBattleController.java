@@ -1,7 +1,7 @@
 package views.graphics;
 
 import controllers.ClientManager;
-import controllers.Manager;
+import controllers.logic.Manager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -26,12 +26,22 @@ import models.cards.spell.Spell;
 import models.map.Cell;
 import models.map.Map;
 import models.match.Match;
+import views.Command;
+import views.Error;
+import views.Graphics;
+import views.Output;
 import views.SpriteMaker;
+import views.menus.BattleMenu;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+
+import static views.Graphics.playMusic;
 
 public class GraphicBattleController implements Initializable {
     public AnchorPane gameBoard;
@@ -208,6 +218,8 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void clickCell(int row, int column) {
+        if (ClientManager.isAITurn())
+            return;
         Card clickedCard = getCardInCell(row, column);
         if (selectedCard == null) {
             if (clickedCard != null) try {
@@ -410,11 +422,92 @@ public class GraphicBattleController implements Initializable {
     }
 
     public void endTurn(MouseEvent mouseEvent) {
+        playMusic("sfx_ui_select.m4a");
         ClientManager.endTurn();
-
-//        System.out.println(ClientManager.getActivePlayer().getAccount().getUsername() + " : " + ClientManager.getActivePlayer().getMana());
-        updateCells();
-        updateHand();
         updateMana();
+        updateHand();
+        String AIMove = "";
+        if (ClientManager.isAITurn())
+            AIMove = ClientManager.getAIMove();
+        new BattleMenu();
+        for (Command command : BattleMenu.getAICommands()) {
+            Matcher matcher = command.getPattern().matcher(AIMove);
+            if (matcher.find()) {
+                Method method;
+                try {
+//                    System.out.println(command.getFunctionName());
+                    method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
+                    System.out.println(method.getName());
+                    Object object = method.invoke( this ,matcher);
+                    if (object != null && object.equals(Boolean.FALSE))
+                        return;
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
     }
+
+    public static boolean attack(Matcher matcher) {
+        String cardID = matcher.group("cardID");
+        try {
+            controllers.logic.Manager.attack(cardID);
+            if (controllers.logic.Manager.getPlayingMatch() == null) {
+                Output.log("Player " + Manager.getWinner().getUsername() + " wins.");
+                return false;
+            }
+        } catch (Match.CardAttackIsNotAvailableException e) {
+            Output.err(String.format(String.valueOf(views.Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
+        } catch (Match.TiredMinionException e) {
+            Output.err(String.format(String.valueOf(views.Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(views.Error.CARD_NOT_FOUND_IN_COLLECTION);
+        } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
+            Output.err(views.Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
+        } catch (Player.CardNotSelectedException e) {
+            Output.err(Error.CARD_NOT_SELECTED);
+        }
+        return true;
+    }
+
+    public static void insert(Matcher matcher) {
+        String cardName = matcher.group("cardName");
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        try {
+            Manager.insertCard(cardName, x, y);
+        } catch (Player.NotEnoughManaException e) {
+            Output.err(Error.NOT_ENOUGH_MANA);
+        } catch (Player.HeroDeadException e) {
+            Output.err(e.getMessage());
+        } catch (Map.InvalidCellException e) {
+            Output.err(e.getMessage());
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_FOUND);
+        } catch (Map.InvalidTargetCellException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void select(Matcher matcher) {
+        String id = matcher.group("id");
+        try {
+            Manager.selectCard(id);
+            Output.log(Error.CARD_SELECTED.toString());
+        } catch (Collection.CardNotFoundException e) {
+            boolean flag = false;
+            try {
+                Manager.selectCollectableItem(id);
+                Output.log(Error.COLLECTABLE_ITEM_SELECTED.toString());
+                flag = true;
+            } catch (Player.ItemNotFoundException e1) {
+                Output.err(Error.NO_ITEM);
+            }
+            if (!flag)
+                Output.err(Error.CARD_NOT_FOUND);
+        }
+    }
+
+
 }
