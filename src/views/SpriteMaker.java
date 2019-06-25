@@ -62,7 +62,7 @@ public class SpriteMaker {
 
     }
 
-    public static ImageView getAndShowAnimation( ImageView imageView, String name, Action action, int cycle) {
+    public static ImageView getAndShowAnimation(ImageView imageView, String name, Action action, int cycle) {
         SpriteMaker spriteMaker = null;
         try {
             spriteMaker = new SpriteMaker(imageView, name, action, cycle);
@@ -77,13 +77,33 @@ public class SpriteMaker {
         }
 
         Duration seconds = Duration.seconds(0.07 * spriteMaker.datas.size());
-        if(action == Action.RUN) {
+        if (action == Action.RUN) {
             seconds = Duration.seconds(0.045555 * spriteMaker.datas.size());
         }
         Animation animation = new SpriteAnimation(spriteMaker.bigImage, seconds, spriteMaker.datas);
         animation.setCycleCount(cycle);
         animation.play();
         return spriteMaker.bigImage;
+    }
+
+    public static double getAnimationTime(ImageView imageView, String name, Action action, int cycle) {
+        SpriteMaker spriteMaker = null;
+        try {
+            spriteMaker = new SpriteMaker(imageView, name, action, cycle);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            loadPlist(spriteMaker);
+        } catch (ParserConfigurationException | IOException
+                | PropertyListFormatException | SAXException | ParseException e) {
+            e.printStackTrace();
+        }
+        Duration seconds = Duration.seconds(0.07 * spriteMaker.datas.size());
+        if (action == Action.RUN) {
+            seconds = Duration.seconds(0.045555 * spriteMaker.datas.size());
+        }
+        return seconds.toMillis();
     }
 
 }

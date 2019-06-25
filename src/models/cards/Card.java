@@ -110,6 +110,12 @@ public class Card implements Comparable {
         return object instanceof Card && ((Card) object).getName().equals(this.name);
     }
 
+    public boolean equalsExactly(Object object) {
+        if (this == object)
+            return true;
+        return object instanceof Card && ((Card) object).getID().equals(this.getID());
+    }
+
     public int getMaxDistance() {
         return this.MAX_DISTANCE_TO_MOVE;
 
