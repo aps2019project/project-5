@@ -7,6 +7,8 @@ public enum  Action {
     HIT("hit"),
     IDLE("idle"),
     RUN("run"),
+    SPELL_IDLE(""),
+    SPELL_ACTIVE("active"),
     TELEPORT("teleportrecall");
 
     String code;

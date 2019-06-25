@@ -101,9 +101,11 @@ public class ShopController implements Initializable {
         cardPane.getChildren().add(cardType);
 
         try {
-            Image image;
+            Action action = Action.IDLE;
             ImageView imageView = new ImageView();
-            SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 10000);
+            if(card instanceof Spell)
+                action = Action.SPELL_IDLE;
+            SpriteMaker.getAndShowAnimation(imageView, card.getName(), action, 10000);
             if (isAttacker) {
                 imageView.relocate(30, -10);
                 imageView.setFitWidth(160);
