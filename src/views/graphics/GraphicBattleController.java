@@ -62,6 +62,7 @@ public class GraphicBattleController implements Initializable {
     private Label[] handItemMana = new Label[5];
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private HashMap<Card, AnchorPane> cardViews = new HashMap<>();
+    private HashMap<Card, AnchorPane> handViews = new HashMap<>();
     private Card selectedCard;
     private BattleMenu battleMenu = new BattleMenu();
     private boolean isSelectedCardInGame = false;
@@ -256,7 +257,14 @@ public class GraphicBattleController implements Initializable {
                         teleport.setLayoutY(rect.getY() + 140);
                         teleport.setScaleX(2);
                         teleport.setScaleY(2);
-//                        removeCard(teleport);
+
+                        AnchorPane handAnchorPane = handViews.get(selectedCard);
+                        handAnchorPane.getStyleClass().removeAll("hand-item-selected");
+                        ((ImageView) handAnchorPane.getChildren().get(0)).setImage(null);
+                        ((Label) handAnchorPane.getChildren().get(2)).setText("");
+                        handAnchorPane.setOnMouseClicked(event -> {});
+                        handAnchorPane.setOnMouseEntered(event -> {});
+
                         setCard(cardPane);
                         setCard(teleport);
                         selectedCard = null;
@@ -308,10 +316,6 @@ public class GraphicBattleController implements Initializable {
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
-//            String imageUrl = "/resources/images/cards/" + card.getName() + "_idle.gif";
-//            if (card instanceof Spell) {
-//                imageUrl = "/resources/images/cards/" + card.getName() + ".gif";
-//            }
             ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
             handItemImages[index].setImage(cardAnimation.getImage());
             if(card instanceof Spell) {
@@ -350,6 +354,7 @@ public class GraphicBattleController implements Initializable {
                 root.getChildren().add(cardPane);
                 handItemContainer[finalIndex].setOnMouseExited(event1 -> root.getChildren().remove(cardPane));
             });
+            handViews.put(card, handItemContainer[index]);
             index++;
         }
     }
