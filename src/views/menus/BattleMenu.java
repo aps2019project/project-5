@@ -99,7 +99,7 @@ public class BattleMenu implements Menu {
         ));
         commands.add(new Command(
                 "^(?i)end\\s+turn$",
-                "endTurn",
+                "endTurnCommand",
                 "End Turn",
                 "\t\t\t\t\t\tGives turn to opponent"
         ));

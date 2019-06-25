@@ -87,7 +87,6 @@ public abstract class Match {
     public void setTurn() {
         turn++;
         int mana = turn / 2 + 2;
-        System.out.println(mana);
         if (mana > 9) mana = 9;
         getActivePlayer().setMana(mana);
         turnPreparing(players[0]);
@@ -273,6 +272,7 @@ public abstract class Match {
             super("Invalid attack");
             this.id = id;
         }
+
         public String getId() {
             return id;
         }

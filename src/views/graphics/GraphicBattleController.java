@@ -230,39 +230,26 @@ public class GraphicBattleController implements Initializable {
                 ClientManager.selectCard(clickedCard.getID());
                 selectedCard = clickedCard;
                 isSelectedCardInGame = true;
-                System.out.println("Card Selected");
+//                System.out.println("Card Selected");
             } catch (Collection.CardNotFoundException e) {
-                System.out.println("Can't Select Card");
+//                System.out.println("Can't Select Card");
             }
         } else {
             if (selectedCard.equals(clickedCard)) {
                 selectedCard = null;
-                System.out.println("Card unselected");
+//                System.out.println("Card unselected");
             } else {
                 if (isSelectedCardInGame) {
                     try {
                         ClientManager.moveTo(row + 1, column + 1);
                         moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
                     } catch (Match.InvalidMoveException | Map.InvalidCellException e) {
-                        System.out.println("can't move here");
+//                        System.out.println("can't move here");
                     }
                 } else {
                     try {
                         ClientManager.insertCard(selectedCard.getID(), row + 1, column + 1);
-                        AnchorPane cardPane = getCardInGame(selectedCard, row, column);
-                        cardViews.put(selectedCard, cardPane);
-                        AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
-                                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
-                                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
-                                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
-                                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1));
-                        Rectangle rect = getCardRectangle(row - 1, column - 1);
-                        teleport.setLayoutX(rect.getX() + 150);
-                        teleport.setLayoutY(rect.getY() + 140);
-                        teleport.setScaleX(2);
-                        teleport.setScaleY(2);
-                        teleport.setMouseTransparent(true);
-
+                        insertCard(row, column);
                         AnchorPane handAnchorPane = handViews.get(selectedCard);
                         handAnchorPane.getStyleClass().removeAll("hand-item-selected");
                         ((ImageView) handAnchorPane.getChildren().get(0)).setImage(null);
@@ -272,10 +259,7 @@ public class GraphicBattleController implements Initializable {
                         handAnchorPane.setOnMouseEntered(event -> {
                         });
 
-                        setCard(cardPane);
-                        setCard(teleport);
-                        selectedCard = null;
-                        updateMana();
+
                     } catch (Player.NotEnoughManaException | Map.InvalidCellException
                             | Map.InvalidTargetCellException | Player.HeroDeadException
                             | Collection.CardNotFoundException ignored) {
@@ -284,6 +268,28 @@ public class GraphicBattleController implements Initializable {
             }
         }
         updateCells();
+    }
+
+    private void insertCard(int row, int column) {
+        System.out.println(selectedCard);
+        AnchorPane cardPane = getCardInGame(selectedCard, row, column);
+        cardViews.put(selectedCard, cardPane);
+        AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
+                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
+                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
+                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
+                SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1));
+        Rectangle rect = getCardRectangle(row - 1, column - 1);
+        teleport.setLayoutX(rect.getX() + 150);
+        teleport.setLayoutY(rect.getY() + 140);
+        teleport.setScaleX(2);
+        teleport.setScaleY(2);
+        teleport.setMouseTransparent(true);
+
+        setCard(cardPane);
+        setCard(teleport);
+        selectedCard = null;
+        updateMana();
     }
 
     private void removeCard(AnchorPane cardPane) {
@@ -462,8 +468,9 @@ public class GraphicBattleController implements Initializable {
             if (matcher.find()) {
                 Method method;
                 try {
+                    System.out.println(command.getFunctionName());
                     method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-                    Object object = method.invoke(null, matcher);
+                    Object object = method.invoke(this, matcher);
                     if (object != null && object.equals(Boolean.FALSE))
                         return;
                 } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
@@ -474,11 +481,11 @@ public class GraphicBattleController implements Initializable {
         }
     }
 
-    public static boolean attack(Matcher matcher) {
+    public boolean attack(Matcher matcher) {
         String cardID = matcher.group("cardID");
         try {
-            controllers.logic.Manager.attack(cardID);
-            if (controllers.logic.Manager.getPlayingMatch() == null) {
+            controllers.ClientManager.attack(cardID);
+            if (controllers.ClientManager.getPlayingMatch() == null) {
                 Output.log("Player " + ClientManager.getWinner().getUsername() + " wins.");
                 return false;
             }
@@ -496,12 +503,18 @@ public class GraphicBattleController implements Initializable {
         return true;
     }
 
-    public static void insert(Matcher matcher) {
+    public void insert(Matcher matcher) {
         String cardName = matcher.group("cardName");
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         try {
-            Manager.insertCard(cardName, x, y);
+            ClientManager.insertCard(cardName, x, y);
+            Hand enemyHand = ClientManager.getOpponent().getHand();
+            for (Card card : enemyHand.getCards())
+                if (card.getID().equals(cardName))
+                    selectedCard = card;
+            insertCard(x - 1, y - 1);
+
         } catch (Player.NotEnoughManaException e) {
             Output.err(Error.NOT_ENOUGH_MANA);
         } catch (Player.HeroDeadException e) {
@@ -515,15 +528,15 @@ public class GraphicBattleController implements Initializable {
         }
     }
 
-    public static void select(Matcher matcher) {
+    public void select(Matcher matcher) {
         String id = matcher.group("id");
         try {
-            Manager.selectCard(id);
+            ClientManager.selectCard(id);
             Output.log(Error.CARD_SELECTED.toString());
         } catch (Collection.CardNotFoundException e) {
             boolean flag = false;
             try {
-                Manager.selectCollectableItem(id);
+                ClientManager.selectCollectableItem(id);
                 Output.log(Error.COLLECTABLE_ITEM_SELECTED.toString());
                 flag = true;
             } catch (Player.ItemNotFoundException e1) {
@@ -534,5 +547,24 @@ public class GraphicBattleController implements Initializable {
         }
     }
 
+    public void moveTo(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        try {
+            ClientManager.moveTo(x, y);
+            Card card = ClientManager.getActivePlayer().getSelectedCard();
+            Output.log(String.format("%s moved to %d %d", card.getName(), x, y));
+            moveCard(cardViews.get(card), getCardRectangle(x, y), card);
+        } catch (Match.InvalidMoveException e) {
+            Output.err(Error.INVALID_MOVE);
+        } catch (Map.InvalidCellException e) {
+
+        }
+    }
+
+    public void endTurnCommand(Matcher matcher) {
+//        ClientManager.endTurn();
+        endTurn(null);
+    }
 
 }
