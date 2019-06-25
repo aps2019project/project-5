@@ -11,8 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
-import models.Collection;
 import models.Shop;
 import models.cards.AttackType;
 import models.cards.Card;
@@ -21,7 +19,6 @@ import models.cards.Minion;
 import models.cards.spell.SpecialPowerActivateTime;
 import models.cards.spell.Spell;
 import views.Graphics;
-import views.menus.CollectionMenu;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,8 +26,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static views.Graphics.Menu.SHOP_MENU;
 import static views.Graphics.playMusic;
@@ -285,6 +280,9 @@ public class GraphicCustomCardMenu {
         final String spritePath = spriteAnimation.getAbsolutePath().replaceAll(regex, "");
         File plistFile = new File(spritePath + fileName + ".plist");
 
+        File logo = new File(spritePath + "HeroLogos" + File.separator + fileName + ".png");
+
+
         if (!plistFile.exists()) {
             heroFlag = false;
             changeAsWrong(spriteAnimationPathHeroTxt, true);
@@ -296,6 +294,7 @@ public class GraphicCustomCardMenu {
 
         spriteAnimation.renameTo(new File(spritePath + name + ".png"));
         plistFile.renameTo(new File(spritePath + name + ".plist"));
+        logo.renameTo(new File(spritePath + "HeroLogos" + File.separator  + name + ".png"));
 
 
         AttackType attackType1 = AttackType.getAttackType(attackType);
@@ -339,12 +338,15 @@ public class GraphicCustomCardMenu {
 
     public void openFileChooser(MouseEvent mouseEvent) {
         changeAsWrong((JFXTextField) mouseEvent.getSource(), false);
-        ((JFXTextField)mouseEvent.getSource()).setText(getFile().getAbsolutePath());
+        String fileName = "";
+        if (((JFXTextField) mouseEvent.getSource()).getPromptText().contains("hero"))
+            fileName = "Hero";
+        ((JFXTextField)mouseEvent.getSource()).setText(getFile(fileName).getAbsolutePath());
     }
 
-    private File getFile() {
+    private File getFile(String fileName) {
         final FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Sprite Animation", "*.png"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Sprite Animation", "*" + fileName + ".png"));
 
         fileChooser.setInitialDirectory(spriteAnimationResourcePath);
         fileChooser.setTitle("Please select a sprite animation with its .plist file");

@@ -32,9 +32,9 @@ public class Graphics extends Application {
 
         try {
             ClientManager.login("mahdi", "mahdi");
-            ClientManager.setOpponent("AI", true);
-            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
-        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException | AccountNotFoundException ignored) {
+//            ClientManager.setOpponent("AI", true);
+//            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
+        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException ignored) {
         }
 
 
@@ -141,7 +141,7 @@ public class Graphics extends Application {
 
         loadFXML();
         stage = primaryStage;
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));

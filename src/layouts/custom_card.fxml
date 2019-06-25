@@ -80,7 +80,7 @@
                                           onKeyTyped="#backToNormal"/>
                             <JFXTextField fx:id="heroCooldown" promptText="3" styleClass="input-text"
                                           onKeyTyped="#backToNormal"/>
-                            <JFXTextField fx:id="spriteAnimationPathHeroTxt" promptText="/path/to/spriteAnimation.jpg"
+                            <JFXTextField fx:id="spriteAnimationPathHeroTxt" promptText="/path/to/heroSpriteAnimation.jpg"
                                           styleClass="input-text" onMouseClicked="#openFileChooser"/>
 
                         </VBox>

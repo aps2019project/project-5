@@ -145,10 +145,10 @@ public class GraphicBattleController implements Initializable {
         String player1HeroName = ClientManager.getPlayingMatch().getPlayer1().getDeck().getHero().getName();
         String player2HeroName = ClientManager.getPlayingMatch().getPlayer2().getDeck().getHero().getName();
         player1ProfileImage.setImage(new Image(
-                "/resources/images/cards/" + player1HeroName + "_logo.png"
+                "/resources/sprites/HeroLogos/" + player1HeroName + ".png"
         ));
         player2ProfileImage.setImage(new Image(
-                "/resources/images/cards/" + player2HeroName + "_logo.png"
+                "/resources/sprites/HeroLogos/" + player2HeroName + ".png"
         ));
     }
 
@@ -308,11 +308,11 @@ public class GraphicBattleController implements Initializable {
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
-//            String imageUrl = "/resources/images/cards/" + card.getName() + "_idle.gif";
-//            if (card instanceof Spell) {
-//                imageUrl = "/resources/images/cards/" + card.getName() + ".gif";
-//            }
-//            SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.BREATHING, 10000);
+            if (card instanceof Spell)
+                SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.SPELL_IDLE, 10000);
+            else
+                SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.IDLE, 10000);
+
             int finalIndex = index;
             int finalIndex1 = index;
             handItemContainer[index].setOnMouseClicked(event -> {
