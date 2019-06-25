@@ -181,7 +181,8 @@ public class GraphicBattleController implements Initializable {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.RUN, 1000);
             long newTime = System.currentTimeMillis();
-            while (System.currentTimeMillis() - newTime <= time) { }
+            while (System.currentTimeMillis() - newTime <= time) {
+            }
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 10000000);
         }).start();
     }
@@ -262,7 +263,7 @@ public class GraphicBattleController implements Initializable {
                         ClientManager.insertCard(selectedCard.getID(), row + 1, column + 1);
                         AnchorPane cardPane = getCardInGame(selectedCard, row, column);
                         cardViews.put(selectedCard, cardPane);
-                       AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
+                        AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
                                 SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
                                 SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
                                 SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
@@ -278,8 +279,10 @@ public class GraphicBattleController implements Initializable {
                         handAnchorPane.getStyleClass().removeAll("hand-item-selected");
                         ((ImageView) handAnchorPane.getChildren().get(0)).setImage(null);
                         ((Label) handAnchorPane.getChildren().get(2)).setText("");
-                        handAnchorPane.setOnMouseClicked(event -> {});
-                        handAnchorPane.setOnMouseEntered(event -> {});
+                        handAnchorPane.setOnMouseClicked(event -> {
+                        });
+                        handAnchorPane.setOnMouseEntered(event -> {
+                        });
 
                         setCard(cardPane);
                         setCard(teleport);
@@ -334,7 +337,7 @@ public class GraphicBattleController implements Initializable {
             handItemMana[index].setText("" + card.getManaPoint());
             ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
             handItemImages[index].setImage(cardAnimation.getImage());
-            if(card instanceof Spell) {
+            if (card instanceof Spell) {
                 cardAnimation.setFitWidth(120);
                 cardAnimation.setFitHeight(120);
                 AnchorPane.setLeftAnchor(cardAnimation, 30.0);
@@ -469,12 +472,12 @@ public class GraphicBattleController implements Initializable {
             AIMove = ClientManager.getAIMove();
         for (Command command : battleMenu.getAICommands()) {
             Matcher matcher = command.getPattern().matcher(AIMove);
-            if(matcher.find()) {
-                Method method ;
+            if (matcher.find()) {
+                Method method;
                 try {
                     method = getClass().getMethod(command.getFunctionName(), Matcher.class);
                     Object object = method.invoke(null, matcher);
-                    if(object != null && object.equals(Boolean.FALSE))
+                    if (object != null && object.equals(Boolean.FALSE))
                         return;
                 } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();

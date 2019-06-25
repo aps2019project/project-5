@@ -294,7 +294,8 @@ public class GraphicCustomCardMenu {
 
         spriteAnimation.renameTo(new File(spritePath + name + ".png"));
         plistFile.renameTo(new File(spritePath + name + ".plist"));
-        logo.renameTo(new File(spritePath + "HeroLogos" + File.separator  + name + ".png"));
+//        File newFile = new File(String.valueOf(Graphics.class.getResource("resources/sprites/HeroLogos/" + name + ".png")));
+        logo.renameTo(new File(String.valueOf(Graphics.class.getResource("resources/sprites/HeroLogos/" + name + ".png"))));
 
 
         AttackType attackType1 = AttackType.getAttackType(attackType);
