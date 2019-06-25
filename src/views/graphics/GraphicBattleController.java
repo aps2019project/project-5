@@ -435,10 +435,8 @@ public class GraphicBattleController implements Initializable {
             if (matcher.find()) {
                 Method method;
                 try {
-//                    System.out.println(command.getFunctionName());
                     method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-                    System.out.println(method.getName());
-                    Object object = method.invoke( this ,matcher);
+                    Object object = method.invoke( null ,matcher);
                     if (object != null && object.equals(Boolean.FALSE))
                         return;
                 } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
