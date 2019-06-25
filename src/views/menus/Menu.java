@@ -47,7 +47,10 @@ public interface Menu {
                 Output.err(Error.INVALID_COMMAND.toString());
         }
     }
-
+    public static void endTurn(Matcher matcher) {
+        Manager.endTurn();
+        //bayad kolle card hayi ke ghabileate attack darand inja attackavailability shan true mishavad!!!!
+    }
     static void help(ArrayList<Command> commands) {
         for(Command command : commands) {
             if(!command.hasHelp())

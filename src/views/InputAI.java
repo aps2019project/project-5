@@ -1,5 +1,6 @@
 package views;
 
+import controllers.ClientManager;
 import controllers.logic.Manager;
 
 public class InputAI extends Input {
@@ -12,7 +13,7 @@ public class InputAI extends Input {
 
     @Override
     public String getCommand() {
-        return Manager.getAIMove();
+        return ClientManager.getAIMove();
     }
 
     public static InputAI getInstance() {

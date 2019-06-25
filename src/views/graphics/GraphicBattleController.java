@@ -1,7 +1,9 @@
 package views.graphics;
 
 import controllers.ClientManager;
-import javafx.animation.*;
+import javafx.animation.ScaleTransition;
+import controllers.logic.Manager;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,7 +28,9 @@ import models.map.Cell;
 import models.map.Map;
 import models.match.Match;
 import views.Command;
+import views.Error;
 import views.Graphics;
+import views.Output;
 import views.SpriteMaker;
 import views.menus.BattleMenu;
 
@@ -157,11 +161,7 @@ public class GraphicBattleController implements Initializable {
         return (int) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-    private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card, Rectangle previousPosition) {
-        System.out.println(previousPosition.getX());
-        System.out.println(previousPosition.getY());
-        System.out.println(cardPane.getLayoutX());
-        System.out.println(cardPane.getLayoutY());
+    private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
         int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
 //        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
 //        t.setToX(newPosition.getX() - cardPane.getLayoutX());
@@ -181,8 +181,7 @@ public class GraphicBattleController implements Initializable {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.RUN, 1000);
             long newTime = System.currentTimeMillis();
-            while (System.currentTimeMillis() - newTime <= time) {
-            }
+            while (System.currentTimeMillis() - newTime <= time) { }
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 10000000);
         }).start();
     }
@@ -328,8 +327,6 @@ public class GraphicBattleController implements Initializable {
 
     private void updateHand() {
         Hand hand = ClientManager.getMe().getHand();
-        System.out.println(ClientManager.getMe().getAccount().getUsername());
-        System.out.println("Hand: \n\t" + hand.getCards().toString());
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
@@ -474,7 +471,7 @@ public class GraphicBattleController implements Initializable {
             if (matcher.find()) {
                 Method method;
                 try {
-                    method = getClass().getMethod(command.getFunctionName(), Matcher.class);
+                    method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
                     Object object = method.invoke(null, matcher);
                     if (object != null && object.equals(Boolean.FALSE))
                         return;
@@ -485,4 +482,66 @@ public class GraphicBattleController implements Initializable {
             }
         }
     }
+
+    public static boolean attack(Matcher matcher) {
+        String cardID = matcher.group("cardID");
+        try {
+            controllers.logic.Manager.attack(cardID);
+            if (controllers.logic.Manager.getPlayingMatch() == null) {
+                Output.log("Player " + ClientManager.getWinner().getUsername() + " wins.");
+                return false;
+            }
+        } catch (Match.CardAttackIsNotAvailableException e) {
+            Output.err(String.format(String.valueOf(views.Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
+        } catch (Match.TiredMinionException e) {
+            Output.err(String.format(String.valueOf(views.Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(views.Error.CARD_NOT_FOUND_IN_COLLECTION);
+        } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
+            Output.err(views.Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
+        } catch (Player.CardNotSelectedException e) {
+            Output.err(Error.CARD_NOT_SELECTED);
+        }
+        return true;
+    }
+
+    public static void insert(Matcher matcher) {
+        String cardName = matcher.group("cardName");
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        try {
+            Manager.insertCard(cardName, x, y);
+        } catch (Player.NotEnoughManaException e) {
+            Output.err(Error.NOT_ENOUGH_MANA);
+        } catch (Player.HeroDeadException e) {
+            Output.err(e.getMessage());
+        } catch (Map.InvalidCellException e) {
+            Output.err(e.getMessage());
+        } catch (Collection.CardNotFoundException e) {
+            Output.err(Error.CARD_NOT_FOUND);
+        } catch (Map.InvalidTargetCellException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void select(Matcher matcher) {
+        String id = matcher.group("id");
+        try {
+            Manager.selectCard(id);
+            Output.log(Error.CARD_SELECTED.toString());
+        } catch (Collection.CardNotFoundException e) {
+            boolean flag = false;
+            try {
+                Manager.selectCollectableItem(id);
+                Output.log(Error.COLLECTABLE_ITEM_SELECTED.toString());
+                flag = true;
+            } catch (Player.ItemNotFoundException e1) {
+                Output.err(Error.NO_ITEM);
+            }
+            if (!flag)
+                Output.err(Error.CARD_NOT_FOUND);
+        }
+    }
+
+
 }

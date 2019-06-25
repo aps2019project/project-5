@@ -1,6 +1,7 @@
 package views.menus;
 
 import controllers.ClientManager;
+import controllers.ClientManager;
 import controllers.logic.Manager;
 import models.Collection;
 import models.Player;
@@ -202,25 +203,24 @@ public class BattleMenu implements Menu {
 
     @Override
     public void handleMenu() {
-        while(true) {
-            String inputCommand ;
-            if (Manager.isAITurn()){
+        while (true) {
+            String inputCommand;
+            if (ClientManager.isAITurn()) {
                 inputCommand = InputAI.getInstance().getCommand();
-            }
-            else
-                inputCommand = Manager.getInput().getCommand(getMenuName());
+            } else
+                inputCommand = ClientManager.getInput().getCommand(getMenuName());
             boolean matches = false;
-            for(Command command : getCommands()) {
+            for (Command command : getCommands()) {
                 Matcher matcher = command.getPattern().matcher(inputCommand);
-                if(matcher.find()) {
-                    if(command.getFunctionName().equals(""))
+                if (matcher.find()) {
+                    if (command.getFunctionName().equals(""))
                         return;
                     matches = true;
-                    Method method ;
+                    Method method;
                     try {
                         method = getClass().getMethod(command.getFunctionName(), Matcher.class);
                         Object object = method.invoke(null, matcher);
-                        if(object != null && object.equals(Boolean.FALSE))
+                        if (object != null && object.equals(Boolean.FALSE))
                             return;
                     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
@@ -228,7 +228,7 @@ public class BattleMenu implements Menu {
                     break;
                 }
             }
-            if(!matches)
+            if (!matches)
                 Output.err(Error.INVALID_COMMAND.toString());
         }
     }
@@ -239,21 +239,21 @@ public class BattleMenu implements Menu {
     }
 
     public static void gameInfo(Matcher matcher) {
-        Output.log(Manager.getMatchInfo());
+        Output.log(ClientManager.getMatchInfo());
     }
 
     private static void showMinions(List<Minion> attackers) {
         attackers.forEach(minion -> {
-                String result = minion.getID() +
-                        " : " +
-                        minion.getName() +
-                        ", health : " +
-                        minion.getHealth() +
-                        ", location : " +
-                        String.format("(%s,%s) power : %s"
-                                , minion.getCell().getX() + 1, minion.getCell().getY() + 1, minion.getAttackPoint());
-                Output.log(result);
-            }
+                    String result = minion.getID() +
+                            " : " +
+                            minion.getName() +
+                            ", health : " +
+                            minion.getHealth() +
+                            ", location : " +
+                            String.format("(%s,%s) power : %s"
+                                    , minion.getCell().getX() + 1, minion.getCell().getY() + 1, minion.getAttackPoint());
+                    Output.log(result);
+                }
         );
     }
 
@@ -364,7 +364,7 @@ public class BattleMenu implements Menu {
     public static void select(Matcher matcher) {
         String id = matcher.group("id");
         try {
-            ClientManager.selectCard(id);
+            Manager.selectCard(id);
             Output.log(Error.CARD_SELECTED.toString());
         } catch (Collection.CardNotFoundException e) {
             boolean flag = false;
