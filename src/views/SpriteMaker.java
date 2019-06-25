@@ -75,7 +75,12 @@ public class SpriteMaker {
                 | PropertyListFormatException | SAXException | ParseException e) {
             e.printStackTrace();
         }
-        Animation animation = new SpriteAnimation(spriteMaker.bigImage, Duration.seconds(0.08 * spriteMaker.datas.size()), spriteMaker.datas);
+
+        Duration seconds = Duration.seconds(0.07 * spriteMaker.datas.size());
+        if(action == Action.RUN) {
+            seconds = Duration.seconds(0.045555 * spriteMaker.datas.size());
+        }
+        Animation animation = new SpriteAnimation(spriteMaker.bigImage, seconds, spriteMaker.datas);
         animation.setCycleCount(cycle);
         animation.play();
         return spriteMaker.bigImage;

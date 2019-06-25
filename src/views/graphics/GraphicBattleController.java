@@ -1,6 +1,7 @@
 package views.graphics;
 
 import controllers.ClientManager;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -62,6 +63,7 @@ public class GraphicBattleController implements Initializable {
     private Label[] handItemMana = new Label[5];
     private AnchorPane[] handItemContainer = new AnchorPane[5];
     private HashMap<Card, AnchorPane> cardViews = new HashMap<>();
+    private HashMap<Card, AnchorPane> handViews = new HashMap<>();
     private Card selectedCard;
     private BattleMenu battleMenu = new BattleMenu();
     private boolean isSelectedCardInGame = false;
@@ -131,7 +133,7 @@ public class GraphicBattleController implements Initializable {
 
     private Rectangle getCardRectangle(int row, int column) {
         double x = 483 + column * 97 + (column - 4) * row * 2.5;
-        double y = 250 + 90 * row;
+        double y = 240 + 90 * row;
         double width = 160 + row * 8;
         double height = 160 + row * 8;
         return new Rectangle(x, y, width, height);
@@ -246,7 +248,8 @@ public class GraphicBattleController implements Initializable {
                     try {
                         ClientManager.insertCard(selectedCard.getID(), row + 1, column + 1);
                         AnchorPane cardPane = getCardInGame(selectedCard, row, column);
-                        AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
+                        cardViews.put(selectedCard, cardPane);
+                       AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
                                 SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
                                 SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
                                 SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
@@ -256,7 +259,15 @@ public class GraphicBattleController implements Initializable {
                         teleport.setLayoutY(rect.getY() + 140);
                         teleport.setScaleX(2);
                         teleport.setScaleY(2);
-//                        removeCard(teleport);
+                        teleport.setMouseTransparent(true);
+
+                        AnchorPane handAnchorPane = handViews.get(selectedCard);
+                        handAnchorPane.getStyleClass().removeAll("hand-item-selected");
+                        ((ImageView) handAnchorPane.getChildren().get(0)).setImage(null);
+                        ((Label) handAnchorPane.getChildren().get(2)).setText("");
+                        handAnchorPane.setOnMouseClicked(event -> {});
+                        handAnchorPane.setOnMouseEntered(event -> {});
+
                         setCard(cardPane);
                         setCard(teleport);
                         selectedCard = null;
@@ -269,6 +280,7 @@ public class GraphicBattleController implements Initializable {
             }
         }
         updateCells();
+        selectedCard = null;
     }
 
     private void removeCard(AnchorPane cardPane) {
@@ -308,10 +320,23 @@ public class GraphicBattleController implements Initializable {
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
-            if (card instanceof Spell)
-                SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.SPELL_IDLE, 10000);
-            else
-                SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.IDLE, 10000);
+            ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
+            handItemImages[index].setImage(cardAnimation.getImage());
+            if(card instanceof Spell) {
+                cardAnimation.setFitWidth(120);
+                cardAnimation.setFitHeight(120);
+                AnchorPane.setLeftAnchor(cardAnimation, 30.0);
+                AnchorPane.setRightAnchor(cardAnimation, 30.0);
+                AnchorPane.setTopAnchor(cardAnimation, 30.0);
+            } else {
+                cardAnimation.setFitWidth(150);
+                cardAnimation.setFitHeight(150);
+                AnchorPane.setLeftAnchor(cardAnimation, 15.0);
+            }
+//            if (card instanceof Spell)
+//                SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.SPELL_IDLE, 10000);
+//            else
+//                SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.IDLE, 10000);
 
             int finalIndex = index;
             int finalIndex1 = index;
@@ -338,6 +363,7 @@ public class GraphicBattleController implements Initializable {
                 root.getChildren().add(cardPane);
                 handItemContainer[finalIndex].setOnMouseExited(event1 -> root.getChildren().remove(cardPane));
             });
+            handViews.put(card, handItemContainer[index]);
             index++;
         }
     }
@@ -374,6 +400,8 @@ public class GraphicBattleController implements Initializable {
     private AnchorPane getCardInGame(Card card, int row, int column) {
         AnchorPane anchorPane = new AnchorPane();
         ImageView imageView = new ImageView();
+        anchorPane.setMouseTransparent(true);
+        imageView.setMouseTransparent(true);
         SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 1000000);
         int scale = 1;
         if (column > 4) scale = -1;
@@ -414,7 +442,6 @@ public class GraphicBattleController implements Initializable {
         hpLabel.setAlignment(Pos.CENTER);
         hpLabel.setPrefWidth(30);
 
-        anchorPane.setMouseTransparent(true);
         anchorPane.getChildren().addAll(imageView, attackPointBackground, healthPointBackground, hpLabel, apLabel);
         return anchorPane;
     }
@@ -424,6 +451,7 @@ public class GraphicBattleController implements Initializable {
         ClientManager.endTurn();
         updateMana();
         updateHand();
+        selectedCard = null;
         String AIMove = "";
         if (ClientManager.isAITurn())
             AIMove = ClientManager.getAIMove();
@@ -443,7 +471,4 @@ public class GraphicBattleController implements Initializable {
             }
         }
     }
-
-
-
 }
