@@ -314,6 +314,17 @@ public class GraphicBattleController implements Initializable {
 //            }
             ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
             handItemImages[index].setImage(cardAnimation.getImage());
+            if(card instanceof Spell) {
+                cardAnimation.setFitWidth(120);
+                cardAnimation.setFitHeight(120);
+                AnchorPane.setLeftAnchor(cardAnimation, 30.0);
+                AnchorPane.setRightAnchor(cardAnimation, 30.0);
+                AnchorPane.setTopAnchor(cardAnimation, 30.0);
+            } else {
+                cardAnimation.setFitWidth(150);
+                cardAnimation.setFitHeight(150);
+                AnchorPane.setLeftAnchor(cardAnimation, 15.0);
+            }
             int finalIndex = index;
             int finalIndex1 = index;
             handItemContainer[index].setOnMouseClicked(event -> {
@@ -444,7 +455,4 @@ public class GraphicBattleController implements Initializable {
             }
         }
     }
-
-
-
 }
