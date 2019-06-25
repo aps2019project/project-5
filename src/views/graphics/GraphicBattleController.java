@@ -4,6 +4,7 @@ import controllers.ClientManager;
 import javafx.animation.ScaleTransition;
 import controllers.logic.Manager;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -71,7 +72,7 @@ public class GraphicBattleController implements Initializable {
 
     private void updateHp(Card... card) {
         for (Card card1 : card) {
-            Label hp = (Label) cardViews.get(card1).getChildren().get(2);
+            Label hp = (Label) cardViews.get(card1).getChildren().get(3);
             hp.setText("" + ((Attacker) card1).getCurrentHealth());
         }
     }
@@ -230,21 +231,26 @@ public class GraphicBattleController implements Initializable {
         AnchorPane myAnchor = cardViews.get(myCard);
         AnchorPane enemyAnchor = cardViews.get(enemyCard);
         ImageView myImageView = (ImageView) myAnchor.getChildren().get(0);
+        ImageView enemyImageView = (ImageView) enemyAnchor.getChildren().get(0);
         new Thread(() -> {
             double actionTime = SpriteMaker.getAnimationTime(myImageView, myCard.getName(), Action.ATTACK, 1);
-            try {
-                SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.ATTACK, 1);
-                Thread.sleep((long) actionTime);
-                SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.IDLE, 10000000);
-                ImageView enemyImageView = (ImageView) enemyAnchor.getChildren().get(0);
-                SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.ATTACK, 1);
-                Thread.sleep((long) actionTime);
-                SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.IDLE, 10000000);
-                updateHp(myCard, enemyCard);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.ATTACK, 1);
+            long time = System.currentTimeMillis();
+            while (System.currentTimeMillis() - time <= actionTime) {
             }
+            SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.IDLE, 10000000);
+            Platform.runLater(() -> updateHp(enemyCard));
+
+            actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.getName(), Action.ATTACK, 1);
+            time = System.currentTimeMillis();
+            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.ATTACK, 1);
+            while (System.currentTimeMillis() - time <= actionTime) {
+            }
+
+            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.IDLE, 10000000);
+            Platform.runLater(() -> updateHp(myCard));
         }).start();
+
     }
 
     private void clickCell(int row, int column) {
@@ -285,6 +291,7 @@ public class GraphicBattleController implements Initializable {
                             try {
                                 ClientManager.attack(clickedCard.getID());
                                 attack(selectedCard, clickedCard);
+
 
                             } catch (Match.CardAttackIsNotAvailableException e) {
                                 e.printStackTrace();
@@ -510,10 +517,11 @@ public class GraphicBattleController implements Initializable {
 
     public void endTurn(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
+        selectedCard = null;
         ClientManager.endTurn();
         updateMana();
         updateHand();
-        selectedCard = null;
+        updateCells();
         String AIMove = "";
         if (ClientManager.isAITurn())
             AIMove = ClientManager.getAIMove();
