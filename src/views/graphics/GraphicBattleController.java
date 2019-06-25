@@ -131,7 +131,7 @@ public class GraphicBattleController implements Initializable {
 
     private Rectangle getCardRectangle(int row, int column) {
         double x = 483 + column * 97 + (column - 4) * row * 2.5;
-        double y = 250 + 90 * row;
+        double y = 240 + 90 * row;
         double width = 160 + row * 8;
         double height = 160 + row * 8;
         return new Rectangle(x, y, width, height);
@@ -312,7 +312,8 @@ public class GraphicBattleController implements Initializable {
 //            if (card instanceof Spell) {
 //                imageUrl = "/resources/images/cards/" + card.getName() + ".gif";
 //            }
-//            SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.BREATHING, 10000);
+            ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
+            handItemImages[index].setImage(cardAnimation.getImage());
             int finalIndex = index;
             int finalIndex1 = index;
             handItemContainer[index].setOnMouseClicked(event -> {
