@@ -1,9 +1,8 @@
 package views.graphics;
 
 import controllers.ClientManager;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import controllers.logic.Manager;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -161,7 +160,7 @@ public class GraphicBattleController implements Initializable {
         return (int) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-    private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
+    private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card, Rectangle previouesPosition) {
         int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
 //        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
 //        t.setToX(newPosition.getX() - cardPane.getLayoutX());
