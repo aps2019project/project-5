@@ -46,6 +46,13 @@ public class Deck {
         cards.remove(card);
     }
 
+    public void removeCard(String cardName) throws Collection.CardNotFoundException {
+        if (!hasCard(cardName)) {
+            throw new Collection.CardNotFoundException();
+        }
+        cards.remove(Shop.getInstance().getCardsCollection().getCard(cardName));
+    }
+
     public Deck(String name) {
         this.name = name;
     }

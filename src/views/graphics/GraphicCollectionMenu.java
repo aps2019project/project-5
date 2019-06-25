@@ -244,6 +244,7 @@ public class GraphicCollectionMenu implements Initializable {
                     ((JFXRadioButton) (selectedDeck.getChildren().get(1))).setSelected(false);
                 }
             } catch (Collection.CardNotFoundException | Account.DeckNotFoundException ignored) {
+                ignored.printStackTrace();
             }
         });
         cardPane.getChildren().add(deleteBtn);
@@ -425,7 +426,6 @@ public class GraphicCollectionMenu implements Initializable {
         } catch (Account.DeckExistsException e) {
             Graphics.alert("Error", "Duplicate Deck", "You already have this deck");
         }
-
     }
 
     public void exportDeck(MouseEvent mouseEvent) {

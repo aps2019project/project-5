@@ -61,8 +61,7 @@
 .tab-pane {
     -fx-background-color: #292929;
     -fx-text-alignment: center;
-    -fx-pref-width: 500;
-    -fx-max-width: 500;
+    -fx-pref-width: 800;
 }
 
 .duelystTab {
@@ -155,7 +154,7 @@
 
 .btn-lg {
     -fx-padding: 1em 3em;
-    -fx-font-size: 1em;
+    -fx-font-size: 2em;
     -fx-border-radius: 0.3em;
     -fx-font-weight: bold;
     -fx-pref-width: 420;

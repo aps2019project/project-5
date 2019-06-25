@@ -177,9 +177,9 @@ public class ClientManager {
 
     public static void removeCardFromDeck(String cardName, String deckName) throws CardNotFoundException,
             Account.DeckNotFoundException {
-        Card card = account.getCollection().getCard(cardName);
+//        Card card = account.getCollection().getCard(cardName);
         Deck deck = account.getDeck(deckName);
-        deck.removeCard(card);
+        deck.removeCard(cardName);
     }
 
     public static String getMatchInfo() {

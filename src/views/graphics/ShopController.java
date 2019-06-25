@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import models.Action;
 import models.Collection;
 import models.cards.Attacker;
 import models.cards.Card;
@@ -23,6 +24,7 @@ import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.spell.Spell;
 import views.Graphics;
+import views.SpriteMaker;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -99,12 +101,11 @@ public class ShopController implements Initializable {
         cardPane.getChildren().add(cardType);
 
         try {
-            Image image;
-            if (isAttacker)
-                image = new Image("/resources/images/cards/" + card.getName() + "_breathing.gif");
-            else
-                image = new Image("/resources/images/cards/" + card.getName() + ".gif");
-            ImageView imageView = new ImageView(image);
+            Action action = Action.IDLE;
+            ImageView imageView = new ImageView();
+            if(card instanceof Spell)
+                action = Action.SPELL_IDLE;
+            SpriteMaker.getAndShowAnimation(imageView, card.getName(), action, 10000);
             if (isAttacker) {
                 imageView.relocate(30, -10);
                 imageView.setFitWidth(160);
