@@ -1,6 +1,6 @@
 package client.models;
 
-import data.JsonParser;
+import client.data.JsonParser;
 import client.models.cards.Card;
 import client.models.Collection.CardNotFoundException;
 import client.models.Collection.ItemsFullException;

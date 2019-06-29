@@ -203,7 +203,7 @@ public class Manager {
         if (!isOpponentNull()) {
             Account opponent;
             if (isAIMode) {
-                opponent = AI.getAIAccount();
+                opponent = AI.getAIAccount(account);
             } else
                 opponent = Account.getAccounts().get(username);
             if (gameMode == 1 /* story mode */) {

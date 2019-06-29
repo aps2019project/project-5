@@ -6,7 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
-import data.FileReader;
+import client.data.FileReader;
 import javafx.event.ActionEvent;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;

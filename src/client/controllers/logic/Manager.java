@@ -191,7 +191,7 @@ public class Manager {
         if (!isOpponentNull()) {
             Account opponent;
             if (isAIMode) {
-                opponent = AI.getAIAccount();
+                opponent = AI.getAIAccount(account);
             } else
                 opponent = Account.getAccounts().get(username);
             if (gameMode == ClientManager.GameMode.STORY_MODE /* story mode */) {

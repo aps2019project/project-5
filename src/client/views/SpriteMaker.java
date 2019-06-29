@@ -37,7 +37,7 @@ public class SpriteMaker {
         this.bigImage = imageView;
         this.name = name;
         this.action = action;
-        filePath = "src/resources/sprites/" + name;
+        filePath = "src/client/resources/sprites/" + name;
         spriteFile = new File(filePath + ".plist");
         bigImage.setImage(new Image(new FileInputStream(filePath + ".png")));
         this.cycle = cycle;

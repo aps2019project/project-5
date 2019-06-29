@@ -1,4 +1,4 @@
-package server.models;
+package models;
 
 public class Account {
     public String username, password;

@@ -239,7 +239,7 @@ public class ClientManager {
 
     public static void setOpponent(String opponentUsername, boolean isAIMode) throws AccountNotFoundException {
         if (isAIMode) {
-            opponent = AI.getAIAccount();
+            opponent = AI.getAIAccount(account);
         } else {
             opponent = Account.getAccount(opponentUsername);
             ClientManager.opponentUsername = opponentUsername;
@@ -270,38 +270,6 @@ public class ClientManager {
             ((AI) opponent).setMatch(playingMatch);
         playingMatch.setAIMode(isAIMode);
     }
-
-    public static void setMatchData(boolean isAIMode, GameMode gameMode, String username) {
-        opponentUsername = username;
-        if (!isOpponentNull()) {
-            Account opponent;
-            if (isAIMode) {
-                opponent = AI.getAIAccount();
-            } else
-                opponent = Account.getAccounts().get(username);
-            if (gameMode == GameMode.STORY_MODE /* story mode */) {
-                matches.add(new DeathMatch(account, opponent));
-                matches.add(new MultiFlagMatch(account, opponent));
-                matches.add(new SingleFlagMatch(account, opponent));
-                playingMatch = matches.get(0);
-                matches.remove(0);
-            } else if (gameMode == GameMode.DEATH_MATCH/* death match */) {
-                playingMatch = new DeathMatch(account, opponent);
-            } else if (gameMode == GameMode.MULTI_FLAG/* multi flag match */) {
-                playingMatch = new MultiFlagMatch(account, opponent);
-            } else if (gameMode == GameMode.SINGLE_FLAG/* single flag match */) {
-                playingMatch = new SingleFlagMatch(account, opponent);
-            }
-            if (opponent == null) {
-                opponentUsername = "";
-            }
-            playingMatch.setAIMode(isAIMode);
-            if (isAIMode) {
-                ((AI) opponent).setMatch(playingMatch);
-            }
-        }
-    }
-
 
     public static boolean isOpponentNull() {
         if (opponentUsername == null)

@@ -1,9 +1,7 @@
 package client.models;
 
-import data.AccountDataStream;
+import client.data.AccountDataStream;
 import client.models.cards.Card;
-
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.*;
 
 public class Account {
@@ -18,12 +16,8 @@ public class Account {
     private int drake = 100000;
     private int winCount = 0;
 
-    public static Account getAccount(String opponentUsername) throws AccountNotFoundException {
+    public static Account getAccount(String opponentUsername) {
         return accounts.get(opponentUsername);
-    }
-
-    static {
-        accounts = AccountDataStream.loadAccounts();
     }
 
     public static void saveAccounts() {
@@ -33,7 +27,6 @@ public class Account {
     public static void loadAccounts() {
         accounts = AccountDataStream.loadAccounts();
     }
-
 
     public int getDrake() {
         return drake;

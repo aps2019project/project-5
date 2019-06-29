@@ -1,6 +1,7 @@
 package client.views;
 
 import client.controllers.ClientManager;
+import client.models.Shop;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -27,17 +28,6 @@ public class Graphics extends Application {
     public static Parent accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
             matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot, battleMenuRoot, collectionMenuRoot, shopMenuRoot;
 
-    static {
-
-//        try {
-//            ClientManager.login("mahdi", "mahdi");
-//            ClientManager.setOpponent("AI", true);
-//            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
-//        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException | AccountNotFoundException ignored) {
-//        }
-
-
-    }
 
     public static void alert(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -63,14 +53,14 @@ public class Graphics extends Application {
     }
 
     public enum Menu {
-        COLLECTION_MENU("../client.layouts/collection_menu.fxml"),
-        SHOP_MENU("../client.layouts/shop.fxml"),
+        COLLECTION_MENU("/client/layouts/collection_menu.fxml"),
+        SHOP_MENU("/client/layouts/shop.fxml"),
         ACCOUNT_MENU(accountMenuRoot),
         MATCH_SELECT_MENU(matchSelectRoot),
         MAIN_MENU(mainMenuRoot),
         MULTI_SINGLE(multiSingleRoot),
         CUSTOM_SELECT(customSelectRoot),
-        BATTLE("../client.layouts/battle.fxml"),
+        BATTLE("/client/layouts/battle.fxml"),
         CUSTOM_CARD(customCardRoot);
         Parent root;
         String file;
@@ -113,12 +103,12 @@ public class Graphics extends Application {
             profileRoot = tmpGridPane;
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("../client/layouts/match_select.fxml"));
-            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client/layouts/main_menu.fxml"));
-            accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client/layouts/account_menu.fxml"));
-            customCardRoot = FXMLLoader.load(Graphics.class.getResource("../client/layouts/custom_card.fxml"));
-            multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("../client/layouts/multi_single.fxml"));
-            customSelectRoot = FXMLLoader.load(Graphics.class.getResource("../client/layouts/custom_select.fxml"));
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/match_select.fxml"));
+            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/main_menu.fxml"));
+            accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
+            customCardRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/custom_card.fxml"));
+            multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/multi_single.fxml"));
+            customSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/custom_select.fxml"));
 //            battleMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/battle.fxml"));
 //            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/collection_menu.fxml"));
 //            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/shop.fxml"));
@@ -131,15 +121,18 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        try {
-            ClientManager.login("mahdi", "mahdi");
+//        try {
+//            ClientManager.login("mahdi", "mahdi");
 //            ClientManager.setOpponent("AI", true);
 //            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
-        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException  ignored) {}
+//        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException  ignored) {}
 
+        Account.loadAccounts();
+        System.out.println(Shop.getInstance().getCardsCollection().getMinions().size());
+//        System.out.println(Account.getAccounts().size());
         loadFXML();
         stage = primaryStage;
-        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("client/resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
@@ -149,7 +142,7 @@ public class Graphics extends Application {
     }
 
     public static MediaPlayer playMusic(String musicName) {
-        Media sound = new Media(new File("src/resources/sounds/" + musicName).toURI().toString());
+        Media sound = new Media(new File("src/client/resources/sounds/" + musicName).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
         return mediaPlayer;

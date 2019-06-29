@@ -1,4 +1,4 @@
-package data;
+package client.data;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
@@ -13,11 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AccountDataStream {
-    private static Type accountsArray = new TypeToken<List<Account>>() {
-    }.getType();
+    private static Type accountsArray = new TypeToken<List<Account>>() {}.getType();
     private static URL url = AccountDataStream.class.getResource("accounts.json");
     private static File file = new File(url.getPath());
-    private static YaGson accountsYagson = new YaGson();
+    private static YaGson accountsYaGson = new YaGson();
 
     public static void saveAccounts() {
         ArrayList<Account> accounts = new ArrayList<>();
@@ -25,13 +24,12 @@ public class AccountDataStream {
         try {
             YaGsonBuilder yaGsonBuilder = new YaGsonBuilder().setPrettyPrinting();
 
-            accountsYagson = yaGsonBuilder.create();
+            accountsYaGson = yaGsonBuilder.create();
             FileWriter accountWriter = new FileWriter(file);
-            accountWriter.write(accountsYagson.toJson(accounts));
+            accountWriter.write(accountsYaGson.toJson(accounts));
             accountWriter.flush();
             accountWriter.close();
-        } catch (IOException e) {
-        }
+        } catch (IOException ignored) {}
     }
 
     public static HashMap<String, Account> loadAccounts() {
@@ -39,7 +37,7 @@ public class AccountDataStream {
         ArrayList<Account> accounts = new ArrayList<>();
         try {
             java.io.FileReader accountReader = new java.io.FileReader(file);
-            accounts = accountsYagson.fromJson(accountReader, accountsArray);
+            accounts = accountsYaGson.fromJson(accountReader, accountsArray);
             accountReader.close();
         } catch (IOException e) {
             System.out.println("loading is not supported");
