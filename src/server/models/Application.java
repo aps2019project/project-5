@@ -2,7 +2,9 @@ package server.models;
 
 import javafx.concurrent.ScheduledService;
 
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class Application {
 
     protected void handleRequest(Socket socket) {
         try {
+            DataInputStream inputStream = new DataInputStream(System.in);
             Scanner scanner = new Scanner(socket.getInputStream());
             StringBuilder requestText = new StringBuilder();
             while (scanner.hasNext()) {
