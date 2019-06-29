@@ -1,4 +1,4 @@
-package server.models;
+package server.models.http;
 
 public class HttpResponseText extends HttpResponse {
     public static final String CONTENT_TYPE = "text.plain";

@@ -1,4 +1,4 @@
-package server.models;
+package server.models.http;
 
 public class HttpResponse {
     public final String version = "HTTP/1.1";

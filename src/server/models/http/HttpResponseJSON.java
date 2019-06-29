@@ -1,4 +1,4 @@
-package server.models;
+package server.models.http;
 
 public class HttpResponseJSON extends HttpResponse {
     public static final String CONTENT_TYPE = "application/json";
