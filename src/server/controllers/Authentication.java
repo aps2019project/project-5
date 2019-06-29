@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Authentication extends Application {
-    public Map<String, Account> users = new HashMap<>();
+    public static Map<String, Account> users = new HashMap<>();
 
     public static HttpResponse login(HttpRequest request) {
         return new HttpResponseText("login");
