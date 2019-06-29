@@ -13,7 +13,7 @@ public class HttpRequest {
 //        POST(Pattern.compile()),
 //        HEADERS(Pattern.compile()),
         HEADER(Pattern.compile("(?<header>(/[\\w]+)+)?")),
-        VALUES(Pattern.compile("(?<key>[.+])\\s*:\\s*(?<value>[.+])")),
+        VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
         VERSION(Pattern.compile("HTTP/(?<version>.+)")),
         METHOD(Pattern.compile("(?<method>[\\w]+)"));
         Pattern pattern;
