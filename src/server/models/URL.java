@@ -1,13 +1,15 @@
 package server.models;
 
-import java.util.regex.Pattern;
+import server.models.http.HttpRequest;
+
+import java.util.function.Consumer;
 
 public class URL {
     public String urlPattern;
-    public String functionName;
+    public Consumer<? extends HttpRequest> viewFunction;
 
-    public URL(String urlPattern, String functionName) {
+    public URL(String urlPattern, Consumer<? extends HttpRequest> viewFunction) {
         this.urlPattern = urlPattern;
-        this.functionName = functionName;
+        this.viewFunction = viewFunction;
     }
 }

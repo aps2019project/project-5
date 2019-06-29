@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Application {
     public int port;
     public boolean isNecessary;
-    public ArrayList<URL> urls;
+    public ArrayList<URL> urls = new ArrayList<>();
 
     public void start() {
         new Thread(() -> {
