@@ -3,6 +3,8 @@ package server.models;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class URL {
     public String urlPattern;
@@ -14,8 +16,8 @@ public class URL {
     }
 
     public boolean matches(String url) {
-        // TODO implement
-
-        return false;
+        Pattern pattern = Pattern.compile(urlPattern);
+        Matcher matcher = pattern.matcher(url);
+        return matcher.find();
     }
 }
