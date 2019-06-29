@@ -1,8 +1,7 @@
 package server.models;
 
-import javafx.concurrent.ScheduledService;
-
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -40,14 +39,16 @@ public class Application {
         try {
             Scanner scanner = new Scanner(socket.getInputStream());
             StringBuilder requestText = new StringBuilder();
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine() + "\n";
-                requestText.append(line);
-                System.out.print(line);
-            }
+            long time = System.currentTimeMillis();
+            new Thread(() -> {
+                while(scanner.hasNext()) {
+                    requestText.append(scanner.nextLine()).append("\n");
+                }
+            }).start();
+            while (time + 10 > System.currentTimeMillis()) {}
+            System.out.println(requestText.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
