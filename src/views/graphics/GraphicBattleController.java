@@ -417,10 +417,6 @@ public class GraphicBattleController implements Initializable {
                 cardAnimation.setFitHeight(150);
                 AnchorPane.setLeftAnchor(cardAnimation, 15.0);
             }
-//            if (card instanceof Spell)
-//                SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.SPELL_IDLE, 10000);
-//            else
-//                SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), Action.IDLE, 10000);
 
             int finalIndex = index;
             int finalIndex1 = index;
