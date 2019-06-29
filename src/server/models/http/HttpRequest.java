@@ -11,6 +11,7 @@ public class HttpRequest {
     private static enum Methods {
         VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
         PARAMETERS(Pattern.compile("(?<key>[^\\W&?]+)=(?<value>[^\\W&?]+)")),
+        URLS(Pattern.compile("(?<url>\\/.+)\\?")),
         FIRST_LINE(Pattern.compile("^(?<method>GET|POST)\\s+(?<url>.+(\\?.*)?)\\s+HTTP\\/(?<version>\\d+\\.\\d+)$"));
         Pattern pattern;
 
@@ -42,12 +43,20 @@ public class HttpRequest {
             this.version = matcher.group("version");
             url = matcher.group("url");
         }
-        matcher = Methods.PARAMETERS.pattern.matcher(url);
-        while (matcher.find()) {
-            if(this.method.equals("POST")) {
-                POST.put(matcher.group("key"), matcher.group("value"));
-            } if(this.method.equals("GET")) {
-                GET.put(matcher.group("key"), matcher.group("value"));
+        if(url != null) {
+            matcher = Methods.PARAMETERS.pattern.matcher(url);
+            while (matcher.find()) {
+                if (this.method.equals("POST")) {
+                    POST.put(matcher.group("key"), matcher.group("value"));
+                }
+                if (this.method.equals("GET")) {
+                    GET.put(matcher.group("key"), matcher.group("value"));
+                }
+            }
+
+            matcher = Methods.URLS.pattern.matcher(url);
+            if (matcher.find()) {
+                url = matcher.group("url");
             }
         }
 
