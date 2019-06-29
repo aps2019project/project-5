@@ -9,11 +9,9 @@ import models.cards.Minion;
 import models.cards.spell.Spell;
 import models.cards.spell.TargetType;
 import models.items.Flag;
-import models.match.Match;
 import views.Error;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Map {
@@ -98,7 +96,7 @@ public class Map {
         }
         if (card instanceof Attacker) cell.setAttacker((Attacker) card);
         if (card instanceof Spell) {
-//            List<Cell> effectedCells = getEffectCells((Spell) card, cell);
+            List<Cell> effectedCells = getEffectCells((Spell) card, cell);
 //            effectedCells.forEach(cell1
 //                    -> cell1.getAttacker().getBuffActivated().addAll(((Spell) card).getBuffs())
 //            );
