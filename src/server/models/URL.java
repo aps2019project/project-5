@@ -6,16 +6,16 @@ import java.util.function.Function;
 
 public class URL {
     public String urlPattern;
-    public Function<? extends HttpRequest, ? extends HttpResponse> viewFunction;
+    public Function<HttpRequest, HttpResponse> viewFunction;
 
-    public URL(String urlPattern, Function<? extends HttpRequest, ? extends HttpResponse> viewFunction) {
+    public URL(String urlPattern, Function<HttpRequest, HttpResponse> viewFunction) {
         this.urlPattern = urlPattern;
         this.viewFunction = viewFunction;
     }
 
-    public boolean mathces(String url) {
+    public boolean matches(String url) {
         // TODO implement
 
-        return true;
+        return false;
     }
 }

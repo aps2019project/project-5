@@ -1,7 +1,10 @@
 package server.models;
 
+import server.models.http.HttpRequest;
+import server.models.http.HttpResponse;
+
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -46,7 +49,29 @@ public class Application {
                 }
             }).start();
             while (time + 10 > System.currentTimeMillis()) {}
-            System.out.println(requestText.toString());
+
+            HttpRequest request = new HttpRequest(requestText.toString());
+            boolean matches = false;
+
+            for(URL url : urls) {
+                if(url.matches(request.url)) {
+                    matches = true;
+                    HttpResponse response = url.viewFunction.apply(request);
+
+                    PrintWriter out = new PrintWriter(socket.getOutputStream());
+                    out.print(response);
+                    out.flush();
+
+                    break;
+                }
+            }
+
+            if(!matches) {
+                PrintWriter out = new PrintWriter(socket.getOutputStream());
+                out.print(HttpResponse.ERROR_404);
+                out.flush();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
