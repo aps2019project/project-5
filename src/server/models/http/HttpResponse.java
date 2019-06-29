@@ -24,7 +24,7 @@ public class HttpResponse {
     @Override
     public String toString() {
         return String.format("%s %d %s\n", version, status, statusMessage) +
-                String.format("Content-Type: %s\n", contentType) +
+                String.format("Content-Type: %s\n\n", contentType) +
                 body;
     }
 }

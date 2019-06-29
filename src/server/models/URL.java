@@ -12,4 +12,10 @@ public class URL {
         this.urlPattern = urlPattern;
         this.viewFunction = viewFunction;
     }
+
+    public boolean mathces(String url) {
+        // TODO implement
+
+        return true;
+    }
 }

@@ -1,33 +1,17 @@
 package server;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Scanner;
+
+import server.controllers.Authentication;
+import server.models.Application;
+import server.models.URL;
 
 public class Server {
-    public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(80);
-        Socket socket = serverSocket.accept();
+    public static void main(String[] args) {
+        Application authentication = new Application();
+        authentication.port = 80;
+        authentication.urls.add(new URL("/login", Authentication::login));
+        authentication.urls.add(new URL("/sign_up", Authentication::signUp));
 
-        Scanner scanner = new Scanner(socket.getInputStream());
-        String method = scanner.next();
-        String requestedURL = scanner.next();
-
-        StringBuilder response = new StringBuilder();
-
-        int status = 404;
-        if (requestedURL.equals("/"))
-            status = 200;
-
-        response.append("HTTP/1.1 ").append(status).append(" OK\n");
-        response.append("Content-type: text/html\n");
-
-        PrintWriter out = new PrintWriter(socket.getOutputStream());
-        out.println(response.toString());
-        out.flush();
-
-        socket.close();
+        authentication.start();
     }
 }
