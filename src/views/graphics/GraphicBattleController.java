@@ -69,6 +69,7 @@ public class GraphicBattleController implements Initializable {
     private Card selectedCard;
     private BattleMenu battleMenu = new BattleMenu();
     private boolean isSelectedCardInGame = false;
+    private int AIAction = 0;
 
     private void updateHp(Card... card) {
         for (Card card1 : card) {
@@ -274,9 +275,7 @@ public class GraphicBattleController implements Initializable {
                 ClientManager.selectCard(clickedCard.getID());
                 selectedCard = clickedCard;
                 isSelectedCardInGame = true;
-//                System.out.println("Card Selected");
             } catch (Collection.CardNotFoundException e) {
-//                System.out.println("Can't Select Card");
             }
         } else {
             if (selectedCard.equalsExactly(clickedCard)) {
@@ -344,7 +343,6 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void insertCard(int row, int column) {
-        System.out.println(selectedCard);
         if (selectedCard instanceof Attacker) {
             AnchorPane cardPane = getCardInGame(selectedCard, row, column);
             cardViews.put(selectedCard, cardPane);
@@ -539,17 +537,19 @@ public class GraphicBattleController implements Initializable {
         updateMana();
         updateHand();
         updateCells();
+//        if (AIAction == 3)
+//            AIAction = 0;
         String AIMove = "";
-        if (ClientManager.isAITurn())
+        if (ClientManager.isAITurn() /*|| AIAction > 0*/)
             AIMove = ClientManager.getAIMove();
         for (Command command : battleMenu.getAICommands()) {
             Matcher matcher = command.getPattern().matcher(AIMove);
             if (matcher.find()) {
                 Method method;
                 try {
-                    System.out.println(command.getFunctionName());
                     method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
                     Object object = method.invoke(this, matcher);
+                    AIAction = 0;
                     if (object != null && object.equals(Boolean.FALSE))
                         return;
                 } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
@@ -578,14 +578,19 @@ public class GraphicBattleController implements Initializable {
             }
         } catch (Match.CardAttackIsNotAvailableException e) {
             Output.err(String.format(String.valueOf(views.Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
+            AIAction++;
         } catch (Match.TiredMinionException e) {
             Output.err(String.format(String.valueOf(views.Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
+            AIAction++;
         } catch (Collection.CardNotFoundException e) {
             Output.err(views.Error.CARD_NOT_FOUND_IN_COLLECTION);
+            AIAction++;
         } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
             Output.err(views.Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
+            AIAction++;
         } catch (Player.CardNotSelectedException e) {
             Output.err(Error.CARD_NOT_SELECTED);
+            AIAction++;
         }
         return true;
     }
@@ -604,14 +609,19 @@ public class GraphicBattleController implements Initializable {
 
         } catch (Player.NotEnoughManaException e) {
             Output.err(Error.NOT_ENOUGH_MANA);
+            AIAction++;
         } catch (Player.HeroDeadException e) {
             Output.err(e.getMessage());
+            AIAction++;
         } catch (Map.InvalidCellException e) {
             Output.err(e.getMessage());
+            AIAction++;
         } catch (Collection.CardNotFoundException e) {
             Output.err(Error.CARD_NOT_FOUND);
+            AIAction++;
         } catch (Map.InvalidTargetCellException e) {
             e.printStackTrace();
+            AIAction++;
         }
     }
 
@@ -620,6 +630,7 @@ public class GraphicBattleController implements Initializable {
         try {
             ClientManager.selectCard(id);
             Output.log(Error.CARD_SELECTED.toString());
+            AIAction++;
         } catch (Collection.CardNotFoundException e) {
             boolean flag = false;
             try {
@@ -627,6 +638,7 @@ public class GraphicBattleController implements Initializable {
                 Output.log(Error.COLLECTABLE_ITEM_SELECTED.toString());
                 flag = true;
             } catch (Player.ItemNotFoundException e1) {
+                AIAction++;
                 Output.err(Error.NO_ITEM);
             }
             if (!flag)
@@ -644,6 +656,7 @@ public class GraphicBattleController implements Initializable {
             moveCard(cardViews.get(card), getCardRectangle(x, y), card);
         } catch (Match.InvalidMoveException e) {
             Output.err(Error.INVALID_MOVE);
+            AIAction++;
         } catch (Map.InvalidCellException e) {
 
         }

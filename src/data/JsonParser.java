@@ -54,7 +54,7 @@ public class JsonParser {
     }
 
     public static void main(String[] args) throws FileNotFoundException, JSONException {
-        System.out.println(getHeroes());
+
     }
 
 }

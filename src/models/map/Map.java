@@ -111,7 +111,6 @@ public class Map {
         TargetType targetType = spell.getTargetType();
         List<Cell> targetCells = new ArrayList<>();
         Attacker attacker = cell.getAttacker();
-        System.out.println(targetType);
         if(targetType == null)
             return getCells();
         switch (targetType) {

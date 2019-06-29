@@ -244,7 +244,6 @@ public abstract class Match {
         }
         if (((Attacker) opponentCard).getCurrentHealth() <= 0) {
             addCardToGraveyard(opponentCard);
-            System.out.println(opponentCard.getID());
             map.getCards().removeCard(opponentCard);
             getActiveCards().remove(opponentCard);
         }

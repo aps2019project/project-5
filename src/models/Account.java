@@ -101,7 +101,6 @@ public class Account {
     public static Account getAccount(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
         accounts = AccountDataStream.loadAccounts();
         for (Map.Entry<String, Account> entry : accounts.entrySet()) {
-            System.out.println(entry.getKey());
             if (entry.getValue().username.equals(username)) {
                 if (entry.getValue().password.equals(password))
                     return entry.getValue();

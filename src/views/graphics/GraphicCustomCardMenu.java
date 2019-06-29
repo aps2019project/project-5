@@ -240,7 +240,6 @@ public class GraphicCustomCardMenu {
         heroFlag = true;
         String name = heroNameTxt.getText();
         if (name.equals("")) {
-            System.out.println( heroNameTxt.getText());
             changeAsWrong(heroNameTxt, true);
             heroFlag = false;
         }
