@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Application {
     public int port;
-    public boolean isNecessary;
+    public boolean isNecessary = true;
     public ArrayList<URL> urls = new ArrayList<>();
 
     public void start() {

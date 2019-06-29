@@ -1,14 +1,14 @@
 package server.models;
 
 import server.models.http.HttpRequest;
-
-import java.util.function.Consumer;
+import server.models.http.HttpResponse;
+import java.util.function.Function;
 
 public class URL {
     public String urlPattern;
-    public Consumer<? extends HttpRequest> viewFunction;
+    public Function<? extends HttpRequest, ? extends HttpResponse> viewFunction;
 
-    public URL(String urlPattern, Consumer<? extends HttpRequest> viewFunction) {
+    public URL(String urlPattern, Function<? extends HttpRequest, ? extends HttpResponse> viewFunction) {
         this.urlPattern = urlPattern;
         this.viewFunction = viewFunction;
     }

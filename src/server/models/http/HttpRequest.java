@@ -9,4 +9,8 @@ public class HttpRequest {
     public Map<String, String> GET = new HashMap<>();
     public Map<String, String> POST = new HashMap<>();
     public Map<String, String> headers = new HashMap<>();
+
+    public HttpRequest(String requestText) {
+        // TODO: parse request text to HttpRequest Object
+    }
 }
