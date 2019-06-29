@@ -1,10 +1,8 @@
 package server.models;
 
-import server.models.http.HttpRequest;
-import server.models.http.HttpResponseText;
+import javafx.concurrent.ScheduledService;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -39,8 +37,17 @@ public class Application {
     }
 
     protected void handleRequest(Socket socket) {
-//        while () {
-//
-//        }
+        try {
+            Scanner scanner = new Scanner(socket.getInputStream());
+            StringBuilder requestText = new StringBuilder();
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine() + "\n";
+                requestText.append(line);
+                System.out.print(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
