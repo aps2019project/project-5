@@ -39,6 +39,8 @@ public class Application {
     }
 
     protected void handleRequest(Socket socket) {
-
+//        while () {
+//
+//        }
     }
 }
