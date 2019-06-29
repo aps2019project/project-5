@@ -9,7 +9,6 @@ import models.cards.Card;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -18,7 +17,7 @@ public class DataReader {
     public static Type CARDS_TYPE = new TypeToken<HashMap<Card, Integer>>(){}.getType();
     public static YaGson yaGson = new YaGson();
 
-    public HashMap<String, Account> readAccounts() {
+    public static HashMap<String, Account> readAccounts() {
         HashMap<String, Account> accounts = null;
         String data = getFileData(Files.USER_DATA);
         accounts = yaGson.fromJson(data, ACCOUNTS_TYPE);
@@ -26,8 +25,7 @@ public class DataReader {
     }
 
     public static String getFileData(String fileName) {
-        URL url = FileReader.class.getResource(fileName);
-        File file = new File(url.getPath());
+        File file = new File("src/server/data/" + fileName);
         Scanner scanner = null;
         try {
             scanner = new Scanner(file);
