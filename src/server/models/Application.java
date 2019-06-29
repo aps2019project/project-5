@@ -62,7 +62,7 @@ public class Application {
                         HttpResponse response = url.viewFunction.apply(request);
 
                         PrintWriter out = new PrintWriter(socket.getOutputStream());
-                        out.print(response);
+                        out.print(response.toString());
                         out.flush();
 
                         break;
@@ -71,7 +71,7 @@ public class Application {
 
             if (!matches) {
                 PrintWriter out = new PrintWriter(socket.getOutputStream());
-                out.print(HttpResponse.notFound(request));
+                out.print(HttpResponse.notFound(request).toString());
                 out.flush();
             }
 
