@@ -12,7 +12,7 @@ public class HttpRequest {
         //        GET(Pattern.compile("")),
 //        POST(Pattern.compile()),
 //        HEADERS(Pattern.compile()),
-        HEADER(Pattern.compile("(?<header>/([\\w]+)+)?")),
+        HEADER(Pattern.compile("(?<header>(/[\\w]+)+)?")),
         VALUES(Pattern.compile("(?<key>[.+])\\s*:\\s*(?<value>[.+])")),
         VERSION(Pattern.compile("HTTP/(?<version>.+)")),
         METHOD(Pattern.compile("(?<method>[\\w]+)"));
@@ -33,7 +33,6 @@ public class HttpRequest {
     public Map<String, String> GET = new HashMap<>();
     public Map<String, String> POST = new HashMap<>();
     public Map<String, String> headers = new HashMap<>();
-    public String header;
 
     public HttpRequest(String requestText) {
         // TODO: parse request text to HttpRequest Object
@@ -46,11 +45,17 @@ public class HttpRequest {
         if (matcher.find()) {
             this.version = matcher.group("version");
         }
-        matcher = Methods.HEADER.getPattern().matcher(lines[0]);
-        if (matcher.find()) {
-            this.header = matcher.group("header");
+        System.out.println(lines[0]);
+        String[] header = lines[0].split(" ");
+        for (String h : header) {
+            System.out.println(header[1]);
         }
+        try {
+            url = header[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
 
+        }
+        System.out.println(url);
         for (String line : lines) {
             matcher = Methods.VALUES.getPattern().matcher(line);
             if (matcher.find()) {
