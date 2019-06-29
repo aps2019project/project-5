@@ -1,10 +1,12 @@
 package server.models;
 
-import javafx.concurrent.ScheduledService;
+import server.models.http.HttpRequest;
+import server.models.http.HttpResponse;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -40,14 +42,38 @@ public class Application {
 
     protected void handleRequest(Socket socket) {
         try {
-            DataInputStream inputStream = new DataInputStream(System.in);
             Scanner scanner = new Scanner(socket.getInputStream());
             StringBuilder requestText = new StringBuilder();
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine() + "\n";
-                requestText.append(line);
-                System.out.print(line);
+            long time = System.currentTimeMillis();
+            new Thread(() -> {
+                while(scanner.hasNext()) {
+                    requestText.append(scanner.nextLine()).append("\n");
+                }
+            }).start();
+            while (time + 10 > System.currentTimeMillis()) {}
+
+            HttpRequest request = new HttpRequest(requestText.toString());
+            boolean matches = false;
+
+            for(URL url : urls) {
+                if(url.matches(request.url)) {
+                    matches = true;
+                    HttpResponse response = url.viewFunction.apply(request);
+
+                    PrintWriter out = new PrintWriter(socket.getOutputStream());
+                    out.print(response);
+                    out.flush();
+
+                    break;
+                }
             }
+
+            if(!matches) {
+                PrintWriter out = new PrintWriter(socket.getOutputStream());
+                out.print(HttpResponse.notFound(request));
+                out.flush();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
