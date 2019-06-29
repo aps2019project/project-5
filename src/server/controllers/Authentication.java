@@ -4,6 +4,8 @@ import com.gilecode.yagson.YaGson;
 import models.Account;
 import models.Response;
 import server.data.DataReader;
+import server.data.DataWriter;
+import server.data.Files;
 import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
@@ -37,6 +39,7 @@ public class Authentication extends Application {
         } else {
             Account account = new Account(username, password);
             users.put(username, account);
+            DataWriter.saveData(Files.USER_DATA, users);
             response = new Response(true, "User created.", account);
         }
         return new HttpResponseJSON(yaGson.toJson(response));
