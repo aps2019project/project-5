@@ -16,6 +16,7 @@ public class URL {
     }
 
     public boolean matches(String url) {
+        System.out.println("matching url: " + url);
         Pattern pattern = Pattern.compile(urlPattern);
         Matcher matcher = pattern.matcher(url);
         return matcher.find();

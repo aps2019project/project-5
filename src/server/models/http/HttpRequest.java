@@ -9,13 +9,8 @@ import java.util.regex.Pattern;
 
 public class HttpRequest {
     private static enum Methods {
-        //        GET(Pattern.compile("")),
-//        POST(Pattern.compile()),
-//        HEADERS(Pattern.compile()),
-        HEADER(Pattern.compile("(?<header>(/[\\w]+)+)?")),
         VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
-        VERSION(Pattern.compile("HTTP/(?<version>.+)")),
-        METHOD(Pattern.compile("(?<method>[\\w]+)"));
+        FIRST_LINE(Pattern.compile("^(?<method>GET|POST)\\s+(?<url>.+(\\?.*)?)\\s+HTTP\\/(?<version>\\d+\\.\\d+)$"));
         Pattern pattern;
 
         Methods(Pattern pattern) {
@@ -35,46 +30,25 @@ public class HttpRequest {
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
-        // TODO: parse request text to HttpRequest Object
+        System.out.println(requestText);
+
         String[] lines = requestText.split("\\n");
-        Matcher matcher = Methods.METHOD.getPattern().matcher(lines[0]);
+        Matcher matcher = Methods.FIRST_LINE.getPattern().matcher(lines[0]);
         if (matcher.find()) {
             this.method = matcher.group("method");
-        }
-        matcher = Methods.VERSION.getPattern().matcher(lines[0]);
-        if (matcher.find()) {
             this.version = matcher.group("version");
-        }
-        System.out.println(lines[0]);
-        String[] header = lines[0].split(" ");
-        for (String h : header) {
-            System.out.println(header[1]);
-        }
-        try {
-            url = header[1];
-        } catch (ArrayIndexOutOfBoundsException e) {
-
+            url = matcher.group("url");
         }
         System.out.println(url);
+        System.out.println(method);
+        System.out.println(version);
+
+
         for (String line : lines) {
-            matcher = Methods.VALUES.getPattern().matcher(line);
-            if (matcher.find()) {
-                switch (method) {
-                    case "GET":
-                        this.GET.put(matcher.group("key"), matcher.group("value"));
-                        break;
-
-                    case "POST":
-                        this.POST.put(matcher.group("key"), matcher.group("value"));
-
-                        break;
-
-                    case "HEAD":
-                        this.headers.put(matcher.group("key"), matcher.group("value"));
-
-                        break;
-                }
-            }
+            if(line.equals(lines[0])) continue;
+            matcher = Methods.VALUES.pattern.matcher(line);
+            if (matcher.find())
+                this.headers.put(matcher.group("key"), matcher.group("value"));
 
         }
     }

@@ -46,29 +46,31 @@ public class Application {
             StringBuilder requestText = new StringBuilder();
             long time = System.currentTimeMillis();
             new Thread(() -> {
-                while(scanner.hasNext()) {
+                while (scanner.hasNext()) {
                     requestText.append(scanner.nextLine()).append("\n");
                 }
             }).start();
-            while (time + 10 > System.currentTimeMillis()) {}
+            while (time + 10 > System.currentTimeMillis()) {
+            }
 
             HttpRequest request = new HttpRequest(requestText.toString());
             boolean matches = false;
 
-            for(URL url : urls) {
-                if(url.matches(request.url)) {
-                    matches = true;
-                    HttpResponse response = url.viewFunction.apply(request);
+            if (request.url != null)
+                for (URL url : urls) {
+                    if (url.matches(request.url)) {
+                        matches = true;
+                        HttpResponse response = url.viewFunction.apply(request);
 
-                    PrintWriter out = new PrintWriter(socket.getOutputStream());
-                    out.print(response);
-                    out.flush();
+                        PrintWriter out = new PrintWriter(socket.getOutputStream());
+                        out.print(response);
+                        out.flush();
 
-                    break;
+                        break;
+                    }
                 }
-            }
 
-            if(!matches) {
+            if (!matches) {
                 PrintWriter out = new PrintWriter(socket.getOutputStream());
                 out.print(HttpResponse.notFound(request));
                 out.flush();
