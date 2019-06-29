@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="client.views.graphics.GraphicPreBattleMenu"
+            stylesheets="/client/resources/stylesheets/match-select.css"
+            prefHeight="400.0" prefWidth="600.0"
+            styleClass="match-select-container">
+    <VBox alignment="center" spacing="50" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+          AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <HBox alignment="CENTER" spacing="50">
+
+            <VBox fx:id="customGame" styleClass="game-select, custom-game" prefWidth="300" prefHeight="550"
+                  alignment="CENTER" onMouseClicked="#customGame" layoutX="3000">
+                <Label text="Custom game" styleClass="choose-game-title"/>
+            </VBox>
+            <VBox fx:id="storyMode" styleClass="game-select, story-mode" prefWidth="300" prefHeight="550"
+                  alignment="CENTER" onMouseClicked="#storyMode" layoutX="3000">
+                <Label text="Story Mode" styleClass="choose-game-title"/>
+            </VBox>
+        </HBox>
+    </VBox>
+    <ImageView onMouseClicked="#backToMultiSingle" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100"
+               fitHeight="100">
+        <Image url="/client/resources/images/buttons/back-button.png"/>
+    </ImageView>
+</AnchorPane>
