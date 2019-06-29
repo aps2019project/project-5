@@ -68,7 +68,7 @@ public class Application {
 
             if(!matches) {
                 PrintWriter out = new PrintWriter(socket.getOutputStream());
-                out.print(HttpResponse.ERROR_404);
+                out.print(HttpResponse.notFound(request));
                 out.flush();
             }
 

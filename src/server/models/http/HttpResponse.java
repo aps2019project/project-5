@@ -29,8 +29,10 @@ public class HttpResponse {
         this.body = body;
     }
 
-    public static HttpResponse ERROR_404 = new HttpResponseJSON(
-            404,
-            "NOT FOUND",
-            new Response(false, "Requested URL not found."));
+    public static HttpResponse notFound(Object data) {
+        return new HttpResponseJSON(
+                404,
+                "NOT FOUND",
+                new Response(false, "Requested URL not found.", data));
+    }
 }
