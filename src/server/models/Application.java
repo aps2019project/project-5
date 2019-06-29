@@ -50,8 +50,7 @@ public class Application {
                     requestText.append(scanner.nextLine()).append("\n");
                 }
             }).start();
-            while (time + 10 > System.currentTimeMillis()) {
-            }
+            while (time + 10 > System.currentTimeMillis()) {}
 
             HttpRequest request = new HttpRequest(requestText.toString());
             boolean matches = false;

@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class HttpRequest {
     private static enum Methods {
         VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
+        PARAMETERS(Pattern.compile("(?<key>[^\\W&?]+)=(?<value>[^\\W&?]+)")),
         FIRST_LINE(Pattern.compile("^(?<method>GET|POST)\\s+(?<url>.+(\\?.*)?)\\s+HTTP\\/(?<version>\\d+\\.\\d+)$"));
         Pattern pattern;
 
@@ -25,31 +26,36 @@ public class HttpRequest {
     public String version;
     public String url;
     public String method;
-    public Map<String, String> GET = new HashMap<>();
-    public Map<String, String> POST = new HashMap<>();
+    public Map<String, String> GET;
+    public Map<String, String> POST;
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
-        System.out.println(requestText);
-
         String[] lines = requestText.split("\\n");
         Matcher matcher = Methods.FIRST_LINE.getPattern().matcher(lines[0]);
         if (matcher.find()) {
             this.method = matcher.group("method");
+            if(this.method.equals("POST"))
+                POST = new HashMap<>();
+            if(this.method.equals("GET"))
+                GET = new HashMap<>();
             this.version = matcher.group("version");
             url = matcher.group("url");
         }
-        System.out.println(url);
-        System.out.println(method);
-        System.out.println(version);
-
+        matcher = Methods.PARAMETERS.pattern.matcher(url);
+        while (matcher.find()) {
+            if(this.method.equals("POST")) {
+                POST.put(matcher.group("key"), matcher.group("value"));
+            } if(this.method.equals("GET")) {
+                GET.put(matcher.group("key"), matcher.group("value"));
+            }
+        }
 
         for (String line : lines) {
             if(line.equals(lines[0])) continue;
             matcher = Methods.VALUES.pattern.matcher(line);
             if (matcher.find())
                 this.headers.put(matcher.group("key"), matcher.group("value"));
-
         }
     }
 }
