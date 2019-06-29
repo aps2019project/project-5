@@ -14,6 +14,13 @@ public class HttpResponse {
         this.body = body;
     }
 
+    public HttpResponse(String contentType, String body) {
+        this.status = 200;
+        this.statusMessage = "OK";
+        this.contentType = contentType;
+        this.body = body;
+    }
+
     @Override
     public String toString() {
         return String.format("%s %d %s\n", version, status, statusMessage) +
