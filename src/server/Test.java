@@ -1,6 +1,7 @@
 package server;
 
 import models.cards.*;
+import server.data.DataReader;
 import server.data.DataWriter;
 import server.data.Files;
 
@@ -59,6 +60,7 @@ public class Test {
         shop.cards.put(new Spell("Shock", "", 1200, 9, TargetType.OPPONENT_HERO), 10);
 
         DataWriter.saveData(Files.CARD_DATA, shop);
+        System.out.println(DataReader.getShopCollection().cards);
     }
 }
 
