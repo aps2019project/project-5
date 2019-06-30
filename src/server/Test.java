@@ -1,6 +1,7 @@
 package server;
 
 import models.cards.AttackType;
+import models.cards.Card;
 import models.cards.Collection;
 import models.cards.Minion;
 

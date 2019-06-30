@@ -10,4 +10,12 @@ public class Card {
         this.price = price;
         this.manaPoint = manaPoint;
     }
+
+    public Card() {
+
+    }
+
+    @Override public String toString() {
+        return name;
+    }
 }
