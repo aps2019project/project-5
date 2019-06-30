@@ -30,7 +30,7 @@ public class HttpRequest {
     public String method;
     public Map<String, String> GET;
     public Map<String, String> POST;
-    public Account user;
+    public Account user = null;
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
@@ -68,5 +68,7 @@ public class HttpRequest {
             if (matcher.find())
                 this.headers.put(matcher.group("key"), matcher.group("value"));
         }
+
+
     }
 }

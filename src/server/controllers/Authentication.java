@@ -10,7 +10,6 @@ import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
-import server.models.http.HttpResponseText;
 
 import java.util.HashMap;
 import java.util.Map;
