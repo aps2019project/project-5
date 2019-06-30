@@ -47,15 +47,11 @@ public class HttpRequest {
         }
         System.out.println(lines[0]);
         String[] header = lines[0].split(" ");
-        for (String h : header) {
-            System.out.println(header[1]);
-        }
         try {
             url = header[1];
         } catch (ArrayIndexOutOfBoundsException e) {
 
         }
-        System.out.println(url);
         for (String line : lines) {
             matcher = Methods.VALUES.getPattern().matcher(line);
             if (matcher.find()) {
