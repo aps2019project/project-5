@@ -1,6 +1,8 @@
 package server;
 
 import models.cards.*;
+import server.data.DataWriter;
+import server.data.Files;
 
 public class Test {
     public static void main(String... args) {
@@ -55,6 +57,8 @@ public class Test {
         shop.cards.put(new Spell("Weakening", "", 1000, 1, TargetType.AN_OPPONENT_MINION), 10);
         shop.cards.put(new Spell("Kings Guard", "", 1750, 9, TargetType.ANY), 10);
         shop.cards.put(new Spell("Shock", "", 1200, 9, TargetType.OPPONENT_HERO), 10);
+
+        DataWriter.saveData(Files.CARD_DATA, shop);
     }
 }
 
