@@ -4,6 +4,8 @@ import com.gilecode.yagson.YaGson;
 import models.Account;
 import models.Response;
 import server.data.DataReader;
+import server.data.DataWriter;
+import server.data.Files;
 import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
@@ -13,30 +15,40 @@ import server.models.http.HttpResponseText;
 import java.util.Map;
 
 public class Authentication extends Application {
-    public static YaGson yaGson = new YaGson();
+    private static YaGson yaGson = new YaGson();
     public static Map<String, Account> users;
 
-    static {
-        users = DataReader.readAccounts();
-    }
-
     public static HttpResponse login(HttpRequest request) {
-        return new HttpResponseText("login");
-    }
-
-    public static HttpResponse signUp(HttpRequest request) {
         String username = request.GET.get("username");
         String password = request.GET.get("password");
         Response response;
-        if(username == null || username.equals("")) {
+        users = DataReader.readAccounts();
+        if (!users.containsKey(username)) {
+            response = new Response(false, "Username is not valid!");
+        } else if (!users.get(username).password.equals(password)) {
+            response = new Response(false, "Password is not true!");
+        } else {
+            Account account = users.get(username);
+            response = new Response(true, "you logged in!", account);
+        }
+        return new HttpResponseJSON(yaGson.toJson(response));
+    }
+
+    public static HttpResponse signUp(HttpRequest request) {
+        users = DataReader.readAccounts();
+        String username = request.GET.get("username");
+        String password = request.GET.get("password");
+        Response response;
+        if (username == null || username.equals("")) {
             response = new Response(false, "Username can't be null.");
-        } else if(password == null || password.equals("")) {
+        } else if (password == null || password.equals("")) {
             response = new Response(false, "Password can't be null.");
-        } else if(users.containsKey(username)) {
+        } else if (users.containsKey(username)) {
             response = new Response(false, "This username exists.");
         } else {
             Account account = new Account(username, password);
             users.put(username, account);
+            DataWriter.saveData(Files.USER_DATA, users);
             response = new Response(true, "User created.", account);
         }
         return new HttpResponseJSON(yaGson.toJson(response));

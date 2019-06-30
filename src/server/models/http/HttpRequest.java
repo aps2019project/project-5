@@ -9,13 +9,10 @@ import java.util.regex.Pattern;
 
 public class HttpRequest {
     private static enum Methods {
-        //        GET(Pattern.compile("")),
-//        POST(Pattern.compile()),
-//        HEADERS(Pattern.compile()),
-        HEADER(Pattern.compile("(?<header>(/[\\w]+)+)?")),
-        VALUES(Pattern.compile("(?<key>[.+])\\s*:\\s*(?<value>[.+])")),
-        VERSION(Pattern.compile("HTTP/(?<version>.+)")),
-        METHOD(Pattern.compile("(?<method>[\\w]+)"));
+        VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
+        PARAMETERS(Pattern.compile("(?<key>[^\\W&?]+)=(?<value>[^\\W&?]+)")),
+        URLS(Pattern.compile("(?<url>\\/.+)\\?")),
+        FIRST_LINE(Pattern.compile("^(?<method>GET|POST)\\s+(?<url>.+(\\?.*)?)\\s+HTTP\\/(?<version>\\d+\\.\\d+)$"));
         Pattern pattern;
 
         Methods(Pattern pattern) {
@@ -30,48 +27,44 @@ public class HttpRequest {
     public String version;
     public String url;
     public String method;
-    public Map<String, String> GET = new HashMap<>();
-    public Map<String, String> POST = new HashMap<>();
+    public Map<String, String> GET;
+    public Map<String, String> POST;
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
-        // TODO: parse request text to HttpRequest Object
         String[] lines = requestText.split("\\n");
-        Matcher matcher = Methods.METHOD.getPattern().matcher(lines[0]);
+        Matcher matcher = Methods.FIRST_LINE.getPattern().matcher(lines[0]);
         if (matcher.find()) {
             this.method = matcher.group("method");
-        }
-        matcher = Methods.VERSION.getPattern().matcher(lines[0]);
-        if (matcher.find()) {
+            if(this.method.equals("POST"))
+                POST = new HashMap<>();
+            if(this.method.equals("GET"))
+                GET = new HashMap<>();
             this.version = matcher.group("version");
+            url = matcher.group("url");
         }
-        System.out.println(lines[0]);
-        String[] header = lines[0].split(" ");
-        try {
-            url = header[1];
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
-        for (String line : lines) {
-            matcher = Methods.VALUES.getPattern().matcher(line);
-            if (matcher.find()) {
-                switch (method) {
-                    case "GET":
-                        this.GET.put(matcher.group("key"), matcher.group("value"));
-                        break;
-
-                    case "POST":
-                        this.POST.put(matcher.group("key"), matcher.group("value"));
-
-                        break;
-
-                    case "HEAD":
-                        this.headers.put(matcher.group("key"), matcher.group("value"));
-
-                        break;
+        if(url != null) {
+            matcher = Methods.PARAMETERS.pattern.matcher(url);
+            while (matcher.find()) {
+                if (this.method.equals("POST")) {
+                    POST.put(matcher.group("key"), matcher.group("value"));
+                }
+                if (this.method.equals("GET")) {
+                    GET.put(matcher.group("key"), matcher.group("value"));
                 }
             }
 
+            matcher = Methods.URLS.pattern.matcher(url);
+            if (matcher.find()) {
+                url = matcher.group("url");
+            }
+        }
+
+        for (String line : lines) {
+            if(line.equals(lines[0])) continue;
+            matcher = Methods.VALUES.pattern.matcher(line);
+            if (matcher.find())
+                this.headers.put(matcher.group("key"), matcher.group("value"));
         }
     }
 }

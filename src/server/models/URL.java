@@ -2,6 +2,7 @@ package server.models;
 
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
+
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +17,7 @@ public class URL {
     }
 
     public boolean matches(String url) {
+        System.out.println("matching url: " + url);
         Pattern pattern = Pattern.compile(urlPattern);
         Matcher matcher = pattern.matcher(url);
         return matcher.find();
