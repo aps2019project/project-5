@@ -12,11 +12,26 @@ import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
 import server.models.http.HttpResponseText;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Authentication extends Application {
     private static YaGson yaGson = new YaGson();
     public static Map<String, Account> users;
+    private static HashMap<String, String> connectedAccounts = new HashMap<>();
+
+    public static String randomString(int n) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            stringBuilder.append(alphaNumericString.charAt(random.nextInt(alphaNumericString.length())));
+        }
+        return stringBuilder.toString();
+    }
 
     public static HttpResponse login(HttpRequest request) {
         String username = request.GET.get("username");
@@ -29,6 +44,7 @@ public class Authentication extends Application {
             response = new Response(false, "Password is not true!");
         } else {
             Account account = users.get(username);
+            connectedAccounts.put(username, randomString(username.length()));
             response = new Response(true, "you logged in!", account);
         }
         return new HttpResponseJSON(yaGson.toJson(response));
