@@ -5,6 +5,7 @@ import models.map.Cell;
 public class Attacker extends Card {
     public int health, currentHealth = 0;
     private int attackPoint;
+    public AttackType attackType;
     public Cell cell;
 
     public int getAttackPoint() {
@@ -12,9 +13,10 @@ public class Attacker extends Card {
         return attackPoint;
     }
 
-    public Attacker(String name, String description, int price, int manaPoint, int health, int attackPoint) {
+    public Attacker(String name, String description, int price, int manaPoint, int health, int attackPoint, AttackType attackType) {
         super(name, description, price, manaPoint);
         this.health = health;
         this.attackPoint = attackPoint;
+        this.attackType = attackType;
     }
 }

@@ -1,13 +1,12 @@
 package server;
 
-import models.Account;
-import server.controllers.Authentication;
-import server.data.DataWriter;
-import server.data.Files;
+import models.cards.Collection;
+import models.cards.Minion;
 
 public class Test {
     public static void main(String... args) {
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        Collection collection = new Collection();
+//        collection.cards.put(new Minion("", "", 100))
     }
 }
 
