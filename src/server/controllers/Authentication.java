@@ -19,7 +19,7 @@ import java.util.Random;
 public class Authentication extends Application {
     private static YaGson yaGson = new YaGson();
     public static Map<String, Account> users;
-    private static HashMap<String, String> connectedAccounts = new HashMap<>();
+    private static HashMap<String, Account> connectedAccounts = new HashMap<>();
 
     public static String randomString(int n) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -44,7 +44,9 @@ public class Authentication extends Application {
             response = new Response(false, "Password is not true!");
         } else {
             Account account = users.get(username);
-            connectedAccounts.put(username, randomString(username.length()));
+            String token = randomString(30);
+            account.loginToken = token;
+            connectedAccounts.put(token, account);
             response = new Response(true, "you logged in!", account);
         }
         return new HttpResponseJSON(yaGson.toJson(response));

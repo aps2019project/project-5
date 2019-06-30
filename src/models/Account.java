@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Account {
     public String username, password;
+    public String loginToken;
     public Map<String, Deck> decks = new HashMap<>();
     public Deck mainDeck;
 

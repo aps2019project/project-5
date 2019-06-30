@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Collection {
-    private Map<Card, Integer> cards = new HashMap<>();
+    public Map<Card, Integer> cards = new HashMap<>();
 
     public Map<Card, Integer> filter(Class cardClass, String query) {
         Map<Card, Integer> result = new HashMap<>();

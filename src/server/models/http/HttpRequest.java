@@ -1,5 +1,6 @@
 package server.models.http;
 
+import models.Account;
 import models.match.Match;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class HttpRequest {
     public String method;
     public Map<String, String> GET;
     public Map<String, String> POST;
+    public Account user;
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
