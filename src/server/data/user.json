@@ -1,27 +1,4 @@
 {
   "@type": "java.util.HashMap",
-  "@val": {
-    "mahdi": {
-      "@type": "models.Account",
-      "@val": {
-        "username": "ali",
-        "password": "mahdi",
-        "decks": {
-          "@type": "java.util.HashMap",
-          "@val": {}
-        }
-      }
-    },
-    "ali": {
-      "@type": "models.Account",
-      "@val": {
-        "username": "ali",
-        "password": "ali",
-        "decks": {
-          "@type": "java.util.HashMap",
-          "@val": {}
-        }
-      }
-    }
-  }
+  "@val": {}
 }
