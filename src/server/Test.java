@@ -1,9 +1,6 @@
 package server;
 
-import models.cards.AttackType;
-import models.cards.Card;
-import models.cards.Collection;
-import models.cards.Minion;
+import models.cards.*;
 
 public class Test {
     public static void main(String... args) {
@@ -28,6 +25,17 @@ public class Test {
         shop.cards.put(new Minion("Avalanche", "", 300, 4, 5, 6, AttackType.RANGED, 4), 10);
         shop.cards.put(new Minion("Fire Dragon", "", 250, 5, 9, 5, AttackType.RANGED, 4), 10);
         shop.cards.put(new Minion("Predator Lion", "", 600, 2, 1, 8, AttackType.MELEE, 1), 10);
+
+        shop.cards.put(new Hero("White Daemon", "", 8000, 1, 50, 4, AttackType.MELEE, 1), 10);
+        shop.cards.put(new Hero("Phoenix", "", 9000, 5, 50, 4, AttackType.MELEE, 1), 10);
+        shop.cards.put(new Hero("SevenHead Dragon", "", 8000, 0, 50, 4, AttackType.MELEE, 1), 10);
+        shop.cards.put(new Hero("Rakhsh", "", 8000, 1, 50, 4, AttackType.MELEE, 1), 10);
+        shop.cards.put(new Hero("Zahak", "", 10000, 1, 50, 2, AttackType.MELEE, 1), 10);
+        shop.cards.put(new Hero("Kaveh", "", 8000, 1, 50, 4, AttackType.MELEE, 1), 10);
+        shop.cards.put(new Hero("Arash", "", 10000, 2, 30, 2, AttackType.MELEE, 1), 10);
+        shop.cards.put(new Hero("Legend", "", 11000, 1, 50, 3, AttackType.RANGED, 3), 10);
+        shop.cards.put(new Hero("Esfandiar", "", 12000, 1, 35, 3, AttackType.HYBRID, 3), 10);
+        shop.cards.put(new Hero("Rostam", "", 8000, 1, 55, 7, AttackType.RANGED, 4), 10);
     }
 }
 
