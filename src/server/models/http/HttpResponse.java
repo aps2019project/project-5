@@ -35,4 +35,11 @@ public class HttpResponse {
                 "NOT FOUND",
                 new Response(false, "Requested URL not found.", data));
     }
+
+    public static HttpResponse loginRequired(Object data) {
+        return new HttpResponseJSON(
+                403,
+                "FORBIDDEN",
+                new Response(false, "You must login to see this url.", data));
+    }
 }
