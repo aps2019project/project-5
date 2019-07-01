@@ -272,9 +272,7 @@ public class GraphicBattleController implements Initializable {
                 ClientManager.selectCard(clickedCard.getID());
                 selectedCard = clickedCard;
                 isSelectedCardInGame = true;
-//                System.out.println("Card Selected");
             } catch (Collection.CardNotFoundException e) {
-//                System.out.println("Can't Select Card");
             }
         } else {
             if (selectedCard.equalsExactly(clickedCard)) {
@@ -342,7 +340,6 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void insertCard(int row, int column) {
-        System.out.println(selectedCard);
         if (selectedCard instanceof Attacker) {
             AnchorPane cardPane = getCardInGame(selectedCard, row, column);
             cardViews.put(selectedCard, cardPane);
@@ -541,7 +538,6 @@ public class GraphicBattleController implements Initializable {
             if (matcher.find()) {
                 Method method;
                 try {
-                    System.out.println(command.getFunctionName());
                     method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
                     Object object = method.invoke(this, matcher);
                     if (object != null && object.equals(Boolean.FALSE))

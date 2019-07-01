@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class Authentication extends Application {
     private static YaGson yaGson = new YaGson();
-    public static Map<String, Account> users;
+    public static Map<String, Account> users = new HashMap<>();
     private static HashMap<String, Account> connectedAccounts = new HashMap<>();
 
     public static String randomString(int n) {

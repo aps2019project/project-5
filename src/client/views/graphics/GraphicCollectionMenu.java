@@ -305,7 +305,6 @@ public class GraphicCollectionMenu implements Initializable {
 //                    cardPane.startFullDrag();
 //                    event.setDragDetect(false);
 //                    AnchorPane draggingCardPane = cardPane;
-//                    System.out.println("hi");
 //                    Graphics.stage.getScene().getRoot().setOnMouseMoved(mouseEvent -> {
 //                        draggingCardPane.setTranslateX(mouseEvent.getX());
 //                        draggingCardPane.setTranslateY(mouseEvent.getY());
