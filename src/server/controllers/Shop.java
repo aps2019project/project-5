@@ -47,17 +47,39 @@ public class Shop {
         } else if (shopCollection.searchCardByName(name) == null) {
             response = new Response(false, "card not found");
         } else {
-            card = shopCollection.searchCardByName(name);
-            shopCollection.decrease(card);
-            if (!shopCollection.decrease(card)) {
-                response = new Response(false, "cards has been bought by another players!");
-            } else {
-                request.user.drake -= card.price;
-                request.user.cardCollection.add(card);
-                response = new Response(true, "card added");
-            }
+            response = getCardTransfer(request, name, shopCollection);
         }
         return new HttpResponseJSON(yaGson.toJson(response));
+    }
+
+    public static HttpResponse sell(HttpRequest request) {
+        String name = request.GET.get("name");
+        Card card;
+        Collection cardCollection;
+        Response response = null;
+        if (request.user == null) {
+            response = new Response(false, "You are not logged in!");
+        } else if ((cardCollection = request.user.cardCollection).searchCardByName(name) == null) {
+            response = new Response(false, "card not found");
+        } else {
+            response = getCardTransfer(request, name, cardCollection);
+        }
+        return new HttpResponseJSON(yaGson.toJson(response));
+    }
+
+    private static Response getCardTransfer(HttpRequest request, String name, Collection cardCollection) {
+        Card card;
+        Response response;
+        card = cardCollection.searchCardByName(name);
+        cardCollection.decrease(card);
+        if (!cardCollection.decrease(card)) {
+            response = new Response(false, "card not found in collection!");
+        } else {
+            request.user.drake -= card.price;
+            request.user.cardCollection.add(card);
+            response = new Response(true, "card added");
+        }
+        return response;
     }
 
 }
