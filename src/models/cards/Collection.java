@@ -46,6 +46,15 @@ public class Collection {
         return true;
     }
 
+    public Card searchCardByName(String name) {
+        for (Map.Entry card1 : cards.entrySet()) {
+            if (((Card) card1.getKey()).name.equals(name)) {
+                return (Card) card1.getKey();
+            }
+        }
+        return null;
+    }
+
     public int count(Card card) {
         return cards.getOrDefault(card, 0);
     }
