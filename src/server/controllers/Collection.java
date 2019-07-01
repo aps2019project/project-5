@@ -29,12 +29,12 @@ public class Collection extends Application {
             System.out.println("class not found");
         }
         Response response;
-        if (!Authentication.users.containsKey(token)) {
-            response = new Response(false, "You are not logged in!");
-        } else {
+//        if (!Authentication.users.containsKey(token)) {
+//            response = new Response(false, "You are not logged in!");
+//        } else {
             response = new Response(true, String.format("search result of %s is sent", searchedContent),
                     DataReader.getShopCollection().filter(cardClass, searchedContent));
-        }
+//        }
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
