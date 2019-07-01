@@ -69,7 +69,12 @@ public class HttpRequest {
             }
         }
 
-        if (GET != null && GET.get("token") != null && Authentication.users.containsKey(GET.get("token"))) {
+        try {
+            System.out.println(GET);
+            System.out.println(GET.get("token"));
+            System.out.println(Authentication.connectedAccounts.containsKey(GET.get("token")));
+        } catch (Exception ignored) {}
+        if (GET != null && GET.get("token") != null && Authentication.connectedAccounts.containsKey(GET.get("token"))) {
             user = Authentication.users.get(GET.get("token"));
         }
 
