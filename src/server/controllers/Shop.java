@@ -69,16 +69,18 @@ public class Shop {
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
-    private static Response getCardTransfer(HttpRequest request, String name, Collection cardCollection) {
+    private static Response getCardTransfer(HttpRequest request, String name, Collection beginCollection, Collection endCollection) {
         Card card;
         Response response;
-        card = cardCollection.searchCardByName(name);
-        cardCollection.decrease(card);
-        if (!cardCollection.decrease(card)) {
+        card = beginCollection.searchCardByName(name);
+        if (!beginCollection.decrease(card)) {
             response = new Response(false, "card not found in collection!");
         } else {
-            request.user.drake -= card.price;
-            request.user.cards.add(card);
+            if (beginCollection == request.user.cards) {
+                request.user.drake += card.price;
+            } else request.user.drake -= card.price;
+            beginCollection.decrease(card);
+            endCollection.add(card);
             response = new Response(true, "card added");
         }
         return response;
