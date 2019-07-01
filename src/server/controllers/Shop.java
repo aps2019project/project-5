@@ -9,6 +9,8 @@ import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
 
+import java.util.Arrays;
+
 public class Shop {
     private static YaGson yaGson = new YaGson();
 
@@ -21,7 +23,7 @@ public class Shop {
         }
         Class cardClass = null;
         try {
-            cardClass = Class.forName(cardType);
+            cardClass = Class.forName("models.cards." + cardType);
         } catch (ClassNotFoundException e) {
             System.out.println("class not found");
         }
