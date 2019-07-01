@@ -29,11 +29,15 @@ public class Collection extends Application {
             System.out.println("class not found");
         }
 
+        System.out.println(Authentication.connectedAccounts.get(token).cards);
+
         Response response = new Response(true, String.format("search result of %s is sent", searchedContent),
-                    Authentication.connectedAccounts.get(token).cards.filter(cardClass, searchedContent));
+                    Authentication.connectedAccounts.get(token).cards.filter(cardClass, searchedContent).keySet());
 
         return new HttpResponseJSON(yaGson.toJson(response));
     }
+
+    public static HttpResponse
 
 
 }

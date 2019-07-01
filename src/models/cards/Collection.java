@@ -10,7 +10,7 @@ public class Collection {
     public Map<Card, Integer> filter(Class cardClass, String query) {
         Map<Card, Integer> result = new HashMap<>();
         for (Map.Entry<Card, Integer> card : cards.entrySet()) {
-            if (cardClass != Card.class && cardClass != card.getKey().getClass())
+            if (cardClass != null && cardClass != Card.class && cardClass != card.getKey().getClass())
                 continue;
             if (query == null || query.equals("") || card.getKey().name.toLowerCase().contains(query.toLowerCase()))
                 result.put(card.getKey(), card.getValue());
@@ -48,7 +48,7 @@ public class Collection {
 
     public Card searchCardByName(String name) {
         for (Map.Entry card1 : cards.entrySet()) {
-            if (((Card) card1.getKey()).name.equals(name)) {
+            if (((Card) card1.getKey()).name.equalsIgnoreCase(name)) {
                 return (Card) card1.getKey();
             }
         }

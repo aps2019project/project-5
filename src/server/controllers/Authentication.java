@@ -20,6 +20,13 @@ public class Authentication extends Application {
     public static Map<String, Account> users = new HashMap<>();
     public static HashMap<String, Account> connectedAccounts = new HashMap<>();
 
+    static {
+        users = DataReader.readAccounts();
+        for (Account account:users.values()) {
+            connectedAccounts.put(account.loginToken, account);
+        }
+    }
+
     public static String randomString(int n) {
         StringBuilder stringBuilder = new StringBuilder();
         String alphaNumericString = "0123456789" + "abcdefghijklmnopqrstuvxyz";
@@ -42,7 +49,7 @@ public class Authentication extends Application {
             response = new Response(false, "Password is not true!");
         } else {
             Account account = users.get(username);
-            String token = randomString(30);
+            String token = "a" /*randomString(30)*/ ; // for test
             account.loginToken = token;
             connectedAccounts.put(token, account);
             response = new Response(true, "you logged in!", account);
