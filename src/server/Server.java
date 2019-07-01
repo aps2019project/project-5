@@ -17,6 +17,11 @@ public class Server {
         authentication.urls.add(new URL("/shop/buy", Shop::buy, true));
         authentication.urls.add(new URL("/shop/sell", Shop::sell, true));
         authentication.urls.add(new URL("/collection/search", Collection::searchCollectionCards, true));
+
+
+        System.out.println(Authentication.login(new HttpRequest("login?username=mahdi&password=mahdi")).toString());
+
+        authentication.urls.add(new URL("/collection/search", Collection::searchCollectionCards));
         authentication.start();
     }
 }
