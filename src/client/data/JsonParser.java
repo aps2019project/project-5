@@ -1,4 +1,4 @@
-package data;
+package client.data;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
