@@ -5,15 +5,20 @@ import models.Response;
 import models.cards.Card;
 import models.cards.Collection;
 import server.data.DataReader;
+import server.data.DataWriter;
+import server.data.Files;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
 
-import java.util.Arrays;
 
 public class Shop {
     private static YaGson yaGson = new YaGson();
+    public static Collection shop;
 
+    static {
+        shop = DataReader.getShopCollection();
+    }
 
     public static HttpResponse searchShopCards(HttpRequest request) {
         String searchedContent = request.GET.get("search");
@@ -30,44 +35,41 @@ public class Shop {
             System.out.println("class not found");
         }
         Response response;
-        if (request.user == null) {
-            response = new Response(false, "You are not logged in!");
-        } else if (searchedContent.equals("")) {
-            response = new Response(true, "shop cards sent!", DataReader.getShopCollection().cards);
+        if (searchedContent.equals("")) {
+            response = new Response(true, "shop cards sent!", shop);
         } else {
-            response = new Response(true, String.format("search result of %s is sent", searchedContent),
-                    DataReader.getShopCollection().filter(cardClass, searchedContent));
+            response = new Response(true, String.format("search result of %s was sent", searchedContent),
+                    shop.filter(cardClass, searchedContent));
         }
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
     public static HttpResponse buy(HttpRequest request) {
         String name = request.GET.get("name");
-        Collection shopCollection = DataReader.getShopCollection();
         Card card;
-        Response response = null;
-        if (request.user == null) {
-            response = new Response(false, "You are not logged in!");
-        } else if (shopCollection.searchCardByName(name) == null) {
+        Response response;
+        if (shop.searchCardByName(name) == null) {
             response = new Response(false, "card not found");
         } else {
-            response = getCardTransfer(request, name, shopCollection);
+            response = getCardTransfer(request, name, shop);
         }
+        DataWriter.saveData(Files.CARD_DATA, shop);
+        DataWriter.saveData(Files.USER_DATA, Authentication.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
     public static HttpResponse sell(HttpRequest request) {
         String name = request.GET.get("name");
         Card card;
-        Collection cardCollection;
-        Response response = null;
-        if (request.user == null) {
-            response = new Response(false, "You are not logged in!");
-        } else if ((cardCollection = request.user.cards).searchCardByName(name) == null) {
+        Collection cardCollection = request.user.cards;
+        Response response;
+        if (cardCollection.searchCardByName(name) == null) {
             response = new Response(false, "card not found");
         } else {
             response = getCardTransfer(request, name, cardCollection);
         }
+        DataWriter.saveData(Files.CARD_DATA, shop);
+        DataWriter.saveData(Files.USER_DATA, Authentication.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
@@ -75,7 +77,6 @@ public class Shop {
         Card card;
         Response response;
         card = cardCollection.searchCardByName(name);
-        cardCollection.decrease(card);
         if (!cardCollection.decrease(card)) {
             response = new Response(false, "card not found in collection!");
         } else {
