@@ -1,6 +1,8 @@
 package models;
 
+import models.cards.Collection;
 import models.cards.Deck;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,6 +13,7 @@ public class Account {
     public int drake = 15000;
     public Map<String, Deck> decks = new HashMap<>();
     public Deck mainDeck;
+    public Collection cardCollection = new Collection();
 
     public Account(String username, String password) {
         this.username = username;

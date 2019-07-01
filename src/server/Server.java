@@ -12,7 +12,7 @@ public class Server {
         authentication.port = 80;
         authentication.urls.add(new URL("/login", Authentication::login));
         authentication.urls.add(new URL("/sign_up", Authentication::signUp));
-        authentication.urls.add(new URL("/shop/searchCard", Shop::searchShopCards));
+        authentication.urls.add(new URL("/shop/search_card", Shop::searchShopCards));
         authentication.start();
     }
 }
