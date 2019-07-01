@@ -59,7 +59,7 @@ public class Shop {
         Response response = null;
         if (request.user == null) {
             response = new Response(false, "You are not logged in!");
-        } else if ((cardCollection = request.user.cardCollection).searchCardByName(name) == null) {
+        } else if ((cardCollection = request.user.cards).searchCardByName(name) == null) {
             response = new Response(false, "card not found");
         } else {
             response = getCardTransfer(request, name, cardCollection);
@@ -76,7 +76,7 @@ public class Shop {
             response = new Response(false, "card not found in collection!");
         } else {
             request.user.drake -= card.price;
-            request.user.cardCollection.add(card);
+            request.user.cards.add(card);
             response = new Response(true, "card added");
         }
         return response;

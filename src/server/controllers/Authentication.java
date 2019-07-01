@@ -10,7 +10,6 @@ import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
-import sun.misc.Cache;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,9 +22,7 @@ public class Authentication extends Application {
 
     public static String randomString(int n) {
         StringBuilder stringBuilder = new StringBuilder();
-        String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                + "0123456789"
-                + "abcdefghijklmnopqrstuvxyz";
+        String alphaNumericString = "0123456789" + "abcdefghijklmnopqrstuvxyz";
         Random random = new Random();
         for (int i = 0; i < n; i++) {
             stringBuilder.append(alphaNumericString.charAt(random.nextInt(alphaNumericString.length())));

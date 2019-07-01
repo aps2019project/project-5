@@ -13,7 +13,7 @@ public class Account {
     public int drake = 15000;
     public Map<String, Deck> decks = new HashMap<>();
     public Deck mainDeck;
-    public Collection cardCollection = new Collection();
+    public Collection cards;
 
     public Account(String username, String password) {
         this.username = username;
