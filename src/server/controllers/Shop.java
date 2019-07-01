@@ -10,6 +10,7 @@ import server.models.http.HttpResponseJSON;
 public class Shop {
     private static YaGson yaGson = new YaGson();
 
+
     public static HttpResponse searchShopCards(HttpRequest request) {
         String searchedContent = request.GET.get("search");
 

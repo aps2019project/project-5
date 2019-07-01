@@ -2,6 +2,7 @@ package server;
 
 
 import server.controllers.Authentication;
+import server.controllers.Shop;
 import server.models.Application;
 import server.models.URL;
 
@@ -11,8 +12,7 @@ public class Server {
         authentication.port = 80;
         authentication.urls.add(new URL("/login", Authentication::login));
         authentication.urls.add(new URL("/sign_up", Authentication::signUp));
-        authentication.urls.add(new URL("/shop_getCards", Authentication::getShopCollection));
-        authentication.urls.add(new URL("/shop_searchCard", Authentication::searchShopCards));
+        authentication.urls.add(new URL("/shop/searchCard", Shop::searchShopCards));
         authentication.start();
     }
 }
