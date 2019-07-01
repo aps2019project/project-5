@@ -22,7 +22,7 @@ public class Shop {
 
     public static HttpResponse searchShopCards(HttpRequest request) {
         String searchedContent = request.GET.get("search");
-        if(searchedContent == null)
+        if (searchedContent == null)
             searchedContent = "";
         String cardType = "Card";
         if (request.GET.containsKey("type")) {
@@ -51,7 +51,7 @@ public class Shop {
         if (shop.searchCardByName(name) == null) {
             response = new Response(false, "card not found");
         } else {
-            response = getCardTransfer(request, name, shop);
+            response = getCardTransfer(request, name, shop, request.user.cards);
         }
         DataWriter.saveData(Files.CARD_DATA, shop);
         DataWriter.saveData(Files.USER_DATA, Authentication.users);
@@ -66,22 +66,25 @@ public class Shop {
         if (cardCollection.searchCardByName(name) == null) {
             response = new Response(false, "card not found");
         } else {
-            response = getCardTransfer(request, name, cardCollection);
+            response = getCardTransfer(request, name, cardCollection, shop);
         }
         DataWriter.saveData(Files.CARD_DATA, shop);
         DataWriter.saveData(Files.USER_DATA, Authentication.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
-    private static Response getCardTransfer(HttpRequest request, String name, Collection cardCollection) {
+    private static Response getCardTransfer(HttpRequest request, String name, Collection beginCollection, Collection endCollection) {
         Card card;
         Response response;
-        card = cardCollection.searchCardByName(name);
-        if (!cardCollection.decrease(card)) {
+        card = beginCollection.searchCardByName(name);
+        if (!beginCollection.decrease(card)) {
             response = new Response(false, "card not found in collection!");
         } else {
-            request.user.drake -= card.price;
-            request.user.cards.add(card);
+            if (beginCollection == request.user.cards) {
+                request.user.drake += card.price;
+            } else request.user.drake -= card.price;
+            beginCollection.decrease(card);
+            endCollection.add(card);
             response = new Response(true, "card added");
         }
         return response;
