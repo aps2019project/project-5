@@ -11,12 +11,12 @@ public class Server {
     public static void main(String[] args) {
         Application authentication = new Application();
         authentication.port = 10000;
-        authentication.urls.add(new URL("/login", Authentication::login));
-        authentication.urls.add(new URL("/sign_up", Authentication::signUp));
-        authentication.urls.add(new URL("/shop/search", Shop::searchShopCards));
-        authentication.urls.add(new URL("/shop/buy", Shop::buy));
-        authentication.urls.add(new URL("/shop/sell", Shop::sell));
-        authentication.urls.add(new URL("/collection/search", Collection::searchCollectionCards));
+        authentication.urls.add(new URL("/login", Authentication::login, false));
+        authentication.urls.add(new URL("/sign_up", Authentication::signUp, false));
+        authentication.urls.add(new URL("/shop/search", Shop::searchShopCards, true));
+        authentication.urls.add(new URL("/shop/buy", Shop::buy, true));
+        authentication.urls.add(new URL("/shop/sell", Shop::sell, true));
+        authentication.urls.add(new URL("/collection/search", Collection::searchCollectionCards, true));
         authentication.start();
     }
 }

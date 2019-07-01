@@ -54,13 +54,19 @@ public class Application {
             }
 
             HttpRequest request = new HttpRequest(requestText.toString());
+            boolean loggedIn = request.user != null;
             boolean matches = false;
 
             if (request.url != null)
                 for (URL url : urls) {
                     if (url.matches(request.url)) {
                         matches = true;
-                        HttpResponse response = url.viewFunction.apply(request);
+                        HttpResponse response;
+                        if (!loggedIn && url.loginRequired) {
+                            response = HttpResponse.loginRequired(request);
+                        } else {
+                            response = url.viewFunction.apply(request);
+                        }
 
                         PrintWriter out = new PrintWriter(socket.getOutputStream());
                         out.print(response.toString());

@@ -8,12 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class URL {
-    public String urlPattern;
+    private String urlPattern;
     public Function<HttpRequest, HttpResponse> viewFunction;
+    public boolean loginRequired;
 
-    public URL(String urlPattern, Function<HttpRequest, HttpResponse> viewFunction) {
+    public URL(String urlPattern, Function<HttpRequest, HttpResponse> viewFunction, boolean loginRequired) {
         this.urlPattern = urlPattern;
         this.viewFunction = viewFunction;
+        this.loginRequired = loginRequired;
     }
 
     public boolean matches(String url) {
