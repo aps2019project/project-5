@@ -2,6 +2,7 @@ package server.models.http;
 
 import models.Account;
 import server.controllers.Authentication;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;

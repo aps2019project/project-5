@@ -1,4 +1,1 @@
-{
-  "@type": "java.util.HashMap",
-  "@val": {}
-}
+{"@type":"java.util.HashMap","@val":{"mahdi":{"@type":"models.Account","@val":{"username":"mahdi","password":"mahdi","drake":15000,"decks":{"@type":"java.util.HashMap","@val":{}}}}}}
