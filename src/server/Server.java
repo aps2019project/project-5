@@ -12,6 +12,7 @@ public class Server {
         authentication.urls.add(new URL("/login", Authentication::login));
         authentication.urls.add(new URL("/sign_up", Authentication::signUp));
         authentication.urls.add(new URL("/shop_getCards", Authentication::getShopCollection));
+        authentication.urls.add(new URL("/shop_searchCard", Authentication::getShopCollection));
 
         authentication.start();
     }
