@@ -17,6 +17,8 @@ public class Shop {
 
     public static HttpResponse searchShopCards(HttpRequest request) {
         String searchedContent = request.GET.get("search");
+        if(searchedContent == null)
+            searchedContent = "";
         String cardType = "Card";
         if (request.GET.containsKey("type")) {
             cardType = request.GET.get("type");
@@ -27,7 +29,7 @@ public class Shop {
         } catch (ClassNotFoundException e) {
             System.out.println("class not found");
         }
-        Response response = null;
+        Response response;
         if (request.user == null) {
             response = new Response(false, "You are not logged in!");
         } else if (searchedContent.equals("")) {

@@ -2,6 +2,7 @@ package server.models.http;
 
 import models.Account;
 import server.controllers.Authentication;
+import sun.plugin2.message.GetAppletMessage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,14 +71,16 @@ public class HttpRequest {
             }
         }
 
-        try {
-            System.out.println(GET);
-            System.out.println(GET.get("token"));
-            System.out.println(Authentication.connectedAccounts.containsKey(GET.get("token")));
-        } catch (Exception ignored) {}
-        if (GET != null && GET.get("token") != null && Authentication.connectedAccounts.containsKey(GET.get("token"))) {
-            user = Authentication.users.get(GET.get("token"));
+        if(GET != null) {
+            System.out.println("request is get: " + url);
+            if(GET.get("token") != null) {
+                System.out.println("token was sent: " + GET.get("token"));
+                Account account = Authentication.connectedAccounts.get(GET.get("token"));
+                if(account != null) {
+                    user = account;
+                    System.out.println("User logged in: " + account.username);
+                }
+            }
         }
-
     }
 }
