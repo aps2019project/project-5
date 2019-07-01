@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Collection {
-    private Map<Card, Integer> cards = new HashMap<>();
+    public Map<Card, Integer> cards = new HashMap<>();
 
     public Map<Card, Integer> filter(Class cardClass, String query) {
         Map<Card, Integer> result = new HashMap<>();
         for (Map.Entry<Card, Integer> card : cards.entrySet()) {
-            if (!card.getKey().getClass().isInstance(cardClass) && card.getKey().getClass() != cardClass)
+            if (cardClass != Card.class && cardClass != card.getKey().getClass())
                 continue;
             if (query == null || query.equals("") || card.getKey().name.toLowerCase().contains(query.toLowerCase()))
                 result.put(card.getKey(), card.getValue());

@@ -1,14 +1,14 @@
 package server.models.http;
 
-import models.match.Match;
-
+import models.Account;
+import server.controllers.Authentication;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HttpRequest {
-    private static enum Methods {
+    private enum Methods {
         VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
         PARAMETERS(Pattern.compile("(?<key>[^\\W&?]+)=(?<value>[^\\W&?]+)")),
         URLS(Pattern.compile("(?<url>\\/.+)\\?")),
@@ -29,6 +29,7 @@ public class HttpRequest {
     public String method;
     public Map<String, String> GET;
     public Map<String, String> POST;
+    public Account user = null;
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
@@ -36,14 +37,14 @@ public class HttpRequest {
         Matcher matcher = Methods.FIRST_LINE.getPattern().matcher(lines[0]);
         if (matcher.find()) {
             this.method = matcher.group("method");
-            if(this.method.equals("POST"))
+            if (this.method.equals("POST"))
                 POST = new HashMap<>();
-            if(this.method.equals("GET"))
+            if (this.method.equals("GET"))
                 GET = new HashMap<>();
             this.version = matcher.group("version");
             url = matcher.group("url");
         }
-        if(url != null) {
+        if (url != null) {
             matcher = Methods.PARAMETERS.pattern.matcher(url);
             while (matcher.find()) {
                 if (this.method.equals("POST")) {
@@ -61,10 +62,16 @@ public class HttpRequest {
         }
 
         for (String line : lines) {
-            if(line.equals(lines[0])) continue;
+            if (line.equals(lines[0])) continue;
             matcher = Methods.VALUES.pattern.matcher(line);
-            if (matcher.find())
+            if (matcher.find()) {
                 this.headers.put(matcher.group("key"), matcher.group("value"));
+            }
         }
+
+        if (GET != null && GET.get("token") != null && Authentication.users.containsKey(GET.get("token"))) {
+            user = Authentication.users.get(GET.get("token"));
+        }
+
     }
 }
