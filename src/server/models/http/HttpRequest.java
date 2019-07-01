@@ -2,6 +2,7 @@ package server.models.http;
 
 import models.Account;
 import models.match.Match;
+import server.controllers.Authentication;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +63,9 @@ public class HttpRequest {
             }
         }
 
+        if (Authentication.users.containsKey(GET != null ? GET.get("token") : null)) {
+            user = Authentication.users.get(GET.get("token"));
+        }
         for (String line : lines) {
             if (line.equals(lines[0])) continue;
             matcher = Methods.VALUES.pattern.matcher(line);
