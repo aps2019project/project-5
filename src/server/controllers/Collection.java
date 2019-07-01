@@ -24,7 +24,7 @@ public class Collection extends Application {
         }
         Class cardClass = null;
         try {
-            cardClass = Class.forName(cardType);
+            cardClass = Class.forName("models.cards." + cardType);
         } catch (ClassNotFoundException e) {
             System.out.println("class not found");
         }
@@ -32,8 +32,8 @@ public class Collection extends Application {
 //        if (!Authentication.users.containsKey(token)) {
 //            response = new Response(false, "You are not logged in!");
 //        } else {
-            response = new Response(true, String.format("search result of %s is sent", searchedContent),
-                    DataReader.getShopCollection().filter(cardClass, searchedContent));
+        response = new Response(true, String.format("search result of %s is sent", searchedContent),
+                DataReader.getShopCollection().filter(cardClass, searchedContent));
 //        }
         return new HttpResponseJSON(yaGson.toJson(response));
     }
