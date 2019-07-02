@@ -1,9 +1,11 @@
 package server.models.http;
 
 import models.Account;
-import server.controllers.Authentication;
-import sun.plugin2.message.GetAppletMessage;
+import server.controllers.AuthenticationController;
 
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -35,6 +37,7 @@ public class HttpRequest {
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
+        requestText.replaceAll("%20", " ");
         String[] lines = requestText.split("\\n");
         Matcher matcher = Methods.FIRST_LINE.getPattern().matcher(lines[0]);
         if (matcher.find()) {
@@ -75,7 +78,7 @@ public class HttpRequest {
             System.out.println("request is get: " + url);
             if(GET.get("token") != null) {
                 System.out.println("token was sent: " + GET.get("token"));
-                Account account = Authentication.connectedAccounts.get(GET.get("token"));
+                Account account = AuthenticationController.connectedAccounts.get(GET.get("token"));
                 if(account != null) {
                     user = account;
                     System.out.println("User logged in: " + account.username);

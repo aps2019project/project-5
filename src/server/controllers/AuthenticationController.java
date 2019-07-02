@@ -10,12 +10,11 @@ import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Authentication extends Application {
+public class AuthenticationController extends Application {
     private static YaGson yaGson = new YaGson();
     public static Map<String, Account> users = new HashMap<>();
     public static HashMap<String, Account> connectedAccounts = new HashMap<>();
@@ -30,6 +29,10 @@ public class Authentication extends Application {
         return stringBuilder.toString();
     }
 
+    public static HttpResponse profile(HttpRequest request) {
+        Response response = new Response(true, "see the profile!", request.user);
+        return new HttpResponseJSON(yaGson.toJson(response));
+    }
 
     public static HttpResponse login(HttpRequest request) {
         String username = request.GET.get("username");
