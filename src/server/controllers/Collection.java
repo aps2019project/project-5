@@ -1,6 +1,6 @@
 package server.controllers;
 
-import models.Account;
+import client.models.Account;
 import models.Response;
 import server.data.DataReader;
 import server.data.DataWriter;

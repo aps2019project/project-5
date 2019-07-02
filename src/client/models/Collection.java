@@ -50,7 +50,7 @@ public class Collection {
     }
 
     public void addCard(Card card) {
-        if (cards.containsKey(card)){
+        if (cards.containsKey(card)) {
             int num = cards.get(card);
             cards.replace(card, num, num + 1);
             return;
@@ -115,7 +115,7 @@ public class Collection {
         if (!cards.containsKey(card))
             throw new CardNotFoundException();
         int number = cards.get(card);
-        if(cards.get(card) == 1) {
+        if (cards.get(card) == 1) {
             cards.remove(card);
             return;
         }
@@ -157,7 +157,7 @@ public class Collection {
     public boolean contains(Card card) {
         try {
             getCardByID(card.getID());
-        }  catch (CardNotFoundException e) {
+        } catch (CardNotFoundException e) {
             return false;
         }
         return true;
@@ -185,6 +185,17 @@ public class Collection {
         public CardNotFoundException(String message) {
             super(message);
         }
+    }
+
+    public Map<models.cards.Card, Integer> filter(Class cardClass, String query) {
+        Map<models.cards.Card, Integer> result = new HashMap<>();
+        for (Map.Entry<Card, Integer> card : cards.entrySet()) {
+            if (cardClass != models.cards.Card.class && cardClass != card.getKey().getClass())
+                continue;
+            if (query == null || query.equals("") || card.getKey().getName().toLowerCase().contains(query.toLowerCase()))
+                result.put(card.getKey(), card.getValue());
+        }
+        return result;
     }
 
     public static class ItemsFullException extends CollectionException {

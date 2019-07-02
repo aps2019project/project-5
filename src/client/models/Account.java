@@ -2,14 +2,16 @@ package client.models;
 
 import client.data.AccountDataStream;
 import client.models.cards.Card;
+
 import java.util.*;
 
 public class Account {
     private static Map<String, Account> accounts = new HashMap<>();
+    public String loginToken;
 
     private List<MatchResult> matchHistory = new ArrayList<>();
-    private String username;
-    private String password;
+    public String username;
+    public String password;
     private Collection collection = new Collection();
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
