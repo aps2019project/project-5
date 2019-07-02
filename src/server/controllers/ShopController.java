@@ -12,7 +12,7 @@ import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
 
 
-public class Shop {
+public class ShopController {
     private static YaGson yaGson = new YaGson();
     public static Collection shop;
 
@@ -24,7 +24,7 @@ public class Shop {
         String searchedContent = request.GET.get("search");
         if(searchedContent == null)
             searchedContent = "";
-        Class cardClass = server.controllers.Collection.getCardClass(request.GET.get("type"));
+        Class cardClass = CollectionController.getCardClass(request.GET.get("type"));
         Response response;
         if (searchedContent.equals("") && cardClass == Card.class) {
             response = new Response(true, "shop cards sent!", shop);
@@ -57,7 +57,7 @@ public class Shop {
             }
         }
         DataWriter.saveData(Files.CARD_DATA, shop);
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
@@ -78,7 +78,7 @@ public class Shop {
             }
         }
         DataWriter.saveData(Files.CARD_DATA, shop);
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 

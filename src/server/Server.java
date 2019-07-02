@@ -1,9 +1,10 @@
 package server;
 
 
-import server.controllers.Authentication;
-import server.controllers.Shop;
-import server.controllers.Collection;
+import server.controllers.AuthenticationController;
+import server.controllers.BattleController;
+import server.controllers.ShopController;
+import server.controllers.CollectionController;
 import server.models.Application;
 import server.models.URL;
 
@@ -11,20 +12,25 @@ public class Server {
     public static void main(String[] args) {
         Application authentication = new Application();
         authentication.port = 80;
-        authentication.urls.add(new URL("/login", Authentication::login, false));
-        authentication.urls.add(new URL("/sign_up", Authentication::signUp, false));
-        authentication.urls.add(new URL("/profile", Authentication::profile, true));
-        authentication.urls.add(new URL("/shop/search", Shop::searchShopCards, true));
-        authentication.urls.add(new URL("/shop/buy", Shop::buy, true));
-        authentication.urls.add(new URL("/shop/sell", Shop::sell, true));
-        authentication.urls.add(new URL("/collection/search", Collection::searchCollectionCards, true));
-        authentication.urls.add(new URL("/collection/create_deck", Collection::addDeck, true));
-        authentication.urls.add(new URL("/collection/add_card_to_deck", Collection::addCardToDeck, true));
-        authentication.urls.add(new URL("/collection/get_deck", Collection::getDeck, true));
-        authentication.urls.add(new URL("/collection/remove_deck", Collection::removeDeck, true));
-        authentication.urls.add(new URL("/collection/remove_card_from_deck", Collection::removeCardFromDeck, true));
-        authentication.urls.add(new URL("/collection/is_valid", Collection::isValid, true));
-        authentication.urls.add(new URL("/collection/set_main_deck", Collection::setMainDeck, true));
+        authentication.urls.add(new URL("/login", AuthenticationController::login, false));
+        authentication.urls.add(new URL("/sign_up", AuthenticationController::signUp, false));
+        authentication.urls.add(new URL("/profile", AuthenticationController::profile, true));
+
+        authentication.urls.add(new URL("/shop/search", ShopController::searchShopCards, true));
+        authentication.urls.add(new URL("/shop/buy", ShopController::buy, true));
+        authentication.urls.add(new URL("/shop/sell", ShopController::sell, true));
+
+        authentication.urls.add(new URL("/collection/search", CollectionController::searchCollectionCards, true));
+        authentication.urls.add(new URL("/collection/create_deck", CollectionController::addDeck, true));
+        authentication.urls.add(new URL("/collection/add_card_to_deck", CollectionController::addCardToDeck, true));
+        authentication.urls.add(new URL("/collection/get_deck", CollectionController::getDeck, true));
+        authentication.urls.add(new URL("/collection/remove_deck", CollectionController::removeDeck, true));
+        authentication.urls.add(new URL("/collection/remove_card_from_deck", CollectionController::removeCardFromDeck, true));
+        authentication.urls.add(new URL("/collection/is_valid", CollectionController::isValid, true));
+        authentication.urls.add(new URL("/collection/set_main_deck", CollectionController::setMainDeck, true));
+
+        authentication.urls.add(new URL("/battle/request", BattleController::battleRequest, true));
+        authentication.urls.add(new URL("/battle/cancel_request", BattleController::cancleBattleRequest, true));
         authentication.start();
     }
 }

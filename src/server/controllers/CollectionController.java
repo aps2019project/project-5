@@ -8,12 +8,9 @@ import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
-
-import java.io.FileWriter;
-
 import static server.data.DataWriter.yaGson;
 
-public class Collection extends Application {
+public class CollectionController extends Application {
 
     public static Class getCardClass(String className) {
         Class cardClass = Card.class;
@@ -52,7 +49,7 @@ public class Collection extends Application {
                 response = new Response(true, "deck added", deck);
             }
         }
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
@@ -78,7 +75,7 @@ public class Collection extends Application {
             else
                 response = new Response(false, "can't add card to deck", 105);
         }
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
@@ -100,7 +97,7 @@ public class Collection extends Application {
                 }
             }
         }
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
@@ -134,7 +131,7 @@ public class Collection extends Application {
                 response = new Response(true, "deck deleted!", request.user);
             }
         }
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
@@ -152,7 +149,7 @@ public class Collection extends Application {
                 response = new Response(true, "see is deck is valid or not!", isValid);
             }
         }
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
@@ -179,7 +176,7 @@ public class Collection extends Application {
                 }
             }
         }
-        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 

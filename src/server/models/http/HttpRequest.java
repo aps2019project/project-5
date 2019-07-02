@@ -1,8 +1,7 @@
 package server.models.http;
 
 import models.Account;
-import server.controllers.Authentication;
-import sun.plugin2.message.GetAppletMessage;
+import server.controllers.AuthenticationController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,7 +74,7 @@ public class HttpRequest {
             System.out.println("request is get: " + url);
             if(GET.get("token") != null) {
                 System.out.println("token was sent: " + GET.get("token"));
-                Account account = Authentication.connectedAccounts.get(GET.get("token"));
+                Account account = AuthenticationController.connectedAccounts.get(GET.get("token"));
                 if(account != null) {
                     user = account;
                     System.out.println("User logged in: " + account.username);
