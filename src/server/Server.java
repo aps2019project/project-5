@@ -24,6 +24,7 @@ public class Server {
         authentication.urls.add(new URL("/collection/remove_deck", Collection::removeDeck, true));
         authentication.urls.add(new URL("/collection/remove_card_from_deck", Collection::removeCardFromDeck, true));
         authentication.urls.add(new URL("/collection/is_valid", Collection::isValid, true));
+        authentication.urls.add(new URL("/collection/set_main_deck", Collection::setMainDeck, true));
         authentication.start();
     }
 }
