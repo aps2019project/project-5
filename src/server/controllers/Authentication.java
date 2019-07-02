@@ -29,6 +29,10 @@ public class Authentication extends Application {
         return stringBuilder.toString();
     }
 
+    public static HttpResponse profile(HttpRequest request) {
+        Response response = new Response(true, "see the profile!", request.user);
+        return new HttpResponseJSON(yaGson.toJson(response));
+    }
 
     public static HttpResponse login(HttpRequest request) {
         String username = request.GET.get("username");
