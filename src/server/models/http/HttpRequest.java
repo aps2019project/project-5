@@ -3,6 +3,9 @@ package server.models.http;
 import models.Account;
 import server.controllers.AuthenticationController;
 
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -34,6 +37,7 @@ public class HttpRequest {
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
+        requestText.replaceAll("%20", " ");
         String[] lines = requestText.split("\\n");
         Matcher matcher = Methods.FIRST_LINE.getPattern().matcher(lines[0]);
         if (matcher.find()) {
