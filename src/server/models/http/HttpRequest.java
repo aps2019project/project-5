@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class HttpRequest {
     private enum Methods {
         VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
-        PARAMETERS(Pattern.compile("(?<key>[^\\W&?]+)=(?<value>([^\\W\\&?]+|\\s)+)")),
+        PARAMETERS(Pattern.compile("(?<key>([^\\&?]|(%\\d+))+)=(?<value>([^\\W&?]|%(\\d))+)")),
         URLS(Pattern.compile("(?<url>\\/.+)\\?")),
         FIRST_LINE(Pattern.compile("^(?<method>GET|POST)\\s+(?<url>.+(\\?.*)?)\\s+HTTP\\/(?<version>\\d+\\.\\d+)$"));
         Pattern pattern;
@@ -53,7 +53,7 @@ public class HttpRequest {
                     POST.put(matcher.group("key"), matcher.group("value"));
                 }
                 if (this.method.equals("GET")) {
-                    GET.put(matcher.group("key"), matcher.group("value"));
+                    GET.put(matcher.group("key").replaceAll("%20", " "), matcher.group("value").replaceAll("%20", " "));
                 }
             }
 
