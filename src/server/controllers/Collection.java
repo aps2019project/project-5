@@ -116,6 +116,25 @@ public class Collection extends Application {
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
+    public static HttpResponse isValid(HttpRequest request) {
+        Response response;
+        String deckName = request.GET.get("deck_name");
+        if(deckName == null)
+            response = new Response(false, "deck_name not sent", 100);
+        else {
+            Deck deck = request.user.decks.get(deckName);
+            if(deck == null)
+                response = new Response(false, "deck with this name not found", 106);
+            else {
+                boolean isValid = deck.isValid();
+                response = new Response(true, "see is deck is valid or not!", isValid);
+            }
+        }
+        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        return new HttpResponseJSON(yaGson.toJson(response));
+    }
+
+
     public static HttpResponse removeCardFromDeck(HttpRequest request) {
         Response response;
         String deckName = request.GET.get("deck_name");

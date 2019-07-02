@@ -5,7 +5,8 @@ public class Deck extends Collection {
 
     @Override
     public boolean add(Card card) {
-        if (size() > 20) {
+        System.out.println("deck " + name + " size is: " + size());
+        if (size() >= 20) {
             System.out.println("deck is full.");
             return false;
         } else if (getHeroCount() > 0 && card instanceof Hero) {

@@ -26,7 +26,7 @@ public class Shop {
             searchedContent = "";
         Class cardClass = server.controllers.Collection.getCardClass(request.GET.get("type"));
         Response response;
-        if (searchedContent.equals("")) {
+        if (searchedContent.equals("") && cardClass == Card.class) {
             response = new Response(true, "shop cards sent!", shop);
         } else {
             response = new Response(true, String.format("search result of %s was sent", searchedContent),
