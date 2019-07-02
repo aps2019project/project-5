@@ -82,4 +82,30 @@ public class Collection extends Application {
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
+    public static HttpResponse removeCardFromDeck(HttpRequest request) {
+        Response response;
+        String deckName = request.GET.get("deck_name");
+        String cardName = request.GET.get("card_name");
+        if(deckName == null)
+            response = new Response(false, "deck_name not sent", 100);
+        else if(cardName == null)
+            response = new Response(false, "card_name not sent", 100);
+        else {
+            Deck deck = request.user.decks.get(deckName);
+            if(deck == null)
+                response = new Response(false, "deck with this name not found", 106);
+            else {
+                Card card = deck.searchCardByName(cardName);
+                if(card == null)
+                    response = new Response(false, "card not found in this deck", 107);
+                else {
+                    deck.decrease(card);
+                    response = new Response(false, "card removed from the deck", deck);
+                }
+            }
+        }
+        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        return new HttpResponseJSON(yaGson.toJson(response));
+    }
+
 }
