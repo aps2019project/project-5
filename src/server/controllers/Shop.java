@@ -24,16 +24,7 @@ public class Shop {
         String searchedContent = request.GET.get("search");
         if(searchedContent == null)
             searchedContent = "";
-        String cardType = "Card";
-        if (request.GET.containsKey("type")) {
-            cardType = request.GET.get("type");
-        }
-        Class cardClass = null;
-        try {
-            cardClass = Class.forName("models.cards." + cardType);
-        } catch (ClassNotFoundException e) {
-            System.out.println("class not found");
-        }
+        Class cardClass = server.controllers.Collection.getCardClass(request.GET.get("type"));
         Response response;
         if (searchedContent.equals("")) {
             response = new Response(true, "shop cards sent!", shop);
@@ -61,9 +52,9 @@ public class Shop {
     public static HttpResponse sell(HttpRequest request) {
         String name = request.GET.get("name");
         Card card;
-        Collection cardCollection = request.user.cards;
+        Collection cardCollection;
         Response response;
-        if (cardCollection.searchCardByName(name) == null) {
+        if ((cardCollection = request.user.cards).searchCardByName(name) == null) {
             response = new Response(false, "card not found");
         } else {
             response = getCardTransfer(request, name, cardCollection);

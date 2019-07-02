@@ -9,4 +9,8 @@ public class Deck extends Collection {
             return false;
         return super.add(card);
     }
+
+    public Deck(String name) {
+        this.name = name;
+    }
 }

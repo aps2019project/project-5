@@ -17,6 +17,7 @@ public class Server {
         authentication.urls.add(new URL("/shop/buy", Shop::buy, true));
         authentication.urls.add(new URL("/shop/sell", Shop::sell, true));
         authentication.urls.add(new URL("/collection/search", Collection::searchCollectionCards, true));
+        authentication.urls.add(new URL("/collection/create_deck", Collection::addDeck, true));
         authentication.start();
     }
 }
