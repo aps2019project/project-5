@@ -1,7 +1,7 @@
 package server.controllers;
 
 import com.gilecode.yagson.YaGson;
-import client.models.Account;
+import models.Account;
 import models.Response;
 import server.data.DataReader;
 import server.data.DataWriter;
@@ -10,6 +10,7 @@ import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;

@@ -3,9 +3,9 @@ package server.data;
 import client.data.FileReader;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
-import client.models.Account;
+import models.Account;
 import client.models.cards.Card;
-import client.models.Collection;
+import models.cards.Collection;
 
 import java.io.File;
 import java.io.FileNotFoundException;

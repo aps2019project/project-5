@@ -17,7 +17,6 @@ public class Account {
     private Deck mainDeck;
     private int drake = 100000;
     private int winCount = 0;
-    private String loginToken;
 
     public static Account getAccount(String opponentUsername) {
         return accounts.get(opponentUsername);
