@@ -19,6 +19,7 @@ public class Server {
         authentication.urls.add(new URL("/collection/search", Collection::searchCollectionCards, true));
         authentication.urls.add(new URL("/collection/create_deck", Collection::addDeck, true));
         authentication.urls.add(new URL("/collection/add_card_to_deck", Collection::addCardToDeck, true));
+        authentication.urls.add(new URL("/collection/get_deck", Collection::getDeck, true));
         authentication.urls.add(new URL("/collection/remove_card_from_deck", Collection::removeCardFromDeck, true));
         authentication.start();
     }

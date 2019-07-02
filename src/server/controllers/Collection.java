@@ -82,6 +82,22 @@ public class Collection extends Application {
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
+    public static HttpResponse getDeck(HttpRequest request) {
+        Response response;
+        String deckName = request.GET.get("deck_name");
+        if(deckName == null)
+            response = new Response(false, "deck_name not sent", 100);
+        else {
+            Deck deck = request.user.decks.get(deckName);
+            if(deck == null)
+                response = new Response(false, "deck with this name not found", 106);
+            else {
+                response = new Response(true, "see the deck!!!", deck);
+            }
+        }
+        return new HttpResponseJSON(yaGson.toJson(response));
+    }
+
     public static HttpResponse removeCardFromDeck(HttpRequest request) {
         Response response;
         String deckName = request.GET.get("deck_name");
