@@ -2,6 +2,7 @@ package client.models;
 
 import client.data.AccountDataStream;
 import client.models.cards.Card;
+
 import java.util.*;
 
 public class Account {
@@ -15,6 +16,7 @@ public class Account {
     private Deck mainDeck;
     private int drake = 100000;
     private int winCount = 0;
+    private String loginToken;
 
     public static Account getAccount(String opponentUsername) {
         return accounts.get(opponentUsername);

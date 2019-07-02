@@ -8,6 +8,7 @@ public class Collection {
     public Map<Card, Integer> cards = new HashMap<>();
 
     public Map<Card, Integer> filter(Class cardClass, String query) {
+        System.out.println(cardClass);
         Map<Card, Integer> result = new HashMap<>();
         for (Map.Entry<Card, Integer> card : cards.entrySet()) {
             if (cardClass != null && cardClass != Card.class && cardClass != card.getKey().getClass())
@@ -56,6 +57,8 @@ public class Collection {
     }
 
     public int count(Card card) {
+        System.out.println(card);
+        System.out.println(cards.getOrDefault(card, 0));
         return cards.getOrDefault(card, 0);
     }
 }
