@@ -3,9 +3,6 @@ package server.models.http;
 import models.Account;
 import server.controllers.AuthenticationController;
 
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -14,7 +11,7 @@ import java.util.regex.Pattern;
 public class HttpRequest {
     private enum Methods {
         VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
-        PARAMETERS(Pattern.compile("(?<key>[^\\W&?]+)=(?<value>[^\\W&?]+)")),
+        PARAMETERS(Pattern.compile("(?<key>[^\\W&?]+)=(?<value>([^\\W\\&?]+|\\s)+)")),
         URLS(Pattern.compile("(?<url>\\/.+)\\?")),
         FIRST_LINE(Pattern.compile("^(?<method>GET|POST)\\s+(?<url>.+(\\?.*)?)\\s+HTTP\\/(?<version>\\d+\\.\\d+)$"));
         Pattern pattern;
@@ -37,7 +34,7 @@ public class HttpRequest {
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
-        requestText.replaceAll("%20", " ");
+        requestText = requestText.replaceAll("%20", " ");
         String[] lines = requestText.split("\\n");
         Matcher matcher = Methods.FIRST_LINE.getPattern().matcher(lines[0]);
         if (matcher.find()) {
