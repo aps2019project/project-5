@@ -1,17 +1,1 @@
-{
-  "@type": "java.util.HashMap",
-  "@val": {
-    "mahdi": {
-      "@type": "models.Account",
-      "@val": {
-        "username": "mahdi",
-        "password": "mahdi",
-        "drake": 15000,
-        "decks": {
-          "@type": "java.util.HashMap",
-          "@val": {}
-        }
-      }
-    }
-  }
-}
+{"@type":"java.util.HashMap","@val":{"mahdi":{"@type":"models.Account","@val":{"username":"mahdi","password":"mahdi","loginToken":"29dq0nvlo9xi3v0vvk6uvqp6ld31vg","drake":5800,"decks":{"@type":"java.util.HashMap","@val":{"deck":{"name":"deck","cards":{"@type":"java.util.HashMap","@val":[[{"@type":"models.cards.Minion","@val":{"health":5,"currentHealth":0,"attackPoint":6,"attackRange":4,"attackType":"RANGED","name":"Avalanche","description":"","price":300,"manaPoint":4}},4]]}}}},"cards":{"cards":{"@type":"java.util.HashMap","@val":[[{"@type":"models.cards.Hero","@val":{"health":55,"currentHealth":0,"attackPoint":7,"attackRange":4,"attackType":"RANGED","name":"Rostam","description":"","price":8000,"manaPoint":1}},1],["@root.0-val.decks.0-val.cards.0-key",4]]}}}}}}

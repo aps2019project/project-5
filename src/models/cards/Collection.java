@@ -48,7 +48,7 @@ public class Collection {
 
     public Card searchCardByName(String name) {
         for (Map.Entry card1 : cards.entrySet()) {
-            if (((Card) card1.getKey()).name.equals(name)) {
+            if (((Card) card1.getKey()).name.equalsIgnoreCase(name)) {
                 return (Card) card1.getKey();
             }
         }
@@ -56,6 +56,8 @@ public class Collection {
     }
 
     public int count(Card card) {
+        System.out.println(card);
+        System.out.println(cards.getOrDefault(card, 0));
         return cards.getOrDefault(card, 0);
     }
 }

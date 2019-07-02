@@ -2,11 +2,14 @@ package server.controllers;
 
 import models.Response;
 import models.cards.*;
-import server.data.DataReader;
+import server.data.DataWriter;
+import server.data.Files;
 import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
+
+import java.io.FileWriter;
 
 import static server.data.DataWriter.yaGson;
 
@@ -49,8 +52,34 @@ public class Collection extends Application {
                 response = new Response(true, "deck added", deck);
             }
         }
+        DataWriter.saveData(Files.USER_DATA, Authentication.users);
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
+    public static HttpResponse addCardToDeck(HttpRequest request) {
+        Response response;
+        String deckName = request.GET.get("deck_name");
+        String cardName = request.GET.get("card_name");
+        if(deckName == null)
+            response = new Response(false, "deck_name not sent", 100);
+        else if(cardName == null)
+            response = new Response(false, "card_name not sent", 100);
+        else {
+            Deck deck = request.user.decks.get(deckName);
+            Card card = request.user.cards.searchCardByName(cardName);
+            if(deck == null)
+                response = new Response(false, "deck not found with this name", 102);
+            else if(card == null)
+                response = new Response(false, "card not found with this name", 103);
+            else if (request.user.cards.count(card) <= deck.count(card))
+                response = new Response(false, "this card is not enough", 104);
+            else if(deck.add(card))
+                response = new Response(true, "card added to deck", deck);
+            else
+                response = new Response(false, "can't add card to deck", 105);
+        }
+        DataWriter.saveData(Files.USER_DATA, Authentication.users);
+        return new HttpResponseJSON(yaGson.toJson(response));
+    }
 
 }

@@ -36,13 +36,25 @@ public class Shop {
     }
 
     public static HttpResponse buy(HttpRequest request) {
-        String name = request.GET.get("name");
-        Card card;
+        String cardName = request.GET.get("card_name");
         Response response;
-        if (shop.searchCardByName(name) == null) {
-            response = new Response(false, "card not found");
-        } else {
-            response = getCardTransfer(request, name, shop);
+        if(cardName == null)
+            response = new Response(false, "card_name not sent", 100);
+        else {
+            Card card = shop.searchCardByName(cardName);
+            if(card == null)
+                response = new Response(false, "this card not found in shop", 120);
+            else {
+                if(request.user.drake < card.price)
+                    response = new Response(false, "you have not enough drakes.", 121);
+                else if(shop.decrease(card)) {
+                    request.user.cards.add(card);
+                    request.user.drake -= card.price;
+                    response = new Response(true, "card transfer completed.", request.user);
+                } else {
+                    response = new Response(false, "card not enough in shop", 122);
+                }
+            }
         }
         DataWriter.saveData(Files.CARD_DATA, shop);
         DataWriter.saveData(Files.USER_DATA, Authentication.users);
@@ -50,32 +62,24 @@ public class Shop {
     }
 
     public static HttpResponse sell(HttpRequest request) {
-        String name = request.GET.get("name");
-        Card card;
-        Collection cardCollection;
+        String cardName = request.GET.get("card_name");
         Response response;
-        if ((cardCollection = request.user.cards).searchCardByName(name) == null) {
-            response = new Response(false, "card not found");
-        } else {
-            response = getCardTransfer(request, name, cardCollection);
+        if(cardName == null)
+            response = new Response(false, "card_name not sent", 100);
+        else {
+            Card card = request.user.cards.searchCardByName(cardName);
+            if(card == null)
+                response = new Response(false, "you don't have this card in your collection", 120);
+            else {
+                request.user.cards.decrease(card);
+                shop.add(card);
+                request.user.drake += card.price;
+                response = new Response(true, "card sells.", request.user);
+            }
         }
         DataWriter.saveData(Files.CARD_DATA, shop);
         DataWriter.saveData(Files.USER_DATA, Authentication.users);
         return new HttpResponseJSON(yaGson.toJson(response));
-    }
-
-    private static Response getCardTransfer(HttpRequest request, String name, Collection cardCollection) {
-        Card card;
-        Response response;
-        card = cardCollection.searchCardByName(name);
-        if (!cardCollection.decrease(card)) {
-            response = new Response(false, "card not found in collection!");
-        } else {
-            request.user.drake -= card.price;
-            request.user.cards.add(card);
-            response = new Response(true, "card added");
-        }
-        return response;
     }
 
 }

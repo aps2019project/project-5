@@ -10,7 +10,7 @@ import server.models.URL;
 public class Server {
     public static void main(String[] args) {
         Application authentication = new Application();
-        authentication.port = 10000;
+        authentication.port = 80;
         authentication.urls.add(new URL("/login", Authentication::login, false));
         authentication.urls.add(new URL("/sign_up", Authentication::signUp, false));
         authentication.urls.add(new URL("/shop/search", Shop::searchShopCards, true));
@@ -18,6 +18,7 @@ public class Server {
         authentication.urls.add(new URL("/shop/sell", Shop::sell, true));
         authentication.urls.add(new URL("/collection/search", Collection::searchCollectionCards, true));
         authentication.urls.add(new URL("/collection/create_deck", Collection::addDeck, true));
+        authentication.urls.add(new URL("/collection/add_card_to_deck", Collection::addCardToDeck, true));
         authentication.start();
     }
 }
