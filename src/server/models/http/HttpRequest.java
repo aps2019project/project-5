@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
 public class HttpRequest {
     private enum Methods {
         VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
-        PARAMETERS(Pattern.compile("(?<key>[^\\W&?]+)=(?<value>[^\\W&?]+)")),
-        URLS(Pattern.compile("(?<url>\\/.+)\\?")),
+        PARAMETERS(Pattern.compile("(?<key>.+)=(?<value>.+)")),
+        URLS(Pattern.compile("(?<url>\\/.+)\\?(?<parameters>.*)")),
         FIRST_LINE(Pattern.compile("^(?<method>GET|POST)\\s+(?<url>.+(\\?.*)?)\\s+HTTP\\/(?<version>\\d+\\.\\d+)$"));
         Pattern pattern;
 
@@ -37,7 +37,7 @@ public class HttpRequest {
     public Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(String requestText) {
-        requestText.replaceAll("%20", " ");
+
         String[] lines = requestText.split("\\n");
         Matcher matcher = Methods.FIRST_LINE.getPattern().matcher(lines[0]);
         if (matcher.find()) {
@@ -48,6 +48,16 @@ public class HttpRequest {
                 GET = new HashMap<>();
             this.version = matcher.group("version");
             url = matcher.group("url");
+            String[] parameters = matcher.group("parameters").split("&");
+            for (String param : parameters) {
+                Matcher matcher1 = Methods.PARAMETERS.pattern.matcher(param);
+                if (matcher1.find()) {
+                    if (method.equals("GET")) {
+                        GET.put(matcher1.group("key"), matcher1.group("value"));
+                    } else if (method.equals("POST")) POST.put(matcher1.group("key"), matcher1.group("value"));
+
+                }
+            }
         }
         if (url != null) {
             matcher = Methods.PARAMETERS.pattern.matcher(url);
@@ -74,12 +84,12 @@ public class HttpRequest {
             }
         }
 
-        if(GET != null) {
+        if (GET != null) {
             System.out.println("request is get: " + url);
-            if(GET.get("token") != null) {
+            if (GET.get("token") != null) {
                 System.out.println("token was sent: " + GET.get("token"));
                 Account account = AuthenticationController.connectedAccounts.get(GET.get("token"));
-                if(account != null) {
+                if (account != null) {
                     user = account;
                     System.out.println("User logged in: " + account.username);
                 }
