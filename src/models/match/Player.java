@@ -11,7 +11,7 @@ public class Player {
     public Deck deck;
     public ArrayList<Card> hand = new ArrayList<>();
 
-    public void makeHand() {
+    private void makeHand() {
         deck.cards.forEach((card, count) -> {
             for (int i = 0; i < count; i++) {
                 Card newCard = new Card();
@@ -21,7 +21,6 @@ public class Player {
                     newCard = new Minion((Minion) card);
                 if(card instanceof Hero)
                     newCard = new Hero((Hero) card);
-
                 hand.add(newCard);
             }
         });

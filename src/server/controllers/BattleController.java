@@ -2,8 +2,7 @@ package server.controllers;
 
 import models.Account;
 import models.Response;
-import models.match.Match;
-import models.match.MatchMode;
+import models.match.*;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
@@ -15,6 +14,7 @@ public class BattleController {
     public static Account waitingUserForCaptureTheFlagMatchMatch;
     public static Account waitingUserForMultiFlagMatch;
     public static HashMap<String, Match> playingMatches = new HashMap<>();
+
     public static Account getWaitingUser(MatchMode matchMode) {
         if (matchMode == MatchMode.MULTI_FLAG_MATCH)
             return waitingUserForMultiFlagMatch;
@@ -47,9 +47,21 @@ public class BattleController {
             } else if (waitingAccount.equals(request.user)) {
                 response = new Response(false, "you are already waited for opponent :).");
             } else {
-                response = new Response(true, "let's play the game with: ", waitingAccount);
+                String matchToken = AuthenticationController.randomString(30);
+                switch (matchMode) {
+                    case DEATH_MATCH:
+                        playingMatches.put(matchToken, new DeathMatch(waitingUserForDeathMatch, request.user));
+                        break;
+                    case MULTI_FLAG_MATCH:
+                        playingMatches.put(matchToken, new MultiFlagMatch(waitingUserForMultiFlagMatch, request.user));
+                        break;
+                    case CAPTURE_THE_FLAG_MATCH:
+                        playingMatches.put(matchToken, new CaptureTheFlagMatch(waitingUserForCaptureTheFlagMatchMatch, request.user));
+                        break;
+                }
+                playingMatches.get(matchToken).token = matchToken;
+                response = new Response(true, "let's play the game with: ", playingMatches.get(matchToken));
 
-                // TODO create new Match and
             }
         } catch (Exception e) {
             response = new Response(false, "match mode must be 1 or 2 or 3");
