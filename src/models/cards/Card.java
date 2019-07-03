@@ -13,6 +13,13 @@ public class Card {
         this.manaPoint = manaPoint;
     }
 
+    public Card(Card card) {
+        this.name = card.name;
+        this.description = card.description;
+        this.price = card.price;
+        this.manaPoint = card.manaPoint;
+    }
+
     public Card() {
 
     }

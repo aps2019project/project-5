@@ -5,7 +5,10 @@ public class Minion extends Attacker {
         super(name, description, price, manaPoint, health, attackPoint, attackType, attackRange);
     }
 
-    public Minion() {
-        super();
+//    public Minion() {
+//        super();
+//    }
+    public Minion(Minion minion) {
+        super(minion);
     }
 }

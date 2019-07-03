@@ -5,7 +5,7 @@ public class Hero extends Attacker {
         super(name, description, price, manaPoint, health, attackPoint, attackType, attackRange);
     }
 
-    public Hero() {
-        super();
+    public Hero(Hero hero) {
+        super(hero);
     }
 }

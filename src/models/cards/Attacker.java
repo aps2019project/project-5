@@ -22,7 +22,11 @@ public class Attacker extends Card {
         this.attackRange = attackRange;
     }
 
-    public Attacker() {
-        super();
+    public Attacker(Attacker attacker) {
+        super(attacker);
+        this.health = attacker.health;
+        this.attackPoint = attacker.attackPoint;
+        this.attackType = attacker.attackType;
+        this.attackRange = attacker.attackRange;
     }
 }
