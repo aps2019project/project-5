@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class DataWriter {
-    private static YaGson yaGson = new YaGsonBuilder().setPrettyPrinting().create();
+    public static YaGson yaGson = new YaGsonBuilder().setPrettyPrinting().create();
 
     public static void saveData(String fileName, Object data) {
 

@@ -1,4 +1,4 @@
 package models.match;
 
-public class MultiFlagMatch {
+public class MultiFlagMatch extends Match{
 }

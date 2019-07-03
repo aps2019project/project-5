@@ -30,7 +30,7 @@ public class Server {
         authentication.urls.add(new URL("/collection/set_main_deck", CollectionController::setMainDeck, true));
 
         authentication.urls.add(new URL("/battle/request", BattleController::battleRequest, true));
-        authentication.urls.add(new URL("/battle/cancel_request", BattleController::cancleBattleRequest, true));
+        authentication.urls.add(new URL("/battle/cancel_request", BattleController::cancelBattleRequest, true));
         authentication.start();
     }
 }

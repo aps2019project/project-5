@@ -52,7 +52,8 @@ public class HttpRequest {
             if (matcher.find()) {
                 String[] parameters = matcher.group("parameters").split("&");
                 for (String param : parameters) {
-                    Matcher matcher1 = Methods.PARAMETERS.pattern.matcher(param);
+                    String str = param.replaceAll("%20", " ");
+                    Matcher matcher1 = Methods.PARAMETERS.pattern.matcher(str);
                     if (matcher1.find()) {
                         if (method.equals("GET")) {
                             GET.put(matcher1.group("key"), matcher1.group("value"));
