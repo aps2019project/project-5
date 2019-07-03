@@ -1,5 +1,6 @@
 package client.views.graphics;
 
+import client.models.Shop;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.*;
@@ -12,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -52,6 +54,7 @@ public class GraphicCollectionMenu implements Initializable {
     public JFXButton exportDeckBtn;
     public JFXTextField exportPathTxt;
     public JFXTextField importPathTxt;
+    public AnchorPane root;
     private ToggleGroup selectedDeckToggleGroup = new ToggleGroup();
     private final Background ordinaryBackground = new Background(new BackgroundFill(Color.VIOLET,
             new CornerRadii(5), Insets.EMPTY));
@@ -365,6 +368,20 @@ public class GraphicCollectionMenu implements Initializable {
                 updateCards(searchField.getText(), filterType);
             });
         }
+
+
+        root.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.A) {
+                for (Card card : Shop.getInstance().getCardsCollection().getCardsList()) {
+                    ClientManager.incrementDrake(card.getPrice());
+                    try {
+                        ClientManager.buy(card.getName());
+                    } catch (Collection.CollectionException | Account.NotEnoughDrakeException ignored) { }
+                }
+                updateCards("", Card.class);
+            }
+        });
+
     }
 
 

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1080" prefWidth="1920" styleClass="shop-container"
+<AnchorPane fx:id="root" prefHeight="1080" prefWidth="1920" styleClass="shop-container"
             stylesheets="@../resources/stylesheets/collection-style.css" xmlns="http://javafx.com/javafx/8.0.999-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.graphics.GraphicCollectionMenu">
     <ScrollPane hbarPolicy="NEVER" layoutX="421.0" layoutY="140.0" prefHeight="900.0" prefWidth="1199.0"

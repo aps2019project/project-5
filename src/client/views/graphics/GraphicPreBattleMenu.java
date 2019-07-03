@@ -1,6 +1,7 @@
 package client.views.graphics;
 
 import client.controllers.ClientManager;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import client.views.Graphics;
@@ -41,12 +42,14 @@ public class GraphicPreBattleMenu {
         Graphics.setMenu(BATTLE);
     }
 
+
     public void customGame(MouseEvent mouseEvent) {
         Graphics.setMenu(MATCH_SELECT_MENU);
     }
 
     public void storyMode(MouseEvent mouseEvent) {
         ClientManager.setGameMode(STORY_MODE);
+
         Graphics.setMenu(BATTLE);
     }
 

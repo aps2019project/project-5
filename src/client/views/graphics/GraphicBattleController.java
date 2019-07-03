@@ -1,6 +1,7 @@
 package client.views.graphics;
 
 import client.controllers.ClientManager;
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import javafx.animation.*;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -117,6 +119,12 @@ public class GraphicBattleController implements Initializable {
         mana2BarContainer.setRotate(3.0);
         showCardsInBoard();
         handItem0_container.setLayoutX(-100);
+        root.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.M) {
+                ClientManager.setMana(10000);
+                updateMana();
+            }
+        });
     }
 
     private void showCardsInBoard() {

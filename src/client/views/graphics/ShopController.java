@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import client.models.Action;
@@ -37,6 +38,7 @@ public class ShopController implements Initializable {
     public TextField searchField;
     public Label filterNone, filterHeroes, filterMinions, filterSpells;
     public Button addCustomCard;
+    public AnchorPane root;
     private Type filterType = Card.class;
     public Label drakes;
 
@@ -44,7 +46,7 @@ public class ShopController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         updateCards("", filterType);
 
-        drakes.setText(ClientManager.getAccount().getDrakeString());
+        updateDrake();
 
         backBtn.setOnMouseClicked(event -> {
             Graphics.playMusic("sfx_ui_select.m4a");
@@ -67,6 +69,18 @@ public class ShopController implements Initializable {
                 updateCards(searchField.getText(), filterType);
             });
         }
+
+        root.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.D) {
+                ClientManager.incrementDrake(1000000);
+                updateDrake();
+            }
+        });
+
+    }
+
+    private void updateDrake() {
+        drakes.setText(ClientManager.getAccount().getDrakeString());
     }
 
     public static AnchorPane getCardPane(Card card, boolean isInShop) {
@@ -173,7 +187,7 @@ public class ShopController implements Initializable {
                         } catch (Exception ignored) {
                         }
                         cardPane.getChildren().removeAll(buy, cancel);
-
+                        updateDrake();
                     });
                     cancel.setOnMouseClicked(canceled -> {
                         Graphics.playMusic("sfx_ui_select.m4a");

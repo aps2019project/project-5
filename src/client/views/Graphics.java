@@ -17,6 +17,7 @@ import client.models.Account;
 import client.models.Collection;
 import client.models.Deck;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.io.File;
 import java.io.IOException;
 
@@ -121,18 +122,17 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-//        try {
-//            ClientManager.login("mahdi", "mahdi");
+        try {
+            ClientManager.login("mahdi", "mahdi");
 //            ClientManager.setOpponent("AI", true);
 //            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
-//        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException  ignored) {}
+        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException ignored) {}
 
         Account.loadAccounts();
         System.out.println(Shop.getInstance().getCardsCollection().getMinions().size());
-//        System.out.println(Account.getAccounts().size());
         loadFXML();
         stage = primaryStage;
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("client/resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
