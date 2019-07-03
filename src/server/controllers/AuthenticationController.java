@@ -1,6 +1,7 @@
 package server.controllers;
 
 import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import models.Account;
 import models.Response;
 import server.data.DataReader;
@@ -16,9 +17,10 @@ import java.util.Map;
 import java.util.Random;
 
 public class AuthenticationController extends Application {
-    private static YaGson yaGson = new YaGson();
+    private static YaGson yaGson = new YaGsonBuilder().setPrettyPrinting().create();
     public static Map<String, Account> users = new HashMap<>();
     public static HashMap<String, Account> connectedAccounts = new HashMap<>();
+
 
     public static String randomString(int n) {
         StringBuilder stringBuilder = new StringBuilder();

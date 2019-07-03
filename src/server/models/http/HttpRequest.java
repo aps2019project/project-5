@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class HttpRequest {
     private enum Methods {
         VALUES(Pattern.compile("(?<key>.+)\\s*:\\s*(?<value>.+)")),
-        PARAMETERS(Pattern.compile("(?<key>.+)=(?<value>.+)")),
+        PARAMETERS(Pattern.compile("(?<key>.+)=(?<value>.*)")),
         URLS(Pattern.compile("(?<url>\\/.+)\\?(?<parameters>.*)")),
         FIRST_LINE(Pattern.compile("^(?<method>GET|POST)\\s+(?<url>.+(\\?.*)?)\\s+HTTP\\/(?<version>\\d+\\.\\d+)$"));
         Pattern pattern;
@@ -48,14 +48,17 @@ public class HttpRequest {
                 GET = new HashMap<>();
             this.version = matcher.group("version");
             url = matcher.group("url");
-            String[] parameters = matcher.group("parameters").split("&");
-            for (String param : parameters) {
-                Matcher matcher1 = Methods.PARAMETERS.pattern.matcher(param);
-                if (matcher1.find()) {
-                    if (method.equals("GET")) {
-                        GET.put(matcher1.group("key"), matcher1.group("value"));
-                    } else if (method.equals("POST")) POST.put(matcher1.group("key"), matcher1.group("value"));
+            matcher = Methods.URLS.pattern.matcher(url);
+            if (matcher.find()) {
+                String[] parameters = matcher.group("parameters").split("&");
+                for (String param : parameters) {
+                    Matcher matcher1 = Methods.PARAMETERS.pattern.matcher(param);
+                    if (matcher1.find()) {
+                        if (method.equals("GET")) {
+                            GET.put(matcher1.group("key"), matcher1.group("value"));
+                        } else if (method.equals("POST")) POST.put(matcher1.group("key"), matcher1.group("value"));
 
+                    }
                 }
             }
         }
