@@ -34,6 +34,7 @@ public class Server {
         authentication.urls.add(new URL("/battle/select_card", BattleController::selectCard, true));
         authentication.urls.add(new URL("/battle/get_match", BattleController::getMatch, true));
         authentication.urls.add(new URL("/battle/insert", BattleController::insert, true));
+        authentication.urls.add(new URL("/battle/end_turn", BattleController::endTurn, true));
         authentication.start();
     }
 }

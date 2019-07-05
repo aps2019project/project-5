@@ -82,7 +82,7 @@ public class Match {
         players[1].hand.remove(hero2);
 
         Cell cell1 = map.cell[2][0];
-        Cell cell2 = map.cell[2][0];
+        Cell cell2 = map.cell[2][8];
 
         hero1.cell = cell1;
         hero2.cell = cell2;
