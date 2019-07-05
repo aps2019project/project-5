@@ -1,6 +1,5 @@
 package models.match;
 
-import client.models.cards.spell.SpecialPowerActivateTime;
 import models.Account;
 import models.cards.*;
 import models.map.Cell;
@@ -95,9 +94,8 @@ public class Match {
                     }
                 } catch (ArrayIndexOutOfBoundsException ignored) {}
             } else if (card instanceof Spell) {
-
+                availableCells.addAll(map.getTarget(((Spell) card).targetType, getActivePlayer()));
             }
-
         } else {
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 9; j++)
