@@ -29,11 +29,12 @@ public class Match {
         getActivePlayer().selectedCard = null;
         turn++;
         setMana();
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 9; j++)
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++)
                 try {
                     map.cell[i][j].attacker.canMove = true;
-                } catch (Throwable ignored) {}
+                } catch (Throwable ignored) {
+                }
     }
 
     public boolean insertCard(int x, int y) {
@@ -54,19 +55,23 @@ public class Match {
     }
 
     public boolean selectCard(int id) {
-        for(int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
-                if(getActivePlayer().hand.get(i).id == id) {
+                if (getActivePlayer().hand.get(i).id == id) {
                     getActivePlayer().selectedCard = getActivePlayer().hand.get(i);
                     return true;
                 }
-            } catch (Throwable ignored) {}
+            } catch (Throwable ignored) {
+            }
         }
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 9; j++) {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++) {
                 if (map.cell[i][j].attacker == null)
                     continue;
-                if(map.cell[i][j].attacker.id == id && map.cell[i][j].attacker.playerName.equals(getActivePlayer().account.username)) {
+                if (map.cell[i][j].attacker.id == id &&
+                        map.cell[i][j].attacker.playerName.equals(
+                                getActivePlayer().account.username
+                        )) {
                     getActivePlayer().selectedCard = map.cell[i][j].attacker;
                     return true;
                 }
@@ -89,6 +94,10 @@ public class Match {
 
         hero1.canMove = true;
         hero2.canMove = true;
+        hero1.playerName = players[0].account.username;
+        hero2.playerName = players[1].account.username;
+        hero1.isInserted = true;
+        hero2.isInserted = true;
 
         cell1.attacker = hero1;
         cell2.attacker = hero2;

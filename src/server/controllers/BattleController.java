@@ -105,7 +105,9 @@ public class BattleController {
                         } else {
                             response = new Response(false, "can't select this card.");
                         }
-                    } catch (Throwable ignored) {
+                    } catch (Throwable e) {
+                        System.err.println(e.getMessage());
+                        e.printStackTrace();
                         response = new Response(false, "card_id must be integer");
                     }
                 } else
