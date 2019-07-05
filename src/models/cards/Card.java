@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Card {
     public String name, description;
     public int price, manaPoint;
+    public boolean isInserted = false;
 
     public Card(String name, String description, int price, int manaPoint) {
         this.name = name;
@@ -12,6 +13,7 @@ public class Card {
         this.price = price;
         this.manaPoint = manaPoint;
     }
+
 
     public Card(Card card) {
         this.name = card.name;
