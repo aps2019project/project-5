@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class AuthenticationController extends Application {
+    private static final int LOGIN_TOKEN_LENGTH = 5;
     private static YaGson yaGson = new YaGsonBuilder().setPrettyPrinting().create();
     public static Map<String, Account> users = new HashMap<>();
     public static HashMap<String, Account> connectedAccounts = new HashMap<>();
@@ -48,7 +49,7 @@ public class AuthenticationController extends Application {
             response = new Response(false, "Password is not true!");
         } else {
             Account account = users.get(username);
-            String token = randomString(30);
+            String token = randomString(LOGIN_TOKEN_LENGTH);
             account.loginToken = token;
             connectedAccounts.put(token, account);
             response = new Response(true, "you logged in!", account);

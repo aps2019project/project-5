@@ -22,26 +22,35 @@ public class Match {
     }
 
     private void setMana() {
-        players[turn % 2].manaPoint = turn / 2 + 2;
+        getActivePlayer().manaPoint = turn / 2 + 2;
     }
 
     public void endTurn() {
         getActivePlayer().selectedCard = null;
         turn++;
         setMana();
+        for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 9; j++)
+                try {
+                    map.cell[i][j].attacker.canMove = true;
+                } catch (Throwable ignored) {}
     }
 
-    public void insertCard(int x, int y) {
+    public boolean insertCard(int x, int y) {
         Card selectedCard = getActivePlayer().selectedCard;
         if (selectedCard != null) {
-            if (!selectedCard.isInserted && getActivePlayer().manaPoint >= selectedCard.manaPoint) {
+            if (!selectedCard.isInserted &&
+                    getActivePlayer().manaPoint >= selectedCard.manaPoint &&
+                    map.cell[x][y].attacker == null) {
                 map.cell[x][y].attacker = (Attacker) selectedCard;
                 selectedCard.isInserted = true;
                 ((Attacker) selectedCard).cell = map.cell[x][y];
                 getActivePlayer().manaPoint -= selectedCard.manaPoint;
                 getActivePlayer().selectedCard = null;
+                return true;
             }
         }
+        return false;
     }
 
     public boolean selectCard(int id) {
@@ -77,6 +86,9 @@ public class Match {
 
         hero1.cell = cell1;
         hero2.cell = cell2;
+
+        hero1.canMove = true;
+        hero2.canMove = true;
 
         cell1.attacker = hero1;
         cell2.attacker = hero2;

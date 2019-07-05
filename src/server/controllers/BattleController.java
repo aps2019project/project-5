@@ -10,6 +10,7 @@ import server.models.http.HttpResponseJSON;
 import java.util.HashMap;
 
 public class BattleController {
+    private static final int MATCH_TOKEN_LENGTH = 5;
     public static Account waitingUserForDeathMatch;
     public static Account waitingUserForCaptureTheFlagMatchMatch;
     public static Account waitingUserForMultiFlagMatch;
@@ -47,7 +48,7 @@ public class BattleController {
             } else if (waitingAccount.equals(request.user)) {
                 response = new Response(false, "you are already waited for opponent :).");
             } else {
-                String matchToken = AuthenticationController.randomString(30);
+                String matchToken = AuthenticationController.randomString(MATCH_TOKEN_LENGTH);
                 switch (matchMode) {
                     case DEATH_MATCH:
                         playingMatches.put(matchToken, new DeathMatch(waitingUserForDeathMatch, request.user));
@@ -81,5 +82,75 @@ public class BattleController {
             response = new Response(false, "you don't have any battle request");
         return new HttpResponseJSON(response);
 
+    }
+
+    public static HttpResponse selectCard(HttpRequest request) {
+        Response response;
+        String matchToken = request.GET.get("match_token");
+        if (matchToken == null)
+            response = new Response(false, "match_token not sent.", 100);
+        else {
+            Match match = playingMatches.get(matchToken);
+            if(match == null)
+                response = new Response(false, "invalid token!!");
+            else {
+                String cardIdStr = request.GET.get("card_id");
+                if (cardIdStr == null)
+                    response = new Response(false, "card_id not sent.", 100);
+                else try {
+                    int cardId = Integer.parseInt(cardIdStr);
+                    if (match.selectCard(cardId)) {
+                        response = new Response(true, "card selected successfully.", match);
+                    } else {
+                        response = new Response(false, "can't select this card.");
+                    }
+                } catch (Throwable ignored) {
+                    response = new Response(false, "card_id must be integer");
+                }
+            }
+        }
+        return new HttpResponseJSON(response);
+    }
+
+    public static HttpResponse getMatch(HttpRequest request) {
+        Response response;
+        String matchToken = request.GET.get("match_token");
+        if (matchToken == null)
+            response = new Response(false, "match_token not sent.", 100);
+        else {
+            Match match = playingMatches.get(matchToken);
+            if(match == null)
+                response = new Response(false, "invalid token!!");
+            else {
+                response = new Response(true, "see match data.", false);
+            }
+        }
+        return new HttpResponseJSON(response);
+    }
+
+    public static HttpResponse insert(HttpRequest request) {
+        Response response;
+        String matchToken = request.GET.get("match_token");
+        if (matchToken == null)
+            response = new Response(false, "match_token not sent.", 100);
+        else {
+            Match match = playingMatches.get(matchToken);
+            if(match == null)
+                response = new Response(false, "invalid token!!");
+            else {
+                try {
+                    int x = Integer.valueOf(request.GET.get("x"));
+                    int y = Integer.valueOf(request.GET.get("y"));
+                    if(match.insertCard(x, y)) {
+                        response = new Response(true, "card inserted!", match);
+                    } else {
+                        response = new Response(false, "cant insert the card");
+                    }
+                } catch (Throwable e) {
+                    response = new Response(false, "x or y is not valid");
+                }
+            }
+        }
+        return new HttpResponseJSON(response);
     }
 }
