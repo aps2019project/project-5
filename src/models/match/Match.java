@@ -1,9 +1,8 @@
 package models.match;
 
+import client.models.cards.spell.SpecialPowerActivateTime;
 import models.Account;
-import models.cards.Attacker;
-import models.cards.Card;
-import models.cards.Hero;
+import models.cards.*;
 import models.map.Cell;
 import models.map.Map;
 
@@ -36,7 +35,8 @@ public class Match {
             for (int j = 0; j < 9; j++)
                 try {
                     map.cell[i][j].attacker.canMove = true;
-                } catch (Throwable ignored) {}
+                } catch (Throwable ignored) {
+                }
     }
 
     public boolean insertCard(int x, int y) {
@@ -59,23 +59,56 @@ public class Match {
     public Set<Cell> getAvailableCells() {
         Card card = getActivePlayer().selectedCard;
         Set<Cell> availableCells = new HashSet<>();
-        if(card.isInserted) {
+        if (card.isInserted) {
+            if (card instanceof Minion) {
+                Minion minion = (Minion) card;
+                int x = minion.cell.x;
+                int y = minion.cell.y;
+                for(int di = -1; di <= 1; di++)
+                    for(int dj = -1; dj <= 1; dj++)
+                        try {
+                            if(map.cell[x + di][y + dj].attacker == null)
+                                availableCells.add(map.cell[x + di][y + dj]);
+                        } catch (ArrayIndexOutOfBoundsException ignored) {}
+                try {
+                    if (map.cell[x - 1][y].attacker == null) {
+                        if(map.cell[x - 2][y].attacker == null)
+                            availableCells.add(map.cell[x - 2][y]);
+                    }
+                } catch (ArrayIndexOutOfBoundsException ignored) {}
+                try {
+                    if (map.cell[x + 1][y].attacker == null) {
+                        if(map.cell[x + 2][y].attacker == null)
+                            availableCells.add(map.cell[x + 2][y]);
+                    }
+                } catch (ArrayIndexOutOfBoundsException ignored) {}
+                try {
+                    if (map.cell[x][y - 1].attacker == null) {
+                        if(map.cell[x][y - 2].attacker == null)
+                            availableCells.add(map.cell[x][y - 2]);
+                    }
+                } catch (ArrayIndexOutOfBoundsException ignored) {}
+                try {
+                    if (map.cell[x][y + 1].attacker == null) {
+                        if(map.cell[x][y + 2].attacker == null)
+                            availableCells.add(map.cell[x][y + 2]);
+                    }
+                } catch (ArrayIndexOutOfBoundsException ignored) {}
+            } else if (card instanceof Spell) {
+
+            }
 
         } else {
-            for(int i = 0; i < 5; i++) {
-                for(int j = 0; j < 9; j++) {
-                    if(map.cell[i][j].attacker != null) {
-                        if(map.cell[i][j].attacker.playerName.equals(getActivePlayer().account.username)) {
-                            for(int di = -1; di <= 1; di++)
-                                for(int dj = -1; dj <= 1; dj++)
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 9; j++)
+                    if (map.cell[i][j].attacker != null)
+                        if (map.cell[i][j].attacker.playerName.equals(getActivePlayer().account.username))
+                            for (int di = -1; di <= 1; di++)
+                                for (int dj = -1; dj <= 1; dj++)
                                     try {
-                                        if(map.cell[i + di][j + dj].attacker == null)
+                                        if (map.cell[i + di][j + dj].attacker == null)
                                             availableCells.add(map.cell[i][j]);
                                     } catch (ArrayIndexOutOfBoundsException ignored) {}
-                        }
-                    }
-                }
-            }
         }
         return availableCells;
     }
@@ -108,12 +141,12 @@ public class Match {
     private void putHeroes() {
         Hero hero1 = new Hero();
         Hero hero2 = new Hero();
-        for(Card card : players[0].hand)
-            if(card instanceof Hero)
+        for (Card card : players[0].hand)
+            if (card instanceof Hero)
                 hero1 = (Hero) card;
 
-        for(Card card : players[1].hand)
-            if(card instanceof Hero)
+        for (Card card : players[1].hand)
+            if (card instanceof Hero)
                 hero2 = (Hero) card;
 
         players[0].hand.remove(hero1);
