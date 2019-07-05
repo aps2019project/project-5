@@ -212,4 +212,39 @@ public class BattleController {
         }
         return new HttpResponseJSON(response);
     }
+
+    public static HttpResponse attack(HttpRequest request) {
+        Response response;
+        String matchToken = request.GET.get("match_token");
+        if (matchToken == null)
+            response = new Response(false, "match_token not sent.", 100);
+        else {
+            Match match = playingMatches.get(matchToken);
+            if (match == null)
+                response = new Response(false, "invalid match_token!!");
+            else {
+                if (match.getActivePlayer().account.username.equals(request.user.username)) {
+                    try {
+                        int x = Integer.valueOf(request.GET.get("x"));
+                        int y = Integer.valueOf(request.GET.get("y"));
+                        int res = match.attack(x, y);
+                        if (res == 1) {
+                            response = new Response(true, "attack without counter!", res);
+                        } else if (res == 2) {
+                            response = new Response(true, "attack with felan!", res);
+                        } else {
+                            response = new Response(false, "invalid attack!", res);
+                        }
+                    } catch (Throwable e) {
+                        response = new Response(false, "x or y is not valid");
+                    }
+                } else {
+                    response = new Response(false, "It isn't your turn :(", match);
+                }
+            }
+        }
+        return new HttpResponseJSON(response);
+
+
+    }
 }
