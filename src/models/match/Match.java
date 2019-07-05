@@ -23,7 +23,8 @@ public class Match {
     }
 
     private void setMana() {
-        getActivePlayer().manaPoint = turn / 2 + 2;
+        if (turn / 2 + 2 >= 9) getActivePlayer().manaPoint = 9;
+        else getActivePlayer().manaPoint = turn / 2 + 2;
     }
 
     public void endTurn() {
@@ -43,7 +44,8 @@ public class Match {
         if (selectedCard != null) {
             if (!selectedCard.isInserted &&
                     getActivePlayer().manaPoint >= selectedCard.manaPoint &&
-                    map.cell[x][y].attacker == null) {
+                    map.cell[x][y].attacker == null &&
+                    getAvailableCells().contains(map.cell[x][y])) {
                 map.cell[x][y].attacker = (Attacker) selectedCard;
                 selectedCard.isInserted = true;
                 ((Attacker) selectedCard).cell = map.cell[x][y];
@@ -63,36 +65,41 @@ public class Match {
                 Minion minion = (Minion) card;
                 int x = minion.cell.x;
                 int y = minion.cell.y;
-                for(int di = -1; di <= 1; di++)
-                    for(int dj = -1; dj <= 1; dj++)
+                for (int di = -1; di <= 1; di++)
+                    for (int dj = -1; dj <= 1; dj++)
                         try {
-                            if(map.cell[x + di][y + dj].attacker == null)
+                            if (map.cell[x + di][y + dj].attacker == null)
                                 availableCells.add(map.cell[x + di][y + dj]);
-                        } catch (ArrayIndexOutOfBoundsException ignored) {}
+                        } catch (ArrayIndexOutOfBoundsException ignored) {
+                        }
                 try {
                     if (map.cell[x - 1][y].attacker == null) {
-                        if(map.cell[x - 2][y].attacker == null)
+                        if (map.cell[x - 2][y].attacker == null)
                             availableCells.add(map.cell[x - 2][y]);
                     }
-                } catch (ArrayIndexOutOfBoundsException ignored) {}
+                } catch (ArrayIndexOutOfBoundsException ignored) {
+                }
                 try {
                     if (map.cell[x + 1][y].attacker == null) {
-                        if(map.cell[x + 2][y].attacker == null)
+                        if (map.cell[x + 2][y].attacker == null)
                             availableCells.add(map.cell[x + 2][y]);
                     }
-                } catch (ArrayIndexOutOfBoundsException ignored) {}
+                } catch (ArrayIndexOutOfBoundsException ignored) {
+                }
                 try {
                     if (map.cell[x][y - 1].attacker == null) {
-                        if(map.cell[x][y - 2].attacker == null)
+                        if (map.cell[x][y - 2].attacker == null)
                             availableCells.add(map.cell[x][y - 2]);
                     }
-                } catch (ArrayIndexOutOfBoundsException ignored) {}
+                } catch (ArrayIndexOutOfBoundsException ignored) {
+                }
                 try {
                     if (map.cell[x][y + 1].attacker == null) {
-                        if(map.cell[x][y + 2].attacker == null)
+                        if (map.cell[x][y + 2].attacker == null)
                             availableCells.add(map.cell[x][y + 2]);
                     }
-                } catch (ArrayIndexOutOfBoundsException ignored) {}
+                } catch (ArrayIndexOutOfBoundsException ignored) {
+                }
             } else if (card instanceof Spell) {
                 availableCells.addAll(map.getTarget(((Spell) card).targetType, getActivePlayer()));
             }
@@ -106,9 +113,26 @@ public class Match {
                                     try {
                                         if (map.cell[i + di][j + dj].attacker == null)
                                             availableCells.add(map.cell[i][j]);
-                                    } catch (ArrayIndexOutOfBoundsException ignored) {}
+                                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                                    }
         }
         return availableCells;
+    }
+
+    public boolean moveCard(int x, int y) {
+        Cell cell = map.cell[x][y];
+        Card selectedCard = getActivePlayer().selectedCard;
+        if (selectedCard != null &&
+                selectedCard.canMove &&
+                selectedCard.isInserted &&
+                getAvailableCells().contains(cell)) {
+            ((Attacker) selectedCard).cell.attacker = null;
+            cell.attacker = (Attacker) selectedCard;
+            ((Attacker) selectedCard).cell = cell;
+            return true;
+        }
+        return false;
+
     }
 
     public boolean selectCard(int id) {
