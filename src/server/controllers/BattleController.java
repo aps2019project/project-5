@@ -145,7 +145,7 @@ public class BattleController {
             if(match == null)
                 response = new Response(false, "invalid match_token!!");
             else {
-                response = new Response(true, "see match data.", false);
+                response = new Response(true, "see match data.", match);
             }
         }
         return new HttpResponseJSON(response);

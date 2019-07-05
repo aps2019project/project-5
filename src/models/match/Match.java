@@ -8,8 +8,8 @@ import models.map.Cell;
 import models.map.Map;
 
 public class Match {
-    public Map map = new Map();
     public String token;
+    public Map map = new Map();
     public Player[] players = new Player[2];
     public int turn = 0;
 
