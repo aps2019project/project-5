@@ -35,6 +35,7 @@ public class Match {
             for (int j = 0; j < 9; j++)
                 try {
                     map.cell[i][j].attacker.canMove = true;
+                    map.cell[i][j].attacker.canAttack = true;
                 } catch (Throwable ignored) {
                 }
     }
@@ -142,16 +143,16 @@ public class Match {
 
     public boolean isValidAttack(Cell cell, Attacker attacker) {
 //        Attacker attacker = (Attacker) getActivePlayer().selectedCard;
-        if (attacker.attackType == AttackType.HYBRID) {
-            return true;
-        }
         int distance = Cell.getManhattanDistance(cell, attacker.cell);
+        if (attacker.attackType == AttackType.HYBRID) {
+            return distance <= attacker.attackRange;
+        }
         if (attacker.attackType == AttackType.RANGED) {
             if (distance <= attacker.attackRange && distance > 1) {
                 return true;
             }
         }
-        if (attacker.attackType == AttackType.RANGED) {
+        if (attacker.attackType == AttackType.MELEE) {
             return distance == 1;
         }
         return false;
@@ -168,9 +169,8 @@ public class Match {
         Attacker targetCard = cell.attacker;
         if (attacker != null &&
                 targetCard != null &&
-                attacker.canMove &&
-                attacker.isInserted &&
-                getAvailableCells().contains(cell)) {
+                attacker.canAttack &&
+                attacker.isInserted) {
             if (isValidAttack(cell, (Attacker) getActivePlayer().selectedCard)) {
                 targetCard.health -= attacker.getAttackPoint();
                 if (isValidAttack(attacker.cell, targetCard)) {
@@ -230,6 +230,9 @@ public class Match {
 
         hero1.canMove = true;
         hero2.canMove = true;
+
+        hero1.canAttack = true;
+        hero2.canAttack = true;
 
         hero1.isInserted = true;
         hero2.isInserted = true;

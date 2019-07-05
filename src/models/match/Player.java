@@ -28,8 +28,10 @@ public class Player {
                 if (card instanceof Hero)
                     newCard = new Hero((Hero) card);
 
-                if(newCard instanceof Attacker)
+                if(newCard instanceof Attacker) {
                     ((Attacker) newCard).currentHealth = ((Attacker) newCard).health;
+                    ((Attacker) newCard).canAttack = false;
+                }
 
                 newCard.playerName = account.username;
                 newCard.id = cardId++;
