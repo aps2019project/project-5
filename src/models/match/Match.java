@@ -7,6 +7,9 @@ import models.cards.Hero;
 import models.map.Cell;
 import models.map.Map;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Match {
     public String token;
     public Map map = new Map();
@@ -51,6 +54,30 @@ public class Match {
             }
         }
         return false;
+    }
+
+    public Set<Cell> getAvailableCells() {
+        Card card = getActivePlayer().selectedCard;
+        Set<Cell> availableCells = new HashSet<>();
+        if(card.isInserted) {
+
+        } else {
+            for(int i = 0; i < 5; i++) {
+                for(int j = 0; j < 9; j++) {
+                    if(map.cell[i][j].attacker != null) {
+                        if(map.cell[i][j].attacker.playerName.equals(getActivePlayer().account.username)) {
+                            for(int di = -1; di <= 1; di++)
+                                for(int dj = -1; dj <= 1; dj++)
+                                    try {
+                                        if(map.cell[i + di][j + dj].attacker == null)
+                                            availableCells.add(map.cell[i][j]);
+                                    } catch (ArrayIndexOutOfBoundsException ignored) {}
+                        }
+                    }
+                }
+            }
+        }
+        return availableCells;
     }
 
     public boolean selectCard(int id) {
