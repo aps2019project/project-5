@@ -33,8 +33,7 @@ public class Match {
             for (int j = 0; j < 9; j++)
                 try {
                     map.cell[i][j].attacker.canMove = true;
-                } catch (Throwable ignored) {
-                }
+                } catch (Throwable ignored) {}
     }
 
     public boolean insertCard(int x, int y) {
@@ -98,6 +97,8 @@ public class Match {
         hero2.playerName = players[1].account.username;
         hero1.isInserted = true;
         hero2.isInserted = true;
+        hero1.id = 20;
+        hero2.id = 20;
 
         cell1.attacker = hero1;
         cell2.attacker = hero2;

@@ -44,7 +44,7 @@ public class Player {
 
     public Player(Account account) {
         this.account = account;
-        this.deck = account.mainDeck;
+        this.deck = new Deck(account.mainDeck);
         makeHand();
     }
 }
