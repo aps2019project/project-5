@@ -29,4 +29,8 @@ public class Attacker extends Card {
         this.attackType = attacker.attackType;
         this.attackRange = attacker.attackRange;
     }
+
+    public Attacker() {
+
+    }
 }

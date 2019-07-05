@@ -8,4 +8,8 @@ public class Hero extends Attacker {
     public Hero(Hero hero) {
         super(hero);
     }
+
+    public Hero() {
+
+    }
 }

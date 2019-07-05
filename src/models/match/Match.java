@@ -79,8 +79,15 @@ public class Match {
     }
 
     private void putHeroes() {
-        Hero hero1 = (Hero) players[0].deck.filter(Hero.class, "").keySet().toArray()[0];
-        Hero hero2 = (Hero) players[1].deck.filter(Hero.class, "").keySet().toArray()[0];
+        Hero hero1 = new Hero();
+        Hero hero2 = new Hero();
+        for(Card card : players[0].hand)
+            if(card instanceof Hero)
+                hero1 = (Hero) card;
+
+        for(Card card : players[1].hand)
+            if(card instanceof Hero)
+                hero2 = (Hero) card;
 
         players[0].hand.remove(hero1);
         players[1].hand.remove(hero2);
@@ -93,12 +100,9 @@ public class Match {
 
         hero1.canMove = true;
         hero2.canMove = true;
-        hero1.playerName = players[0].account.username;
-        hero2.playerName = players[1].account.username;
+
         hero1.isInserted = true;
         hero2.isInserted = true;
-        hero1.id = 20;
-        hero2.id = 20;
 
         cell1.attacker = hero1;
         cell2.attacker = hero2;

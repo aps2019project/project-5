@@ -35,6 +35,7 @@ public class Player {
                 newCard.id = cardId++;
                 newCard.canMove = false;
                 newCard.isInserted = false;
+                System.out.println(newCard.name + "   " + newCard.id + "   " + newCard.playerName);
 
                 hand.add(newCard);
             }
