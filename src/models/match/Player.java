@@ -5,6 +5,7 @@ import models.cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 public class Player {
     public Account account;
@@ -14,7 +15,10 @@ public class Player {
     public Card selectedCard;
 
     private void makeHand() {
-        deck.cards.forEach((card, count) -> {
+        int cardId = 0;
+        for (Map.Entry<Card, Integer> entry : deck.cards.entrySet()) {
+            Card card = entry.getKey();
+            Integer count = entry.getValue();
             for (int i = 0; i < count; i++) {
                 Card newCard = new Card();
                 if (card instanceof Spell)
@@ -23,9 +27,15 @@ public class Player {
                     newCard = new Minion((Minion) card);
                 if (card instanceof Hero)
                     newCard = new Hero((Hero) card);
+
+                newCard.playerName = account.username;
+                newCard.id = cardId++;
+                newCard.canMove = false;
+                newCard.isInserted = false;
+
                 hand.add(newCard);
             }
-        });
+        }
         Collections.shuffle(hand);
     }
 

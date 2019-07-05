@@ -17,14 +17,18 @@ public class Match {
         return players[turn % 2];
     }
 
+    public Player getInActivePlayer() {
+        return players[1 - turn % 2];
+    }
+
     private void setMana() {
         players[turn % 2].manaPoint = turn / 2 + 2;
     }
 
     public void endTurn() {
+        getActivePlayer().selectedCard = null;
         turn++;
         setMana();
-
     }
 
     public void insertCard(int x, int y) {
@@ -35,8 +39,30 @@ public class Match {
                 selectedCard.isInserted = true;
                 ((Attacker) selectedCard).cell = map.cell[x][y];
                 getActivePlayer().manaPoint -= selectedCard.manaPoint;
+                getActivePlayer().selectedCard = null;
             }
         }
+    }
+
+    public boolean selectCard(int id) {
+        for(int i = 0; i < 5; i++) {
+            try {
+                if(getActivePlayer().hand.get(i).id == id) {
+                    getActivePlayer().selectedCard = getActivePlayer().hand.get(i);
+                    return true;
+                }
+            } catch (Throwable ignored) {}
+        }
+        for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 9; j++) {
+                if (map.cell[i][j].attacker == null)
+                    continue;
+                if(map.cell[i][j].attacker.id == id && map.cell[i][j].attacker.playerName.equals(getActivePlayer().account.username)) {
+                    getActivePlayer().selectedCard = map.cell[i][j].attacker;
+                    return true;
+                }
+            }
+        return false;
     }
 
     private void putHeroes() {

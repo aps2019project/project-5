@@ -3,9 +3,14 @@ package models.cards;
 import java.util.Objects;
 
 public class Card {
-    public String name, description;
-    public int price, manaPoint;
+    public String name;
+    public String description;
+    public String playerName;
+    public int id;
+    public int price;
+    public int manaPoint;
     public boolean isInserted = false;
+    public boolean canMove;
 
     public Card(String name, String description, int price, int manaPoint) {
         this.name = name;
@@ -13,7 +18,6 @@ public class Card {
         this.price = price;
         this.manaPoint = manaPoint;
     }
-
 
     public Card(Card card) {
         this.name = card.name;
@@ -37,6 +41,13 @@ public class Card {
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
         return Objects.equals(name, card.name);
+    }
+
+    public boolean equalsInGame(Card card) {
+        if(card.playerName == null || this.playerName == null)
+            return false;
+        else
+            return card.playerName.equals(this.playerName) && this.id == card.id;
     }
 
     @Override
