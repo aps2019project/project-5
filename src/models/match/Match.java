@@ -61,10 +61,10 @@ public class Match {
         Card card = getActivePlayer().selectedCard;
         Set<Cell> availableCells = new HashSet<>();
         if (card.isInserted) {
-            if (card instanceof Minion) {
-                Minion minion = (Minion) card;
-                int x = minion.cell.x;
-                int y = minion.cell.y;
+            if (card instanceof Attacker) {
+                Attacker attacker = (Attacker) card;
+                int x = attacker.cell.x;
+                int y = attacker.cell.y;
                 for (int di = -1; di <= 1; di++)
                     for (int dj = -1; dj <= 1; dj++)
                         try {
@@ -120,7 +120,12 @@ public class Match {
     }
 
     public boolean moveCard(int x, int y) {
-        Cell cell = map.cell[x][y];
+        Cell cell;
+        try {
+            cell = map.cell[x][y];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
         Card selectedCard = getActivePlayer().selectedCard;
         if (selectedCard != null &&
                 selectedCard.canMove &&
@@ -129,10 +134,53 @@ public class Match {
             ((Attacker) selectedCard).cell.attacker = null;
             cell.attacker = (Attacker) selectedCard;
             ((Attacker) selectedCard).cell = cell;
+            selectedCard.canMove = false;
             return true;
         }
         return false;
+    }
 
+    public boolean isValidAttack(Cell cell, Attacker attacker) {
+//        Attacker attacker = (Attacker) getActivePlayer().selectedCard;
+        if (attacker.attackType == AttackType.HYBRID) {
+            return true;
+        }
+        int distance = Cell.getManhattanDistance(cell, attacker.cell);
+        if (attacker.attackType == AttackType.RANGED) {
+            if (distance <= attacker.attackRange && distance > 1) {
+                return true;
+            }
+        }
+        if (attacker.attackType == AttackType.RANGED) {
+            return distance == 1;
+        }
+        return false;
+    }
+
+    public int attack(int x, int y) {
+        Cell cell;
+        try {
+            cell = map.cell[x][y];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return -1;
+        }
+        Attacker attacker = (Attacker) getActivePlayer().selectedCard;
+        Attacker targetCard = cell.attacker;
+        if (attacker != null &&
+                targetCard != null &&
+                attacker.canMove &&
+                attacker.isInserted &&
+                getAvailableCells().contains(cell)) {
+            if (isValidAttack(cell, (Attacker) getActivePlayer().selectedCard)) {
+                targetCard.health -= attacker.getAttackPoint();
+                if (isValidAttack(attacker.cell, targetCard)) {
+                    attacker.health -= targetCard.getAttackPoint();
+                    return 2;
+                }
+                return 1;
+            }
+        }
+        return -1;
     }
 
     public boolean selectCard(int id) {

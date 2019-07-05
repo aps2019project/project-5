@@ -11,4 +11,8 @@ public class Cell {
         this.x = x;
         this.y = y;
     }
+
+    public static int getManhattanDistance(Cell firstCell, Cell secondCell) {
+        return Math.abs(firstCell.x - secondCell.x) + Math.abs(secondCell.y - firstCell.y);
+    }
 }
