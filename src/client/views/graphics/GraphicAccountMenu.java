@@ -1,5 +1,6 @@
 package client.views.graphics;
 
+import client.controllers.AccountClient;
 import com.jfoenix.controls.*;
 import client.controllers.ClientManager;
 import javafx.animation.TranslateTransition;
@@ -12,10 +13,13 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import client.models.Account;
 import client.views.Graphics;
+import models.Response;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static client.views.Graphics.Menu.MAIN_MENU;
+import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
 public class GraphicAccountMenu implements Initializable {
@@ -40,17 +44,14 @@ public class GraphicAccountMenu implements Initializable {
 
     public void login(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
-        try {
-            ClientManager.login(loginUsernameTxt.getText(), loginPasswordTxt.getText());
+        Response response = AccountClient.login(loginUsernameTxt.getText(), loginPasswordTxt.getText());
+        if(response.OK) {
             Graphics.setMenu(MAIN_MENU);
             music.stop();
             GraphicMainMenu.music = playMusic("music_collection.m4a");
-        } catch (Account.InvalidPasswordException e) {
-            changeAsWrong(loginPasswordTxt, true);
-        } catch (Account.InvalidUsernameException e) {
-            changeAsWrong(loginUsernameTxt, true);
+        } else {
+            alert("error", "can't login.", response.message);
         }
-
     }
 
     private void changeAsWrong(JFXTextField textField, boolean isWrong) {
