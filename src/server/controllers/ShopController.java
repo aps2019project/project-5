@@ -29,7 +29,7 @@ public class ShopController {
         Class cardClass = CollectionController.getCardClass(request.GET.get("type"));
         Response response;
         if (searchedContent.equals("") && cardClass == Card.class) {
-            response = new Response(true, "shop cards sent!", shop);
+            response = new Response(true, "shop cards sent!", shop.cards);
         } else {
             response = new Response(true, String.format("search result of %s was sent", searchedContent),
                     shop.filter(cardClass, searchedContent));
