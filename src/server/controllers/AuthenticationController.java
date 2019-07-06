@@ -1,6 +1,7 @@
 package server.controllers;
 
 import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import models.Account;
 import models.Response;
 import server.data.DataReader;
@@ -10,21 +11,17 @@ import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class AuthenticationController extends Application {
-    private static YaGson yaGson = new YaGson();
+    private static final int LOGIN_TOKEN_LENGTH = 5;
+    private static YaGson yaGson = new YaGsonBuilder().setPrettyPrinting().create();
     public static Map<String, Account> users = new HashMap<>();
     public static HashMap<String, Account> connectedAccounts = new HashMap<>();
 
-    static {
-        users = DataReader.readAccounts();
-        for (Account account:users.values()) {
-            connectedAccounts.put(account.loginToken, account);
-        }
-    }
 
     public static String randomString(int n) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -52,7 +49,7 @@ public class AuthenticationController extends Application {
             response = new Response(false, "Password is not true!");
         } else {
             Account account = users.get(username);
-            String token = "a" /*randomString(30)*/ ; // for test
+            String token = randomString(LOGIN_TOKEN_LENGTH);
             account.loginToken = token;
             connectedAccounts.put(token, account);
             response = new Response(true, "you logged in!", account);

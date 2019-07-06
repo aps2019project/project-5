@@ -1,6 +1,6 @@
 package client.views.menus;
 
-import client.controllers.logic.Manager;
+import client.controllers.Manager;
 import client.views.Command;
 import client.views.Error;
 import client.views.Output;

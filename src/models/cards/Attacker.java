@@ -4,6 +4,7 @@ import models.map.Cell;
 
 public class Attacker extends Card {
     public int health, currentHealth = 0;
+    public boolean canAttack;
     private int attackPoint;
     public int attackRange;
     public AttackType attackType;
@@ -22,7 +23,15 @@ public class Attacker extends Card {
         this.attackRange = attackRange;
     }
 
+    public Attacker(Attacker attacker) {
+        super(attacker);
+        this.health = attacker.health;
+        this.attackPoint = attacker.attackPoint;
+        this.attackType = attacker.attackType;
+        this.attackRange = attacker.attackRange;
+    }
+
     public Attacker() {
-        super();
+
     }
 }

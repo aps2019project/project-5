@@ -1,6 +1,7 @@
 package server.controllers;
 
 import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import models.Response;
 import models.cards.Card;
 import models.cards.Collection;
@@ -13,7 +14,8 @@ import server.models.http.HttpResponseJSON;
 
 
 public class ShopController {
-    private static YaGson yaGson = new YaGson();
+    private static YaGson yaGson = new YaGsonBuilder().setPrettyPrinting().create();
+
     public static Collection shop;
 
     static {
@@ -22,12 +24,12 @@ public class ShopController {
 
     public static HttpResponse searchShopCards(HttpRequest request) {
         String searchedContent = request.GET.get("search");
-        if(searchedContent == null)
+        if (searchedContent == null)
             searchedContent = "";
         Class cardClass = CollectionController.getCardClass(request.GET.get("type"));
         Response response;
         if (searchedContent.equals("") && cardClass == Card.class) {
-            response = new Response(true, "shop cards sent!", shop);
+            response = new Response(true, "shop cards sent!", shop.cards);
         } else {
             response = new Response(true, String.format("search result of %s was sent", searchedContent),
                     shop.filter(cardClass, searchedContent));
@@ -38,16 +40,16 @@ public class ShopController {
     public static HttpResponse buy(HttpRequest request) {
         String cardName = request.GET.get("card_name");
         Response response;
-        if(cardName == null)
+        if (cardName == null)
             response = new Response(false, "card_name not sent", 100);
         else {
             Card card = shop.searchCardByName(cardName);
-            if(card == null)
+            if (card == null)
                 response = new Response(false, "this card not found in shop", 120);
             else {
-                if(request.user.drake < card.price)
+                if (request.user.drake < card.price)
                     response = new Response(false, "you have not enough drakes.", 121);
-                else if(shop.decrease(card)) {
+                else if (shop.decrease(card)) {
                     request.user.cards.add(card);
                     request.user.drake -= card.price;
                     response = new Response(true, "card transfer completed.", request.user);
@@ -64,11 +66,11 @@ public class ShopController {
     public static HttpResponse sell(HttpRequest request) {
         String cardName = request.GET.get("card_name");
         Response response;
-        if(cardName == null)
+        if (cardName == null)
             response = new Response(false, "card_name not sent", 100);
         else {
             Card card = request.user.cards.searchCardByName(cardName);
-            if(card == null)
+            if (card == null)
                 response = new Response(false, "you don't have this card in your collection", 120);
             else {
                 request.user.cards.decrease(card);

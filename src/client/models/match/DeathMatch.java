@@ -1,9 +1,8 @@
 package client.models.match;
 
-import client.controllers.logic.Manager;
+import client.controllers.Manager;
 import client.models.Account;
 import client.models.Player;
-
 import java.util.LinkedList;
 
 public class DeathMatch extends client.models.match.Match {

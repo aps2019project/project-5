@@ -50,7 +50,7 @@ public class Collection {
     }
 
     public void addCard(Card card) {
-        if (cards.containsKey(card)){
+        if (cards.containsKey(card)) {
             int num = cards.get(card);
             cards.replace(card, num, num + 1);
             return;
@@ -115,7 +115,7 @@ public class Collection {
         if (!cards.containsKey(card))
             throw new CardNotFoundException();
         int number = cards.get(card);
-        if(cards.get(card) == 1) {
+        if (cards.get(card) == 1) {
             cards.remove(card);
             return;
         }
@@ -157,7 +157,7 @@ public class Collection {
     public boolean contains(Card card) {
         try {
             getCardByID(card.getID());
-        }  catch (CardNotFoundException e) {
+        } catch (CardNotFoundException e) {
             return false;
         }
         return true;

@@ -1,5 +1,7 @@
 package models.cards;
 
+import java.util.Map;
+
 public class Deck extends Collection {
     public String name;
 
@@ -25,6 +27,22 @@ public class Deck extends Collection {
 
     public Deck(String name) {
         this.name = name;
+    }
+
+    public Deck(Deck deck) {
+        this.name = deck.name;
+        for (Map.Entry<Card, Integer> entry : deck.cards.entrySet()) {
+            Card card = entry.getKey();
+            Integer count = entry.getValue();
+            Card newCard = new Card();
+            if (card instanceof Spell)
+                newCard = new Spell((Spell) card);
+            if (card instanceof Minion)
+                newCard = new Minion((Minion) card);
+            if (card instanceof Hero)
+                newCard = new Hero((Hero) card);
+            this.cards.put(newCard, entry.getValue());
+        }
     }
 
     public int getHeroCount() {

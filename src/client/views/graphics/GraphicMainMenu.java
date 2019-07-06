@@ -1,5 +1,6 @@
 package client.views.graphics;
 
+import client.controllers.AccountClient;
 import client.controllers.ClientManager;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
@@ -69,7 +70,7 @@ public class GraphicMainMenu implements Initializable {
 
         foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
         pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
-//        drakes.setText(ClientManager.getAccount().getDrakeString());
+        drakes.setText("" + AccountClient.user.drake);
 
         root.setOnMouseMoved(event -> {
             foregroundTransition.setToX(-event.getX() / 40);
