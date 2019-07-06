@@ -44,6 +44,8 @@ public class Card {
     }
 
     public boolean equalsInGame(Card card) {
+        if(card == null)
+            return false;
         if(card.playerName == null || this.playerName == null)
             return false;
         else

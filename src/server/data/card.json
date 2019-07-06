@@ -11,8 +11,11 @@
               "targetType": "ALL_OPPONENT_FORCE",
               "name": "All DisarmBuff",
               "description": "",
+              "id": 0,
               "price": 2000,
-              "manaPoint": 9
+              "manaPoint": 9,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -23,13 +26,17 @@
             "@val": {
               "health": 3,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 10,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Turan Wand",
               "description": "",
+              "id": 0,
               "price": 450,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -41,8 +48,11 @@
               "targetType": "OPPONENT_HERO",
               "name": "Lighting Bolt",
               "description": "",
+              "id": 0,
               "price": 1250,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -53,13 +63,17 @@
             "@val": {
               "health": 10,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 6,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Persian Horse Rider",
               "description": "",
+              "id": 0,
               "price": 200,
-              "manaPoint": 4
+              "manaPoint": 4,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -71,8 +85,11 @@
               "targetType": "ALL_OPPONENT_FORCE_IN_ONE_COLUMN",
               "name": "All Attack",
               "description": "",
+              "id": 0,
               "price": 1500,
-              "manaPoint": 4
+              "manaPoint": 4,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -83,13 +100,17 @@
             "@val": {
               "health": 6,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Persian Swordsman",
               "description": "",
+              "id": 0,
               "price": 400,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -100,13 +121,17 @@
             "@val": {
               "health": 12,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 11,
               "attackRange": 3,
               "attackType": "HYBRID",
               "name": "One Eye Giant",
               "description": "",
+              "id": 0,
               "price": 500,
-              "manaPoint": 7
+              "manaPoint": 7,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -117,13 +142,17 @@
             "@val": {
               "health": 50,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Kaveh",
               "description": "",
+              "id": 0,
               "price": 8000,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -134,13 +163,17 @@
             "@val": {
               "health": 35,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 3,
               "attackRange": 3,
               "attackType": "HYBRID",
               "name": "Esfandiar",
               "description": "",
+              "id": 0,
               "price": 12000,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -152,8 +185,11 @@
               "targetType": "AN_OPPONENT_MINION",
               "name": "Weakening",
               "description": "",
+              "id": 0,
               "price": 1000,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -165,8 +201,11 @@
               "targetType": "OPPONENT_FORCE_OR_MY_FORCE",
               "name": "Dispel",
               "description": "",
+              "id": 0,
               "price": 2500,
-              "manaPoint": 0
+              "manaPoint": 0,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -177,13 +216,17 @@
             "@val": {
               "health": 24,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 6,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Persian Champion",
               "description": "",
+              "id": 0,
               "price": 600,
-              "manaPoint": 9
+              "manaPoint": 9,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -195,8 +238,11 @@
               "targetType": "ALL_MY_FORCE",
               "name": "All Power",
               "description": "",
+              "id": 0,
               "price": 2500,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -207,13 +253,17 @@
             "@val": {
               "health": 4,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 2,
               "attackRange": 7,
               "attackType": "RANGED",
               "name": "Turan Sling",
               "description": "",
+              "id": 0,
               "price": 600,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -225,8 +275,11 @@
               "targetType": "MY_HERO",
               "name": "God strength",
               "description": "",
+              "id": 0,
               "price": 450,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -237,13 +290,17 @@
             "@val": {
               "health": 50,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Rakhsh",
               "description": "",
+              "id": 0,
               "price": 8000,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -255,8 +312,11 @@
               "targetType": "MY_FORCE",
               "name": "Madness",
               "description": "",
+              "id": 0,
               "price": 650,
-              "manaPoint": 0
+              "manaPoint": 0,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -267,13 +327,17 @@
             "@val": {
               "health": 14,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 10,
               "attackRange": 7,
               "attackType": "HYBRID",
               "name": "Black Demon",
               "description": "",
+              "id": 0,
               "price": 300,
-              "manaPoint": 9
+              "manaPoint": 9,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -284,13 +348,17 @@
             "@val": {
               "health": 5,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 3,
               "attackRange": 3,
               "attackType": "HYBRID",
               "name": "Persian Lancer",
               "description": "",
+              "id": 0,
               "price": 500,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -301,13 +369,17 @@
             "@val": {
               "health": 12,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 5,
               "attackType": "RANGED",
               "name": "Persian General",
               "description": "",
+              "id": 0,
               "price": 800,
-              "manaPoint": 7
+              "manaPoint": 7,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -318,13 +390,17 @@
             "@val": {
               "health": 3,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 5,
               "attackType": "RANGED",
               "name": "Turan Archer",
               "description": "",
+              "id": 0,
               "price": 500,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -335,13 +411,17 @@
             "@val": {
               "health": 2,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 2,
               "attackRange": 3,
               "attackType": "RANGED",
               "name": "Small Tiger",
               "description": "",
+              "id": 0,
               "price": 200,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -352,13 +432,17 @@
             "@val": {
               "health": 12,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 12,
               "attackRange": 7,
               "attackType": "RANGED",
               "name": "Giant Catapult",
               "description": "",
+              "id": 0,
               "price": 300,
-              "manaPoint": 9
+              "manaPoint": 9,
+              "isInserted": false,
+              "canMove": false
             }
           },
           5
@@ -369,13 +453,17 @@
             "@val": {
               "health": 50,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 3,
               "attackRange": 3,
               "attackType": "RANGED",
               "name": "Legend",
               "description": "",
+              "id": 0,
               "price": 11000,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -387,8 +475,11 @@
               "targetType": "OPPONENT_HERO",
               "name": "Shock",
               "description": "",
+              "id": 0,
               "price": 1200,
-              "manaPoint": 9
+              "manaPoint": 9,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -400,8 +491,11 @@
               "targetType": "ANY",
               "name": "Kings Guard",
               "description": "",
+              "id": 0,
               "price": 1750,
-              "manaPoint": 9
+              "manaPoint": 9,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -412,13 +506,17 @@
             "@val": {
               "health": 50,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 2,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Zahak",
               "description": "",
+              "id": 0,
               "price": 10000,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -429,13 +527,17 @@
             "@val": {
               "health": 4,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 3,
               "attackType": "HYBRID",
               "name": "Turan Lancer",
               "description": "",
+              "id": 0,
               "price": 600,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -446,13 +548,17 @@
             "@val": {
               "health": 50,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "White Daemon",
               "description": "",
+              "id": 0,
               "price": 8000,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -463,13 +569,17 @@
             "@val": {
               "health": 30,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 2,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Arash",
               "description": "",
+              "id": 0,
               "price": 10000,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -480,13 +590,17 @@
             "@val": {
               "health": 6,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 6,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Turan Spy",
               "description": "",
+              "id": 0,
               "price": 700,
-              "manaPoint": 4
+              "manaPoint": 4,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -498,8 +612,11 @@
               "targetType": "AN_OPPONENT_FORCE",
               "name": "Fireball",
               "description": "",
+              "id": 0,
               "price": 400,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           7
@@ -511,8 +628,11 @@
               "targetType": "MY_FORCE",
               "name": "Health With Profit",
               "description": "",
+              "id": 0,
               "price": 2250,
-              "manaPoint": 0
+              "manaPoint": 0,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -524,8 +644,11 @@
               "targetType": "MY_FORCE",
               "name": "Power Up",
               "description": "",
+              "id": 0,
               "price": 2500,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -536,13 +659,17 @@
             "@val": {
               "health": 50,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "SevenHead Dragon",
               "description": "",
+              "id": 0,
               "price": 8000,
-              "manaPoint": 0
+              "manaPoint": 0,
+              "isInserted": false,
+              "canMove": false
             }
           },
           9
@@ -553,13 +680,17 @@
             "@val": {
               "health": 1,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 8,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Predator Lion",
               "description": "",
+              "id": 0,
               "price": 600,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -570,13 +701,17 @@
             "@val": {
               "health": 55,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 7,
               "attackRange": 4,
               "attackType": "RANGED",
               "name": "Rostam",
               "description": "",
+              "id": 0,
               "price": 8000,
-              "manaPoint": 1
+              "manaPoint": 1,
+              "isInserted": false,
+              "canMove": false
             }
           },
           8
@@ -587,13 +722,17 @@
             "@val": {
               "health": 16,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 8,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Hog Head Demon",
               "description": "",
+              "id": 0,
               "price": 300,
-              "manaPoint": 6
+              "manaPoint": 6,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -604,13 +743,17 @@
             "@val": {
               "health": 50,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 4,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Phoenix",
               "description": "",
+              "id": 0,
               "price": 9000,
-              "manaPoint": 5
+              "manaPoint": 5,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -621,13 +764,17 @@
             "@val": {
               "health": 6,
               "currentHealth": 0,
+              "canAttack": false,
               "attackPoint": 10,
               "attackRange": 1,
               "attackType": "MELEE",
               "name": "Turan Prince",
               "description": "",
+              "id": 0,
               "price": 800,
-              "manaPoint": 6
+              "manaPoint": 6,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -639,8 +786,11 @@
               "targetType": "SQUARE2x2",
               "name": "Area Dispel",
               "description": "",
+              "id": 0,
               "price": 1500,
-              "manaPoint": 2
+              "manaPoint": 2,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -652,8 +802,11 @@
               "targetType": "ANY",
               "name": "Poison Lake",
               "description": "",
+              "id": 0,
               "price": 900,
-              "manaPoint": 5
+              "manaPoint": 5,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
@@ -665,8 +818,11 @@
               "targetType": "AN_OPPONENT_FORCE",
               "name": "Total Disarm",
               "description": "",
+              "id": 0,
               "price": 1000,
-              "manaPoint": 0
+              "manaPoint": 0,
+              "isInserted": false,
+              "canMove": false
             }
           },
           10
