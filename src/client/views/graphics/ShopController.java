@@ -1,5 +1,8 @@
 package client.views.graphics;
 
+import client.controllers.AccountClient;
+import client.controllers.ShopClient;
+import client.models.Shop;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import client.controllers.ClientManager;
@@ -20,12 +23,11 @@ import client.models.cards.Minion;
 import client.models.cards.spell.Spell;
 import client.views.Graphics;
 import client.views.SpriteMaker;
+import models.Response;
 
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static client.views.Graphics.Menu.CUSTOM_CARD;
 import static client.views.Graphics.Menu.MAIN_MENU;
@@ -97,7 +99,7 @@ public class ShopController implements Initializable {
         try {
             Action action = Action.IDLE;
             ImageView imageView = new ImageView();
-            if(card instanceof Spell)
+            if (card instanceof Spell)
                 action = Action.SPELL_IDLE;
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), action, 10000);
             if (isAttacker) {
@@ -140,17 +142,20 @@ public class ShopController implements Initializable {
 
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
-        List<Card> cards = new ArrayList<>();
+//        List<Card> cards = new ArrayList<>();
+        Map<Card, Integer> cards = new HashMap<>();
         if (q == null || q.equals("")) {
-            cards = ClientManager.getShopCollection().getCardsList();
-        } else {
-            try {
-                cards = ClientManager.searchCardInShop(q);
-            } catch (Collection.CardNotFoundException ignored) {
-            }
+            Response response = new ShopClient().search(AccountClient.user.loginToken, q, type.getTypeName().toLowerCase());
+//            cards = ClientManager.getShopCollection().getCardsList();
+//        } else {
+//            try {
+//                cards = ClientManager.searchCardInShop(q);
+//            } catch (Collection.CardNotFoundException ignored) {
+//            }
+            cards = ((Map<Card, Integer>) response.data);
         }
 
-        cards.forEach(card -> {
+        cards.forEach((card, integer) -> {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true);
                 cardPane.setOnMouseClicked(event -> {
@@ -168,10 +173,13 @@ public class ShopController implements Initializable {
                     cardPane.getChildren().addAll(buy, cancel);
                     buy.setOnMouseClicked(bought -> {
                         Graphics.playMusic("sfx_ui_select.m4a");
-                        try {
-                            ClientManager.buy(card.getName());
-                        } catch (Exception ignored) {
-                        }
+//                        try {
+//                            ClientManager.buy(card.getName());
+//                        } catch (Exception ignored) {
+//                        }
+                        ShopClient shopClient = new ShopClient();
+                        shopClient.buy(AccountClient.user.loginToken, card.getName());
+                        //Todo: check response message;
                         cardPane.getChildren().removeAll(buy, cancel);
 
                     });
