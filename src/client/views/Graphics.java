@@ -57,7 +57,7 @@ public class Graphics extends Application {
         SHOP_MENU("/client/layouts/shop.fxml"),
         ACCOUNT_MENU(accountMenuRoot),
         MATCH_SELECT_MENU(matchSelectRoot),
-        MAIN_MENU(mainMenuRoot),
+        MAIN_MENU("/client/layouts/main_menu.fxml"),
         MULTI_SINGLE(multiSingleRoot),
         CUSTOM_SELECT(customSelectRoot),
         BATTLE("/client/layouts/battle.fxml"),
@@ -104,11 +104,11 @@ public class Graphics extends Application {
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
             matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/match_select.fxml"));
-            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/main_menu.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
             customCardRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/custom_card.fxml"));
             multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/multi_single.fxml"));
             customSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/custom_select.fxml"));
+//            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/main_menu.fxml"));
 //            battleMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/battle.fxml"));
 //            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/collection_menu.fxml"));
 //            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/shop.fxml"));
