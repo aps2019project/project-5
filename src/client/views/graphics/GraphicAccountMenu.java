@@ -44,8 +44,8 @@ public class GraphicAccountMenu implements Initializable {
 
     public void login(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
-        AccountClient accountClient = new AccountClient();
-        Response response = accountClient.login(loginUsernameTxt.getText(), loginPasswordTxt.getText());
+//        AccountClient accountClient = new AccountClient();
+        Response response = AccountClient.login(loginUsernameTxt.getText(), loginPasswordTxt.getText());
         if (response.OK) {
             Graphics.setMenu(MAIN_MENU);
             music.stop();
@@ -87,15 +87,16 @@ public class GraphicAccountMenu implements Initializable {
             return;
         }
 
-        try {
-            ClientManager.createAccount(username, password);
-            Graphics.alert("Account Created", "Congrats", "Your account created successfully");
-            signUpUsernameTxt.setText("");
-            signUpPasswordTxt.setText("");
-            signUpPasswordRematchTxt.setText("");
-        } catch (Account.UsernameExistsException ignored) {
-            changeAsWrong(signUpUsernameTxt, true);
-        }
+//        try {
+//            ClientManager.createAccount(username, password);
+        AccountClient.signup(username, password);
+        Graphics.alert("Account Created", "Congrats", "Your account created successfully");
+        signUpUsernameTxt.setText("");
+        signUpPasswordTxt.setText("");
+        signUpPasswordRematchTxt.setText("");
+//        } catch (Account.UsernameExistsException ignored) {
+//            changeAsWrong(signUpUsernameTxt, true);
+//        }
     }
 
     @Override

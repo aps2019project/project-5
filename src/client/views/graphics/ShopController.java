@@ -1,5 +1,7 @@
 package client.views.graphics;
 
+import client.controllers.AccountClient;
+import client.controllers.ShopClient;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import client.controllers.ClientManager;
@@ -20,6 +22,7 @@ import client.models.cards.Minion;
 import client.models.cards.spell.Spell;
 import client.views.Graphics;
 import client.views.SpriteMaker;
+import models.Response;
 
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -97,7 +100,7 @@ public class ShopController implements Initializable {
         try {
             Action action = Action.IDLE;
             ImageView imageView = new ImageView();
-            if(card instanceof Spell)
+            if (card instanceof Spell)
                 action = Action.SPELL_IDLE;
             SpriteMaker.getAndShowAnimation(imageView, card.getName(), action, 10000);
             if (isAttacker) {
@@ -140,50 +143,54 @@ public class ShopController implements Initializable {
 
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
-        List<Card> cards = new ArrayList<>();
-        if (q == null || q.equals("")) {
-            cards = ClientManager.getShopCollection().getCardsList();
-        } else {
-            try {
-                cards = ClientManager.searchCardInShop(q);
-            } catch (Collection.CardNotFoundException ignored) {
-            }
-        }
-
-        cards.forEach(card -> {
-            if (card.getClass() == type || type == Card.class) {
-                AnchorPane cardPane = getCardPane(card, true);
-                cardPane.setOnMouseClicked(event -> {
-                    Graphics.playMusic("sfx_ui_select.m4a");
-                    JFXButton buy = new JFXButton("BUY");
-                    buy.setLayoutX(110);
-                    buy.setLayoutY(210);
-                    buy.setPrefSize(90, 62);
-                    buy.getStyleClass().addAll("shop-buy-button");
-                    JFXButton cancel = new JFXButton("CANCEL");
-                    cancel.setLayoutX(25);
-                    cancel.setLayoutY(210);
-                    cancel.setPrefSize(90, 62);
-                    cancel.getStyleClass().addAll("shop-cancel-button");
-                    cardPane.getChildren().addAll(buy, cancel);
-                    buy.setOnMouseClicked(bought -> {
-                        Graphics.playMusic("sfx_ui_select.m4a");
-                        try {
-                            ClientManager.buy(card.getName());
-                        } catch (Exception ignored) {
-                        }
-                        cardPane.getChildren().removeAll(buy, cancel);
-
-                    });
-                    cancel.setOnMouseClicked(canceled -> {
-                        Graphics.playMusic("sfx_ui_select.m4a");
-                        cardPane.getChildren().removeAll(buy, cancel);
-                    });
-                });
-                cardContainer.getChildren().add(cardPane);
-            }
-        });
+        List<Card> cards;
+//        if (q == null || q.equals("")) {
+        Response response = new ShopClient().search(AccountClient.user.loginToken, q, type.getTypeName().toLowerCase());
+//            cards = ClientManager.getShopCollection().getCardsList();
+        cards = (List<Card>) response.data;
+//        } else {
+//            try {
+//                cards = ClientManager.searchCardInShop(q);
+//            } catch (Collection.CardNotFoundException ignored) {
+//            }
     }
+
+        cards.forEach(card ->
+
+    {
+        if (card.getClass() == type || type == Card.class) {
+            AnchorPane cardPane = getCardPane(card, true);
+            cardPane.setOnMouseClicked(event -> {
+                Graphics.playMusic("sfx_ui_select.m4a");
+                JFXButton buy = new JFXButton("BUY");
+                buy.setLayoutX(110);
+                buy.setLayoutY(210);
+                buy.setPrefSize(90, 62);
+                buy.getStyleClass().addAll("shop-buy-button");
+                JFXButton cancel = new JFXButton("CANCEL");
+                cancel.setLayoutX(25);
+                cancel.setLayoutY(210);
+                cancel.setPrefSize(90, 62);
+                cancel.getStyleClass().addAll("shop-cancel-button");
+                cardPane.getChildren().addAll(buy, cancel);
+                buy.setOnMouseClicked(bought -> {
+                    Graphics.playMusic("sfx_ui_select.m4a");
+                    try {
+                        ClientManager.buy(card.getName());
+                    } catch (Exception ignored) {
+                    }
+                    cardPane.getChildren().removeAll(buy, cancel);
+
+                });
+                cancel.setOnMouseClicked(canceled -> {
+                    Graphics.playMusic("sfx_ui_select.m4a");
+                    cardPane.getChildren().removeAll(buy, cancel);
+                });
+            });
+            cardContainer.getChildren().add(cardPane);
+        }
+    });
+}
 
     public void addCustomCard(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
