@@ -1,10 +1,7 @@
 package server;
 
 
-import server.controllers.AuthenticationController;
-import server.controllers.BattleController;
-import server.controllers.ShopController;
-import server.controllers.CollectionController;
+import server.controllers.*;
 import server.models.Application;
 import server.models.URL;
 
@@ -37,6 +34,9 @@ public class Server {
         authentication.urls.add(new URL("/battle/end_turn", BattleController::endTurn, true));
         authentication.urls.add(new URL("/battle/move", BattleController::moveCard, true));
         authentication.urls.add(new URL("/battle/attack", BattleController::attack, true));
+
+        authentication.urls.add(new URL("/chat/send_message", ChatController::sendMessage, true));
+        authentication.urls.add(new URL("/chat/update", ChatController::update, true));
         authentication.start();
     }
 }
