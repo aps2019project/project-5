@@ -28,6 +28,7 @@ import java.util.*;
 
 import static client.views.Graphics.Menu.CUSTOM_CARD;
 import static client.views.Graphics.Menu.MAIN_MENU;
+import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
 public class ShopController implements Initializable {
@@ -68,7 +69,7 @@ public class ShopController implements Initializable {
         }
     }
 
-    public static AnchorPane getCardPane(Card card, boolean isInShop) {
+    public static AnchorPane getCardPane(Card card, boolean isInShop, int count) {
         boolean isAttacker = card instanceof Hero || card instanceof Minion;
         AnchorPane cardPane = new AnchorPane();
         cardPane.getStyleClass().add("card-pane");
@@ -109,7 +110,14 @@ public class ShopController implements Initializable {
                 imageView.setFitHeight(120);
             }
             cardPane.getChildren().add(imageView);
-        } catch (Exception ignored) {
+        } catch (Exception ignored) {}
+
+        if(isInShop) {
+            Label countLabel = new Label("x" + count);
+            countLabel.setStyle("-fx-text-fill: white; -fx-pref-width: 30px;");
+            countLabel.relocate(98, 275);
+            countLabel.setAlignment(Pos.CENTER);
+            cardPane.getChildren().add(countLabel);
         }
 
         if (isAttacker) {
@@ -148,8 +156,8 @@ public class ShopController implements Initializable {
 
         cards.forEach((card, integer) -> {
             if (card.getClass() == type || type == Card.class) {
-                AnchorPane cardPane = getCardPane(card, true);
-                cardPane.setOnMouseClicked(event -> {
+                AnchorPane cardPane = getCardPane(card, true, integer);
+                cardPane.setOnMouseEntered(event -> {
                     Graphics.playMusic("sfx_ui_select.m4a");
                     JFXButton buy = new JFXButton("BUY");
                     buy.setLayoutX(110);
@@ -164,13 +172,17 @@ public class ShopController implements Initializable {
                     cardPane.getChildren().addAll(buy, cancel);
                     buy.setOnMouseClicked(bought -> {
                         Graphics.playMusic("sfx_ui_select.m4a");
-                        ShopClient.buy(AccountClient.user.loginToken, card.name);
-                        //Todo: check response message;
-                        cardPane.getChildren().removeAll(buy, cancel);
-
+                        Response buyResponse = ShopClient.buy(AccountClient.user.loginToken, card.name);
+                        if(buyResponse.OK)
+                            updateCards(searchField.getText(), filterType);
+                        else
+                            alert("Error", "buy failed", buyResponse.message);
                     });
                     cancel.setOnMouseClicked(canceled -> {
                         Graphics.playMusic("sfx_ui_select.m4a");
+                        cardPane.getChildren().removeAll(buy, cancel);
+                    });
+                    cardPane.setOnMouseExited(event1 -> {
                         cardPane.getChildren().removeAll(buy, cancel);
                     });
                 });

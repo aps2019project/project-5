@@ -412,7 +412,7 @@ public class GraphicBattleController implements Initializable {
                 updateCells();
             });
             handItemContainer[index].setOnMouseEntered(event -> {
-                AnchorPane cardPane = ShopController.getCardPane(card, false);
+                AnchorPane cardPane = ShopController.getCardPane(card, false, 0);
                 cardPane.relocate(handItemContainer[finalIndex].localToScene(
                         handItemContainer[finalIndex].getBoundsInLocal()
                 ).getMinX(), 600);
