@@ -1,6 +1,6 @@
 package client.models.map;
 
-import client.controllers.logic.Manager;
+import client.controllers.Manager;
 import client.models.Collection;
 import client.models.Player;
 import client.models.cards.Attacker;

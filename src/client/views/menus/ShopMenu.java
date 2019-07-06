@@ -1,6 +1,6 @@
 package client.views.menus;
 
-import client.controllers.logic.Manager;
+import client.controllers.Manager;
 import client.models.Account;
 import client.models.Collection;
 import client.models.cards.Hero;
@@ -12,7 +12,6 @@ import client.views.Command;
 import client.views.Error;
 import client.views.Log;
 import client.views.Output;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

@@ -8,7 +8,8 @@ public class Spell extends Card {
         this.targetType = targetType;
     }
 
-    public Spell() {
-        super();
+    public Spell(Spell spell) {
+        super(spell);
+        this.targetType = spell.targetType;
     }
 }

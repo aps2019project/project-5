@@ -2,9 +2,10 @@ package server.data;
 
 import client.data.FileReader;
 import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
 import models.Account;
-import models.cards.Card;
+import client.models.cards.Card;
 import models.cards.Collection;
 
 import java.io.File;
@@ -14,9 +15,11 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class DataReader {
-    public static Type ACCOUNTS_TYPE = new TypeToken<HashMap<String, Account>>(){}.getType();
-    public static Type CARDS_TYPE = new TypeToken<Collection>(){}.getType();
-    public static YaGson yaGson = new YaGson();
+    public static Type ACCOUNTS_TYPE = new TypeToken<HashMap<String, Account>>() {
+    }.getType();
+    public static Type CARDS_TYPE = new TypeToken<Collection>() {
+    }.getType();
+    private static YaGson yaGson = new YaGsonBuilder().setPrettyPrinting().create();
 
     public static HashMap<String, Account> readAccounts() {
         HashMap<String, Account> accounts;

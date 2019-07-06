@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AccountDataStream {
-    private static Type accountsArray = new TypeToken<List<Account>>() {}.getType();
+    private static Type accountsArray = new TypeToken<List<Account>>() {
+    }.getType();
     private static URL url = AccountDataStream.class.getResource("accounts.json");
     private static File file = new File(url.getPath());
     private static YaGson accountsYaGson = new YaGson();
@@ -29,7 +30,8 @@ public class AccountDataStream {
             accountWriter.write(accountsYaGson.toJson(accounts));
             accountWriter.flush();
             accountWriter.close();
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 
     public static HashMap<String, Account> loadAccounts() {

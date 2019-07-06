@@ -1,7 +1,7 @@
 package client.views.menus;
 
 import client.controllers.ClientManager;
-import client.controllers.logic.Manager;
+import client.controllers.Manager;
 import client.models.Account;
 import client.views.Command;
 import client.views.Error;
@@ -104,7 +104,7 @@ public class PreBattleMenu implements Menu {
             opponentName = "AI User";
 
         }
-        Manager.setMatchData(AIMode, ClientManager.GameMode.getGame(gameMode), opponentName);
+        Manager.setMatchData(AIMode, 0, opponentName);
 
     }
 }
