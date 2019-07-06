@@ -145,7 +145,7 @@ public class ShopController implements Initializable {
 //        List<Card> cards = new ArrayList<>();
         Map<Card, Integer> cards = new HashMap<>();
         if (q == null || q.equals("")) {
-            Response response = new ShopClient().search(AccountClient.user.loginToken, q, type.getTypeName().toLowerCase());
+            Response response = new ShopClient().search(q, type.getTypeName().toLowerCase());
 //            cards = ClientManager.getShopCollection().getCardsList();
 //        } else {
 //            try {
@@ -178,7 +178,7 @@ public class ShopController implements Initializable {
 //                        } catch (Exception ignored) {
 //                        }
                         ShopClient shopClient = new ShopClient();
-                        shopClient.buy(AccountClient.user.loginToken, card.getName());
+                        shopClient.buy(card.getName());
                         //Todo: check response message;
                         cardPane.getChildren().removeAll(buy, cancel);
 

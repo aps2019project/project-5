@@ -8,18 +8,19 @@ import server.models.Application;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
+
 import static server.data.DataWriter.yaGson;
 
 public class CollectionController extends Application {
 
     public static Class getCardClass(String className) {
         Class cardClass = Card.class;
-        if(className == null) className = "";
-        if(className.equalsIgnoreCase("minion"))
+        if (className == null) className = "";
+        if (className.equalsIgnoreCase("minion"))
             cardClass = Minion.class;
-        if(className.equalsIgnoreCase("spell"))
+        if (className.equalsIgnoreCase("spell"))
             cardClass = Spell.class;
-        if(className.equalsIgnoreCase("hero"))
+        if (className.equalsIgnoreCase("hero"))
             cardClass = Hero.class;
         return cardClass;
     }
@@ -37,11 +38,11 @@ public class CollectionController extends Application {
     public static HttpResponse addDeck(HttpRequest request) {
         Response response;
         String deckName = request.GET.get("name");
-        if(deckName == null)
+        if (deckName == null)
             response = new Response(false, "name parameter not sent", 100);
         else {
             Deck deck = request.user.decks.get(deckName);
-            if(deck != null) {
+            if (deck != null) {
                 response = new Response(false, "deck exists.", 101);
             } else {
                 deck = new Deck(deckName);
@@ -57,20 +58,20 @@ public class CollectionController extends Application {
         Response response;
         String deckName = request.GET.get("deck_name");
         String cardName = request.GET.get("card_name");
-        if(deckName == null)
+        if (deckName == null)
             response = new Response(false, "deck_name not sent", 100);
-        else if(cardName == null)
+        else if (cardName == null)
             response = new Response(false, "card_name not sent", 100);
         else {
             Deck deck = request.user.decks.get(deckName);
             Card card = request.user.cards.searchCardByName(cardName);
-            if(deck == null)
+            if (deck == null)
                 response = new Response(false, "deck not found with this name", 102);
-            else if(card == null)
+            else if (card == null)
                 response = new Response(false, "card not found with this name", 103);
             else if (request.user.cards.count(card) <= deck.count(card))
                 response = new Response(false, "this card is not enough", 104);
-            else if(deck.add(card))
+            else if (deck.add(card))
                 response = new Response(true, "card added to deck", deck);
             else
                 response = new Response(false, "can't add card to deck", 105);
@@ -82,14 +83,14 @@ public class CollectionController extends Application {
     public static HttpResponse setMainDeck(HttpRequest request) {
         Response response;
         String deckName = request.GET.get("deck_name");
-        if(deckName == null)
+        if (deckName == null)
             response = new Response(false, "deck_name not sent", 100);
         else {
             Deck deck = request.user.decks.get(deckName);
-            if(deck == null)
+            if (deck == null)
                 response = new Response(false, "deck with this name not found", 106);
             else {
-                if(!deck.isValid()) {
+                if (!deck.isValid()) {
                     response = new Response(false, "selected deck is not valid :(");
                 } else {
                     request.user.mainDeck = deck;
@@ -104,11 +105,11 @@ public class CollectionController extends Application {
     public static HttpResponse getDeck(HttpRequest request) {
         Response response;
         String deckName = request.GET.get("deck_name");
-        if(deckName == null)
+        if (deckName == null)
             response = new Response(false, "deck_name not sent", 100);
         else {
             Deck deck = request.user.decks.get(deckName);
-            if(deck == null)
+            if (deck == null)
                 response = new Response(false, "deck with this name not found", 106);
             else {
                 response = new Response(true, "see the deck!!!", deck);
@@ -120,11 +121,11 @@ public class CollectionController extends Application {
     public static HttpResponse removeDeck(HttpRequest request) {
         Response response;
         String deckName = request.GET.get("deck_name");
-        if(deckName == null)
+        if (deckName == null)
             response = new Response(false, "deck_name not sent", 100);
         else {
             Deck deck = request.user.decks.get(deckName);
-            if(deck == null)
+            if (deck == null)
                 response = new Response(false, "deck with this name not found", 106);
             else {
                 request.user.decks.remove(deck.name);
@@ -138,11 +139,11 @@ public class CollectionController extends Application {
     public static HttpResponse isValid(HttpRequest request) {
         Response response;
         String deckName = request.GET.get("deck_name");
-        if(deckName == null)
+        if (deckName == null)
             response = new Response(false, "deck_name not sent", 100);
         else {
             Deck deck = request.user.decks.get(deckName);
-            if(deck == null)
+            if (deck == null)
                 response = new Response(false, "deck with this name not found", 106);
             else {
                 boolean isValid = deck.isValid();
@@ -158,17 +159,17 @@ public class CollectionController extends Application {
         Response response;
         String deckName = request.GET.get("deck_name");
         String cardName = request.GET.get("card_name");
-        if(deckName == null)
+        if (deckName == null)
             response = new Response(false, "deck_name not sent", 100);
-        else if(cardName == null)
+        else if (cardName == null)
             response = new Response(false, "card_name not sent", 100);
         else {
             Deck deck = request.user.decks.get(deckName);
-            if(deck == null)
+            if (deck == null)
                 response = new Response(false, "deck with this name not found", 106);
             else {
                 Card card = deck.searchCardByName(cardName);
-                if(card == null)
+                if (card == null)
                     response = new Response(false, "card not found in this deck", 107);
                 else {
                     deck.decrease(card);
