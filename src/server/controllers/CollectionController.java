@@ -128,7 +128,9 @@ public class CollectionController extends Application {
             if (deck == null)
                 response = new Response(false, "deck with this name not found", 106);
             else {
+                if (deck.name.equals(request.user.mainDeck.name)) request.user.mainDeck = null;
                 request.user.decks.remove(deck.name);
+
                 response = new Response(true, "deck deleted!", request.user);
             }
         }
