@@ -2,6 +2,7 @@ package client.views.graphics;
 
 import client.controllers.AccountClient;
 import client.controllers.ShopClient;
+import client.models.Shop;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import client.controllers.ClientManager;
@@ -26,9 +27,7 @@ import models.Response;
 
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static client.views.Graphics.Menu.CUSTOM_CARD;
 import static client.views.Graphics.Menu.MAIN_MENU;
@@ -143,54 +142,56 @@ public class ShopController implements Initializable {
 
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
-        List<Card> cards;
-//        if (q == null || q.equals("")) {
-        Response response = new ShopClient().search(AccountClient.user.loginToken, q, type.getTypeName().toLowerCase());
+//        List<Card> cards = new ArrayList<>();
+        Map<Card, Integer> cards = new HashMap<>();
+        if (q == null || q.equals("")) {
+            Response response = new ShopClient().search(AccountClient.user.loginToken, q, type.getTypeName().toLowerCase());
 //            cards = ClientManager.getShopCollection().getCardsList();
-        cards = (List<Card>) response.data;
 //        } else {
 //            try {
 //                cards = ClientManager.searchCardInShop(q);
 //            } catch (Collection.CardNotFoundException ignored) {
 //            }
-    }
-
-        cards.forEach(card ->
-
-    {
-        if (card.getClass() == type || type == Card.class) {
-            AnchorPane cardPane = getCardPane(card, true);
-            cardPane.setOnMouseClicked(event -> {
-                Graphics.playMusic("sfx_ui_select.m4a");
-                JFXButton buy = new JFXButton("BUY");
-                buy.setLayoutX(110);
-                buy.setLayoutY(210);
-                buy.setPrefSize(90, 62);
-                buy.getStyleClass().addAll("shop-buy-button");
-                JFXButton cancel = new JFXButton("CANCEL");
-                cancel.setLayoutX(25);
-                cancel.setLayoutY(210);
-                cancel.setPrefSize(90, 62);
-                cancel.getStyleClass().addAll("shop-cancel-button");
-                cardPane.getChildren().addAll(buy, cancel);
-                buy.setOnMouseClicked(bought -> {
-                    Graphics.playMusic("sfx_ui_select.m4a");
-                    try {
-                        ClientManager.buy(card.getName());
-                    } catch (Exception ignored) {
-                    }
-                    cardPane.getChildren().removeAll(buy, cancel);
-
-                });
-                cancel.setOnMouseClicked(canceled -> {
-                    Graphics.playMusic("sfx_ui_select.m4a");
-                    cardPane.getChildren().removeAll(buy, cancel);
-                });
-            });
-            cardContainer.getChildren().add(cardPane);
+            cards = ((Map<Card, Integer>) response.data);
         }
-    });
-}
+
+        cards.forEach((card, integer) -> {
+            if (card.getClass() == type || type == Card.class) {
+                AnchorPane cardPane = getCardPane(card, true);
+                cardPane.setOnMouseClicked(event -> {
+                    Graphics.playMusic("sfx_ui_select.m4a");
+                    JFXButton buy = new JFXButton("BUY");
+                    buy.setLayoutX(110);
+                    buy.setLayoutY(210);
+                    buy.setPrefSize(90, 62);
+                    buy.getStyleClass().addAll("shop-buy-button");
+                    JFXButton cancel = new JFXButton("CANCEL");
+                    cancel.setLayoutX(25);
+                    cancel.setLayoutY(210);
+                    cancel.setPrefSize(90, 62);
+                    cancel.getStyleClass().addAll("shop-cancel-button");
+                    cardPane.getChildren().addAll(buy, cancel);
+                    buy.setOnMouseClicked(bought -> {
+                        Graphics.playMusic("sfx_ui_select.m4a");
+//                        try {
+//                            ClientManager.buy(card.getName());
+//                        } catch (Exception ignored) {
+//                        }
+                        ShopClient shopClient = new ShopClient();
+                        shopClient.buy(AccountClient.user.loginToken, card.getName());
+                        //Todo: check response message;
+                        cardPane.getChildren().removeAll(buy, cancel);
+
+                    });
+                    cancel.setOnMouseClicked(canceled -> {
+                        Graphics.playMusic("sfx_ui_select.m4a");
+                        cardPane.getChildren().removeAll(buy, cancel);
+                    });
+                });
+                cardContainer.getChildren().add(cardPane);
+            }
+        });
+    }
 
     public void addCustomCard(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
