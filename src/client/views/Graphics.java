@@ -129,7 +129,6 @@ public class Graphics extends Application {
 
         Account.loadAccounts();
         System.out.println(Shop.getInstance().getCardsCollection().getMinions().size());
-//        System.out.println(Account.getAccounts().size());
         loadFXML();
         stage = primaryStage;
         Scene scene = new Scene(accountMenuRoot, 1920, 1080);
