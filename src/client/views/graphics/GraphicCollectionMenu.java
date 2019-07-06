@@ -71,6 +71,7 @@ public class GraphicCollectionMenu implements Initializable {
     private YaGson deckJson = new YaGson();
     final File savedDecksPath = new File("src" + File.separator + "data" + File.separator + "saved-decks");
 
+
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
         button.setDisable(isWrong);
         if (isWrong) {

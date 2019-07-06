@@ -32,8 +32,9 @@ public class SpriteMaker {
     File spriteFile;
     private ImageView bigImage;
     private ArrayList<MiniPicPeculiarities> datas = new ArrayList<>();
+    private int speed = 1;
 
-    private SpriteMaker(ImageView imageView, String name, Action action, int cycle) throws FileNotFoundException {
+    private SpriteMaker(ImageView imageView, String name, Action action, int cycle, int speed) throws FileNotFoundException {
         this.bigImage = imageView;
         this.name = name;
         this.action = action;
@@ -41,6 +42,7 @@ public class SpriteMaker {
         spriteFile = new File(filePath + ".plist");
         bigImage.setImage(new Image(new FileInputStream(filePath + ".png")));
         this.cycle = cycle;
+        this.speed = speed;
     }
 
     private static void loadPlist(SpriteMaker spriteMaker) throws ParserConfigurationException, ParseException, SAXException, PropertyListFormatException, IOException {
@@ -61,10 +63,10 @@ public class SpriteMaker {
 
     }
 
-    public static ImageView getAndShowAnimation(ImageView imageView, String name, Action action, int cycle) {
+    public static ImageView getAndShowAnimation(ImageView imageView, String name, Action action, int cycle, int speed) {
         SpriteMaker spriteMaker = null;
         try {
-            spriteMaker = new SpriteMaker(imageView, name, action, cycle);
+            spriteMaker = new SpriteMaker(imageView, name, action, cycle, speed);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -75,9 +77,9 @@ public class SpriteMaker {
             e.printStackTrace();
         }
 
-        Duration seconds = Duration.seconds(0.07 * spriteMaker.datas.size());
+        Duration seconds = Duration.seconds(0.07 * spriteMaker.datas.size() / speed) ;
         if (action == Action.RUN) {
-            seconds = Duration.seconds(0.045555 * spriteMaker.datas.size());
+            seconds = Duration.seconds(0.045555 * spriteMaker.datas.size() / speed);
         }
         Animation animation = new SpriteAnimation(spriteMaker.bigImage, seconds, spriteMaker.datas);
         animation.setCycleCount(cycle);
@@ -85,10 +87,10 @@ public class SpriteMaker {
         return spriteMaker.bigImage;
     }
 
-    public static double getAnimationTime(ImageView imageView, String name, Action action, int cycle) {
+    public static double getAnimationTime(ImageView imageView, String name, Action action, int cycle, int speed) {
         SpriteMaker spriteMaker = null;
         try {
-            spriteMaker = new SpriteMaker(imageView, name, action, cycle);
+            spriteMaker = new SpriteMaker(imageView, name, action, cycle, speed);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

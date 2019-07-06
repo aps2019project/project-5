@@ -113,7 +113,7 @@ public class ShopController implements Initializable {
             ImageView imageView = new ImageView();
             if(card instanceof Spell)
                 action = Action.SPELL_IDLE;
-            SpriteMaker.getAndShowAnimation(imageView, card.getName(), action, 10000);
+            SpriteMaker.getAndShowAnimation(imageView, card.getName(), action, 10000, 1);
             if (isAttacker) {
                 imageView.relocate(30, -10);
                 imageView.setFitWidth(160);

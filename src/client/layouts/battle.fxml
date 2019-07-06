@@ -21,6 +21,8 @@
                 styleClass="game-board" AnchorPane.topAnchor="310" AnchorPane.bottomAnchor="330">
     </AnchorPane>
 
+    <Label fx:id="timerLbl" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="950" />
+
     <ImageView AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" fitWidth="600" fitHeight="457">
         <Image url="/client/resources/images/battle/battlemap5_foreground_001@2x.png"/>
     </ImageView>
@@ -30,7 +32,7 @@
     </ImageView>
 
     <!-- End Turn Button -->
-    <Button styleClass="end-turn-button" text="END TURN" AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="40" onMouseClicked="#endTurn"/>
+    <Button fx:id="endTurnBtn" styleClass="end-turn-button" text="END TURN" AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="40" onMouseClicked="#endTurn"/>
 
     <!-- Graveyard -->
     <AnchorPane fx:id="graveyardContainer" styleClass="graveyard-container" AnchorPane.topAnchor="180"

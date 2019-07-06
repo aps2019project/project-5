@@ -1,7 +1,6 @@
 package client.views.graphics;
 
 import client.controllers.ClientManager;
-import com.sun.corba.se.impl.orbutil.graph.Graph;
 import javafx.animation.*;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -12,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -39,11 +37,15 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 
 import static client.views.Graphics.playMusic;
 
 public class GraphicBattleController implements Initializable {
+
+
+    private int eachTurnTime = 20;
     public AnchorPane gameBoard;
     public AnchorPane[][] cell = new AnchorPane[5][9];
     public Button graveyardButton;
@@ -58,6 +60,8 @@ public class GraphicBattleController implements Initializable {
     public ImageView player2Mana0, player2Mana1, player2Mana2, player2Mana3, player2Mana4, player2Mana5, player2Mana6, player2Mana7, player2Mana8;
     public Label player1Name, player2Name;
     public HBox mana1BarContainer, mana2BarContainer;
+    public Label timerLbl;
+    public Button endTurnBtn;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
     private ImageView[] player1Mana = new ImageView[9];
@@ -69,6 +73,9 @@ public class GraphicBattleController implements Initializable {
     private Card selectedCard;
     private BattleMenu battleMenu = new BattleMenu();
     private boolean isSelectedCardInGame = false;
+    private Timer timer;
+
+    int speed = 1;
 
     private void updateHp(Card... card) {
         for (Card card1 : card) {
@@ -120,11 +127,26 @@ public class GraphicBattleController implements Initializable {
         showCardsInBoard();
         handItem0_container.setLayoutX(-100);
         root.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.M) {
-                ClientManager.setMana(10000);
-                updateMana();
+            switch (event.getCode()) {
+                case M:
+                    ClientManager.setMana(10000);
+                    updateMana();
+                    break;
+                case EQUALS:
+                    speed++;
+                    break;
+                case MINUS:
+                    if (speed > 1)
+                        speed--;
+                    break;
             }
+            showCardsInBoard();
+            updateHand();
         });
+
+        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
+        timer.start();
+
     }
 
     private void showCardsInBoard() {
@@ -174,7 +196,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
-        int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
+        double time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7 / speed;
 //        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
 //        t.setToX(newPosition.getX() - cardPane.getLayoutX());
 //        t.setToY(newPosition.getY() - cardPane.getLayoutY());
@@ -192,11 +214,10 @@ public class GraphicBattleController implements Initializable {
         new Thread(() -> {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
             Graphics.playMusic("sfx_unit_run_charge_4.m4a");
-            SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.RUN, 1000);
+            SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.RUN, 1000, speed);
             long newTime = System.currentTimeMillis();
-            while (System.currentTimeMillis() - newTime <= time) {
-            }
-            SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 10000000);
+            while (System.currentTimeMillis() - newTime <= time ) { }
+            SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 10000000, speed);
         }).start();
     }
 
@@ -249,23 +270,23 @@ public class GraphicBattleController implements Initializable {
         ImageView myImageView = (ImageView) myAnchor.getChildren().get(0);
         ImageView enemyImageView = (ImageView) enemyAnchor.getChildren().get(0);
         new Thread(() -> {
-            double actionTime = SpriteMaker.getAnimationTime(myImageView, myCard.getName(), Action.ATTACK, 1);
+            double actionTime = SpriteMaker.getAnimationTime(myImageView, myCard.getName(), Action.ATTACK, 1, speed);
             Graphics.playMusic("sfx_f3_general_attack_impact.m4a");
-            SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.ATTACK, 1);
+            SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.ATTACK, 1, speed);
             long time = System.currentTimeMillis();
             while (System.currentTimeMillis() - time <= actionTime) {
             }
-            SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.IDLE, 10000000);
+            SpriteMaker.getAndShowAnimation(myImageView, myCard.getName(), Action.IDLE, 10000000, speed);
             Platform.runLater(() -> updateHp(enemyCard));
 
-            actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.getName(), Action.ATTACK, 1);
+            actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.getName(), Action.ATTACK, 1, speed);
             time = System.currentTimeMillis();
-            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.ATTACK, 1);
+            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.ATTACK, 1, speed);
             Graphics.playMusic("sfx_f3_general_attack_swing.m4a");
             while (System.currentTimeMillis() - time <= actionTime) {
             }
 
-            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.IDLE, 10000000);
+            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.getName(), Action.IDLE, 10000000, speed);
             Platform.runLater(() -> updateHp(myCard));
         }).start();
 
@@ -351,11 +372,11 @@ public class GraphicBattleController implements Initializable {
         if (selectedCard instanceof Attacker) {
             AnchorPane cardPane = getCardInGame(selectedCard, row, column);
             cardViews.put(selectedCard, cardPane);
-            AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
-                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
-                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
-                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
-                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1));
+            AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1, speed),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1, speed),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1, speed),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1, speed),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1, speed));
             Rectangle rect = getCardRectangle(row - 1, column - 1);
             teleport.setLayoutX(rect.getX() + 150);
             teleport.setLayoutY(rect.getY() + 140);
@@ -407,7 +428,9 @@ public class GraphicBattleController implements Initializable {
         int index = 0;
         for (Card card : hand.getCards()) {
             handItemMana[index].setText("" + card.getManaPoint());
-            ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.getName(), card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
+            ImageView cardAnimation = SpriteMaker.getAndShowAnimation(
+                    handItemImages[index], card.getName(),
+                    card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000, speed);
             handItemImages[index].setImage(cardAnimation.getImage());
             if (card instanceof Spell) {
                 cardAnimation.setFitWidth(120);
@@ -486,7 +509,7 @@ public class GraphicBattleController implements Initializable {
         ImageView imageView = new ImageView();
         anchorPane.setMouseTransparent(true);
         imageView.setMouseTransparent(true);
-        SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 1000000);
+        SpriteMaker.getAndShowAnimation(imageView, card.getName(), Action.IDLE, 1000000, speed);
         int scale = 1;
         if (column > 4) scale = -1;
         imageView.setScaleX(scale);
@@ -535,6 +558,9 @@ public class GraphicBattleController implements Initializable {
         playMusic("sfx_ui_select.m4a");
         selectedCard = null;
         ClientManager.endTurn();
+        timer.stop();
+        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
+        timer.start();
         updateMana();
         updateHand();
         updateCells();
@@ -557,6 +583,7 @@ public class GraphicBattleController implements Initializable {
             }
         }
     }
+
 
     public boolean attack(Matcher matcher) {
         String cardID = matcher.group("cardID");
