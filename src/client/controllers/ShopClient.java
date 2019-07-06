@@ -1,10 +1,7 @@
 package client.controllers;
 
-import models.Account;
 import models.Response;
 import models.cards.Card;
-
-import java.util.ArrayList;
 import java.util.Map;
 
 public class ShopClient {
@@ -16,9 +13,8 @@ public class ShopClient {
         if (!searchedContent.equals("")) serverConnection.parameters.put("search", searchedContent);
         if (!type.equals("")) serverConnection.parameters.put("type", type);
         Response response = serverConnection.getResponse();
-        if (response.OK) {
+        if (response.OK)
             searchedCards = (Map<Card, Integer>) response.data;
-        }
         return response;
     }
 

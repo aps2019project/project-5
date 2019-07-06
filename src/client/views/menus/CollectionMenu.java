@@ -1,6 +1,6 @@
 package client.views.menus;
 
-import client.controllers.logic.Manager;
+import client.controllers.Manager;
 import client.models.Account;
 import client.models.Collection;
 import client.models.Deck;
@@ -205,14 +205,14 @@ public class CollectionMenu implements Menu {
     }
 
     public static void showDeck(Matcher matcher) {
-        String deckName = matcher.group("deck");
-        try {
-            Deck deck = Manager.getDeck(deckName);
-            Output.log(deck.toString());
-        } catch (Account.DeckNotFoundException e) {
-            Output.err(Error.DECK_NOT_FOUND);
-        }
-
+//        String deckName = matcher.group("deck");
+//        try {
+//            Deck deck = Manager.getDeck(deckName);
+//            Output.log(deck.toString());
+//        } catch (Account.DeckNotFoundException e) {
+//            Output.err(Error.DECK_NOT_FOUND);
+//        }
+//
     }
 
     public static void help(Matcher matcher) {
