@@ -1,5 +1,6 @@
 package server.controllers;
 
+import com.gilecode.yagson.YaGson;
 import models.Response;
 import models.cards.*;
 import server.data.DataWriter;
@@ -181,6 +182,12 @@ public class CollectionController extends Application {
         }
         DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
         return new HttpResponseJSON(yaGson.toJson(response));
+    }
+
+    public static HttpResponse getDecks(HttpRequest request) {
+        Response response = new Response(true, "get decks", request.user.decks);
+        return new HttpResponseJSON(yaGson.toJson(response));
+
     }
 
 }

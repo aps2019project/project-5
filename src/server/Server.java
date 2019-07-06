@@ -25,6 +25,7 @@ public class Server {
         authentication.urls.add(new URL("/collection/remove_card_from_deck", CollectionController::removeCardFromDeck, true));
         authentication.urls.add(new URL("/collection/is_valid", CollectionController::isValid, true));
         authentication.urls.add(new URL("/collection/set_main_deck", CollectionController::setMainDeck, true));
+        authentication.urls.add(new URL("/collection/get_decks", CollectionController::getDecks, true));
 
         authentication.urls.add(new URL("/battle/request", BattleController::battleRequest, true));
         authentication.urls.add(new URL("/battle/cancel_request", BattleController::cancelBattleRequest, true));

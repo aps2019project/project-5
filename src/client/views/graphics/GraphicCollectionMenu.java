@@ -276,7 +276,7 @@ public class GraphicCollectionMenu implements Initializable {
                             exportDeckBtn.setDisable(false);
                             selectedDeck.getChildren().get(1).setVisible(true);
                         }
-                    }else alert("Error","invalid addition",addResponse.message);
+                    } else alert("Error", "invalid addition", addResponse.message);
 //                    } catch (Deck.DeckFullException e) {
 //                        Graphics.alert("Error", "Can't add card to deck", "your deck is full.");
 //                    } catch (Deck.HeroExistsInDeckException e) {
@@ -328,7 +328,7 @@ public class GraphicCollectionMenu implements Initializable {
         }));
 
 //        try {
-//            ClientManager.getDecks().forEach(deck -> deckList.getChildren().add(getDeckPane(deck.getName())));
+//        ((Map<String, Deck>) CollectionClient.getDecks().data).forEach((name, deck) -> deckList.getChildren().add(getDeckPane(name)));
 //        } catch (Account.NotLoggedInException ignored) {
 //        }
 

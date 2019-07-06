@@ -68,5 +68,11 @@ public class CollectionClient {
         return serverConnection.getResponse();
     }
 
+    public static Response getDecks() {
+        ServerConnection serverConnection = new ServerConnection("/collection/get_decks");
+        serverConnection.parameters.put("token", token);
+        return serverConnection.getResponse();
+    }
+
 
 }
