@@ -380,7 +380,7 @@ public class GraphicBattleController implements Initializable {
         int index = 0;
         for (Card card : hand) {
             handItemMana[index].setText("" + card.manaPoint);
-            ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.name, card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
+            ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.name, card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000, );
             handItemImages[index].setImage(cardAnimation.getImage());
             if (card instanceof Spell) {
                 cardAnimation.setFitWidth(120);
