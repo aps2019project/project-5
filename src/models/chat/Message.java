@@ -8,5 +8,6 @@ public class Message {
     public Message(String text, String user) {
         this.text = text;
         this.user = user;
+        this.date = System.currentTimeMillis();
     }
 }
