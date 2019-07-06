@@ -5,9 +5,9 @@ import models.cards.Card;
 import java.util.Map;
 
 public class ShopClient {
-    public Map<Card, Integer> searchedCards;
+    public static Map<Card, Integer> searchedCards;
 
-    public Response search(String token, String searchedContent, String type) {
+    public static Response search(String token, String searchedContent, String type) {
         ServerConnection serverConnection = new ServerConnection("/shop/search");
         serverConnection.parameters.put("token", token);
         if (!searchedContent.equals("")) serverConnection.parameters.put("search", searchedContent);
@@ -18,7 +18,7 @@ public class ShopClient {
         return response;
     }
 
-    public Response buy(String token, String cardName) {
+    public static Response buy(String token, String cardName) {
         ServerConnection serverConnection = new ServerConnection("/shop/buy");
         serverConnection.parameters.put("token", token);
         serverConnection.parameters.put("card_name", cardName);

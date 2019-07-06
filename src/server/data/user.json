@@ -6,7 +6,7 @@
       "@val": {
         "username": "mahdi",
         "password": "mahdi",
-        "loginToken": "k870fdsk79uzo657xchdgshrnyq1m1",
+        "loginToken": "lb6sn",
         "drake": 300,
         "decks": {
           "@type": "java.util.HashMap",
@@ -23,8 +23,11 @@
                         "targetType": "MY_FORCE",
                         "name": "Empower",
                         "description": "",
+                        "id": 0,
                         "price": 250,
-                        "manaPoint": 1
+                        "manaPoint": 1,
+                        "isInserted": false,
+                        "canMove": false
                       }
                     },
                     8
@@ -36,8 +39,11 @@
                         "targetType": "AN_OPPONENT_FORCE",
                         "name": "Fireball",
                         "description": "",
+                        "id": 0,
                         "price": 400,
-                        "manaPoint": 1
+                        "manaPoint": 1,
+                        "isInserted": false,
+                        "canMove": false
                       }
                     },
                     1
@@ -48,13 +54,17 @@
                       "@val": {
                         "health": 55,
                         "currentHealth": 0,
+                        "canAttack": false,
                         "attackPoint": 7,
                         "attackRange": 4,
                         "attackType": "RANGED",
                         "name": "Rostam",
                         "description": "",
+                        "id": 0,
                         "price": 8000,
-                        "manaPoint": 1
+                        "manaPoint": 1,
+                        "isInserted": false,
+                        "canMove": false
                       }
                     },
                     1
@@ -65,13 +75,17 @@
                       "@val": {
                         "health": 5,
                         "currentHealth": 0,
+                        "canAttack": false,
                         "attackPoint": 6,
                         "attackRange": 4,
                         "attackType": "RANGED",
                         "name": "Avalanche",
                         "description": "",
+                        "id": 0,
                         "price": 300,
-                        "manaPoint": 4
+                        "manaPoint": 4,
+                        "isInserted": false,
+                        "canMove": false
                       }
                     },
                     10
@@ -130,13 +144,17 @@
                       "@val": {
                         "health": 9,
                         "currentHealth": 0,
+                        "canAttack": false,
                         "attackPoint": 5,
                         "attackRange": 4,
                         "attackType": "RANGED",
                         "name": "Fire Dragon",
                         "description": "",
+                        "id": 0,
                         "price": 250,
-                        "manaPoint": 5
+                        "manaPoint": 5,
+                        "isInserted": false,
+                        "canMove": false
                       }
                     },
                     10
@@ -147,13 +165,17 @@
                       "@val": {
                         "health": 50,
                         "currentHealth": 0,
+                        "canAttack": false,
                         "attackPoint": 4,
                         "attackRange": 1,
                         "attackType": "MELEE",
                         "name": "SevenHead Dragon",
                         "description": "",
+                        "id": 0,
                         "price": 8000,
-                        "manaPoint": 0
+                        "manaPoint": 0,
+                        "isInserted": false,
+                        "canMove": false
                       }
                     },
                     1
@@ -164,13 +186,17 @@
                       "@val": {
                         "health": 6,
                         "currentHealth": 0,
+                        "canAttack": false,
                         "attackPoint": 4,
                         "attackRange": 7,
                         "attackType": "RANGED",
                         "name": "Persian Archer",
                         "description": "",
+                        "id": 0,
                         "price": 300,
-                        "manaPoint": 2
+                        "manaPoint": 2,
+                        "isInserted": false,
+                        "canMove": false
                       }
                     },
                     9
@@ -202,13 +228,17 @@
                   "@val": {
                     "health": 12,
                     "currentHealth": 0,
+                    "canAttack": false,
                     "attackPoint": 12,
                     "attackRange": 7,
                     "attackType": "RANGED",
                     "name": "Giant Catapult",
                     "description": "",
+                    "id": 0,
                     "price": 300,
-                    "manaPoint": 9
+                    "manaPoint": 9,
+                    "isInserted": false,
+                    "canMove": false
                   }
                 },
                 5

@@ -2,10 +2,9 @@ package client.views.graphics;
 
 import client.controllers.AccountClient;
 import client.controllers.ShopClient;
-import client.models.Shop;
+import client.models.Action;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
-import client.controllers.ClientManager;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,13 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import client.models.Action;
-import client.models.Collection;
-import client.models.cards.Attacker;
-import client.models.cards.Card;
-import client.models.cards.Hero;
-import client.models.cards.Minion;
-import client.models.cards.spell.Spell;
+import models.cards.Attacker;
+import models.cards.Card;
+import models.cards.Hero;
+import models.cards.Minion;
+import models.cards.Spell;
 import client.views.Graphics;
 import client.views.SpriteMaker;
 import models.Response;
@@ -46,7 +43,7 @@ public class ShopController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         updateCards("", filterType);
 
-        drakes.setText(ClientManager.getAccount().getDrakeString());
+        drakes.setText("" + AccountClient.user.drake);
 
         backBtn.setOnMouseClicked(event -> {
             Graphics.playMusic("sfx_ui_select.m4a");
@@ -81,7 +78,7 @@ public class ShopController implements Initializable {
             cardPane.getStyleClass().add("spell-pane");
         cardPane.setPrefSize(200, 262);
 
-        Label cardName = new Label(card.getName().toUpperCase());
+        Label cardName = new Label(card.name.toUpperCase());
         cardName.relocate(15, 130);
         cardName.setPrefWidth(200);
         cardName.setAlignment(Pos.CENTER);
@@ -101,7 +98,7 @@ public class ShopController implements Initializable {
             ImageView imageView = new ImageView();
             if (card instanceof Spell)
                 action = Action.SPELL_IDLE;
-            SpriteMaker.getAndShowAnimation(imageView, card.getName(), action, 10000);
+            SpriteMaker.getAndShowAnimation(imageView, card.name, action, 10000);
             if (isAttacker) {
                 imageView.relocate(30, -10);
                 imageView.setFitWidth(160);
@@ -116,7 +113,7 @@ public class ShopController implements Initializable {
         }
 
         if (isAttacker) {
-            Label health = new Label("" + ((Attacker) card).getHealth());
+            Label health = new Label("" + ((Attacker) card).health);
             health.getStyleClass().add("shop-card-health");
             if (isInShop)
                 health.relocate(157, 163);
@@ -142,18 +139,12 @@ public class ShopController implements Initializable {
 
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
-//        List<Card> cards = new ArrayList<>();
-        Map<Card, Integer> cards = new HashMap<>();
-        if (q == null || q.equals("")) {
-            Response response = new ShopClient().search(AccountClient.user.loginToken, q, type.getTypeName().toLowerCase());
-//            cards = ClientManager.getShopCollection().getCardsList();
-//        } else {
-//            try {
-//                cards = ClientManager.searchCardInShop(q);
-//            } catch (Collection.CardNotFoundException ignored) {
-//            }
-            cards = ((Map<Card, Integer>) response.data);
-        }
+        Map<Card, Integer> cards;
+        if (q == null)
+            q = "";
+
+        Response response = ShopClient.search(AccountClient.user.loginToken, q, type.getTypeName().toLowerCase());
+        cards = ((Map<Card, Integer>) response.data);
 
         cards.forEach((card, integer) -> {
             if (card.getClass() == type || type == Card.class) {
@@ -173,12 +164,7 @@ public class ShopController implements Initializable {
                     cardPane.getChildren().addAll(buy, cancel);
                     buy.setOnMouseClicked(bought -> {
                         Graphics.playMusic("sfx_ui_select.m4a");
-//                        try {
-//                            ClientManager.buy(card.getName());
-//                        } catch (Exception ignored) {
-//                        }
-                        ShopClient shopClient = new ShopClient();
-                        shopClient.buy(AccountClient.user.loginToken, card.getName());
+                        ShopClient.buy(AccountClient.user.loginToken, card.name);
                         //Todo: check response message;
                         cardPane.getChildren().removeAll(buy, cancel);
 
