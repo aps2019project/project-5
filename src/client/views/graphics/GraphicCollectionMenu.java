@@ -263,7 +263,7 @@ public class GraphicCollectionMenu implements Initializable {
 
         cards.forEach(card -> {
             if (card.getClass() == type || type == Card.class) {
-                AnchorPane cardPane = getCardPane(card, true, 0);
+                AnchorPane cardPane = getCardPane(card, true);
                 cardPane.setOnMouseClicked(event -> {
                     playMusic("sfx_ui_select.m4a");
                     if (selectedDeck == null) {
