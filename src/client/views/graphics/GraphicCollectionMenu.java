@@ -64,7 +64,7 @@ public class GraphicCollectionMenu implements Initializable {
     public Type filterType = Card.class;
     private YaGsonBuilder deckJsonBuilder = new YaGsonBuilder().setPrettyPrinting();
     private YaGson deckJson = new YaGson();
-    final File savedDecksPath = new File("src" + File.separator + "data" + File.separator + "saved-decks");
+    final File savedDecksPath = new File("src/data/saved-decks");
 
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
         button.setDisable(isWrong);
@@ -131,12 +131,15 @@ public class GraphicCollectionMenu implements Initializable {
 
         Background backgroundBtn = (deckIsValid ? validBackground : ordinaryBackground);
         deckPane.setBackground(backgroundBtn);
-        String tmp;
-        try {
-            tmp = ClientManager.getMainDeck().getName();
-        } catch (Exception e) {
-            tmp = "";
+        String tmp = "";
+
+        Response mainDeckResponse = CollectionClient.getMainDeck();
+        if(mainDeckResponse.OK) {
+            if(mainDeckResponse.data != null) { // User has a main deck
+                tmp = ((Deck) mainDeckResponse.data).name;
+            }
         }
+
         final String mainDeckName = tmp;
         radioButton.setSelected(mainDeckName.equals(deckName));
         radioButton.setVisible(deckIsValid);
@@ -170,14 +173,14 @@ public class GraphicCollectionMenu implements Initializable {
         deckPane.setOnMouseExited(event -> deleteDeckBtn.setVisible(false));
 
         deckPane.setOnMouseClicked(event -> {
-            boolean finalDeckIsValid = CollectionClient.isValid(deckName).OK;
+            boolean finalDeckIsValid = (boolean) CollectionClient.isValid(deckName).data;
 
             exportDeckBtn.setDisable(!finalDeckIsValid);
             playMusic("sfx_ui_select.m4a");
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
             deckList.getChildren().forEach(node -> {
                 AnchorPane nodePane = (AnchorPane) node;
-                boolean isValid = CollectionClient.isValid(((Label) nodePane.getChildren().get(0)).getText()).OK;
+                boolean isValid = (boolean) CollectionClient.isValid(((Label) nodePane.getChildren().get(0)).getText()).data;
                 Background background = (isValid ? validBackground : ordinaryBackground);
                 nodePane.setBackground(background);
                 JFXRadioButton rbtn = (JFXRadioButton) nodePane.getChildren().get(1);
@@ -426,11 +429,7 @@ public class GraphicCollectionMenu implements Initializable {
 
         String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
 
-        Deck deck = null;
-//        try {
-//            deck = ClientManager.getDeck(deckName);
-//        } catch (Account.DeckNotFoundException ignored) {
-//        }
+        Deck deck = (Deck) CollectionClient.getDeck(deckName).data;
 
         File file = new File(exportPathTxt.getText());
         if (!file.exists())

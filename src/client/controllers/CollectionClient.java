@@ -69,4 +69,10 @@ public class CollectionClient {
         serverConnection.parameters.put("token", token);
         return serverConnection.getResponse();
     }
+
+    public static Response getMainDeck() {
+        ServerConnection serverConnection = new ServerConnection("/collection/get_main_deck");
+        serverConnection.parameters.put("token", token);
+        return serverConnection.getResponse();
+    }
 }
