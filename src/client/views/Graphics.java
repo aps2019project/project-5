@@ -55,13 +55,13 @@ public class Graphics extends Application {
     public enum Menu {
         COLLECTION_MENU("/client/layouts/collection_menu.fxml"),
         SHOP_MENU("/client/layouts/shop.fxml"),
-        ACCOUNT_MENU(accountMenuRoot),
-        MATCH_SELECT_MENU(matchSelectRoot),
+        ACCOUNT_MENU("/client/layouts/account_menu.fxml"),
+        MATCH_SELECT_MENU("/client/layouts/match_select.fxml"),
         MAIN_MENU("/client/layouts/main_menu.fxml"),
-        MULTI_SINGLE(multiSingleRoot),
-        CUSTOM_SELECT(customSelectRoot),
+        MULTI_SINGLE("/client/layouts/multi_single.fxml"),
+        CUSTOM_SELECT("/client/layouts/custom_select.fxml"),
         BATTLE("/client/layouts/battle.fxml"),
-        CUSTOM_CARD(customCardRoot);
+        CUSTOM_CARD("/client/layouts/custom_card.fxml");
         Parent root;
         String file;
         boolean isPreLoaded;
@@ -89,10 +89,6 @@ public class Graphics extends Application {
         }
     }
 
-    public static void createNewStage(Stage stage) {
-
-    }
-
     public void loadFXML() {
         try {
             GridPane tmpGridPane = new GridPane();
@@ -103,15 +99,7 @@ public class Graphics extends Application {
             profileRoot = tmpGridPane;
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/match_select.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
-            customCardRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/custom_card.fxml"));
-            multiSingleRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/multi_single.fxml"));
-            customSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/custom_select.fxml"));
-//            mainMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/main_menu.fxml"));
-//            battleMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/battle.fxml"));
-//            collectionMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/collection_menu.fxml"));
-//            shopMenuRoot = FXMLLoader.load(Graphics.class.getResource("../client.layouts/shop.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1000);
@@ -120,13 +108,6 @@ public class Graphics extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-//        try {
-//            ClientManager.login("mahdi", "mahdi");
-//            ClientManager.setOpponent("AI", true);
-//            ClientManager.setGameMode(ClientManager.GameMode.DEATH_MATCH);
-//        } catch (Account.InvalidPasswordException | Account.InvalidUsernameException  ignored) {}
-
         Account.loadAccounts();
         System.out.println(Shop.getInstance().getCardsCollection().getMinions().size());
         loadFXML();
@@ -147,112 +128,4 @@ public class Graphics extends Application {
         return mediaPlayer;
     }
 
-    private static void createTestUser() {
-        try {
-            ClientManager.createAccount("ali", "ali");
-            ClientManager.createAccount("mahdi", "mahdi");
-            ClientManager.createAccount("amin", "amin");
-
-            ClientManager.login("ali", "ali");
-            ClientManager.buy("empower");
-            ClientManager.buy("fire dragon");
-            ClientManager.buy("fire dragon");
-            ClientManager.buy("Hog Head Demon");
-            ClientManager.buy("Persian Swordsman");
-            ClientManager.buy("rostam");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Champion");
-            ClientManager.buy("Persian Champion");
-            ClientManager.buy("Turan Archer");
-            ClientManager.buy("Turan Archer");
-            ClientManager.buy("Turan Wand");
-            ClientManager.buy("Turan Wand");
-            ClientManager.buy("persian horse rider");
-            ClientManager.buy("persian horse rider");
-            ClientManager.buy("Hog Head Demon");
-            ClientManager.buy("Hog Head Demon");
-            ClientManager.buy("Hog Head Demon");
-            ClientManager.createDeck("aliDeck");
-
-
-            ClientManager.login("mahdi", "mahdi");
-            ClientManager.buy("empower");
-            ClientManager.buy("fire dragon");
-            ClientManager.buy("fire dragon");
-            ClientManager.buy("Hog Head Demon");
-            ClientManager.buy("Persian Swordsman");
-            ClientManager.buy("rostam");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Horse Rider");
-            ClientManager.buy("Persian Champion");
-            ClientManager.buy("Persian Champion");
-            ClientManager.buy("Turan Archer");
-            ClientManager.buy("Turan Archer");
-            ClientManager.buy("Turan Wand");
-            ClientManager.buy("Turan Wand");
-            ClientManager.buy("persian horse rider");
-            ClientManager.buy("persian horse rider");
-            ClientManager.buy("Hog Head Demon");
-            ClientManager.buy("Hog Head Demon");
-            ClientManager.buy("Hog Head Demon");
-            ClientManager.createDeck("mahdiDeck");
-            ClientManager.createDeck("mahdiDeck2");
-            ClientManager.createDeck("mahdiDeck3");
-            ClientManager.addCardToDeck("empower", "mahdiDeck");
-            ClientManager.addCardToDeck("fire dragon", "mahdiDeck");
-            ClientManager.addCardToDeck("fire dragon", "mahdiDeck");
-            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck");
-            ClientManager.addCardToDeck("Persian Swordsman", "mahdiDeck");
-            ClientManager.addCardToDeck("rostam", "mahdiDeck");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck");
-            ClientManager.addCardToDeck("Persian Champion", "mahdiDeck");
-            ClientManager.addCardToDeck("Persian Champion", "mahdiDeck");
-            ClientManager.addCardToDeck("Turan Archer", "mahdiDeck");
-            ClientManager.addCardToDeck("Turan Archer", "mahdiDeck");
-            ClientManager.addCardToDeck("Turan Wand", "mahdiDeck");
-            ClientManager.addCardToDeck("Turan Wand", "mahdiDeck");
-            ClientManager.addCardToDeck("persian horse rider", "mahdiDeck");
-            ClientManager.addCardToDeck("persian horse rider", "mahdiDeck");
-            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck");
-            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck");
-
-            ClientManager.addCardToDeck("empower", "mahdiDeck2");
-            ClientManager.addCardToDeck("fire dragon", "mahdiDeck2");
-            ClientManager.addCardToDeck("fire dragon", "mahdiDeck2");
-            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck2");
-            ClientManager.addCardToDeck("Persian Swordsman", "mahdiDeck2");
-            ClientManager.addCardToDeck("rostam", "mahdiDeck2");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
-            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck2");
-            ClientManager.addCardToDeck("Persian Champion", "mahdiDeck2");
-            ClientManager.addCardToDeck("Turan Archer", "mahdiDeck2");
-            ClientManager.addCardToDeck("Turan Archer", "mahdiDeck2");
-            ClientManager.addCardToDeck("Turan Wand", "mahdiDeck2");
-            ClientManager.addCardToDeck("Turan Wand", "mahdiDeck2");
-            ClientManager.addCardToDeck("persian horse rider", "mahdiDeck2");
-            ClientManager.addCardToDeck("persian horse rider", "mahdiDeck2");
-            ClientManager.addCardToDeck("Persian Horse Rider", "mahdiDeck2");
-            ClientManager.addCardToDeck("Hog Head Demon", "mahdiDeck2");
-
-            ClientManager.selectDeck("mahdiDeck");
-
-
-        } catch (Account.UsernameExistsException | Account.InvalidPasswordException | Account.InvalidUsernameException | Collection.CollectionException | Account.NotEnoughDrakeException | Account.NotLoggedInException | Account.DeckExistsException | Account.DeckNotFoundException | Deck.HeroExistsInDeckException | Deck.HeroNotExistsInDeckException | Deck.DeckFullException ignored) {
-//            ignored.printStackTrace();
-        }
-
-    }
 }
