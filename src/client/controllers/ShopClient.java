@@ -37,7 +37,11 @@ public class ShopClient {
 
     public static Response customCard(Card card) {
         ServerConnection serverConnection = new ServerConnection("/shop/custom_card");
-        serverConnection.parameters.put("json", new YaGson().toJson(card));
+        YaGson yaGson = new YaGson();
+
+        System.out.println(yaGson.toJson(card));
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("json", yaGson.toJson(card));
         return serverConnection.getResponse();
     }
 

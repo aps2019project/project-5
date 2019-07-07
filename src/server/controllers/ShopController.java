@@ -87,6 +87,7 @@ public class ShopController {
 
     public static HttpResponse customCard(HttpRequest httpRequest) {
         String cardJson = httpRequest.GET.get("json");
+        System.out.println("json " + cardJson);
         YaGson yaGson = new YaGson();
         Card card = yaGson.fromJson(cardJson, Card.class);
         Response response;

@@ -67,7 +67,8 @@ public class GraphicCustomCardMenu {
     private File heroSpriteFile;
     private File minionSpriteFile;
     private File spellSpriteFile;
-    File spriteAnimationResourcePath = new File("src" + File.separator + "resources" + File.separator + "sprites");
+    File spriteAnimationResourcePath = new File("src" + File.separator + "client" + File.separator +
+            "resources" + File.separator + "sprites");
 
     public int getTextInfo(JFXTextField t, String type) {
         int number = 0;
