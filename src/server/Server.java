@@ -62,9 +62,14 @@ public class Server {
         main.urls.add(new URL("/chat/send_message", ChatController::sendMessage, true));
         main.urls.add(new URL("/chat/update", ChatController::update, true));
         main.start();
+
+
     }
 
     private static void startAdmin() {
+        Application adminApp = new Application();
+        adminApp.urls.add(new URL("/server/online_users", AdminController::getOnlineUsers, true));
+        adminApp.urls.add(new URL("/server/shop", AdminController::getShopCards, true));
 
     }
 
