@@ -105,7 +105,6 @@ public class GraphicCollectionMenu implements Initializable {
         cardNameLbl.getStyleClass().add("card-name-label");
         deckPane.getChildren().add(cardNameLbl);
 
-
         JFXRadioButton radioButton = new JFXRadioButton("");
         radioButton.setToggleGroup(selectedDeckToggleGroup);
         radioButton.relocate(5, 17);
@@ -124,7 +123,11 @@ public class GraphicCollectionMenu implements Initializable {
         });
         radioButton.setVisible(false);
         deckPane.getChildren().add(radioButton);
-        boolean deckIsValid = CollectionClient.isValid(deckName).OK;
+        Response validationResponse = CollectionClient.isValid(deckName);
+        boolean deckIsValid = false;
+        if(validationResponse.OK) {
+            deckIsValid = (boolean) validationResponse.data;
+        }
 
         Background backgroundBtn = (deckIsValid ? validBackground : ordinaryBackground);
         deckPane.setBackground(backgroundBtn);
