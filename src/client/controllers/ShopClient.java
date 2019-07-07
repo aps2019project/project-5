@@ -26,9 +26,9 @@ public class ShopClient {
         return serverConnection.getResponse();
     }
 
-    public Response sell(String token, String cardName) {
+    public static Response sell(String cardName) {
         ServerConnection serverConnection = new ServerConnection("/shop/sell");
-        serverConnection.parameters.put("token", token);
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("card_name", cardName);
         return serverConnection.getResponse();
     }

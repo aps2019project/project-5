@@ -17,11 +17,7 @@ public class CollectionClient {
         ServerConnection serverConnection = new ServerConnection("/collection/create_deck");
         serverConnection.parameters.put("token", token);
         serverConnection.parameters.put("name", name);
-
-//        if (!search.equals("")) serverConnection.parameters.put("search", search);
-//        if (!type.equals("")) serverConnection.parameters.put("type", type);
         return serverConnection.getResponse();
-
     }
 
     public static Response addCardToDeck(String deckName, String cardName) {
@@ -69,10 +65,14 @@ public class CollectionClient {
     }
 
     public static Response getDecks() {
-        ServerConnection serverConnection = new ServerConnection("/collection/get_decks");
+        ServerConnection serverConnection = new ServerConnection("/collection/get_all_decks");
         serverConnection.parameters.put("token", token);
         return serverConnection.getResponse();
     }
 
-
+    public static Response getMainDeck() {
+        ServerConnection serverConnection = new ServerConnection("/collection/get_main_deck");
+        serverConnection.parameters.put("token", token);
+        return serverConnection.getResponse();
+    }
 }

@@ -176,7 +176,7 @@ public class CollectionController extends Application {
                     response = new Response(false, "card not found in this deck", 107);
                 else {
                     deck.decrease(card);
-                    response = new Response(false, "card removed from the deck", deck);
+                    response = new Response(true, "card removed from the deck", deck);
                 }
             }
         }
@@ -187,7 +187,11 @@ public class CollectionController extends Application {
     public static HttpResponse getDecks(HttpRequest request) {
         Response response = new Response(true, "get decks", request.user.decks);
         return new HttpResponseJSON(yaGson.toJson(response));
-
     }
 
+    public static HttpResponse getMainDeck(HttpRequest request) {
+        Response response = new Response(true, "deck sent.", request.user.mainDeck);
+        return new HttpResponseJSON(yaGson.toJson(response));
+
+    }
 }
