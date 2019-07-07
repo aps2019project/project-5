@@ -1,5 +1,6 @@
 package server.controllers;
 
+import client.models.Shop;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import models.Response;
@@ -84,4 +85,16 @@ public class ShopController {
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
+    public static HttpResponse customCard(HttpRequest httpRequest) {
+        String cardJson = httpRequest.GET.get("json");
+        YaGson yaGson = new YaGson();
+        Card card = yaGson.fromJson(cardJson, Card.class);
+        Response response;
+        if (shop.add(card)) {
+            shop.cards.put(card, 10);
+            DataWriter.saveData("card.json", shop);
+            response = new Response(true, "card added");
+        } else response = new Response(false, "a card with this name exists");
+        return new HttpResponseJSON(ShopController.yaGson.toJson(response));
+    }
 }

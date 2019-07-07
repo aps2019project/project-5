@@ -16,6 +16,7 @@ public class Server {
         main.urls.add(new URL("/shop/search", ShopController::searchShopCards, true));
         main.urls.add(new URL("/shop/buy", ShopController::buy, true));
         main.urls.add(new URL("/shop/sell", ShopController::sell, true));
+        main.urls.add(new URL("/shop/custom_card", ShopController::customCard, true));
 
         main.urls.add(new URL("/collection/search", CollectionController::searchCollectionCards, true));
         main.urls.add(new URL("/collection/create_deck", CollectionController::addDeck, true));

@@ -1,7 +1,9 @@
 package client.controllers;
 
+import com.gilecode.yagson.YaGson;
 import models.Response;
 import models.cards.Card;
+
 import java.util.Map;
 
 public class ShopClient {
@@ -30,6 +32,12 @@ public class ShopClient {
         ServerConnection serverConnection = new ServerConnection("/shop/sell");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("card_name", cardName);
+        return serverConnection.getResponse();
+    }
+
+    public static Response customCard(Card card) {
+        ServerConnection serverConnection = new ServerConnection("/shop/custom_card");
+        serverConnection.parameters.put("json", new YaGson().toJson(card));
         return serverConnection.getResponse();
     }
 

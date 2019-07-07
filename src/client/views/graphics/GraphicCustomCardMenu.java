@@ -268,7 +268,6 @@ public class GraphicCustomCardMenu {
         }
 
 
-
         File spriteAnimation = new File(spriteAnimationPathHeroTxt.getText());
         if (!spriteAnimation.exists()) {
             heroFlag = false;
@@ -341,7 +340,7 @@ public class GraphicCustomCardMenu {
         String fileName = "";
         if (((JFXTextField) mouseEvent.getSource()).getPromptText().contains("hero"))
             fileName = "Hero";
-        ((JFXTextField)mouseEvent.getSource()).setText(getFile(fileName).getAbsolutePath());
+        ((JFXTextField) mouseEvent.getSource()).setText(getFile(fileName).getAbsolutePath());
     }
 
     private File getFile(String fileName) {
