@@ -87,7 +87,6 @@ public class GraphicCollectionMenu implements Initializable {
             AnchorPane deckPane = getDeckPane(deckName);
             deckList.getChildren().add(deckPane);
             newDeckNameTxt.setText("");
-
         } else {
             alert("failed to create", "deck creation", response.message);
         }
@@ -180,7 +179,13 @@ public class GraphicCollectionMenu implements Initializable {
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
             deckList.getChildren().forEach(node -> {
                 AnchorPane nodePane = (AnchorPane) node;
-                boolean isValid = (boolean) CollectionClient.isValid(((Label) nodePane.getChildren().get(0)).getText()).data;
+                Response validResponse = CollectionClient.isValid(((Label) nodePane.getChildren().get(0)).getText());
+                boolean isValid = false;
+                if(validationResponse.OK) {
+                    isValid = (boolean) validResponse.data;
+                } else {
+                    alert("Error", "Error", validationResponse.message);
+                }
                 Background background = (isValid ? validBackground : ordinaryBackground);
                 nodePane.setBackground(background);
                 JFXRadioButton rbtn = (JFXRadioButton) nodePane.getChildren().get(1);
@@ -196,7 +201,6 @@ public class GraphicCollectionMenu implements Initializable {
 
         return deckPane;
     }
-
 
     public AnchorPane getMiniCardPane(String cardName, boolean isInShop) {
 
@@ -252,7 +256,7 @@ public class GraphicCollectionMenu implements Initializable {
 
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
-        Map<Card, Integer> cards = new HashMap<>();
+        Map<Card, Integer> cards;
         if (q == null) {
             q = "";
         }
@@ -266,10 +270,9 @@ public class GraphicCollectionMenu implements Initializable {
                         Graphics.alert("Error", "Can't add card", "please select a deck first.");
                         return;
                     }
-//                    try {
-                    String cardName = ((Label) cardPane.getChildren().get(0)).getText();
                     String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
-                    Response addResponse = CollectionClient.addCardToDeck(cardName, deckName);
+                    String cardName = card.name;
+                    Response addResponse = CollectionClient.addCardToDeck(deckName, cardName);
                     if (addResponse.OK) {
                         selectedDeckCardList.getChildren().add(getMiniCardPane(cardName, false));
                         if (CollectionClient.isValid(deckName).OK) {
@@ -277,35 +280,12 @@ public class GraphicCollectionMenu implements Initializable {
                             exportDeckBtn.setDisable(false);
                             selectedDeck.getChildren().get(1).setVisible(true);
                         }
-                    } else alert("Error", "invalid addition", addResponse.message);
-//                    } catch (Deck.DeckFullException e) {
-//                        Graphics.alert("Error", "Can't add card to deck", "your deck is full.");
-//                    } catch (Deck.HeroExistsInDeckException e) {
-//                        Graphics.alert("Error", "Can't add hero to deck", "You can have exacly one hero in any deck.");
-//                    } catch (Deck.HeroNotExistsInDeckException e) {
-//                        Graphics.alert("Error", "Can't add hero to deck", "You should have at least one hero in your deck.");
-//                    } catch (Collection.CardNotFoundException ignored) {
-//                        cardPane.setDisable(true);
-//                    } catch (Account.DeckNotFoundException ignored) {
-//                    }
-
-                });
-                cardPane.setOnMousePressed(event -> {
-                    cardPane.setMouseTransparent(true);
-                    event.setDragDetect(true);
-                });
-                cardPane.setOnMouseDragged(event -> {
-                    cardPane.startFullDrag();
-                    event.setDragDetect(false);
-                    AnchorPane draggingCardPane = cardPane;
-                    Graphics.stage.getScene().getRoot().setOnMouseMoved(mouseEvent -> {
-                        draggingCardPane.setTranslateX(mouseEvent.getX());
-                        draggingCardPane.setTranslateY(mouseEvent.getY());
-                    });
+                    } else {
+                        alert("Error", "invalid addition", addResponse.message);
+                    }
                 });
                 cardContainer.getChildren().add(cardPane);
             }
-
         });
 
 
