@@ -399,8 +399,8 @@ public class GraphicCollectionMenu implements Initializable {
 
         root.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.A) {
-                Response response = ShopClient.search(AccountClient.user.loginToken, "", "");
-                List<Card> cards = new ArrayList<>(((Map<Card, Integer>) response.data).keySet());
+                Response res = ShopClient.search(AccountClient.user.loginToken, "", "");
+                List<Card> cards = new ArrayList<>(((Map<Card, Integer>) res.data).keySet());
                 for (Card card : cards) {
                     AccountClient.incrementDrake(card.price);
                     try {

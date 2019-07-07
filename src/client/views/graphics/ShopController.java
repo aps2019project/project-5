@@ -80,7 +80,7 @@ public class ShopController implements Initializable {
     }
 
     private void updateDrake() {
-        drakes.setText("" + AccountClient.user.drake);
+        drakes.setText("" + );
     }
 
     public static AnchorPane getCardPane(Card card, boolean isInShop, int count) {

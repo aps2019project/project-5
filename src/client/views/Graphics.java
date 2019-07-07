@@ -132,7 +132,7 @@ public class Graphics extends Application {
         System.out.println(Shop.getInstance().getCardsCollection().getMinions().size());
         loadFXML();
         stage = primaryStage;
-        Scene scene = new Scene(mainMenuRoot, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("client/resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));

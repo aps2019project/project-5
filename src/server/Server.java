@@ -61,6 +61,9 @@ public class Server {
 
         main.urls.add(new URL("/chat/send_message", ChatController::sendMessage, true));
         main.urls.add(new URL("/chat/update", ChatController::update, true));
+
+        main.urls.add(new URL("/cheat-mode/increment-drake", CheatModeController::incrementDrake, true));
+
         main.start();
     }
 
