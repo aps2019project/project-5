@@ -1,5 +1,6 @@
 package client.views.graphics;
 
+import client.controllers.ShopClient;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.JFXButton;
@@ -12,12 +13,13 @@ import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import client.models.Shop;
-import client.models.cards.AttackType;
-import client.models.cards.Card;
-import client.models.cards.Hero;
-import client.models.cards.Minion;
-import client.models.cards.spell.SpecialPowerActivateTime;
-import client.models.cards.spell.Spell;
+//import client.models.cards.AttackType;
+//import client.models.cards.Card;
+//import client.models.cards.Hero;
+//import client.models.cards.Minion;
+//import client.models.cards.spell.SpecialPowerActivateTime;
+//import client.models.cards.spell.Spell;
+import models.cards.*;
 import client.views.Graphics;
 
 import java.io.File;
@@ -91,31 +93,34 @@ public class GraphicCustomCardMenu {
     }
 
     public void saveNewCard(String type, Card card) {
-        try {
-            Shop.getInstance().getCardsCollection().addCard(card);
-            YaGsonBuilder jsonCardBuilder = new YaGsonBuilder();
+//        try {
+//            Shop.getInstance().getCardsCollection().addCard(card);
+//            YaGsonBuilder jsonCardBuilder = new YaGsonBuilder();
+//
+//            jsonCardBuilder.setPrettyPrinting();
+//            YaGson jsonCard = jsonCardBuilder.create();
+//            URL url = FileReader.class.getResource("minions.json");
+//            List<Card> cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getMinions());
+//            if (type.equals("spell")) {
+//                url = FileReader.class.getResource("spell.json");
+//                cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getSpells());
+//            }
+//            if (type.equals("hero")) {
+//                url = FileReader.class.getResource("heroes.json");
+//                cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getHeroes());
+//            }
+//            File file = new File(url.getPath());
+//            FileWriter cardWriter = new FileWriter(file);
+//            cardWriter.write(jsonCard.toJson(cards));
+//            cardWriter.flush();
+//            cardWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        if (ShopClient.customCard(card).OK)
+            Graphics.alert("Congrats", "Card Added", "Your new card added successfully.");
+        else Graphics.alert("Not Added", "Card Not Added", "This card exists in shop");
 
-            jsonCardBuilder.setPrettyPrinting();
-            YaGson jsonCard = jsonCardBuilder.create();
-            URL url = FileReader.class.getResource("minions.json");
-            List<Card> cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getMinions());
-            if (type.equals("spell")) {
-                url = FileReader.class.getResource("spell.json");
-                cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getSpells());
-            }
-            if (type.equals("hero")) {
-                url = FileReader.class.getResource("heroes.json");
-                cards = new ArrayList<>(Shop.getInstance().getCardsCollection().getHeroes());
-            }
-            File file = new File(url.getPath());
-            FileWriter cardWriter = new FileWriter(file);
-            cardWriter.write(jsonCard.toJson(cards));
-            cardWriter.flush();
-            cardWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Graphics.alert("Congrats", "Card Added", "Your new card added successfully.");
     }
 
     public void addSpellCard(ActionEvent actionEvent) {
@@ -164,7 +169,7 @@ public class GraphicCustomCardMenu {
         plistFile.renameTo(new File(spritePath + name + ".plist"));
 
 
-        Spell spell = new Spell(id, name, "", manaPoint, price);
+        Spell spell = new Spell(name, "", price, manaPoint, TargetType.ALL_MY_FORCE);
         saveNewCard("spell", spell);
 
     }
@@ -229,9 +234,8 @@ public class GraphicCustomCardMenu {
         spriteAnimation.renameTo(new File(spritePath + name + ".png"));
         plistFile.renameTo(new File(spritePath + name + ".plist"));
 
-        SpecialPowerActivateTime specialPowerActivateTime = SpecialPowerActivateTime.ON_ATTACK;
         AttackType attackType1 = AttackType.getAttackType(attackType);
-        Minion minion = new Minion(id, name, "", manaPoint, price, health, attackPoint, attackType1, range, specialPowerActivateTime);
+        Minion minion = new Minion(name, "", price, manaPoint, health, attackPoint, attackType1, range);
         saveNewCard("minion", minion);
     }
 
@@ -297,7 +301,7 @@ public class GraphicCustomCardMenu {
 
 
         AttackType attackType1 = AttackType.getAttackType(attackType);
-        Hero hero = new Hero(id, name, "", manaPoint, price, health, attackPoint, attackType1, range, cooldown);
+        Hero hero = new Hero(name, "", price, manaPoint, health, attackPoint, attackType1, range);
         saveNewCard("hero", hero);
     }
 
