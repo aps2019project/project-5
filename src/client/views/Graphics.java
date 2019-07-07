@@ -61,7 +61,8 @@ public class Graphics extends Application {
         MULTI_SINGLE("/client/layouts/multi_single.fxml"),
         CUSTOM_SELECT("/client/layouts/custom_select.fxml"),
         BATTLE("/client/layouts/battle.fxml"),
-        CUSTOM_CARD("/client/layouts/custom_card.fxml");
+        CUSTOM_CARD("/client/layouts/custom_card.fxml"),
+        WAITING_MENU("/client/layouts/waiting.fxml");
         Parent root;
         String file;
         boolean isPreLoaded;
