@@ -53,6 +53,7 @@ public class Server {
         main.urls.add(new URL("/collection/is_main_deck_valid", CollectionController::isMainDeckValid, true));
 
         main.urls.add(new URL("/battle/request", BattleController::battleRequest, true));
+        main.urls.add(new URL("/battle/opponent_check", BattleController::opponent_check, true));
         main.urls.add(new URL("/battle/cancel_request", BattleController::cancelBattleRequest, true));
         main.urls.add(new URL("/battle/select_card", BattleController::selectCard, true));
         main.urls.add(new URL("/battle/get_match", BattleController::getMatch, true));

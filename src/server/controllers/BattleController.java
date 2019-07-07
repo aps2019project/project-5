@@ -8,6 +8,7 @@ import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
 
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class BattleController {
     private static final int MATCH_TOKEN_LENGTH = 5;
@@ -244,7 +245,18 @@ public class BattleController {
             }
         }
         return new HttpResponseJSON(response);
+    }
 
-
+    public static HttpResponse opponent_check(HttpRequest request) {
+        AtomicReference<Response> response = new AtomicReference<>(
+                new Response(true, "match not started")
+        );
+        playingMatches.forEach((token, match) -> {
+            if (match.players[0].account.username.equals(request.user.username) ||
+                    match.players[1].account.username.equals(request.user.username)) {
+                response.set(new Response(true, "match started!", match));
+            }
+        });
+        return new HttpResponseJSON(response.get());
     }
 }

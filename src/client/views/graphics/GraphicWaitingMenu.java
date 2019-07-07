@@ -28,7 +28,7 @@ public class GraphicWaitingMenu implements Initializable {
                 dots.append(".");
             Platform.runLater(() -> waitingLabel.setText("Waiting for opponent" + dots));
             count %= 3;
-        }, 0, 1, TimeUnit.SECONDS); // execute every 60 seconds
+        }, 0, 1, TimeUnit.SECONDS);
 
     }
 
