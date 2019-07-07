@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class ShopClient {
     public static Map<Card, Integer> searchedCards;
-    private String token = AccountClient.user.loginToken;
 
     public static Response search(String token, String searchedContent, String type) {
         ServerConnection serverConnection = new ServerConnection("/shop/search");
@@ -31,6 +30,16 @@ public class ShopClient {
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("card_name", cardName);
         return serverConnection.getResponse();
+    }
+
+    public static int getDrakes() {
+        ServerConnection serverConnection = new ServerConnection("/shop/get_drakes");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        int drakes = AccountClient.user.drake;
+        Response response = serverConnection.getResponse();
+        if(response.OK)
+            drakes = (int) response.data;
+        return drakes;
     }
 
 }

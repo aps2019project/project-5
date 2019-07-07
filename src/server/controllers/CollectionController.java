@@ -194,4 +194,18 @@ public class CollectionController extends Application {
         return new HttpResponseJSON(yaGson.toJson(response));
 
     }
+
+    public static HttpResponse isMainDeckValid(HttpRequest request) {
+        Response response;
+        if(request.user.mainDeck == null) {
+            response = new Response(true, "you don't have main deck!", false);
+        } else {
+            if(request.user.mainDeck.isValid()) {
+                response = new Response(true, "your main deck is valid", true);
+            } else {
+                response = new Response(true, "your main deck is not valid", false);
+            }
+        }
+        return new HttpResponseJSON(response);
+    }
 }

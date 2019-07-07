@@ -38,6 +38,7 @@ public class Server {
         main.urls.add(new URL("/shop/search", ShopController::searchShopCards, true));
         main.urls.add(new URL("/shop/buy", ShopController::buy, true));
         main.urls.add(new URL("/shop/sell", ShopController::sell, true));
+        main.urls.add(new URL("/shop/get_drakes", ShopController::getDrakes, true));
 
         main.urls.add(new URL("/collection/search", CollectionController::searchCollectionCards, true));
         main.urls.add(new URL("/collection/create_deck", CollectionController::addDeck, true));
@@ -49,6 +50,7 @@ public class Server {
         main.urls.add(new URL("/collection/set_main_deck", CollectionController::setMainDeck, true));
         main.urls.add(new URL("/collection/get_all_decks", CollectionController::getDecks, true));
         main.urls.add(new URL("/collection/get_main_deck", CollectionController::getMainDeck, true));
+        main.urls.add(new URL("/collection/is_main_deck_valid", CollectionController::isMainDeckValid, true));
 
         main.urls.add(new URL("/battle/request", BattleController::battleRequest, true));
         main.urls.add(new URL("/battle/cancel_request", BattleController::cancelBattleRequest, true));
