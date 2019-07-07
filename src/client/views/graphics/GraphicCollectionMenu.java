@@ -1,5 +1,6 @@
 package client.views.graphics;
 
+import client.controllers.AccountClient;
 import client.controllers.CollectionClient;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
@@ -19,23 +20,18 @@ import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import models.Account;
 import models.Response;
-import models.cards.Collection;
 import models.cards.Deck;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.Spell;
 import client.views.Graphics;
-
 import java.io.File;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.*;
-
-import static client.views.Graphics.Menu.COLLECTION_MENU;
 import static client.views.Graphics.Menu.MAIN_MENU;
 import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
@@ -94,7 +90,6 @@ public class GraphicCollectionMenu implements Initializable {
 
         } else {
             alert("failed to create", "deck creation", response.message);
-
         }
     }
 
@@ -258,7 +253,7 @@ public class GraphicCollectionMenu implements Initializable {
         cards = ((Map<Card, Integer>) CollectionClient.search(q, type.getTypeName()).data);
         cards.forEach((card, integer) -> {
             if (card.getClass() == type || type == Card.class) {
-                AnchorPane cardPane = getCardPane(card, true, 0);
+                AnchorPane cardPane = getCardPane(card, true, integer);
                 cardPane.setOnMouseClicked(event -> {
                     playMusic("sfx_ui_select.m4a");
                     if (selectedDeck == null) {
@@ -327,10 +322,16 @@ public class GraphicCollectionMenu implements Initializable {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, false);
         }));
 
-//        try {
-//        ((Map<String, Deck>) CollectionClient.getDecks().data).forEach((name, deck) -> deckList.getChildren().add(getDeckPane(name)));
-//        } catch (Account.NotLoggedInException ignored) {
-//        }
+        Response response = CollectionClient.getDecks();
+        if(response.OK) {
+            Map<String, Deck> decks = (HashMap<String, Deck>) response.data;
+            decks.forEach((name, deck) -> {
+                AnchorPane deckAnchorPane = getDeckPane(name);
+                deckList.getChildren().add(deckAnchorPane);
+            });
+        } else {
+            alert("Error", "can not get decks", response.message);
+        }
 
         updateCards("", filterType);
 
