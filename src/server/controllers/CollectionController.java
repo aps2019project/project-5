@@ -189,4 +189,9 @@ public class CollectionController extends Application {
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
+    public static HttpResponse getMainDeck(HttpRequest request) {
+        Response response = new Response(true, "deck sent.", request.user.mainDeck);
+        return new HttpResponseJSON(yaGson.toJson(response));
+
+    }
 }
