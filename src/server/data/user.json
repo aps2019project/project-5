@@ -6,8 +6,8 @@
       "@val": {
         "username": "mahdi",
         "password": "mahdi",
-        "loginToken": "unq1o",
-        "drake": 300,
+        "loginToken": "8vhzb",
+        "drake": 600,
         "decks": {
           "@type": "java.util.HashMap",
           "@val": {
@@ -88,7 +88,7 @@
                         "canMove": false
                       }
                     },
-                    10
+                    9
                   ]
                 ]
               }
@@ -97,7 +97,12 @@
               "name": "amin",
               "cards": {
                 "@type": "java.util.HashMap",
-                "@val": {}
+                "@val": {
+                  "@root.0-val.decks.0-val.cards.0-key": 10,
+                  "@root.0-val.decks.0-val.cards.1-key": 3,
+                  "@root.0-val.decks.0-val.cards.2-key": 1,
+                  "@root.0-val.decks.0-val.cards.3-key": 6
+                }
               }
             },
             "mahdi_deck": {
@@ -106,10 +111,16 @@
                 "@type": "java.util.HashMap",
                 "@val": {}
               }
+            },
+            "ali": {
+              "name": "ali",
+              "cards": {
+                "@type": "java.util.HashMap",
+                "@val": {}
+              }
             }
           }
         },
-        "mainDeck": "@root.0-val.decks.0-val",
         "cards": {
           "cards": {
             "@type": "java.util.HashMap",
@@ -117,7 +128,7 @@
               "@root.0-val.decks.0-val.cards.0-key": 10,
               "@root.0-val.decks.0-val.cards.1-key": 3,
               "@root.0-val.decks.0-val.cards.2-key": 1,
-              "@root.0-val.decks.0-val.cards.3-key": 10
+              "@root.0-val.decks.0-val.cards.3-key": 9
             }
           }
         }

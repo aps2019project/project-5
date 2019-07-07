@@ -1,6 +1,9 @@
 package client.views.graphics;
 
 import client.controllers.AccountClient;
+import client.controllers.CollectionClient;
+import client.controllers.ShopClient;
+import client.controllers.AccountClient;
 import client.controllers.ShopClient;
 import client.models.Shop;
 import com.gilecode.yagson.YaGson;
@@ -22,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.Response;
 import models.Account;
 import models.Response;
 import models.cards.Collection;
@@ -31,11 +35,11 @@ import models.cards.Hero;
 import models.cards.Minion;
 import models.cards.Spell;
 import client.views.Graphics;
-
 import java.io.File;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +47,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import static client.views.Graphics.Menu.MAIN_MENU;
+import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 import static client.views.graphics.ShopController.getCardPane;
 
@@ -74,7 +79,7 @@ public class GraphicCollectionMenu implements Initializable {
     public Type filterType = Card.class;
     private YaGsonBuilder deckJsonBuilder = new YaGsonBuilder().setPrettyPrinting();
     private YaGson deckJson = new YaGson();
-    final File savedDecksPath = new File("src" + File.separator + "data" + File.separator + "saved-decks");
+    final File savedDecksPath = new File("src/data/saved-decks");
 
 
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
@@ -93,14 +98,14 @@ public class GraphicCollectionMenu implements Initializable {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, true);
             return;
         }
-//        try {
-//            ClientManager.createDeck(deckName);
-//            AnchorPane deckPane = getDeckPane(deckName);
-//            deckList.getChildren().add(deckPane);
-//            newDeckNameTxt.setText("");
-//        } catch (Account.DeckExistsException e) {
-//            changeAsWrong(newDeckNameTxt, saveDeckBtn, true);
-//        } catch (Account.NotLoggedInException ignored) {}
+        Response response = CollectionClient.createDeck(deckName);
+        if (response.OK) {
+            AnchorPane deckPane = getDeckPane(deckName);
+            deckList.getChildren().add(deckPane);
+            newDeckNameTxt.setText("");
+        } else {
+            alert("failed to create", "deck creation", response.message);
+        }
     }
 
     public AnchorPane getDeckPane(String deckName) {
@@ -115,33 +120,41 @@ public class GraphicCollectionMenu implements Initializable {
         cardNameLbl.getStyleClass().add("card-name-label");
         deckPane.getChildren().add(cardNameLbl);
 
-
         JFXRadioButton radioButton = new JFXRadioButton("");
         radioButton.setToggleGroup(selectedDeckToggleGroup);
         radioButton.relocate(5, 17);
         radioButton.setOnMouseClicked(event -> {
             playMusic("sfx_ui_select.m4a");
-//            try {
-//                if (ClientManager.isValid(deckName))
-//                    ClientManager.selectDeck(deckName);
-//            } catch (Account.DeckNotFoundException ignored) {
-//            }
+            Response isValidRes = CollectionClient.isValid(deckName);
+            if (isValidRes.OK) {
+                Response response = CollectionClient.setMainDeck(deckName);
+                if (!response.OK) {
+                    alert("deck not selected", "set main deck", response.message);
+                }
+
+            } else {
+                alert("invalid deck", "deck validation", isValidRes.message);
+            }
         });
         radioButton.setVisible(false);
         deckPane.getChildren().add(radioButton);
+        Response validationResponse = CollectionClient.isValid(deckName);
         boolean deckIsValid = false;
-//        try {
-//            deckIsValid = ClientManager.isValid(deckName);
-//        } catch (Account.DeckNotFoundException ignored) {}
+        if(validationResponse.OK) {
+            deckIsValid = (boolean) validationResponse.data;
+        }
 
         Background backgroundBtn = (deckIsValid ? validBackground : ordinaryBackground);
         deckPane.setBackground(backgroundBtn);
-        String tmp;
-        try {
-            tmp = ClientManager.getMainDeck().getName();
-        } catch (Exception e) {
-            tmp = "";
+        String tmp = "";
+
+        Response mainDeckResponse = CollectionClient.getMainDeck();
+        if(mainDeckResponse.OK) {
+            if(mainDeckResponse.data != null) { // User has a main deck
+                tmp = ((Deck) mainDeckResponse.data).name;
+            }
         }
+
         final String mainDeckName = tmp;
         radioButton.setSelected(mainDeckName.equals(deckName));
         radioButton.setVisible(deckIsValid);
@@ -153,16 +166,17 @@ public class GraphicCollectionMenu implements Initializable {
         deleteDeckBtn.setOnMouseClicked(event -> {
             exportDeckBtn.setDisable(true);
             playMusic("sfx_ui_select.m4a");
-//            try {
-//                if (radioButton.isSelected())
-//                    ClientManager.selectDeck(null);
-//                ClientManager.deleteDeck(((Label) deckPane.getChildren().get(0)).getText());
-//                deckList.getChildren().remove(deckPane);
-//                if (selectedDeck == deckPane) {
-//                    selectedDeck = null;
-//                    selectedDeckCardList.getChildren().clear();
-//                }
-//            } catch (Account.DeckNotFoundException ignored) {}
+            Response response = CollectionClient.removeDeck(((Label) deckPane.getChildren().get(0)).getText());
+            if (!response.OK) {
+                alert("deck not removed", "invalid remove", response.message);
+            }
+            deckList.getChildren().remove(deckPane);
+            if (selectedDeck == deckPane) {
+                selectedDeck = null;
+                selectedDeckCardList.getChildren().clear();
+            }
+
+
         });
         deckPane.getChildren().add(deleteDeckBtn);
         deleteDeckBtn.resize(180, 50);
@@ -174,39 +188,37 @@ public class GraphicCollectionMenu implements Initializable {
         deckPane.setOnMouseExited(event -> deleteDeckBtn.setVisible(false));
 
         deckPane.setOnMouseClicked(event -> {
-            boolean finalDeckIsValid = false;
-//            try {
-//                finalDeckIsValid = ClientManager.isValid(deckName);
-//            } catch (Account.DeckNotFoundException ignored) {}
+            boolean finalDeckIsValid = (boolean) CollectionClient.isValid(deckName).data;
+
             exportDeckBtn.setDisable(!finalDeckIsValid);
             playMusic("sfx_ui_select.m4a");
             cardContainer.getChildren().forEach(node -> node.setDisable(false));
             deckList.getChildren().forEach(node -> {
                 AnchorPane nodePane = (AnchorPane) node;
-//                try {
-//                    boolean isValid = ClientManager.isValid(((Label) nodePane.getChildren().get(0)).getText());
-//                    Background background = (isValid ? validBackground : ordinaryBackground);
-//                    nodePane.setBackground(background);
-//                    JFXRadioButton rbtn = (JFXRadioButton) nodePane.getChildren().get(1);
-//                    rbtn.setSelected(mainDeckName.equals(((Label) nodePane.getChildren().get(0)).getText()));
-//                    rbtn.setVisible(isValid);
-//
-//                } catch (Account.DeckNotFoundException ignored) {}
+                Response validResponse = CollectionClient.isValid(((Label) nodePane.getChildren().get(0)).getText());
+                boolean isValid = false;
+                if(validationResponse.OK) {
+                    isValid = (boolean) validResponse.data;
+                } else {
+                    alert("Error", "Error", validationResponse.message);
+                }
+                Background background = (isValid ? validBackground : ordinaryBackground);
+                nodePane.setBackground(background);
+                JFXRadioButton rbtn = (JFXRadioButton) nodePane.getChildren().get(1);
+                rbtn.setSelected(mainDeckName.equals(((Label) nodePane.getChildren().get(0)).getText()));
+                rbtn.setVisible(isValid);
             });
             deckPane.setBackground(selectedDeckBackGround);
             selectedDeckCardList.getChildren().clear();
-//            try {
-//                ClientManager.getDeck(deckName).getCards().forEach(card ->
-//                        selectedDeckCardList.getChildren().add(getMiniCardPane(card.getName(), false)));
-//            } catch (Account.DeckNotFoundException ignored) {}
+            ((Deck) CollectionClient.getDeck(deckName).data).cards.forEach((card, integer) ->
+                    selectedDeckCardList.getChildren().add(getMiniCardPane(card.name, false, integer)));
             selectedDeck = deckPane;
         });
 
         return deckPane;
     }
 
-
-    public AnchorPane getMiniCardPane(String cardName, boolean isInShop) {
+    public AnchorPane getMiniCardPane(String cardName, boolean isInShop, int count) {
 
         AnchorPane cardPane = new AnchorPane();
 
@@ -214,7 +226,7 @@ public class GraphicCollectionMenu implements Initializable {
         cardPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(5), Insets.EMPTY)));
 
 
-        Label cardNameLbl = new Label(cardName.toUpperCase());
+        Label cardNameLbl = new Label(cardName.toUpperCase() + " x" + count);
         cardNameLbl.relocate(15, 17);
         cardNameLbl.setPrefWidth(200);
         cardNameLbl.setAlignment(Pos.CENTER);
@@ -228,26 +240,34 @@ public class GraphicCollectionMenu implements Initializable {
         deleteBtn.setOnMouseDragEntered(event -> deleteBtn.setVisible(true));
         deleteBtn.setOnMouseDragExited(event -> deleteBtn.setVisible(false));
         deleteBtn.setBackground(deleteBackground);
+
         deleteBtn.setOnMouseClicked(event -> {
             exportDeckBtn.setDisable(true);
             playMusic("sfx_ui_select.m4a");
-//            try {
-//                final String selectedDeckName = ((Label) selectedDeck.getChildren().get(0)).getText();
-//                ClientManager.removeCardFromDeck(cardName, selectedDeckName);
-//                selectedDeckCardList.getChildren().remove(cardPane);
-//                cardContainer.getChildren().forEach(node -> {
-//                    if (((Label) ((AnchorPane) node).getChildren().get(0)).getText().equals(cardName)) {
-//                        node.setDisable(false);
-//                    }
-//                });
-//                if (!ClientManager.isValid(selectedDeckName)) {
-//                    selectedDeck.setBackground(selectedDeckBackGround);
-//                    selectedDeck.getChildren().get(1).setVisible(false);
-//                    ((JFXRadioButton) (selectedDeck.getChildren().get(1))).setSelected(false);
+            final String selectedDeckName = ((Label) selectedDeck.getChildren().get(0)).getText();
+            Response response = CollectionClient.removeCardFromDeck(selectedDeckName, cardName);
+            if(response.OK) {
+                Deck newDeck = (Deck) response.data;
+
+                selectedDeckCardList.getChildren().clear();
+                Map<Card, Integer> newDeckCards = newDeck.cards;
+                newDeckCards.forEach((newCard, cardCount) -> selectedDeckCardList.getChildren().add(getMiniCardPane(newCard.name, false, cardCount)));
+
+                deleteBtn.setVisible(false);
+
+                if (!(boolean) CollectionClient.isValid(selectedDeckName).data) {
+                    selectedDeck.setBackground(selectedDeckBackGround);
+                    selectedDeck.getChildren().get(1).setVisible(false);
+                    ((JFXRadioButton) (selectedDeck.getChildren().get(1))).setSelected(false);
+                }
+            } else {
+                alert("Error", "Error", response.message);
+            }
+//            cardContainer.getChildren().forEach(node -> {
+//                if (((Label) ((AnchorPane) node).getChildren().get(0)).getText().equals(cardName)) {
+//                    node.setDisable(false);
 //                }
-//            } catch (Collection.CardNotFoundException | Account.DeckNotFoundException ignored) {
-//                ignored.printStackTrace();
-//            }
+//            });
         });
         cardPane.getChildren().add(deleteBtn);
 
@@ -260,66 +280,66 @@ public class GraphicCollectionMenu implements Initializable {
 
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
-        List<Card> cards = new ArrayList<>();
-        if (q == null || q.equals("")) {
-//            cards = ClientManager.getMyCollection().getCardsList();
-        } else {
-//            try {
-//                cards = ClientManager.searchMyCard(q);
-//            } catch (Collection.CardNotFoundException ignored) {
-//            }
+        Map<Card, Integer> cards;
+        if (q == null) {
+            q = "";
         }
-
-        cards.forEach(card -> {
+        cards = ((Map<Card, Integer>) CollectionClient.search(q, type.getTypeName()).data);
+        cards.forEach((card, integer) -> {
             if (card.getClass() == type || type == Card.class) {
-                AnchorPane cardPane = getCardPane(card, true, 0);
-                cardPane.setOnMouseClicked(event -> {
-                    playMusic("sfx_ui_select.m4a");
-                    if (selectedDeck == null) {
-                        Graphics.alert("Error", "Can't add card", "please select a deck first.");
-                        return;
-                    }
-//                    try {
-//                        String cardName = ((Label) cardPane.getChildren().get(0)).getText();
-//                        String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
-//                        ClientManager.addCardToDeck(cardName, deckName);
-//                        selectedDeckCardList.getChildren().add(getMiniCardPane(cardName, false));
-//                        if (ClientManager.isValid(deckName)) {
-//                            selectedDeck.setBackground(validBackground);
-//                            exportDeckBtn.setDisable(false);
-//                            selectedDeck.getChildren().get(1).setVisible(true);
-//                        }
-//                    } catch (Deck.DeckFullException e) {
-//                        Graphics.alert("Error", "Can't add card to deck", "your deck is full.");
-//                    } catch (Deck.HeroExistsInDeckException e) {
-//                        Graphics.alert("Error", "Can't add hero to deck", "You can have exacly one hero in any deck.");
-//                    } catch (Deck.HeroNotExistsInDeckException e) {
-//                        Graphics.alert("Error", "Can't add hero to deck", "You should have at least one hero in your deck.");
-//                    } catch (Collection.CardNotFoundException ignored) {
-//                        cardPane.setDisable(true);
-//                    } catch (Account.DeckNotFoundException ignored) {
-//                    }
+                AnchorPane cardPane = getCardPane(card, true, integer);
 
+                cardPane.setOnMouseEntered(event -> {
+                    Graphics.playMusic("sfx_ui_select.m4a");
+                    JFXButton sell = new JFXButton("SELL");
+                    sell.setLayoutX(110);
+                    sell.setLayoutY(210);
+                    sell.setPrefSize(90, 62);
+                    sell.getStyleClass().add("shop-buy-button");
+                    JFXButton add = new JFXButton("ADD");
+                    add.setLayoutX(25);
+                    add.setLayoutY(210);
+                    add.setPrefSize(90, 62);
+                    add.getStyleClass().add("shop-cancel-button");
+                    cardPane.getChildren().addAll(sell, add);
+                    sell.setOnMouseClicked(bought -> {
+                        Graphics.playMusic("sfx_ui_select.m4a");
+                        Response buyResponse = ShopClient.sell(card.name);
+                        if(buyResponse.OK)
+                            updateCards(searchField.getText(), filterType);
+                        else
+                            alert("Error", "sell failed", buyResponse.message);
+                    });
+                    add.setOnMouseClicked(canceled -> {
+                        Graphics.playMusic("sfx_ui_select.m4a");
+                        if (selectedDeck == null) {
+                            Graphics.alert("Error", "Can't add card", "please select a deck first.");
+                            return;
+                        }
+                        String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
+                        String cardName = card.name;
+                        Response addResponse = CollectionClient.addCardToDeck(deckName, cardName);
+                        if (addResponse.OK) {
+                            selectedDeckCardList.getChildren().clear();
+                            Map<Card, Integer> newDeckCards = ((Deck) addResponse.data).cards;
+                            newDeckCards.forEach((newCard, count) -> selectedDeckCardList.getChildren().add(getMiniCardPane(newCard.name, false, count)));
+                        } else {
+                            alert("Error", "invalid addition", addResponse.message);
+                        }
+                        cardPane.getChildren().removeAll(sell, add);
+                    });
+                    cardPane.setOnMouseExited(event1 -> {
+                        cardPane.getChildren().removeAll(sell, add);
+                    });
                 });
-//                cardPane.setOnMousePressed(event -> {
-//                    cardPane.setMouseTransparent(true);
-//                    event.setDragDetect(true);
-//                });
-//                cardPane.setOnMouseDragged(event -> {
-//                    cardPane.startFullDrag();
-//                    event.setDragDetect(false);
-//                    AnchorPane draggingCardPane = cardPane;
-//                    Graphics.stage.getScene().getRoot().setOnMouseMoved(mouseEvent -> {
-//                        draggingCardPane.setTranslateX(mouseEvent.getX());
-//                        draggingCardPane.setTranslateY(mouseEvent.getY());
-//                    });
+
+
+//                cardPane.setOnMouseClicked(event -> {
+//                    playMusic("sfx_ui_select.m4a");
 //                });
                 cardContainer.getChildren().add(cardPane);
             }
-
         });
-
-
     }
 
     @Override
@@ -339,10 +359,16 @@ public class GraphicCollectionMenu implements Initializable {
             changeAsWrong(newDeckNameTxt, saveDeckBtn, false);
         }));
 
-//        try {
-//            ClientManager.getDecks().forEach(deck -> deckList.getChildren().add(getDeckPane(deck.getName())));
-//        } catch (Account.NotLoggedInException ignored) {
-//        }
+        Response response = CollectionClient.getDecks();
+        if(response.OK) {
+            Map<String, Deck> decks = (HashMap<String, Deck>) response.data;
+            decks.forEach((name, deck) -> {
+                AnchorPane deckAnchorPane = getDeckPane(name);
+                deckList.getChildren().add(deckAnchorPane);
+            });
+        } else {
+            alert("Error", "can not get decks", response.message);
+        }
 
         updateCards("", filterType);
 
@@ -435,14 +461,6 @@ public class GraphicCollectionMenu implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-//        try {
-//            ClientManager.addDeck(deck);
-//            deckList.getChildren().add(getDeckPane(deck.getName()));
-//        } catch (Account.DeckExistsException e) {
-//            Graphics.alert("Error", "Duplicate Deck", "You already have this deck");
-//        }
     }
 
     public void exportDeck(MouseEvent mouseEvent) {
@@ -450,11 +468,7 @@ public class GraphicCollectionMenu implements Initializable {
 
         String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
 
-        Deck deck = null;
-//        try {
-//            deck = ClientManager.getDeck(deckName);
-//        } catch (Account.DeckNotFoundException ignored) {
-//        }
+        Deck deck = (Deck) CollectionClient.getDeck(deckName).data;
 
         File file = new File(exportPathTxt.getText());
         if (!file.exists())
