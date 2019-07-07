@@ -6,7 +6,7 @@ import server.models.Application;
 import server.models.URL;
 
 public class Server {
-    public static void main(String[] args) {
+    private static void startMain() {
         Application main = new Application();
         main.port = 80;
         main.urls.add(new URL("/login", AuthenticationController::login, false));
@@ -40,5 +40,14 @@ public class Server {
         main.urls.add(new URL("/chat/send_message", ChatController::sendMessage, true));
         main.urls.add(new URL("/chat/update", ChatController::update, true));
         main.start();
+    }
+
+    private static void startAdmin() {
+
+    }
+
+    public static void main(String[] args) {
+        startMain();
+        startAdmin();
     }
 }
