@@ -5,10 +5,33 @@ import server.controllers.*;
 import server.models.Application;
 import server.models.URL;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 public class Server {
+    private static final String DEFAULT_MAIN_PORT = "8000";
+    private static final String DEFAULT_ADMIN_PORT = "8888";
+
+    private static Properties getProperties() {
+        try {
+            FileInputStream input = new FileInputStream("src/server/config.properties");
+            Properties properties = new Properties();
+            properties.load(input);
+            return properties;
+        } catch (IOException e) { e.printStackTrace(); }
+
+        Properties properties = new Properties();
+        properties.setProperty("main_application.port", DEFAULT_MAIN_PORT);
+        properties.setProperty("admin_application.port", DEFAULT_ADMIN_PORT);
+
+        return properties;
+    }
+
     private static void startMain() {
         Application main = new Application();
-        main.port = 80;
+        main.port = Integer.valueOf(getProperties().getProperty("main_application.port"));
         main.urls.add(new URL("/login", AuthenticationController::login, false));
         main.urls.add(new URL("/sign_up", AuthenticationController::signUp, false));
         main.urls.add(new URL("/profile", AuthenticationController::profile, true));
