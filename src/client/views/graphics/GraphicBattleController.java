@@ -3,6 +3,7 @@ package client.views.graphics;
 import client.controllers.BattleClient;
 import client.controllers.ClientManager;
 import client.models.Action;
+import client.models.Timer;
 import javafx.animation.*;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -214,10 +215,10 @@ public class GraphicBattleController implements Initializable {
         new Thread(() -> {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
             Graphics.playMusic("sfx_unit_run_charge_4.m4a");
-            SpriteMaker.getAndShowAnimation(imageView, card.name, Action.RUN, 1000);
+            SpriteMaker.getAndShowAnimation(imageView, card.name, Action.RUN, 1000, speed);
             long newTime = System.currentTimeMillis();
             while (System.currentTimeMillis() - newTime <= time) {}
-            SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000);
+            SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000, speed);
         }).start();
     }
 

@@ -37,6 +37,8 @@ public class Server {
 
         authentication.urls.add(new URL("/chat/send_message", ChatController::sendMessage, true));
         authentication.urls.add(new URL("/chat/update", ChatController::update, true));
+
+
         authentication.start();
     }
 }

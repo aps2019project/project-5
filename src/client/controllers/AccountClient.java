@@ -23,4 +23,9 @@ public class AccountClient {
         return serverConnection.getResponse();
     }
 
+    public static Response incrementDrake(int amount) {
+        ServerConnection serverConnection = new ServerConnection("/cheat-mode/increment_drake");
+        serverConnection.parameters.put("amount", String.valueOf(amount));
+        return serverConnection.getResponse();
+    }
 }

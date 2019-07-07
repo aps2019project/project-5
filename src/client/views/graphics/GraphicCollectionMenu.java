@@ -1,5 +1,7 @@
 package client.views.graphics;
 
+import client.controllers.AccountClient;
+import client.controllers.ShopClient;
 import client.models.Shop;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
@@ -21,6 +23,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Account;
+import models.Response;
 import models.cards.Collection;
 import models.cards.Deck;
 import models.cards.Card;
@@ -35,7 +38,9 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import static client.views.Graphics.Menu.MAIN_MENU;
 import static client.views.Graphics.playMusic;
@@ -368,11 +373,13 @@ public class GraphicCollectionMenu implements Initializable {
 
         root.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.A) {
-                for (Card card : Shop.getInstance().getCardsCollection().getCardsList()) {
-                    ClientManager.incrementDrake(card.getPrice());
+                Response response = ShopClient.search(AccountClient.user.loginToken, "", "");
+                List<Card> cards = new ArrayList<>(((Map<Card, Integer>) response.data).keySet());
+                for (Card card : cards) {
+                    AccountClient.incrementDrake(card.price);
                     try {
-                        ClientManager.buy(card.getName());
-                    } catch (Collection.CollectionException | Account.NotEnoughDrakeException ignored) { }
+                        ClientManager.buy(card.name);
+                    } catch (client.models.Collection.CollectionException | client.models.Account.NotEnoughDrakeException ignored) { }
                 }
                 updateCards("", Card.class);
             }
