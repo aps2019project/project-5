@@ -2,6 +2,7 @@ package client.views.graphics;
 
 import client.controllers.AccountClient;
 import client.controllers.CollectionClient;
+import client.controllers.ShopClient;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.*;
@@ -272,23 +273,55 @@ public class GraphicCollectionMenu implements Initializable {
         cards.forEach((card, integer) -> {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true, integer);
-                cardPane.setOnMouseClicked(event -> {
-                    playMusic("sfx_ui_select.m4a");
-                    if (selectedDeck == null) {
-                        Graphics.alert("Error", "Can't add card", "please select a deck first.");
-                        return;
-                    }
-                    String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
-                    String cardName = card.name;
-                    Response addResponse = CollectionClient.addCardToDeck(deckName, cardName);
-                    if (addResponse.OK) {
-                        selectedDeckCardList.getChildren().clear();
-                        Map<Card, Integer> newDeckCards = ((Deck) addResponse.data).cards;
-                        newDeckCards.forEach((newCard, count) -> selectedDeckCardList.getChildren().add(getMiniCardPane(newCard.name, false, count)));
-                    } else {
-                        alert("Error", "invalid addition", addResponse.message);
-                    }
+
+                cardPane.setOnMouseEntered(event -> {
+                    Graphics.playMusic("sfx_ui_select.m4a");
+                    JFXButton sell = new JFXButton("SELL");
+                    sell.setLayoutX(110);
+                    sell.setLayoutY(210);
+                    sell.setPrefSize(90, 62);
+                    sell.getStyleClass().add("shop-buy-button");
+                    JFXButton add = new JFXButton("ADD");
+                    add.setLayoutX(25);
+                    add.setLayoutY(210);
+                    add.setPrefSize(90, 62);
+                    add.getStyleClass().add("shop-cancel-button");
+                    cardPane.getChildren().addAll(sell, add);
+                    sell.setOnMouseClicked(bought -> {
+                        Graphics.playMusic("sfx_ui_select.m4a");
+                        Response buyResponse = ShopClient.sell(card.name);
+                        if(buyResponse.OK)
+                            updateCards(searchField.getText(), filterType);
+                        else
+                            alert("Error", "sell failed", buyResponse.message);
+                    });
+                    add.setOnMouseClicked(canceled -> {
+                        Graphics.playMusic("sfx_ui_select.m4a");
+                        if (selectedDeck == null) {
+                            Graphics.alert("Error", "Can't add card", "please select a deck first.");
+                            return;
+                        }
+                        String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
+                        String cardName = card.name;
+                        Response addResponse = CollectionClient.addCardToDeck(deckName, cardName);
+                        if (addResponse.OK) {
+                            selectedDeckCardList.getChildren().clear();
+                            Map<Card, Integer> newDeckCards = ((Deck) addResponse.data).cards;
+                            newDeckCards.forEach((newCard, count) -> selectedDeckCardList.getChildren().add(getMiniCardPane(newCard.name, false, count)));
+                        } else {
+                            alert("Error", "invalid addition", addResponse.message);
+                        }
+                        cardPane.getChildren().removeAll(sell, add);
+                    });
+                    cardPane.setOnMouseExited(event1 -> {
+                        cardPane.getChildren().removeAll(sell, add);
+                    });
                 });
+
+
+//                cardPane.setOnMouseClicked(event -> {
+//                    playMusic("sfx_ui_select.m4a");
+//                });
                 cardContainer.getChildren().add(cardPane);
             }
         });
