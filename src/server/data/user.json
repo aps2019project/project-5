@@ -140,8 +140,8 @@
       "@val": {
         "username": "amin",
         "password": "amin",
-        "loginToken": "v1ujs",
-        "drake": 350,
+        "loginToken": "g91x7",
+        "drake": 6300,
         "decks": {
           "@type": "java.util.HashMap",
           "@val": {}
@@ -152,81 +152,18 @@
             "@val": [
               [
                 {
-                  "@type": "models.cards.Minion",
+                  "@type": "models.cards.Hero",
                   "@val": {
-                    "health": 24,
+                    "health": 50,
                     "currentHealth": 0,
                     "canAttack": false,
-                    "attackPoint": 6,
+                    "attackPoint": 4,
                     "attackRange": 1,
                     "attackType": "MELEE",
-                    "name": "Persian Champion",
+                    "name": "Rakhsh",
                     "description": "",
                     "id": 0,
-                    "price": 600,
-                    "manaPoint": 9,
-                    "isInserted": false,
-                    "canMove": false
-                  }
-                },
-                1
-              ],
-              [
-                {
-                  "@type": "models.cards.Minion",
-                  "@val": {
-                    "health": 2,
-                    "currentHealth": 0,
-                    "canAttack": false,
-                    "attackPoint": 2,
-                    "attackRange": 3,
-                    "attackType": "RANGED",
-                    "name": "Small Tiger",
-                    "description": "",
-                    "id": 0,
-                    "price": 200,
-                    "manaPoint": 1,
-                    "isInserted": false,
-                    "canMove": false
-                  }
-                },
-                1
-              ],
-              [
-                {
-                  "@type": "models.cards.Minion",
-                  "@val": {
-                    "health": 3,
-                    "currentHealth": 0,
-                    "canAttack": false,
-                    "attackPoint": 10,
-                    "attackRange": 1,
-                    "attackType": "MELEE",
-                    "name": "Turan Wand",
-                    "description": "",
-                    "id": 0,
-                    "price": 450,
-                    "manaPoint": 2,
-                    "isInserted": false,
-                    "canMove": false
-                  }
-                },
-                1
-              ],
-              [
-                {
-                  "@type": "models.cards.Minion",
-                  "@val": {
-                    "health": 4,
-                    "currentHealth": 0,
-                    "canAttack": false,
-                    "attackPoint": 2,
-                    "attackRange": 7,
-                    "attackType": "RANGED",
-                    "name": "Turan Sling",
-                    "description": "",
-                    "id": 0,
-                    "price": 600,
+                    "price": 8000,
                     "manaPoint": 1,
                     "isInserted": false,
                     "canMove": false
@@ -259,121 +196,16 @@
                 {
                   "@type": "models.cards.Minion",
                   "@val": {
-                    "health": 6,
-                    "currentHealth": 0,
-                    "canAttack": false,
-                    "attackPoint": 4,
-                    "attackRange": 1,
-                    "attackType": "MELEE",
-                    "name": "Persian Swordsman",
-                    "description": "",
-                    "id": 0,
-                    "price": 400,
-                    "manaPoint": 2,
-                    "isInserted": false,
-                    "canMove": false
-                  }
-                },
-                1
-              ],
-              [
-                {
-                  "@type": "models.cards.Hero",
-                  "@val": {
-                    "health": 30,
-                    "currentHealth": 0,
-                    "canAttack": false,
-                    "attackPoint": 2,
-                    "attackRange": 1,
-                    "attackType": "MELEE",
-                    "name": "Arash",
-                    "description": "",
-                    "id": 0,
-                    "price": 10000,
-                    "manaPoint": 2,
-                    "isInserted": false,
-                    "canMove": false
-                  }
-                },
-                1
-              ],
-              [
-                {
-                  "@type": "models.cards.Minion",
-                  "@val": {
-                    "health": 4,
-                    "currentHealth": 0,
-                    "canAttack": false,
-                    "attackPoint": 4,
-                    "attackRange": 3,
-                    "attackType": "HYBRID",
-                    "name": "Turan Lancer",
-                    "description": "",
-                    "id": 0,
-                    "price": 600,
-                    "manaPoint": 1,
-                    "isInserted": false,
-                    "canMove": false
-                  }
-                },
-                1
-              ],
-              [
-                {
-                  "@type": "models.cards.Minion",
-                  "@val": {
-                    "health": 14,
-                    "currentHealth": 0,
-                    "canAttack": false,
-                    "attackPoint": 10,
-                    "attackRange": 7,
-                    "attackType": "HYBRID",
-                    "name": "Black Demon",
-                    "description": "",
-                    "id": 0,
-                    "price": 300,
-                    "manaPoint": 9,
-                    "isInserted": false,
-                    "canMove": false
-                  }
-                },
-                1
-              ],
-              [
-                {
-                  "@type": "models.cards.Minion",
-                  "@val": {
-                    "health": 5,
-                    "currentHealth": 0,
-                    "canAttack": false,
-                    "attackPoint": 3,
-                    "attackRange": 3,
-                    "attackType": "HYBRID",
-                    "name": "Persian Lancer",
-                    "description": "",
-                    "id": 0,
-                    "price": 500,
-                    "manaPoint": 1,
-                    "isInserted": false,
-                    "canMove": false
-                  }
-                },
-                1
-              ],
-              [
-                {
-                  "@type": "models.cards.Minion",
-                  "@val": {
                     "health": 12,
                     "currentHealth": 0,
                     "canAttack": false,
-                    "attackPoint": 4,
-                    "attackRange": 5,
-                    "attackType": "RANGED",
-                    "name": "Persian General",
+                    "attackPoint": 11,
+                    "attackRange": 3,
+                    "attackType": "HYBRID",
+                    "name": "One Eye Giant",
                     "description": "",
                     "id": 0,
-                    "price": 800,
+                    "price": 500,
                     "manaPoint": 7,
                     "isInserted": false,
                     "canMove": false
