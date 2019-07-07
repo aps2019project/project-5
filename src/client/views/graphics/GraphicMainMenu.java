@@ -36,7 +36,7 @@ public class GraphicMainMenu implements Initializable {
     }
 
     public void matchSelect(MouseEvent mouseEvent) {
-        if (!ClientManager.isMainDeckSelected()) {
+        if (!AccountClient.user.mainDeck.isValid()) {
             Graphics.alert("Sorry", "Can't start game", "You should first select a valid deck as your main deck.");
             return;
         }

@@ -84,4 +84,8 @@ public class ShopController {
         return new HttpResponseJSON(yaGson.toJson(response));
     }
 
+    public static HttpResponse getDrakes(HttpRequest request) {
+        Response response = new Response(true, "drakes sent.", request.user.drake);
+        return new HttpResponseJSON(response);
+    }
 }
