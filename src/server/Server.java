@@ -6,7 +6,6 @@ import server.models.Application;
 import server.models.URL;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
