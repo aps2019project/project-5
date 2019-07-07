@@ -176,7 +176,7 @@ public class CollectionController extends Application {
                     response = new Response(false, "card not found in this deck", 107);
                 else {
                     deck.decrease(card);
-                    response = new Response(false, "card removed from the deck", deck);
+                    response = new Response(true, "card removed from the deck", deck);
                 }
             }
         }

@@ -224,26 +224,34 @@ public class GraphicCollectionMenu implements Initializable {
         deleteBtn.setOnMouseDragEntered(event -> deleteBtn.setVisible(true));
         deleteBtn.setOnMouseDragExited(event -> deleteBtn.setVisible(false));
         deleteBtn.setBackground(deleteBackground);
+
         deleteBtn.setOnMouseClicked(event -> {
             exportDeckBtn.setDisable(true);
             playMusic("sfx_ui_select.m4a");
-//            try {
             final String selectedDeckName = ((Label) selectedDeck.getChildren().get(0)).getText();
-            CollectionClient.removeCardFromDeck(cardName, selectedDeckName);
-            selectedDeckCardList.getChildren().remove(cardPane);
-            cardContainer.getChildren().forEach(node -> {
-                if (((Label) ((AnchorPane) node).getChildren().get(0)).getText().equals(cardName)) {
-                    node.setDisable(false);
+            Response response = CollectionClient.removeCardFromDeck(selectedDeckName, cardName);
+            if(response.OK) {
+                Deck newDeck = (Deck) response.data;
+
+                selectedDeckCardList.getChildren().clear();
+                Map<Card, Integer> newDeckCards = newDeck.cards;
+                newDeckCards.forEach((newCard, cardCount) -> selectedDeckCardList.getChildren().add(getMiniCardPane(newCard.name, false, cardCount)));
+
+                deleteBtn.setVisible(false);
+
+                if (!(boolean) CollectionClient.isValid(selectedDeckName).data) {
+                    selectedDeck.setBackground(selectedDeckBackGround);
+                    selectedDeck.getChildren().get(1).setVisible(false);
+                    ((JFXRadioButton) (selectedDeck.getChildren().get(1))).setSelected(false);
                 }
-            });
-            if (!CollectionClient.isValid(selectedDeckName).OK) {
-                selectedDeck.setBackground(selectedDeckBackGround);
-                selectedDeck.getChildren().get(1).setVisible(false);
-                ((JFXRadioButton) (selectedDeck.getChildren().get(1))).setSelected(false);
+            } else {
+                alert("Error", "Error", response.message);
             }
-//            } catch (Collection.CardNotFoundException | Account.DeckNotFoundException ignored) {
-//                ignored.printStackTrace();
-//            }
+//            cardContainer.getChildren().forEach(node -> {
+//                if (((Label) ((AnchorPane) node).getChildren().get(0)).getText().equals(cardName)) {
+//                    node.setDisable(false);
+//                }
+//            });
         });
         cardPane.getChildren().add(deleteBtn);
 
@@ -284,8 +292,6 @@ public class GraphicCollectionMenu implements Initializable {
                 cardContainer.getChildren().add(cardPane);
             }
         });
-
-
     }
 
     @Override
@@ -391,14 +397,6 @@ public class GraphicCollectionMenu implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-//        try {
-//            ClientManager.addDeck(deck);
-//            deckList.getChildren().add(getDeckPane(deck.getName()));
-//        } catch (Account.DeckExistsException e) {
-//            Graphics.alert("Error", "Duplicate Deck", "You already have this deck");
-//        }
     }
 
     public void exportDeck(MouseEvent mouseEvent) {
