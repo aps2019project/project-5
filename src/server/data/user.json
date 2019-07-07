@@ -6,7 +6,7 @@
       "@val": {
         "username": "mahdi",
         "password": "mahdi",
-        "loginToken": "v4jmv",
+        "loginToken": "epjlh",
         "drake": 300,
         "decks": {
           "@type": "java.util.HashMap",
@@ -109,7 +109,12 @@
               "name": "amin",
               "cards": {
                 "@type": "java.util.HashMap",
-                "@val": {}
+                "@val": {
+                  "@root.0-val.decks.0-val.cards.0-key": 10,
+                  "@root.0-val.decks.0-val.cards.1-key": 3,
+                  "@root.0-val.decks.0-val.cards.2-key": 1,
+                  "@root.0-val.decks.0-val.cards.3-key": 6
+                }
               }
             },
             "mahdi_deck": {
@@ -128,7 +133,7 @@
             }
           }
         },
-        "mainDeck": "@root.0-val.decks.1-val",
+        "mainDeck": "@root.0-val.decks.0-val",
         "cards": {
           "cards": {
             "@type": "java.util.HashMap",

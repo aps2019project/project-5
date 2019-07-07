@@ -195,14 +195,14 @@ public class GraphicCollectionMenu implements Initializable {
             deckPane.setBackground(selectedDeckBackGround);
             selectedDeckCardList.getChildren().clear();
             ((Deck) CollectionClient.getDeck(deckName).data).cards.forEach((card, integer) ->
-                    selectedDeckCardList.getChildren().add(getMiniCardPane(card.name, false)));
+                    selectedDeckCardList.getChildren().add(getMiniCardPane(card.name, false, integer)));
             selectedDeck = deckPane;
         });
 
         return deckPane;
     }
 
-    public AnchorPane getMiniCardPane(String cardName, boolean isInShop) {
+    public AnchorPane getMiniCardPane(String cardName, boolean isInShop, int count) {
 
         AnchorPane cardPane = new AnchorPane();
 
@@ -210,7 +210,7 @@ public class GraphicCollectionMenu implements Initializable {
         cardPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(5), Insets.EMPTY)));
 
 
-        Label cardNameLbl = new Label(cardName.toUpperCase());
+        Label cardNameLbl = new Label(cardName.toUpperCase() + " x" + count);
         cardNameLbl.relocate(15, 17);
         cardNameLbl.setPrefWidth(200);
         cardNameLbl.setAlignment(Pos.CENTER);
@@ -274,12 +274,9 @@ public class GraphicCollectionMenu implements Initializable {
                     String cardName = card.name;
                     Response addResponse = CollectionClient.addCardToDeck(deckName, cardName);
                     if (addResponse.OK) {
-                        selectedDeckCardList.getChildren().add(getMiniCardPane(cardName, false));
-                        if (CollectionClient.isValid(deckName).OK) {
-                            selectedDeck.setBackground(validBackground);
-                            exportDeckBtn.setDisable(false);
-                            selectedDeck.getChildren().get(1).setVisible(true);
-                        }
+                        selectedDeckCardList.getChildren().clear();
+                        Map<Card, Integer> newDeckCards = ((Deck) addResponse.data).cards;
+                        newDeckCards.forEach((newCard, count) -> selectedDeckCardList.getChildren().add(getMiniCardPane(newCard.name, false, count)));
                     } else {
                         alert("Error", "invalid addition", addResponse.message);
                     }
