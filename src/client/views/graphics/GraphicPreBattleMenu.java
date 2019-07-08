@@ -3,8 +3,11 @@ package client.views.graphics;
 import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import client.controllers.ChatClient;
+import client.models.Player;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -12,11 +15,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import client.views.Graphics;
 import models.Response;
+import models.chat.Chat;
 import models.chat.Message;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static client.views.Graphics.Menu.*;
 
-public class GraphicPreBattleMenu {
+public class GraphicPreBattleMenu implements Initializable {
 
     public VBox deathMatchContainer;
     public VBox captureTheFlagContainer;
@@ -98,8 +107,14 @@ public class GraphicPreBattleMenu {
     public void sendMessage(ActionEvent actionEvent) {
         String message = messageField.getText();
         ChatClient.sendMessage(message);
-        Response response = ChatClient.update();
+        updateMessage();
+    }
 
+    private void updateMessage() {
+        chats.getChildren().clear();
+        for (Message message : ((Chat) ChatClient.update().data).messages) {
+            chats.getChildren().add(getMessageView(message));
+        }
 
     }
 
@@ -116,5 +131,12 @@ public class GraphicPreBattleMenu {
         messageView.getStyleClass().add("chat-container");
         messageView.getChildren().addAll(label);
         return messageView;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        ScheduledThreadPoolExecutor waitingAnimation = new ScheduledThreadPoolExecutor(1);
+        waitingAnimation.scheduleAtFixedRate(() -> Platform.runLater(this::updateMessage), 0, 1, TimeUnit.SECONDS);
     }
 }
