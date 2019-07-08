@@ -34,9 +34,9 @@ public class GraphicPreBattleMenu implements Initializable {
     public VBox captureTheFlagContainer;
     public VBox multiFlagContainer;
 
-    private static int matchMode = 1;
-    private static boolean isStoryMode = false;
-    private static boolean isMultiPlayer = false;
+    public static int matchMode = 1;
+    public static boolean isStoryMode = false;
+    public static boolean isMultiPlayer = false;
     public VBox chats;
     public JFXTextField messageField;
 
@@ -46,7 +46,7 @@ public class GraphicPreBattleMenu implements Initializable {
     }
 
 
-    public void battleRequest() {
+    public static void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
             if (response.data != null) {
@@ -76,7 +76,6 @@ public class GraphicPreBattleMenu implements Initializable {
         matchMode = 3;
         battleRequest();
     }
-
 
     public void customGame(MouseEvent mouseEvent) {
         Graphics.setMenu(MATCH_SELECT_MENU);

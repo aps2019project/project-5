@@ -1,6 +1,7 @@
 package client.views.graphics;
 
 import client.controllers.AccountClient;
+import client.controllers.CheatClient;
 import client.controllers.ShopClient;
 import client.models.Action;
 import com.jfoenix.controls.JFXButton;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import models.cards.Attacker;
@@ -37,6 +39,7 @@ public class ShopController implements Initializable {
     public TextField searchField;
     public Label filterNone, filterHeroes, filterMinions, filterSpells;
     public Button addCustomCard;
+    public AnchorPane root;
     private Type filterType = Card.class;
     public Label drakes;
 
@@ -67,6 +70,30 @@ public class ShopController implements Initializable {
                 updateCards(searchField.getText(), filterType);
             });
         }
+
+        root.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.D) {
+                CheatClient.incrementDrake(1000000);
+                updateDrakes();
+            }
+
+            if (event.getCode() == KeyCode.A) {
+                Response res = ShopClient.search(AccountClient.user.loginToken, "", "");
+                List<Card> cards = new ArrayList<>(((Map<Card, Integer>) res.data).keySet());
+                for (Card card : cards) {
+                    CheatClient.incrementDrake(card.price);
+                    ShopClient.buy(AccountClient.user.loginToken, card.name);
+                }
+                updateCards("", Card.class);
+            }
+        });
+
+
+
+    }
+
+    private void updateDrakes() {
+        drakes.setText("" + ShopClient.getDrakes());
     }
 
     public static AnchorPane getCardPane(Card card, boolean isInShop, int count) {
@@ -99,7 +126,7 @@ public class ShopController implements Initializable {
             ImageView imageView = new ImageView();
             if (card instanceof Spell)
                 action = Action.SPELL_IDLE;
-            SpriteMaker.getAndShowAnimation(imageView, card.name, action, 10000);
+            SpriteMaker.getAndShowAnimation(imageView, card.name, action, 10000, 1);
             if (isAttacker) {
                 imageView.relocate(30, -10);
                 imageView.setFitWidth(160);
@@ -178,6 +205,7 @@ public class ShopController implements Initializable {
                             updateDrakes();
                         } else
                             alert("Error", "buy failed", buyResponse.message);
+                        updateDrakes();
                     });
                     cancel.setOnMouseClicked(canceled -> {
                         Graphics.playMusic("sfx_ui_select.m4a");
@@ -192,10 +220,6 @@ public class ShopController implements Initializable {
         });
     }
 
-    public void updateDrakes() {
-        int drake = ShopClient.getDrakes();
-        drakes.setText("" + drake);
-    }
 
     public void addCustomCard(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
