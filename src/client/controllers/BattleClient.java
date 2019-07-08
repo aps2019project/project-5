@@ -5,14 +5,23 @@ import models.Response;
 import models.map.Cell;
 import models.match.Match;
 import models.match.Player;
+import server.controllers.AuthenticationController;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class BattleClient {
+    private static String token = AccountClient.user.loginToken;
+
     public static Match playingMatch;
 
     public static Match getPlayingMatch() {
+        Response response;
+        ServerConnection serverConnection = new ServerConnection("/battle/");
+        return null;
+    }
+
+    public static Response battleRequest() {
         return null;
     }
 

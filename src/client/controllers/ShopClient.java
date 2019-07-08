@@ -1,11 +1,14 @@
 package client.controllers;
 
+import com.gilecode.yagson.YaGson;
 import models.Response;
 import models.cards.Card;
+
 import java.util.Map;
 
 public class ShopClient {
     public static Map<Card, Integer> searchedCards;
+    private String token = AccountClient.user.loginToken;
 
     public static Response search(String token, String searchedContent, String type) {
         ServerConnection serverConnection = new ServerConnection("/shop/search");
@@ -29,6 +32,16 @@ public class ShopClient {
         ServerConnection serverConnection = new ServerConnection("/shop/sell");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("card_name", cardName);
+        return serverConnection.getResponse();
+    }
+
+    public static Response customCard(Card card) {
+        ServerConnection serverConnection = new ServerConnection("/shop/custom_card");
+        YaGson yaGson = new YaGson();
+
+        System.out.println(yaGson.toJson(card));
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("json", yaGson.toJson(card));
         return serverConnection.getResponse();
     }
 
