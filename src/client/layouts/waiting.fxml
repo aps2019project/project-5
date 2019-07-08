@@ -2,10 +2,19 @@
 
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<AnchorPane xmlns="http://javafx.com/javafx" styleClass="match-select-container"
             xmlns:fx="http://javafx.com/fxml"
-
+            stylesheets="/client/resources/stylesheets/waiting.css"
             fx:controller="client.views.graphics.GraphicWaitingMenu"
             prefHeight="400.0" prefWidth="600.0">
-
+    <VBox alignment="center" spacing="50" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+          AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <Label text="Waiting for opponent." styleClass="waiting-text" fx:id="waitingLabel"/>
+    </VBox>
+    <ImageView onMouseClicked="#backToCustomSelect" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" fitWidth="100" fitHeight="100">
+        <Image url="/client/resources/images/buttons/back-button.png"/>
+    </ImageView>
 </AnchorPane>

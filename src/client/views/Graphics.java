@@ -27,7 +27,7 @@ public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
-            matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot, battleMenuRoot, collectionMenuRoot, shopMenuRoot;
+            profileRoot, watchRoot, codexRoot, customCardRoot, battleMenuRoot, collectionMenuRoot, shopMenuRoot;
 
 
     public static void alert(String title, String header, String content) {
@@ -62,7 +62,8 @@ public class Graphics extends Application {
         MULTI_SINGLE("/client/layouts/multi_single.fxml"),
         CUSTOM_SELECT("/client/layouts/custom_select.fxml"),
         BATTLE("/client/layouts/battle.fxml"),
-        CUSTOM_CARD("/client/layouts/custom_card.fxml");
+        CUSTOM_CARD("/client/layouts/custom_card.fxml"),
+        WAITING_MENU("/client/layouts/waiting.fxml");
         Parent root;
         String file;
         boolean isPreLoaded;
@@ -109,8 +110,6 @@ public class Graphics extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Account.loadAccounts();
-        System.out.println(Shop.getInstance().getCardsCollection().getMinions().size());
         loadFXML();
         stage = primaryStage;
         Scene scene = new Scene(accountMenuRoot, 1920, 1080);

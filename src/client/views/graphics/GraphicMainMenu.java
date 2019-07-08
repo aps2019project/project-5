@@ -89,6 +89,7 @@ public class GraphicMainMenu implements Initializable {
             music.stop();
         } catch (Exception e) {}
         playMusic("sfx_ui_select.m4a");
+        AccountClient.logout();
         Graphics.setMenu(ACCOUNT_MENU);
     }
 

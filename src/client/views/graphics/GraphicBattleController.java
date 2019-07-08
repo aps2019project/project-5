@@ -23,14 +23,12 @@ import javafx.util.Duration;
 import models.*;
 import models.cards.Attacker;
 import models.cards.Card;
+import models.cards.Hero;
 import models.cards.Spell;
 import models.map.Cell;
 import models.map.Map;
-import models.match.Match;
 import client.views.Command;
-import client.views.Error;
 import client.views.Graphics;
-import client.views.Output;
 import client.views.SpriteMaker;
 import client.views.menus.BattleMenu;
 
@@ -42,6 +40,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 
 import static client.views.Graphics.playMusic;
@@ -122,8 +121,8 @@ public class GraphicBattleController implements Initializable {
         updateHand();
         showProfiles();
         updateMana();
-        player1Name.setText(ClientManager.getPlayingMatch().getPlayer1().getAccount().getUsername().toUpperCase());
-        player2Name.setText(ClientManager.getPlayingMatch().getPlayer2().getAccount().getUsername().toUpperCase());
+        player1Name.setText(BattleClient.playingMatch.players[0].account.username.toUpperCase());
+        player2Name.setText(BattleClient.playingMatch.players[1].account.username.toUpperCase());
         player1Name.setRotate(-3.0);
         player2Name.setRotate(3.0);
         mana1BarContainer.setRotate(-3.0);
@@ -182,13 +181,17 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void showProfiles() {
-        String player1HeroName = ClientManager.getPlayingMatch().getPlayer1().getDeck().getHero().getName();
-        String player2HeroName = ClientManager.getPlayingMatch().getPlayer2().getDeck().getHero().getName();
+        Set<Card> heros1 = BattleClient.playingMatch.players[0].deck.filter(Hero.class, "").keySet();
+        Set<Card> heros2 = BattleClient.playingMatch.players[0].deck.filter(Hero.class, "").keySet();
+        AtomicReference<String> player1HeroName = new AtomicReference<>("Rostam");
+        AtomicReference<String> player2HeroName = new AtomicReference<>("Rostam");
+        heros1.forEach(hero -> player1HeroName.set(hero.name));
+        heros2.forEach(hero -> player2HeroName.set(hero.name));
         player1ProfileImage.setImage(new Image(
                 "/client/resources/sprites/HeroLogos/" + player1HeroName + ".png"
         ));
         player2ProfileImage.setImage(new Image(
-                "/client/resources/sprites/HeroLogos/" + player2HeroName + ".png"
+                "/client/resources/sprites/HeroLogos/" + player2HeroName.get() + ".png"
         ));
     }
 
@@ -197,11 +200,8 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
-        double time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7 / speed;
-//        TranslateTransition t = new TranslateTransition(new Duration(time), cardPane);
-//        t.setToX(newPosition.getX() - cardPane.getLayoutX());
-//        t.setToY(newPosition.getY() - cardPane.getLayoutY());
-//        t.play();
+        int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
+
         Timeline timeline = new Timeline();
         KeyFrame end = new KeyFrame(new Duration(time),
                 new KeyValue(cardPane.layoutXProperty(), newPosition.getX()),
@@ -461,8 +461,8 @@ public class GraphicBattleController implements Initializable {
     private void updateMana() {
         Image mana = new Image("/client/resources/images/battle/ui/icon_mana@2x.png");
         Image noMana = new Image("/client/resources/images/battle/ui/icon_mana_inactive@2x.png");
-        int mana1 = ClientManager.getPlayingMatch().getPlayer1().getMana();
-        int mana2 = ClientManager.getPlayingMatch().getPlayer2().getMana();
+        int mana1 = BattleClient.playingMatch.players[0].manaPoint;
+        int mana2 = BattleClient.playingMatch.players[1].manaPoint;
         for (int i = 0; i < 9; i++)
             player1Mana[i].setImage(i < mana1 ? mana : noMana);
         for (int i = 0; i < 9; i++)

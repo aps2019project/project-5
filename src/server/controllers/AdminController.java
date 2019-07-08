@@ -15,7 +15,7 @@ public class AdminController {
 
     public static HttpResponse getOnlineUsers(HttpRequest httpRequest) {
         ArrayList<String> connectedAccounts = new ArrayList<>();
-        AuthenticationController.connectedAccounts.forEach((string, account) -> connectedAccounts.add(string));
+        AuthenticationController.connectedAccounts.forEach((string, account) -> connectedAccounts.add(account.username));
         Response response = new Response(true, "online users are", connectedAccounts);
         return new HttpResponseJSON(yaGson.toJson(response));
     }

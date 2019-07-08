@@ -33,12 +33,14 @@ public class Server {
         main.port = Integer.valueOf(getProperties().getProperty("main_application.port"));
         main.urls.add(new URL("/login", AuthenticationController::login, false));
         main.urls.add(new URL("/sign_up", AuthenticationController::signUp, false));
+        main.urls.add(new URL("/logout", AuthenticationController::logout, true));
         main.urls.add(new URL("/profile", AuthenticationController::profile, true));
 
         main.urls.add(new URL("/shop/search", ShopController::searchShopCards, true));
         main.urls.add(new URL("/shop/buy", ShopController::buy, true));
         main.urls.add(new URL("/shop/sell", ShopController::sell, true));
         main.urls.add(new URL("/shop/get_drakes", ShopController::getDrakes, true));
+        main.urls.add(new URL("/shop/custom_card", ShopController::customCard, true));
 
         main.urls.add(new URL("/collection/search", CollectionController::searchCollectionCards, true));
         main.urls.add(new URL("/collection/create_deck", CollectionController::addDeck, true));
@@ -53,6 +55,7 @@ public class Server {
         main.urls.add(new URL("/collection/is_main_deck_valid", CollectionController::isMainDeckValid, true));
 
         main.urls.add(new URL("/battle/request", BattleController::battleRequest, true));
+        main.urls.add(new URL("/battle/opponent_check", BattleController::opponent_check, true));
         main.urls.add(new URL("/battle/cancel_request", BattleController::cancelBattleRequest, true));
         main.urls.add(new URL("/battle/select_card", BattleController::selectCard, true));
         main.urls.add(new URL("/battle/get_match", BattleController::getMatch, true));

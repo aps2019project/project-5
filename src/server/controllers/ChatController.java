@@ -13,7 +13,7 @@ public class ChatController {
     public static HttpResponse sendMessage(HttpRequest request) {
         String text = request.GET.get("text");
         Response response;
-        if(text == null) {
+        if (text == null) {
             response = new Response(false, "text not sent");
         } else {
             chat.messages.add(new Message(text, request.user.username));
