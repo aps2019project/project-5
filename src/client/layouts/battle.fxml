@@ -46,7 +46,7 @@
     </AnchorPane>
 
     <!-- Hand Items -->
-    <HBox AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="400" styleClass="hand-container">
+    <HBox fx:id="handBox" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="400" styleClass="hand-container">
         <AnchorPane styleClass="hand-item" fx:id="handItem0_container">
             <ImageView fitWidth="150" fitHeight="150" AnchorPane.leftAnchor="15" fx:id="handItem0_image">
                 <Image url="/client/resources/images/cards/Persian Archer_idle.gif"/>

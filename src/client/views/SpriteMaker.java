@@ -40,6 +40,7 @@ public class SpriteMaker {
         this.action = action;
         filePath = "src/client/resources/sprites/" + name;
         spriteFile = new File(filePath + ".plist");
+        System.out.println(filePath);
         bigImage.setImage(new Image(new FileInputStream(filePath + ".png")));
         this.cycle = cycle;
         this.speed = speed;
