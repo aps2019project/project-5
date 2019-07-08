@@ -1,14 +1,11 @@
 package client.views.graphics;
 
-import client.controllers.ClientManager;
+import client.controllers.BattleClient;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import client.views.Graphics;
+import models.Response;
 
-import javax.security.auth.login.AccountNotFoundException;
-
-import static client.controllers.ClientManager.GameMode.*;
-import static client.controllers.ClientManager.GameMode.MULTI_FLAG;
 import static client.views.Graphics.Menu.*;
 
 public class GraphicPreBattleMenu {
@@ -17,28 +14,44 @@ public class GraphicPreBattleMenu {
     public VBox captureTheFlagContainer;
     public VBox multiFlagContainer;
 
+    private static int matchMode = 1;
+    private static boolean isStoryMode = false;
+    private static boolean isMultiPlayer = false;
 
     public void backToCustomSelect(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
         Graphics.setMenu(CUSTOM_SELECT);
     }
 
+    public void battleRequest() {
+        if (isMultiPlayer) {
+            Response response = BattleClient.battleRequest(matchMode);
+            if(response.data != null) {
+                Graphics.setMenu(BATTLE);
+            } else {
+                Graphics.setMenu(WAITING_MENU);
+            }
+        } else if (!isStoryMode) {
+            // TODO: start single player game (with ai)
+        }
+    }
+
     public void deathMatch(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
-        ClientManager.setGameMode(DEATH_MATCH);
-        Graphics.setMenu(BATTLE);
+        matchMode = 1;
+        battleRequest();
     }
 
     public void captureTheFlag(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
-        ClientManager.setGameMode(SINGLE_FLAG);
-        Graphics.setMenu(BATTLE);
+        matchMode = 2;
+        battleRequest();
     }
 
     public void multiFlagMode(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
-        ClientManager.setGameMode(MULTI_FLAG);
-        Graphics.setMenu(BATTLE);
+        matchMode = 3;
+        battleRequest();
     }
 
     public void customGame(MouseEvent mouseEvent) {
@@ -46,8 +59,8 @@ public class GraphicPreBattleMenu {
     }
 
     public void storyMode(MouseEvent mouseEvent) {
-        ClientManager.setGameMode(STORY_MODE);
-        Graphics.setMenu(BATTLE);
+        isStoryMode = true;
+        battleRequest();
     }
 
     public void backToMultiSingle(MouseEvent mouseEvent) {
@@ -56,17 +69,13 @@ public class GraphicPreBattleMenu {
 
     public void multiPlayer(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
-        try {
-            ClientManager.setOpponent("", false); // TODO: 6/20/19 add other player for phase 3
-        } catch (AccountNotFoundException ignored) { }
+        isMultiPlayer = true;
         Graphics.setMenu(CUSTOM_SELECT);
     }
 
     public void singlePlayer(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
-        try {
-            ClientManager.setOpponent("", true);
-        } catch (AccountNotFoundException ignored) { }
+        isMultiPlayer = false;
         Graphics.setMenu(CUSTOM_SELECT);
     }
 

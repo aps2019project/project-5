@@ -2,6 +2,7 @@ package client.views.graphics;
 
 import client.controllers.AccountClient;
 import client.controllers.ClientManager;
+import client.controllers.ShopClient;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -36,7 +37,7 @@ public class GraphicMainMenu implements Initializable {
     }
 
     public void matchSelect(MouseEvent mouseEvent) {
-        if (!ClientManager.isMainDeckSelected()) {
+        if (!AccountClient.user.mainDeck.isValid()) {
             Graphics.alert("Sorry", "Can't start game", "You should first select a valid deck as your main deck.");
             return;
         }
@@ -70,7 +71,7 @@ public class GraphicMainMenu implements Initializable {
 
         foregroundTransition = new TranslateTransition(Duration.millis(2000), foreground);
         pillarsTransition = new TranslateTransition(Duration.millis(2000), pillars);
-        drakes.setText("" + AccountClient.user.drake);
+        drakes.setText("" + ShopClient.getDrakes());
 
         root.setOnMouseMoved(event -> {
             foregroundTransition.setToX(-event.getX() / 40);

@@ -6,8 +6,8 @@
       "@val": {
         "username": "mahdi",
         "password": "mahdi",
-        "loginToken": "6626n",
-        "drake": 600,
+        "loginToken": "elv2g",
+        "drake": 1000,
         "decks": {
           "@type": "java.util.HashMap",
           "@val": {
@@ -129,10 +129,93 @@
             "@type": "java.util.HashMap",
             "@val": {
               "@root.0-val.decks.0-val.cards.0-key": 10,
-              "@root.0-val.decks.0-val.cards.1-key": 3,
+              "@root.0-val.decks.0-val.cards.1-key": 2,
               "@root.0-val.decks.0-val.cards.2-key": 1,
               "@root.0-val.decks.0-val.cards.3-key": 9
             }
+          }
+        }
+      }
+    },
+    "amin": {
+      "@type": "models.Account",
+      "@val": {
+        "username": "amin",
+        "password": "amin",
+        "loginToken": "g91x7",
+        "drake": 6300,
+        "decks": {
+          "@type": "java.util.HashMap",
+          "@val": {}
+        },
+        "cards": {
+          "cards": {
+            "@type": "java.util.HashMap",
+            "@val": [
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 50,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Rakhsh",
+                    "description": "",
+                    "id": 0,
+                    "price": 8000,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                1
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 10,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 6,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Persian Horse Rider",
+                    "description": "",
+                    "id": 0,
+                    "price": 200,
+                    "manaPoint": 4,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                1
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 12,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 11,
+                    "attackRange": 3,
+                    "attackType": "HYBRID",
+                    "name": "One Eye Giant",
+                    "description": "",
+                    "id": 0,
+                    "price": 500,
+                    "manaPoint": 7,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                1
+              ]
+            ]
           }
         }
       }
@@ -227,13 +310,13 @@
             }
           }
         },
-        "mainDeck": "@root.1-val.decks.0-val",
+        "mainDeck": "@root.2-val.decks.0-val",
         "cards": {
           "cards": {
             "@type": "java.util.HashMap",
             "@val": [
               [
-                "@root.1-val.decks.0-val.cards.0-key",
+                "@root.2-val.decks.0-val.cards.0-key",
                 10
               ],
               [
@@ -258,11 +341,11 @@
                 5
               ],
               [
-                "@root.1-val.decks.0-val.cards.1-key",
+                "@root.2-val.decks.0-val.cards.1-key",
                 1
               ],
               [
-                "@root.1-val.decks.0-val.cards.2-key",
+                "@root.2-val.decks.0-val.cards.2-key",
                 10
               ]
             ]

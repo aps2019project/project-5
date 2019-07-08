@@ -45,4 +45,14 @@ public class ShopClient {
         return serverConnection.getResponse();
     }
 
+    public static int getDrakes() {
+        ServerConnection serverConnection = new ServerConnection("/shop/get_drakes");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        int drakes = AccountClient.user.drake;
+        Response response = serverConnection.getResponse();
+        if(response.OK)
+            drakes = (int) response.data;
+        return drakes;
+    }
+
 }

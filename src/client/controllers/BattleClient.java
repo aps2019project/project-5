@@ -1,18 +1,19 @@
 package client.controllers;
 
+import client.views.Graphics;
 import models.Response;
-import models.cards.Card;
 import models.map.Cell;
 import models.match.Match;
 import models.match.Player;
 import server.controllers.AuthenticationController;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class BattleClient {
     private static String token = AccountClient.user.loginToken;
+
+    public static Match playingMatch;
 
     public static Match getPlayingMatch() {
         Response response;
@@ -32,7 +33,7 @@ public class BattleClient {
         return false;
     }
 
-    public static Response attack(int x, int y) {
+    public static Response attack(int row, int column) {
         return null;
     }
 
@@ -46,5 +47,16 @@ public class BattleClient {
 
     public static Player getMe() {
         return null;
+    }
+
+    public static Response battleRequest(int match_mode) {
+        ServerConnection serverConnection = new ServerConnection("/battle/request");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_mode", "" + match_mode);
+        Response response = serverConnection.getResponse();
+        if(response.data != null)
+             playingMatch = (Match) response.data;
+        Graphics.alert("Log", "log", response.message);
+        return response;
     }
 }

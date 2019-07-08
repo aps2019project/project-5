@@ -98,4 +98,8 @@ public class ShopController {
         } else response = new Response(false, "a card with this name exists");
         return new HttpResponseJSON(ShopController.yaGson.toJson(response));
     }
+    public static HttpResponse getDrakes(HttpRequest request) {
+        Response response = new Response(true, "drakes sent.", request.user.drake);
+        return new HttpResponseJSON(response);
+    }
 }
