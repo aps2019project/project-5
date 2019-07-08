@@ -21,40 +21,8 @@
             <VBox alignment="center" spacing="10">
                 <JFXTextField prefWidth="1000" text="salam" styleClass="input-text" onAction="#sendMessage" fx:id="messageField"/>
                 <ScrollPane prefHeight="250" styleClass="scroll-pane" style="-fx-background-color: transparent">
-                    <VBox style="-fx-background-color: transparent;" fx:id="chats">
-                        <HBox alignment="CENTER_RIGHT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-right" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-left" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-right" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-left" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-right" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-left" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-right" text="salamsallamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsalamsa"/>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-left" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-right" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-left" text="salam"/>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" styleClass="chat-container">
-                            <Label styleClass="chat-message, chat-right" text="salam"/>
-                        </HBox>
+                    <VBox style="-fx-background-color: transparent;" spacing="4" fx:id="chats">
+
                     </VBox>
                 </ScrollPane>
             </VBox>

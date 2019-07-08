@@ -110,6 +110,7 @@ public class GraphicPreBattleMenu implements Initializable {
 
     public void sendMessage(ActionEvent actionEvent) {
         String message = messageField.getText();
+        messageField.setText("");
         ChatClient.sendMessage(message);
         Platform.runLater(this::updateMessage);
     }
@@ -120,10 +121,7 @@ public class GraphicPreBattleMenu implements Initializable {
         if (update != null) {
             for (int i = update.messages.size() - 1; i >= 0; i--) {
                 chats.getChildren().add(getMessageView(update.messages.get(i)));
-                System.out.println(update.messages.get(i).text);
             }
-        } else {
-            System.out.println("update is null");
         }
     }
 
@@ -144,7 +142,6 @@ public class GraphicPreBattleMenu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         ScheduledThreadPoolExecutor waitingAnimation = new ScheduledThreadPoolExecutor(1);
         if (chats != null)
             waitingAnimation.scheduleAtFixedRate(() -> Platform.runLater(this::updateMessage), 0, 1, TimeUnit.SECONDS);
