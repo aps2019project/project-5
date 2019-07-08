@@ -87,16 +87,15 @@ public class GraphicAccountMenu implements Initializable {
             return;
         }
 
-//        try {
-//            ClientManager.createAccount(username, password);
-        AccountClient.signup(username, password);
-        Graphics.alert("Account Created", "Congrats", "Your account created successfully");
-        signUpUsernameTxt.setText("");
-        signUpPasswordTxt.setText("");
-        signUpPasswordRematchTxt.setText("");
-//        } catch (Account.UsernameExistsException ignored) {
-//            changeAsWrong(signUpUsernameTxt, true);
-//        }
+        Response signup = AccountClient.signup(username, password);
+        if(signup.OK) {
+            Graphics.alert("Account Created", "Congrats", "Your account created successfully");
+            signUpUsernameTxt.setText("");
+            signUpPasswordTxt.setText("");
+            signUpPasswordRematchTxt.setText("");
+        } else {
+            alert("Error", "Error", signup.message);
+        }
     }
 
     @Override

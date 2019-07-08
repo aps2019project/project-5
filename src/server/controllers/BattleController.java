@@ -8,6 +8,7 @@ import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
 
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class BattleController {
     private static final int MATCH_TOKEN_LENGTH = 5;
@@ -52,17 +53,19 @@ public class BattleController {
                 switch (matchMode) {
                     case DEATH_MATCH:
                         playingMatches.put(matchToken, new DeathMatch(waitingUserForDeathMatch, request.user));
+                        waitingUserForDeathMatch = null;
                         break;
                     case MULTI_FLAG_MATCH:
                         playingMatches.put(matchToken, new MultiFlagMatch(waitingUserForMultiFlagMatch, request.user));
+                        waitingUserForMultiFlagMatch = null;
                         break;
                     case CAPTURE_THE_FLAG_MATCH:
                         playingMatches.put(matchToken, new CaptureTheFlagMatch(waitingUserForCaptureTheFlagMatchMatch, request.user));
+                        waitingUserForCaptureTheFlagMatchMatch = null;
                         break;
                 }
                 playingMatches.get(matchToken).token = matchToken;
                 response = new Response(true, "let's play the game with: ", playingMatches.get(matchToken));
-
             }
         } catch (Exception e) {
             response = new Response(false, "match mode must be 1 or 2 or 3");
@@ -244,7 +247,19 @@ public class BattleController {
             }
         }
         return new HttpResponseJSON(response);
-
-
     }
+
+    public static HttpResponse opponent_check(HttpRequest request) {
+        AtomicReference<Response> response = new AtomicReference<>(
+                new Response(true, "match not started")
+        );
+        playingMatches.forEach((token, match) -> {
+            if (match.players[0].account.username.equals(request.user.username) ||
+                    match.players[1].account.username.equals(request.user.username)) {
+                response.set(new Response(true, "match started!", match));
+            }
+        });
+        return new HttpResponseJSON(response.get());
+    }
+
 }

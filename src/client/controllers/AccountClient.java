@@ -23,4 +23,10 @@ public class AccountClient {
         return serverConnection.getResponse();
     }
 
+    public static void logout() {
+        ServerConnection serverConnection = new ServerConnection("/logout");
+        serverConnection.parameters.put("token", user.loginToken);
+        serverConnection.getResponse();
+    }
+
 }

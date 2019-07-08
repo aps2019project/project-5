@@ -44,7 +44,7 @@ public class ShopController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         updateCards("", filterType);
 
-        drakes.setText("" + AccountClient.user.drake);
+        updateDrakes();
 
         backBtn.setOnMouseClicked(event -> {
             Graphics.playMusic("sfx_ui_select.m4a");
@@ -173,9 +173,10 @@ public class ShopController implements Initializable {
                     buy.setOnMouseClicked(bought -> {
                         Graphics.playMusic("sfx_ui_select.m4a");
                         Response buyResponse = ShopClient.buy(AccountClient.user.loginToken, card.name);
-                        if(buyResponse.OK)
+                        if(buyResponse.OK) {
                             updateCards(searchField.getText(), filterType);
-                        else
+                            updateDrakes();
+                        } else
                             alert("Error", "buy failed", buyResponse.message);
                     });
                     cancel.setOnMouseClicked(canceled -> {
@@ -189,6 +190,11 @@ public class ShopController implements Initializable {
                 cardContainer.getChildren().add(cardPane);
             }
         });
+    }
+
+    public void updateDrakes() {
+        int drake = ShopClient.getDrakes();
+        drakes.setText("" + drake);
     }
 
     public void addCustomCard(MouseEvent mouseEvent) {

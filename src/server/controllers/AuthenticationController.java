@@ -76,4 +76,10 @@ public class AuthenticationController extends Application {
         }
         return new HttpResponseJSON(yaGson.toJson(response));
     }
+
+    public static HttpResponse logout(HttpRequest request) {
+        Response response = new Response(true, "you logged out");
+        connectedAccounts.remove(request.user.loginToken);
+        return new HttpResponseJSON(response);
+    }
 }
