@@ -1,6 +1,8 @@
 package client.views.graphics;
 
 import client.controllers.BattleClient;
+import com.jfoenix.controls.JFXTextField;
+import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import client.views.Graphics;
@@ -17,6 +19,8 @@ public class GraphicPreBattleMenu {
     private static int matchMode = 1;
     private static boolean isStoryMode = false;
     private static boolean isMultiPlayer = false;
+    public VBox chats;
+    public JFXTextField messageField;
 
     public void backToCustomSelect(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
@@ -82,5 +86,9 @@ public class GraphicPreBattleMenu {
     public void backToMainMenu(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
         Graphics.setMenu(MAIN_MENU);
+    }
+
+    public void sendMessage(ActionEvent actionEvent) {
+        String message;
     }
 }

@@ -100,6 +100,7 @@ public class Graphics extends Application {
             profileRoot = tmpGridPane;
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
+            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/match_select.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,11 +110,9 @@ public class Graphics extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Account.loadAccounts();
-        System.out.println(Shop.getInstance().getCardsCollection().getMinions().size());
         loadFXML();
         stage = primaryStage;
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Scene scene = new Scene(matchSelectRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("client/resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
