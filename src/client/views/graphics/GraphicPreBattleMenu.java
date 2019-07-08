@@ -1,12 +1,17 @@
 package client.views.graphics;
 
+import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import client.views.Graphics;
 import models.Response;
+import models.chat.Message;
 
 import static client.views.Graphics.Menu.*;
 
@@ -30,7 +35,7 @@ public class GraphicPreBattleMenu {
     public void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
-            if(response.data != null) {
+            if (response.data != null) {
                 Graphics.setMenu(BATTLE);
             } else {
                 Graphics.setMenu(WAITING_MENU);
@@ -90,5 +95,20 @@ public class GraphicPreBattleMenu {
 
     public void sendMessage(ActionEvent actionEvent) {
         String message;
+    }
+
+    public HBox getMessageView(Message message) {
+        HBox messageView = new HBox();
+        Label label = new Label(message.text);
+        if (message.user.equals(AccountClient.user.username)) {
+            messageView.setAlignment(Pos.CENTER_RIGHT);
+            label.getStyleClass().addAll("chat-message", "chat-right");
+        } else {
+            messageView.setAlignment(Pos.CENTER_LEFT);
+            label.getStyleClass().addAll("chat-message", "chat-left");
+        }
+        messageView.getStyleClass().add("chat-container");
+        messageView.getChildren().addAll(label);
+        return messageView;
     }
 }

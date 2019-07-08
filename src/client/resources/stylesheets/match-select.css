@@ -125,6 +125,7 @@
 }
 
 .chat-container {
+    -fx-background-color: transparent;
     -fx-pref-width: 980px;
 }
 
