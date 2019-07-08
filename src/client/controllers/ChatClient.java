@@ -8,7 +8,7 @@ public class ChatClient {
     public static Response sendMessage(String message) {
         ServerConnection serverConnection = new ServerConnection("/chat/send_message");
         serverConnection.parameters.put("token", token);
-        serverConnection.parameters.put("message", message);
+        serverConnection.parameters.put("text", message);
         return serverConnection.getResponse();
     }
 

@@ -72,8 +72,8 @@ public class Server {
     private static void startAdmin() {
         Application adminApp = new Application();
         adminApp.port = Integer.valueOf(getProperties().getProperty("admin_application.port"));
-        adminApp.urls.add(new URL("/server/online_users", AdminController::getOnlineUsers, false));
-        adminApp.urls.add(new URL("/server/shop", AdminController::getShopCards, false));
+        adminApp.urls.add(new URL("/admin/online_users", AdminController::getOnlineUsers, false));
+        adminApp.urls.add(new URL("/admin/shop", AdminController::getShopCards, false));
         adminApp.start();
     }
 
