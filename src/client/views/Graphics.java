@@ -26,7 +26,7 @@ public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
-            matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot, battleMenuRoot, collectionMenuRoot, shopMenuRoot;
+            profileRoot, watchRoot, codexRoot, customCardRoot, battleMenuRoot, collectionMenuRoot, shopMenuRoot;
 
 
     public static void alert(String title, String header, String content) {
@@ -100,7 +100,6 @@ public class Graphics extends Application {
             profileRoot = tmpGridPane;
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
-//            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/match_select.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
