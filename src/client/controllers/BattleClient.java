@@ -15,10 +15,11 @@ public class BattleClient {
 
     public static Match playingMatch;
 
-    public static Match getPlayingMatch() {
-        Response response;
-        ServerConnection serverConnection = new ServerConnection("/battle/");
-        return null;
+    public static Match updatePlayingMatch() {
+        ServerConnection serverConnection = new ServerConnection("/battle/get_match");
+        Response response = serverConnection.getResponse();
+        if (response.OK) playingMatch = ((Match) response.data);
+        return playingMatch;
     }
 
     public static Response battleRequest() {
@@ -54,8 +55,8 @@ public class BattleClient {
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("match_mode", "" + match_mode);
         Response response = serverConnection.getResponse();
-        if(response.data != null)
-             playingMatch = (Match) response.data;
+        if (response.data != null)
+            playingMatch = (Match) response.data;
         return response;
     }
 
@@ -63,7 +64,7 @@ public class BattleClient {
         ServerConnection serverConnection = new ServerConnection("/battle/opponent_check");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         Response response = serverConnection.getResponse();
-        if(response.data != null)
+        if (response.data != null)
             playingMatch = (Match) response.data;
         return response;
     }
