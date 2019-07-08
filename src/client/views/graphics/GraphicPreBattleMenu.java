@@ -44,9 +44,8 @@ public class GraphicPreBattleMenu implements Initializable {
         Graphics.setMenu(CUSTOM_SELECT);
     }
 
-    public static void battleRequest() {
 
-    public void battleRequest() {
+    public static void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
             if (response.data != null) {

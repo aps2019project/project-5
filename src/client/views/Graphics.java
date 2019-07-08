@@ -116,7 +116,6 @@ public class Graphics extends Application {
     public void start(Stage primaryStage) {
         loadFXML();
         stage = primaryStage;
-        testLogin();
         Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("client/resources/images/cursor.png");
@@ -124,6 +123,7 @@ public class Graphics extends Application {
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
+        testLogin();
     }
 
     private void testLogin() {
