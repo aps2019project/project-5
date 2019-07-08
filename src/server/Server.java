@@ -19,7 +19,9 @@ public class Server {
             Properties properties = new Properties();
             properties.load(input);
             return properties;
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Properties properties = new Properties();
         properties.setProperty("main_application.port", DEFAULT_MAIN_PORT);
@@ -63,6 +65,7 @@ public class Server {
         main.urls.add(new URL("/battle/end_turn", BattleController::endTurn, true));
         main.urls.add(new URL("/battle/move", BattleController::moveCard, true));
         main.urls.add(new URL("/battle/attack", BattleController::attack, true));
+        main.urls.add(new URL("/battle/end_turn", BattleController::endTurn, true));
 
         main.urls.add(new URL("/chat/send_message", ChatController::sendMessage, true));
         main.urls.add(new URL("/chat/update", ChatController::update, true));

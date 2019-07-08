@@ -124,7 +124,8 @@ public class GraphicBattleController implements Initializable {
     private void showCardsInBoard() {
         root.getChildren().removeAll(cardViews.values());
         cardViews.clear();
-        Map map = BattleClient.getPlayingMatch().map;
+
+        Map map = BattleClient.updatePlayingMatch().map;
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 9; j++) {
                 Cell cell = map.cell[i][j];
@@ -186,7 +187,8 @@ public class GraphicBattleController implements Initializable {
             Graphics.playMusic("sfx_unit_run_charge_4.m4a");
             SpriteMaker.getAndShowAnimation(imageView, card.name, Action.RUN, 1000);
             long newTime = System.currentTimeMillis();
-            while (System.currentTimeMillis() - newTime <= time) {}
+            while (System.currentTimeMillis() - newTime <= time) {
+            }
             SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000);
         }).start();
     }
@@ -229,10 +231,10 @@ public class GraphicBattleController implements Initializable {
 
     private Card getCardInCell(int x, int y) {
         for (java.util.Map.Entry<Card, AnchorPane> cardView : cardViews.entrySet())
-            if(cardView.getKey() instanceof Attacker) {
+            if (cardView.getKey() instanceof Attacker) {
                 if (((Attacker) cardView.getKey()).cell.x == x &&
                         ((Attacker) cardView.getKey()).cell.y == y)
-                return cardView.getKey();
+                    return cardView.getKey();
             }
         return null;
     }
@@ -266,8 +268,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void clickCell(int row, int column) {
-        if (ClientManager.isAITurn())
-            return;
+        if (!BattleClient.isMyTurn()) return;
         Card clickedCard = getCardInCell(row, column);
         if (selectedCard == null) {
             if (clickedCard != null) {
@@ -282,13 +283,13 @@ public class GraphicBattleController implements Initializable {
             } else {
                 if (isSelectedCardInGame) {
                     if (clickedCard == null) {
-                        if(BattleClient.move(row, column)) {
+                        if (BattleClient.move(row, column)) {
                             moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
                         } else {
                             System.out.println("can't move here");
                         }
                     } else {
-                        if (clickedCard.playerName.equals(ClientManager.getMe().getAccount().getUsername())) {
+                        if (clickedCard.playerName.equals(BattleClient.getMe().account.username)) {
                             BattleClient.selectCard(clickedCard.id);
                             selectedCard = clickedCard;
                         } else {
@@ -301,14 +302,16 @@ public class GraphicBattleController implements Initializable {
                     }
                 } else {
                     Response response = BattleClient.insert(row, column);
-                    if(response.OK) {
+                    if (response.OK) {
                         insertCard(row, column);
                         AnchorPane handAnchorPane = handViews.get(selectedCard);
                         handAnchorPane.getStyleClass().removeAll("hand-item-selected");
                         ((ImageView) handAnchorPane.getChildren().get(0)).setImage(null);
                         ((Label) handAnchorPane.getChildren().get(2)).setText("");
-                        handAnchorPane.setOnMouseClicked(event -> {});
-                        handAnchorPane.setOnMouseEntered(event -> {});
+                        handAnchorPane.setOnMouseClicked(event -> {
+                        });
+                        handAnchorPane.setOnMouseEntered(event -> {
+                        });
                         selectedCard = null;
                     }
                 }
@@ -356,7 +359,7 @@ public class GraphicBattleController implements Initializable {
         }
         if (selectedCard != null) {
             if (isSelectedCardInGame) {
-                if(selectedCard instanceof Attacker) {
+                if (selectedCard instanceof Attacker) {
                     Attacker selectedAttacker = (Attacker) selectedCard;
                     cell[selectedAttacker.cell.x][selectedAttacker.cell.y].getStyleClass().add("selected-card-cell");
                     Set<Cell> moveableCells = BattleClient.getAvailableCells();
@@ -379,6 +382,7 @@ public class GraphicBattleController implements Initializable {
         List<Card> hand = BattleClient.getMe().hand;
         int index = 0;
         for (Card card : hand) {
+            if (index == 5) return;
             handItemMana[index].setText("" + card.manaPoint);
             ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.name, card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
             handItemImages[index].setImage(cardAnimation.getImage());
@@ -428,8 +432,8 @@ public class GraphicBattleController implements Initializable {
     private void updateMana() {
         Image mana = new Image("/client/resources/images/battle/ui/icon_mana@2x.png");
         Image noMana = new Image("/client/resources/images/battle/ui/icon_mana_inactive@2x.png");
-        int mana1 = BattleClient.playingMatch.players[0].manaPoint;
-        int mana2 = BattleClient.playingMatch.players[1].manaPoint;
+        int mana1 = BattleClient.updatePlayingMatch().players[0].manaPoint;
+        int mana2 = BattleClient.updatePlayingMatch().players[1].manaPoint;
         for (int i = 0; i < 9; i++)
             player1Mana[i].setImage(i < mana1 ? mana : noMana);
         for (int i = 0; i < 9; i++)
@@ -507,27 +511,31 @@ public class GraphicBattleController implements Initializable {
     public void endTurn(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
         selectedCard = null;
-        ClientManager.endTurn();
-        updateMana();
-        updateHand();
-        updateCells();
-        String AIMove = "";
-        if (ClientManager.isAITurn())
-            AIMove = ClientManager.getAIMove();
-        for (Command command : battleMenu.getAICommands()) {
-            Matcher matcher = command.getPattern().matcher(AIMove);
-            if (matcher.find()) {
-                Method method;
-                try {
-                    method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-                    Object object = method.invoke(this, matcher);
-                    if (object != null && object.equals(Boolean.FALSE))
-                        return;
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
+        Response response = BattleClient.endTurn();
+        if (response.OK) {
+            updateMana();
+            updateHand();
+            updateCells();
+//            String AIMove = "";
+//            if (ClientManager.isAITurn())
+//                AIMove = ClientManager.getAIMove();
+//            for (Command command : battleMenu.getAICommands()) {
+//                Matcher matcher = command.getPattern().matcher(AIMove);
+//                if (matcher.find()) {
+//                    Method method;
+//                    try {
+//                        method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
+//                        Object object = method.invoke(this, matcher);
+//                        if (object != null && object.equals(Boolean.FALSE))
+//                            return;
+//                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+//                        e.printStackTrace();
+//                    }
+//                    break;
+//                }
+//            }
+        } else {
+            Graphics.alert("Error", "end turn error", response.message);
         }
     }
 

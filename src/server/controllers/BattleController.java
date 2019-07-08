@@ -261,4 +261,5 @@ public class BattleController {
         });
         return new HttpResponseJSON(response.get());
     }
+
 }
