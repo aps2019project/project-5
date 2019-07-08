@@ -38,6 +38,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
@@ -63,8 +64,6 @@ public class GraphicBattleController implements Initializable {
     public ImageView player2Mana0, player2Mana1, player2Mana2, player2Mana3, player2Mana4, player2Mana5, player2Mana6, player2Mana7, player2Mana8;
     public Label player1Name, player2Name;
     public HBox mana1BarContainer, mana2BarContainer;
-    public Label timerLbl;
-    public Button endTurnBtn;
     private boolean isGraveyardOpen = false;
     private ImageView[] handItemImages = new ImageView[5];
     private ImageView[] player1Mana = new ImageView[9];
@@ -292,6 +291,7 @@ public class GraphicBattleController implements Initializable {
             }
 
             SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
+            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000);
             Platform.runLater(() -> updateHp(myCard));
         }).start();
 
@@ -543,34 +543,29 @@ public class GraphicBattleController implements Initializable {
     public void endTurn(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
         selectedCard = null;
-        Response response = BattleClient.endTurn();
-        if (response.OK) {
-            updateMana();
-            updateHand();
-            updateCells();
-//            String AIMove = "";
-//            if (ClientManager.isAITurn())
-//                AIMove = ClientManager.getAIMove();
-//            for (Command command : battleMenu.getAICommands()) {
-//                Matcher matcher = command.getPattern().matcher(AIMove);
-//                if (matcher.find()) {
-//                    Method method;
-//                    try {
-//                        method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-//                        Object object = method.invoke(this, matcher);
-//                        if (object != null && object.equals(Boolean.FALSE))
-//                            return;
-//                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-//                        e.printStackTrace();
-//                    }
-//                    break;
-//                }
-//            }
-        } else {
-            Graphics.alert("Error", "end turn error", response.message);
+        ClientManager.endTurn();
+        updateMana();
+        updateHand();
+        updateCells();
+        String AIMove = "";
+        if (ClientManager.isAITurn())
+            AIMove = ClientManager.getAIMove();
+        for (Command command : battleMenu.getAICommands()) {
+            Matcher matcher = command.getPattern().matcher(AIMove);
+            if (matcher.find()) {
+                Method method;
+                try {
+                    method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
+                    Object object = method.invoke(this, matcher);
+                    if (object != null && object.equals(Boolean.FALSE))
+                        return;
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
         }
     }
-
 
 //    public boolean attack(Matcher matcher) {
 //        String cardID = matcher.group("cardID");
