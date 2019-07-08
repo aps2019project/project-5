@@ -1,6 +1,7 @@
 package client.views.graphics;
 
 import client.controllers.BattleClient;
+import client.controllers.ChatClient;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
@@ -27,10 +28,11 @@ public class GraphicPreBattleMenu {
         Graphics.setMenu(CUSTOM_SELECT);
     }
 
+
     public void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
-            if(response.data != null) {
+            if (response.data != null) {
                 Graphics.setMenu(BATTLE);
             } else {
                 Graphics.setMenu(WAITING_MENU);
@@ -89,6 +91,10 @@ public class GraphicPreBattleMenu {
     }
 
     public void sendMessage(ActionEvent actionEvent) {
-        String message;
+        String message = messageField.getText();
+        ChatClient.sendMessage(message);
+        Response response = ChatClient.update();
+
+
     }
 }

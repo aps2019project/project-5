@@ -21,10 +21,10 @@ public class BattleClient {
         if (response.OK) playingMatch = ((Match) response.data);
         return playingMatch;
     }
-
-    public static Response battleRequest() {
-        return null;
-    }
+//
+//    public static Response battleRequest() {
+//        return null;
+//    }
 
     public static void selectCard(int id) {
 
@@ -47,7 +47,21 @@ public class BattleClient {
     }
 
     public static Player getMe() {
-        return null;
+        updatePlayingMatch();
+        if (playingMatch.players[0].account.username.equals(AccountClient.user.username))
+            return playingMatch.players[0];
+        else return playingMatch.players[1];
+    }
+
+    public static boolean isMyTurn() {
+        updatePlayingMatch();
+        return getMe() == playingMatch.getActivePlayer();
+    }
+
+    public static Response endTurn() {
+        ServerConnection serverConnection = new ServerConnection("/battle/end_turn");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        return serverConnection.getResponse();
     }
 
     public static Response battleRequest(int match_mode) {

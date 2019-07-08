@@ -268,8 +268,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void clickCell(int row, int column) {
-        if (ClientManager.isAITurn())
-            return;
+        if (!BattleClient.isMyTurn()) return;
         Card clickedCard = getCardInCell(row, column);
         if (selectedCard == null) {
             if (clickedCard != null) {
@@ -432,8 +431,8 @@ public class GraphicBattleController implements Initializable {
     private void updateMana() {
         Image mana = new Image("/client/resources/images/battle/ui/icon_mana@2x.png");
         Image noMana = new Image("/client/resources/images/battle/ui/icon_mana_inactive@2x.png");
-        int mana1 = BattleClient.playingMatch.players[0].manaPoint;
-        int mana2 = BattleClient.playingMatch.players[1].manaPoint;
+        int mana1 = BattleClient.updatePlayingMatch().players[0].manaPoint;
+        int mana2 = BattleClient.updatePlayingMatch().players[1].manaPoint;
         for (int i = 0; i < 9; i++)
             player1Mana[i].setImage(i < mana1 ? mana : noMana);
         for (int i = 0; i < 9; i++)
@@ -511,27 +510,31 @@ public class GraphicBattleController implements Initializable {
     public void endTurn(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
         selectedCard = null;
-        ClientManager.endTurn();
-        updateMana();
-        updateHand();
-        updateCells();
-        String AIMove = "";
-        if (ClientManager.isAITurn())
-            AIMove = ClientManager.getAIMove();
-        for (Command command : battleMenu.getAICommands()) {
-            Matcher matcher = command.getPattern().matcher(AIMove);
-            if (matcher.find()) {
-                Method method;
-                try {
-                    method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-                    Object object = method.invoke(this, matcher);
-                    if (object != null && object.equals(Boolean.FALSE))
-                        return;
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
+        Response response = BattleClient.endTurn();
+        if (response.OK) {
+            updateMana();
+            updateHand();
+            updateCells();
+            String AIMove = "";
+            if (ClientManager.isAITurn())
+                AIMove = ClientManager.getAIMove();
+            for (Command command : battleMenu.getAICommands()) {
+                Matcher matcher = command.getPattern().matcher(AIMove);
+                if (matcher.find()) {
+                    Method method;
+                    try {
+                        method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
+                        Object object = method.invoke(this, matcher);
+                        if (object != null && object.equals(Boolean.FALSE))
+                            return;
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 }
-                break;
             }
+        } else {
+            Graphics.alert("Error", "end turn error", response.message);
         }
     }
 
