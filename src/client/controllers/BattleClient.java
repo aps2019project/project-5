@@ -47,7 +47,15 @@ public class BattleClient {
         Response response = serverConnection.getResponse();
         if(response.data != null)
              playingMatch = (Match) response.data;
-        Graphics.alert("Log", "log", response.message);
+        return response;
+    }
+
+    public static Response opponentCheck() {
+        ServerConnection serverConnection = new ServerConnection("/battle/opponent_check");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        Response response = serverConnection.getResponse();
+        if(response.data != null)
+            playingMatch = (Match) response.data;
         return response;
     }
 }
