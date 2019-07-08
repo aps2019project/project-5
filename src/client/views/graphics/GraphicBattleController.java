@@ -289,7 +289,7 @@ public class GraphicBattleController implements Initializable {
                             System.out.println("can't move here");
                         }
                     } else {
-                        if (clickedCard.playerName.equals(ClientManager.getMe().getAccount().getUsername())) {
+                        if (clickedCard.playerName.equals(BattleClient.getMe().account.username)) {
                             BattleClient.selectCard(clickedCard.id);
                             selectedCard = clickedCard;
                         } else {
@@ -515,24 +515,24 @@ public class GraphicBattleController implements Initializable {
             updateMana();
             updateHand();
             updateCells();
-            String AIMove = "";
-            if (ClientManager.isAITurn())
-                AIMove = ClientManager.getAIMove();
-            for (Command command : battleMenu.getAICommands()) {
-                Matcher matcher = command.getPattern().matcher(AIMove);
-                if (matcher.find()) {
-                    Method method;
-                    try {
-                        method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-                        Object object = method.invoke(this, matcher);
-                        if (object != null && object.equals(Boolean.FALSE))
-                            return;
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
-            }
+//            String AIMove = "";
+//            if (ClientManager.isAITurn())
+//                AIMove = ClientManager.getAIMove();
+//            for (Command command : battleMenu.getAICommands()) {
+//                Matcher matcher = command.getPattern().matcher(AIMove);
+//                if (matcher.find()) {
+//                    Method method;
+//                    try {
+//                        method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
+//                        Object object = method.invoke(this, matcher);
+//                        if (object != null && object.equals(Boolean.FALSE))
+//                            return;
+//                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+//                        e.printStackTrace();
+//                    }
+//                    break;
+//                }
+//            }
         } else {
             Graphics.alert("Error", "end turn error", response.message);
         }
