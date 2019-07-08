@@ -100,7 +100,7 @@ public class Graphics extends Application {
             profileRoot = tmpGridPane;
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/match_select.fxml"));
+//            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/match_select.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();

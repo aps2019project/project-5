@@ -3,8 +3,10 @@ package client.views.graphics;
 import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import client.controllers.ChatClient;
+import client.controllers.ClientManager;
 import client.models.Player;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.security.ntlm.Client;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -107,15 +109,20 @@ public class GraphicPreBattleMenu implements Initializable {
     public void sendMessage(ActionEvent actionEvent) {
         String message = messageField.getText();
         ChatClient.sendMessage(message);
-        updateMessage();
+        Platform.runLater(this::updateMessage);
     }
 
     private void updateMessage() {
         chats.getChildren().clear();
-        for (Message message : ((Chat) ChatClient.update().data).messages) {
-            chats.getChildren().add(getMessageView(message));
+        Chat update = ChatClient.update();
+        if (update != null) {
+            for (int i = update.messages.size() - 1; i >= 0; i--) {
+                chats.getChildren().add(getMessageView(update.messages.get(i)));
+                System.out.println(update.messages.get(i).text);
+            }
+        } else {
+            System.out.println("update is null");
         }
-
     }
 
     public HBox getMessageView(Message message) {
@@ -137,6 +144,7 @@ public class GraphicPreBattleMenu implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         ScheduledThreadPoolExecutor waitingAnimation = new ScheduledThreadPoolExecutor(1);
-        waitingAnimation.scheduleAtFixedRate(() -> Platform.runLater(this::updateMessage), 0, 1, TimeUnit.SECONDS);
+        if (chats != null)
+            waitingAnimation.scheduleAtFixedRate(() -> Platform.runLater(this::updateMessage), 0, 1, TimeUnit.SECONDS);
     }
 }
