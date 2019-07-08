@@ -2,8 +2,14 @@ package client.views.graphics;
 
 import client.controllers.AccountClient;
 import client.controllers.BattleClient;
+import client.controllers.ChatClient;
+import client.controllers.ClientManager;
+import client.models.Player;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.security.ntlm.Client;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -11,11 +17,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import client.views.Graphics;
 import models.Response;
+import models.chat.Chat;
 import models.chat.Message;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static client.views.Graphics.Menu.*;
 
-public class GraphicPreBattleMenu {
+public class GraphicPreBattleMenu implements Initializable {
 
     public VBox deathMatchContainer;
     public VBox captureTheFlagContainer;
@@ -33,6 +45,8 @@ public class GraphicPreBattleMenu {
     }
 
     public static void battleRequest() {
+
+    public void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
             if (response.data != null) {
@@ -62,7 +76,6 @@ public class GraphicPreBattleMenu {
         matchMode = 3;
         battleRequest();
     }
-
 
     public void customGame(MouseEvent mouseEvent) {
         Graphics.setMenu(MATCH_SELECT_MENU);
@@ -95,7 +108,22 @@ public class GraphicPreBattleMenu {
     }
 
     public void sendMessage(ActionEvent actionEvent) {
-        String message;
+        String message = messageField.getText();
+        ChatClient.sendMessage(message);
+        Platform.runLater(this::updateMessage);
+    }
+
+    private void updateMessage() {
+        chats.getChildren().clear();
+        Chat update = ChatClient.update();
+        if (update != null) {
+            for (int i = update.messages.size() - 1; i >= 0; i--) {
+                chats.getChildren().add(getMessageView(update.messages.get(i)));
+                System.out.println(update.messages.get(i).text);
+            }
+        } else {
+            System.out.println("update is null");
+        }
     }
 
     public HBox getMessageView(Message message) {
@@ -111,5 +139,13 @@ public class GraphicPreBattleMenu {
         messageView.getStyleClass().add("chat-container");
         messageView.getChildren().addAll(label);
         return messageView;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        ScheduledThreadPoolExecutor waitingAnimation = new ScheduledThreadPoolExecutor(1);
+        if (chats != null)
+            waitingAnimation.scheduleAtFixedRate(() -> Platform.runLater(this::updateMessage), 0, 1, TimeUnit.SECONDS);
     }
 }
