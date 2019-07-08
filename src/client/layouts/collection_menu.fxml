@@ -15,7 +15,7 @@
 <AnchorPane fx:id="root" prefHeight="1080" prefWidth="1920" styleClass="shop-container"
             stylesheets="@../resources/stylesheets/collection-style.css" xmlns="http://javafx.com/javafx/8.0.999-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.graphics.GraphicCollectionMenu">
-    <ScrollPane hbarPolicy="NEVER" layoutX="421.0" layoutY="140.0" prefHeight="900.0" prefWidth="1199.0"
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="421.0" layoutY="140.0" prefHeight="900.0" prefWidth="1199.0"
                 styleClass="shop-card-container" AnchorPane.bottomAnchor="40" AnchorPane.leftAnchor="421.0"
                 AnchorPane.rightAnchor="300" AnchorPane.topAnchor="140.0">
         <JFXMasonryPane fx:id="cardContainer" prefHeight="902.0" prefWidth="1160.0" styleClass="inner-container"/>

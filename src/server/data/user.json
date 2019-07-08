@@ -6,8 +6,8 @@
       "@val": {
         "username": "mahdi",
         "password": "mahdi",
-        "loginToken": "elv2g",
-        "drake": 1000,
+        "loginToken": "x13fu",
+        "drake": 64022850,
         "decks": {
           "@type": "java.util.HashMap",
           "@val": {
@@ -42,6 +42,22 @@
                         "id": 0,
                         "price": 400,
                         "manaPoint": 1,
+                        "isInserted": false,
+                        "canMove": false
+                      }
+                    },
+                    1
+                  ],
+                  [
+                    {
+                      "@type": "models.cards.Spell",
+                      "@val": {
+                        "targetType": "OPPONENT_HERO",
+                        "name": "Lighting Bolt",
+                        "description": "",
+                        "id": 0,
+                        "price": 1250,
+                        "manaPoint": 2,
                         "isInserted": false,
                         "canMove": false
                       }
@@ -97,26 +113,136 @@
               "name": "amin",
               "cards": {
                 "@type": "java.util.HashMap",
-                "@val": {
-                  "@root.0-val.decks.0-val.cards.0-key": 10,
-                  "@root.0-val.decks.0-val.cards.1-key": 3,
-                  "@root.0-val.decks.0-val.cards.2-key": 1,
-                  "@root.0-val.decks.0-val.cards.3-key": 6
-                }
+                "@val": [
+                  [
+                    "@root.0-val.decks.0-val.cards.0-key",
+                    10
+                  ],
+                  [
+                    "@root.0-val.decks.0-val.cards.1-key",
+                    3
+                  ],
+                  [
+                    {
+                      "@type": "models.cards.Spell",
+                      "@val": {
+                        "targetType": "ALL_MY_FORCE",
+                        "name": "All Power",
+                        "description": "",
+                        "id": 0,
+                        "price": 2500,
+                        "manaPoint": 2,
+                        "isInserted": false,
+                        "canMove": false
+                      }
+                    },
+                    1
+                  ],
+                  [
+                    "@root.0-val.decks.0-val.cards.3-key",
+                    1
+                  ],
+                  [
+                    "@root.0-val.decks.0-val.cards.4-key",
+                    5
+                  ]
+                ]
               }
             },
             "mahdi_deck": {
               "name": "mahdi_deck",
               "cards": {
                 "@type": "java.util.HashMap",
-                "@val": {}
+                "@val": [
+                  [
+                    {
+                      "@type": "models.cards.Minion",
+                      "@val": {
+                        "health": 3,
+                        "currentHealth": 0,
+                        "canAttack": false,
+                        "attackPoint": 10,
+                        "attackRange": 1,
+                        "attackType": "MELEE",
+                        "name": "Turan Wand",
+                        "description": "",
+                        "id": 0,
+                        "price": 450,
+                        "manaPoint": 2,
+                        "isInserted": false,
+                        "canMove": false
+                      }
+                    },
+                    1
+                  ],
+                  [
+                    {
+                      "@type": "models.cards.Minion",
+                      "@val": {
+                        "health": 10,
+                        "currentHealth": 0,
+                        "canAttack": false,
+                        "attackPoint": 6,
+                        "attackRange": 1,
+                        "attackType": "MELEE",
+                        "name": "Persian Horse Rider",
+                        "description": "",
+                        "id": 0,
+                        "price": 200,
+                        "manaPoint": 4,
+                        "isInserted": false,
+                        "canMove": false
+                      }
+                    },
+                    1
+                  ],
+                  [
+                    {
+                      "@type": "models.cards.Spell",
+                      "@val": {
+                        "targetType": "ALL_OPPONENT_FORCE_IN_ONE_COLUMN",
+                        "name": "All Attack",
+                        "description": "",
+                        "id": 0,
+                        "price": 1500,
+                        "manaPoint": 4,
+                        "isInserted": false,
+                        "canMove": false
+                      }
+                    },
+                    2
+                  ],
+                  [
+                    {
+                      "@type": "models.cards.Hero",
+                      "@val": {
+                        "health": 50,
+                        "currentHealth": 0,
+                        "canAttack": false,
+                        "attackPoint": 4,
+                        "attackRange": 1,
+                        "attackType": "MELEE",
+                        "name": "Kaveh",
+                        "description": "",
+                        "id": 0,
+                        "price": 8000,
+                        "manaPoint": 1,
+                        "isInserted": false,
+                        "canMove": false
+                      }
+                    },
+                    1
+                  ]
+                ]
               }
             },
             "ali": {
               "name": "ali",
               "cards": {
                 "@type": "java.util.HashMap",
-                "@val": {}
+                "@val": {
+                  "@root.0-val.decks.2-val.cards.1-key": 1
+                }
               }
             }
           }
@@ -125,12 +251,723 @@
         "cards": {
           "cards": {
             "@type": "java.util.HashMap",
-            "@val": {
-              "@root.0-val.decks.0-val.cards.0-key": 10,
-              "@root.0-val.decks.0-val.cards.1-key": 2,
-              "@root.0-val.decks.0-val.cards.2-key": 1,
-              "@root.0-val.decks.0-val.cards.3-key": 9
-            }
+            "@val": [
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "ALL_OPPONENT_FORCE",
+                    "name": "All DisarmBuff",
+                    "description": "",
+                    "id": 0,
+                    "price": 2000,
+                    "manaPoint": 9,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                "@root.0-val.decks.2-val.cards.0-key",
+                2
+              ],
+              [
+                "@root.0-val.decks.0-val.cards.2-key",
+                6
+              ],
+              [
+                "@root.0-val.decks.2-val.cards.1-key",
+                3
+              ],
+              [
+                "@root.0-val.decks.2-val.cards.2-key",
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 6,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Persian Swordsman",
+                    "description": "",
+                    "id": 0,
+                    "price": 400,
+                    "manaPoint": 2,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 12,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 11,
+                    "attackRange": 3,
+                    "attackType": "HYBRID",
+                    "name": "One Eye Giant",
+                    "description": "",
+                    "id": 0,
+                    "price": 500,
+                    "manaPoint": 7,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                "@root.0-val.decks.2-val.cards.3-key",
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 35,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 3,
+                    "attackRange": 3,
+                    "attackType": "HYBRID",
+                    "name": "Esfandiar",
+                    "description": "",
+                    "id": 0,
+                    "price": 12000,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "AN_OPPONENT_MINION",
+                    "name": "Weakening",
+                    "description": "",
+                    "id": 0,
+                    "price": 1000,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                "@root.0-val.decks.0-val.cards.4-key",
+                10
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "OPPONENT_FORCE_OR_MY_FORCE",
+                    "name": "Dispel",
+                    "description": "",
+                    "id": 0,
+                    "price": 2500,
+                    "manaPoint": 0,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                3
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 24,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 6,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Persian Champion",
+                    "description": "",
+                    "id": 0,
+                    "price": 600,
+                    "manaPoint": 9,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                "@root.0-val.decks.1-val.cards.2-key",
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 4,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 2,
+                    "attackRange": 7,
+                    "attackType": "RANGED",
+                    "name": "Turan Sling",
+                    "description": "",
+                    "id": 0,
+                    "price": 600,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "MY_HERO",
+                    "name": "God strength",
+                    "description": "",
+                    "id": 0,
+                    "price": 450,
+                    "manaPoint": 2,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 50,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Rakhsh",
+                    "description": "",
+                    "id": 0,
+                    "price": 8000,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "MY_FORCE",
+                    "name": "Madness",
+                    "description": "",
+                    "id": 0,
+                    "price": 650,
+                    "manaPoint": 0,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 14,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 10,
+                    "attackRange": 7,
+                    "attackType": "HYBRID",
+                    "name": "Black Demon",
+                    "description": "",
+                    "id": 0,
+                    "price": 300,
+                    "manaPoint": 9,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 5,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 3,
+                    "attackRange": 3,
+                    "attackType": "HYBRID",
+                    "name": "Persian Lancer",
+                    "description": "",
+                    "id": 0,
+                    "price": 500,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 12,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 5,
+                    "attackType": "RANGED",
+                    "name": "Persian General",
+                    "description": "",
+                    "id": 0,
+                    "price": 800,
+                    "manaPoint": 7,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 3,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 5,
+                    "attackType": "RANGED",
+                    "name": "Turan Archer",
+                    "description": "",
+                    "id": 0,
+                    "price": 500,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 2,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 2,
+                    "attackRange": 3,
+                    "attackType": "RANGED",
+                    "name": "Small Tiger",
+                    "description": "",
+                    "id": 0,
+                    "price": 200,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 12,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 12,
+                    "attackRange": 7,
+                    "attackType": "RANGED",
+                    "name": "Giant Catapult",
+                    "description": "",
+                    "id": 0,
+                    "price": 300,
+                    "manaPoint": 9,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 50,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 3,
+                    "attackRange": 3,
+                    "attackType": "RANGED",
+                    "name": "Legend",
+                    "description": "",
+                    "id": 0,
+                    "price": 11000,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "OPPONENT_HERO",
+                    "name": "Shock",
+                    "description": "",
+                    "id": 0,
+                    "price": 1200,
+                    "manaPoint": 9,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "ANY",
+                    "name": "Kings Guard",
+                    "description": "",
+                    "id": 0,
+                    "price": 1750,
+                    "manaPoint": 9,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 50,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 2,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Zahak",
+                    "description": "",
+                    "id": 0,
+                    "price": 10000,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 4,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 3,
+                    "attackType": "HYBRID",
+                    "name": "Turan Lancer",
+                    "description": "",
+                    "id": 0,
+                    "price": 600,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 50,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "White Daemon",
+                    "description": "",
+                    "id": 0,
+                    "price": 8000,
+                    "manaPoint": 1,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 30,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 2,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Arash",
+                    "description": "",
+                    "id": 0,
+                    "price": 10000,
+                    "manaPoint": 2,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                "@root.0-val.decks.0-val.cards.0-key",
+                10
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 6,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 6,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Turan Spy",
+                    "description": "",
+                    "id": 0,
+                    "price": 700,
+                    "manaPoint": 4,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                "@root.0-val.decks.0-val.cards.1-key",
+                4
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "MY_FORCE",
+                    "name": "Health With Profit",
+                    "description": "",
+                    "id": 0,
+                    "price": 2250,
+                    "manaPoint": 0,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "MY_FORCE",
+                    "name": "Power Up",
+                    "description": "",
+                    "id": 0,
+                    "price": 2500,
+                    "manaPoint": 2,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 50,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "SevenHead Dragon",
+                    "description": "",
+                    "id": 0,
+                    "price": 8000,
+                    "manaPoint": 0,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                "@root.0-val.decks.0-val.cards.3-key",
+                3
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 1,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 8,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Predator Lion",
+                    "description": "",
+                    "id": 0,
+                    "price": 600,
+                    "manaPoint": 2,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 16,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 8,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Hog Head Demon",
+                    "description": "",
+                    "id": 0,
+                    "price": 300,
+                    "manaPoint": 6,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Hero",
+                  "@val": {
+                    "health": 50,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 4,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Phoenix",
+                    "description": "",
+                    "id": 0,
+                    "price": 9000,
+                    "manaPoint": 5,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Minion",
+                  "@val": {
+                    "health": 6,
+                    "currentHealth": 0,
+                    "canAttack": false,
+                    "attackPoint": 10,
+                    "attackRange": 1,
+                    "attackType": "MELEE",
+                    "name": "Turan Prince",
+                    "description": "",
+                    "id": 0,
+                    "price": 800,
+                    "manaPoint": 6,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "SQUARE2x2",
+                    "name": "Area Dispel",
+                    "description": "",
+                    "id": 0,
+                    "price": 1500,
+                    "manaPoint": 2,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "ANY",
+                    "name": "Poison Lake",
+                    "description": "",
+                    "id": 0,
+                    "price": 900,
+                    "manaPoint": 5,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ],
+              [
+                {
+                  "@type": "models.cards.Spell",
+                  "@val": {
+                    "targetType": "AN_OPPONENT_FORCE",
+                    "name": "Total Disarm",
+                    "description": "",
+                    "id": 0,
+                    "price": 1000,
+                    "manaPoint": 0,
+                    "isInserted": false,
+                    "canMove": false
+                  }
+                },
+                2
+              ]
+            ]
           }
         }
       }

@@ -1,6 +1,7 @@
 package client.views.graphics;
 
 import client.controllers.AccountClient;
+import client.controllers.CheatClient;
 import client.controllers.ShopClient;
 import client.models.Action;
 import com.jfoenix.controls.JFXButton;
@@ -46,7 +47,7 @@ public class ShopController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         updateCards("", filterType);
 
-        updateDrake();
+        updateDrakes();
 
         backBtn.setOnMouseClicked(event -> {
             Graphics.playMusic("sfx_ui_select.m4a");
@@ -72,15 +73,27 @@ public class ShopController implements Initializable {
 
         root.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.D) {
-                AccountClient.incrementDrake(1000000);
-                updateDrake();
+                CheatClient.incrementDrake(1000000);
+                updateDrakes();
+            }
+
+            if (event.getCode() == KeyCode.A) {
+                Response res = ShopClient.search(AccountClient.user.loginToken, "", "");
+                List<Card> cards = new ArrayList<>(((Map<Card, Integer>) res.data).keySet());
+                for (Card card : cards) {
+                    CheatClient.incrementDrake(card.price);
+                    ShopClient.buy(AccountClient.user.loginToken, card.name);
+                }
+                updateCards("", Card.class);
             }
         });
 
+
+
     }
 
-    private void updateDrake() {
-        drakes.setText("" + );
+    private void updateDrakes() {
+        drakes.setText("" + ShopClient.getDrakes());
     }
 
     public static AnchorPane getCardPane(Card card, boolean isInShop, int count) {
@@ -192,7 +205,7 @@ public class ShopController implements Initializable {
                             updateDrakes();
                         } else
                             alert("Error", "buy failed", buyResponse.message);
-                        updateDrake();
+                        updateDrakes();
                     });
                     cancel.setOnMouseClicked(canceled -> {
                         Graphics.playMusic("sfx_ui_select.m4a");
@@ -207,10 +220,6 @@ public class ShopController implements Initializable {
         });
     }
 
-    public void updateDrakes() {
-        int drake = ShopClient.getDrakes();
-        drakes.setText("" + drake);
-    }
 
     public void addCustomCard(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
