@@ -53,17 +53,19 @@ public class BattleController {
                 switch (matchMode) {
                     case DEATH_MATCH:
                         playingMatches.put(matchToken, new DeathMatch(waitingUserForDeathMatch, request.user));
+                        waitingUserForDeathMatch = null;
                         break;
                     case MULTI_FLAG_MATCH:
                         playingMatches.put(matchToken, new MultiFlagMatch(waitingUserForMultiFlagMatch, request.user));
+                        waitingUserForMultiFlagMatch = null;
                         break;
                     case CAPTURE_THE_FLAG_MATCH:
                         playingMatches.put(matchToken, new CaptureTheFlagMatch(waitingUserForCaptureTheFlagMatchMatch, request.user));
+                        waitingUserForCaptureTheFlagMatchMatch = null;
                         break;
                 }
                 playingMatches.get(matchToken).token = matchToken;
                 response = new Response(true, "let's play the game with: ", playingMatches.get(matchToken));
-
             }
         } catch (Exception e) {
             response = new Response(false, "match mode must be 1 or 2 or 3");
