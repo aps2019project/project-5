@@ -127,3 +127,7 @@
 .chat-container {
     -fx-pref-width: 980px;
 }
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
