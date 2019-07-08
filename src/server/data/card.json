@@ -161,27 +161,6 @@
           {
             "@type": "models.cards.Hero",
             "@val": {
-              "health": 1,
-              "currentHealth": 0,
-              "canAttack": false,
-              "attackPoint": 1,
-              "attackRange": 1,
-              "attackType": "MELEE",
-              "name": "m",
-              "description": "",
-              "id": 0,
-              "price": 1,
-              "manaPoint": 1,
-              "isInserted": false,
-              "canMove": false
-            }
-          },
-          10
-        ],
-        [
-          {
-            "@type": "models.cards.Hero",
-            "@val": {
               "health": 35,
               "currentHealth": 0,
               "canAttack": false,
