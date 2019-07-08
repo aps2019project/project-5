@@ -26,7 +26,7 @@ public class Graphics extends Application {
     public static Stage stage;
 
     public static Parent accountMenuRoot, mainMenuRoot, multiSingleRoot, customSelectRoot,
-            matchSelectRoot, profileRoot, watchRoot, codexRoot, customCardRoot, battleMenuRoot, collectionMenuRoot, shopMenuRoot;
+            profileRoot, watchRoot, codexRoot, customCardRoot, battleMenuRoot, collectionMenuRoot, shopMenuRoot;
 
 
     public static void alert(String title, String header, String content) {
@@ -100,7 +100,6 @@ public class Graphics extends Application {
             profileRoot = tmpGridPane;
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
-            matchSelectRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/match_select.fxml"));
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -112,7 +111,7 @@ public class Graphics extends Application {
     public void start(Stage primaryStage) {
         loadFXML();
         stage = primaryStage;
-        Scene scene = new Scene(matchSelectRoot, 1920, 1080);
+        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("client/resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));

@@ -33,6 +33,7 @@ public class Server {
         main.port = Integer.valueOf(getProperties().getProperty("main_application.port"));
         main.urls.add(new URL("/login", AuthenticationController::login, false));
         main.urls.add(new URL("/sign_up", AuthenticationController::signUp, false));
+        main.urls.add(new URL("/logout", AuthenticationController::logout, true));
         main.urls.add(new URL("/profile", AuthenticationController::profile, true));
 
         main.urls.add(new URL("/shop/search", ShopController::searchShopCards, true));
