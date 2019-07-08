@@ -23,7 +23,7 @@
 .death-match {
     -fx-background-image: url(/client/resources/images/play/play_mode_sandbox.jpg), url(/client/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 560, 300 62;
-    -fx-background-position: center, 0 560;
+    -fx-background-position: center, 0 660;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
@@ -35,21 +35,21 @@
 .capture-the-flag {
     -fx-background-image: url(/client/resources/images/play/collecting-flags.jpg), url(/client/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 560, 300 62;
-    -fx-background-position: center, 0 560;
+    -fx-background-position: center, 0 660;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .multi-flag-mode {
     -fx-background-image: url(/client/resources/images/play/gate_010.jpg), url(/client/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 560, 300 62;
-    -fx-background-position: center, 0 560;
+    -fx-background-position: center, 0 660;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .extra-mode {
     -fx-background-image: url(/client/resources/images/play/play_mode_arenagauntlet.jpg), url(/client/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 560, 300 62;
-    -fx-background-position: center, 0 560;
+    -fx-background-position: center, 0 660;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
@@ -71,28 +71,28 @@
 .story-mode {
     -fx-background-image: url(/client/resources/images/play/play_mode_rankedladder@2x.jpg), url(/client/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 560, 300 62;
-    -fx-background-position: center, 0 560;
+    -fx-background-position: center, 0 660;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .custom-game {
     -fx-background-image: url(/client/resources/images/play/play_mode_rift.jpg), url(/client/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 560, 300 62;
-    -fx-background-position: center, 0 560;
+    -fx-background-position: center, 0 660;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .single-player {
     -fx-background-image: url(/client/resources/images/play/play_mode_rankedladder@2x.jpg), url(/client/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 560, 300 62;
-    -fx-background-position: center, 0 560;
+    -fx-background-position: center, 0 660;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
 .multi-player {
     -fx-background-image: url(/client/resources/images/play/play_mode_arenagauntlet.jpg), url(/client/resources/images/play/game-select-plate.png);
     -fx-background-size: 300 560, 300 62;
-    -fx-background-position: center, 0 560;
+    -fx-background-position: center, 0 660;
     -fx-background-repeat: no-repeat, no-repeat;
 }
 
@@ -120,13 +120,13 @@
 .chat-message {
     -fx-wrap-text: true;
     -fx-padding: 10px;
-    -fx-max-width: 400px;
+    -fx-max-width: 300px;
     -fx-font-size: 17px;
 }
 
 .chat-container {
     -fx-background-color: transparent;
-    -fx-pref-width: 980px;
+    -fx-pref-width: 500px;
 }
 
 .scroll-pane .viewport {

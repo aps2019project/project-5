@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import client.views.Graphics;
+import javafx.scene.text.TextAlignment;
 import models.Response;
 import models.chat.Chat;
 import models.chat.Message;
@@ -125,13 +126,15 @@ public class GraphicPreBattleMenu implements Initializable {
 
     public HBox getMessageView(Message message) {
         HBox messageView = new HBox();
-        Label label = new Label(message.text);
+        Label label = new Label(message.user + ":\n" + message.text);
         if (message.user.equals(AccountClient.user.username)) {
             messageView.setAlignment(Pos.CENTER_RIGHT);
             label.getStyleClass().addAll("chat-message", "chat-right");
+            label.setTextAlignment(TextAlignment.RIGHT);
         } else {
             messageView.setAlignment(Pos.CENTER_LEFT);
             label.getStyleClass().addAll("chat-message", "chat-left");
+            label.setTextAlignment(TextAlignment.LEFT);
         }
         messageView.getStyleClass().add("chat-container");
         messageView.getChildren().addAll(label);
