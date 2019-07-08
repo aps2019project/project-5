@@ -34,7 +34,7 @@ public class BattleClient {
         return false;
     }
 
-    public static Response attack(int row, int column) {
+    public static Response attack(int x, int y) {
         return null;
     }
 

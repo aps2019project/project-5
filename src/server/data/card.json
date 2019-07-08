@@ -18,7 +18,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -39,7 +39,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -55,7 +55,7 @@
               "canMove": false
             }
           },
-          10
+          2
         ],
         [
           {
@@ -76,7 +76,7 @@
               "canMove": false
             }
           },
-          9
+          4
         ],
         [
           {
@@ -92,7 +92,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -113,7 +113,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -134,7 +134,7 @@
               "canMove": false
             }
           },
-          9
+          5
         ],
         [
           {
@@ -155,7 +155,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -176,7 +176,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -192,7 +192,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -208,28 +208,7 @@
               "canMove": false
             }
           },
-          10
-        ],
-        [
-          {
-            "@type": "models.cards.Minion",
-            "@val": {
-              "health": 5,
-              "currentHealth": 0,
-              "canAttack": false,
-              "attackPoint": 6,
-              "attackRange": 4,
-              "attackType": "RANGED",
-              "name": "Avalanche",
-              "description": "",
-              "id": 0,
-              "price": 300,
-              "manaPoint": 4,
-              "isInserted": false,
-              "canMove": false
-            }
-          },
-          1
+          5
         ],
         [
           {
@@ -250,7 +229,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -266,7 +245,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -287,7 +266,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -303,7 +282,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -324,7 +303,7 @@
               "canMove": false
             }
           },
-          9
+          5
         ],
         [
           {
@@ -340,7 +319,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -361,7 +340,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -382,7 +361,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -403,7 +382,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -424,7 +403,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -445,7 +424,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -466,7 +445,7 @@
               "canMove": false
             }
           },
-          5
+          1
         ],
         [
           {
@@ -487,7 +466,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -503,7 +482,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -519,7 +498,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -540,7 +519,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -561,7 +540,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -582,7 +561,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -603,7 +582,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -624,7 +603,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -640,7 +619,7 @@
               "canMove": false
             }
           },
-          8
+          4
         ],
         [
           {
@@ -656,7 +635,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -672,7 +651,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -693,7 +672,7 @@
               "canMove": false
             }
           },
-          9
+          5
         ],
         [
           {
@@ -714,7 +693,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -735,7 +714,7 @@
               "canMove": false
             }
           },
-          8
+          4
         ],
         [
           {
@@ -756,7 +735,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -777,7 +756,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -798,7 +777,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -814,7 +793,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -830,7 +809,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ],
         [
           {
@@ -846,7 +825,7 @@
               "canMove": false
             }
           },
-          10
+          6
         ]
       ]
     }

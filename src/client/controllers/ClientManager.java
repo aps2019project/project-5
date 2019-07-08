@@ -43,8 +43,16 @@ public class ClientManager {
     }
 
 
+    public static void setMana(int amount) {
+        getMe().setMana(amount);
+    }
+
     public static void addDeck(Deck deck) throws Account.DeckExistsException {
         account.addDeck(deck);
+    }
+
+    public static void incrementDrake(int amount) {
+        account.incrementDrake(amount);
     }
 
     public static enum GameMode {

@@ -48,8 +48,11 @@ public class ShopController {
             if (card == null)
                 response = new Response(false, "this card not found in shop", 120);
             else {
-                if (request.user.drake < card.price)
+                if (request.user.drake < card.price){
+                    System.out.println(card.price);
+                    System.out.println(request.user.drake);
                     response = new Response(false, "you have not enough drakes.", 121);
+                }
                 else if (shop.decrease(card)) {
                     request.user.cards.add(card);
                     request.user.drake -= card.price;

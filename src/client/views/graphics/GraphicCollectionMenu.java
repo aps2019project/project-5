@@ -3,13 +3,16 @@ package client.views.graphics;
 import client.controllers.AccountClient;
 import client.controllers.CollectionClient;
 import client.controllers.ShopClient;
+import client.models.Shop;
+import client.models.Action;
+import client.views.SpriteMaker;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.*;
-import client.controllers.ClientManager;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
@@ -22,17 +25,16 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Response;
-import models.cards.Deck;
-import models.cards.Card;
-import models.cards.Hero;
-import models.cards.Minion;
-import models.cards.Spell;
+import models.cards.*;
 import client.views.Graphics;
 import java.io.File;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.*;
+import java.util.Map;
+import java.util.ResourceBundle;
+
 import static client.views.Graphics.Menu.MAIN_MENU;
 import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
@@ -51,6 +53,8 @@ public class GraphicCollectionMenu implements Initializable {
     public JFXButton exportDeckBtn;
     public JFXTextField exportPathTxt;
     public JFXTextField importPathTxt;
+    public AnchorPane root;
+    public ScrollPane scrollPane;
     private ToggleGroup selectedDeckToggleGroup = new ToggleGroup();
     private final Background ordinaryBackground = new Background(new BackgroundFill(Color.VIOLET,
             new CornerRadii(5), Insets.EMPTY));
@@ -66,6 +70,8 @@ public class GraphicCollectionMenu implements Initializable {
     private YaGsonBuilder deckJsonBuilder = new YaGsonBuilder().setPrettyPrinting();
     private YaGson deckJson = new YaGson();
     final File savedDecksPath = new File("src/data/saved-decks");
+    double draggingX = 0, draggingY = 0;
+    AnchorPane draggingCardPane = getCardPane(new Card("Rostam", "", 2, 3), false, 1);
 
     private void changeAsWrong(JFXTextField textField, JFXButton button, boolean isWrong) {
         button.setDisable(isWrong);
@@ -263,6 +269,45 @@ public class GraphicCollectionMenu implements Initializable {
         return cardPane;
     }
 
+//    private AnchorPane getCardPane(AnchorPane sampleCardPane) {
+//        ((Label) draggingCardPane.getChildren().get(0)).setText(((Label)sampleCardPane.getChildren().get(0)).getText());
+//        ((Label) draggingCardPane.getChildren().get(1)).setText(((Label)sampleCardPane.getChildren().get(1)).getText());
+//        draggingCardPane.getChildren().get(2).get
+//        draggingCardPane.getStyleClass().add("card-pane");
+//
+//
+//
+//        if(isInShop) {
+//            Label countLabel = new Label("x" + count);
+//            countLabel.setStyle("-fx-text-fill: white; -fx-pref-width: 30px;");
+//            countLabel.relocate(98, 275);
+//            countLabel.setAlignment(Pos.CENTER);
+//            cardPane.getChildren().add(countLabel);
+//        }
+//
+//        if (isAttacker) {
+//            Label health = new Label("" + ((Attacker) card).health);
+//            health.getStyleClass().add("shop-card-health");
+//            if (isInShop)
+//                health.relocate(157, 163);
+//            else
+//                health.relocate(150, 155);
+//            health.setPrefWidth(30);
+//            health.setAlignment(Pos.CENTER);
+//
+//            Label power = new Label("" + ((Attacker) card).getAttackPoint());
+//            power.getStyleClass().add("shop-card-power");
+//            if (isInShop)
+//                power.relocate(38, 163);
+//            else
+//                power.relocate(35, 155);
+//            power.setPrefWidth(30);
+//            power.setAlignment(Pos.CENTER);
+//
+//            cardPane.getChildren().addAll(power, health);
+//        }
+//    }
+
     private void updateCards(String q, Type type) {
         cardContainer.getChildren().clear();
         Map<Card, Integer> cards;
@@ -273,6 +318,25 @@ public class GraphicCollectionMenu implements Initializable {
         cards.forEach((card, integer) -> {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true, integer);
+                cardPane.setOnMousePressed(e -> {
+                    draggingCardPane = getCardPane(card, true, integer);
+                    root.getChildren().add(draggingCardPane);
+                    draggingCardPane.setLayoutX(cardPane.getLayoutX() + cardContainer.getLayoutX() + scrollPane.getLayoutX());
+                    draggingCardPane.setLayoutY(cardPane.getLayoutY() + cardContainer.getLayoutY() + scrollPane.getLayoutY());
+                    draggingX = e.getSceneX();
+                    draggingY = e.getSceneY();
+                    draggingCardPane.setVisible(true);
+                });
+
+                cardPane.setOnMouseDragged(e -> {
+                    draggingCardPane.setTranslateX(e.getSceneX() - draggingX);
+                    draggingCardPane.setTranslateY(e.getSceneY() - draggingY);
+                });
+
+                cardPane.setOnMouseReleased(event -> {
+                    draggingCardPane.setVisible(false);
+                    addCardToDeck(card);
+                });
 
                 cardPane.setOnMouseEntered(event -> {
                     Graphics.playMusic("sfx_ui_select.m4a");
@@ -296,21 +360,7 @@ public class GraphicCollectionMenu implements Initializable {
                             alert("Error", "sell failed", buyResponse.message);
                     });
                     add.setOnMouseClicked(canceled -> {
-                        Graphics.playMusic("sfx_ui_select.m4a");
-                        if (selectedDeck == null) {
-                            Graphics.alert("Error", "Can't add card", "please select a deck first.");
-                            return;
-                        }
-                        String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
-                        String cardName = card.name;
-                        Response addResponse = CollectionClient.addCardToDeck(deckName, cardName);
-                        if (addResponse.OK) {
-                            selectedDeckCardList.getChildren().clear();
-                            Map<Card, Integer> newDeckCards = ((Deck) addResponse.data).cards;
-                            newDeckCards.forEach((newCard, count) -> selectedDeckCardList.getChildren().add(getMiniCardPane(newCard.name, false, count)));
-                        } else {
-                            alert("Error", "invalid addition", addResponse.message);
-                        }
+                        addCardToDeck(card);
                         cardPane.getChildren().removeAll(sell, add);
                     });
                     cardPane.setOnMouseExited(event1 -> {
@@ -327,8 +377,35 @@ public class GraphicCollectionMenu implements Initializable {
         });
     }
 
+    private void addCardToDeck(Card card) {
+        {
+            Graphics.playMusic("sfx_ui_select.m4a");
+            if (selectedDeck == null) {
+                Graphics.alert("Error", "Can't add card", "please select a deck first.");
+                return;
+            }
+            String deckName = ((Label) selectedDeck.getChildren().get(0)).getText();
+            String cardName = card.name;
+            Response addResponse = CollectionClient.addCardToDeck(deckName, cardName);
+            if (addResponse.OK) {
+                selectedDeckCardList.getChildren().clear();
+                Map<Card, Integer> newDeckCards = ((Deck) addResponse.data).cards;
+                newDeckCards.forEach((newCard, count) -> selectedDeckCardList.getChildren().add(getMiniCardPane(newCard.name, false, count)));
+            } else {
+                alert("Error", "invalid addition", addResponse.message);
+            }
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        selectedDeckCardList.setOnDragDropped(event -> {
+
+        });
+
+        root.getChildren().add(draggingCardPane);
+        draggingCardPane.setVisible(false);
 
         exportPathTxt.textProperty().addListener(observable -> exportDeckBtn.setDisable(false));
         importPathTxt.textProperty().addListener(observable -> importDeckBtn.setDisable(false));
@@ -380,6 +457,8 @@ public class GraphicCollectionMenu implements Initializable {
                 updateCards(searchField.getText(), filterType);
             });
         }
+
+
     }
 
 

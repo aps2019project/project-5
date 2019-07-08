@@ -1,7 +1,10 @@
 package client.views;
 
+import client.controllers.AccountClient;
 import client.controllers.ClientManager;
 import client.models.Shop;
+import client.views.graphics.GraphicBattleController;
+import client.views.graphics.GraphicPreBattleMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -17,8 +20,10 @@ import client.models.Account;
 import client.models.Collection;
 import client.models.Deck;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import static client.views.Graphics.Menu.MAIN_MENU;
 
@@ -118,6 +123,27 @@ public class Graphics extends Application {
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
+        testLogin();
+    }
+
+    private void testLogin() {
+        Scanner scn = new Scanner(System.in);
+        int user = scn.nextInt();
+        GraphicPreBattleMenu.matchMode = 1;
+        GraphicPreBattleMenu.isMultiPlayer = true;
+        GraphicPreBattleMenu.isStoryMode = false;
+        switch (user) {
+            case 1:
+                AccountClient.login("mahdi", "mahdi");
+                break;
+            case 2:
+                AccountClient.login("ali", "ali");
+                break;
+            case 3:
+                AccountClient.login("amin", "amin");
+                break;
+        }
+        GraphicPreBattleMenu.battleRequest();
     }
 
     public static MediaPlayer playMusic(String musicName) {

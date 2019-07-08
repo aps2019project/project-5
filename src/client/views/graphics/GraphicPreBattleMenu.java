@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -34,9 +35,9 @@ public class GraphicPreBattleMenu implements Initializable {
     public VBox captureTheFlagContainer;
     public VBox multiFlagContainer;
 
-    private static int matchMode = 1;
-    private static boolean isStoryMode = false;
-    private static boolean isMultiPlayer = false;
+    public static int matchMode = 1;
+    public static boolean isStoryMode = false;
+    public static boolean isMultiPlayer = false;
     public VBox chats;
     public JFXTextField messageField;
 
@@ -46,7 +47,7 @@ public class GraphicPreBattleMenu implements Initializable {
     }
 
 
-    public void battleRequest() {
+    public static void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
             if (response.data != null) {

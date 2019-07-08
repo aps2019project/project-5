@@ -28,7 +28,7 @@ public class HttpRequest {
     public String version;
     public String url;
     public String method;
-    public Map<String, String> GET;
+    public Map<String, String> GET = new HashMap<>();
     public Map<String, String> POST;
     public Account user = null;
     public Map<String, String> headers = new HashMap<>();

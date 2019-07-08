@@ -3,6 +3,7 @@ package client.views.graphics;
 import client.controllers.BattleClient;
 import client.controllers.ClientManager;
 import client.models.Action;
+import client.models.Timer;
 import javafx.animation.*;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -38,12 +39,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 
 import static client.views.Graphics.playMusic;
 
 public class GraphicBattleController implements Initializable {
+
+
+    private int eachTurnTime = 20;
     public AnchorPane gameBoard;
     public AnchorPane[][] cell = new AnchorPane[5][9];
     public Button graveyardButton;
@@ -69,6 +75,9 @@ public class GraphicBattleController implements Initializable {
     private Card selectedCard;
     private BattleMenu battleMenu = new BattleMenu();
     private boolean isSelectedCardInGame = false;
+    private Timer timer;
+
+    int speed = 1;
 
     private void updateHp(Card... card) {
         for (Card card1 : card) {
@@ -119,6 +128,27 @@ public class GraphicBattleController implements Initializable {
         mana2BarContainer.setRotate(3.0);
         showCardsInBoard();
         handItem0_container.setLayoutX(-100);
+        root.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case M:
+                    ClientManager.setMana(10000);
+                    updateMana();
+                    break;
+                case EQUALS:
+                    speed++;
+                    break;
+                case MINUS:
+                    if (speed > 1)
+                        speed--;
+                    break;
+            }
+            showCardsInBoard();
+            updateHand();
+        });
+
+        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
+        timer.start();
+
     }
 
     private void showCardsInBoard() {
@@ -158,7 +188,7 @@ public class GraphicBattleController implements Initializable {
         heros1.forEach(hero -> player1HeroName.set(hero.name));
         heros2.forEach(hero -> player2HeroName.set(hero.name));
         player1ProfileImage.setImage(new Image(
-                "/client/resources/sprites/HeroLogos/" + player1HeroName.get() + ".png"
+                "/client/resources/sprites/HeroLogos/" + player1HeroName + ".png"
         ));
         player2ProfileImage.setImage(new Image(
                 "/client/resources/sprites/HeroLogos/" + player2HeroName.get() + ".png"
@@ -185,11 +215,10 @@ public class GraphicBattleController implements Initializable {
         new Thread(() -> {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
             Graphics.playMusic("sfx_unit_run_charge_4.m4a");
-            SpriteMaker.getAndShowAnimation(imageView, card.name, Action.RUN, 1000);
+            SpriteMaker.getAndShowAnimation(imageView, card.name, Action.RUN, 1000, speed);
             long newTime = System.currentTimeMillis();
-            while (System.currentTimeMillis() - newTime <= time) {
-            }
-            SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000);
+            while (System.currentTimeMillis() - newTime <= time) {}
+            SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000, speed);
         }).start();
     }
 
@@ -245,22 +274,23 @@ public class GraphicBattleController implements Initializable {
         ImageView myImageView = (ImageView) myAnchor.getChildren().get(0);
         ImageView enemyImageView = (ImageView) enemyAnchor.getChildren().get(0);
         new Thread(() -> {
-            double actionTime = SpriteMaker.getAnimationTime(myImageView, myCard.name, Action.ATTACK, 1);
+            double actionTime = SpriteMaker.getAnimationTime(myImageView, myCard.name, Action.ATTACK, 1, speed);
             Graphics.playMusic("sfx_f3_general_attack_impact.m4a");
-            SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.ATTACK, 1);
+            SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.ATTACK, 1, speed);
             long time = System.currentTimeMillis();
             while (System.currentTimeMillis() - time <= actionTime) {
             }
-            SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.IDLE, 10000000);
+            SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.IDLE, 10000000, speed);
             Platform.runLater(() -> updateHp(enemyCard));
 
-            actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.name, Action.ATTACK, 1);
+            actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
             time = System.currentTimeMillis();
-            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.ATTACK, 1);
+            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
             Graphics.playMusic("sfx_f3_general_attack_swing.m4a");
             while (System.currentTimeMillis() - time <= actionTime) {
             }
 
+            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
             SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000);
             Platform.runLater(() -> updateHp(myCard));
         }).start();
@@ -324,11 +354,11 @@ public class GraphicBattleController implements Initializable {
         if (selectedCard instanceof Attacker) {
             AnchorPane cardPane = getCardInGame(selectedCard, row, column);
             cardViews.put(selectedCard, cardPane);
-            AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1),
-                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1),
-                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1),
-                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1),
-                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1));
+            AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1, speed),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1, speed),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport2", Action.TELEPORT, 1, speed),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport3", Action.TELEPORT, 1, speed),
+                    SpriteMaker.getAndShowAnimation(new ImageView(), "teleport4", Action.TELEPORT, 1, speed));
             Rectangle rect = getCardRectangle(row - 1, column - 1);
             teleport.setLayoutX(rect.getX() + 150);
             teleport.setLayoutY(rect.getY() + 140);
@@ -384,7 +414,9 @@ public class GraphicBattleController implements Initializable {
         for (Card card : hand) {
             if (index == 5) return;
             handItemMana[index].setText("" + card.manaPoint);
-            ImageView cardAnimation = SpriteMaker.getAndShowAnimation(handItemImages[index], card.name, card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000);
+            ImageView cardAnimation = SpriteMaker.getAndShowAnimation(
+                    handItemImages[index], card.name,
+                    card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 1000000, speed);
             handItemImages[index].setImage(cardAnimation.getImage());
             if (card instanceof Spell) {
                 cardAnimation.setFitWidth(120);
@@ -463,7 +495,7 @@ public class GraphicBattleController implements Initializable {
         ImageView imageView = new ImageView();
         anchorPane.setMouseTransparent(true);
         imageView.setMouseTransparent(true);
-        SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 1000000);
+        SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 1000000, speed);
         int scale = 1;
         if (column > 4) scale = -1;
         imageView.setScaleX(scale);
@@ -511,31 +543,27 @@ public class GraphicBattleController implements Initializable {
     public void endTurn(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
         selectedCard = null;
-        Response response = BattleClient.endTurn();
-        if (response.OK) {
-            updateMana();
-            updateHand();
-            updateCells();
-//            String AIMove = "";
-//            if (ClientManager.isAITurn())
-//                AIMove = ClientManager.getAIMove();
-//            for (Command command : battleMenu.getAICommands()) {
-//                Matcher matcher = command.getPattern().matcher(AIMove);
-//                if (matcher.find()) {
-//                    Method method;
-//                    try {
-//                        method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-//                        Object object = method.invoke(this, matcher);
-//                        if (object != null && object.equals(Boolean.FALSE))
-//                            return;
-//                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-//                        e.printStackTrace();
-//                    }
-//                    break;
-//                }
-//            }
-        } else {
-            Graphics.alert("Error", "end turn error", response.message);
+        ClientManager.endTurn();
+        updateMana();
+        updateHand();
+        updateCells();
+        String AIMove = "";
+        if (ClientManager.isAITurn())
+            AIMove = ClientManager.getAIMove();
+        for (Command command : battleMenu.getAICommands()) {
+            Matcher matcher = command.getPattern().matcher(AIMove);
+            if (matcher.find()) {
+                Method method;
+                try {
+                    method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
+                    Object object = method.invoke(this, matcher);
+                    if (object != null && object.equals(Boolean.FALSE))
+                        return;
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
         }
     }
 

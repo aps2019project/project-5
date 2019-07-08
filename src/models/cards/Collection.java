@@ -11,7 +11,7 @@ public class Collection {
         System.out.println(cardClass);
         Map<Card, Integer> result = new HashMap<>();
         for (Map.Entry<Card, Integer> card : cards.entrySet()) {
-            if (cardClass != Card.class && cardClass != card.getKey().getClass())
+            if (cardClass != null && cardClass != Card.class && cardClass != card.getKey().getClass())
                 continue;
             if (query == null || query.equals("") || card.getKey().name.toLowerCase().contains(query.toLowerCase()))
                 result.put(card.getKey(), card.getValue());
