@@ -22,7 +22,7 @@
                 <JFXTextField prefWidth="1000" text="salam" styleClass="input-text" onAction="#sendMessage" fx:id="messageField"/>
                 <ScrollPane prefHeight="250" styleClass="scroll-pane" style="-fx-background-color: transparent">
                     <VBox style="-fx-background-color: transparent;" fx:id="chats">
-                        <HBox alignment="CENTER_RIGHT" styleClass="chat-container" style="-fx-background-color: transparent;">
+                        <HBox alignment="CENTER_RIGHT" styleClass="chat-container">
                             <Label styleClass="chat-message, chat-right" text="salam"/>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" styleClass="chat-container">
