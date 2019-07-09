@@ -65,6 +65,7 @@ public class Server {
         main.urls.add(new URL("/battle/end_turn", BattleController::endTurn, true));
         main.urls.add(new URL("/battle/move", BattleController::moveCard, true));
         main.urls.add(new URL("/battle/attack", BattleController::attack, true));
+        main.urls.add(new URL("/battle/get_action", BattleController::getAction, true));
         main.urls.add(new URL("/battle/end_turn", BattleController::endTurn, true));
 
         main.urls.add(new URL("/chat/send_message", ChatController::sendMessage, true));

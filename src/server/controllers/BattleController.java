@@ -1,8 +1,10 @@
 package server.controllers;
 
+import com.gilecode.yagson.YaGson;
 import models.Account;
 import models.Response;
 import models.match.*;
+import models.match.action.Move;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
@@ -181,6 +183,27 @@ public class BattleController {
                 } else {
                     response = new Response(false, "It isn't your turn :(", match);
                 }
+            }
+        }
+        return new HttpResponseJSON(response);
+    }
+
+    public static HttpResponse getAction(HttpRequest request) {
+        Response response;
+        String matchToken = request.GET.get("match_token");
+        if (matchToken == null)
+            response = new Response(false, "match_token not sent.", 100);
+        else {
+            Match match = playingMatches.get(matchToken);
+            if (match == null)
+                response = new Response(false, "invalid match_token!!");
+            else {
+                if (match.players[0].account.username.equals(request.user.username)) {
+                    response = new Response(true, "oldest action sent", match.player2Actions.pollLast());
+                } else {
+                    response = new Response(true, "oldest action sent", match.player1Actions.pollLast());
+                }
+                System.out.println(new YaGson().toJson(response));
             }
         }
         return new HttpResponseJSON(response);

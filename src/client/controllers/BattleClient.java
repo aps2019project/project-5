@@ -1,9 +1,11 @@
 package client.controllers;
 
+import client.models.Action;
 import models.Response;
 import models.map.Cell;
 import models.match.Match;
 import models.match.Player;
+import models.match.action.GameAction;
 
 
 import java.util.Arrays;
@@ -109,8 +111,14 @@ public class BattleClient {
         return response;
     }
 
-//    public static Response sendShot(byte[] bytes) {
-//        ServerConnection serverConnection = new ServerConnection("/battle/game_watch");
-//        serverConnection.parameters.put("frame", Arrays.toString(bytes));
-//    }
+    public static GameAction getAction() {
+        ServerConnection serverConnection = new ServerConnection("/battle/request");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        Response response = serverConnection.getResponse();
+        if(response.OK)
+            return (GameAction) response.data;
+        else
+            return null;
+    }
 }

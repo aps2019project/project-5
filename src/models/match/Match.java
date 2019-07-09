@@ -4,8 +4,11 @@ import models.Account;
 import models.cards.*;
 import models.map.Cell;
 import models.map.Map;
+import models.match.action.*;
 
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 public class Match {
@@ -13,6 +16,8 @@ public class Match {
     public Map map = new Map();
     public Player[] players = new Player[2];
     public int turn = 0;
+    public Deque<GameAction> player1Actions = new LinkedList<>();
+    public Deque<GameAction> player2Actions = new LinkedList<>();
 
     public Player getActivePlayer() {
         return players[turn % 2];
@@ -29,6 +34,10 @@ public class Match {
 
     public void endTurn() {
         getActivePlayer().selectedCard = null;
+        if(turn % 2 == 0)
+            player1Actions.addFirst(new EndTurn());
+        else
+            player1Actions.addFirst(new EndTurn());
         turn++;
         setMana();
         for (int i = 0; i < 5; i++)
@@ -51,6 +60,11 @@ public class Match {
                 selectedCard.isInserted = true;
                 ((Attacker) selectedCard).cell = map.cell[x][y];
                 getActivePlayer().manaPoint -= selectedCard.manaPoint;
+                if(turn % 2 == 0) {
+                    player1Actions.addFirst(new Insert(selectedCard, map.cell[x][y]));
+                } else {
+                    player2Actions.addFirst(new Insert(selectedCard, map.cell[x][y]));
+                }
                 getActivePlayer().selectedCard = null;
                 return true;
             }
@@ -121,9 +135,9 @@ public class Match {
     }
 
     public boolean moveCard(int x, int y) {
-        Cell cell;
+        Cell newCell;
         try {
-            cell = map.cell[x][y];
+            newCell = map.cell[x][y];
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -131,11 +145,18 @@ public class Match {
         if (selectedCard != null &&
                 selectedCard.canMove &&
                 selectedCard.isInserted &&
-                getAvailableCells().contains(cell)) {
+                getAvailableCells().contains(newCell)) {
             ((Attacker) selectedCard).cell.attacker = null;
-            cell.attacker = (Attacker) selectedCard;
-            ((Attacker) selectedCard).cell = cell;
+            newCell.attacker = (Attacker) selectedCard;
+            Cell previousCell = ((Attacker) selectedCard).cell;
+            ((Attacker) selectedCard).cell = newCell;
             selectedCard.canMove = false;
+            if(turn % 2 == 0) {
+                player1Actions.addFirst(new Move(selectedCard, previousCell, newCell));
+            } else {
+                player2Actions.addFirst(new Move(selectedCard, previousCell, newCell));
+            }
+            getActivePlayer().selectedCard = null;
             return true;
         }
         return false;
@@ -175,8 +196,16 @@ public class Match {
                 targetCard.health -= attacker.getAttackPoint();
                 if (isValidAttack(attacker.cell, targetCard)) {
                     attacker.health -= targetCard.getAttackPoint();
+                    if(turn % 2 == 0)
+                        player1Actions.addFirst(new Attack(attacker, targetCard, true));
+                    else
+                        player1Actions.addFirst(new Attack(attacker, targetCard, true));
                     return 2;
                 }
+                if(turn % 2 == 0)
+                    player1Actions.addFirst(new Attack(attacker, targetCard, false));
+                else
+                    player1Actions.addFirst(new Attack(attacker, targetCard, false));
                 return 1;
             }
         }

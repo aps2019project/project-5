@@ -32,6 +32,7 @@ import models.cards.Hero;
 import models.cards.Spell;
 import models.map.Cell;
 import models.map.Map;
+import models.match.action.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -47,8 +48,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static client.views.Graphics.Menu.BATTLE;
 import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
@@ -148,8 +152,8 @@ public class GraphicBattleController implements Initializable {
         root.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case M:
-                    ClientManager.setMana(10000);
-                    updateMana();
+//                    ClientManager.setMana(10000);
+//                    updateMana();
                     break;
                 case EQUALS:
                     speed++;
@@ -162,8 +166,11 @@ public class GraphicBattleController implements Initializable {
             showCardsInBoard();
             updateHand();
         });
-
         endTurnBtn.setDisable(!BattleClient.isMyTurn());
+
+        ScheduledThreadPoolExecutor opponentCheck = new ScheduledThreadPoolExecutor(1);
+        opponentCheck.scheduleAtFixedRate(this::updateMatch, 0, 1, TimeUnit.SECONDS);
+
 //        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
 //        timer.start();
 
@@ -364,6 +371,30 @@ public class GraphicBattleController implements Initializable {
             }
         }
         updateCells();
+    }
+
+    private void updateMatch() {
+        if(BattleClient.isMyTurn())
+            return;
+        GameAction action = BattleClient.getAction();
+        System.out.println(action);
+        if(action instanceof Insert) {
+            Insert insert = (Insert) action;
+            selectedCard = insert.card;
+            insertCard(insert.cell.x, insert.cell.y);
+            selectedCard = null;
+        } else if(action instanceof Move) {
+            Move move = (Move) action;
+            AnchorPane cardPane = cardViews.get(move.card);
+            Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
+            moveCard(cardPane, newPosition, move.card);
+        } else if(action instanceof Attack) {
+            Attack attack = (Attack) action;
+            // TODO: implement
+        } else if(action instanceof EndTurn) {
+            endTurnBtn.setDisable(false);
+            BattleClient.updatePlayingMatch();
+        }
     }
 
     private void insertCard(int row, int column) {
