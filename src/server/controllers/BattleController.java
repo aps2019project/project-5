@@ -187,6 +187,26 @@ public class BattleController {
         return new HttpResponseJSON(response);
     }
 
+    public static HttpResponse getAction(HttpRequest request) {
+        Response response;
+        String matchToken = request.GET.get("match_token");
+        if (matchToken == null)
+            response = new Response(false, "match_token not sent.", 100);
+        else {
+            Match match = playingMatches.get(matchToken);
+            if (match == null)
+                response = new Response(false, "invalid match_token!!");
+            else {
+                if (match.players[0].account.username.equals(request.user.username)) {
+                    response = new Response(true, "oldest action sent", match.player2Actions.pollLast());
+                } else {
+                    response = new Response(true, "oldest action sent", match.player1Actions.pollLast());
+                }
+            }
+        }
+        return new HttpResponseJSON(response);
+    }
+
     public static HttpResponse moveCard(HttpRequest request) {
         Response response;
         String matchToken = request.GET.get("match_token");
