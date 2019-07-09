@@ -17,6 +17,4 @@ public class CheatClient {
         return serverConnection.getResponse();
     }
 
-
-
 }

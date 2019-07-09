@@ -1,12 +1,9 @@
 package client.controllers;
 
-import client.views.Graphics;
 import models.Response;
 import models.map.Cell;
 import models.match.Match;
 import models.match.Player;
-import server.controllers.AuthenticationController;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +14,8 @@ public class BattleClient {
 
     public static Match updatePlayingMatch() {
         ServerConnection serverConnection = new ServerConnection("/battle/get_match");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
         Response response = serverConnection.getResponse();
         if (response.OK) playingMatch = ((Match) response.data);
         return playingMatch;
@@ -27,7 +26,13 @@ public class BattleClient {
 //    }
 
     public static void selectCard(int id) {
-
+        ServerConnection serverConnection = new ServerConnection("/battle/select_card");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        serverConnection.parameters.put("card_id", "" + id);
+        Response response = serverConnection.getResponse();
+        if(response.OK)
+            playingMatch = (Match) response.data;
     }
 
     public static boolean move(int row, int column) {
@@ -43,7 +48,7 @@ public class BattleClient {
     }
 
     public static Set<Cell> getAvailableCells() {
-        return new HashSet<>();
+        return playingMatch.getAvailableCells();
     }
 
     public static Player getMe() {
@@ -61,6 +66,7 @@ public class BattleClient {
     public static Response endTurn() {
         ServerConnection serverConnection = new ServerConnection("/battle/end_turn");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
         return serverConnection.getResponse();
     }
 
