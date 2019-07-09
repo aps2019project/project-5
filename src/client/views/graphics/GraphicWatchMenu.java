@@ -1,21 +1,41 @@
 package client.views.graphics;
 
+import client.controllers.CollectionClient;
+import client.controllers.ShopClient;
 import client.controllers.WatchClient;
 import client.views.Graphics;
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXMasonryPane;
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import models.Response;
+import models.cards.*;
 import models.match.Match;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
@@ -25,15 +45,16 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import static client.views.Graphics.Menu.MAIN_MENU;
+import static client.views.Graphics.alert;
+import static client.views.Graphics.playMusic;
+import static client.views.graphics.ShopController.getCardPane;
 
-public class GraphicWatchMenu implements Initializable {
+public class GraphicCollectionMenu2 implements Initializable {
+
+
 
     public static ArrayList<Match> matchesList;
     static boolean isStartStream = false;
-    public static ImageView watch;
-    public static AnchorPane root;
-    public static VBox liveMatchesBox;
-    public ImageView backBtn;
     public static Map<String, Integer> matches = new HashMap<>();
 
 
@@ -110,12 +131,8 @@ public class GraphicWatchMenu implements Initializable {
     public void back(MouseEvent mouseEvent) {
         Graphics.setMenu(MAIN_MENU);
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
-
         matchesList = WatchClient.getLiveMatches();
         liveMatchesBox.getChildren().clear();
         matches.clear();
@@ -128,6 +145,7 @@ public class GraphicWatchMenu implements Initializable {
             liveMatchesBox.getChildren().add(button);
         }
 
-
     }
+
+
 }
