@@ -244,6 +244,7 @@ public class GraphicBattleController implements Initializable {
             }
             SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000, speed);
         }).start();
+        BattleClient.updatePlayingMatch();
     }
 
     private void copyHandViewsToArray() {
@@ -339,6 +340,10 @@ public class GraphicBattleController implements Initializable {
                     if (clickedCard == null) {
                         if (BattleClient.move(row, column)) {
                             moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
+                            if(selectedCard instanceof Attacker) {
+                                ((Attacker) selectedCard).cell.x = row;
+                                ((Attacker) selectedCard).cell.x = column;
+                            }
                         } else {
                             System.out.println("can't move here");
                         }
@@ -374,25 +379,33 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateMatch() {
-        if(BattleClient.isMyTurn())
-            return;
         GameAction action = BattleClient.getAction();
         System.out.println(action);
+        if(action instanceof EndTurn) {
+            endTurnBtn.setDisable(false);
+            BattleClient.updatePlayingMatch();
+        }
+
+        if(BattleClient.isMyTurn())
+            return;
+
         if(action instanceof Insert) {
             Insert insert = (Insert) action;
             selectedCard = insert.card;
             insertCard(insert.cell.x, insert.cell.y);
             selectedCard = null;
-        } else if(action instanceof Move) {
+            BattleClient.updatePlayingMatch();
+        }
+        if(action instanceof Move) {
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
             moveCard(cardPane, newPosition, move.card);
-        } else if(action instanceof Attack) {
+            BattleClient.updatePlayingMatch();
+        }
+        if(action instanceof Attack) {
             Attack attack = (Attack) action;
             // TODO: implement
-        } else if(action instanceof EndTurn) {
-            endTurnBtn.setDisable(false);
             BattleClient.updatePlayingMatch();
         }
     }
@@ -417,8 +430,8 @@ public class GraphicBattleController implements Initializable {
             setCard(teleport);
         } else {
 
-
         }
+        BattleClient.updatePlayingMatch();
         updateMana();
     }
 
@@ -427,6 +440,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateCells() {
+        BattleClient.updatePlayingMatch();
         String[] removingStyleClassList = {"selected-card-cell", "can-insert-cell", "can-move-cell"};
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -456,6 +470,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateHand() {
+        BattleClient.updatePlayingMatch();
         List<Card> hand = BattleClient.getMe().hand;
         int index = 0;
         for (Card card : hand) {
@@ -533,6 +548,7 @@ public class GraphicBattleController implements Initializable {
 
 
     private void updateMana() {
+        BattleClient.updatePlayingMatch();
         Image mana = new Image("/client/resources/images/battle/ui/icon_mana@2x.png");
         Image noMana = new Image("/client/resources/images/battle/ui/icon_mana_inactive@2x.png");
         int mana1 = BattleClient.playingMatch.players[0].manaPoint;

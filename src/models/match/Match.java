@@ -34,10 +34,10 @@ public class Match {
 
     public void endTurn() {
         getActivePlayer().selectedCard = null;
-        if(turn % 2 == 0)
+        if (turn % 2 == 0)
             player1Actions.addFirst(new EndTurn());
         else
-            player1Actions.addFirst(new EndTurn());
+            player2Actions.addFirst(new EndTurn());
         turn++;
         setMana();
         for (int i = 0; i < 5; i++)
@@ -60,7 +60,7 @@ public class Match {
                 selectedCard.isInserted = true;
                 ((Attacker) selectedCard).cell = map.cell[x][y];
                 getActivePlayer().manaPoint -= selectedCard.manaPoint;
-                if(turn % 2 == 0) {
+                if (turn % 2 == 0) {
                     player1Actions.addFirst(new Insert(selectedCard, map.cell[x][y]));
                 } else {
                     player2Actions.addFirst(new Insert(selectedCard, map.cell[x][y]));
@@ -75,6 +75,7 @@ public class Match {
     public Set<Cell> getAvailableCells() {
         Card card = getActivePlayer().selectedCard;
         Set<Cell> availableCells = new HashSet<>();
+        if (getActivePlayer().selectedCard == null) return availableCells;
         if (card.isInserted) {
             if (card instanceof Attacker) {
                 Attacker attacker = (Attacker) card;
@@ -127,7 +128,7 @@ public class Match {
                                 for (int dj = -1; dj <= 1; dj++)
                                     try {
                                         if (map.cell[i + di][j + dj].attacker == null)
-                                            availableCells.add(map.cell[i][j]);
+                                            availableCells.add(map.cell[i + di][j + dj]);
                                     } catch (ArrayIndexOutOfBoundsException ignored) {
                                     }
         }
@@ -151,7 +152,7 @@ public class Match {
             Cell previousCell = ((Attacker) selectedCard).cell;
             ((Attacker) selectedCard).cell = newCell;
             selectedCard.canMove = false;
-            if(turn % 2 == 0) {
+            if (turn % 2 == 0) {
                 player1Actions.addFirst(new Move(selectedCard, previousCell, newCell));
             } else {
                 player2Actions.addFirst(new Move(selectedCard, previousCell, newCell));
@@ -196,13 +197,13 @@ public class Match {
                 targetCard.health -= attacker.getAttackPoint();
                 if (isValidAttack(attacker.cell, targetCard)) {
                     attacker.health -= targetCard.getAttackPoint();
-                    if(turn % 2 == 0)
+                    if (turn % 2 == 0)
                         player1Actions.addFirst(new Attack(attacker, targetCard, true));
                     else
                         player1Actions.addFirst(new Attack(attacker, targetCard, true));
                     return 2;
                 }
-                if(turn % 2 == 0)
+                if (turn % 2 == 0)
                     player1Actions.addFirst(new Attack(attacker, targetCard, false));
                 else
                     player1Actions.addFirst(new Attack(attacker, targetCard, false));
