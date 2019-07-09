@@ -146,8 +146,8 @@ public class GraphicBattleController implements Initializable {
             updateHand();
         });
 
-        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
-        timer.start();
+//        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
+//        timer.start();
 
     }
 
@@ -188,7 +188,7 @@ public class GraphicBattleController implements Initializable {
         heros1.forEach(hero -> player1HeroName.set(hero.name));
         heros2.forEach(hero -> player2HeroName.set(hero.name));
         player1ProfileImage.setImage(new Image(
-                "/client/resources/sprites/HeroLogos/" + player1HeroName + ".png"
+                "/client/resources/sprites/HeroLogos/" + player1HeroName.get() + ".png"
         ));
         player2ProfileImage.setImage(new Image(
                 "/client/resources/sprites/HeroLogos/" + player2HeroName.get() + ".png"
@@ -291,7 +291,6 @@ public class GraphicBattleController implements Initializable {
             }
 
             SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
-            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000);
             Platform.runLater(() -> updateHp(myCard));
         }).start();
 

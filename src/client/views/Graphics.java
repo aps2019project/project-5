@@ -115,6 +115,7 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
         loadFXML();
+        testLogin();
         stage = primaryStage;
         Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
@@ -123,7 +124,7 @@ public class Graphics extends Application {
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
-        testLogin();
+        setMenu(MAIN_MENU);
     }
 
     private void testLogin() {
@@ -143,7 +144,7 @@ public class Graphics extends Application {
                 AccountClient.login("amin", "amin");
                 break;
         }
-        GraphicPreBattleMenu.battleRequest();
+//        GraphicPreBattleMenu.battleRequest();
     }
 
     public static MediaPlayer playMusic(String musicName) {
