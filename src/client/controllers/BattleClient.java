@@ -39,16 +39,31 @@ public class BattleClient {
         }
     }
 
-    public static boolean move(int row, int column) {
-        return false;
+    public static boolean move(int x, int y) {
+        ServerConnection serverConnection = new ServerConnection("/battle/move");
+        serverConnection.parameters.put("x", "" + x);
+        serverConnection.parameters.put("y", "" + y);
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        return serverConnection.getResponse().OK;
     }
 
     public static Response attack(int x, int y) {
-        return null;
+        ServerConnection serverConnection = new ServerConnection("/battle/attack");
+        serverConnection.parameters.put("x", "" + x);
+        serverConnection.parameters.put("y", "" + y);
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        return serverConnection.getResponse();
     }
 
-    public static Response insert(int row, int column) {
-        return null;
+    public static Response insert(int x, int y) {
+        ServerConnection serverConnection = new ServerConnection("/battle/insert");
+        serverConnection.parameters.put("x", "" + x);
+        serverConnection.parameters.put("y", "" + y);
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        return serverConnection.getResponse();
     }
 
     public static Set<Cell> getAvailableCells() {
