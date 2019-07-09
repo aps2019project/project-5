@@ -3,6 +3,7 @@ package server.controllers;
 import models.Account;
 import models.Response;
 import models.match.*;
+import models.match.action.Move;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;

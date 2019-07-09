@@ -1,10 +1,16 @@
 package models.match.action;
 
-import client.models.cards.Card;
-import client.models.map.Cell;
+import models.cards.Card;
+import models.map.Cell;
 
 public class Move extends Action {
     public Card card;
     public Cell previousCell;
     public Cell newCell;
+
+    public Move(Card card, Cell previousCell, Cell newCell) {
+        this.card = card;
+        this.previousCell = previousCell;
+        this.newCell = newCell;
+    }
 }

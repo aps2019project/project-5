@@ -1,3 +1,3 @@
 package models.match.action;
 
-public class EndTurn {}
+public class EndTurn extends Action {}
