@@ -127,7 +127,7 @@ public class Match {
                                 for (int dj = -1; dj <= 1; dj++)
                                     try {
                                         if (map.cell[i + di][j + dj].attacker == null)
-                                            availableCells.add(map.cell[i][j]);
+                                            availableCells.add(map.cell[i + di][j + dj]);
                                     } catch (ArrayIndexOutOfBoundsException ignored) {
                                     }
         }
