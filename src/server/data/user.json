@@ -6,8 +6,8 @@
       "@val": {
         "username": "mahdi",
         "password": "mahdi",
-        "loginToken": "lh23n",
-        "drake": 1000,
+        "loginToken": "zjj3q",
+        "drake": 100,
         "decks": {
           "@type": "java.util.HashMap",
           "@val": {
@@ -97,12 +97,66 @@
               "name": "amin",
               "cards": {
                 "@type": "java.util.HashMap",
-                "@val": {
-                  "@root.0-val.decks.0-val.cards.0-key": 10,
-                  "@root.0-val.decks.0-val.cards.1-key": 3,
-                  "@root.0-val.decks.0-val.cards.2-key": 1,
-                  "@root.0-val.decks.0-val.cards.3-key": 6
-                }
+                "@val": [
+                  [
+                    "@root.0-val.decks.0-val.cards.0-key",
+                    8
+                  ],
+                  [
+                    "@root.0-val.decks.0-val.cards.1-key",
+                    3
+                  ],
+                  [
+                    "@root.0-val.decks.0-val.cards.2-key",
+                    1
+                  ],
+                  [
+                    {
+                      "@type": "models.cards.Minion",
+                      "@val": {
+                        "health": 6,
+                        "currentHealth": 0,
+                        "canAttack": false,
+                        "attackPoint": 4,
+                        "attackRange": 1,
+                        "attackType": "MELEE",
+                        "name": "Persian Swordsman",
+                        "description": "",
+                        "id": 0,
+                        "price": 400,
+                        "manaPoint": 2,
+                        "isInserted": false,
+                        "canMove": false
+                      }
+                    },
+                    1
+                  ],
+                  [
+                    {
+                      "@type": "models.cards.Minion",
+                      "@val": {
+                        "health": 12,
+                        "currentHealth": 0,
+                        "canAttack": false,
+                        "attackPoint": 11,
+                        "attackRange": 3,
+                        "attackType": "HYBRID",
+                        "name": "One Eye Giant",
+                        "description": "",
+                        "id": 0,
+                        "price": 500,
+                        "manaPoint": 7,
+                        "isInserted": false,
+                        "canMove": false
+                      }
+                    },
+                    1
+                  ],
+                  [
+                    "@root.0-val.decks.0-val.cards.3-key",
+                    6
+                  ]
+                ]
               }
             },
             "mahdi_deck": {
@@ -134,6 +188,8 @@
               "@root.0-val.decks.0-val.cards.0-key": 10,
               "@root.0-val.decks.0-val.cards.1-key": 2,
               "@root.0-val.decks.0-val.cards.2-key": 1,
+              "@root.0-val.decks.1-val.cards.3-key": 1,
+              "@root.0-val.decks.1-val.cards.4-key": 1,
               "@root.0-val.decks.0-val.cards.3-key": 9
             }
           }

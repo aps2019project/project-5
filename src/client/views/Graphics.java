@@ -96,7 +96,7 @@ public class Graphics extends Application {
             watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
             profileRoot = tmpGridPane;
-            watchRoot = tmpGridPane;
+            watchRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/watch.fxml"));
             codexRoot = tmpGridPane;
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
         } catch (IOException e) {
@@ -108,16 +108,14 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
         loadFXML();
-//        testLogin();
         stage = primaryStage;
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Scene scene = new Scene(watchRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("client/resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
-//        setMenu(MAIN_MENU);
     }
 
     private void testLogin() {
@@ -140,11 +138,11 @@ public class Graphics extends Application {
         GraphicPreBattleMenu.battleRequest();
     }
 
+
     public static MediaPlayer playMusic(String musicName) {
         Media sound = new Media(new File("src/client/resources/sounds/" + musicName).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
         return mediaPlayer;
     }
-
 }

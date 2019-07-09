@@ -20,10 +20,6 @@ public class BattleClient {
         if (response.OK) playingMatch = ((Match) response.data);
         return playingMatch;
     }
-//
-//    public static Response battleRequest() {
-//        return null;
-//    }
 
     public static void selectCard(int id) {
         ServerConnection serverConnection = new ServerConnection("/battle/select_card");
@@ -56,14 +52,12 @@ public class BattleClient {
     }
 
     public static Player getMe() {
-        updatePlayingMatch();
         if (playingMatch.players[0].account.username.equals(AccountClient.user.username))
             return playingMatch.players[0];
         else return playingMatch.players[1];
     }
 
     public static boolean isMyTurn() {
-        updatePlayingMatch();
         return getMe() == playingMatch.getActivePlayer();
     }
 
@@ -73,8 +67,10 @@ public class BattleClient {
         serverConnection.parameters.put("match_token", playingMatch.token);
         Response response = serverConnection.getResponse();
         if (response.OK) {
+            System.out.println("turn ended");
             playingMatch = ((Match) response.data);
         }
+        System.out.println("API Message: " + response.message);
         return response.OK;
     }
 
