@@ -75,6 +75,7 @@ public class Match {
     public Set<Cell> getAvailableCells() {
         Card card = getActivePlayer().selectedCard;
         Set<Cell> availableCells = new HashSet<>();
+        if (getActivePlayer().selectedCard == null) return availableCells;
         if (card.isInserted) {
             if (card instanceof Attacker) {
                 Attacker attacker = (Attacker) card;
