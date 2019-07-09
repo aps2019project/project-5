@@ -2,7 +2,7 @@ package models.match.action;
 
 import models.cards.Attacker;
 
-public class Attack extends Action {
+public class Attack extends GameAction {
     public Attacker attacker;
     public Attacker Defender;
     public boolean hasCounterAttack;

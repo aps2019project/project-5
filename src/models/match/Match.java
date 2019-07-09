@@ -16,8 +16,8 @@ public class Match {
     public Map map = new Map();
     public Player[] players = new Player[2];
     public int turn = 0;
-    public Deque<Action> player1Actions = new LinkedList<>();
-    public Deque<Action> player2Actions = new LinkedList<>();
+    public Deque<GameAction> player1Actions = new LinkedList<>();
+    public Deque<GameAction> player2Actions = new LinkedList<>();
 
     public Player getActivePlayer() {
         return players[turn % 2];

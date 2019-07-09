@@ -1,4 +1,4 @@
 package models.match.action;
 
-public class Action {
+public class GameAction {
 }

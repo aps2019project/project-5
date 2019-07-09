@@ -3,7 +3,7 @@ package models.match.action;
 import models.cards.Card;
 import models.map.Cell;
 
-public class Insert extends Action {
+public class Insert extends GameAction {
     public Card card;
     public Cell cell;
 

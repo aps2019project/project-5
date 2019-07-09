@@ -1,9 +1,11 @@
 package client.controllers;
 
+import client.models.Action;
 import models.Response;
 import models.map.Cell;
 import models.match.Match;
 import models.match.Player;
+import models.match.action.GameAction;
 
 import java.util.Set;
 
@@ -104,5 +106,16 @@ public class BattleClient {
         if (response.data != null)
             playingMatch = (Match) response.data;
         return response;
+    }
+
+    public static GameAction getAction() {
+        ServerConnection serverConnection = new ServerConnection("/battle/request");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        Response response = serverConnection.getResponse();
+        if(response.OK)
+            return (GameAction) response.data;
+        else
+            return null;
     }
 }
