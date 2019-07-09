@@ -225,6 +225,7 @@ public class GraphicBattleController implements Initializable {
             }
             SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000, speed);
         }).start();
+        BattleClient.updatePlayingMatch();
     }
 
     private void copyHandViewsToArray() {
@@ -363,14 +364,17 @@ public class GraphicBattleController implements Initializable {
             selectedCard = insert.card;
             insertCard(insert.cell.x, insert.cell.y);
             selectedCard = null;
+            BattleClient.updatePlayingMatch();
         } else if(action instanceof Move) {
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
             moveCard(cardPane, newPosition, move.card);
+            BattleClient.updatePlayingMatch();
         } else if(action instanceof Attack) {
             Attack attack = (Attack) action;
             // TODO: implement
+            BattleClient.updatePlayingMatch();
         } else if(action instanceof EndTurn) {
             endTurnBtn.setDisable(false);
             BattleClient.updatePlayingMatch();
@@ -397,8 +401,8 @@ public class GraphicBattleController implements Initializable {
             setCard(teleport);
         } else {
 
-
         }
+        BattleClient.updatePlayingMatch();
         updateMana();
     }
 
@@ -407,6 +411,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateCells() {
+        BattleClient.updatePlayingMatch();
         String[] removingStyleClassList = {"selected-card-cell", "can-insert-cell", "can-move-cell"};
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -436,6 +441,7 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateHand() {
+        BattleClient.updatePlayingMatch();
         List<Card> hand = BattleClient.getMe().hand;
         int index = 0;
         for (Card card : hand) {
@@ -490,6 +496,7 @@ public class GraphicBattleController implements Initializable {
 
 
     private void updateMana() {
+        BattleClient.updatePlayingMatch();
         Image mana = new Image("/client/resources/images/battle/ui/icon_mana@2x.png");
         Image noMana = new Image("/client/resources/images/battle/ui/icon_mana_inactive@2x.png");
         int mana1 = BattleClient.playingMatch.players[0].manaPoint;
