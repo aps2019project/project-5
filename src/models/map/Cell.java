@@ -15,4 +15,9 @@ public class Cell {
     public static int getManhattanDistance(Cell firstCell, Cell secondCell) {
         return Math.abs(firstCell.x - secondCell.x) + Math.abs(secondCell.y - firstCell.y);
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
 }
