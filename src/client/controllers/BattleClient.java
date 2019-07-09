@@ -21,7 +21,7 @@ public class BattleClient {
         return playingMatch;
     }
 
-    public static void selectCard(int id) {
+    public static Response selectCard(int id) {
         ServerConnection serverConnection = new ServerConnection("/battle/select_card");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("match_token", playingMatch.token);
@@ -29,10 +29,8 @@ public class BattleClient {
         Response response = serverConnection.getResponse();
         if (response.OK) {
             playingMatch = (Match) response.data;
-
-        } else {
-            System.out.println(response.message);
         }
+        return response;
     }
 
     public static boolean move(int row, int column) {
@@ -61,7 +59,7 @@ public class BattleClient {
         return getMe() == playingMatch.getActivePlayer();
     }
 
-    public static boolean endTurn() {
+    public static Response endTurn() {
         ServerConnection serverConnection = new ServerConnection("/battle/end_turn");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("match_token", playingMatch.token);
@@ -71,7 +69,7 @@ public class BattleClient {
             playingMatch = ((Match) response.data);
         }
         System.out.println("API Message: " + response.message);
-        return response.OK;
+        return response;
     }
 
     public static Response battleRequest(int match_mode) {
