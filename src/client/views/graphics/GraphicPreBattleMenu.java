@@ -3,6 +3,7 @@ package client.views.graphics;
 import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import client.controllers.ChatClient;
+import client.controllers.ShellCommand;
 import client.views.Graphics;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.corba.se.impl.orbutil.graph.Graph;
@@ -51,7 +52,6 @@ public class GraphicPreBattleMenu implements Initializable {
     public static void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
-            System.out.println("sal");
             if (response.data != null) {
                 Graphics.setMenu(BATTLE);
                 GraphicBattleController.token = Integer.parseInt(((Match) response.data).token);
@@ -63,7 +63,7 @@ public class GraphicPreBattleMenu implements Initializable {
         } else if (!isStoryMode) {
             // TODO: start single player game (with ai)
         }
-
+        ShellCommand.executeCommand("byzanz-record -d 10 lastMatch.mp4");
     }
 
     public void deathMatch(MouseEvent mouseEvent) {

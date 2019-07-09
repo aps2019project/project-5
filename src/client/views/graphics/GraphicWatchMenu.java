@@ -24,6 +24,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -41,6 +43,7 @@ import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +66,7 @@ public class GraphicWatchMenu implements Initializable {
     public ImageView watch;
     public ImageView backBtn;
     public JFXButton lastMatchBtn;
+    public MediaView watchMedia;
 
 
     public void startWatchClient(int port) {
@@ -153,6 +157,13 @@ public class GraphicWatchMenu implements Initializable {
 
 
     public void playLastMatch(MouseEvent mouseEvent) {
-        Media media = new Media("lastMatch.");
+        try {
+            Media media = new Media(Paths.get("lastMatch.mp4").toUri().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
+            watchMedia.setMediaPlayer(mediaPlayer);
+        } catch (Exception ignored) {
+            Graphics.alert("Error","Sorry", "You haven't played any match yet !");
+        }
     }
 }
