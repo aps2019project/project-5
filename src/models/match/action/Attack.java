@@ -12,4 +12,13 @@ public class Attack extends GameAction {
         Defender = defender;
         this.hasCounterAttack = hasCounterAttack;
     }
+
+    @Override
+    public String toString() {
+        return "Attack{" +
+                "attacker=" + attacker +
+                ", Defender=" + Defender +
+                ", hasCounterAttack=" + hasCounterAttack +
+                '}';
+    }
 }

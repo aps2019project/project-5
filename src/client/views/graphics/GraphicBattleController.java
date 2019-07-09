@@ -39,8 +39,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static client.views.Graphics.Menu.BATTLE;
 import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
@@ -146,7 +149,8 @@ public class GraphicBattleController implements Initializable {
         });
         endTurnBtn.setDisable(!BattleClient.isMyTurn());
 
-
+        ScheduledThreadPoolExecutor opponentCheck = new ScheduledThreadPoolExecutor(1);
+        opponentCheck.scheduleAtFixedRate(this::updateMatch, 0, 1, TimeUnit.SECONDS);
 
 //        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
 //        timer.start();
@@ -353,6 +357,7 @@ public class GraphicBattleController implements Initializable {
         if(BattleClient.isMyTurn())
             return;
         GameAction action = BattleClient.getAction();
+        System.out.println(action);
         if(action instanceof Insert) {
             Insert insert = (Insert) action;
             selectedCard = insert.card;
@@ -367,7 +372,7 @@ public class GraphicBattleController implements Initializable {
             Attack attack = (Attack) action;
             // TODO: implement
         } else if(action instanceof EndTurn) {
-            endTurnBtn.setDisable(true);
+            endTurnBtn.setDisable(false);
             BattleClient.updatePlayingMatch();
         }
     }

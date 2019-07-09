@@ -11,4 +11,12 @@ public class Insert extends GameAction {
         this.card = card;
         this.cell = cell;
     }
+
+    @Override
+    public String toString() {
+        return "Insert{" +
+                "card=" + card +
+                ", cell=" + cell +
+                '}';
+    }
 }

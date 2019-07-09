@@ -1,5 +1,6 @@
 package server.controllers;
 
+import com.gilecode.yagson.YaGson;
 import models.Account;
 import models.Response;
 import models.match.*;
@@ -202,6 +203,7 @@ public class BattleController {
                 } else {
                     response = new Response(true, "oldest action sent", match.player1Actions.pollLast());
                 }
+                System.out.println(new YaGson().toJson(response));
             }
         }
         return new HttpResponseJSON(response);

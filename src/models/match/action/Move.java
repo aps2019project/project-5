@@ -13,4 +13,13 @@ public class Move extends GameAction {
         this.previousCell = previousCell;
         this.newCell = newCell;
     }
+
+    @Override
+    public String toString() {
+        return "Move{" +
+                "card=" + card +
+                ", previousCell=" + previousCell +
+                ", newCell=" + newCell +
+                '}';
+    }
 }
