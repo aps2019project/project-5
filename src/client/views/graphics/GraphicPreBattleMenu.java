@@ -3,6 +3,7 @@ package client.views.graphics;
 import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import client.controllers.ChatClient;
+import client.views.Graphics;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.corba.se.impl.orbutil.graph.Graph;
 import javafx.application.Platform;
@@ -13,13 +14,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import client.views.Graphics;
 import javafx.scene.text.TextAlignment;
 import models.Response;
 import models.chat.Chat;
 import models.chat.Message;
 import models.match.Match;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -52,6 +51,7 @@ public class GraphicPreBattleMenu implements Initializable {
     public static void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
+            System.out.println("sal");
             if (response.data != null) {
                 Graphics.setMenu(BATTLE);
                 GraphicBattleController.token = Integer.parseInt(((Match) response.data).token);
@@ -67,9 +67,11 @@ public class GraphicPreBattleMenu implements Initializable {
 
     public void deathMatch(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
-        try {
-            waitingAnimation.awaitTermination(10, TimeUnit.DAYS);
-        } catch (InterruptedException e) { e.printStackTrace(); }
+//        try {
+//            waitingAnimation.awaitTermination(10, TimeUnit.DAYS);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         matchMode = 1;
         battleRequest();
     }
@@ -78,7 +80,9 @@ public class GraphicPreBattleMenu implements Initializable {
         Graphics.playMusic("sfx_ui_select.m4a");
         try {
             waitingAnimation.awaitTermination(10, TimeUnit.DAYS);
-        } catch (InterruptedException e) { e.printStackTrace(); }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         matchMode = 2;
         battleRequest();
     }
@@ -87,7 +91,9 @@ public class GraphicPreBattleMenu implements Initializable {
         Graphics.playMusic("sfx_ui_select.m4a");
         try {
             waitingAnimation.awaitTermination(10, TimeUnit.DAYS);
-        } catch (InterruptedException e) { e.printStackTrace(); }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         matchMode = 3;
         battleRequest();
     }
@@ -145,7 +151,7 @@ public class GraphicPreBattleMenu implements Initializable {
         if (message.user.equals(AccountClient.user.username)) {
             messageView.setAlignment(Pos.CENTER_RIGHT);
             label.getStyleClass().addAll("chat-message", "chat-right");
-            label.setTextAlignment(TextAlignment.RIGHT );
+            label.setTextAlignment(TextAlignment.RIGHT);
         } else {
             messageView.setAlignment(Pos.CENTER_LEFT);
             label.getStyleClass().addAll("chat-message", "chat-left");

@@ -103,16 +103,14 @@ public class Graphics extends Application {
 
 
         loadFXML();
-        testLogin();
         stage = primaryStage;
-        Scene scene = new Scene(accountMenuRoot, 1920, 1080);
+        Scene scene = new Scene(watchRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
         Image image = new Image("client/resources/images/cursor.png");
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
-        setMenu(MAIN_MENU);
     }
 
 
@@ -133,8 +131,9 @@ public class Graphics extends Application {
                 AccountClient.login("amin", "amin");
                 break;
         }
-//        GraphicPreBattleMenu.battleRequest();
+        GraphicPreBattleMenu.battleRequest();
     }
+
 
     public static MediaPlayer playMusic(String musicName) {
         Media sound = new Media(new File("src/client/resources/sounds/" + musicName).toURI().toString());
@@ -142,5 +141,4 @@ public class Graphics extends Application {
         mediaPlayer.play();
         return mediaPlayer;
     }
-
 }

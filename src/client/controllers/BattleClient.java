@@ -5,6 +5,7 @@ import models.map.Cell;
 import models.match.Match;
 import models.match.Player;
 
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,10 +23,6 @@ public class BattleClient {
         if (response.OK) playingMatch = ((Match) response.data);
         return playingMatch;
     }
-//
-//    public static Response battleRequest() {
-//        return null;
-//    }
 
     public static void selectCard(int id) {
         ServerConnection serverConnection = new ServerConnection("/battle/select_card");
@@ -33,20 +30,39 @@ public class BattleClient {
         serverConnection.parameters.put("match_token", playingMatch.token);
         serverConnection.parameters.put("card_id", "" + id);
         Response response = serverConnection.getResponse();
-        if(response.OK)
+        if (response.OK) {
             playingMatch = (Match) response.data;
+
+        } else {
+            System.out.println(response.message);
+        }
     }
 
-    public static boolean move(int row, int column) {
-        return false;
+    public static boolean move(int x, int y) {
+        ServerConnection serverConnection = new ServerConnection("/battle/move");
+        serverConnection.parameters.put("x", "" + x);
+        serverConnection.parameters.put("y", "" + y);
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        return serverConnection.getResponse().OK;
     }
 
     public static Response attack(int x, int y) {
-        return null;
+        ServerConnection serverConnection = new ServerConnection("/battle/attack");
+        serverConnection.parameters.put("x", "" + x);
+        serverConnection.parameters.put("y", "" + y);
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        return serverConnection.getResponse();
     }
 
-    public static Response insert(int row, int column) {
-        return null;
+    public static Response insert(int x, int y) {
+        ServerConnection serverConnection = new ServerConnection("/battle/insert");
+        serverConnection.parameters.put("x", "" + x);
+        serverConnection.parameters.put("y", "" + y);
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        serverConnection.parameters.put("match_token", playingMatch.token);
+        return serverConnection.getResponse();
     }
 
     public static Set<Cell> getAvailableCells() {
@@ -54,22 +70,26 @@ public class BattleClient {
     }
 
     public static Player getMe() {
-        updatePlayingMatch();
         if (playingMatch.players[0].account.username.equals(AccountClient.user.username))
             return playingMatch.players[0];
         else return playingMatch.players[1];
     }
 
     public static boolean isMyTurn() {
-        updatePlayingMatch();
         return getMe() == playingMatch.getActivePlayer();
     }
 
-    public static Response endTurn() {
+    public static boolean endTurn() {
         ServerConnection serverConnection = new ServerConnection("/battle/end_turn");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("match_token", playingMatch.token);
-        return serverConnection.getResponse();
+        Response response = serverConnection.getResponse();
+        if (response.OK) {
+            System.out.println("turn ended");
+            playingMatch = ((Match) response.data);
+        }
+        System.out.println("API Message: " + response.message);
+        return response.OK;
     }
 
     public static Response battleRequest(int match_mode) {

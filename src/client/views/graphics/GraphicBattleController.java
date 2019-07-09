@@ -4,7 +4,12 @@ import client.controllers.BattleClient;
 import client.controllers.ClientManager;
 import client.models.Action;
 import client.models.Timer;
-import javafx.animation.*;
+import client.views.Graphics;
+import client.views.SpriteMaker;
+import client.views.menus.BattleMenu;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
@@ -20,17 +25,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import models.*;
+import models.Response;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Spell;
 import models.map.Cell;
 import models.map.Map;
-import client.views.Command;
-import client.views.Graphics;
-import client.views.SpriteMaker;
-import client.views.menus.BattleMenu;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -47,13 +48,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.regex.Matcher;
 
 import static client.views.Graphics.playMusic;
 
 public class GraphicBattleController implements Initializable {
 
 
+    public Button endTurnBtn;
     public static int token;
     public Label timerLbl;
     public HBox handBox;
@@ -161,6 +162,7 @@ public class GraphicBattleController implements Initializable {
             updateHand();
         });
 
+        endTurnBtn.setDisable(!BattleClient.isMyTurn());
 //        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
 //        timer.start();
 
@@ -170,7 +172,7 @@ public class GraphicBattleController implements Initializable {
         root.getChildren().removeAll(cardViews.values());
         cardViews.clear();
 
-        Map map = BattleClient.updatePlayingMatch().map;
+        Map map = BattleClient.playingMatch.map;
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 9; j++) {
                 Cell cell = map.cell[i][j];
@@ -222,17 +224,16 @@ public class GraphicBattleController implements Initializable {
                 new KeyValue(cardPane.layoutXProperty(), newPosition.getX()),
                 new KeyValue(cardPane.layoutYProperty(), newPosition.getY()));
         timeline.getKeyFrames().add(end);
-//        timeline.setOnFinished(event -> {
-//                System.out.println("Location after relocation = " + newPosition.getX()
-//                        + "," + newPosition.getY() + ")");
-//        });
+
         timeline.play();
+
         new Thread(() -> {
             ImageView imageView = (ImageView) cardPane.getChildren().get(0);
             Graphics.playMusic("sfx_unit_run_charge_4.m4a");
             SpriteMaker.getAndShowAnimation(imageView, card.name, Action.RUN, 1000, speed);
             long newTime = System.currentTimeMillis();
-            while (System.currentTimeMillis() - newTime <= time) {}
+            while (System.currentTimeMillis() - newTime <= time) {
+            }
             SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000, speed);
         }).start();
     }
@@ -343,7 +344,6 @@ public class GraphicBattleController implements Initializable {
                             Response response = BattleClient.attack(attacker.cell.x, attacker.cell.y);
                             attack(selectedCard, clickedCard);
                         }
-
                     }
                 } else {
                     Response response = BattleClient.insert(row, column);
@@ -417,7 +417,7 @@ public class GraphicBattleController implements Initializable {
                 Set<Cell> putableCells = BattleClient.getAvailableCells();
                 for (Cell putableCell : putableCells) {
                     cell[putableCell.x][putableCell.y].getStyleClass().removeAll("empty-cell");
-                    cell[putableCell.x][putableCell.y].getStyleClass().add("can-insert-cell");
+                    cell[putableCell.x][putableCell.y].getStyleClass().addAll("can-insert-cell");
                 }
             }
         }
@@ -453,7 +453,8 @@ public class GraphicBattleController implements Initializable {
                     handItem.getStyleClass().remove("hand-item-selected");
                 }
                 if (!card.equals(selectedCard)) {
-                    // TODO: check if can select hand card (have enough mana)
+
+                    BattleClient.selectCard(card.id);
 
                     handItemContainer[finalIndex1].getStyleClass().add("hand-item-selected");
                     selectedCard = card;
@@ -502,8 +503,8 @@ public class GraphicBattleController implements Initializable {
     private void updateMana() {
         Image mana = new Image("/client/resources/images/battle/ui/icon_mana@2x.png");
         Image noMana = new Image("/client/resources/images/battle/ui/icon_mana_inactive@2x.png");
-        int mana1 = BattleClient.updatePlayingMatch().players[0].manaPoint;
-        int mana2 = BattleClient.updatePlayingMatch().players[1].manaPoint;
+        int mana1 = BattleClient.playingMatch.players[0].manaPoint;
+        int mana2 = BattleClient.playingMatch.players[1].manaPoint;
         for (int i = 0; i < 9; i++)
             player1Mana[i].setImage(i < mana1 ? mana : noMana);
         for (int i = 0; i < 9; i++)
@@ -581,122 +582,11 @@ public class GraphicBattleController implements Initializable {
     public void endTurn(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
         selectedCard = null;
-        ClientManager.endTurn();
-        updateMana();
-        updateHand();
-        updateCells();
-        String AIMove = "";
-        if (ClientManager.isAITurn())
-            AIMove = ClientManager.getAIMove();
-        for (Command command : battleMenu.getAICommands()) {
-            Matcher matcher = command.getPattern().matcher(AIMove);
-            if (matcher.find()) {
-                Method method;
-                try {
-                    method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-                    Object object = method.invoke(this, matcher);
-                    if (object != null && object.equals(Boolean.FALSE))
-                        return;
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
+        if (BattleClient.endTurn()) {
+            updateMana();
+            updateHand();
+            updateCells();
+            endTurnBtn.setDisable(true);
         }
     }
-
-//    public boolean attack(Matcher matcher) {
-//        String cardID = matcher.group("cardID");
-//        try {
-//            client.controllers.ClientManager.attack(cardID);
-//            Card card = null;
-//            for (Card card1 : ClientManager.getMe().getActiveCards()) {
-//                if (card1.getID().equals(cardID)) {
-//                    card = card1;
-//                    break;
-//                }
-//            }
-//            if (card != null) attack(ClientManager.getOpponent().getSelectedCard(), card);
-//            if (client.controllers.ClientManager.getPlayingMatch() == null) {
-//                Output.log("Player " + ClientManager.getWinner().getUsername() + " wins.");
-//                return false;
-//            }
-//        } catch (Match.CardAttackIsNotAvailableException e) {
-//            Output.err(String.format(String.valueOf(client.views.Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
-//        } catch (Match.TiredMinionException e) {
-//            Output.err(String.format(String.valueOf(client.views.Error.CARD_ATTACK_IS_NOT_AVAILABLE), e.getId()));
-//        } catch (Collection.CardNotFoundException e) {
-//            Output.err(client.views.Error.CARD_NOT_FOUND_IN_COLLECTION);
-//        } catch (Match.OpponentMinionIsNotAvailableForAttack opponentMinionIsNotAvailableForAttack) {
-//            Output.err(client.views.Error.OPPONENT_MINION_IS_NOT_AVAILABLE);
-//        } catch (Player.CardNotSelectedException e) {
-//            Output.err(Error.CARD_NOT_SELECTED);
-//        }
-//        return true;
-//    }
-//
-//    public void insert(Matcher matcher) {
-//        String cardName = matcher.group("cardName");
-//        int x = Integer.parseInt(matcher.group("x"));
-//        int y = Integer.parseInt(matcher.group("y"));
-//        try {
-//            ClientManager.insertCard(cardName, x, y);
-//            Hand enemyHand = ClientManager.getOpponent().getHand();
-//            for (Card card : enemyHand.getCards())
-//                if (card.getID().equals(cardName))
-//                    selectedCard = card;
-//            insertCard(x - 1, y - 1);
-//
-//        } catch (Player.NotEnoughManaException e) {
-//            Output.err(Error.NOT_ENOUGH_MANA);
-//        } catch (Player.HeroDeadException e) {
-//            Output.err(e.getMessage());
-//        } catch (Map.InvalidCellException e) {
-//            Output.err(e.getMessage());
-//        } catch (Collection.CardNotFoundException e) {
-//            Output.err(Error.CARD_NOT_FOUND);
-//        } catch (Map.InvalidTargetCellException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void select(Matcher matcher) {
-//        String id = matcher.group("id");
-//        try {
-//            ClientManager.selectCard(id);
-//            Output.log(Error.CARD_SELECTED.toString());
-//        } catch (Collection.CardNotFoundException e) {
-//            boolean flag = false;
-//            try {
-//                ClientManager.selectCollectableItem(id);
-//                Output.log(Error.COLLECTABLE_ITEM_SELECTED.toString());
-//                flag = true;
-//            } catch (Player.ItemNotFoundException e1) {
-//                Output.err(Error.NO_ITEM);
-//            }
-//            if (!flag)
-//                Output.err(Error.CARD_NOT_FOUND);
-//        }
-//    }
-//
-//    public void moveTo(Matcher matcher) {
-//        int x = Integer.parseInt(matcher.group("x"));
-//        int y = Integer.parseInt(matcher.group("y"));
-//        try {
-//            ClientManager.moveTo(x, y);
-//            Card card = ClientManager.getActivePlayer().getSelectedCard();
-//            Output.log(String.format("%s moved to %d %d", card.getName(), x, y));
-//            moveCard(cardViews.get(card), getCardRectangle(x, y), card);
-//        } catch (Match.InvalidMoveException e) {
-//            Output.err(Error.INVALID_MOVE);
-//        } catch (Map.InvalidCellException e) {
-//
-//        }
-//    }
-//
-//    public void endTurnCommand(Matcher matcher) {
-//        ClientManager.endTurn();
-//        endTurn(null);
-//    }
-
 }
