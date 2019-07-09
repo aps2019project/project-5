@@ -132,7 +132,7 @@ public class BattleController {
             else {
                 if (match.getActivePlayer().account.username.equals(request.user.username)) {
                     match.endTurn();
-                    response = new Response(true, "your turn ended");
+                    response = new Response(true, "your turn ended", match);
                 } else
                     response = new Response(false, "It isn't your turn :(");
             }

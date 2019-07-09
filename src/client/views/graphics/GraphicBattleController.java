@@ -49,6 +49,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
 public class GraphicBattleController implements Initializable {
@@ -509,7 +510,6 @@ public class GraphicBattleController implements Initializable {
             player1Mana[i].setImage(i < mana1 ? mana : noMana);
         for (int i = 0; i < 9; i++)
             player2Mana[i].setImage(i < mana2 ? mana : noMana);
-
     }
 
     public void graveyardToggle(MouseEvent mouseEvent) {
@@ -582,11 +582,14 @@ public class GraphicBattleController implements Initializable {
     public void endTurn(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
         selectedCard = null;
-        if (BattleClient.endTurn()) {
+        Response response = BattleClient.endTurn();
+        if (response.OK) {
             updateMana();
             updateHand();
             updateCells();
             endTurnBtn.setDisable(true);
+        } else {
+            alert("error", "error", response.message);
         }
     }
 }
