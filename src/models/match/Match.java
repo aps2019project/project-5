@@ -37,7 +37,7 @@ public class Match {
         if(turn % 2 == 0)
             player1Actions.addFirst(new EndTurn());
         else
-            player1Actions.addFirst(new EndTurn());
+            player2Actions.addFirst(new EndTurn());
         turn++;
         setMana();
         for (int i = 0; i < 5; i++)
