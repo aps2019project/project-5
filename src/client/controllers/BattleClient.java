@@ -4,7 +4,7 @@ import models.Response;
 import models.map.Cell;
 import models.match.Match;
 import models.match.Player;
-import java.util.HashSet;
+
 import java.util.Set;
 
 public class BattleClient {
@@ -31,8 +31,12 @@ public class BattleClient {
         serverConnection.parameters.put("match_token", playingMatch.token);
         serverConnection.parameters.put("card_id", "" + id);
         Response response = serverConnection.getResponse();
-        if(response.OK)
+        if (response.OK) {
             playingMatch = (Match) response.data;
+
+        } else {
+            System.out.println(response.message);
+        }
     }
 
     public static boolean move(int row, int column) {
@@ -63,11 +67,15 @@ public class BattleClient {
         return getMe() == playingMatch.getActivePlayer();
     }
 
-    public static Response endTurn() {
+    public static boolean endTurn() {
         ServerConnection serverConnection = new ServerConnection("/battle/end_turn");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("match_token", playingMatch.token);
-        return serverConnection.getResponse();
+        Response response = serverConnection.getResponse();
+        if (response.OK) {
+            playingMatch = ((Match) response.data);
+        }
+        return response.OK;
     }
 
     public static Response battleRequest(int match_mode) {

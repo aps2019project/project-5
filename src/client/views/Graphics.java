@@ -1,9 +1,6 @@
 package client.views;
 
 import client.controllers.AccountClient;
-import client.controllers.ClientManager;
-import client.models.Shop;
-import client.views.graphics.GraphicBattleController;
 import client.views.graphics.GraphicPreBattleMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import client.models.Account;
-import client.models.Collection;
-import client.models.Deck;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -115,7 +108,7 @@ public class Graphics extends Application {
     @Override
     public void start(Stage primaryStage) {
         loadFXML();
-        testLogin();
+//        testLogin();
         stage = primaryStage;
         Scene scene = new Scene(accountMenuRoot, 1920, 1080);
         scene.setOnMouseClicked(event -> playMusic("sfx_ui_select.m4a"));
@@ -124,7 +117,7 @@ public class Graphics extends Application {
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
-        setMenu(MAIN_MENU);
+//        setMenu(MAIN_MENU);
     }
 
     private void testLogin() {
@@ -144,7 +137,7 @@ public class Graphics extends Application {
                 AccountClient.login("amin", "amin");
                 break;
         }
-//        GraphicPreBattleMenu.battleRequest();
+        GraphicPreBattleMenu.battleRequest();
     }
 
     public static MediaPlayer playMusic(String musicName) {

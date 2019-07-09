@@ -4,7 +4,12 @@ import client.controllers.BattleClient;
 import client.controllers.ClientManager;
 import client.models.Action;
 import client.models.Timer;
-import javafx.animation.*;
+import client.views.Graphics;
+import client.views.SpriteMaker;
+import client.views.menus.BattleMenu;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
@@ -20,35 +25,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import models.*;
+import models.Response;
 import models.cards.Attacker;
 import models.cards.Card;
 import models.cards.Hero;
 import models.cards.Spell;
 import models.map.Cell;
 import models.map.Map;
-import client.views.Command;
-import client.views.Graphics;
-import client.views.SpriteMaker;
-import client.views.menus.BattleMenu;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.regex.Matcher;
 
 import static client.views.Graphics.playMusic;
 
 public class GraphicBattleController implements Initializable {
 
 
+    public Button endTurnBtn;
     private int eachTurnTime = 20;
     public AnchorPane gameBoard;
     public AnchorPane[][] cell = new AnchorPane[5][9];
@@ -146,6 +143,7 @@ public class GraphicBattleController implements Initializable {
             updateHand();
         });
 
+        endTurnBtn.setDisable(!BattleClient.isMyTurn());
 //        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
 //        timer.start();
 
@@ -217,7 +215,8 @@ public class GraphicBattleController implements Initializable {
             Graphics.playMusic("sfx_unit_run_charge_4.m4a");
             SpriteMaker.getAndShowAnimation(imageView, card.name, Action.RUN, 1000, speed);
             long newTime = System.currentTimeMillis();
-            while (System.currentTimeMillis() - newTime <= time) {}
+            while (System.currentTimeMillis() - newTime <= time) {
+            }
             SpriteMaker.getAndShowAnimation(imageView, card.name, Action.IDLE, 10000000, speed);
         }).start();
     }
@@ -542,27 +541,11 @@ public class GraphicBattleController implements Initializable {
     public void endTurn(MouseEvent mouseEvent) {
         playMusic("sfx_ui_select.m4a");
         selectedCard = null;
-        ClientManager.endTurn();
-        updateMana();
-        updateHand();
-        updateCells();
-        String AIMove = "";
-        if (ClientManager.isAITurn())
-            AIMove = ClientManager.getAIMove();
-        for (Command command : battleMenu.getAICommands()) {
-            Matcher matcher = command.getPattern().matcher(AIMove);
-            if (matcher.find()) {
-                Method method;
-                try {
-                    method = this.getClass().getMethod(command.getFunctionName(), Matcher.class);
-                    Object object = method.invoke(this, matcher);
-                    if (object != null && object.equals(Boolean.FALSE))
-                        return;
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
+        if (BattleClient.endTurn()) {
+            updateMana();
+            updateHand();
+            updateCells();
+            endTurnBtn.setDisable(true);
         }
     }
 
