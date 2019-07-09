@@ -320,6 +320,10 @@ public class GraphicBattleController implements Initializable {
                     if (clickedCard == null) {
                         if (BattleClient.move(row, column)) {
                             moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
+                            if(selectedCard instanceof Attacker) {
+                                ((Attacker) selectedCard).cell.x = row;
+                                ((Attacker) selectedCard).cell.x = column;
+                            }
                         } else {
                             System.out.println("can't move here");
                         }
