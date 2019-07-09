@@ -359,28 +359,33 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void updateMatch() {
-        if(BattleClient.isMyTurn())
-            return;
         GameAction action = BattleClient.getAction();
         System.out.println(action);
+        if(action instanceof EndTurn) {
+            endTurnBtn.setDisable(false);
+            BattleClient.updatePlayingMatch();
+        }
+
+        if(BattleClient.isMyTurn())
+            return;
+
         if(action instanceof Insert) {
             Insert insert = (Insert) action;
             selectedCard = insert.card;
             insertCard(insert.cell.x, insert.cell.y);
             selectedCard = null;
             BattleClient.updatePlayingMatch();
-        } else if(action instanceof Move) {
+        }
+        if(action instanceof Move) {
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
             moveCard(cardPane, newPosition, move.card);
             BattleClient.updatePlayingMatch();
-        } else if(action instanceof Attack) {
+        }
+        if(action instanceof Attack) {
             Attack attack = (Attack) action;
             // TODO: implement
-            BattleClient.updatePlayingMatch();
-        } else if(action instanceof EndTurn) {
-            endTurnBtn.setDisable(false);
             BattleClient.updatePlayingMatch();
         }
     }
