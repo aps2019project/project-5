@@ -112,7 +112,7 @@ public class BattleClient {
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("match_token", playingMatch.token);
         Response response = serverConnection.getResponse();
-        if(response.OK)
+        if (response.OK)
             return (GameAction) response.data;
         else
             return null;
