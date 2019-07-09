@@ -63,6 +63,7 @@ public class GraphicPreBattleMenu implements Initializable {
         } else if (!isStoryMode) {
             // TODO: start single player game (with ai)
         }
+
     }
 
     public void deathMatch(MouseEvent mouseEvent) {

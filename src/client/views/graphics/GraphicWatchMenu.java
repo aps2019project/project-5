@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXMasonryPane;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -22,6 +23,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -49,16 +51,21 @@ import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 import static client.views.graphics.ShopController.getCardPane;
 
-public class GraphicCollectionMenu2 implements Initializable {
+public class GraphicWatchMenu implements Initializable {
 
 
 
     public static ArrayList<Match> matchesList;
     static boolean isStartStream = false;
     public static Map<String, Integer> matches = new HashMap<>();
+    public AnchorPane root;
+    public VBox liveMatchesBox;
+    public ImageView watch;
+    public ImageView backBtn;
+    public JFXButton lastMatchBtn;
 
 
-    public static void startWatchClient(int port) {
+    public void startWatchClient(int port) {
         if (!isStartStream) {
             String ip = "127.0.0.1";
             isStartStream = true;
@@ -68,10 +75,7 @@ public class GraphicCollectionMenu2 implements Initializable {
                         Socket soc = new Socket(ip, port);
                         BufferedImage img = ImageIO.read(soc.getInputStream());
 
-//                        System.out.println("root = " + root);
-//                        System.out.println("watch = " + watch);
-//                        System.out.println("liveMatchesBox = " + liveMatchesBox);
-                        watch.setImage(SwingFXUtils.toFXImage(img, null));
+                        Platform.runLater(() -> watch.setImage(SwingFXUtils.toFXImage(img, null)));
                         soc.close();
 
                         try {
@@ -148,4 +152,7 @@ public class GraphicCollectionMenu2 implements Initializable {
     }
 
 
+    public void playLastMatch(MouseEvent mouseEvent) {
+        Media media = new Media("lastMatch.");
+    }
 }

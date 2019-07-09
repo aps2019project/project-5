@@ -2,7 +2,6 @@ package client.views;
 
 import client.controllers.AccountClient;
 import client.views.graphics.GraphicPreBattleMenu;
-import client.views.graphics.GraphicWatchMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
