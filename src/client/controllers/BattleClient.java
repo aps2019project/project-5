@@ -1,6 +1,5 @@
 package client.controllers;
 
-import client.models.Action;
 import models.Response;
 import models.map.Cell;
 import models.match.Match;
@@ -109,7 +108,7 @@ public class BattleClient {
     }
 
     public static GameAction getAction() {
-        ServerConnection serverConnection = new ServerConnection("/battle/request");
+        ServerConnection serverConnection = new ServerConnection("/battle/getAction");
         serverConnection.parameters.put("token", AccountClient.user.loginToken);
         serverConnection.parameters.put("match_token", playingMatch.token);
         Response response = serverConnection.getResponse();
