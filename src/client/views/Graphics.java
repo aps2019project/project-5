@@ -1,10 +1,8 @@
 package client.views;
 
 import client.controllers.AccountClient;
-import client.controllers.ClientManager;
-import client.models.Shop;
-import client.views.graphics.GraphicBattleController;
 import client.views.graphics.GraphicPreBattleMenu;
+import client.views.graphics.GraphicWatchMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -16,11 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import client.models.Account;
-import client.models.Collection;
-import client.models.Deck;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -47,8 +41,7 @@ public class Graphics extends Application {
         if (!menu.isPreLoaded) {
             try {
                 Graphics.stage.getScene().setRoot(
-                        FXMLLoader.load(Graphics.class.getResource(menu.getFile()))
-                );
+                        FXMLLoader.load(Graphics.class.getResource(menu.getFile())));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -67,7 +60,8 @@ public class Graphics extends Application {
         CUSTOM_SELECT("/client/layouts/custom_select.fxml"),
         BATTLE("/client/layouts/battle.fxml"),
         CUSTOM_CARD("/client/layouts/custom_card.fxml"),
-        WAITING_MENU("/client/layouts/waiting.fxml");
+        WAITING_MENU("/client/layouts/waiting.fxml"),
+        WATCH_MENU("/client/layouts/watch.fxml");
         Parent root;
         String file;
         boolean isPreLoaded;
@@ -86,10 +80,6 @@ public class Graphics extends Application {
             return this.file;
         }
 
-        public boolean isPreLoaded() {
-            return isPreLoaded;
-        }
-
         public Parent getRoot() {
             return this.root;
         }
@@ -100,10 +90,6 @@ public class Graphics extends Application {
             GridPane tmpGridPane = new GridPane();
             tmpGridPane.setOnMouseClicked(event -> setMenu(MAIN_MENU));
             profileRoot = tmpGridPane;
-            watchRoot = tmpGridPane;
-            codexRoot = tmpGridPane;
-            profileRoot = tmpGridPane;
-            watchRoot = tmpGridPane;
             codexRoot = tmpGridPane;
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
         } catch (IOException e) {
@@ -114,6 +100,8 @@ public class Graphics extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+
         loadFXML();
         testLogin();
         stage = primaryStage;
@@ -126,6 +114,7 @@ public class Graphics extends Application {
         stage.show();
         setMenu(MAIN_MENU);
     }
+
 
     private void testLogin() {
         Scanner scn = new Scanner(System.in);

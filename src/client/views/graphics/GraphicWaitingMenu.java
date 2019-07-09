@@ -5,6 +5,7 @@ import client.views.Graphics;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import models.Response;
 import java.net.URL;

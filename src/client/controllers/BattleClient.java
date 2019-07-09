@@ -4,6 +4,8 @@ import models.Response;
 import models.map.Cell;
 import models.match.Match;
 import models.match.Player;
+
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -88,4 +90,9 @@ public class BattleClient {
             playingMatch = (Match) response.data;
         return response;
     }
+
+//    public static Response sendShot(byte[] bytes) {
+//        ServerConnection serverConnection = new ServerConnection("/battle/game_watch");
+//        serverConnection.parameters.put("frame", Arrays.toString(bytes));
+//    }
 }

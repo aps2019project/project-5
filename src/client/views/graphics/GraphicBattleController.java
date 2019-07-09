@@ -32,8 +32,15 @@ import client.views.Graphics;
 import client.views.SpriteMaker;
 import client.views.menus.BattleMenu;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +54,7 @@ import static client.views.Graphics.playMusic;
 public class GraphicBattleController implements Initializable {
 
 
+    public static int token;
     public Label timerLbl;
     public HBox handBox;
     private int eachTurnTime = 20;
@@ -81,6 +89,7 @@ public class GraphicBattleController implements Initializable {
     private ImageView draggingCard = new ImageView();
     private double draggingX;
     private double draggingY;
+    public static Thread watchThread;
 
     private void updateHp(Card... card) {
         for (Card card1 : card) {
@@ -466,12 +475,10 @@ public class GraphicBattleController implements Initializable {
             cardAnimation.setOnMousePressed(event -> {
                 SpriteMaker.getAndShowAnimation(draggingCard, card.name,
                         card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 100, speed);
-//                if (card instanceof Spell) {
-//                    draggingCard.setScaleX(3);
-//                    draggingCard.setScaleY(3);
-//                }
-                draggingCard.setLayoutX(handItemContainer[finalIndex].getLayoutX() + handBox.getLayoutX());
-                draggingCard.setLayoutY(handItemContainer[finalIndex].getLayoutY() + handBox.getLayoutY());
+                draggingCard.setScaleX(1.5);
+                draggingCard.setScaleY(1.5);
+                draggingCard.setLayoutX(handItemContainer[finalIndex].getLayoutX() + handBox.getLayoutX() + 50);
+                draggingCard.setLayoutY(handItemContainer[finalIndex].getLayoutY() + handBox.getLayoutY() + 20);
                 draggingX = event.getSceneX();
                 draggingY = event.getSceneY();
                 draggingCard.setVisible(true);

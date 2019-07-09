@@ -73,6 +73,7 @@ public class Server {
         main.urls.add(new URL("/cheat_mode/increment_drake", CheatModeController::incrementDrake, true));
         main.urls.add(new URL("/cheat_mode/cheat_mana", CheatModeController::cheatMana, true));
 
+        main.urls.add(new URL("/watch/get_live_matches", WatchController::getLiveMatches, true));
 
         main.start();
     }
