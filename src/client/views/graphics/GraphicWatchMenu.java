@@ -84,8 +84,7 @@ public class GraphicWatchMenu implements Initializable {
 
                         try {
                             Thread.sleep(10);
-                        } catch (Exception e) {
-                        }
+                        } catch (Exception ignored) { }
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);
