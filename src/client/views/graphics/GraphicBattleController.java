@@ -332,13 +332,17 @@ public class GraphicBattleController implements Initializable {
                             System.out.println("can't move here");
                         }
                     } else {
+                        System.out.format("Selected card player name: %s", BattleClient.getMe().account.username);
+                        System.out.format("Clicked card player name: %s", clickedCard.playerName);
                         if (clickedCard.playerName.equals(BattleClient.getMe().account.username)) {
+                            System.out.println("card selection changed");
                             BattleClient.selectCard(clickedCard.id);
                             selectedCard = clickedCard;
+                            isSelectedCardInGame = true;
                         } else {
                             System.out.println("attack");
                             Attacker attacker = (Attacker) clickedCard;
-                            Response response = BattleClient.attack(attacker.cell.x, attacker.cell.y);
+                            Response response = BattleClient.attack(row, column);
                             attack(selectedCard, clickedCard);
                         }
                     }
