@@ -336,7 +336,7 @@ public class GraphicBattleController implements Initializable {
                             moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
                             if (selectedCard instanceof Attacker) {
                                 ((Attacker) selectedCard).cell.x = row;
-                                ((Attacker) selectedCard).cell.x = column;
+                                ((Attacker) selectedCard).cell.y = column;
                             }
                         } else {
                             System.out.println("can't move here");
@@ -374,8 +374,9 @@ public class GraphicBattleController implements Initializable {
 
     private void updateMatch() {
         GameAction action = BattleClient.getAction();
-        System.out.println(action);
+
         if (action instanceof EndTurn) {
+            System.out.println(action);
             endTurnBtn.setDisable(false);
             BattleClient.updatePlayingMatch();
         }
@@ -396,6 +397,7 @@ public class GraphicBattleController implements Initializable {
             BattleClient.updatePlayingMatch();
         }
         if (action instanceof Attack) {
+            System.out.println(action);
             Attack attack = (Attack) action;
             // TODO: implement
             BattleClient.updatePlayingMatch();
