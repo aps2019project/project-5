@@ -297,10 +297,10 @@ public class GraphicBattleController implements Initializable {
             }
             enemyCardIsAlive.set(((Attacker) enemyCard).currentHealth > 0);
 
-            if(enemyCardIsAlive.get())
+            if (enemyCardIsAlive.get())
                 SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.IDLE, 10000000, speed);
 
-            if(count > 1) {
+            if (count > 1) {
                 actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
                 time = System.currentTimeMillis();
                 SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
@@ -308,7 +308,7 @@ public class GraphicBattleController implements Initializable {
                 while (System.currentTimeMillis() - time <= actionTime) {
                 }
 
-                if(myCardIsAlive.get())
+                if (myCardIsAlive.get())
                     myCardIsAlive.set(((Attacker) myCard).currentHealth > 0);
 
                 SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
@@ -316,13 +316,13 @@ public class GraphicBattleController implements Initializable {
 
             }
 
-            if(!enemyCardIsAlive.get()) {
+            if (!enemyCardIsAlive.get()) {
                 death((Attacker) enemyCard);
             } else {
                 Platform.runLater(() -> updateHp(enemyCard));
             }
 
-            if(!myCardIsAlive.get()) {
+            if (!myCardIsAlive.get()) {
                 death((Attacker) myCard);
             } else {
                 Platform.runLater(() -> updateHp(myCard));
@@ -334,7 +334,7 @@ public class GraphicBattleController implements Initializable {
 
     public void death(Attacker card) {
         AnchorPane cardPane = cardViews.get(card);
-        if(cardPane == null)
+        if (cardPane == null)
             return;
 
         ImageView imageView = (ImageView) cardPane.getChildren().get(0);
@@ -456,7 +456,12 @@ public class GraphicBattleController implements Initializable {
         if (action instanceof Attack) {
             System.out.println(action);
             Attack attack = (Attack) action;
-            // TODO: implement
+            Attacker attacker = attack.Defender;
+            Attacker defender = attack.attacker;
+            int count = 1;
+            if (attack.hasCounterAttack) count = 2;
+            int finalCount = count;
+            Platform.runLater(() -> attack(attacker, defender, finalCount));
             BattleClient.updatePlayingMatch();
         }
     }
