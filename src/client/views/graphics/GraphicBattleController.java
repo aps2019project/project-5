@@ -392,6 +392,11 @@ public class GraphicBattleController implements Initializable {
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
 
+            cardViews.forEach((key, value) -> {
+                if(key.equalsInGame(move.card))
+                    ((Attacker) key).cell = ((Attacker) move.card).cell;
+            });
+
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
             Platform.runLater(() -> moveCard(cardPane, newPosition, move.card));
             BattleClient.updatePlayingMatch();
