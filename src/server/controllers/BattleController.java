@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class BattleController {
-    private static final int MATCH_TOKEN_LENGTH = 5;
+    private static final int MATCH_TOKEN_LENGTH = 4;
     public static Account waitingUserForDeathMatch;
     public static Account waitingUserForCaptureTheFlagMatchMatch;
     public static Account waitingUserForMultiFlagMatch;
@@ -51,7 +51,7 @@ public class BattleController {
             } else if (waitingAccount.equals(request.user)) {
                 response = new Response(false, "you are already waited for opponent :).");
             } else {
-                String matchToken = AuthenticationController.randomString(MATCH_TOKEN_LENGTH);
+                String matchToken = "1" + AuthenticationController.randomString(MATCH_TOKEN_LENGTH, true);
                 switch (matchMode) {
                     case DEATH_MATCH:
                         playingMatches.put(matchToken, new DeathMatch(waitingUserForDeathMatch, request.user));

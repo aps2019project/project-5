@@ -1,0 +1,44 @@
+.shop-card-container {
+    -fx-padding: 15;
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-background-radius: 10;
+}
+
+
+.match-select-container {
+    /*-fx-background-image: url(/resources/images/play/play_background.jpg);*/
+    /*-fx-background-repeat: no-repeat;*/
+    /*-fx-background-size: cover;*/
+    -fx-background-color: #272A35;
+}
+
+
+.inner-container {
+    -fx-background-color: transparent;
+}
+
+.watch-button {
+    -fx-background-color: blue;
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-pref-width: 230;
+    -fx-pref-height: 50;
+}
+
+.watch-button:hover {
+    -fx-background-image: url(/client/resources/images/buttons/button_icon_right_glow@2x.png);
+}
+
+
+.btn-primary {
+    -fx-background-color: #f36f20;
+}
+
+.btn-lg {
+    -fx-padding: 1em 3em;
+    -fx-font-size: 1em;
+    -fx-border-radius: 0.3em;
+    -fx-font-weight: bold;
+}

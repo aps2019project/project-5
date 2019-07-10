@@ -33,6 +33,15 @@ import models.map.Cell;
 import models.map.Map;
 import models.match.action.*;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +58,9 @@ public class GraphicBattleController implements Initializable {
 
 
     public Button endTurnBtn;
+    public static int token;
+    public Label timerLbl;
+    public HBox handBox;
     private int eachTurnTime = 20;
     public AnchorPane gameBoard;
     public AnchorPane[][] cell = new AnchorPane[5][9];
@@ -78,6 +90,10 @@ public class GraphicBattleController implements Initializable {
     private Timer timer;
 
     int speed = 1;
+    private ImageView draggingCard = new ImageView();
+    private double draggingX;
+    private double draggingY;
+    public static Thread watchThread;
 
     private void updateHp(Card... card) {
         for (Card card1 : card) {
@@ -115,6 +131,9 @@ public class GraphicBattleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        root.getChildren().add(draggingCard);
+
         createMapCells();
         copyHandViewsToArray();
         updateHand();
@@ -296,6 +315,7 @@ public class GraphicBattleController implements Initializable {
             }
 
             SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
+            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
             Platform.runLater(() -> updateHp(myCard));
         }).start();
 
@@ -455,6 +475,7 @@ public class GraphicBattleController implements Initializable {
         int index = 0;
         for (Card card : hand) {
             if (index == 5) return;
+
             handItemMana[index].setText("" + card.manaPoint);
             ImageView cardAnimation = SpriteMaker.getAndShowAnimation(
                     handItemImages[index], card.name,
@@ -497,6 +518,28 @@ public class GraphicBattleController implements Initializable {
                 ).getMinX(), 600);
                 root.getChildren().add(cardPane);
                 handItemContainer[finalIndex].setOnMouseExited(event1 -> root.getChildren().remove(cardPane));
+            });
+
+            cardAnimation.setOnMousePressed(event -> {
+                SpriteMaker.getAndShowAnimation(draggingCard, card.name,
+                        card instanceof Spell ? Action.SPELL_IDLE : Action.IDLE, 100, speed);
+                draggingCard.setScaleX(1.5);
+                draggingCard.setScaleY(1.5);
+                draggingCard.setLayoutX(handItemContainer[finalIndex].getLayoutX() + handBox.getLayoutX() + 50);
+                draggingCard.setLayoutY(handItemContainer[finalIndex].getLayoutY() + handBox.getLayoutY() + 20);
+                draggingX = event.getSceneX();
+                draggingY = event.getSceneY();
+                draggingCard.setVisible(true);
+            });
+
+            cardAnimation.setOnMouseDragged(e -> {
+                draggingCard.setTranslateX(e.getSceneX() - draggingX);
+                draggingCard.setTranslateY(e.getSceneY() - draggingY);
+            });
+
+            cardAnimation.setOnMouseReleased(event -> {
+                draggingCard.setVisible(false);
+                // TODO: 7/9/19 insert card
             });
             handViews.put(card, handItemContainer[index]);
             index++;

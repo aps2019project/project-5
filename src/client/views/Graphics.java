@@ -40,8 +40,7 @@ public class Graphics extends Application {
         if (!menu.isPreLoaded) {
             try {
                 Graphics.stage.getScene().setRoot(
-                        FXMLLoader.load(Graphics.class.getResource(menu.getFile()))
-                );
+                        FXMLLoader.load(Graphics.class.getResource(menu.getFile())));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -60,7 +59,8 @@ public class Graphics extends Application {
         CUSTOM_SELECT("/client/layouts/custom_select.fxml"),
         BATTLE("/client/layouts/battle.fxml"),
         CUSTOM_CARD("/client/layouts/custom_card.fxml"),
-        WAITING_MENU("/client/layouts/waiting.fxml");
+        WAITING_MENU("/client/layouts/waiting.fxml"),
+        WATCH_MENU("/client/layouts/watch.fxml");
         Parent root;
         String file;
         boolean isPreLoaded;
@@ -79,10 +79,6 @@ public class Graphics extends Application {
             return this.file;
         }
 
-        public boolean isPreLoaded() {
-            return isPreLoaded;
-        }
-
         public Parent getRoot() {
             return this.root;
         }
@@ -93,10 +89,6 @@ public class Graphics extends Application {
             GridPane tmpGridPane = new GridPane();
             tmpGridPane.setOnMouseClicked(event -> setMenu(MAIN_MENU));
             profileRoot = tmpGridPane;
-            watchRoot = tmpGridPane;
-            codexRoot = tmpGridPane;
-            profileRoot = tmpGridPane;
-            watchRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/watch.fxml"));
             codexRoot = tmpGridPane;
             accountMenuRoot = FXMLLoader.load(Graphics.class.getResource("/client/layouts/account_menu.fxml"));
         } catch (IOException e) {
@@ -107,6 +99,8 @@ public class Graphics extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+
         loadFXML();
         stage = primaryStage;
         Scene scene = new Scene(accountMenuRoot, 1920, 1080);
@@ -117,6 +111,7 @@ public class Graphics extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
 
     private void testLogin() {
         Scanner scn = new Scanner(System.in);

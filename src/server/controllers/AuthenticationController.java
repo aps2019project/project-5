@@ -23,9 +23,11 @@ public class AuthenticationController extends Application {
     public static HashMap<String, Account> connectedAccounts = new HashMap<>();
 
 
-    public static String randomString(int n) {
+    public static String randomString(int n, boolean integerOnly) {
         StringBuilder stringBuilder = new StringBuilder();
-        String alphaNumericString = "0123456789" + "abcdefghijklmnopqrstuvxyz";
+        String alphaNumericString = "0123456789";
+        if (!integerOnly)
+            alphaNumericString += "abcdefghijklmnopqrstuvxyz";
         Random random = new Random();
         for (int i = 0; i < n; i++) {
             stringBuilder.append(alphaNumericString.charAt(random.nextInt(alphaNumericString.length())));
@@ -49,7 +51,7 @@ public class AuthenticationController extends Application {
             response = new Response(false, "Password is not true!");
         } else {
             Account account = users.get(username);
-            String token = randomString(LOGIN_TOKEN_LENGTH);
+            String token = randomString(LOGIN_TOKEN_LENGTH, false);
             account.loginToken = token;
             connectedAccounts.put(token, account);
             response = new Response(true, "you logged in!", account);

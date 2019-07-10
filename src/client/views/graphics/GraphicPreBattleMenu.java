@@ -3,8 +3,10 @@ package client.views.graphics;
 import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import client.controllers.ChatClient;
+import client.controllers.ShellCommand;
 import client.views.Graphics;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -17,13 +19,15 @@ import javafx.scene.text.TextAlignment;
 import models.Response;
 import models.chat.Chat;
 import models.chat.Message;
-
+import models.match.Match;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import static client.views.Graphics.Menu.*;
+import static client.views.graphics.GraphicBattleController.watchThread;
+import static client.views.graphics.GraphicWatchMenu.startWatchServer;
 
 public class GraphicPreBattleMenu implements Initializable {
 
@@ -48,15 +52,18 @@ public class GraphicPreBattleMenu implements Initializable {
     public static void battleRequest() {
         if (isMultiPlayer) {
             Response response = BattleClient.battleRequest(matchMode);
-            System.out.println("sal");
             if (response.data != null) {
                 Graphics.setMenu(BATTLE);
+                GraphicBattleController.token = Integer.parseInt(((Match) response.data).token);
+                watchThread = new Thread(() -> startWatchServer(GraphicBattleController.token));
+                watchThread.start();
             } else {
                 Graphics.setMenu(WAITING_MENU);
             }
         } else if (!isStoryMode) {
             // TODO: start single player game (with ai)
         }
+        ShellCommand.executeCommand("byzanz-record -d 10 lastMatch.mp4");
     }
 
     public void deathMatch(MouseEvent mouseEvent) {
