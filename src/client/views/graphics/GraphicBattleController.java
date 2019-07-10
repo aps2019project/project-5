@@ -396,10 +396,10 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void insertCard(int row, int column) {
-        System.out.println(selectedCard);
-        System.out.println(selectedCard.name);
         if (selectedCard instanceof Attacker) {
             AnchorPane cardPane = getCardInGame(selectedCard, row, column);
+            System.out.println("Card " + selectedCard + " insert!!");
+            System.out.println("in " + row + ", " + column);
             cardViews.put(selectedCard, cardPane);
             AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1, speed),
                     SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1, speed),
@@ -610,6 +610,9 @@ public class GraphicBattleController implements Initializable {
         hpLabel.setPrefWidth(30);
 
         anchorPane.getChildren().addAll(imageView, attackPointBackground, healthPointBackground, hpLabel, apLabel);
+
+        System.out.printf("card %s anchor pane created!\n", card);
+
         return anchorPane;
     }
 
