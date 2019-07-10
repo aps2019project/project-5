@@ -1,7 +1,6 @@
 package client.views.graphics;
 
 import client.controllers.BattleClient;
-import client.controllers.ClientManager;
 import client.models.Action;
 import client.models.Timer;
 import client.views.Graphics;
@@ -43,7 +42,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static client.views.Graphics.Menu.BATTLE;
 import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
@@ -208,6 +206,7 @@ public class GraphicBattleController implements Initializable {
     private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
         int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
 
+
         Timeline timeline = new Timeline();
         KeyFrame end = new KeyFrame(new Duration(time),
                 new KeyValue(cardPane.layoutXProperty(), newPosition.getX()),
@@ -314,13 +313,14 @@ public class GraphicBattleController implements Initializable {
         } else {
             if (selectedCard.equalsInGame(clickedCard)) {
                 selectedCard = null;
+                isSelectedCardInGame = false;
                 System.out.println("Card unselected");
             } else {
                 if (isSelectedCardInGame) {
                     if (clickedCard == null) {
                         if (BattleClient.move(row, column)) {
                             moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
-                            if(selectedCard instanceof Attacker) {
+                            if (selectedCard instanceof Attacker) {
                                 ((Attacker) selectedCard).cell.x = row;
                                 ((Attacker) selectedCard).cell.x = column;
                             }
@@ -361,29 +361,29 @@ public class GraphicBattleController implements Initializable {
     private void updateMatch() {
         GameAction action = BattleClient.getAction();
         System.out.println(action);
-        if(action instanceof EndTurn) {
+        if (action instanceof EndTurn) {
             endTurnBtn.setDisable(false);
             BattleClient.updatePlayingMatch();
         }
 
-        if(BattleClient.isMyTurn())
+        if (BattleClient.isMyTurn())
             return;
 
-        if(action instanceof Insert) {
+        if (action instanceof Insert) {
             Insert insert = (Insert) action;
             selectedCard = insert.card;
             insertCard(insert.cell.x, insert.cell.y);
             selectedCard = null;
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Move) {
+        if (action instanceof Move) {
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
             moveCard(cardPane, newPosition, move.card);
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Attack) {
+        if (action instanceof Attack) {
             Attack attack = (Attack) action;
             // TODO: implement
             BattleClient.updatePlayingMatch();
