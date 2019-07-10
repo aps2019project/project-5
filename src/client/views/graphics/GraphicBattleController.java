@@ -375,7 +375,7 @@ public class GraphicBattleController implements Initializable {
             Insert insert = (Insert) action;
             selectedCard = insert.card;
             System.out.printf("Selected card is: %s\n", selectedCard);
-            insertCard(insert.cell.x, insert.cell.y);
+            Platform.runLater(() -> insertCard(insert.cell.x, insert.cell.y));
             selectedCard = null;
             BattleClient.updatePlayingMatch();
         }
