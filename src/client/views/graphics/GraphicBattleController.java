@@ -347,7 +347,14 @@ public class GraphicBattleController implements Initializable {
                             System.out.println("attack");
                             Attacker attacker = (Attacker) clickedCard;
                             Response response = BattleClient.attack(row, column);
-                            attack(selectedCard, clickedCard);
+
+                            if (response.OK) {
+                                ((Attacker) clickedCard).currentHealth -= ((Attacker) selectedCard).getAttackPoint();
+                                if (response.data.equals(2))
+                                    ((Attacker) selectedCard).currentHealth -= ((Attacker) clickedCard).getAttackPoint();
+
+                                attack(selectedCard, clickedCard);
+                            }
                         }
                     }
                 } else {
@@ -393,7 +400,7 @@ public class GraphicBattleController implements Initializable {
             AnchorPane cardPane = cardViews.get(move.card);
 
             cardViews.forEach((key, value) -> {
-                if(key.equalsInGame(move.card))
+                if (key.equalsInGame(move.card))
                     ((Attacker) key).cell = ((Attacker) move.card).cell;
             });
 
