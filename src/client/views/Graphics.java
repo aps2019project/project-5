@@ -3,6 +3,8 @@ package client.views;
 import client.controllers.AccountClient;
 import client.views.graphics.GraphicPreBattleMenu;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
@@ -13,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -109,6 +112,7 @@ public class Graphics extends Application {
         scene.setCursor(new ImageCursor(image));
         stage.setFullScreen(true);
         stage.setScene(scene);
+        stage.setOnHiding(event -> Platform.runLater(AccountClient::logout));
         stage.show();
     }
 
