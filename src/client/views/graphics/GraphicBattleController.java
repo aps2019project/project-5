@@ -31,10 +31,7 @@ import models.cards.Hero;
 import models.cards.Spell;
 import models.map.Cell;
 import models.map.Map;
-import models.match.action.Attack;
-import models.match.action.EndTurn;
-import models.match.action.GameAction;
-import models.match.action.Move;
+import models.match.action.*;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -380,16 +377,16 @@ public class GraphicBattleController implements Initializable {
             endTurnBtn.setDisable(false);
             BattleClient.updatePlayingMatch();
         }
-
-
-//        if (action instanceof Insert) {
-//            Insert insert = (Insert) action;
-//            selectedCard = insert.card;
-//            insertCard(insert.cell.x, insert.cell.y);
-//            selectedCard = null;
-//            BattleClient.updatePlayingMatch();
-//        }
-        if (action instanceof Move) {
+        if(action instanceof Insert) {
+            System.out.println(action);
+            Insert insert = (Insert) action;
+            selectedCard = insert.card;
+            insertCard(insert.cell.x, insert.cell.y);
+            selectedCard = null;
+            BattleClient.updatePlayingMatch();
+        }
+        if(action instanceof Move) {
+            System.out.println(action);
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
@@ -407,6 +404,8 @@ public class GraphicBattleController implements Initializable {
     private void insertCard(int row, int column) {
         if (selectedCard instanceof Attacker) {
             AnchorPane cardPane = getCardInGame(selectedCard, row, column);
+            System.out.println("Card " + selectedCard + " insert!!");
+            System.out.println("in " + row + ", " + column);
             cardViews.put(selectedCard, cardPane);
             AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1, speed),
                     SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1, speed),
@@ -617,6 +616,9 @@ public class GraphicBattleController implements Initializable {
         hpLabel.setPrefWidth(30);
 
         anchorPane.getChildren().addAll(imageView, attackPointBackground, healthPointBackground, hpLabel, apLabel);
+
+        System.out.printf("card %s anchor pane created!\n", card);
+
         return anchorPane;
     }
 
