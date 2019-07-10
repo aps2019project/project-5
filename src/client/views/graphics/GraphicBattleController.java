@@ -280,7 +280,7 @@ public class GraphicBattleController implements Initializable {
         return null;
     }
 
-    private void attack(Card myCard, Card enemyCard) {
+    private void attack(Card myCard, Card enemyCard, int count) {
         AnchorPane myAnchor = cardViews.get(myCard);
         AnchorPane enemyAnchor = cardViews.get(enemyCard);
         ImageView myImageView = (ImageView) myAnchor.getChildren().get(0);
@@ -295,16 +295,18 @@ public class GraphicBattleController implements Initializable {
             SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.IDLE, 10000000, speed);
             Platform.runLater(() -> updateHp(enemyCard));
 
-            actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
-            time = System.currentTimeMillis();
-            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
-            Graphics.playMusic("sfx_f3_general_attack_swing.m4a");
-            while (System.currentTimeMillis() - time <= actionTime) {
-            }
+            if(count > 1) {
+                actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
+                time = System.currentTimeMillis();
+                SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
+                Graphics.playMusic("sfx_f3_general_attack_swing.m4a");
+                while (System.currentTimeMillis() - time <= actionTime) {
+                }
 
-            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
-            SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
-            Platform.runLater(() -> updateHp(myCard));
+                SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
+                SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
+                Platform.runLater(() -> updateHp(myCard));
+            }
         }).start();
 
     }
@@ -353,7 +355,7 @@ public class GraphicBattleController implements Initializable {
                                 if (response.data.equals(2))
                                     ((Attacker) selectedCard).currentHealth -= ((Attacker) clickedCard).getAttackPoint();
 
-                                attack(selectedCard, clickedCard);
+                                attack(selectedCard, clickedCard, ((int) response.data));
                             }
                         }
                     }
