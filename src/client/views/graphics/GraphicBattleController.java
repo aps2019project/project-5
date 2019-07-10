@@ -1,7 +1,6 @@
 package client.views.graphics;
 
 import client.controllers.BattleClient;
-import client.controllers.ClientManager;
 import client.models.Action;
 import client.models.Timer;
 import client.views.Graphics;
@@ -33,26 +32,12 @@ import models.cards.Spell;
 import models.map.Cell;
 import models.map.Map;
 import models.match.action.*;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.URL;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-
-import static client.views.Graphics.Menu.BATTLE;
 import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
@@ -389,6 +374,7 @@ public class GraphicBattleController implements Initializable {
             System.out.println(action);
             Insert insert = (Insert) action;
             selectedCard = insert.card;
+            System.out.printf("Selected card is: %s\n", selectedCard);
             insertCard(insert.cell.x, insert.cell.y);
             selectedCard = null;
             BattleClient.updatePlayingMatch();
@@ -410,6 +396,8 @@ public class GraphicBattleController implements Initializable {
     }
 
     private void insertCard(int row, int column) {
+        System.out.println(selectedCard);
+        System.out.println(selectedCard.name);
         if (selectedCard instanceof Attacker) {
             AnchorPane cardPane = getCardInGame(selectedCard, row, column);
             cardViews.put(selectedCard, cardPane);
