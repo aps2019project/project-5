@@ -385,10 +385,6 @@ public class GraphicBattleController implements Initializable {
             endTurnBtn.setDisable(false);
             BattleClient.updatePlayingMatch();
         }
-
-        if(BattleClient.isMyTurn())
-            return;
-
         if(action instanceof Insert) {
             Insert insert = (Insert) action;
             selectedCard = insert.card;
