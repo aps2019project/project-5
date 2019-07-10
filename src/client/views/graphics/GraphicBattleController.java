@@ -31,17 +31,11 @@ import models.cards.Hero;
 import models.cards.Spell;
 import models.map.Cell;
 import models.map.Map;
-import models.match.action.*;
+import models.match.action.Attack;
+import models.match.action.EndTurn;
+import models.match.action.GameAction;
+import models.match.action.Move;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -386,16 +380,14 @@ public class GraphicBattleController implements Initializable {
             BattleClient.updatePlayingMatch();
         }
 
-        if (BattleClient.isMyTurn())
-            return;
 
-        if (action instanceof Insert) {
-            Insert insert = (Insert) action;
-            selectedCard = insert.card;
-            insertCard(insert.cell.x, insert.cell.y);
-            selectedCard = null;
-            BattleClient.updatePlayingMatch();
-        }
+//        if (action instanceof Insert) {
+//            Insert insert = (Insert) action;
+//            selectedCard = insert.card;
+//            insertCard(insert.cell.x, insert.cell.y);
+//            selectedCard = null;
+//            BattleClient.updatePlayingMatch();
+//        }
         if (action instanceof Move) {
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
