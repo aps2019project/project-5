@@ -1,7 +1,6 @@
 package client.views.graphics;
 
 import client.controllers.BattleClient;
-import client.controllers.ClientManager;
 import client.models.Action;
 import client.models.Timer;
 import client.views.Graphics;
@@ -34,15 +33,6 @@ import models.map.Cell;
 import models.map.Map;
 import models.match.action.*;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +42,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static client.views.Graphics.Menu.BATTLE;
 import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
@@ -171,9 +160,6 @@ public class GraphicBattleController implements Initializable {
         ScheduledThreadPoolExecutor opponentCheck = new ScheduledThreadPoolExecutor(1);
         opponentCheck.scheduleAtFixedRate(this::updateMatch, 0, 1, TimeUnit.SECONDS);
 
-//        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
-//        timer.start();
-
     }
 
     private void showCardsInBoard() {
@@ -226,6 +212,7 @@ public class GraphicBattleController implements Initializable {
 
     private void moveCard(AnchorPane cardPane, Rectangle newPosition, Card card) {
         int time = getDistance(newPosition.getX(), newPosition.getY(), cardPane.getLayoutX(), cardPane.getLayoutY()) * 7;
+
 
         Timeline timeline = new Timeline();
         KeyFrame end = new KeyFrame(new Duration(time),
@@ -334,27 +321,32 @@ public class GraphicBattleController implements Initializable {
         } else {
             if (selectedCard.equalsInGame(clickedCard)) {
                 selectedCard = null;
+                isSelectedCardInGame = false;
                 System.out.println("Card unselected");
             } else {
                 if (isSelectedCardInGame) {
                     if (clickedCard == null) {
                         if (BattleClient.move(row, column)) {
                             moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
-                            if(selectedCard instanceof Attacker) {
+                            if (selectedCard instanceof Attacker) {
                                 ((Attacker) selectedCard).cell.x = row;
-                                ((Attacker) selectedCard).cell.x = column;
+                                ((Attacker) selectedCard).cell.y = column;
                             }
                         } else {
                             System.out.println("can't move here");
                         }
                     } else {
+                        System.out.format("Selected card player name: %s", BattleClient.getMe().account.username);
+                        System.out.format("Clicked card player name: %s", clickedCard.playerName);
                         if (clickedCard.playerName.equals(BattleClient.getMe().account.username)) {
+                            System.out.println("card selection changed");
                             BattleClient.selectCard(clickedCard.id);
                             selectedCard = clickedCard;
+                            isSelectedCardInGame = true;
                         } else {
                             System.out.println("attack");
                             Attacker attacker = (Attacker) clickedCard;
-                            Response response = BattleClient.attack(attacker.cell.x, attacker.cell.y);
+                            Response response = BattleClient.attack(row, column);
                             attack(selectedCard, clickedCard);
                         }
                     }
@@ -380,30 +372,32 @@ public class GraphicBattleController implements Initializable {
 
     private void updateMatch() {
         GameAction action = BattleClient.getAction();
-        System.out.println(action);
-        if(action instanceof EndTurn) {
-            endTurnBtn.setDisable(false);
+
+        if (action instanceof EndTurn) {
+            System.out.println(action);
+            Platform.runLater(() -> endTurnBtn.setDisable(false));
             BattleClient.updatePlayingMatch();
         }
-
-        if(BattleClient.isMyTurn())
-            return;
-
-        if(action instanceof Insert) {
+        if (action instanceof Insert) {
+            System.out.println(action);
             Insert insert = (Insert) action;
             selectedCard = insert.card;
-            insertCard(insert.cell.x, insert.cell.y);
+            System.out.printf("Selected card is: %s\n", selectedCard);
+            Platform.runLater(() -> insertCard(insert.cell.x, insert.cell.y));
             selectedCard = null;
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Move) {
+        if (action instanceof Move) {
+            System.out.println(action);
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
+
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
-            moveCard(cardPane, newPosition, move.card);
+            Platform.runLater(() -> moveCard(cardPane, newPosition, move.card));
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Attack) {
+        if (action instanceof Attack) {
+            System.out.println(action);
             Attack attack = (Attack) action;
             // TODO: implement
             BattleClient.updatePlayingMatch();
@@ -413,6 +407,8 @@ public class GraphicBattleController implements Initializable {
     private void insertCard(int row, int column) {
         if (selectedCard instanceof Attacker) {
             AnchorPane cardPane = getCardInGame(selectedCard, row, column);
+            System.out.println("Card " + selectedCard + " insert!!");
+            System.out.println("in " + row + ", " + column);
             cardViews.put(selectedCard, cardPane);
             AnchorPane teleport = new AnchorPane(SpriteMaker.getAndShowAnimation(new ImageView(), "teleport", Action.TELEPORT, 1, speed),
                     SpriteMaker.getAndShowAnimation(new ImageView(), "teleport1", Action.TELEPORT, 1, speed),
@@ -499,7 +495,7 @@ public class GraphicBattleController implements Initializable {
                 for (AnchorPane handItem : handItemContainer) {
                     handItem.getStyleClass().remove("hand-item-selected");
                 }
-                if (!card.equals(selectedCard)) {
+                if (!card.equalsInGame(selectedCard)) {
 
                     BattleClient.selectCard(card.id);
 
@@ -623,6 +619,9 @@ public class GraphicBattleController implements Initializable {
         hpLabel.setPrefWidth(30);
 
         anchorPane.getChildren().addAll(imageView, attackPointBackground, healthPointBackground, hpLabel, apLabel);
+
+        System.out.printf("card %s anchor pane created!\n", card);
+
         return anchorPane;
     }
 

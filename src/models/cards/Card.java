@@ -40,13 +40,15 @@ public class Card {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
-        return Objects.equals(name, card.name);
+        if(this.playerName == null)
+            return Objects.equals(name, card.name);
+        return equalsInGame(card);
     }
 
     public boolean equalsInGame(Card card) {
-        if(card == null)
+        if (card == null)
             return false;
-        if(card.playerName == null || this.playerName == null)
+        if (card.playerName == null || this.playerName == null)
             return false;
         else
             return card.playerName.equals(this.playerName) && this.id == card.id;
@@ -54,6 +56,9 @@ public class Card {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        if(playerName == null)
+            return Objects.hash(name);
+        else
+            return Objects.hash(name, id, playerName);
     }
 }
