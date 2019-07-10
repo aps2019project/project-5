@@ -157,7 +157,6 @@ public class Match {
             } else {
                 player2Actions.addFirst(new Move(selectedCard, previousCell, newCell));
             }
-            getActivePlayer().selectedCard = null;
             return true;
         }
         return false;
@@ -193,20 +192,20 @@ public class Match {
                 targetCard != null &&
                 attacker.canAttack &&
                 attacker.isInserted) {
-            if (isValidAttack(cell, (Attacker) getActivePlayer().selectedCard)) {
-                targetCard.health -= attacker.getAttackPoint();
+            if (isValidAttack(cell, attacker)) {
+                targetCard.currentHealth -= attacker.getAttackPoint();
                 if (isValidAttack(attacker.cell, targetCard)) {
-                    attacker.health -= targetCard.getAttackPoint();
+                    attacker.currentHealth -= targetCard.getAttackPoint();
                     if (turn % 2 == 0)
                         player1Actions.addFirst(new Attack(attacker, targetCard, true));
                     else
-                        player1Actions.addFirst(new Attack(attacker, targetCard, true));
+                        player2Actions.addFirst(new Attack(attacker, targetCard, true));
                     return 2;
                 }
                 if (turn % 2 == 0)
                     player1Actions.addFirst(new Attack(attacker, targetCard, false));
                 else
-                    player1Actions.addFirst(new Attack(attacker, targetCard, false));
+                    player2Actions.addFirst(new Attack(attacker, targetCard, false));
                 return 1;
             }
         }
