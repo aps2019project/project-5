@@ -32,12 +32,14 @@ import models.cards.Spell;
 import models.map.Cell;
 import models.map.Map;
 import models.match.action.*;
+
 import java.net.URL;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+
 import static client.views.Graphics.alert;
 import static client.views.Graphics.playMusic;
 
@@ -155,9 +157,6 @@ public class GraphicBattleController implements Initializable {
 
         ScheduledThreadPoolExecutor opponentCheck = new ScheduledThreadPoolExecutor(1);
         opponentCheck.scheduleAtFixedRate(this::updateMatch, 0, 1, TimeUnit.SECONDS);
-
-//        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
-//        timer.start();
 
     }
 
@@ -325,7 +324,7 @@ public class GraphicBattleController implements Initializable {
                     if (clickedCard == null) {
                         if (BattleClient.move(row, column)) {
                             moveCard(cardViews.get(selectedCard), getCardRectangle(row, column), selectedCard);
-                            if(selectedCard instanceof Attacker) {
+                            if (selectedCard instanceof Attacker) {
                                 ((Attacker) selectedCard).cell.x = row;
                                 ((Attacker) selectedCard).cell.y = column;
                             }
@@ -365,12 +364,12 @@ public class GraphicBattleController implements Initializable {
 
     private void updateMatch() {
         GameAction action = BattleClient.getAction();
-        if(action instanceof EndTurn) {
+        if (action instanceof EndTurn) {
             System.out.println(action);
-            endTurnBtn.setDisable(false);
+            Platform.runLater(() -> endTurnBtn.setDisable(false));
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Insert) {
+        if (action instanceof Insert) {
             System.out.println(action);
             Insert insert = (Insert) action;
             selectedCard = insert.card;
@@ -379,15 +378,15 @@ public class GraphicBattleController implements Initializable {
             selectedCard = null;
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Move) {
+        if (action instanceof Move) {
             System.out.println(action);
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
-            moveCard(cardPane, newPosition, move.card);
+            Platform.runLater(() -> moveCard(cardPane, newPosition, move.card));
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Attack) {
+        if (action instanceof Attack) {
             System.out.println(action);
             Attack attack = (Attack) action;
             // TODO: implement
@@ -486,7 +485,7 @@ public class GraphicBattleController implements Initializable {
                 for (AnchorPane handItem : handItemContainer) {
                     handItem.getStyleClass().remove("hand-item-selected");
                 }
-                if (!card.equals(selectedCard)) {
+                if (!card.equalsInGame(selectedCard)) {
 
                     BattleClient.selectCard(card.id);
 
