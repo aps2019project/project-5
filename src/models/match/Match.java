@@ -6,10 +6,7 @@ import models.map.Cell;
 import models.map.Map;
 import models.match.action.*;
 
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class Match {
     public String token;
@@ -194,12 +191,23 @@ public class Match {
                 attacker.isInserted) {
             if (isValidAttack(cell, attacker)) {
                 targetCard.currentHealth -= attacker.getAttackPoint();
+                attacker.canAttack = false;
+                if(targetCard.currentHealth <= 0) {
+                    targetCard.cell.attacker = null;
+                    targetCard.cell = null;
+                    getInActivePlayer().graveyard.add(targetCard);
+                }
                 if (isValidAttack(attacker.cell, targetCard)) {
                     attacker.currentHealth -= targetCard.getAttackPoint();
                     if (turn % 2 == 0)
                         player1Actions.addFirst(new Attack(attacker, targetCard, true));
                     else
                         player2Actions.addFirst(new Attack(attacker, targetCard, true));
+                    if(attacker.currentHealth <= 0) {
+                        attacker.cell.attacker = null;
+                        attacker.cell = null;
+                        getActivePlayer().graveyard.add(attacker);
+                    }
                     return 2;
                 }
                 if (turn % 2 == 0)

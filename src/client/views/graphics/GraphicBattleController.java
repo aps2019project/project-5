@@ -40,6 +40,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static client.views.Graphics.alert;
@@ -285,29 +286,71 @@ public class GraphicBattleController implements Initializable {
         AnchorPane enemyAnchor = cardViews.get(enemyCard);
         ImageView myImageView = (ImageView) myAnchor.getChildren().get(0);
         ImageView enemyImageView = (ImageView) enemyAnchor.getChildren().get(0);
+        AtomicBoolean enemyCardIsAlive = new AtomicBoolean(true);
+        AtomicBoolean myCardIsAlive = new AtomicBoolean(true);
         new Thread(() -> {
             double actionTime = SpriteMaker.getAnimationTime(myImageView, myCard.name, Action.ATTACK, 1, speed);
-            Graphics.playMusic("sfx_f3_general_attack_impact.m4a");
+            playMusic("sfx_f3_general_attack_impact.m4a");
             SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.ATTACK, 1, speed);
             long time = System.currentTimeMillis();
             while (System.currentTimeMillis() - time <= actionTime) {
             }
-            SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.IDLE, 10000000, speed);
-            Platform.runLater(() -> updateHp(enemyCard));
+            enemyCardIsAlive.set(((Attacker) enemyCard).currentHealth > 0);
+
+            if(enemyCardIsAlive.get())
+                SpriteMaker.getAndShowAnimation(myImageView, myCard.name, Action.IDLE, 10000000, speed);
 
             if(count > 1) {
                 actionTime = SpriteMaker.getAnimationTime(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
                 time = System.currentTimeMillis();
                 SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.ATTACK, 1, speed);
-                Graphics.playMusic("sfx_f3_general_attack_swing.m4a");
+                playMusic("sfx_f3_general_attack_swing.m4a");
                 while (System.currentTimeMillis() - time <= actionTime) {
                 }
 
+                if(myCardIsAlive.get())
+                    myCardIsAlive.set(((Attacker) myCard).currentHealth > 0);
+
                 SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
                 SpriteMaker.getAndShowAnimation(enemyImageView, enemyCard.name, Action.IDLE, 10000000, speed);
+
+            }
+
+            if(!enemyCardIsAlive.get()) {
+                death((Attacker) enemyCard);
+            } else {
+                Platform.runLater(() -> updateHp(enemyCard));
+            }
+
+            if(!myCardIsAlive.get()) {
+                death((Attacker) myCard);
+            } else {
                 Platform.runLater(() -> updateHp(myCard));
             }
+
+
         }).start();
+    }
+
+    public void death(Attacker card) {
+        AnchorPane cardPane = cardViews.get(card);
+        if(cardPane == null)
+            return;
+
+        ImageView imageView = (ImageView) cardPane.getChildren().get(0);
+        double actionTime = SpriteMaker.getAnimationTime(imageView, card.name, Action.DEATH, 1, speed);
+        playMusic("sfx_f3_general_attack_impact.m4a");
+        SpriteMaker.getAndShowAnimation(imageView, card.name, Action.DEATH, 1, speed);
+        long time = System.currentTimeMillis();
+        while (System.currentTimeMillis() - time <= actionTime) {
+        }
+
+        root.getChildren().remove(cardPane);
+        cardViews.remove(card);
+
+        System.out.println("card " + card.name + " dead.");
+
+        // TODO: add card to graveyard.
 
     }
 

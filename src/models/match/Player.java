@@ -5,6 +5,7 @@ import models.cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class Player {
@@ -13,6 +14,7 @@ public class Player {
     public ArrayList<Card> hand = new ArrayList<>();
     public int manaPoint = 2;
     public Card selectedCard;
+    public List<Card> graveyard = new ArrayList<>();
 
     private void makeHand() {
         int cardId = 0;
