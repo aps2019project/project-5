@@ -160,9 +160,6 @@ public class GraphicBattleController implements Initializable {
         ScheduledThreadPoolExecutor opponentCheck = new ScheduledThreadPoolExecutor(1);
         opponentCheck.scheduleAtFixedRate(this::updateMatch, 0, 1, TimeUnit.SECONDS);
 
-//        timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
-//        timer.start();
-
     }
 
     private void showCardsInBoard() {
@@ -374,10 +371,10 @@ public class GraphicBattleController implements Initializable {
 
         if (action instanceof EndTurn) {
             System.out.println(action);
-            endTurnBtn.setDisable(false);
+            Platform.runLater(() -> endTurnBtn.setDisable(false));
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Insert) {
+        if (action instanceof Insert) {
             System.out.println(action);
             Insert insert = (Insert) action;
             selectedCard = insert.card;
@@ -386,12 +383,13 @@ public class GraphicBattleController implements Initializable {
             selectedCard = null;
             BattleClient.updatePlayingMatch();
         }
-        if(action instanceof Move) {
+        if (action instanceof Move) {
             System.out.println(action);
             Move move = (Move) action;
             AnchorPane cardPane = cardViews.get(move.card);
+
             Rectangle newPosition = getCardRectangle(move.newCell.x, move.newCell.y);
-            moveCard(cardPane, newPosition, move.card);
+            Platform.runLater(() -> moveCard(cardPane, newPosition, move.card));
             BattleClient.updatePlayingMatch();
         }
         if (action instanceof Attack) {
@@ -493,7 +491,7 @@ public class GraphicBattleController implements Initializable {
                 for (AnchorPane handItem : handItemContainer) {
                     handItem.getStyleClass().remove("hand-item-selected");
                 }
-                if (!card.equals(selectedCard)) {
+                if (!card.equalsInGame(selectedCard)) {
 
                     BattleClient.selectCard(card.id);
 
