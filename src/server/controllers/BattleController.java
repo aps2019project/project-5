@@ -4,6 +4,8 @@ import com.gilecode.yagson.YaGson;
 import models.Account;
 import models.Response;
 import models.match.*;
+import server.data.DataWriter;
+import server.data.Files;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
@@ -262,6 +264,7 @@ public class BattleController {
                         }
                         if(match.winner != null) {
                             match.winner.account.drake += 10000;
+                            DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
                         }
                     } catch (Throwable e) {
                         response = new Response(false, "x or y is not valid");
