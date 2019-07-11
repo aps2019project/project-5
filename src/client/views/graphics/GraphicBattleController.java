@@ -1,6 +1,5 @@
 package client.views.graphics;
 
-import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import client.layouts.EndGame;
 import client.models.Action;
@@ -183,6 +182,7 @@ public class GraphicBattleController implements Initializable {
                 setCard(cardAnchorPane);
             }
 
+        graveyardCards.getChildren().clear();
         for (Card card : BattleClient.getMe().graveyard) {
             Label deadCard = new Label(card.name);
             deadCard.setTextFill(Color.rgb(255, 255, 255));
@@ -339,12 +339,22 @@ public class GraphicBattleController implements Initializable {
             }
 
             if (!enemyCardIsAlive.get()) {
+                if (enemyCard instanceof Hero) {
+                    EndGame.isWin = true;
+                    Graphics.setMenu(Graphics.Menu.END_GAME);
+                }
+
                 death((Attacker) enemyCard, enemyAnchor);
             } else {
                 Platform.runLater(() -> updateHp(enemyCard));
             }
 
             if (!myCardIsAlive.get()) {
+                if (myCard instanceof Hero) {
+                    EndGame.isWin = false;
+                    Graphics.setMenu(Graphics.Menu.END_GAME);
+                }
+
                 death((Attacker) myCard, myAnchor);
             } else {
                 Platform.runLater(() -> updateHp(myCard));
@@ -365,19 +375,9 @@ public class GraphicBattleController implements Initializable {
         while (System.currentTimeMillis() - time <= actionTime) {
         }
 
-        root.getChildren().remove(cardPane);
-        cardViews.remove(card);
+        updateCardsInBoard();
 
         System.out.println("card " + card.name + " dead.");
-
-        if (card instanceof Hero) {
-            if (card.playerName.equals(AccountClient.user.username)) {
-                EndGame.isWin = false;
-            } else {
-                EndGame.isWin = true;
-            }
-            Graphics.setMenu(Graphics.Menu.END_GAME);
-        }
 
     }
 
