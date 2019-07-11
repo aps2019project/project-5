@@ -179,6 +179,10 @@ public class ShopController implements Initializable {
             q = "";
 
         Response response = ShopClient.search(AccountClient.user.loginToken, q, type.getTypeName().toLowerCase());
+        if(!response.OK) {
+            alert("Error", "Error", response.message);
+            return;
+        }
         cards = ((Map<Card, Integer>) response.data);
 
         cards.forEach((card, integer) -> {

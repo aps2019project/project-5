@@ -152,8 +152,9 @@ public class GraphicBattleController implements Initializable {
                     if (speed > 1)
                         speed--;
                     break;
+                case N:
+                    showCardsInBoard();
             }
-            showCardsInBoard();
             updateHand();
         });
         endTurnBtn.setDisable(!BattleClient.isMyTurn());
@@ -199,12 +200,24 @@ public class GraphicBattleController implements Initializable {
         AtomicReference<String> player2HeroName = new AtomicReference<>("Rostam");
         heros1.forEach(hero -> player1HeroName.set(hero.name));
         heros2.forEach(hero -> player2HeroName.set(hero.name));
-        player1ProfileImage.setImage(new Image(
-                "/client/resources/sprites/HeroLogos/" + player1HeroName.get() + ".png"
-        ));
-        player2ProfileImage.setImage(new Image(
-                "/client/resources/sprites/HeroLogos/" + player2HeroName.get() + ".png"
-        ));
+        try {
+            player1ProfileImage.setImage(new Image(
+                    "/client/resources/sprites/HeroLogos/" + player1HeroName.get() + ".png"
+            ));
+        } catch (Throwable e) {
+            player1ProfileImage.setImage(new Image(
+                    "/client/resources/sprites/HeroLogos/Rostam.png"
+            ));
+        }
+        try {
+            player2ProfileImage.setImage(new Image(
+                    "/client/resources/sprites/HeroLogos/" + player2HeroName.get() + ".png"
+            ));
+        } catch (Throwable e) {
+            player2ProfileImage.setImage(new Image(
+                    "/client/resources/sprites/HeroLogos/Rostam.png"
+            ));
+        }
     }
 
     private int getDistance(double x1, double y1, double x2, double y2) {

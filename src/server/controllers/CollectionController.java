@@ -129,7 +129,8 @@ public class CollectionController extends Application {
             if (deck == null)
                 response = new Response(false, "deck with this name not found", 106);
             else {
-                if (deck.name.equals(request.user.mainDeck.name)) request.user.mainDeck = null;
+                if (request.user.mainDeck != null)
+                    if (deck.name.equals(request.user.mainDeck.name)) request.user.mainDeck = null;
                 request.user.decks.remove(deck.name);
 
                 response = new Response(true, "deck deleted!", request.user);
@@ -197,10 +198,10 @@ public class CollectionController extends Application {
 
     public static HttpResponse isMainDeckValid(HttpRequest request) {
         Response response;
-        if(request.user.mainDeck == null) {
+        if (request.user.mainDeck == null) {
             response = new Response(true, "you don't have main deck!", false);
         } else {
-            if(request.user.mainDeck.isValid()) {
+            if (request.user.mainDeck.isValid()) {
                 response = new Response(true, "your main deck is valid", true);
             } else {
                 response = new Response(true, "your main deck is not valid", false);
