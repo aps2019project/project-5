@@ -2,6 +2,7 @@ package server.controllers;
 
 import javafx.stage.FileChooser;
 import models.Response;
+import models.match.Player;
 import server.data.DataWriter;
 import server.data.Files;
 import server.models.http.HttpRequest;
@@ -25,9 +26,10 @@ public class CheatModeController {
     }
 
     public static HttpResponse cheatMana(HttpRequest request) {
-        // request.user.mana +=  100;
+        final Player player = BattleController.playingMatches.get(request.GET.get("matchToken")).getActivePlayer();
+        player.manaPoint +=  100;
         DataWriter.saveData(Files.USER_DATA, AuthenticationController.users);
-        Response response = new Response(true, "mana incremented", request.user.drake);
+        Response response = new Response(true, "mana incremented", player.manaPoint);
         return new HttpResponseJSON(response);
     }
 }

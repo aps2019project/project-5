@@ -17,7 +17,7 @@
                 styleClass="game-board" AnchorPane.topAnchor="310" AnchorPane.bottomAnchor="330">
     </AnchorPane>
 
-    <Label fx:id="timerLbl" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="950"/>
+    <Label fx:id="timerLbl" text="timer" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="950"/>
 
     <ImageView AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" fitWidth="600" fitHeight="457">
         <Image url="/client/resources/images/battle/battlemap5_foreground_001@2x.png"/>

@@ -75,6 +75,8 @@ public class Server {
         main.urls.add(new URL("/cheat_mode/cheat_mana", CheatModeController::cheatMana, true));
 
         main.urls.add(new URL("/watch/get_live_matches", WatchController::getLiveMatches, true));
+        main.urls.add(new URL("/watch/get_online_players", WatchController::getOnlineUsersClient, true));
+
 
         main.start();
     }

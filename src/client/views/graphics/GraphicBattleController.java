@@ -3,6 +3,7 @@ package client.views.graphics;
 import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import client.layouts.EndGame;
+import client.controllers.CheatClient;
 import client.models.Action;
 import client.models.Timer;
 import client.views.Graphics;
@@ -145,8 +146,8 @@ public class GraphicBattleController implements Initializable {
         root.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case M:
-//                    ClientManager.setMana(10000);
-//                    updateMana();
+                    CheatClient.cheatMana();
+                    updateMana();
                     break;
                 case EQUALS:
                     speed++;
@@ -155,9 +156,8 @@ public class GraphicBattleController implements Initializable {
                     if (speed > 1)
                         speed--;
                     break;
-                case RIGHT:
-                    updateCardsInBoard();
             }
+            updateCardsInBoard();
             updateHand();
         });
         endTurnBtn.setDisable(!BattleClient.isMyTurn());
@@ -345,7 +345,7 @@ public class GraphicBattleController implements Initializable {
             }
 
             if (!myCardIsAlive.get()) {
-                death((Attacker) myCard, myAnchor);
+                death((Attacker) myCard);
             } else {
                 Platform.runLater(() -> updateHp(myCard));
             }
@@ -424,6 +424,7 @@ public class GraphicBattleController implements Initializable {
                                 ((Attacker) clickedCard).currentHealth -= ((Attacker) selectedCard).getAttackPoint();
                                 if (response.data.equals(2))
                                     ((Attacker) selectedCard).currentHealth -= ((Attacker) clickedCard).getAttackPoint();
+
                                 attack(selectedCard, clickedCard, ((int) response.data));
                             }
                         }

@@ -1,6 +1,6 @@
 package client.views.graphics;
 
-import client.controllers.WatchClient;
+import client.controllers.*;
 import client.views.Graphics;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
@@ -13,7 +13,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import models.Account;
+import models.Response;
+import models.cards.*;
 import models.match.Match;
+import server.models.http.HttpResponse;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -26,6 +34,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -60,8 +69,7 @@ public class GraphicWatchMenu implements Initializable {
 
                         try {
                             Thread.sleep(10);
-                        } catch (Exception ignored) {
-                        }
+                        } catch (Exception ignored) { }
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);
@@ -145,5 +153,11 @@ public class GraphicWatchMenu implements Initializable {
         } catch (Exception ignored) {
             Graphics.alert("Error", "Sorry", "You haven't played any match yet !");
         }
+    }
+
+    public List<Account> getOnlineUsers() {
+        ServerConnection serverConnection = new ServerConnection("/watch/get_online_players");
+        serverConnection.parameters.put("token", AccountClient.user.loginToken);
+        return (List<Account>)serverConnection.getResponse().data;
     }
 }
