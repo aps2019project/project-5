@@ -4,12 +4,12 @@ import models.cards.Attacker;
 
 public class Attack extends GameAction {
     public Attacker attacker;
-    public Attacker Defender;
+    public Attacker defender;
     public boolean hasCounterAttack;
 
     public Attack(Attacker attacker, Attacker defender, boolean hasCounterAttack) {
         this.attacker = attacker;
-        Defender = defender;
+        this.defender = defender;
         this.hasCounterAttack = hasCounterAttack;
     }
 
@@ -17,7 +17,7 @@ public class Attack extends GameAction {
     public String toString() {
         return "Attack{" +
                 "attacker=" + attacker +
-                ", Defender=" + Defender +
+                ", defender=" + defender +
                 ", hasCounterAttack=" + hasCounterAttack +
                 '}';
     }

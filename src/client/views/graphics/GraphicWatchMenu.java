@@ -71,7 +71,7 @@ public class GraphicWatchMenu implements Initializable {
 
     public void startWatchClient(int port) {
         if (!isStartStream) {
-            String ip = "127.0.0.1";
+            String ip = "192.168.43.237";
             isStartStream = true;
             new Thread(() -> {
                 try {

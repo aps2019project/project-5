@@ -314,7 +314,11 @@ public class GraphicCollectionMenu implements Initializable {
         if (q == null) {
             q = "";
         }
-        cards = ((Map<Card, Integer>) CollectionClient.search(q, type.getTypeName()).data);
+        Response search = CollectionClient.search(q, type.getTypeName());
+        if(!search.OK) {
+
+        }
+        cards = ((Map<Card, Integer>) search.data);
         cards.forEach((card, integer) -> {
             if (card.getClass() == type || type == Card.class) {
                 AnchorPane cardPane = getCardPane(card, true, integer);
