@@ -61,6 +61,7 @@ public class Graphics extends Application {
         BATTLE("/client/layouts/battle.fxml"),
         CUSTOM_CARD("/client/layouts/custom_card.fxml"),
         WAITING_MENU("/client/layouts/waiting.fxml"),
+        SCORE("/client/layouts/scoreboard.fxml"),
         END_GAME("/client/layouts/end_game.fxml"),
         WATCH_MENU("/client/layouts/watch.fxml");
         Parent root;

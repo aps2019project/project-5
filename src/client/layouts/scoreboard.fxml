@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx" alignment="center" xmlns:fx="http://javafx.com/fxml"
+      fx:id="root"
+      fx:controller="client.layouts.Scoreboard" prefHeight="400.0" prefWidth="600.0">
+
+
+</VBox>
