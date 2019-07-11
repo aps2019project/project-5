@@ -4,7 +4,6 @@ import com.gilecode.yagson.YaGson;
 import models.Account;
 import models.Response;
 import models.match.*;
-import models.match.action.Move;
 import server.models.http.HttpRequest;
 import server.models.http.HttpResponse;
 import server.models.http.HttpResponseJSON;
@@ -261,6 +260,9 @@ public class BattleController {
                         } else {
                             response = new Response(false, "invalid attack!", res);
                         }
+                        if(match.winner != null) {
+                            match.winner.account.drake += 10000;
+                        }
                     } catch (Throwable e) {
                         response = new Response(false, "x or y is not valid");
                     }
@@ -269,6 +271,7 @@ public class BattleController {
                 }
             }
         }
+
         return new HttpResponseJSON(response);
     }
 

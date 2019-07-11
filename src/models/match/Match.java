@@ -6,13 +6,17 @@ import models.map.Cell;
 import models.map.Map;
 import models.match.action.*;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 public class Match {
     public String token;
     public Map map = new Map();
     public Player[] players = new Player[2];
     public int turn = 0;
+    public Player winner = null;
     public Deque<GameAction> player1Actions = new LinkedList<>();
     public Deque<GameAction> player2Actions = new LinkedList<>();
 
@@ -192,7 +196,10 @@ public class Match {
             if (isValidAttack(cell, attacker)) {
                 targetCard.currentHealth -= attacker.getAttackPoint();
                 attacker.canAttack = false;
-                if(targetCard.currentHealth <= 0) {
+                if (targetCard.currentHealth <= 0) {
+                    if (targetCard instanceof Hero) {
+                        winner = getActivePlayer();
+                    }
                     targetCard.cell.attacker = null;
                     targetCard.cell = null;
                     getInActivePlayer().graveyard.add(targetCard);
@@ -203,7 +210,10 @@ public class Match {
                         player1Actions.addFirst(new Attack(attacker, targetCard, true));
                     else
                         player2Actions.addFirst(new Attack(attacker, targetCard, true));
-                    if(attacker.currentHealth <= 0) {
+                    if (attacker.currentHealth <= 0) {
+                        if (attacker instanceof Hero) {
+                            winner = getInActivePlayer();
+                        }
                         attacker.cell.attacker = null;
                         attacker.cell = null;
                         getActivePlayer().graveyard.add(attacker);
