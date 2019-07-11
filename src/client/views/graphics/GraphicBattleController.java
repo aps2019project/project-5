@@ -2,6 +2,7 @@ package client.views.graphics;
 
 import client.controllers.BattleClient;
 import client.layouts.EndGame;
+import client.controllers.CheatClient;
 import client.models.Action;
 import client.models.Timer;
 import client.views.Graphics;
@@ -144,8 +145,8 @@ public class GraphicBattleController implements Initializable {
         root.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case M:
-//                    ClientManager.setMana(10000);
-//                    updateMana();
+                    CheatClient.cheatMana();
+                    updateMana();
                     break;
                 case EQUALS:
                     speed++;
@@ -154,9 +155,8 @@ public class GraphicBattleController implements Initializable {
                     if (speed > 1)
                         speed--;
                     break;
-                case RIGHT:
-                    updateCardsInBoard();
             }
+            updateCardsInBoard();
             updateHand();
         });
         endTurnBtn.setDisable(!BattleClient.isMyTurn());
@@ -424,6 +424,7 @@ public class GraphicBattleController implements Initializable {
                                 ((Attacker) clickedCard).currentHealth -= ((Attacker) selectedCard).getAttackPoint();
                                 if (response.data.equals(2))
                                     ((Attacker) selectedCard).currentHealth -= ((Attacker) clickedCard).getAttackPoint();
+
                                 attack(selectedCard, clickedCard, ((int) response.data));
                             }
                         }
@@ -455,7 +456,7 @@ public class GraphicBattleController implements Initializable {
             System.out.println(action);
             Platform.runLater(() -> endTurnBtn.setDisable(false));
             BattleClient.updatePlayingMatch();
-            timer = new Timer(20, timerLbl, () -> endTurn(null));
+            timer = new Timer( eachTurnTime, timerLbl, () -> endTurn(null));
         }
         if (action instanceof Insert) {
             System.out.println(action);

@@ -18,7 +18,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -39,7 +39,7 @@
               "canMove": false
             }
           },
-          3
+          2
         ],
         [
           {
@@ -60,7 +60,7 @@
               "canMove": false
             }
           },
-          3
+          2
         ],
         [
           {
@@ -81,7 +81,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -97,7 +97,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -113,7 +113,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -134,7 +134,7 @@
               "canMove": false
             }
           },
-          7
+          6
         ],
         [
           {
@@ -155,7 +155,7 @@
               "canMove": false
             }
           },
-          10
+          9
         ],
         [
           {
@@ -171,7 +171,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -192,7 +192,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -213,7 +213,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -234,7 +234,7 @@
               "canMove": false
             }
           },
-          8
+          7
         ],
         [
           {
@@ -255,7 +255,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -276,7 +276,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -297,7 +297,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -318,7 +318,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -339,7 +339,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -360,7 +360,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -381,7 +381,7 @@
               "canMove": false
             }
           },
-          9
+          8
         ],
         [
           {
@@ -402,7 +402,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -418,7 +418,7 @@
               "canMove": false
             }
           },
-          8
+          7
         ],
         [
           {
@@ -434,7 +434,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -455,7 +455,7 @@
               "canMove": false
             }
           },
-          9
+          8
         ],
         [
           {
@@ -471,7 +471,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -492,7 +492,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -508,7 +508,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -524,7 +524,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -540,7 +540,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -561,23 +561,7 @@
               "canMove": false
             }
           },
-          4
-        ],
-        [
-          {
-            "@type": "models.cards.Spell",
-            "@val": {
-              "targetType": "OPPONENT_HERO",
-              "name": "Lighting Bolt",
-              "description": "",
-              "id": 0,
-              "price": 1250,
-              "manaPoint": 2,
-              "isInserted": false,
-              "canMove": false
-            }
-          },
-          1
+          3
         ],
         [
           {
@@ -598,7 +582,7 @@
               "canMove": false
             }
           },
-          2
+          1
         ],
         [
           {
@@ -614,7 +598,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -635,7 +619,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -656,7 +640,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -672,7 +656,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -688,7 +672,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -709,7 +693,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -730,7 +714,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -751,7 +735,7 @@
               "canMove": false
             }
           },
-          9
+          8
         ],
         [
           {
@@ -767,7 +751,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -783,7 +767,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -804,7 +788,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -825,7 +809,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -846,7 +830,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -862,7 +846,7 @@
               "canMove": false
             }
           },
-          5
+          4
         ],
         [
           {
@@ -883,7 +867,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -904,7 +888,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -925,7 +909,7 @@
               "canMove": false
             }
           },
-          3
+          2
         ],
         [
           {
@@ -946,7 +930,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ],
         [
           {
@@ -967,7 +951,7 @@
               "canMove": false
             }
           },
-          4
+          3
         ]
       ]
     }
