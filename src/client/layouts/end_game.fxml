@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.layouts.EndGame">
+    <Label layoutX="211.0" layoutY="165.0" style="-fx-font-size:4em" text="You Win" visible="false" fx:id="win"/>
+    <Label layoutX="204.0" layoutY="165.0" style="-fx-font-size:4em" text="You Lose" visible="false" fx:id="lose"/>
+    <Button layoutX="274.0" layoutY="318.0" mnemonicParsing="false" text="بازگشت" onMouseClicked="#back"/>
+</AnchorPane>

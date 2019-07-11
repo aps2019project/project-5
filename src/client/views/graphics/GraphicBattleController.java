@@ -1,6 +1,8 @@
 package client.views.graphics;
 
+import client.controllers.AccountClient;
 import client.controllers.BattleClient;
+import client.layouts.EndGame;
 import client.models.Action;
 import client.models.Timer;
 import client.views.Graphics;
@@ -22,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import models.Response;
@@ -182,6 +185,7 @@ public class GraphicBattleController implements Initializable {
 
         for (Card card : BattleClient.getMe().graveyard) {
             Label deadCard = new Label(card.name);
+            deadCard.setTextFill(Color.rgb(255, 255, 255));
             graveyardCards.getChildren().addAll(deadCard);
         }
     }
@@ -353,7 +357,6 @@ public class GraphicBattleController implements Initializable {
     public void death(Attacker card, AnchorPane cardPane) {
         if (cardPane == null)
             return;
-
         ImageView imageView = (ImageView) cardPane.getChildren().get(0);
         double actionTime = SpriteMaker.getAnimationTime(imageView, card.name, Action.DEATH, 1, speed);
         playMusic("sfx_f3_general_attack_impact.m4a");
@@ -367,7 +370,14 @@ public class GraphicBattleController implements Initializable {
 
         System.out.println("card " + card.name + " dead.");
 
-        // TODO: add card to graveyard.
+        if (card instanceof Hero) {
+            if (card.playerName.equals(AccountClient.user.username)) {
+                EndGame.isWin = false;
+            } else {
+                EndGame.isWin = true;
+            }
+            Graphics.setMenu(Graphics.Menu.END_GAME);
+        }
 
     }
 
@@ -414,7 +424,6 @@ public class GraphicBattleController implements Initializable {
                                 ((Attacker) clickedCard).currentHealth -= ((Attacker) selectedCard).getAttackPoint();
                                 if (response.data.equals(2))
                                     ((Attacker) selectedCard).currentHealth -= ((Attacker) clickedCard).getAttackPoint();
-
                                 attack(selectedCard, clickedCard, ((int) response.data));
                             }
                         }

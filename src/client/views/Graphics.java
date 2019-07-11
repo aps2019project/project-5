@@ -4,7 +4,6 @@ import client.controllers.AccountClient;
 import client.views.graphics.GraphicPreBattleMenu;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
@@ -15,7 +14,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,6 +61,7 @@ public class Graphics extends Application {
         BATTLE("/client/layouts/battle.fxml"),
         CUSTOM_CARD("/client/layouts/custom_card.fxml"),
         WAITING_MENU("/client/layouts/waiting.fxml"),
+        END_GAME("/client/layouts/end_game.fxml"),
         WATCH_MENU("/client/layouts/watch.fxml");
         Parent root;
         String file;
