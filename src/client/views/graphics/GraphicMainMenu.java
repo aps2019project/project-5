@@ -2,10 +2,9 @@ package client.views.graphics;
 
 import client.controllers.AccountClient;
 import client.controllers.ShopClient;
-import client.controllers.WatchClient;
-import com.jfoenix.controls.JFXButton;
+import client.models.Account;
+import client.views.Graphics;
 import javafx.animation.TranslateTransition;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -13,18 +12,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import client.models.Account;
-import client.views.Graphics;
-import models.match.Match;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import static client.views.Graphics.*;
 import static client.views.Graphics.Menu.*;
-import static client.views.graphics.GraphicWatchMenu.*;
+import static client.views.Graphics.playMusic;
+import static client.views.Graphics.setMenu;
 
 public class GraphicMainMenu implements Initializable {
 
@@ -69,7 +63,7 @@ public class GraphicMainMenu implements Initializable {
 
     public void codex(MouseEvent mouseEvent) {
         Graphics.playMusic("sfx_ui_select.m4a");
-        Graphics.setMenu(COLLECTION_MENU);
+        Graphics.setMenu(SCORE);
     }
 
     @Override
