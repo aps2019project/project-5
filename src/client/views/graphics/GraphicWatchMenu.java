@@ -155,9 +155,5 @@ public class GraphicWatchMenu implements Initializable {
         }
     }
 
-    public List<Account> getOnlineUsers() {
-        ServerConnection serverConnection = new ServerConnection("/watch/get_online_players");
-        serverConnection.parameters.put("token", AccountClient.user.loginToken);
-        return (List<Account>)serverConnection.getResponse().data;
-    }
+
 }

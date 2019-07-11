@@ -345,7 +345,7 @@ public class GraphicBattleController implements Initializable {
             }
 
             if (!myCardIsAlive.get()) {
-                death((Attacker) myCard);
+                death((Attacker) myCard, myAnchor);
             } else {
                 Platform.runLater(() -> updateHp(myCard));
             }
@@ -456,7 +456,7 @@ public class GraphicBattleController implements Initializable {
             System.out.println(action);
             Platform.runLater(() -> endTurnBtn.setDisable(false));
             BattleClient.updatePlayingMatch();
-            timer = new Timer(20, timerLbl, () -> endTurn(null));
+            timer = new Timer( eachTurnTime, timerLbl, () -> endTurn(null));
         }
         if (action instanceof Insert) {
             System.out.println(action);

@@ -66,7 +66,7 @@ public class GraphicPreBattleMenu implements Initializable {
             // TODO: start single player game (with ai)
         }
 
-        ShellCommand.executeCommand("byzanz-record -d 10 lastMatch.mp4");
+        ShellCommand.executeCommand("byzanz-record -d 100 lastMatch.mp4");
     }
 
     public void deathMatch(MouseEvent mouseEvent) {
