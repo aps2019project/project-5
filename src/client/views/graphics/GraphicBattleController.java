@@ -48,7 +48,6 @@ import static client.views.Graphics.playMusic;
 
 public class GraphicBattleController implements Initializable {
 
-
     public Button endTurnBtn;
     public static int token;
     public Label timerLbl;
@@ -336,13 +335,13 @@ public class GraphicBattleController implements Initializable {
             }
 
             if (!enemyCardIsAlive.get()) {
-                death((Attacker) enemyCard);
+                death((Attacker) enemyCard, enemyAnchor);
             } else {
                 Platform.runLater(() -> updateHp(enemyCard));
             }
 
             if (!myCardIsAlive.get()) {
-                death((Attacker) myCard);
+                death((Attacker) myCard, myAnchor);
             } else {
                 Platform.runLater(() -> updateHp(myCard));
             }
@@ -351,8 +350,7 @@ public class GraphicBattleController implements Initializable {
         }).start();
     }
 
-    public void death(Attacker card) {
-        AnchorPane cardPane = cardViews.get(card);
+    public void death(Attacker card, AnchorPane cardPane) {
         if (cardPane == null)
             return;
 
