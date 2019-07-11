@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class BattleController {
-    private static final int MATCH_TOKEN_LENGTH = 4;
+    private static final int MATCH_TOKEN_LENGTH = 3;
     public static Account waitingUserForDeathMatch;
     public static Account waitingUserForCaptureTheFlagMatchMatch;
     public static Account waitingUserForMultiFlagMatch;

@@ -1,6 +1,6 @@
 package client.views.graphics;
 
-import client.controllers.*;
+import client.controllers.WatchClient;
 import client.views.Graphics;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
@@ -13,15 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import models.Account;
-import models.Response;
-import models.cards.*;
 import models.match.Match;
-import server.models.http.HttpResponse;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -34,7 +26,6 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -56,7 +47,7 @@ public class GraphicWatchMenu implements Initializable {
 
     public void startWatchClient(int port) {
         if (!isStartStream) {
-            String ip = "192.168.43.237";
+            String ip = "172.20.10.103";
             isStartStream = true;
             new Thread(() -> {
                 try {
@@ -69,7 +60,8 @@ public class GraphicWatchMenu implements Initializable {
 
                         try {
                             Thread.sleep(10);
-                        } catch (Exception ignored) { }
+                        } catch (Exception ignored) {
+                        }
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);

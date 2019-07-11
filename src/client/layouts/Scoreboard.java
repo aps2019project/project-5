@@ -16,7 +16,7 @@ public class Scoreboard implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         root.getChildren().clear();
-        WatchClient.getOnlineUsers().forEach(account -> {
+        if (WatchClient.getOnlineUsers() != null) WatchClient.getOnlineUsers().forEach(account -> {
             Label label = new Label(account.username);
             root.getChildren().add(label);
         });

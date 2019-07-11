@@ -1,8 +1,8 @@
 package client.views.graphics;
 
 import client.controllers.BattleClient;
-import client.layouts.EndGame;
 import client.controllers.CheatClient;
+import client.layouts.EndGame;
 import client.models.Action;
 import client.models.Timer;
 import client.views.Graphics;
@@ -456,7 +456,8 @@ public class GraphicBattleController implements Initializable {
             System.out.println(action);
             Platform.runLater(() -> endTurnBtn.setDisable(false));
             BattleClient.updatePlayingMatch();
-            timer = new Timer( eachTurnTime, timerLbl, () -> endTurn(null));
+            timer = new Timer(eachTurnTime, timerLbl, () -> endTurn(null));
+            timer.start();
         }
         if (action instanceof Insert) {
             System.out.println(action);
