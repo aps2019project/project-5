@@ -71,11 +71,11 @@ public class GraphicWatchMenu implements Initializable {
 
     public void startWatchClient(int port) {
         if (!isStartStream) {
-            String ip = "127.0.0.1";
+            String ip = "192.168.43.196";
             isStartStream = true;
             new Thread(() -> {
                 try {
-                    while (isStartStream) {
+                    while (true) {
                         Socket soc = new Socket(ip, port);
                         BufferedImage img = ImageIO.read(soc.getInputStream());
 
@@ -89,10 +89,10 @@ public class GraphicWatchMenu implements Initializable {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
-                isStartStream = false;
+//                isStartStream = false;
             }).start();
         } else {
-            isStartStream = false;
+//            isStartStream = false;
         }
     }
 

@@ -81,6 +81,7 @@ public class GraphicBattleController implements Initializable {
     private boolean isSelectedCardInGame = false;
     private Timer timer;
 
+
     int speed = 1;
     private ImageView draggingCard = new ImageView();
     private double draggingX;
@@ -442,6 +443,7 @@ public class GraphicBattleController implements Initializable {
             System.out.println(action);
             Platform.runLater(() -> endTurnBtn.setDisable(false));
             BattleClient.updatePlayingMatch();
+            timer = new Timer(20, timerLbl, () -> endTurn(null));
         }
         if (action instanceof Insert) {
             System.out.println(action);

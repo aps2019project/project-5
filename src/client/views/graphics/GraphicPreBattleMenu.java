@@ -4,6 +4,7 @@ import client.controllers.AccountClient;
 import client.controllers.BattleClient;
 import client.controllers.ChatClient;
 import client.controllers.ShellCommand;
+import client.models.Timer;
 import client.views.Graphics;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.corba.se.impl.orbutil.graph.Graph;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 import static client.views.Graphics.Menu.*;
 import static client.views.graphics.GraphicBattleController.watchThread;
 import static client.views.graphics.GraphicWatchMenu.startWatchServer;
+import static client.views.menus.BattleMenu.endTurn;
 
 public class GraphicPreBattleMenu implements Initializable {
 
@@ -63,6 +65,7 @@ public class GraphicPreBattleMenu implements Initializable {
         } else if (!isStoryMode) {
             // TODO: start single player game (with ai)
         }
+
         ShellCommand.executeCommand("byzanz-record -d 10 lastMatch.mp4");
     }
 
