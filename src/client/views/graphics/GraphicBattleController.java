@@ -138,7 +138,7 @@ public class GraphicBattleController implements Initializable {
         player2Name.setRotate(3.0);
         mana1BarContainer.setRotate(-3.0);
         mana2BarContainer.setRotate(3.0);
-        showCardsInBoard();
+        updateCardsInBoard();
         handItem0_container.setLayoutX(-100);
         root.setOnKeyPressed(event -> {
             switch (event.getCode()) {
@@ -153,8 +153,8 @@ public class GraphicBattleController implements Initializable {
                     if (speed > 1)
                         speed--;
                     break;
-                case N:
-                    showCardsInBoard();
+                case RIGHT:
+                    updateCardsInBoard();
             }
             updateHand();
         });
@@ -165,7 +165,7 @@ public class GraphicBattleController implements Initializable {
 
     }
 
-    private void showCardsInBoard() {
+    private void updateCardsInBoard() {
         root.getChildren().removeAll(cardViews.values());
         cardViews.clear();
 
@@ -180,6 +180,11 @@ public class GraphicBattleController implements Initializable {
                 cardViews.put(attacker, cardAnchorPane);
                 setCard(cardAnchorPane);
             }
+
+        for (Card card : BattleClient.getMe().graveyard) {
+            Label deadCard = new Label(card.name);
+            graveyardCards.getChildren().addAll(deadCard);
+        }
     }
 
     private Rectangle getCardRectangle(int row, int column) {
@@ -471,8 +476,8 @@ public class GraphicBattleController implements Initializable {
         if (action instanceof Attack) {
             System.out.println(action);
             Attack attack = (Attack) action;
-            Attacker attacker = attack.Defender;
-            Attacker defender = attack.attacker;
+            Attacker attacker = attack.attacker;
+            Attacker defender = attack.defender;
             int count = 1;
             if (attack.hasCounterAttack) count = 2;
             int finalCount = count;
@@ -618,7 +623,6 @@ public class GraphicBattleController implements Initializable {
             index++;
         }
     }
-
 
     private void updateMana() {
         BattleClient.updatePlayingMatch();
